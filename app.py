@@ -13,7 +13,7 @@ with st.sidebar:
     # Aquí pones tu link real de Instagram
     st.markdown("""
     ### 🔗 Mis Redes
-    * [📸 Sígueme en Instagram](https://instagram.com/tu_usuario_aqui) 
+    * [📸 Sígueme en Instagram](https://instagram.com/lagrangianitos) 
     * [📚 Apuntes PAES M1](https://google.com)
     
     ---
