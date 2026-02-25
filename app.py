@@ -49,12 +49,14 @@ st.markdown("""
 # --- 3. BARRA LATERAL ---
 with st.sidebar:
     st.markdown("# 🚀 Perfil")
-    st.markdown("**Seba** \n*Estudiante de Ingeniería*")
+    st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM Universidad de Chile*")
     st.markdown("### Redes Sociales \n- [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)")
     st.divider()
-    menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca PDFs"])
+    menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
     st.divider()
-    st.write("Típ: El diseño de tarjetas facilita la navegación táctil.")
+    st.write("Sólo existen dos días en el año en los que no se puede hacer nada. Uno se llama ayer y otro mañana. 
+    Por lo tanto, hoy es el día ideal para amar, crecer, hacer y principalmente vivir. 
+    Dalai Lama")
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
