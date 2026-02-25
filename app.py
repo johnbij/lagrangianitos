@@ -1,8 +1,8 @@
-
 import streamlit as st
 from datetime import datetime
 import pytz
 
+# Configuración de la página
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wide")
 
 # --- BARRA LATERAL (SIDEBAR) ---
@@ -51,16 +51,15 @@ with col_reloj:
 
 st.divider()
 
-# --- SISTEMA DE PESTAÑAS ---
-tab1, tab2, tab3, tab4 = st.tabs(["🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Estadística"])
+# --- SISTEMA DE PESTAÑAS (TABS) ---
+tab1, tab2, tab3, tab4 = st.tabs(["🔢 Números", "📉 Álgebra y Funciones", "📐 Geometría", "📊 Estadística y Probabilidad"])
 
 with tab1:
     st.header("Eje: Números")
     st.write("Contenidos de potencias, raíces y porcentajes.")
 
 with tab2:
-    # Título en azul para Álgebra
-    st.markdown("<h1 style='color: blue;'>Eje Álgebra</h1>", unsafe_allow_html=True)
+    st.header("Eje: Álgebra y Funciones")
     st.write("Ecuaciones, funciones y sistemas lineales.")
     st.info("Típ: Anota: tip ... El lenguaje algebraico es la base de toda la prueba.")
 
