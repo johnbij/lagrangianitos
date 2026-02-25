@@ -3,58 +3,58 @@ import streamlit as st
 from datetime import datetime
 import pytz
 
-# Configuración de la página
-st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wide")
+st.set_page_config(page_title="Lagrangianitos Dash", page_icon="🚀")
 
 # --- BARRA LATERAL (SIDEBAR) ---
 with st.sidebar:
-    st.title("📌 Navegación")
-    
-    # Aquí pones tu link real de Instagram
+    st.image("https://www.freeiconspng.com/uploads/blue-rocket-icon-png-17.png", width=100)
+    st.title("Perfil")
     st.markdown("""
-    ### 🔗 Mis Redes
-    * [📸 Sígueme en Instagram](https://instagram.com/lagrangianitos) 
-    * [📚 Apuntes PAES M1](https://google.com)
-    
-    ---
     **Seba**
     *Estudiante de Ingeniería*
-    """)
     
+    **Redes Sociales:**
+    * [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)
+    
+    **Proyectos:**
+    - Libro Digital PAES M1 📚
+    - Dashboard de Datos 📊
+    """)
     st.divider()
-    st.info("**Típ**: El éxito en la PAES M1 depende de la constancia, no de la velocidad.")
+    st.write("Típ: Estudia al menos 30 min al día de álgebra para asegurar la M1.")
 
 # --- CUERPO PRINCIPAL ---
-st.title("🚀 Lagrangianitos: Centro de Recursos")
+st.title("Hola, bienvenidos a la página de Lagrangianitos 👋")
+st.write("Estás en el centro de recursos para la PAES M1 y herramientas de ingeniería.")
 
-# Sistema de pestañas para organizar el contenido
-tab1, tab2, tab3 = st.tabs(["🏠 Inicio", "📅 Contador PAES", "🌍 Reloj Global"])
+st.divider()
 
-with tab1:
-    st.header("¡Bienvenidos!")
-    st.write("Hola, soy Seba. Este es mi espacio donde comparto recursos para ingeniería y la PAES M1.")
-    st.success("Explora las herramientas usando las pestañas de arriba.")
+# --- CONTADOR PAES DE INVIERNO ---
+st.header("⏳ Cuenta regresiva: PAES de Invierno")
 
-with tab2:
-    st.header("⏳ Cuenta regresiva: PAES de Invierno")
-    # Fecha: Lunes 15 de junio de 2026
-    zona_cl = pytz.timezone('America/Santiago')
-    fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
-    ahora = datetime.now(zona_cl)
-    faltan = fecha_paes - ahora
-    
-    if faltan.days > 0:
-        c1, c2, c3 = st.columns(3)
-        c1.metric("Días restantes", faltan.days)
-        c2.metric("Horas", faltan.seconds // 3600)
-        c3.metric("Minutos", (faltan.seconds // 60) % 60)
-    else:
-        st.balloons()
-        st.success("¡Llegó el gran día!")
+# Configurar fecha objetivo: 15 de junio de 2026
+zona_cl = pytz.timezone('America/Santiago')
+fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
+ahora = datetime.now(zona_cl)
 
-with tab3:
-    st.header("🌍 Reloj Mundial")
-    tz_name = st.selectbox("Selecciona una zona horaria:", pytz.all_timezones, index=pytz.all_timezones.index('America/Santiago'))
-    now = datetime.now(pytz.timezone(tz_name))
-    st.metric(f"Hora en {tz_name}", now.strftime("%H:%M:%S"))
-    st.write(f"Fecha: {now.strftime('%d/%m/%Y')}")
+faltan = fecha_paes - ahora
+
+if faltan.days > 0:
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Días", faltan.days)
+    col2.metric("Horas", faltan.seconds // 3600)
+    col3.metric("Minutos", (faltan.seconds // 60) % 60)
+    st.write(f"Faltan **{faltan.days} días** para el inicio de la prueba.")
+else:
+    st.success("¡Llegó el día!")
+
+st.divider()
+
+# --- RELOJ GLOBAL ---
+st.header("⏰ Reloj Global")
+timezone_name = st.selectbox("Cambia la zona horaria para comparar:", pytz.all_timezones, index=pytz.all_timezones.index('America/Santiago'))
+
+now_global = datetime.now(pytz.timezone(timezone_name))
+c1, c2 = st.columns(2)
+c1.metric(label="Fecha Actual", value=now_global.strftime("%d/%m/%Y"))
+c2.metric(label="Hora Local", value=now_global.strftime("%H:%M:%S"))
