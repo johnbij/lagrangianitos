@@ -23,20 +23,19 @@ with st.sidebar:
     st.divider()
     st.write("Típ: El orden en los ejes es clave para un buen puntaje.")
 
-# --- ENCABEZADO COMPACTO (TÍTULO + RELOJ) ---
+# --- ENCABEZADO AZUL (TÍTULO + RELOJ) ---
 zona_cl = pytz.timezone('America/Santiago')
 ahora = datetime.now(zona_cl)
 
-# Usamos HTML/CSS para crear la franja azul con columnas internas
 st.markdown(f"""
-    <div style="background-color: #3b71ca; padding: 15px; border-radius: 10px; margin-bottom: 20px; color: white;">
+    <div style="background-color: #3b71ca; padding: 15px; border-radius: 10px; margin-bottom: 10px; color: white;">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="font-size: 28px; font-weight: bold;">
                 🚀 Centro de Recursos: PAES M1
             </div>
             <div style="text-align: right;">
-                <div style="font-size: 14px; opacity: 0.9;">⏰ Hora Actual (Chile)</div>
-                <div style="font-size: 24px; font-weight: bold; font-family: monospace;">
+                <div style="font-size: 12px; opacity: 0.9;">⏰ Hora Actual (Chile)</div>
+                <div style="font-size: 22px; font-weight: bold; font-family: monospace;">
                     {ahora.strftime("%H:%M:%S")}
                 </div>
             </div>
@@ -44,18 +43,30 @@ st.markdown(f"""
     </div>
     """, unsafe_allow_html=True)
 
-# --- CONTADOR PAES (DEBAJO DEL ENCABEZADO) ---
-st.subheader("⏳ Cuenta regresiva: PAES de Invierno")
+# --- ENCABEZADO ROJO (CUENTA REGRESIVA) ---
 fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
 faltan = fecha_paes - ahora
 
-if faltan.days > 0:
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Días", faltan.days)
-    c2.metric("Horas", faltan.seconds // 3600)
-    c3.metric("Minutos", (faltan.seconds // 60) % 60)
-else:
-    st.success("¡Llegó el día!")
+# Estilo para la barra roja del contador
+st.markdown(f"""
+    <div style="background-color: #cc0000; padding: 15px; border-radius: 10px; color: white; margin-bottom: 20px;">
+        <div style="font-size: 20px; font-weight: bold; margin-bottom: 10px;">⏳ Cuenta regresiva: PAES de Invierno</div>
+        <div style="display: flex; justify-content: space-around; text-align: center;">
+            <div>
+                <div style="font-size: 30px; font-weight: bold;">{faltan.days}</div>
+                <div style="font-size: 14px;">Días</div>
+            </div>
+            <div>
+                <div style="font-size: 30px; font-weight: bold;">{faltan.seconds // 3600}</div>
+                <div style="font-size: 14px;">Horas</div>
+            </div>
+            <div>
+                <div style="font-size: 30px; font-weight: bold;">{(faltan.seconds // 60) % 60}</div>
+                <div style="font-size: 14px;">Minutos</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 st.divider()
 
