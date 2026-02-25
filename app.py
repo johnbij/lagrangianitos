@@ -9,7 +9,7 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wi
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
 
-# --- 2. INYECCIÓN DE CSS (TARJETAS PRO) ---
+# --- 2. INYECCIÓN DE CSS (TARJETAS PRO Y BOTONES DE NAVEGACIÓN) ---
 st.markdown("""
     <style>
     [data-testid="stHorizontalBlock"] {
@@ -17,6 +17,7 @@ st.markdown("""
         padding: 10px !important;
         border-radius: 0 0 15px 15px !important;
     }
+    /* Tarjetas Pro Principales */
     div.stButton > button {
         height: 110px !important;
         border-radius: 15px !important;
@@ -39,6 +40,12 @@ st.markdown("""
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1) !important;
         transform: translateY(-2px) !important;
     }
+    /* Estilo para los mini-botones de navegación superior */
+    .nav-container {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -48,12 +55,6 @@ with st.sidebar:
     st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM Universidad de Chile*")
     st.markdown("### Redes Sociales \n- [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)")
     st.divider()
-    # Si estamos dentro de un eje, añadimos un botón para volver al inicio
-    if st.session_state.eje_actual:
-        if st.button("⬅️ Volver al Menú Principal"):
-            st.session_state.eje_actual = None
-            st.rerun()
-    
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
     st.divider()
     st.write("""
@@ -92,29 +93,53 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("---")
 
-    # --- LÓGICA DE PÁGINAS ---
+    # Definición de Ejes y Colores
+    ejes_info = {
+        "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
+        "📉 Álgebra": "Operatoria algebraica y funciones",
+        "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores",
+        "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."
+    }
+
     if st.session_state.eje_actual is None:
-        # PÁGINA A: MENÚ DE SELECCIÓN
+        # PÁGINA A: MENÚ DE SELECCIÓN PRINCIPAL
         st.subheader("📚 Selecciona un Eje Temático")
-        ejes_info = {
-            "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
-            "📉 Álgebra": "Operatoria algebraica y funciones",
-            "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores",
-            "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."
-        }
         for nombre, desc in ejes_info.items():
             if st.button(f"{nombre}\n{desc}", key=f"btn_{nombre}", use_container_width=True):
                 st.session_state.eje_actual = nombre
-                st.rerun() # Recarga para ocultar esto y mostrar la "Página B"
+                st.rerun()
     else:
-        # PÁGINA B: CONTENIDO DEL EJE
+        # PÁGINA B: CONTENIDO DEL EJE + NAVEGACIÓN SUPERIOR COLORIDA
+        col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])
+        
+        with col1:
+            if st.button("🏠 Inicio", use_container_width=True):
+                st.session_state.eje_actual = None
+                st.rerun()
+        with col2:
+            if st.button("🔢 Números", key="nav_num", use_container_width=True):
+                st.session_state.eje_actual = "🔢 Números"
+                st.rerun()
+        with col3:
+            if st.button("📉 Álgebra", key="nav_alg", use_container_width=True):
+                st.session_state.eje_actual = "📉 Álgebra"
+                st.rerun()
+        with col4:
+            if st.button("📐 Geometría", key="nav_geo", use_container_width=True):
+                st.session_state.eje_actual = "📐 Geometría"
+                st.rerun()
+        with col5:
+            if st.button("📊 Datos", key="nav_dat", use_container_width=True):
+                st.session_state.eje_actual = "📊 Datos y Azar"
+                st.rerun()
+
+        st.write("---")
         eje_selec = st.session_state.eje_actual
-        st.button("⬅️ Volver a Ejes", on_click=lambda: st.session_state.update({"eje_actual": None}))
         st.header(eje_selec)
         
         with st.expander(f"📂 Sesiones de {eje_selec[2:]}", expanded=True):
-            st.info(f"Bienvenido al contenido de {eje_selec}. Aquí se listarán tus 121 clases.")
+            st.info(f"Contenido de {eje_selec}. Listado de clases en desarrollo.")
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
-    # ... Lógica de archivos igual
+    # ... (Lógica de archivos)
