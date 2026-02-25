@@ -44,11 +44,11 @@ st.markdown("""
 
 with st.sidebar:
     st.markdown("# 🚀 Perfil")
-    st.markdown("**Barton**")
+    st.markdown("**Barton. Bienvenidos pequeños dragónes 🐉**")
     st.divider()
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
     st.divider()
-    st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
+    st.write("Sólo existen dos días en el año en los que no puedes hacer nada, uno fue ayer y el otro será mañana.Dalai Lama")
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # :::: 4. DASHBOARD PRINCIPAL :::::::::::::::::::::::::::::::::::::::::::::::::
@@ -73,14 +73,14 @@ if menu == "🏠 Dashboard PAES":
     if st.session_state.eje_actual is None:
         # Fila 1: Números y Álgebra
         c1, c2 = st.columns(2)
-        if c1.button("🔢 Números\nConjuntos y operatoria", key="btn_num", use_container_width=True):
+        if c1.button("🔢 Números\n: Conjuntos y operaciones", key="btn_num", use_container_width=True):
             st.session_state.eje_actual = "🔢 Números"; st.rerun()
-        if c2.button("📉 Álgebra\nFunciones y más", key="btn_alg", use_container_width=True):
+        if c2.button("📉 Álgebra\n: Funciones y más", key="btn_alg", use_container_width=True):
             st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
         
         # Fila 2: Geometría y Datos
         c3, c4 = st.columns(2)
-        if c3.button("📐 Geometría\nÁreas y Volúmenes", key="btn_geo", use_container_width=True):
+        if c3.button("📐 Geometría\n: Áreas y Volúmenes y más", key="btn_geo", use_container_width=True):
             st.session_state.eje_actual = "📐 Geometría"; st.rerun()
         if c4.button("📊 Datos y Azar\nProbabilidad y Estadística", key="btn_dat", use_container_width=True):
             st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
