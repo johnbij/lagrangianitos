@@ -45,7 +45,7 @@ st.markdown("""
 # --- 3. BARRA LATERAL (ORIGINAL) ---
 with st.sidebar:
     st.markdown("# 🚀 Perfil")
-    st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM Universidad de Chile*")
+    st.markdown("**Barton** \n*Bienvenidos pequeños dragones*")
     st.markdown("### Redes Sociales \n- [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)")
     st.divider()
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
