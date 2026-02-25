@@ -14,7 +14,7 @@ if 'sub_seccion_actual' not in st.session_state:
     st.session_state.sub_seccion_actual = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (DISEÑO DE LA CASA) :::::::::::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (DISEÑO FINAL DE LA CASA) :::::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
@@ -26,27 +26,26 @@ st.markdown("""
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
-    /* NAVEGACIÓN RÁPIDA: Forzar fila horizontal y botones robustos */
+    /* NAVEGACIÓN RÁPIDA: Botones robustos y anchos */
     [data-testid="stHorizontalBlock"] {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
-        justify-content: center !important;
-        gap: 8px !important;
+        gap: 4px !important; /* Espacio mínimo entre botones */
     }
     
     [data-testid="stHorizontalBlock"] > div {
-        width: auto !important;
-        min-width: 55px !important; /* Evita que se vean flacos */
-        flex: 1 1 auto !important;
+        flex: 1 1 0% !important; /* Fuerza a que todas las columnas midan lo mismo */
+        min-width: 0 !important;
     }
 
     [data-testid="stHorizontalBlock"] button {
+        width: 100% !important;
         min-height: 55px !important; 
-        padding: 5px !important;
-        font-size: 18px !important; /* Letra grande para N A G D */
+        font-size: 20px !important; /* Letra más grande para que se note */
         font-weight: bold !important;
-        border-radius: 10px !important;
+        border-radius: 8px !important;
+        padding: 0px !important;
     }
 
     /* BOTONES DE CATEGORÍAS: Verticales y grandes */
@@ -56,7 +55,6 @@ st.markdown("""
         margin-bottom: 12px !important;
         width: 100% !important;
         font-size: 16px !important;
-        display: block !important;
     }
     
     .clase-box { max-width: 900px; margin: 0 auto; padding: 10px; }
@@ -80,7 +78,6 @@ with st.sidebar:
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
-    # ::: Render de Cabeceras :::
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
@@ -93,6 +90,7 @@ if menu == "🏠 Dashboard PAES":
 
     # ::: PANTALLA DE INICIO (4 EJES) :::
     if st.session_state.eje_actual is None:
+        st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
         if c1.button("🔢 Números\nConjuntos y operatoria", key="m_n", use_container_width=True):
             st.session_state.eje_actual = "🔢 Números"; st.rerun()
@@ -107,43 +105,39 @@ if menu == "🏠 Dashboard PAES":
 
     # ::: NAVEGACIÓN INTERNA (🏠 N A G D) :::
     else:
-        n1, n2, n3, n4, n5 = st.columns(5)
-        
-        if n1.button("🏠", key="nav_h"):
+        n_cols = st.columns(5)
+        if n_cols[0].button("🏠", key="n_h"):
             st.session_state.eje_actual = None; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n2.button("N", key="nav_n"):
+        if n_cols[1].button("N", key="n_n"):
             st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n3.button("A", key="nav_a"):
+        if n_cols[2].button("A", key="n_a"):
             st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n4.button("G", key="nav_g"):
+        if n_cols[3].button("G", key="n_g"):
             st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n5.button("D", key="nav_d"):
+        if n_cols[4].button("D", key="n_d"):
             st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.rerun()
 
         st.write("---")
 
-        # ::: CONTENIDO EJE NÚMEROS :::
+        # ::: CONTENIDO DINÁMICO :::
         if st.session_state.eje_actual == "🔢 Números":
             if st.session_state.sub_seccion_actual is None:
                 st.subheader("📌 Categorías de Números")
-                
                 st.markdown('<div class="cat-container">', unsafe_allow_html=True)
                 if st.button("📦 Conjuntos Numéricos (N01)", key="cat_n01"):
                     st.session_state.sub_seccion_actual = "N01"; st.rerun()
                 if st.button("➕ Operatoria", key="cat_op"): pass
                 if st.button("📝 Ejercitación", key="cat_ej"): pass
                 st.markdown('</div>', unsafe_allow_html=True)
-            
             elif st.session_state.sub_seccion_actual == "N01":
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
                 st.markdown("# <span style='color:darkblue'>N01: Teoría de Conjuntos</span>", unsafe_allow_html=True)
-                st.write("Bienvenido al lenguaje maestro...")
+                st.write("Contenido de la clase...")
                 st.markdown('</div>', unsafe_allow_html=True)
-
         else:
             st.header(st.session_state.eje_actual)
-            st.info("Contenido en desarrollo.")
+            st.info("🚀 Contenido en desarrollo.")
 
 elif menu == "📂 Biblioteca de PDFs":
-    st.header("📂 Biblioteca")
+    st.header("📂 Biblioteca de Recursos")
     
