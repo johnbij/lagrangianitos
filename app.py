@@ -73,7 +73,7 @@ if menu == "🏠 Dashboard PAES":
     if st.session_state.eje_actual is None:
         # Fila 1: Números y Álgebra
         c1, c2 = st.columns(2)
-        if c1.button("🔢 Números\n: Conjuntos y operaciones", key="btn_num", use_container_width=True):
+        if c1.button("🔢 Números", key="btn_num", use_container_width=True):
             st.session_state.eje_actual = "🔢 Números"; st.rerun()
         if c2.button("📉 Álgebra\n: Funciones y más", key="btn_alg", use_container_width=True):
             st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
