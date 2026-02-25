@@ -26,29 +26,29 @@ st.markdown("""
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
-    /* NAVEGACIÓN RÁPIDA: Botones robustos y anchos */
+    /* --- NAVEGACIÓN RÁPIDA (🏠 N A G D) --- */
+    /* Forzamos que el contenedor de columnas NO se achique */
     [data-testid="stHorizontalBlock"] {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
-        gap: 4px !important; /* Espacio mínimo entre botones */
-    }
-    
-    [data-testid="stHorizontalBlock"] > div {
-        flex: 1 1 0% !important; /* Fuerza a que todas las columnas midan lo mismo */
-        min-width: 0 !important;
-    }
-
-    [data-testid="stHorizontalBlock"] button {
+        gap: 5px !important;
         width: 100% !important;
-        min-height: 55px !important; 
-        font-size: 20px !important; /* Letra más grande para que se note */
-        font-weight: bold !important;
-        border-radius: 8px !important;
-        padding: 0px !important;
     }
 
-    /* BOTONES DE CATEGORÍAS: Verticales y grandes */
+    /* Forzamos que cada botón sea ancho y visible */
+    [data-testid="stHorizontalBlock"] .stButton button {
+        width: 100% !important;
+        min-width: 60px !important; /* El ancho mínimo para que no sea un fideo */
+        height: 60px !important;    /* Lo hacemos cuadrado */
+        font-size: 22px !important; /* Letra bien grande */
+        font-weight: bold !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 12px !important;
+    }
+
+    /* --- BOTONES DE CATEGORÍAS (Verticales) --- */
     .cat-container div.stButton > button { 
         min-height: 80px !important; 
         border-radius: 12px !important; 
@@ -70,8 +70,6 @@ with st.sidebar:
     st.markdown("**Barton**")
     st.divider()
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
-    st.divider()
-    st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # :::: 4. DASHBOARD PRINCIPAL :::::::::::::::::::::::::::::::::::::::::::::::::
@@ -105,16 +103,17 @@ if menu == "🏠 Dashboard PAES":
 
     # ::: NAVEGACIÓN INTERNA (🏠 N A G D) :::
     else:
-        n_cols = st.columns(5)
-        if n_cols[0].button("🏠", key="n_h"):
+        # Usamos columnas para la fila de 5
+        n1, n2, n3, n4, n5 = st.columns(5)
+        if n1.button("🏠", key="n_h"):
             st.session_state.eje_actual = None; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[1].button("N", key="n_n"):
+        if n2.button("N", key="n_n"):
             st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[2].button("A", key="n_a"):
+        if n3.button("A", key="n_a"):
             st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[3].button("G", key="n_g"):
+        if n4.button("G", key="n_g"):
             st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[4].button("D", key="n_d"):
+        if n5.button("D", key="n_d"):
             st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.rerun()
 
         st.write("---")
@@ -130,14 +129,11 @@ if menu == "🏠 Dashboard PAES":
                 if st.button("📝 Ejercitación", key="cat_ej"): pass
                 st.markdown('</div>', unsafe_allow_html=True)
             elif st.session_state.sub_seccion_actual == "N01":
-                st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-                st.markdown("# <span style='color:darkblue'>N01: Teoría de Conjuntos</span>", unsafe_allow_html=True)
-                st.write("Contenido de la clase...")
-                st.markdown('</div>', unsafe_allow_html=True)
+                st.write("Contenido de N01")
         else:
             st.header(st.session_state.eje_actual)
             st.info("🚀 Contenido en desarrollo.")
 
 elif menu == "📂 Biblioteca de PDFs":
-    st.header("📂 Biblioteca de Recursos")
-    
+    st.header("📂 Biblioteca")
+            
