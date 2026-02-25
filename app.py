@@ -5,7 +5,7 @@ import pytz
 # --- 1. CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
-# Inicializamos el estado vacío para que no se vea nada al cargar
+# Estado para controlar en qué "página" estamos
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
 
@@ -42,12 +42,18 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- 3. BARRA LATERAL (ORIGINAL) ---
+# --- 3. BARRA LATERAL ---
 with st.sidebar:
     st.markdown("# 🚀 Perfil")
     st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM Universidad de Chile*")
     st.markdown("### Redes Sociales \n- [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)")
     st.divider()
+    # Si estamos dentro de un eje, añadimos un botón para volver al inicio
+    if st.session_state.eje_actual:
+        if st.button("⬅️ Volver al Menú Principal"):
+            st.session_state.eje_actual = None
+            st.rerun()
+    
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
     st.divider()
     st.write("""
@@ -58,7 +64,7 @@ with st.sidebar:
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # Cabecera Azul (Título Centrado y Grande con Dragón)
+    # Cabecera Azul (Título Centrado y Reloj)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
@@ -73,7 +79,7 @@ if menu == "🏠 Dashboard PAES":
         </div>
         """, unsafe_allow_html=True)
 
-    # Cabecera Roja (Countdown con Minutos - Tamaño 22px)
+    # Cabecera Roja (Countdown)
     fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
     faltan = fecha_paes - ahora
     st.markdown(f"""
@@ -85,36 +91,30 @@ if menu == "🏠 Dashboard PAES":
         """, unsafe_allow_html=True)
 
     st.write("---")
-    st.subheader("📚 Ejes Temáticos")
 
-    ejes_info = {
-        "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
-        "📉 Álgebra": "Operatoria algebraica y funciones",
-        "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores",
-        "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."
-    }
-
-    # Creamos las tarjetas pro
-    for nombre, desc in ejes_info.items():
-        if st.button(f"{nombre}\n{desc}", key=f"btn_{nombre}", use_container_width=True):
-            st.session_state.eje_actual = nombre
-
-    # --- CONTROL DE VISIBILIDAD ---
-    # Solo si el usuario hizo clic en una tarjeta, se muestra el contenido
-    if st.session_state.eje_actual:
-        st.write("---")
+    # --- LÓGICA DE PÁGINAS ---
+    if st.session_state.eje_actual is None:
+        # PÁGINA A: MENÚ DE SELECCIÓN
+        st.subheader("📚 Selecciona un Eje Temático")
+        ejes_info = {
+            "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
+            "📉 Álgebra": "Operatoria algebraica y funciones",
+            "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores",
+            "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."
+        }
+        for nombre, desc in ejes_info.items():
+            if st.button(f"{nombre}\n{desc}", key=f"btn_{nombre}", use_container_width=True):
+                st.session_state.eje_actual = nombre
+                st.rerun() # Recarga para ocultar esto y mostrar la "Página B"
+    else:
+        # PÁGINA B: CONTENIDO DEL EJE
         eje_selec = st.session_state.eje_actual
+        st.button("⬅️ Volver a Ejes", on_click=lambda: st.session_state.update({"eje_actual": None}))
         st.header(eje_selec)
         
         with st.expander(f"📂 Sesiones de {eje_selec[2:]}", expanded=True):
-            st.info(f"Seleccionaste {eje_selec}. Aquí aparecerán tus clases organizadas.")
-            # Botón opcional para cerrar la selección y volver a la vista limpia
-            if st.button("❌ Cerrar selección"):
-                st.session_state.eje_actual = None
-                st.rerun()
-    else:
-        st.write("") # Espacio en blanco para mantener la estética
+            st.info(f"Bienvenido al contenido de {eje_selec}. Aquí se listarán tus 121 clases.")
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
-    # ... (Aquí va tu lógica de carga de PDFs)
+    # ... Lógica de archivos igual
