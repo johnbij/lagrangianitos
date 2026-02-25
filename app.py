@@ -9,7 +9,8 @@ st.set_page_config(page_title="Lagrangianitos", page_icon="🚀")
 st.title("Hola, bienvenidos a la página de Lagrangianitos 👋")
 st.markdown("""
 ### 
-Soy estudiante de ingeniería y en este estoy creando mi proyecto de libro digital.
+Soy estudiante de ingeniería en FCFM y estoy creando mi proyecto
+ libro digital PAES M1.
 """ )
 
 st.divider()
