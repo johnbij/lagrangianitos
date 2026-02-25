@@ -10,7 +10,7 @@ if 'eje_actual' not in st.session_state:
 if 'sub_seccion_actual' not in st.session_state:
     st.session_state.sub_seccion_actual = None
 
-# --- 2. INYECCIÓN DE CSS (TARJETAS Y ESTILO DE CLASE) ---
+# --- 2. INYECCIÓN DE CSS ---
 st.markdown("""
     <style>
     div.stButton > button {
@@ -19,7 +19,6 @@ st.markdown("""
         border: 1px solid #e0e0e0 !important;
         transition: all 0.3s ease !important;
     }
-    /* Estilo para que el contenido original se vea centrado y pro */
     .clase-box {
         max-width: 900px;
         margin: 0 auto;
@@ -37,7 +36,6 @@ with st.sidebar:
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # CABECERAS (Azul y Roja se mantienen)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
@@ -64,10 +62,9 @@ if menu == "🏠 Dashboard PAES":
         if c2.button("📉 Álgebra\nFunciones y más", use_container_width=True):
             st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
     else:
-        # Mini Navegación Superior
+        # Barra de Navegación entre Ejes
         c_nav = st.columns(5)
-        nombres = ["🏠 Inicio", "🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Datos"]
-        for i, n in enumerate(nombres):
+        for i, n in enumerate(["🏠 Inicio", "🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Datos"]):
             if c_nav[i].button(n, key=f"nav_{i}", use_container_width=True):
                 st.session_state.eje_actual = None if n == "🏠 Inicio" else n
                 st.session_state.sub_seccion_actual = None; st.rerun()
@@ -75,20 +72,27 @@ if menu == "🏠 Dashboard PAES":
         st.write("---")
 
         if st.session_state.eje_actual == "🔢 Números":
+            # Si no hay sub-sección, muestra las 3 cajitas originales
             if st.session_state.sub_seccion_actual is None:
                 st.subheader("📌 Categorías de Números")
                 cs1, cs2, cs3 = st.columns(3)
-                if cs1.button("📦 Conjuntos Numéricos", use_container_width=True):
+                if cs1.button("📦 Conjuntos Numéricos", key="main_conj", use_container_width=True):
                     st.session_state.sub_seccion_actual = "N01"; st.rerun()
+                if cs2.button("➕ Operatoria", key="main_ope", use_container_width=True): pass
+                if cs3.button("📝 Ejercitación", key="main_ejer", use_container_width=True): pass
             
-            # --- RENDERIZADO DEL CONTENIDO ORIGINAL ---
+            # Si estamos en la clase, mostramos el contenido + botones de las otras categorías
             elif st.session_state.sub_seccion_actual == "N01":
-                if st.button("⬅️ Volver a Categorías"):
-                    st.session_state.sub_seccion_actual = None; st.rerun()
+                col_back1, col_back2, col_back3 = st.columns(3)
+                with col_back1:
+                    if st.button("⬅️ Volver a Menú", use_container_width=True):
+                        st.session_state.sub_seccion_actual = None; st.rerun()
+                with col_back2:
+                    if st.button("➕ Ir a Operatoria", use_container_width=True): pass
+                with col_back3:
+                    if st.button("📝 Ir a Ejercitación", use_container_width=True): pass
                 
-                # INICIO DEL CONTENIDO ORIGINAL
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-                
                 st.markdown("""
 # <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
@@ -151,7 +155,6 @@ Para dominar la PAES, debes "ver" la operación antes de calcularla. Los diagram
 > — **Georg Cantor**
 """)
                 st.markdown('</div>', unsafe_allow_html=True)
-                # FIN DEL CONTENIDO ORIGINAL
 
         else:
             st.header(st.session_state.eje_actual)
