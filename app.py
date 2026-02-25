@@ -23,8 +23,16 @@ with st.sidebar:
     st.divider()
     st.write("Típ: El orden en los ejes es clave para un buen puntaje.")
 
-# --- CUERPO PRINCIPAL (CONTENIDO FIJO ARRIBA) ---
-st.title("🚀 Centro de Recursos: PAES M1")
+# --- CUERPO PRINCIPAL ---
+
+# Título con franja azul y letras blancas (Estilo CSS)
+st.markdown("""
+    <div style="background-color: #3b71ca; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+        <h1 style="color: white; margin: 0; display: flex; align-items: center;">
+            <span style="margin-right: 15px;">🚀</span> Centro de Recursos: PAES M1
+        </h1>
+    </div>
+    """, unsafe_allow_html=True)
 
 # 1. CONTADOR SIEMPRE VISIBLE
 st.subheader("⏳ Cuenta regresiva: PAES de Invierno")
@@ -38,7 +46,6 @@ if faltan.days > 0:
     c1.metric("Días", faltan.days)
     c2.metric("Horas", faltan.seconds // 3600)
     c3.metric("Minutos", (faltan.seconds // 60) % 60)
-    st.write(f"Faltan **{faltan.days} días** para el inicio de la prueba.")
 else:
     st.success("¡Llegó el día!")
 
@@ -52,14 +59,15 @@ with col_reloj:
 st.divider()
 
 # --- SISTEMA DE PESTAÑAS (TABS) ---
-tab1, tab2, tab3, tab4 = st.tabs(["🔢 Números", "📉 Álgebra y Funciones", "📐 Geometría", "📊 Estadística y Probabilidad"])
+tab1, tab2, tab3, tab4 = st.tabs(["🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Estadística"])
 
 with tab1:
     st.header("Eje: Números")
     st.write("Contenidos de potencias, raíces y porcentajes.")
 
 with tab2:
-    st.header("Eje: Álgebra y Funciones")
+    # Aplicando estilo azul al título del Eje Álgebra según tus reglas
+    st.markdown("<h1 style='color: blue;'>Eje Álgebra</h1>", unsafe_allow_html=True)
     st.write("Ecuaciones, funciones y sistemas lineales.")
     st.info("Típ: Anota: tip ... El lenguaje algebraico es la base de toda la prueba.")
 
