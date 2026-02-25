@@ -23,22 +23,30 @@ with st.sidebar:
     st.divider()
     st.write("Típ: El orden en los ejes es clave para un buen puntaje.")
 
-# --- CUERPO PRINCIPAL ---
+# --- ENCABEZADO COMPACTO (TÍTULO + RELOJ) ---
+zona_cl = pytz.timezone('America/Santiago')
+ahora = datetime.now(zona_cl)
 
-# Título con franja azul y letras blancas (Estilo CSS)
-st.markdown("""
-    <div style="background-color: #3b71ca; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
-        <h1 style="color: white; margin: 0; display: flex; align-items: center;">
-            <span style="margin-right: 15px;">🚀</span> Centro de Recursos: PAES M1
-        </h1>
+# Usamos HTML/CSS para crear la franja azul con columnas internas
+st.markdown(f"""
+    <div style="background-color: #3b71ca; padding: 15px; border-radius: 10px; margin-bottom: 20px; color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 28px; font-weight: bold;">
+                🚀 Centro de Recursos: PAES M1
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 14px; opacity: 0.9;">⏰ Hora Actual (Chile)</div>
+                <div style="font-size: 24px; font-weight: bold; font-family: monospace;">
+                    {ahora.strftime("%H:%M:%S")}
+                </div>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-# 1. CONTADOR SIEMPRE VISIBLE
+# --- CONTADOR PAES (DEBAJO DEL ENCABEZADO) ---
 st.subheader("⏳ Cuenta regresiva: PAES de Invierno")
-zona_cl = pytz.timezone('America/Santiago')
 fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
-ahora = datetime.now(zona_cl)
 faltan = fecha_paes - ahora
 
 if faltan.days > 0:
@@ -49,16 +57,9 @@ if faltan.days > 0:
 else:
     st.success("¡Llegó el día!")
 
-# 2. RELOJ SIEMPRE VISIBLE
-st.write("---")
-col_reloj, col_vacia = st.columns([1, 2])
-with col_reloj:
-    now_g = datetime.now(zona_cl)
-    st.metric(label="⏰ Hora Actual (Chile)", value=now_g.strftime("%H:%M:%S"))
-
 st.divider()
 
-# --- SISTEMA DE PESTAÑAS (TABS) ---
+# --- SISTEMA DE PESTAÑAS ---
 tab1, tab2, tab3, tab4 = st.tabs(["🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Estadística"])
 
 with tab1:
@@ -66,7 +67,6 @@ with tab1:
     st.write("Contenidos de potencias, raíces y porcentajes.")
 
 with tab2:
-    # Aplicando estilo azul al título del Eje Álgebra según tus reglas
     st.markdown("<h1 style='color: blue;'>Eje Álgebra</h1>", unsafe_allow_html=True)
     st.write("Ecuaciones, funciones y sistemas lineales.")
     st.info("Típ: Anota: tip ... El lenguaje algebraico es la base de toda la prueba.")
