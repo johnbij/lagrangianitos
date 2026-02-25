@@ -5,7 +5,7 @@ import pytz
 # --- 1. CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
-# Estado inicial en None para que no aparezca el cuadro de abajo al cargar
+# Inicializamos el estado vacío para que no se vea nada al cargar
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
 
@@ -45,7 +45,7 @@ st.markdown("""
 # --- 3. BARRA LATERAL (ORIGINAL) ---
 with st.sidebar:
     st.markdown("# 🚀 Perfil")
-    st.markdown("**Barton** \n*Bienvenidos pequeños dragones*")
+    st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM Universidad de Chile*")
     st.markdown("### Redes Sociales \n- [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)")
     st.divider()
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
@@ -58,7 +58,7 @@ with st.sidebar:
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # Cabecera Azul (Título más grande y centrado)
+    # Cabecera Azul (Título Centrado y Grande con Dragón)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
@@ -73,7 +73,7 @@ if menu == "🏠 Dashboard PAES":
         </div>
         """, unsafe_allow_html=True)
 
-    # Cabecera Roja (Countdown con tamaño igualado a 22px)
+    # Cabecera Roja (Countdown con Minutos - Tamaño 22px)
     fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
     faltan = fecha_paes - ahora
     st.markdown(f"""
@@ -94,34 +94,27 @@ if menu == "🏠 Dashboard PAES":
         "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."
     }
 
+    # Creamos las tarjetas pro
     for nombre, desc in ejes_info.items():
         if st.button(f"{nombre}\n{desc}", key=f"btn_{nombre}", use_container_width=True):
             st.session_state.eje_actual = nombre
 
-    # Mostrar solo si se ha seleccionado un eje
+    # --- CONTROL DE VISIBILIDAD ---
+    # Solo si el usuario hizo clic en una tarjeta, se muestra el contenido
     if st.session_state.eje_actual:
         st.write("---")
         eje_selec = st.session_state.eje_actual
         st.header(eje_selec)
         
         with st.expander(f"📂 Sesiones de {eje_selec[2:]}", expanded=True):
-            st.info("Aquí aparecerán tus 121 clases organizadas.")
+            st.info(f"Seleccionaste {eje_selec}. Aquí aparecerán tus clases organizadas.")
+            # Botón opcional para cerrar la selección y volver a la vista limpia
+            if st.button("❌ Cerrar selección"):
+                st.session_state.eje_actual = None
+                st.rerun()
+    else:
+        st.write("") # Espacio en blanco para mantener la estética
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
-    
-    def cargar_archivo(nombre):
-        try:
-            with open(f"pdfs/{nombre}", "rb") as f: return f.read()
-        except: return None
-
-    recursos = {
-        "📄 Temario PAES M1 2027": "2027I-TemarioPaesM1.pdf",
-        "📝 Ensayo PAES M1 2026": "2026V-PaesM1.pdf",
-        "🔑 Clavijero PAES M1 2026": "2026V-ClavijeroPaesM1.pdf"
-    }
-
-    for etiqueta, archivo in recursos.items():
-        data = cargar_archivo(archivo)
-        if data:
-            st.download_button(label=etiqueta, data=data, file_name=archivo, use_container_width=True)
+    # ... (Aquí va tu lógica de carga de PDFs)
