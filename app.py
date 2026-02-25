@@ -25,13 +25,21 @@ st.markdown("""
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
+    /* Botones generales */
     div.stButton > button { 
-        min-height: 85px !important; 
+        min-height: 60px !important; 
         border-radius: 12px !important; 
         border: 1px solid #e0e0e0 !important; 
         color: #31333F !important;
         font-weight: bold !important;
     }
+    
+    /* Ajuste específico para la fila de 5 botones (Nivel 1) */
+    .stHorizontalBlock div.stButton > button {
+        min-height: 50px !important;
+        padding: 5px !important;
+    }
+    
     .clase-box { max-width: 900px; margin: 0 auto; padding: 10px; }
     </style>
     """, unsafe_allow_html=True)
@@ -64,7 +72,7 @@ if menu == "🏠 Dashboard PAES":
     st.write("") 
 
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    # ::: PANTALLA DE LOS 4 EJES ::::::::::::::::::::::::::::::::::::::::::::::
+    # ::: PANTALLA DE LOS 4 EJES (INICIO) :::::::::::::::::::::::::::::::::::::
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     if st.session_state.eje_actual is None:
         c1, c2 = st.columns(2)
@@ -80,27 +88,46 @@ if menu == "🏠 Dashboard PAES":
             st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    # ::: NAVEGACIÓN DENTRO DE NÚMEROS ::::::::::::::::::::::::::::::::::::::::
+    # ::: NAVEGACIÓN COMPACTA (FILA DE 5 BOTONES) :::::::::::::::::::::::::::::
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     else:
-        if st.button("⬅️ Volver al Inicio", use_container_width=True):
+        # Fila única con 5 columnas
+        col1, col2, col3, col4, col5 = st.columns(5)
+        
+        if col1.button("🏠", use_container_width=True):
             st.session_state.eje_actual = None
+            st.session_state.sub_seccion_actual = None; st.rerun()
+        
+        if col2.button("N", use_container_width=True):
+            st.session_state.eje_actual = "🔢 Números"
+            st.session_state.sub_seccion_actual = None; st.rerun()
+            
+        if col3.button("A", use_container_width=True):
+            st.session_state.eje_actual = "📉 Álgebra"
+            st.session_state.sub_seccion_actual = None; st.rerun()
+            
+        if col4.button("G", use_container_width=True):
+            st.session_state.eje_actual = "📐 Geometría"
+            st.session_state.sub_seccion_actual = None; st.rerun()
+            
+        if col5.button("D", use_container_width=True):
+            st.session_state.eje_actual = "📊 Datos y Azar"
             st.session_state.sub_seccion_actual = None; st.rerun()
 
         st.write("---")
 
+        # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        # ::: SECCIÓN NÚMEROS :::::::::::::::::::::::::::::::::::::::::::::::::
+        # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         if st.session_state.eje_actual == "🔢 Números":
             if st.session_state.sub_seccion_actual is None:
                 st.subheader("📌 Categorías de Números")
                 
-                # Botón 1: Conjuntos
                 if st.button("📦 Conjuntos Numéricos (N01)", use_container_width=True):
                     st.session_state.sub_seccion_actual = "N01"; st.rerun()
                 
-                # Botón 2: Operatoria
                 if st.button("➕ Operatoria", use_container_width=True): pass
                 
-                # Botón 3: Ejercitación (EL QUE FALTABA)
                 if st.button("📝 Ejercitación", use_container_width=True): pass
             
             # ::: CLASE N01 :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -111,10 +138,10 @@ if menu == "🏠 Dashboard PAES":
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
 ---
 ### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
-... Contenido ...
+...
 """, unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca")
-    
+            
