@@ -17,15 +17,24 @@ st.markdown("""
         padding: 15px !important;
         border: 1px solid #dddddd !important;
         border-radius: 0 0 15px 15px !important;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.05) !important;
     }
     .stButton > button {
         border-radius: 8px !important;
+        border: 1px solid #3b71ca !important;
+        color: #3b71ca !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# --- DISEÑO DE BANDERAS (AZUL Y ROJO) ---
+# --- BARRA LATERAL (MANTENIDA SEGÚN TU SOLICITUD) ---
+with st.sidebar:
+    st.image("https://www.freeiconspng.com/uploads/blue-rocket-icon-png-17.png", width=100)
+    st.title("Perfil")
+    st.markdown('''**Seba** \n*Estudiante de Ingeniería*''')
+    st.divider()
+    st.write("Típ: El orden en los ejes es clave.")
+
+# --- DISEÑO DE BANDERAS ---
 zona_cl = pytz.timezone('America/Santiago')
 ahora = datetime.now(zona_cl)
 fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
@@ -44,7 +53,7 @@ st.markdown(f"""
 
 # 2. BARRA ROJA
 st.markdown(f"""
-    <div style="background-color: #cc0000; padding: 20px; color: white; height: 100px; display: flex; justify-content: space-around; align-items: center;">
+    <div style="background-color: #cc0000; padding: 20px; color: white; height: 100px; display: flex; justify-content: space-around; align-items: center; border-bottom: 1px solid white;">
         <div style="font-size: 18px; font-weight: bold;">⏳ Días: {faltan.days}</div>
         <div style="font-size: 18px; font-weight: bold;">Horas: {faltan.seconds // 3600}</div>
         <div style="font-size: 18px; font-weight: bold;">Minutos: {(faltan.seconds // 60) % 60}</div>
@@ -53,33 +62,26 @@ st.markdown(f"""
 
 # 3. BARRA BLANCA (Navegación)
 cols = st.columns(4)
-with cols[0]:
-    if st.button("🔢 Números", use_container_width=True): st.session_state.eje_actual = "🔢 Números"
-with cols[1]:
-    if st.button("📉 Álgebra", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"
-with cols[2]:
-    if st.button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
-with cols[3]:
-    if st.button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
+if cols[0].button("🔢 Números", use_container_width=True): st.session_state.eje_actual = "🔢 Números"
+if cols[1].button("📉 Álgebra", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"
+if cols[2].button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
+if cols[3].button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
 
 st.write("---")
 
-# --- LÓGICA DE CONTENIDO ---
+# --- LÓGICA DE CONTENIDO ESTANDARIZADO ---
 eje = st.session_state.eje_actual
 
-if eje == "🔢 Números":
-    st.header("🔢 Números")
-    st.write("Contenidos de potencias, raíces y porcentajes.")
-
-elif eje == "📉 Álgebra":
-    # Formato estándar igual a los otros ejes
+if eje == "📉 Álgebra":
     st.header("📉 Álgebra")
     st.write("Contenidos de expresiones algebraicas, ecuaciones y funciones.")
-
+    # Se eliminó el título azul y el tip según tu instrucción.
+elif eje == "🔢 Números":
+    st.header("🔢 Números")
+    st.write("Contenidos de potencias, raíces y porcentajes.")
 elif eje == "📐 Geometría":
     st.header("📐 Geometría")
-    st.write("Recursos de figuras 2D, 3D y transformaciones isométricas.")
-
+    st.write("Contenidos de geometría plana y espacial.")
 elif eje == "📊 Estadística":
     st.header("📊 Estadística")
-    st.write("Análisis de datos, medidas de tendencia central y probabilidades.")
+    st.write("Análisis de datos y probabilidad.")
