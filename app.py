@@ -5,11 +5,13 @@ import pytz
 # --- 1. CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
-# Estado para controlar en qué "página" estamos
+# Inicialización de estados para navegación profunda
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
+if 'sub_seccion' not in st.session_state:
+    st.session_state.sub_seccion = None
 
-# --- 2. INYECCIÓN DE CSS (TARJETAS PRO Y BOTONES DE NAVEGACIÓN) ---
+# --- 2. INYECCIÓN DE CSS (TARJETAS PRO) ---
 st.markdown("""
     <style>
     [data-testid="stHorizontalBlock"] {
@@ -17,9 +19,8 @@ st.markdown("""
         padding: 10px !important;
         border-radius: 0 0 15px 15px !important;
     }
-    /* Tarjetas Pro Principales */
     div.stButton > button {
-        height: 110px !important;
+        height: 100px !important;
         border-radius: 15px !important;
         background-color: white !important;
         border: 1px solid #e0e0e0 !important;
@@ -27,24 +28,16 @@ st.markdown("""
         transition: all 0.3s ease !important;
         display: flex !important;
         flex-direction: column !important;
-        align-items: flex-start !important;
+        align-items: center !important;
         justify-content: center !important;
-        padding: 20px !important;
-        white-space: pre-wrap !important;
-        text-align: left !important;
-        margin-bottom: 15px !important;
+        text-align: center !important;
+        margin-bottom: 10px !important;
         color: #31333F !important;
     }
     div.stButton > button:hover {
         border-color: #3b71ca !important;
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1) !important;
         transform: translateY(-2px) !important;
-    }
-    /* Estilo para los mini-botones de navegación superior */
-    .nav-container {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -53,19 +46,14 @@ st.markdown("""
 with st.sidebar:
     st.markdown("# 🚀 Perfil")
     st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM Universidad de Chile*")
-    st.markdown("### Redes Sociales \n- [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)")
     st.divider()
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
     st.divider()
-    st.write("""
-    Sólo existen dos días en el año en los que no se puede hacer nada. Uno se llama ayer y otro mañana. 
-    Por lo tanto, hoy es el día ideal para amar, crecer, hacer y principalmente vivir. 
-    Dalai Lama
-    """)
+    st.write("Típ: Selecciona una sub-sección para ver las clases específicas.")
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # Cabecera Azul (Título Centrado y Reloj)
+    # --- CABECERAS (Dragón y Countdown) ---
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
@@ -80,7 +68,6 @@ if menu == "🏠 Dashboard PAES":
         </div>
         """, unsafe_allow_html=True)
 
-    # Cabecera Roja (Countdown)
     fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
     faltan = fecha_paes - ahora
     st.markdown(f"""
@@ -93,53 +80,63 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("---")
 
-    # Definición de Ejes y Colores
-    ejes_info = {
-        "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
-        "📉 Álgebra": "Operatoria algebraica y funciones",
-        "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores",
-        "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."
-    }
-
+    # --- LÓGICA DE PANTALLAS ---
     if st.session_state.eje_actual is None:
-        # PÁGINA A: MENÚ DE SELECCIÓN PRINCIPAL
+        # PANTALLA 1: SELECCIÓN DE EJES
         st.subheader("📚 Selecciona un Eje Temático")
-        for nombre, desc in ejes_info.items():
-            if st.button(f"{nombre}\n{desc}", key=f"btn_{nombre}", use_container_width=True):
+        ejes = {
+            "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
+            "📉 Álgebra": "Operatoria algebraica y funciones",
+            "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes.",
+            "📊 Datos": "Medidas de tendencia, tablas y azar."
+        }
+        for nombre, desc in ejes.items():
+            if st.button(f"{nombre}\n{desc}", key=f"main_{nombre}", use_container_width=True):
                 st.session_state.eje_actual = nombre
                 st.rerun()
-    else:
-        # PÁGINA B: CONTENIDO DEL EJE + NAVEGACIÓN SUPERIOR COLORIDA
-        col1, col2, col3, col4, col5 = st.columns([1, 1, 1, 1, 1])
-        
-        with col1:
-            if st.button("🏠 Inicio", use_container_width=True):
-                st.session_state.eje_actual = None
-                st.rerun()
-        with col2:
-            if st.button("🔢 Números", key="nav_num", use_container_width=True):
-                st.session_state.eje_actual = "🔢 Números"
-                st.rerun()
-        with col3:
-            if st.button("📉 Álgebra", key="nav_alg", use_container_width=True):
-                st.session_state.eje_actual = "📉 Álgebra"
-                st.rerun()
-        with col4:
-            if st.button("📐 Geometría", key="nav_geo", use_container_width=True):
-                st.session_state.eje_actual = "📐 Geometría"
-                st.rerun()
-        with col5:
-            if st.button("📊 Datos", key="nav_dat", use_container_width=True):
-                st.session_state.eje_actual = "📊 Datos y Azar"
-                st.rerun()
 
-        st.write("---")
-        eje_selec = st.session_state.eje_actual
-        st.header(eje_selec)
+    elif st.session_state.eje_actual == "🔢 Números":
+        # PANTALLA 2: SUB-SECCIONES DE NÚMEROS
+        # Barra de navegación superior
+        nav_cols = st.columns(5)
+        if nav_cols[0].button("🏠 Inicio"):
+            st.session_state.eje_actual = None
+            st.session_state.sub_seccion = None
+            st.rerun()
         
-        with st.expander(f"📂 Sesiones de {eje_selec[2:]}", expanded=True):
-            st.info(f"Contenido de {eje_selec}. Listado de clases en desarrollo.")
+        st.header("🔢 Eje Números")
+        
+        # Solo mostramos los cuadraditos si no se ha elegido una sub-sección
+        if st.session_state.sub_seccion is None:
+            st.subheader("Selecciona una unidad:")
+            sub1, sub2, sub3 = st.columns(3)
+            with sub1:
+                if st.button("📓 Conjuntos\nNuméricos", use_container_width=True):
+                    st.session_state.sub_seccion = "Conjuntos"
+                    st.rerun()
+            with sub2:
+                if st.button("➕ Operatoria", use_container_width=True):
+                    st.session_state.sub_seccion = "Operatoria"
+                    st.rerun()
+            with sub3:
+                if st.button("📝 Ejercitación", use_container_width=True):
+                    st.session_state.sub_seccion = "Ejercitación"
+                    st.rerun()
+        else:
+            # PANTALLA 3: CONTENIDO FINAL (AQUÍ IRÁ TU CLASE E02)
+            st.button("⬅️ Volver a Unidades", on_click=lambda: st.session_state.update({"sub_seccion": None}))
+            st.subheader(f"📍 {st.session_state.sub_seccion}")
+            
+            # Aquí es donde el mensaje de "desarrollo" desaparece y pondremos la materia real
+            st.success(f"Cargando material de {st.session_state.sub_seccion}...")
+
+    else:
+        # Otros ejes (Álgebra, etc.)
+        if st.button("⬅️ Volver al Inicio"):
+            st.session_state.eje_actual = None
+            st.rerun()
+        st.header(st.session_state.eje_actual)
+        st.info("Esta sección se configurará igual que Números próximamente.")
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
-    # ... (Lógica de archivos)
