@@ -9,7 +9,7 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wi
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = "🔢 Números"
 
-# --- 2. INYECCIÓN DE CSS (TARJETAS PRO) ---
+# --- 2. INYECCIÓN DE CSS (TARJETAS PRO LIMPIAS) ---
 st.markdown("""
     <style>
     /* Estilo de la barra blanca debajo de las cabeceras */
@@ -21,7 +21,7 @@ st.markdown("""
     
     /* Transformación de Botones en CONTENEDORES (Cards) */
     div.stButton > button {
-        height: 120px !important;
+        height: 110px !important;
         border-radius: 15px !important;
         background-color: white !important;
         border: 1px solid #e0e0e0 !important;
@@ -35,19 +35,13 @@ st.markdown("""
         white-space: pre-wrap !important;
         text-align: left !important;
         margin-bottom: 15px !important;
+        color: #31333F !important; /* Color de texto estándar */
     }
     
     div.stButton > button:hover {
         border-color: #3b71ca !important;
-        box-shadow: 0px 6px 15px rgba(59, 113, 202, 0.2) !important;
+        box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1) !important;
         transform: translateY(-2px) !important;
-        color: #3b71ca !important;
-    }
-
-    /* Color azul para el Eje Álgebra */
-    .blue-title {
-        color: #3b71ca;
-        font-weight: bold;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -70,7 +64,9 @@ if menu == "🏠 Dashboard PAES":
     st.markdown(f"""
         <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; display: flex; justify-content: space-between; align-items: center;">
             <div style="font-size: 22px; font-weight: bold;">🚀 Centro de Recursos PAES</div>
-            <div style="font-size: 18px; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
+            <div style="text-align: right;">
+                <div style="font-size: 18px; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -97,19 +93,18 @@ if menu == "🏠 Dashboard PAES":
     }
 
     for nombre, desc in ejes_info.items():
-        if st.button(f"{nombre}\\n{desc}", key=f"btn_{nombre}", use_container_width=True):
+        # Usamos doble salto de línea para separar el título de la descripción en el botón
+        if st.button(f"{nombre}\n{desc}", key=f"btn_{nombre}", use_container_width=True):
             st.session_state.eje_actual = nombre
 
     st.write("---")
     
-    # Contenido del Eje Seleccionado
+    # Título del Eje Seleccionado (Limpio)
     eje_selec = st.session_state.eje_actual
-    if eje_selec == "📉 Álgebra":
-        st.markdown('<h1 class="blue-title">Eje Álgebra</h1>', unsafe_allow_html=True)
-    else:
-        st.header(eje_selec)
+    st.header(eje_selec)
     
-    st.info(f"Seleccionaste el eje de {eje_selec[2:]}. Aquí aparecerán tus 121 clases.")
+    with st.expander(f"📂 Sesiones de {eje_selec[2:]}", expanded=True):
+        st.info("Aquí aparecerán tus 121 clases organizadas.")
 
 elif menu == "📂 Biblioteca PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
