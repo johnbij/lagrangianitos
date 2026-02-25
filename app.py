@@ -56,9 +56,11 @@ with st.sidebar:
     Dalai Lama
     """)
 
-# --- 4. LÓGICA DE NAVEGACIÓN ---
+
+
+    # --- 4. LÓGICA DE NAVEGACIÓN (TAMAÑOS CORREGIDOS) ---
 if menu == "🏠 Dashboard PAES":
-    # Cabecera Azul (Reloj con ubicación sobre la hora)
+    # Cabecera Azul (Reloj)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
@@ -66,23 +68,24 @@ if menu == "🏠 Dashboard PAES":
             <div style="font-size: 22px; font-weight: bold;">🚀 Lagrangianitos. Tus recursos PAES M1</div>
             <div style="text-align: right;">
                 <div style="font-size: 14px; opacity: 0.9;">Santiago, Chile</div>
-                <div style="font-size: 20px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
+                <div style="font-size: 22px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-    # Cabecera Roja (Countdown con Minutos)
+    # Cabecera Roja (Countdown con tamaño aumentado a 22px)
     fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
     faltan = fecha_paes - ahora
     st.markdown(f"""
         <div style="background-color: #cc0000; padding: 15px; color: white; display: flex; justify-content: space-around; align-items: center;">
-            <div style="font-size: 16px; font-weight: bold;">⏳ Días: {faltan.days}</div>
-            <div style="font-size: 16px; font-weight: bold;">Hrs: {faltan.seconds // 3600}</div>
-            <div style="font-size: 16px; font-weight: bold;">Min: {(faltan.seconds // 60) % 60}</div>
+            <div style="font-size: 22px; font-weight: bold;">⏳ Días: {faltan.days}</div>
+            <div style="font-size: 22px; font-weight: bold;">Hrs: {faltan.seconds // 3600}</div>
+            <div style="font-size: 22px; font-weight: bold;">Min: {(faltan.seconds // 60) % 60}</div>
         </div>
         """, unsafe_allow_html=True)
 
     st.write("---")
+    # ... resto del código igual
     st.subheader("📚 Ejes Temáticos")
 
     ejes_info = {
