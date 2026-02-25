@@ -75,7 +75,7 @@ with cols[1]:
 with cols[2]:
     if st.button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
 with cols[3]:
-    if st.button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
+    if st.button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística y Probabilidad"
 
 st.write("---")
 
