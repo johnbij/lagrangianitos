@@ -2,99 +2,130 @@ import streamlit as st
 from datetime import datetime
 import pytz
 
-# Configuración de la página
+# --- 1. CONFIGURACIÓN DE PÁGINA ---
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wide")
 
-# --- ESTADO DE NAVEGACIÓN ---
+# Estado para que la página recuerde qué eje elegiste
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = "🔢 Números"
 
-# --- INYECCIÓN DE CSS PARA LA NAVEGACIÓN ---
+# --- 2. INYECCIÓN DE CSS (TARJETAS PRO) ---
 st.markdown("""
     <style>
+    /* Estilo de la barra blanca debajo de las cabeceras */
     [data-testid="stHorizontalBlock"] {
         background-color: white !important;
-        padding: 15px !important;
-        border: 1px solid #dddddd !important;
+        padding: 10px !important;
         border-radius: 0 0 15px 15px !important;
-        box-shadow: 0px 4px 6px rgba(0,0,0,0.05) !important;
     }
-    .stButton > button {
-        border-radius: 8px !important;
-        border: 1px solid #3b71ca !important;
+    
+    /* Transformación de Botones en CONTENEDORES (Cards) */
+    div.stButton > button {
+        height: 120px !important;
+        border-radius: 15px !important;
+        background-color: white !important;
+        border: 1px solid #e0e0e0 !important;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.05) !important;
+        transition: all 0.3s ease !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: center !important;
+        padding: 20px !important;
+        white-space: pre-wrap !important;
+        text-align: left !important;
+        margin-bottom: 15px !important;
+    }
+    
+    div.stButton > button:hover {
+        border-color: #3b71ca !important;
+        box-shadow: 0px 6px 15px rgba(59, 113, 202, 0.2) !important;
+        transform: translateY(-2px) !important;
         color: #3b71ca !important;
-        font-weight: bold !important;
+    }
+
+    /* Color azul para el Eje Álgebra */
+    .blue-title {
+        color: #3b71ca;
+        font-weight: bold;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# --- BARRA LATERAL (CON LINKS Y NAVEGACIÓN) ---
+# --- 3. BARRA LATERAL ---
 with st.sidebar:
-    st.image("https://www.freeiconspng.com/uploads/blue-rocket-icon-png-17.png", width=100)
-    st.title("Perfil")
-    st.markdown('''
-**Seba**
-*Estudiante de Ingeniería*
-
-**Redes Sociales:**
-* [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)
-
-**Proyectos:**
-- Libro Digital PAES M1 📚
-- Dashboard de Datos 📊
-''')
+    st.markdown("# 🚀 Perfil")
+    st.markdown("**Seba** \n*Estudiante de Ingeniería*")
+    st.markdown("### Redes Sociales \n- [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)")
     st.divider()
-    st.subheader("Navegación")
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca PDFs"])
     st.divider()
-    st.write("Típ: El orden en los ejes es clave para un buen puntaje.")
+    st.write("Típ: El diseño de tarjetas facilita la navegación táctil.")
 
-# --- LÓGICA DE NAVEGACIÓN PRINCIPAL ---
+# --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # 1. BARRA AZUL
+    # Cabecera Azul (Reloj)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
-        <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; height: 100px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid white;">
-            <div style="font-size: 26px; font-weight: bold;">🚀 Centro de Recursos: PAES M1</div>
-            <div style="text-align: right;">
-                <div style="font-size: 11px; opacity: 0.9;">⏰ Hora Actual</div>
-                <div style="font-size: 20px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
-            </div>
+        <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 22px; font-weight: bold;">🚀 Centro de Recursos PAES</div>
+            <div style="font-size: 18px; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
         </div>
         """, unsafe_allow_html=True)
 
-    # 2. BARRA ROJA
+    # Cabecera Roja (Countdown)
     fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
     faltan = fecha_paes - ahora
     st.markdown(f"""
-        <div style="background-color: #cc0000; padding: 20px; color: white; height: 100px; display: flex; justify-content: space-around; align-items: center; border-bottom: 1px solid white;">
-            <div style="font-size: 18px; font-weight: bold;">⏳ Días: {faltan.days}</div>
-            <div style="font-size: 18px; font-weight: bold;">Horas: {faltan.seconds // 3600}</div>
-            <div style="font-size: 18px; font-weight: bold;">Minutos: {(faltan.seconds // 60) % 60}</div>
+        <div style="background-color: #cc0000; padding: 15px; color: white; display: flex; justify-content: space-around; align-items: center;">
+            <div style="font-size: 16px; font-weight: bold;">⏳ Días: {faltan.days}</div>
+            <div style="font-size: 16px; font-weight: bold;">Hrs: {faltan.seconds // 3600}</div>
         </div>
         """, unsafe_allow_html=True)
 
-    # 3. BARRA BLANCA (Navegación con 5 botones)
-    cols = st.columns(5) # Cambiado a 5 columnas
-    if cols[0].button("🔢 Números", use_container_width=True): st.session_state.eje_actual = "🔢 Números"
-    if cols[1].button("📉 Álgebra", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"
-    if cols[2].button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
-    if cols[3].button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
-    if cols[4].button("📊 Probabilidad", use_container_width=True): st.session_state.eje_actual = "📊 Probabilidad"
+    st.write("---")
+    st.subheader("📚 Planes de Estudio")
+
+    # Los 5 Ejes como Tarjetas Pro
+    ejes_info = {
+        "🔢 Números": "Conjuntos, potencias y razones.",
+        "📉 Álgebra": "Ecuaciones, funciones y álgebra.",
+        "📐 Geometría": "Teoremas, áreas y volúmenes.",
+        "📊 Estadística": "Medidas de tendencia y tablas.",
+        "📊 Probabilidad": "Azar, eventos y combinatoria."
+    }
+
+    for nombre, desc in ejes_info.items():
+        if st.button(f"{nombre}\\n{desc}", key=f"btn_{nombre}", use_container_width=True):
+            st.session_state.eje_actual = nombre
 
     st.write("---")
-
-    # Contenido según el eje
-    eje = st.session_state.eje_actual
-    st.header(eje)
-    if eje == "📉 Álgebra":
-        st.write("Contenidos de expresiones algebraicas, ecuaciones y funciones.")
-    elif eje == "📊 Probabilidad":
-        st.write("Contenidos de probabilidad clásica, reglas de suma y producto.")
+    
+    # Contenido del Eje Seleccionado
+    eje_selec = st.session_state.eje_actual
+    if eje_selec == "📉 Álgebra":
+        st.markdown('<h1 class="blue-title">Eje Álgebra</h1>', unsafe_allow_html=True)
     else:
-        st.write(f"Contenidos y ejercicios para el eje de {eje[2:]}.")
+        st.header(eje_selec)
+    
+    st.info(f"Seleccionaste el eje de {eje_selec[2:]}. Aquí aparecerán tus 121 clases.")
 
 elif menu == "📂 Biblioteca PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
-    st.write("Aquí puedes descargar las guías reales desde tu carpeta /pdfs.")
+    
+    def cargar_archivo(nombre):
+        try:
+            with open(f"pdfs/{nombre}", "rb") as f: return f.read()
+        except: return None
+
+    recursos = {
+        "📄 Temario PAES M1 2027": "2027I-TemarioPaesM1.pdf",
+        "📝 Ensayo PAES M1 2026": "2026V-PaesM1.pdf",
+        "🔑 Clavijero PAES M1 2026": "2026V-ClavijeroPaesM1.pdf"
+    }
+
+    for etiqueta, archivo in recursos.items():
+        data = cargar_archivo(archivo)
+        if data:
+            st.download_button(label=etiqueta, data=data, file_name=archivo, use_container_width=True)
