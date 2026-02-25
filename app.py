@@ -21,70 +21,71 @@ with st.sidebar:
 * [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)
 ''')
     st.divider()
-    st.write("Típ: El orden en los ejes es clave.")
+    st.write("Típ: El orden en los ejes es clave para un buen puntaje.")
 
-# --- CUERPO PRINCIPAL (ESTILO BANDERA) ---
+# --- DISEÑO DE BANDERAS (LAS 3 BARRAS IGUALES) ---
 zona_cl = pytz.timezone('America/Santiago')
 ahora = datetime.now(zona_cl)
+fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
+faltan = fecha_paes - ahora
 
 # 1. BARRA AZUL (Título y Reloj)
 st.markdown(f"""
-    <div style="background-color: #3b71ca; padding: 15px; border-radius: 10px 10px 0 0; color: white; border-bottom: 2px solid white;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 26px; font-weight: bold;">🚀 Centro de Recursos: PAES M1</div>
-            <div style="text-align: right;">
-                <div style="font-size: 11px; opacity: 0.9;">⏰ Hora Actual (Chile)</div>
-                <div style="font-size: 20px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
-            </div>
+    <div style="background-color: #3b71ca; padding: 20px; border-radius: 10px 10px 0 0; color: white; height: 100px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid white;">
+        <div style="font-size: 26px; font-weight: bold;">🚀 Centro de Recursos: PAES M1</div>
+        <div style="text-align: right;">
+            <div style="font-size: 12px; opacity: 0.9;">⏰ Hora Actual (Chile)</div>
+            <div style="font-size: 20px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 # 2. BARRA ROJA (Cuenta Regresiva)
-fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
-faltan = fecha_paes - ahora
 st.markdown(f"""
-    <div style="background-color: #cc0000; padding: 12px; color: white; border-bottom: 2px solid #eeeeee;">
-        <div style="display: flex; justify-content: space-around; text-align: center; align-items: center; font-size: 16px; font-weight: bold;">
-            <div>⏳ PAES de Invierno: {faltan.days} días</div>
-            <div>{faltan.seconds // 3600} Horas</div>
-            <div>{(faltan.seconds // 60) % 60} Minutos</div>
-        </div>
+    <div style="background-color: #cc0000; padding: 20px; color: white; height: 100px; display: flex; justify-content: space-around; align-items: center; border-bottom: 2px solid #eeeeee;">
+        <div style="font-size: 18px; font-weight: bold;">⏳ Días: {faltan.days}</div>
+        <div style="font-size: 18px; font-weight: bold;">Horas: {faltan.seconds // 3600}</div>
+        <div style="font-size: 18px; font-weight: bold;">Minutos: {(faltan.seconds // 60) % 60}</div>
     </div>
     """, unsafe_allow_html=True)
 
-# 3. BARRA BLANCA (Navegación por Ejes)
+# 3. BARRA BLANCA (Navegación)
+# Primero creamos el contenedor visual blanco
 st.markdown("""
-    <div style="background-color: white; padding: 5px 15px; border-radius: 0 0 10px 10px; border: 1px solid #dddddd; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);">
-        <p style="margin: 5px 0; font-size: 12px; color: #666; font-weight: bold;">Selecciona tu eje de estudio:</p>
+    <div style="background-color: white; padding: 0px; border-radius: 0 0 10px 10px; height: 100px; border: 1px solid #dddddd; display: flex; align-items: center; justify-content: center; box-shadow: 2px 2px 5px rgba(0,0,0,0.05);">
     </div>
     """, unsafe_allow_html=True)
 
-# Botones de navegación dentro de la lógica de Streamlit (aparecen justo debajo de la franja blanca)
-col1, col2, col3, col4 = st.columns(4)
-if col1.button("🔢 Números"): st.session_state.eje_actual = "🔢 Números"
-if col2.button("📉 Álgebra"): st.session_state.eje_actual = "📉 Álgebra"
-if col3.button("📐 Geometría"): st.session_state.eje_actual = "📐 Geometría"
-if col4.button("📊 Estadística"): st.session_state.eje_actual = "📊 Estadística"
+# Usamos un truco de CSS negativo para meter los botones reales de Streamlit "dentro" del espacio de la barra blanca
+st.markdown('<style>div.row-widget.stButton {text-align:center;}</style>', unsafe_allow_html=True)
+cols = st.columns(4)
+with cols[0]:
+    if st.button("🔢 Números", use_container_width=True): st.session_state.eje_actual = "🔢 Números"
+with cols[1]:
+    if st.button("📉 Álgebra", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"
+with cols[2]:
+    if st.button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
+with cols[3]:
+    if st.button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
 
-st.divider()
+st.write("---")
 
-# --- MOSTRAR CONTENIDO SEGÚN EL BOTÓN PRESIONADO ---
+# --- LÓGICA DE CONTENIDO ---
 eje = st.session_state.eje_actual
 
 if eje == "🔢 Números":
     st.header(eje)
-    st.write("Contenidos de conjuntos numéricos y porcentajes.")
+    st.write("Aquí encontrarás recursos sobre conjuntos numéricos, potencias y porcentajes.")
 
 elif eje == "📉 Álgebra":
     st.markdown("<h1 style='color: blue;'>Eje Álgebra</h1>", unsafe_allow_html=True)
-    st.write("Contenidos de expresiones y funciones.")
-    st.info("Típ: Anota: tip ... El lenguaje algebraico es la base de la prueba.")
+    st.write("Contenidos de expresiones algebraicas, ecuaciones y funciones.")
+    st.info("Típ: Anota: tip ... Las funciones son el corazón de la PAES.")
 
 elif eje == "📐 Geometría":
     st.header(eje)
-    st.write("Teoremas de Pitágoras, Tales y transformaciones.")
+    st.write("Recursos de figuras 2D, 3D y transformaciones isométricas.")
 
 elif eje == "📊 Estadística":
     st.header(eje)
-    st.write("Medidas de tendencia central y probabilidades.")
+    st.write("Análisis de datos, medidas de tendencia central y probabilidades.")
