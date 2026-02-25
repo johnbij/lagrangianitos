@@ -58,15 +58,15 @@ with st.sidebar:
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # Cabecera Azul (Título Centrado con Dragón + Reloj)
+    # Cabecera Azul (Título más grande y centrado)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
-        <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; position: relative; display: flex; align-items: center; justify-content: center; min-height: 90px;">
-            <div style="font-size: 22px; font-weight: bold; text-align: center; padding: 0 100px;">
+        <div style="background-color: #3b71ca; padding: 25px; border-radius: 15px 15px 0 0; color: white; position: relative; display: flex; align-items: center; justify-content: center; min-height: 100px;">
+            <div style="font-size: 28px; font-weight: bold; text-align: center; padding: 0 120px; line-height: 1.2;">
                 🐉 Lagrangianitos. Tus recursos PAES M1
             </div>
-            <div style="position: absolute; right: 20px; text-align: right;">
+            <div style="position: absolute; right: 25px; text-align: right;">
                 <div style="font-size: 14px; opacity: 0.9;">Santiago, Chile</div>
                 <div style="font-size: 22px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
             </div>
