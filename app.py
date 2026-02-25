@@ -3,14 +3,13 @@ import streamlit as st
 from datetime import datetime
 import pytz
 
-st.set_page_config(page_title="Dashboard de Seba", page_icon="🚀")
+st.set_page_config(page_title="Lagrangianitos", page_icon="🚀")
 
 # --- PRESENTACIÓN ---
 st.title("Hola, bienvenidos a la página de Lagrangianitos 👋")
 st.markdown("""
-### Estudiante de Ingeniería
-Bienvenido a mi espacio de datos. Soy estudiante de ingeniería y este dashboard
-es parte de mi proyecto de libro digital.
+### 
+Soy estudiante de ingeniería y en este estoy creando mi proyecto de libro digital.
 """ )
 
 st.divider()
