@@ -63,7 +63,7 @@ if menu == "🏠 Dashboard PAES":
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
         <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 22px; font-weight: bold;">🚀 Lagrangianitos</div>
+            <div style="font-size: 22px; font-weight: bold;">🚀 Lagrangianitos. Tus recursos PAES M1</div>
             <div style="text-align: right;">
                 <div style="font-size: 18px; font-family: monospace;">{ahora.strftime("%H:%M:%S")} CLST</div>
             </div>
