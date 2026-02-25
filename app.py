@@ -9,24 +9,29 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wi
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = "🔢 Números"
 
-# --- INYECCIÓN DE CSS PARA LA NAVEGACIÓN BLANCA ---
+# --- INYECCIÓN DE CSS (ESTO ES LO QUE CREA LA BARRA BLANCA) ---
 st.markdown("""
     <style>
-    [data-testid="stHorizontalBlock"] {
+    /* Forzamos el contenedor de los botones a ser blanco y con bordes */
+    [data-testid="stVerticalBlock"] > div:nth-child(4) [data-testid="stHorizontalBlock"] {
         background-color: white !important;
-        padding: 15px !important;
+        padding: 20px !important;
         border: 1px solid #dddddd !important;
         border-radius: 0 0 15px 15px !important;
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.1) !important;
     }
+    
+    /* Estilo de los botones */
     .stButton > button {
         border-radius: 8px !important;
         border: 1px solid #3b71ca !important;
         color: #3b71ca !important;
+        font-weight: bold !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# --- BARRA LATERAL (MANTENIDA SEGÚN TU SOLICITUD) ---
+# --- BARRA LATERAL ---
 with st.sidebar:
     st.image("https://www.freeiconspng.com/uploads/blue-rocket-icon-png-17.png", width=100)
     st.title("Perfil")
@@ -61,27 +66,23 @@ st.markdown(f"""
     """, unsafe_allow_html=True)
 
 # 3. BARRA BLANCA (Navegación)
+# En Streamlit, las columnas crean un bloque que el CSS de arriba pintará de blanco
 cols = st.columns(4)
-if cols[0].button("🔢 Números", use_container_width=True): st.session_state.eje_actual = "🔢 Números"
-if cols[1].button("📉 Álgebra", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"
-if cols[2].button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
-if cols[3].button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
+with cols[0]:
+    if st.button("🔢 Números", use_container_width=True): st.session_state.eje_actual = "🔢 Números"
+with cols[1]:
+    if st.button("📉 Álgebra", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"
+with cols[2]:
+    if st.button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
+with cols[3]:
+    if st.button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
 
 st.write("---")
 
-# --- LÓGICA DE CONTENIDO ESTANDARIZADO ---
+# --- LÓGICA DE CONTENIDO ---
 eje = st.session_state.eje_actual
-
 if eje == "📉 Álgebra":
-    st.header("📉 Álgebra")
-    st.write("Contenidos de expresiones algebraicas, ecuaciones y funciones.")
-    # Se eliminó el título azul y el tip según tu instrucción.
-elif eje == "🔢 Números":
-    st.header("🔢 Números")
-    st.write("Contenidos de potencias, raíces y porcentajes.")
-elif eje == "📐 Geometría":
-    st.header("📐 Geometría")
-    st.write("Contenidos de geometría plana y espacial.")
-elif eje == "📊 Estadística":
-    st.header("📊 Estadística")
-    st.write("Análisis de datos y probabilidad.")
+    st.markdown("<h1 style='color: blue;'>Eje Álgebra</h1>", unsafe_allow_html=True)
+    st.info("Típ: Anota: tip ... El lenguaje algebraico es la base de toda la prueba.")
+else:
+    st.header(eje)
