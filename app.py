@@ -9,29 +9,24 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wi
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = "🔢 Números"
 
-# --- ESTILOS CSS PARA INTEGRAR BOTONES ---
+# --- INYECCIÓN DE CSS (ESTO ES LO QUE CREA LA BARRA BLANCA) ---
 st.markdown("""
     <style>
-    /* Estilo para que los botones se vean limpios dentro de la barra */
+    /* Forzamos el contenedor de los botones a ser blanco y con bordes */
+    [data-testid="stVerticalBlock"] > div:nth-child(4) [data-testid="stHorizontalBlock"] {
+        background-color: white !important;
+        padding: 20px !important;
+        border: 1px solid #dddddd !important;
+        border-radius: 0 0 15px 15px !important;
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Estilo de los botones */
     .stButton > button {
-        width: 100%;
-        border-radius: 5px;
-        height: 50px;
-        background-color: #f8f9fa;
-        color: #333;
-        border: 1px solid #ddd;
-    }
-    .stButton > button:hover {
-        border-color: #3b71ca;
-        color: #3b71ca;
-    }
-    /* Contenedor de la barra blanca */
-    .barra-blanca {
-        background-color: white;
-        padding: 20px;
-        border-radius: 0 0 10px 10px;
-        border: 1px solid #dddddd;
-        margin-bottom: 20px;
+        border-radius: 8px !important;
+        border: 1px solid #3b71ca !important;
+        color: #3b71ca !important;
+        font-weight: bold !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -40,7 +35,7 @@ st.markdown("""
 with st.sidebar:
     st.image("https://www.freeiconspng.com/uploads/blue-rocket-icon-png-17.png", width=100)
     st.title("Perfil")
-    st.markdown('''**Seba** \n*Estudiante de Ingeniería* \n\n[📸 Instagram](https://instagram.com/lagrangianitos)''')
+    st.markdown('''**Seba** \n*Estudiante de Ingeniería*''')
     st.divider()
     st.write("Típ: El orden en los ejes es clave.")
 
@@ -52,10 +47,10 @@ faltan = fecha_paes - ahora
 
 # 1. BARRA AZUL
 st.markdown(f"""
-    <div style="background-color: #3b71ca; padding: 20px; border-radius: 10px 10px 0 0; color: white; height: 100px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid white;">
+    <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; height: 100px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid white;">
         <div style="font-size: 26px; font-weight: bold;">🚀 Centro de Recursos: PAES M1</div>
         <div style="text-align: right;">
-            <div style="font-size: 12px; opacity: 0.9;">⏰ Hora Actual</div>
+            <div style="font-size: 11px; opacity: 0.9;">⏰ Hora Actual</div>
             <div style="font-size: 20px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
         </div>
     </div>
@@ -63,36 +58,31 @@ st.markdown(f"""
 
 # 2. BARRA ROJA
 st.markdown(f"""
-    <div style="background-color: #cc0000; padding: 20px; color: white; height: 100px; display: flex; justify-content: space-around; align-items: center; border-bottom: 1px solid #eee;">
+    <div style="background-color: #cc0000; padding: 20px; color: white; height: 100px; display: flex; justify-content: space-around; align-items: center; border-bottom: 1px solid white;">
         <div style="font-size: 18px; font-weight: bold;">⏳ Días: {faltan.days}</div>
         <div style="font-size: 18px; font-weight: bold;">Horas: {faltan.seconds // 3600}</div>
         <div style="font-size: 18px; font-weight: bold;">Minutos: {(faltan.seconds // 60) % 60}</div>
     </div>
     """, unsafe_allow_html=True)
 
-# 3. BARRA BLANCA INTEGRADA (Con botones dentro)
-with st.container():
-    # Abrimos el div blanco con HTML
-    st.markdown('<div class="barra-blanca">', unsafe_allow_html=True)
-    cols = st.columns(4)
-    with cols[0]:
-        if st.button("🔢 Números"): st.session_state.eje_actual = "🔢 Números"
-    with cols[1]:
-        if st.button("📉 Álgebra"): st.session_state.eje_actual = "📉 Álgebra"
-    with cols[2]:
-        if st.button("📐 Geometría"): st.session_state.eje_actual = "📐 Geometría"
-    with cols[3]:
-        if st.button("📊 Estadística"): st.session_state.eje_actual = "📊 Estadística"
-    # Cerramos el div
-    st.markdown('</div>', unsafe_allow_html=True)
+# 3. BARRA BLANCA (Navegación)
+# En Streamlit, las columnas crean un bloque que el CSS de arriba pintará de blanco
+cols = st.columns(4)
+with cols[0]:
+    if st.button("🔢 Números", use_container_width=True): st.session_state.eje_actual = "🔢 Números"
+with cols[1]:
+    if st.button("📉 Álgebra", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"
+with cols[2]:
+    if st.button("📐 Geometría", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"
+with cols[3]:
+    if st.button("📊 Estadística", use_container_width=True): st.session_state.eje_actual = "📊 Estadística"
 
-st.write("")
+st.write("---")
 
-# --- CONTENIDO ---
+# --- LÓGICA DE CONTENIDO ---
 eje = st.session_state.eje_actual
 if eje == "📉 Álgebra":
     st.markdown("<h1 style='color: blue;'>Eje Álgebra</h1>", unsafe_allow_html=True)
     st.info("Típ: Anota: tip ... El lenguaje algebraico es la base de toda la prueba.")
 else:
     st.header(eje)
-    st.write(f"Recursos para el eje de {eje[2:]}")
