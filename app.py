@@ -3,36 +3,44 @@ import streamlit as st
 from datetime import datetime
 import pytz
 
-st.set_page_config(page_title="Lagrangianitos", page_icon="🚀")
+st.set_page_config(page_title="Lagrangianitos Dash", page_icon="🚀")
 
 # --- PRESENTACIÓN ---
 st.title("Hola, bienvenidos a la página de Lagrangianitos 👋")
-st.markdown("""
-### 
-Soy estudiante de ingeniería en FCFM y estoy creando mi proyecto
- libro digital PAES M1.
-""" )
+st.markdown("Soy estudiante de ingeniería en la universidad y estoy creando mi proyecto **Libro Digital PAES M1**.")
 
 st.divider()
 
-# --- DASHBOARD DE TIEMPO ---
+# --- CONTADOR PAES DE INVIERNO ---
+st.header("⏳ Cuenta regresiva: PAES de Invierno")
+
+# Configurar fecha objetivo: 15 de junio de 2026
+zona_cl = pytz.timezone('America/Santiago')
+fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
+ahora = datetime.now(zona_cl)
+
+# Calcular diferencia
+faltan = fecha_paes - ahora
+
+if faltan.days > 0:
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Días", faltan.days)
+    col2.metric("Horas", faltan.seconds // 3600)
+    col3.metric("Minutos", (faltan.seconds // 60) % 60)
+    st.write(f"Faltan exactamente **{faltan.days} días** para el Lunes 15 de junio de 2026.")
+else:
+    st.success("¡Llegó el día de la PAES! ¡Mucho éxito!")
+
+st.divider()
+
+# --- RELOJ GLOBAL ---
 st.header("⏰ Reloj Global")
-st.write("Selecciona una zona horaria para ver la hora exacta:")
+timezone_name = st.selectbox("Zona horaria:", pytz.all_timezones, index=pytz.all_timezones.index('America/Santiago'))
 
-# Selección de Zona Horaria
-timezone = st.selectbox("Zona horaria:", pytz.all_timezones, index=pytz.all_timezones.index('America/Santiago'))
-
-# Obtener datos
-now = datetime.now(pytz.timezone(timezone))
-fecha_actual = now.strftime("%d/%m/%Y")
-hora_actual = now.strftime("%H:%M:%S")
-
-# Mostrar en métricas
-col1, col2 = st.columns(2)
-col1.metric(label="Fecha Actual", value=fecha_actual)
-col2.metric(label="Hora Local", value=hora_actual)
+now_global = datetime.now(pytz.timezone(timezone_name))
+c1, c2 = st.columns(2)
+c1.metric(label="Fecha Actual", value=now_global.strftime("%d/%m/%Y"))
+c2.metric(label="Hora Local", value=now_global.strftime("%H:%M:%S"))
 
 st.divider()
-
-# Típ: Esto ayuda a que el usuario sepa qué hacer
-st.info("**Típ**: Refresca la página para ver los cambios en el código que subas a GitHub.")
+st.info("Típ: Recuerda que la PAES de Invierno es una gran oportunidad para asegurar tu puntaje temprano.")
