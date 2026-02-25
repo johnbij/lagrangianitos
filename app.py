@@ -19,14 +19,12 @@ if 'sub_seccion_actual' not in st.session_state:
 
 st.markdown("""
     <style>
-    /* Estilos fijos para las barras */
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
     .titulo-header { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
     .info-header { font-size: 14px; opacity: 0.9; }
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
-    /* Botones de los 4 Ejes */
     div.stButton > button { 
         min-height: 85px !important; 
         border-radius: 12px !important; 
@@ -55,7 +53,6 @@ with st.sidebar:
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
-    # ::: Renderizado de Barras (Ya listas) :::
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
@@ -64,21 +61,18 @@ if menu == "🏠 Dashboard PAES":
     horas = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).seconds // 3600
     st.markdown(f'<div class="header-rojo"><div class="timer-item">⏳ Días: {dias}</div><div class="timer-item">Hrs: {horas}</div></div>', unsafe_allow_html=True)
 
-    st.write("") # Espacio mínimo para que los botones suban
+    st.write("") 
 
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    # ::: DESPLIEGUE DE LOS 4 EJES (CORREGIDO) ::::::::::::::::::::::::::::::::
+    # ::: PANTALLA DE LOS 4 EJES ::::::::::::::::::::::::::::::::::::::::::::::
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    
     if st.session_state.eje_actual is None:
-        # Fila 1: Números y Álgebra
         c1, c2 = st.columns(2)
         if c1.button("🔢 Números\nConjuntos y operatoria", key="btn_num", use_container_width=True):
             st.session_state.eje_actual = "🔢 Números"; st.rerun()
         if c2.button("📉 Álgebra\nFunciones y más", key="btn_alg", use_container_width=True):
             st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
         
-        # Fila 2: Geometría y Datos
         c3, c4 = st.columns(2)
         if c3.button("📐 Geometría\nÁreas y Volúmenes", key="btn_geo", use_container_width=True):
             st.session_state.eje_actual = "📐 Geometría"; st.rerun()
@@ -86,10 +80,9 @@ if menu == "🏠 Dashboard PAES":
             st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-    # ::: NAVEGACIÓN Y CONTENIDO DE EJES ::::::::::::::::::::::::::::::::::::::
+    # ::: NAVEGACIÓN DENTRO DE NÚMEROS ::::::::::::::::::::::::::::::::::::::::
     # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
     else:
-        # Menú superior para volver rápido
         if st.button("⬅️ Volver al Inicio", use_container_width=True):
             st.session_state.eje_actual = None
             st.session_state.sub_seccion_actual = None; st.rerun()
@@ -99,27 +92,29 @@ if menu == "🏠 Dashboard PAES":
         if st.session_state.eje_actual == "🔢 Números":
             if st.session_state.sub_seccion_actual is None:
                 st.subheader("📌 Categorías de Números")
-                cs1, cs2 = st.columns(2)
-                if cs1.button("📦 Conjuntos Numéricos (N01)", use_container_width=True):
+                
+                # Botón 1: Conjuntos
+                if st.button("📦 Conjuntos Numéricos (N01)", use_container_width=True):
                     st.session_state.sub_seccion_actual = "N01"; st.rerun()
-                if cs2.button("➕ Operatoria", use_container_width=True): pass
+                
+                # Botón 2: Operatoria
+                if st.button("➕ Operatoria", use_container_width=True): pass
+                
+                # Botón 3: Ejercitación (EL QUE FALTABA)
+                if st.button("📝 Ejercitación", use_container_width=True): pass
             
+            # ::: CLASE N01 :::::::::::::::::::::::::::::::::::::::::::::::::::
             elif st.session_state.sub_seccion_actual == "N01":
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
                 st.markdown("""
 # <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
-
 ---
 ### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
-... Contenido de la clase ...
+... Contenido ...
 """, unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
 
-        else:
-            st.header(st.session_state.eje_actual)
-            st.info("Contenido en desarrollo para este eje.")
-
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca")
-        
+    
