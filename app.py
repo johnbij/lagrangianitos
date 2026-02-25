@@ -54,9 +54,13 @@ with st.sidebar:
     st.divider()
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
     st.divider()
-    st.write("Sólo existen dos días en el año en los que no se puede hacer nada. Uno se llama ayer y otro mañana. 
-    Por lo tanto, hoy es el día ideal para amar, crecer, hacer y principalmente vivir. 
-    Dalai Lama")
+    st.write("""Sólo existen dos días en los que no se puede hacer nada. Uno fue ayer, el otro sera mañana. 
+    Por lo tanto, hoy es el día ideal para amar, crecer, hacer 
+    y principalmente vivir. 
+    Dalai Lama""")
+
+
+    
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
