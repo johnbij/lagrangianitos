@@ -8,6 +8,8 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wi
 # Estado para controlar la navegación
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
+if 'sub_seccion_actual' not in st.session_state:
+    st.session_state.sub_seccion_actual = None
 
 # --- 2. INYECCIÓN DE CSS (TARJETAS PRO) ---
 st.markdown("""
@@ -17,7 +19,6 @@ st.markdown("""
         padding: 10px !important;
         border-radius: 0 0 15px 15px !important;
     }
-    /* Estilo de las tarjetas (botones grandes) */
     div.stButton > button {
         height: 110px !important;
         border-radius: 15px !important;
@@ -43,7 +44,7 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- 3. BARRA LATERAL (ORIGINAL SIN CAMBIOS) ---
+# --- 3. BARRA LATERAL ---
 with st.sidebar:
     st.markdown("# 🚀 Perfil")
     st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM Universidad de Chile*")
@@ -87,17 +88,10 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("---")
 
-    # Definición de Ejes
-    ejes_info = {
-        "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
-        "📉 Álgebra": "Operatoria algebraica y funciones",
-        "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores",
-        "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."
-    }
-
     if st.session_state.eje_actual is None:
-        # PÁGINA A: MENÚ DE EJES PRINCIPAL
+        # PÁGINA A: MENÚ DE EJES
         st.subheader("📚 Selecciona un Eje Temático")
+        ejes_info = {"🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.", "📉 Álgebra": "Operatoria algebraica y funciones", "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores", "📊 Datos y Azar": "Medidas de tendencia y tablas. Azar, eventos y combinatoria."}
         for nombre, desc in ejes_info.items():
             if st.button(f"{nombre}\n{desc}", key=f"btn_{nombre}", use_container_width=True):
                 st.session_state.eje_actual = nombre
@@ -105,63 +99,85 @@ if menu == "🏠 Dashboard PAES":
     else:
         # PÁGINA B: DENTRO DEL EJE (Navegación superior)
         col_nav = st.columns([1, 1, 1, 1, 1])
-        with col_nav[0]:
-            if st.button("🏠 Inicio", use_container_width=True):
-                st.session_state.eje_actual = None
-                st.rerun()
-        with col_nav[1]:
-            if st.button("🔢 Números", key="nav_num", use_container_width=True):
-                st.session_state.eje_actual = "🔢 Números"
-                st.rerun()
-        with col_nav[2]:
-            if st.button("📉 Álgebra", key="nav_alg", use_container_width=True):
-                st.session_state.eje_actual = "📉 Álgebra"
-                st.rerun()
-        with col_nav[3]:
-            if st.button("📐 Geometría", key="nav_geo", use_container_width=True):
-                st.session_state.eje_actual = "📐 Geometría"
-                st.rerun()
-        with col_nav[4]:
-            if st.button("📊 Datos", key="nav_dat", use_container_width=True):
-                st.session_state.eje_actual = "📊 Datos y Azar"
-                st.rerun()
+        botones = ["🏠 Inicio", "🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Datos"]
+        for i, texto in enumerate(botones):
+            with col_nav[i]:
+                if st.button(texto, key=f"nav_{i}", use_container_width=True):
+                    st.session_state.eje_actual = None if texto == "🏠 Inicio" else (f"📊 Datos y Azar" if texto == "📊 Datos" else f"{texto}")
+                    st.session_state.sub_seccion_actual = None
+                    st.rerun()
 
         st.write("---")
-        eje_selec = st.session_state.eje_actual
-        st.header(eje_selec)
+        
+        # Lógica de SUB-SECCIONES en Números
+        if st.session_state.eje_actual == "🔢 Números":
+            if st.session_state.sub_seccion_actual is None:
+                st.subheader("📌 Selecciona una categoría:")
+                c1, c2, c3 = st.columns(3)
+                with c1:
+                    if st.button("📦 Conjuntos Numéricos", key="sub_conj", use_container_width=True):
+                        st.session_state.sub_seccion_actual = "Conjuntos"
+                        st.rerun()
+                with c2:
+                    if st.button("➕ Operatoria", key="sub_ope", use_container_width=True): pass
+                with c3:
+                    if st.button("📝 Ejercitación", key="sub_ejer", use_container_width=True): pass
+            
+            # --- DESPLIEGUE DE LA CLASE N01 ---
+            elif st.session_state.sub_seccion_actual == "Conjuntos":
+                if st.button("⬅️ Volver a Categorías"):
+                    st.session_state.sub_seccion_actual = None
+                    st.rerun()
+                
+                st.markdown("""
+                # <span style="color:darkblue">Eje Números</span>
+                ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
 
-        # Lógica específica para Números (Sub-secciones)
-        if eje_selec == "🔢 Números":
-            st.subheader("📌 Selecciona una categoría:")
-            col_sub1, col_sub2, col_sub3 = st.columns(3)
-            with col_sub1:
-                if st.button("📦 Conjuntos Numéricos", key="sub_conj", use_container_width=True):
-                    pass # Aquí irán tus clases de conjuntos
-            with col_sub2:
-                if st.button("➕ Operatoria", key="sub_ope", use_container_width=True):
-                    pass # Aquí irán tus clases de operatoria
-            with col_sub3:
-                if st.button("📝 Ejercitación", key="sub_ejer", use_container_width=True):
-                    pass # Aquí irán tus clases de ejercitación
+                ---
+
+                ### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
+                Bienvenido a la primera página de un viaje que no tiene vuelta atrás. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
+
+                Este eje de **Números** no se trata de hacer cuentas rápidas; se trata de aprender a clasificar el caos. Durante las próximas unidades, descubriremos que los números habitan en estructuras organizadas llamadas **Conjuntos**.
+
+                ---
+
+                ### 🛡️ 2. Crónica del Infinito: El Legado de Georg Cantor
+                A finales del siglo XIX, **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido. Su valentía permitió que hoy podamos definir con precisión quirúrgica qué es un número.
+
+                ---
+
+                ### 🛡️ 3. El Marco de Referencia: Universo, Vacío y Subconjuntos
+                * **El Universo ($\mathcal{U}$):** Contexto total que contiene todos los elementos.
+                * **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos.
+                * **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto.
+                * **Subconjunto ($\subset$):** $A \subset B$ si **todos** los elementos de $A$ están también en $B$.
+
+                > **Típ:** ... Si $A \subset B$, entonces $A \cap B = A$ y $A \cup B = B$.
+
+                ---
+
+                ### 🛡️ 4. Operaciones de "1000 Puntos"
+
+                | Operación | Símbolo | Significado Lógico | Carpintería Técnica |
+                | :--- | :---: | :--- | :--- |
+                | **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos. |
+                | **Intersección** | $\cap$ | $x \in A$ **y** $x \in B$ | Solo los repetidos. |
+                | **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Borrar lo del segundo al primero. |
+                | **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Lo que le falta para ser Universo. |
+
+                ---
+
+                ### 🛡️ 5. Cardinalidad y Conjunto Potencia
+                * **Cardinalidad ($n$):** Número de elementos únicos.
+                * **Regla de Oro:** $\#(A \cup B) = \#A + \#B - \#(A \cap B)$.
+                * **Total de Subconjuntos:** $2^n$
+
+                ---
+
+                > "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".
+                > — **Georg Cantor**
+                """, unsafe_allow_html=True)
         else:
-            # Para los otros ejes, por ahora mostramos el info limpio
-            st.info(f"Contenido de {eje_selec} en construcción.")
-
-elif menu == "📂 Biblioteca de PDFs":
-    st.header("📂 Biblioteca de Recursos PDF")
-    
-    def cargar_archivo(nombre):
-        try:
-            with open(f"pdfs/{nombre}", "rb") as f: return f.read()
-        except: return None
-
-    recursos = {
-        "📄 Temario PAES M1 2027": "2027I-TemarioPaesM1.pdf",
-        "📝 Ensayo PAES M1 2026": "2026V-PaesM1.pdf",
-        "🔑 Clavijero PAES M1 2026": "2026V-ClavijeroPaesM1.pdf"
-    }
-
-    for etiqueta, archivo in recursos.items():
-        data = cargar_archivo(archivo)
-        if data:
-            st.download_button(label=etiqueta, data=data, file_name=archivo, use_container_width=True)
+            st.header(st.session_state.eje_actual)
+            st.info("Contenido en desarrollo.")
