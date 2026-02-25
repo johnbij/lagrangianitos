@@ -81,15 +81,14 @@ if menu == "🏠 Dashboard PAES":
         """, unsafe_allow_html=True)
 
     st.write("---")
-    st.subheader("📚 Planes de Estudio")
+    st.subheader("📚 Ejes Temáticos")
 
-    # Los 5 Ejes como Tarjetas Pro
+    # Los 4 Ejes como Tarjetas Pro
     ejes_info = {
-        "🔢 Números": "Conjuntos, potencias y razones.",
-        "📉 Álgebra": "Ecuaciones, funciones y álgebra.",
-        "📐 Geometría": "Teoremas, áreas y volúmenes.",
-        "📊 Estadística": "Medidas de tendencia y tablas.",
-        "📊 Probabilidad": "Azar, eventos y combinatoria."
+        "🔢 Números": "Conjuntos, operatoria, potencias, raíces y razones.",
+        "📉 Álgebra": "Operatoria algebraica y funciones",
+        "📐 Geometría": "Teoremas, perímetros, áreas y volúmenes. Vectores",
+        "📊 Datos y Azar": "Medidas de tendencia y tablas.Azar, eventos y combinatoria."
     }
 
     for nombre, desc in ejes_info.items():
