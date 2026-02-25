@@ -10,7 +10,7 @@ if 'eje_actual' not in st.session_state:
 if 'sub_seccion_actual' not in st.session_state:
     st.session_state.sub_seccion_actual = None
 
-# --- 2. INYECCIÓN DE CSS ---
+# --- 2. INYECCIÓN DE CSS (TARJETAS Y CLASE) ---
 st.markdown("""
     <style>
     div.stButton > button {
@@ -18,11 +18,13 @@ st.markdown("""
         border-radius: 12px !important;
         border: 1px solid #e0e0e0 !important;
         transition: all 0.3s ease !important;
+        color: #31333F !important;
     }
     .clase-box {
         max-width: 900px;
         margin: 0 auto;
         padding: 20px;
+        line-height: 1.6;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -33,9 +35,12 @@ with st.sidebar:
     st.markdown("**Barton** \n*Estudiante de Ingeniería en FCFM*")
     st.divider()
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
+    st.divider()
+    st.write("Sólo existen dos días en el año en los que no se puede hacer nada. Uno se llama ayer y otro mañana. Por lo tanto, hoy es el día ideal para amar, crecer, hacer y principalmente vivir. Dalai Lama")
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
+    # CABECERAS
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
@@ -57,40 +62,37 @@ if menu == "🏠 Dashboard PAES":
     if st.session_state.eje_actual is None:
         st.subheader("📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
-        if c1.button("🔢 Números\nConjuntos y operatoria", use_container_width=True):
+        if c1.button("🔢 Números\nConjuntos y operatoria", key="main_n", use_container_width=True):
             st.session_state.eje_actual = "🔢 Números"; st.rerun()
-        if c2.button("📉 Álgebra\nFunciones y más", use_container_width=True):
+        if c2.button("📉 Álgebra\nFunciones y más", key="main_a", use_container_width=True):
             st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
     else:
-        # Barra de Navegación entre Ejes
+        # Mini Navegación Superior
         c_nav = st.columns(5)
-        for i, n in enumerate(["🏠 Inicio", "🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Datos"]):
-            if c_nav[i].button(n, key=f"nav_{i}", use_container_width=True):
+        n_ejes = ["🏠 Inicio", "🔢 Números", "📉 Álgebra", "📐 Geometría", "📊 Datos"]
+        for i, n in enumerate(n_ejes):
+            if c_nav[i].button(n, key=f"nav_top_{i}", use_container_width=True):
                 st.session_state.eje_actual = None if n == "🏠 Inicio" else n
                 st.session_state.sub_seccion_actual = None; st.rerun()
 
         st.write("---")
 
         if st.session_state.eje_actual == "🔢 Números":
-            # Si no hay sub-sección, muestra las 3 cajitas originales
             if st.session_state.sub_seccion_actual is None:
                 st.subheader("📌 Categorías de Números")
                 cs1, cs2, cs3 = st.columns(3)
-                if cs1.button("📦 Conjuntos Numéricos", key="main_conj", use_container_width=True):
+                if cs1.button("📦 Conjuntos Numéricos", key="cat_conj", use_container_width=True):
                     st.session_state.sub_seccion_actual = "N01"; st.rerun()
-                if cs2.button("➕ Operatoria", key="main_ope", use_container_width=True): pass
-                if cs3.button("📝 Ejercitación", key="main_ejer", use_container_width=True): pass
+                if cs2.button("➕ Operatoria", key="cat_ope", use_container_width=True): pass
+                if cs3.button("📝 Ejercitación", key="cat_ejer", use_container_width=True): pass
             
-            # Si estamos en la clase, mostramos el contenido + botones de las otras categorías
             elif st.session_state.sub_seccion_actual == "N01":
-                col_back1, col_back2, col_back3 = st.columns(3)
-                with col_back1:
-                    if st.button("⬅️ Volver a Menú", use_container_width=True):
-                        st.session_state.sub_seccion_actual = None; st.rerun()
-                with col_back2:
-                    if st.button("➕ Ir a Operatoria", use_container_width=True): pass
-                with col_back3:
-                    if st.button("📝 Ir a Ejercitación", use_container_width=True): pass
+                # CAJITAS DE NAVEGACIÓN INTERNA
+                col_back = st.columns(3)
+                if col_back[0].button("⬅️ Volver a Menú", key="back_menu", use_container_width=True):
+                    st.session_state.sub_seccion_actual = None; st.rerun()
+                if col_back[1].button("➕ Ir a Operatoria", key="go_ope", use_container_width=True): pass
+                if col_back[2].button("📝 Ir a Ejercitación", key="go_ejer", use_container_width=True): pass
                 
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
                 st.markdown("""
@@ -153,9 +155,12 @@ Para dominar la PAES, debes "ver" la operación antes de calcularla. Los diagram
 
 > "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".
 > — **Georg Cantor**
-""")
+""", unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
 
         else:
             st.header(st.session_state.eje_actual)
             st.info("Contenido en desarrollo.")
+
+elif menu == "📂 Biblioteca de PDFs":
+    st.header("📂 Biblioteca de Recursos PDF")
