@@ -9,7 +9,7 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wi
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
 
-# --- 2. INYECCIÓN DE CSS (TUS TARJETAS PRO) ---
+# --- 2. INYECCIÓN DE CSS (TARJETAS PRO) ---
 st.markdown("""
     <style>
     [data-testid="stHorizontalBlock"] {
@@ -58,14 +58,15 @@ with st.sidebar:
 
 # --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # Cabecera Azul (Reloj con Zona Horaria)
+    # Cabecera Azul (Reloj con ubicación sobre la hora)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
         <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; display: flex; justify-content: space-between; align-items: center;">
             <div style="font-size: 22px; font-weight: bold;">🚀 Lagrangianitos. Tus recursos PAES M1</div>
             <div style="text-align: right;">
-                <div style="font-size: 18px; font-family: monospace;">{ahora.strftime("%H:%M:%S")} CLST</div>
+                <div style="font-size: 14px; opacity: 0.9;">Santiago, Chile</div>
+                <div style="font-size: 20px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -106,4 +107,4 @@ if menu == "🏠 Dashboard PAES":
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
-    # ... (Resto de la lógica de descarga igual)
+    # ... (Aquí va tu lógica de descarga de archivos)
