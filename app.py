@@ -3,7 +3,7 @@ from datetime import datetime
 import pytz
 
 # --- 1. CONFIGURACIÓN DE PÁGINA ---
-st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🚀", layout="wide")
+st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
 # Estado inicial en None para que no aparezca el cuadro de abajo al cargar
 if 'eje_actual' not in st.session_state:
@@ -56,24 +56,24 @@ with st.sidebar:
     Dalai Lama
     """)
 
-
-
-    # --- 4. LÓGICA DE NAVEGACIÓN (TAMAÑOS CORREGIDOS) ---
+# --- 4. LÓGICA DE NAVEGACIÓN ---
 if menu == "🏠 Dashboard PAES":
-    # Cabecera Azul (Reloj)
+    # Cabecera Azul (Título Centrado con Dragón + Reloj)
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f"""
-        <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 22px; font-weight: bold;">🚀 Lagrangianitos. Tus recursos PAES M1</div>
-            <div style="text-align: right;">
+        <div style="background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; position: relative; display: flex; align-items: center; justify-content: center; min-height: 90px;">
+            <div style="font-size: 22px; font-weight: bold; text-align: center; padding: 0 100px;">
+                🐉 Lagrangianitos. Tus recursos PAES M1
+            </div>
+            <div style="position: absolute; right: 20px; text-align: right;">
                 <div style="font-size: 14px; opacity: 0.9;">Santiago, Chile</div>
                 <div style="font-size: 22px; font-weight: bold; font-family: monospace;">{ahora.strftime("%H:%M:%S")}</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-    # Cabecera Roja (Countdown con tamaño aumentado a 22px)
+    # Cabecera Roja (Countdown con tamaño igualado a 22px)
     fecha_paes = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
     faltan = fecha_paes - ahora
     st.markdown(f"""
@@ -85,7 +85,6 @@ if menu == "🏠 Dashboard PAES":
         """, unsafe_allow_html=True)
 
     st.write("---")
-    # ... resto del código igual
     st.subheader("📚 Ejes Temáticos")
 
     ejes_info = {
@@ -110,4 +109,19 @@ if menu == "🏠 Dashboard PAES":
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
-    # ... (Aquí va tu lógica de descarga de archivos)
+    
+    def cargar_archivo(nombre):
+        try:
+            with open(f"pdfs/{nombre}", "rb") as f: return f.read()
+        except: return None
+
+    recursos = {
+        "📄 Temario PAES M1 2027": "2027I-TemarioPaesM1.pdf",
+        "📝 Ensayo PAES M1 2026": "2026V-PaesM1.pdf",
+        "🔑 Clavijero PAES M1 2026": "2026V-ClavijeroPaesM1.pdf"
+    }
+
+    for etiqueta, archivo in recursos.items():
+        data = cargar_archivo(archivo)
+        if data:
+            st.download_button(label=etiqueta, data=data, file_name=archivo, use_container_width=True)
