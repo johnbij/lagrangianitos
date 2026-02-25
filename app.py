@@ -10,8 +10,8 @@ with st.sidebar:
     st.image("https://www.freeiconspng.com/uploads/blue-rocket-icon-png-17.png", width=100)
     st.title("Perfil")
     st.markdown('''
-**Barton**
-*Estudiante de Ingeniería en FCFM*
+**Seba**
+*Estudiante de Ingeniería*
 
 **Redes Sociales:**
 * [📸 Instagram: @lagrangianitos](https://instagram.com/lagrangianitos)
@@ -21,13 +21,13 @@ with st.sidebar:
 - Dashboard de Datos 📊
 ''')
     st.divider()
-
+    
     # NUEVO: Selector de Página
     st.subheader("Navegación")
     menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca PDFs"])
-
+    
     st.divider()
-    st.write("Solo hay dos días en el año en los que no se puede hacer nada. Uno se llama ayer y el otro se llama mañana. Hoy es el día perfecto para amar, creer, hacer y, sobre todo, vivir". - Dalai Lama.")
+    st.write("Típ: El orden en los ejes es clave para un buen puntaje.")
 
 # --- LÓGICA DE NAVEGACIÓN PRINCIPAL ---
 
@@ -98,14 +98,14 @@ if menu == "🏠 Dashboard PAES":
 elif menu == "📂 Biblioteca PDFs":
     st.header("📂 Biblioteca de Recursos PDF")
     st.write("Aquí puedes descargar las guías y ensayos oficiales.")
-
+    
     # Ejemplo de cómo se vería un botón de descarga
     st.subheader("Eje Números")
-    st.download_button(label="📄 Descargar Guía Potencias.pdf",
-                       data="Contenido ficticio del PDF",
+    st.download_button(label="📄 Descargar Guía Potencias.pdf", 
+                       data="Contenido ficticio del PDF", 
                        file_name="Guia_Potencias_Lagrangianitos.pdf")
-
+    
     st.subheader("Ensayos")
-    st.download_button(label="📝 Descargar Ensayo M1 #1.pdf",
-                       data="Contenido ficticio",
+    st.download_button(label="📝 Descargar Ensayo M1 #1.pdf", 
+                       data="Contenido ficticio", 
                        file_name="Ensayo_M1_Lagrangianitos.pdf")
