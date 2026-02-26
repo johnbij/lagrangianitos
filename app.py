@@ -159,7 +159,7 @@ if menu == "🏠 Dashboard PAES":
         
         if st.session_state.clase_seleccionada == "N01":
             st.markdown("""
-# <span style="color:darkblue">Eje Números</span>
+
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
 
 ---
