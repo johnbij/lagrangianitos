@@ -137,12 +137,12 @@ if menu == "🏠 Dashboard PAES":
         if st.session_state.sub_eje_actual == "Conjuntos" and st.session_state.sub_seccion_actual == "Teoria":
             clases = [
                 ("📖 N01: Teoría de Conjuntos", "N01"),
-                ("📖 N02: Diagramas de Venn", "N02"),
-                ("📖 N03: Subconjuntos y Potencia", "N03"),
-                ("📖 N04: Operaciones de Unión e Intersección", "N04"),
-                ("📖 N05: Diferencia y Complemento", "N05"),
-                ("📖 N06: Cardinalidad de Conjuntos", "N06"),
-                ("📖 N07: Aplicaciones y Problemas", "N07")
+                ("📖 N02: Los Números Naturales", "N02"),
+                ("📖 N03: Los Números Cardinales", "N03"),
+                ("📖 N04: Los Números Enteros", "N04"),
+                ("📖 N05: Los Números Racionales", "N05"),
+                ("📖 N06: Los Números Irracionales", "N06"),
+                ("📖 N07: Los Números Reales", "N07")
             ]
             for nombre, code in clases:
                 if st.button(nombre):
