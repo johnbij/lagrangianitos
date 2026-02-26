@@ -10,6 +10,7 @@ import time
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
 if 'eje_actual' not in st.session_state: st.session_state.eje_actual = None
+if 'sub_eje_actual' not in st.session_state: st.session_state.sub_eje_actual = None
 if 'sub_seccion_actual' not in st.session_state: st.session_state.sub_seccion_actual = None
 if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccionada = None
 
@@ -29,7 +30,7 @@ st.markdown("""
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
-    /* CRONÓMETRO: Fondo blanco, Números Azules */
+    /* CRONÓMETRO BARTON: Fondo blanco, Números Azules */
     .crono-container-barton { 
         background-color: white; padding: 10px; border-radius: 10px; 
         text-align: center; border: 2px solid #3b71ca;
@@ -62,12 +63,12 @@ if menu == "🏠 Dashboard PAES":
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
     
-    # Cálculo de días para la PAES (Ejemplo Junio 2026)
+    # Timer para PAES
     dias_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).days
     horas_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).seconds // 3600
     st.markdown(f'<div class="header-rojo"><div class="timer-item">⏳ Días para PAES: {dias_paes}</div><div class="timer-item">Hrs: {horas_paes}</div></div>', unsafe_allow_html=True)
 
-    # --- SECCIÓN CRONÓMETRO BARTON ---
+    # --- SECCIÓN CRONÓMETRO ---
     st.write("")
     c_crono1, c_crono2 = st.columns([1, 3])
     with c_crono1:
@@ -91,17 +92,17 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("") 
 
-    # --- NAVEGACIÓN SUPERIOR (ACCESOS DIRECTOS) ---
+    # --- NAVEGACIÓN SUPERIOR ---
     n_cols = st.columns(5)
-    if n_cols[0].button("🏠", key="n_h"): st.session_state.eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+    if n_cols[0].button("🏠", key="n_h"): st.session_state.eje_actual = None; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+    if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+    if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+    if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+    if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
 
     st.divider()
 
-    # --- LÓGICA DE NAVEGACIÓN POR EJES ---
+    # --- LÓGICA DE NAVEGACIÓN ---
     if st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         e_col1, e_col2 = st.columns(2)
@@ -111,41 +112,53 @@ if menu == "🏠 Dashboard PAES":
         if e_col3.button("📐 Geometría"): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
         if e_col4.button("📊 Datos y Azar"): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
     
-    elif st.session_state.sub_seccion_actual is None:
+    # LÓGICA ESPECÍFICA PARA NÚMEROS (SUB-EJES)
+    elif st.session_state.eje_actual == "🔢 Números" and st.session_state.sub_eje_actual is None:
         st.markdown(f"## {st.session_state.eje_actual}")
+        st.markdown("### Selecciona un Sub-eje")
+        se_col1, se_col2 = st.columns(2)
+        if se_col1.button("🛡️ Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
+        if se_col2.button("⚙️ Operatoria"): st.session_state.sub_eje_actual = "Operatoria"; st.rerun()
+        if st.button("🔙 Volver"): st.session_state.eje_actual = None; st.rerun()
+
+    elif st.session_state.sub_seccion_actual is None:
+        # Se muestra el título del eje o sub-eje según corresponda
+        titulo = st.session_state.sub_eje_actual if st.session_state.eje_actual == "🔢 Números" else st.session_state.eje_actual
+        st.markdown(f"## {titulo}")
+        
         st.markdown('<div class="cat-container">', unsafe_allow_html=True)
         if st.button("📘 Teoría y Conceptos"): st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
         if st.button("📝 Ejercitación"): st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
+        
+        if st.button("🔙 Volver"): 
+            if st.session_state.eje_actual == "🔢 Números": st.session_state.sub_eje_actual = None
+            else: st.session_state.eje_actual = None
+            st.rerun()
 
     elif st.session_state.clase_seleccionada is None:
-        st.subheader(f"📚 Clases de {st.session_state.eje_actual}")
+        st.subheader(f"📚 Clases de {st.session_state.sub_eje_actual if st.session_state.eje_actual == '🔢 Números' else st.session_state.eje_actual}")
         
-        # --- FILTRO LÓGICO DE CLASES ---
-        if st.session_state.eje_actual == "🔢 Números":
+        # FILTRO FINAL: Solo en Números -> Conjuntos -> Teoría aparece N01
+        if st.session_state.sub_eje_actual == "Conjuntos" and st.session_state.sub_seccion_actual == "Teoria":
             if st.button("📖 N01: Teoría de Conjuntos"): 
                 st.session_state.clase_seleccionada = "N01"
                 st.rerun()
         else:
-            st.info(f"✨ Próximamente se añadirán clases para {st.session_state.eje_actual}.")
+            st.info("✨ Próximamente contenido disponible.")
 
-        if st.button("🔙 Volver"): 
-            st.session_state.sub_seccion_actual = None
-            st.rerun()
+        if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
 
     else:
-        # RENDER DE LA CLASE SELECCIONADA
         if st.session_state.clase_seleccionada == "N01":
             st.markdown('<div class="clase-box">', unsafe_allow_html=True)
             st.markdown("# N01: Teoría de Conjuntos")
             st.markdown("Aprender Teoría de Conjuntos es aprender a pensar con orden...")
             st.markdown('</div>', unsafe_allow_html=True)
             
-        if st.button("🔙 Volver al listado"): 
-            st.session_state.clase_seleccionada = None
-            st.rerun()
+        if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
 
-# Refresco dinámico si el cronómetro está encendido
+# Refresco para el cronómetro
 if st.session_state.cronometro_activo:
     time.sleep(1)
     st.rerun()
