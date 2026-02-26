@@ -8,7 +8,6 @@ import pytz
 
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
-# Estados para controlar la navegación profunda
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
 if 'sub_seccion_actual' not in st.session_state:
@@ -17,7 +16,7 @@ if 'rama_datos' not in st.session_state:
     st.session_state.rama_datos = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (DISEÑO UNIFICADO Y ROBUSTO) ::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
@@ -50,7 +49,7 @@ st.markdown("""
         border-radius: 8px !important;
     }
 
-    /* BOTONES DE CATEGORÍAS (Muebles de la casa) */
+    /* BOTONES DE CATEGORÍAS */
     .cat-container div.stButton > button { 
         min-height: 85px !important; 
         border-radius: 15px !important; 
@@ -62,6 +61,16 @@ st.markdown("""
         padding-left: 20px !important;
         border: 1px solid #e0e0e0 !important;
         box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
+    }
+
+    /* Estilo de "Hoja de Clase" */
+    .clase-box {
+        background-color: white; 
+        padding: 30px; 
+        border-radius: 15px; 
+        border: 1px solid #e0e0e0;
+        color: #1a1a1a;
+        line-height: 1.6;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -83,7 +92,6 @@ with st.sidebar:
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
-    # Render de Cabeceras
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
@@ -94,7 +102,6 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("") 
 
-    # ::: PANTALLA DE INICIO (4 EJES PRINCIPALES) :::
     if st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
@@ -102,16 +109,13 @@ if menu == "🏠 Dashboard PAES":
             st.session_state.eje_actual = "🔢 Números"; st.rerun()
         if c2.button("📉 Álgebra\nFunciones y más", key="m_a", use_container_width=True):
             st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
-        
         c3, c4 = st.columns(2)
         if c3.button("📐 Geometría\nÁreas y Volúmenes", key="m_g", use_container_width=True):
             st.session_state.eje_actual = "📐 Geometría"; st.rerun()
         if c4.button("📊 Datos y Azar\nProbabilidad y Estadística", key="m_d", use_container_width=True):
             st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
-    # ::: VISTA DE EJE SELECCIONADO :::
     else:
-        # Menú de navegación rápida (siempre visible dentro de un eje)
         n_cols = st.columns(5)
         if n_cols[0].button("🏠", key="nav_h"):
             st.session_state.eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.rama_datos = None; st.rerun()
@@ -122,25 +126,25 @@ if menu == "🏠 Dashboard PAES":
         if n_cols[3].button("G", key="nav_g"):
             st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_seccion_actual = None; st.rerun()
         if n_cols[4].button("D", key="nav_d"):
-            st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.session_state.rama_datos = None; st.rerun()
+            st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.rerun()
 
         st.write("---")
-        st.markdown(f"## {st.session_state.eje_actual}")
 
-        # --- Lógica específica para DATOS Y AZAR ---
+        # --- Lógica de Datos y Azar ---
         if st.session_state.eje_actual == "📊 Datos y Azar" and st.session_state.rama_datos is None:
+            st.markdown(f"## {st.session_state.eje_actual}")
             st.markdown('<div class="cat-container">', unsafe_allow_html=True)
             if st.button("📈 Estadística", key="btn_est"):
                 st.session_state.rama_datos = "Estadística"; st.rerun()
             if st.button("🎲 Probabilidad", key="btn_prob"):
                 st.session_state.rama_datos = "Probabilidad"; st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
-            st.info("🚀 Elige una rama para ver su material.")
 
-        # --- Vista de Teoría/Ejercitación (Para todos los ejes) ---
+        # --- Selección de Teoría/Ejercitación ---
         elif st.session_state.sub_seccion_actual is None:
+            st.markdown(f"## {st.session_state.eje_actual}")
             if st.session_state.eje_actual == "📊 Datos y Azar":
-                st.write(f"Rama seleccionada: **{st.session_state.rama_datos}**")
+                st.write(f"Seleccionaste: **{st.session_state.rama_datos}**")
             
             st.markdown('<div class="cat-container">', unsafe_allow_html=True)
             if st.button("📘 Teoría y Conceptos", key="btn_teoria"):
@@ -149,20 +153,70 @@ if menu == "🏠 Dashboard PAES":
                 st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
             
-            # Botón para retroceder solo en Datos y Azar
             if st.session_state.eje_actual == "📊 Datos y Azar":
-                if st.button("⬅️ Volver a elegir rama"):
+                if st.button("⬅️ Cambiar Rama"):
                     st.session_state.rama_datos = None; st.rerun()
         
-        # --- Vista de Contenido Final ---
+        # --- CONTENIDO FINAL ---
         else:
-            tipo = "Teoría" if st.session_state.sub_seccion_actual == "Teoria" else "Ejercitación"
-            st.subheader(f"📍 {tipo}")
-            st.info(f"🚀 Aquí se cargará el material de {tipo} para este eje.")
+            if st.session_state.sub_seccion_actual == "Teoria" and st.session_state.eje_actual == "🔢 Números":
+                st.markdown('<div class="clase-box">', unsafe_allow_html=True)
+                st.markdown("""
+                # <span style="color:darkblue">Eje Números</span>
+                ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
+
+                ---
+
+                ### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
+                Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas.
+
+                ---
+
+                ### 🛡️ 2. Crónica del Infinito: El Legado de Georg Cantor
+                **Georg Cantor** demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles. En la PAES, este lenguaje es tu escudo.
+
+                ---
+
+                ### 🛡️ 3. El Marco de Referencia: Universo, Vacío y Subconjuntos
+                * **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos de un problema.
+                * **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos. Es subconjunto de cualquier conjunto por definición.
+                * **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto.
+                * **Subconjunto o Inclusión ($\subset$):** $A \subset B$ si todos los elementos de $A$ están en $B$.
+
+                > **Típ:** Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
+
+                ---
+
+                ### 🛡️ 4. Operaciones de "1000 Puntos"
+                | Operación | Símbolo | Significado Lógico | Carpintería Técnica |
+                | :--- | :---: | :--- | :--- |
+                | **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos. |
+                | **Intersección** | $\cap$ | $x \in A$ **y** $x \in B$ | Solo los que se repiten. |
+                | **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Quitar elementos del segundo. |
+                | **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Lo que le falta para ser el Universo. |
+
+                ---
+
+                ### 🛡️ 5. Cardinalidad y Conjunto Potencia
+                * **Cardinalidad ($n$):** Número de elementos únicos.
+                * **Regla de Oro de la Unión:** $n(A \cup B) = n(A) + n(B) - n(A \cap B)$.
+                * **Total de Subconjuntos:** $$2^n$$
+
+                ---
+
+                ### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
+                
+                Los diagramas de Venn nos permiten visualizar las relaciones entre conjuntos de manera intuitiva.
+
+                ---
+                *"En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla."* — **Georg Cantor**
+                """, unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+            else:
+                st.info("🚀 Contenido en desarrollo para esta sección.")
             
             if st.button("🔙 Volver a opciones"):
                 st.session_state.sub_seccion_actual = None; st.rerun()
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
-    st.write("Próximamente podrás descargar tus guías aquí.")
