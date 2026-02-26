@@ -9,49 +9,47 @@ import time
 
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
-# Inicialización de estados de navegación
 if 'eje_actual' not in st.session_state: st.session_state.eje_actual = None
 if 'sub_eje_actual' not in st.session_state: st.session_state.sub_eje_actual = None
 if 'sub_seccion_actual' not in st.session_state: st.session_state.sub_seccion_actual = None
 if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccionada = None
 
-# Estados del cronómetro
 if 'cronometro_activo' not in st.session_state: st.session_state.cronometro_activo = False
 if 'tiempo_inicio' not in st.session_state: st.session_state.tiempo_inicio = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (ELIMINACIÓN DE CAJAS EXTRA) ::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (EXTREMO PARA BORRAR CAJAS) :::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
     <style>
-    /* Headers y Timers */
+    /* Estilos generales */
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
-    .titulo-header { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
-    .info-header { font-size: 14px; opacity: 0.9; }
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
-    .timer-item { font-size: 16px; font-weight: bold; }
-
-    /* Cronómetro Barton */
-    .crono-container-barton { 
-        background-color: white; padding: 10px; border-radius: 10px; 
-        text-align: center; border: 2px solid #3b71ca;
-    }
+    .crono-container-barton { background-color: white; padding: 10px; border-radius: 10px; text-align: center; border: 2px solid #3b71ca; }
     .crono-digital-azul { font-family: 'Courier New', monospace; font-size: 32px; font-weight: bold; color: #3b71ca; }
     
-    /* Botones de Navegación */
+    /* Botones */
     [data-testid="stHorizontalBlock"] button { width: 100% !important; min-height: 55px !important; font-size: 20px !important; font-weight: bold !important; border-radius: 8px !important; }
-    .cat-container div.stButton > button { min-height: 85px !important; border-radius: 15px !important; margin-bottom: 15px !important; width: 100% !important; font-size: 18px !important; text-align: left !important; padding-left: 20px !important; border: 1px solid #e0e0e0 !important; }
-
-    /* UNIFICACIÓN DE CAJA DE CLASE: Elimina el recuadro blanco sobrante */
-    .main-clase-container {
-        background-color: white; 
-        padding: 20px 35px; 
-        border-radius: 15px; 
-        border: 1px solid #e0e0e0; 
-        margin-top: -20px; /* Succiona el contenido hacia arriba */
+    
+    /* ELIMINACIÓN DE ESPACIOS FANTASMA */
+    /* Esto quita el espacio que Streamlit pone entre bloques de markdown */
+    [data-testid="stVerticalBlock"] > div {
+        padding-top: 0rem !important;
+        padding-bottom: 0rem !important;
+        margin-top: 0rem !important;
+        margin-bottom: 0rem !important;
     }
-    .main-clase-container h1, .main-clase-container h2 { margin-top: 0px !important; }
+
+    /* CAJA DE CLASE PURA */
+    .clase-limpia {
+        background-color: white;
+        padding: 0px 30px 30px 30px; /* 0 arriba para pegar al botón */
+        border-radius: 15px;
+        border: 1px solid #e0e0e0;
+        color: #1a1a1a;
+    }
+    .clase-limpia h1 { margin-top: 0px !important; padding-top: 20px !important; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -67,152 +65,110 @@ with st.sidebar:
     st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 4. LÓGICA DEL DASHBOARD ::::::::::::::::::::::::::::::::::::::::::::::::
+# :::: 4. DASHBOARD :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
-    # Reloj y Cuenta Regresiva
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
-    st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="header-azul"><div style="font-size: 20px; font-weight: bold;">🐉 Lagrangianitos. Tus recursos PAES M1</div><div style="font-size: 14px; opacity: 0.9;">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
     
     dias_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).days
-    horas_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).seconds // 3600
-    st.markdown(f'<div class="header-rojo"><div class="timer-item">⏳ Días para PAES: {dias_paes}</div><div class="timer-item">Hrs: {horas_paes}</div></div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="header-rojo">⏳ Días para PAES: {dias_paes} </div>', unsafe_allow_html=True)
 
-    # Bloque Cronómetro
+    # Cronómetro
     st.write("")
-    c_crono1, c_crono2 = st.columns([1, 3])
-    with c_crono1:
+    c1, c2 = st.columns([1, 3])
+    with c1:
         if not st.session_state.cronometro_activo:
-            if st.button("▶️ Iniciar"):
-                st.session_state.tiempo_inicio = time.time()
-                st.session_state.cronometro_activo = True
-                st.rerun()
+            if st.button("▶️ Iniciar"): st.session_state.tiempo_inicio = time.time(); st.session_state.cronometro_activo = True; st.rerun()
         else:
-            if st.button("⏹️ Detener"):
-                st.session_state.cronometro_activo = False
-                st.session_state.tiempo_inicio = None
-                st.rerun()
-    with c_crono2:
+            if st.button("⏹️ Detener"): st.session_state.cronometro_activo = False; st.session_state.tiempo_inicio = None; st.rerun()
+    with c2:
         if st.session_state.cronometro_activo:
-            t_actual = int(time.time() - st.session_state.tiempo_inicio)
-            mins, segs = divmod(t_actual, 60)
-            st.markdown(f'<div class="crono-container-barton"><span class="crono-digital-azul">{mins:02d}:{segs:02d}</span></div>', unsafe_allow_html=True)
+            t = int(time.time() - st.session_state.tiempo_inicio)
+            st.markdown(f'<div class="crono-container-barton"><span class="crono-digital-azul">{t//60:02d}:{t%60:02d}</span></div>', unsafe_allow_html=True)
         else:
             st.markdown(f'<div class="crono-container-barton" style="border: 2px dashed #e0e0e0;"><span style="color:#e0e0e0; font-size:32px; font-family:Courier New; font-weight:bold;">00:00</span></div>', unsafe_allow_html=True)
 
-    st.write("") 
-
-    # Navegación Superior (Iconos)
-    n_cols = st.columns(5)
-    if n_cols[0].button("🏠", key="n_h"): st.session_state.eje_actual = None; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-    if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-
     st.divider()
 
-    # --- FLUJO DE PANTALLAS ---
+    # Lógica de Navegación Simple
     if st.session_state.eje_actual is None:
-        st.markdown("### 📚 Selecciona un Eje Temático")
-        e_col1, e_col2 = st.columns(2)
-        if e_col1.button("🔢 Números"): st.session_state.eje_actual = "🔢 Números"; st.rerun()
-        if e_col2.button("📉 Álgebra"): st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
-        e_col3, e_col4 = st.columns(2)
-        if e_col3.button("📐 Geometría"): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
-        if e_col4.button("📊 Datos y Azar"): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
+        if st.button("🔢 Números"): st.session_state.eje_actual = "🔢 Números"; st.rerun()
     
-    elif st.session_state.eje_actual == "🔢 Números" and st.session_state.sub_eje_actual is None:
-        st.markdown("## 🔢 Números")
-        se_col1, se_col2, se_col3 = st.columns(3)
-        if se_col1.button("🛡️ 1. Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
-        if se_col2.button("⚙️ 2. Operatoria"): st.session_state.sub_eje_actual = "Operatoria"; st.rerun()
-        if se_col3.button("⚖️ 3. Razones"): st.session_state.sub_eje_actual = "Razones"; st.rerun()
+    elif st.session_state.sub_eje_actual is None:
+        if st.button("🛡️ 1. Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.eje_actual = None; st.rerun()
 
     elif st.session_state.sub_seccion_actual is None:
-        st.markdown(f"## {st.session_state.sub_eje_actual}")
         if st.button("📘 Teoría y Conceptos"): st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
-        if st.button("📝 Ejercitación"): st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
-        if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.session_state.sub_eje_actual = None; st.rerun()
+        if st.button("🔙 Volver"): st.session_state.sub_eje_actual = None; st.rerun()
 
     elif st.session_state.clase_seleccionada is None:
-        st.subheader("📚 Clases Disponibles")
-        if st.session_state.sub_eje_actual == "Conjuntos":
-            if st.button("📖 N01: Teoría de Conjuntos"): st.session_state.clase_seleccionada = "N01"; st.rerun()
+        if st.button("📖 N01: Teoría de Conjuntos"): st.session_state.clase_seleccionada = "N01"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
 
     else:
-        # --- VISTA FINAL DE CLASE (CORREGIDA) ---
+        # --- PANTALLA DE CLASE SIN CAJAS SOBRANTES ---
         if st.button("🔙 Volver al listado"): 
             st.session_state.clase_seleccionada = None
             st.rerun()
         
-        # Contenedor único para evitar el recuadro blanco extra
-        st.markdown('<div class="main-clase-container">', unsafe_allow_html=True)
-        
-        if st.session_state.clase_seleccionada == "N01":
-            st.markdown("""
+        # Usamos un solo bloque de Markdown para que Streamlit no meta divs entre medio
+        st.markdown(f"""
+        <div class="clase-limpia">
+
 # <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
 
 ---
 
 ### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
-Bienvenido a la primera página de un viaje que no tiene vuelta atrás. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
-
-Este eje de **Números** no se trata de hacer cuentas rápidas; se trata de aprender a clasificar el caos. Durante las próximas unidades, descubriremos que los números habitan en estructuras organizadas llamadas **Conjuntos**.
+Bienvenido a la primera página de un viaje que no tiene vuelta atrás. Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas.
 
 ---
 
 ### 🛡️ 2. Crónica del Infinito: El Legado de Georg Cantor
-A finales del siglo XIX, **Georg Cantor** se atrevió a decir que el infinito era un jardín que podía ser medido. Demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles.
+A finales del siglo XIX, **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido.
 
 ---
 
-### 🛡️ 3. El Marco de Referencia: Universo, Vacío y Subconjuntos
-* **El Universo ($\mathcal{U}$):** El contexto total que contiene todos los elementos.
-* **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos.
+### 🛡️ 3. El Marco de Referencia
+* **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos.
+* **El Vacío ($\emptyset$):** Un conjunto sin elementos.
 * **Pertenencia ($\in$):** Relación de un elemento hacia un conjunto.
-* **Subconjunto ($\subset$):** $A \subset B$ si todos los elementos de $A$ están en $B$.
 
-> **Típ:** ... Si $A \subset B$, entonces $A \cap B = A$ y $A \cup B = B$.
+> **Típ:** ... Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
 
 ---
 
 ### 🛡️ 4. Operaciones de "1000 Puntos"
-
-| Operación | Símbolo | Significado Lógico | Carpintería Técnica |
-| :--- | :---: | :--- | :--- |
-| **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos. |
-| **Intersección** | $\cap$ | $x \in A$ **y** $x \in B$ | Solo los que se repiten. |
-| **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Al primero le borras el segundo. |
+* **Unión ($\cup$):** Agrupar todos los elementos.
+* **Intersección ($\cap$):** Solo los elementos que se repiten.
+* **Diferencia ($-$):** Al primer conjunto le borras lo que sea del segundo.
 
 ---
 
 ### 🛡️ 5. Cardinalidad y Conjunto Potencia
-* **Cardinalidad ($n$):** Número de elementos únicos.
-* **Regla de Oro:** $\#(A \cup B) = \#A + \#B - \#(A \cap B)$.
-* **Total de Subconjuntos:** $2^n$
+* **Cardinalidad ($n$):** Número de elementos únicos de un conjunto.
+* **Conjunto Potencia:** Total de subconjuntos es $2^n$.
 
 > **Típ:** ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**.
 
 ---
 
 ### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
-Los diagramas de Venn-Euler nos permiten visualizar las relaciones entre conjuntos de manera intuitiva.
+Cada círculo representa un conjunto, y las superposiciones muestran las intersecciones. El rectángulo exterior representa el Universo.
 
 ---
 
 > "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".  
 > — **Georg Cantor**
-            """, unsafe_allow_html=True)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
 
-# Actualización del cronómetro
+        </div>
+        """, unsafe_allow_html=True)
+
 if st.session_state.cronometro_activo:
     time.sleep(1)
     st.rerun()
