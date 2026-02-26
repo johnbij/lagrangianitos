@@ -14,19 +14,19 @@ if 'sub_seccion_actual' not in st.session_state:
     st.session_state.sub_seccion_actual = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (DISEÑO UNIFICADO) ::::::::::::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (DISEÑO DE LA CASA) :::::::::::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
     <style>
-    /* Barras superiores fijas */
+    /* Barras superiores */
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
     .titulo-header { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
     .info-header { font-size: 14px; opacity: 0.9; }
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
-    /* NAVEGACIÓN RÁPIDA: Botones robustos y horizontales */
+    /* NAVEGACIÓN RÁPIDA (🏠 N A G D) */
     [data-testid="stHorizontalBlock"] {
         display: flex !important;
         flex-direction: row !important;
@@ -47,14 +47,18 @@ st.markdown("""
         border-radius: 8px !important;
     }
 
-    /* Estilo para los títulos de sección con emoji */
-    .eje-titulo {
-        font-size: 32px;
-        font-weight: bold;
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
+    /* BOTONES DE CATEGORÍAS (Teoría y Ejercitación) */
+    .cat-container div.stButton > button { 
+        min-height: 85px !important; 
+        border-radius: 15px !important; 
+        margin-bottom: 15px !important;
+        width: 100% !important;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        text-align: left !important;
+        padding-left: 20px !important;
+        border: 1px solid #e0e0e0 !important;
+        box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
     }
     
     .clase-box { max-width: 900px; margin: 0 auto; padding: 10px; }
@@ -119,16 +123,33 @@ if menu == "🏠 Dashboard PAES":
 
         st.write("---")
 
-        # ::: CONTENIDO DINÁMICO UNIFICADO :::
-        # Renderizamos el título y el aviso de desarrollo para todos igual
+        # ::: CONTENIDO DINÁMICO POR EJE :::
         st.markdown(f"## {st.session_state.eje_actual}")
-        
-        if st.session_state.eje_actual == "🔢 Números":
-            # Aquí puedes poner tus botones de N01, etc. cuando decidas volver a activarlos
-            # Por ahora, unificado con el estilo de "desarrollo" que pediste
-            st.info("🚀 Contenido en desarrollo.")
+
+        if st.session_state.sub_seccion_actual is None:
+            # Botones de Teoría y Ejercitación para el eje seleccionado
+            st.markdown('<div class="cat-container">', unsafe_allow_html=True)
+            
+            if st.button("📘 Teoría y Conceptos", key="btn_teoria"):
+                st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
+                
+            if st.button("📝 Ejercitación y Práctica", key="btn_ejercitacion"):
+                st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
+                
+            st.markdown('</div>', unsafe_allow_html=True)
+            st.info("🚀 Selecciona una modalidad para comenzar.")
+            
         else:
-            st.info("🚀 Contenido en desarrollo.")
+            # Vista cuando ya seleccionaste Teoría o Ejercitación
+            if st.session_state.sub_seccion_actual == "Teoria":
+                st.subheader(f"📚 Teoría: {st.session_state.eje_actual}")
+                st.info("Aquí irán las clases y explicaciones paso a paso.")
+            else:
+                st.subheader(f"📝 Ejercitación: {st.session_state.eje_actual}")
+                st.info("Aquí irán los cuestionarios y pautas explicativas.")
+            
+            if st.button("🔙 Volver a opciones"):
+                st.session_state.sub_seccion_actual = None; st.rerun()
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
