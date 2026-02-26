@@ -14,7 +14,7 @@ if 'sub_seccion_actual' not in st.session_state:
     st.session_state.sub_seccion_actual = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (DISEÑO FINAL DE LA CASA) :::::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (DISEÑO UNIFICADO) ::::::::::::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
@@ -26,35 +26,35 @@ st.markdown("""
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
-    /* NAVEGACIÓN RÁPIDA: Botones robustos y anchos */
+    /* NAVEGACIÓN RÁPIDA: Botones robustos y horizontales */
     [data-testid="stHorizontalBlock"] {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
-        gap: 4px !important; /* Espacio mínimo entre botones */
+        gap: 4px !important;
     }
     
     [data-testid="stHorizontalBlock"] > div {
-        flex: 1 1 0% !important; /* Fuerza a que todas las columnas midan lo mismo */
+        flex: 1 1 0% !important;
         min-width: 0 !important;
     }
 
     [data-testid="stHorizontalBlock"] button {
         width: 100% !important;
         min-height: 55px !important; 
-        font-size: 20px !important; /* Letra más grande para que se note */
+        font-size: 20px !important;
         font-weight: bold !important;
         border-radius: 8px !important;
-        padding: 0px !important;
     }
 
-    /* BOTONES DE CATEGORÍAS: Verticales y grandes */
-    .cat-container div.stButton > button { 
-        min-height: 80px !important; 
-        border-radius: 12px !important; 
-        margin-bottom: 12px !important;
-        width: 100% !important;
-        font-size: 16px !important;
+    /* Estilo para los títulos de sección con emoji */
+    .eje-titulo {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
     
     .clase-box { max-width: 900px; margin: 0 auto; padding: 10px; }
@@ -119,25 +119,16 @@ if menu == "🏠 Dashboard PAES":
 
         st.write("---")
 
-        # ::: CONTENIDO DINÁMICO :::
+        # ::: CONTENIDO DINÁMICO UNIFICADO :::
+        # Renderizamos el título y el aviso de desarrollo para todos igual
+        st.markdown(f"## {st.session_state.eje_actual}")
+        
         if st.session_state.eje_actual == "🔢 Números":
-            if st.session_state.sub_seccion_actual is None:
-                st.subheader("📌 Categorías de Números")
-                st.markdown('<div class="cat-container">', unsafe_allow_html=True)
-                if st.button("📦 Conjuntos Numéricos (N01)", key="cat_n01"):
-                    st.session_state.sub_seccion_actual = "N01"; st.rerun()
-                if st.button("➕ Operatoria", key="cat_op"): pass
-                if st.button("📝 Ejercitación", key="cat_ej"): pass
-                st.markdown('</div>', unsafe_allow_html=True)
-            elif st.session_state.sub_seccion_actual == "N01":
-                st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-                st.markdown("# <span style='color:darkblue'>N01: Teoría de Conjuntos</span>", unsafe_allow_html=True)
-                st.write("Contenido de la clase...")
-                st.markdown('</div>', unsafe_allow_html=True)
+            # Aquí puedes poner tus botones de N01, etc. cuando decidas volver a activarlos
+            # Por ahora, unificado con el estilo de "desarrollo" que pediste
+            st.info("🚀 Contenido en desarrollo.")
         else:
-            st.header(st.session_state.eje_actual)
             st.info("🚀 Contenido en desarrollo.")
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
-        
