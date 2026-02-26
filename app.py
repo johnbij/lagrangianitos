@@ -1,8 +1,12 @@
 import streamlit as st
 import matplotlib.pyplot as plt
-from datetime import datetime
+import matplotlib
+import numpy as np
+import pandas as pd
 import pytz
 import time
+from datetime import datetime
+matplotlib.use('Agg')
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 # :::: 1. FUNCIONES DE GRÁFICOS (MODULARIZADOS) :::::::::::::::::::::::::::::::
