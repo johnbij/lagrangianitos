@@ -18,7 +18,6 @@ if 'rama_datos' not in st.session_state:
 if 'clase_seleccionada' not in st.session_state:
     st.session_state.clase_seleccionada = None
 
-# --- ESTADOS DEL CRONÓMETRO ---
 if 'cronometro_activo' not in st.session_state:
     st.session_state.cronometro_activo = False
 if 'tiempo_inicio' not in st.session_state:
@@ -47,7 +46,6 @@ st.markdown("""
     }
     .clase-box { background-color: white; padding: 30px; border-radius: 15px; border: 1px solid #e0e0e0; color: #1a1a1a; }
     
-    /* Estilo para el Cronómetro dentro de la caja */
     .crono-digital {
         font-family: 'Courier New', monospace;
         font-size: 35px;
@@ -86,15 +84,14 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("") 
 
-    # --- BOTONES DE EJES (Mantenidos igual) ---
     if st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
-        if c1.button("🔢 Números", key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números"; st.rerun()
-        if c2.button("📉 Álgebra", key="m_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
+        if c1.button("🔢 Números", key="m_n"): st.session_state.eje_actual = "🔢 Números"; st.rerun()
+        if c2.button("📉 Álgebra", key="m_a"): st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
         c3, c4 = st.columns(2)
-        if c3.button("📐 Geometría", key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
-        if c4.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
+        if c3.button("📐 Geometría", key="m_g"): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
+        if c4.button("📊 Datos y Azar", key="m_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
     else:
         n_cols = st.columns(5)
@@ -102,23 +99,20 @@ if menu == "🏠 Dashboard PAES":
         if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-        if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.session_state.rama_datos = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
 
         st.write("---")
 
-        # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-        # :::: LA CAJA DEL CRONÓMETRO (AQUÍ APROVECHAMOS EL ESPACIO) ::::::::::::::
-        # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
         with st.container(border=True):
             col_btn, col_crono = st.columns([1, 2])
             with col_btn:
                 if not st.session_state.cronometro_activo:
-                    if st.button("▶️ Iniciar", key="btn_start_crono"):
+                    if st.button("▶️ Iniciar", key="btn_start"):
                         st.session_state.tiempo_inicio = time.time()
                         st.session_state.cronometro_activo = True
                         st.rerun()
                 else:
-                    if st.button("⏹️ Detener", key="btn_stop_crono"):
+                    if st.button("⏹️ Parar", key="btn_stop"):
                         st.session_state.cronometro_activo = False
                         st.rerun()
             with col_crono:
@@ -128,42 +122,98 @@ if menu == "🏠 Dashboard PAES":
                 else:
                     st.markdown('<span class="crono-digital" style="opacity:0.2;">00:00</span>', unsafe_allow_html=True)
         
-        # --- LÓGICA DE NAVEGACIÓN DE CONTENIDO (Mantenida igual) ---
         if st.session_state.sub_seccion_actual is None:
             st.markdown(f"## {st.session_state.eje_actual}")
             st.markdown('<div class="cat-container">', unsafe_allow_html=True)
             if st.button("📘 Teoría y Conceptos", key="bt_t"): st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
-            if st.button("📝 Ejercitación y Práctica", key="bt_e"): st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
+            if st.button("📝 Ejercitacion", key="bt_e"): st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
         elif st.session_state.clase_seleccionada is None:
             st.subheader(f"📚 Clases de {st.session_state.eje_actual}")
             st.markdown('<div class="cat-container">', unsafe_allow_html=True)
             if st.button("📖 N01: Teoría de Conjuntos", key="n01"): st.session_state.clase_seleccionada = "N01"; st.rerun()
-            if st.button("📖 N02: Próximamente", key="n02"): st.session_state.clase_seleccionada = "N02"; st.rerun()
-            if st.button("📖 N03: Próximamente", key="n03"): st.session_state.clase_seleccionada = "N03"; st.rerun()
+            if st.button("📖 N02: Los Números Naturales", key="n02"): st.session_state.clase_seleccionada = "N02"; st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
             if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
 
         else:
             if st.session_state.clase_seleccionada == "N01":
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-                st.markdown("""
-                # <span style="color:darkblue">N01: Teoría de Conjuntos</span>
-                ## <span style="color:darkblue">El Lenguaje Maestro</span>
-                
-                Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas.
-                """, unsafe_allow_html=True)
+                st.markdown("""# <span style="color:darkblue">N01: Teoría de Conjuntos</span>
+Aprender Teoría de Conjuntos es aprender a pensar con orden...""", unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
-            else:
-                st.info(f"🚀 La clase {st.session_state.clase_seleccionada} está en desarrollo.")
             
-            if st.button("🔙 Volver al listado de clases"): st.session_state.clase_seleccionada = None; st.rerun()
+            elif st.session_state.clase_seleccionada == "N02":
+                st.markdown('<div class="clase-box">', unsafe_allow_html=True)
+                st.markdown("""# <span style="color:darkblue">Eje Números</span>
+## <span style="color:darkblue">N02: Los Números Naturales ($\mathbb{N}$) - El Génesis del Conteo</span>
 
-elif menu == "📂 Biblioteca de PDFs":
-    st.header("📂 Biblioteca de Recursos")
+---
 
-# --- AUTO REFRESH PARA EL CRONÓMETRO ---
+### 🛡️ 1. El Portal: El Instinto de Cuantificar
+Mucho antes de que existieran las pizarras o los computadores, el ser humano tuvo una necesidad vital: **¿Cuántos hay?** Los Números Naturales no fueron inventados; fueron descubiertos como la herramienta de supervivencia definitiva para contar presas, días y ciclos.
+
+---
+
+### 🛡️ 2. Crónica del Origen: El Hueso de Ishango y Peano
+Hace más de 20.000 años, alguien talló marcas en un hueso (el Hueso de Ishango) para llevar una cuenta. Siglos después, **Giuseppe Peano** definió los "Axiomas de Peano", demostrando que solo necesitábamos un punto de partida (el 1) y un sucesor para construir todo el universo matemático.
+
+---
+
+### 🛡️ 3. Definición y Características Formales
+Se denota con la letra $\mathbb{N}$ y se define como el conjunto infinito:
+$$\mathbb{N} = \{1, 2, 3, 4, 5, 6, 7, ...\}$$
+
+* **Primer Elemento:** El **1** es el inicio absoluto. Carece de antecesor en este conjunto.
+* **Infinitud:** No existe un número máximo.
+* **Discretitud:** Es un conjunto "con saltos". Entre el 4 y el 5 **no hay nada**.
+
+---
+
+### 🛡️ 4. La Ley de Tricotomía: El Juez de los Números
+Esta es la regla que permite el orden. Establece que si tomas dos números naturales cualesquiera, $a$ y $b$, **solo una** de estas tres realidades es posible:
+1. **$a < b$** ($a$ está a la izquierda de $b$).
+2. **$a > b$** ($a$ está a la derecha de $b$).
+3. **$a = b$** (Son el mismo número).
+
+---
+
+### 🛡️ 5. Relaciones de Vecindad
+* **El Sucesor:** Todo $n \in \mathbb{N}$ tiene un sucesor único: $(n + 1)$.
+* **El Antecesor:** Todo $n \in \mathbb{N}$, **con excepción del 1**, tiene un antecesor único: $(n - 1)$.
+    * **Típ:** ... Si un problema dice que "el antecesor de $n$ es natural", el contrato te dice que $n$ no puede ser 1.
+
+---
+
+### 🛡️ 6. Las Reglas del Juego: Propiedades Estructurales
+Para operar en $\mathbb{N}$, debemos conocer las leyes que gobiernan el comportamiento de los números:
+
+* **Clausura (Cierre):** Un conjunto es "cerrado" si al operar dos de sus elementos, el resultado **siempre** es un elemento del mismo conjunto.
+* **Conmutativa:** El orden de los sumandos o factores no altera el resultado ($a + b = b + a$).
+* **Asociativa:** La forma en que agrupas los números no cambia el total $(a + b) + c = a + (b + c)$.
+* **Distributiva:** La multiplicación se "reparte" sobre la suma: $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$.
+
+**Análisis de Clausura en $\mathbb{N}$:**
+| Operación | ¿Es Cerrada? | Carpintería Técnica |
+| :--- | :---: | :--- |
+| **Adición (+)** | ✅ SÍ | Natural + Natural = Siempre Natural. |
+| **Multiplicación ($\cdot$)** | ✅ SÍ | Natural $\cdot$ Natural = Siempre Natural. |
+| **Sustracción (-)** | ❌ NO | Si el sustraendo es mayor, sales del conjunto. |
+| **División (:)** | ❌ NO | No toda división resulta en un número "entero". |
+
+> **Típ:** ... En la PAES, la propiedad distributiva es el motor de la factorización. Si la aprendes bien aquí, el álgebra será mucho más fácil.
+
+---
+
+> "El número es la sustancia de todas las cosas".
+> — **Pitágoras**
+""", unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+            
+            if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
+
 if st.session_state.cronometro_activo:
     time.sleep(1)
     st.rerun()
+                
