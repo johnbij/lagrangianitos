@@ -180,4 +180,3 @@ elif st.session_state.clase == "N02": mostrar_clase_n02()
 
 if st.session_state.crono_on:
     time.sleep(1); st.rerun()
-    
