@@ -115,9 +115,9 @@ if menu == "🏠 Dashboard PAES":
     elif st.session_state.eje_actual == "🔢 Números" and st.session_state.sub_eje_actual is None:
         st.markdown("## 🔢 Números")
         se_col1, se_col2, se_col3 = st.columns(3)
-        if se_col1.button("🛡️ Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
-        if se_col2.button("⚙️ Operatoria"): st.session_state.sub_eje_actual = "Operatoria"; st.rerun()
-        if se_col3.button("⚖️ Razones y Proporciones"): st.session_state.sub_eje_actual = "Razones"; st.rerun()
+        if se_col1.button("🛡️ 1. Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
+        if se_col2.button("⚙️ 2. Operatoria"): st.session_state.sub_eje_actual = "Operatoria"; st.rerun()
+        if se_col3.button("⚖️ 3. Razones y Proporciones"): st.session_state.sub_eje_actual = "Razones"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.eje_actual = None; st.rerun()
 
     elif st.session_state.sub_seccion_actual is None:
