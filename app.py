@@ -101,14 +101,16 @@ if menu == "🏠 Dashboard PAES":
             st.subheader(f"📚 Clases de {st.session_state.eje_actual}")
             st.markdown('<div class="cat-container">', unsafe_allow_html=True)
             if st.button("📖 N01: Teoría de Conjuntos", key="n01"): st.session_state.clase_seleccionada = "N01"; st.rerun()
-            if st.button("📖 N02: Próximamente", key="n02"): st.session_state.clase_seleccionada = "N02"; st.rerun()
-            if st.button("📖 N03: Próximamente", key="n03"): st.session_state.clase_seleccionada = "N03"; st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
             if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
 
         else:
             if st.session_state.clase_seleccionada == "N01":
+                # Renderizamos la "hoja" blanca
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
+                
+                # El texto DEBE estar pegado a la izquierda para evitar el modo código gris.
+                # He escapado los símbolos de dólar que no son matemáticas para que no rompan la tabla.
                 st.markdown("""
 # <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
@@ -171,10 +173,9 @@ Para dominar la PAES, debes "ver" la operación antes de calcularla. Los diagram
 > — **Georg Cantor**
 """, unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
-            else:
-                st.info(f"🚀 La clase {st.session_state.clase_seleccionada} está en desarrollo.")
             
-            if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
+            if st.button("🔙 Volver"): st.session_state.clase_seleccionada = None; st.rerun()
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
+        
