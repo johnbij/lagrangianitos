@@ -18,34 +18,42 @@ if 'cronometro_activo' not in st.session_state: st.session_state.cronometro_acti
 if 'tiempo_inicio' not in st.session_state: st.session_state.tiempo_inicio = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (ELIMINACIÓN RADICAL DE ESPACIOS) :::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (ELIMINACIÓN DEFINITIVA DEL ESPACIO BLANCO) :::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
     <style>
+    /* 1. ELIMINAR EL AIRE SUPERIOR DEL DASHBOARD */
+    .block-container {
+        padding-top: 1rem !important;
+        padding-bottom: 0rem !important;
+    }
+
+    /* 2. ESTILO DE CABECERAS */
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
-    .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; margin-bottom: 20px; }
+    .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; margin-bottom: 10px; }
+    
+    /* 3. CRONÓMETRO */
     .crono-container-barton { background-color: white; padding: 10px; border-radius: 10px; text-align: center; border: 2px solid #3b71ca; }
     .crono-digital-azul { font-family: 'Courier New', monospace; font-size: 32px; font-weight: bold; color: #3b71ca; }
     
-    /* Botones de navegación */
-    [data-testid="stHorizontalBlock"] button { width: 100% !important; min-height: 55px !important; font-size: 20px !important; font-weight: bold !important; border-radius: 8px !important; }
+    /* 4. BOTONES */
+    [data-testid="stHorizontalBlock"] button { width: 100% !important; min-height: 50px !important; font-size: 18px !important; font-weight: bold !important; border-radius: 8px !important; }
 
-    /* ELIMINAR ESPACIO SUPERIOR DE STREAMLIT */
-    .block-container { padding-top: 2rem !important; }
-
-    /* CAJA DE CLASE: Aquí metemos todo para que no sobre nada blanco */
-    .clase-box-full {
+    /* 5. LA CAJA DE LA CLASE (ELIMINA LO QUE RAYASTE CON PLUMÓN) */
+    .clase-unificada {
         background-color: white;
-        padding: 25px 35px 35px 35px;
+        padding: 20px 40px;
         border-radius: 15px;
         border: 1px solid #e0e0e0;
-        color: #1a1a1a;
-        margin-top: -10px;
+        margin-top: -25px; /* Sube la caja para pegarla al botón de arriba */
     }
     
-    /* Ajuste para que el texto de la clase no tenga margen arriba del h1 */
-    .clase-box-full h1:first-child { margin-top: 0px !important; }
+    /* Quitar espacios que mete Streamlit entre markdowns */
+    [data-testid="stVerticalBlock"] > div {
+        padding-top: 0px !important;
+        margin-top: 0px !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -61,10 +69,11 @@ with st.sidebar:
     st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 4. DASHBOARD :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::: 4. LÓGICA DEL DASHBOARD ::::::::::::::::::::::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
+    # Reloj
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div style="font-size: 20px; font-weight: bold;">🐉 Lagrangianitos. Tus recursos PAES M1</div><div style="font-size: 14px; opacity: 0.9;">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
@@ -72,7 +81,6 @@ if menu == "🏠 Dashboard PAES":
     st.markdown(f'<div class="header-rojo">⏳ Días para PAES: {dias_paes} </div>', unsafe_allow_html=True)
 
     # Cronómetro
-    st.write("")
     c1, c2 = st.columns([1, 3])
     with c1:
         if not st.session_state.cronometro_activo:
@@ -88,7 +96,7 @@ if menu == "🏠 Dashboard PAES":
 
     st.divider()
 
-    # Navegación
+    # --- NAVEGACIÓN ---
     if st.session_state.eje_actual is None:
         if st.button("🔢 Números"): st.session_state.eje_actual = "🔢 Números"; st.rerun()
     elif st.session_state.sub_eje_actual is None:
@@ -101,16 +109,14 @@ if menu == "🏠 Dashboard PAES":
         if st.button("📖 N01: Teoría de Conjuntos"): st.session_state.clase_seleccionada = "N01"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
     else:
-        # --- CLASE N01 COMPLETA Y SIN ESPACIOS ---
-        
-        # El botón de volver está justo antes del div de la clase para evitar saltos
+        # --- PANTALLA DE CLASE SIN ESPACIOS ---
         if st.button("🔙 Volver al listado"): 
             st.session_state.clase_seleccionada = None
             st.rerun()
 
-        st.markdown('<div class="clase-box-full">', unsafe_allow_html=True)
+        # Metemos todo el contenido en una sola caja sin aire arriba
+        st.markdown('<div class="clase-unificada">', unsafe_allow_html=True)
         
-        # AQUÍ VA TU CLASE TAL CUAL LA PEGASTE
         st.markdown("""
 # <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
@@ -169,7 +175,7 @@ Para dominar la PAES, debes "ver" la operación antes de calcularla. Los diagram
 
 ---
 
-> "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".
+> "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".  
 > — **Georg Cantor**
         """, unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html=True)
