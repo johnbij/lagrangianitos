@@ -63,7 +63,6 @@ if menu == "🏠 Dashboard PAES":
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
     
-    # Timer para PAES
     dias_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).days
     horas_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).seconds // 3600
     st.markdown(f'<div class="header-rojo"><div class="timer-item">⏳ Días para PAES: {dias_paes}</div><div class="timer-item">Hrs: {horas_paes}</div></div>', unsafe_allow_html=True)
@@ -112,25 +111,20 @@ if menu == "🏠 Dashboard PAES":
         if e_col3.button("📐 Geometría"): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
         if e_col4.button("📊 Datos y Azar"): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
     
-    # LÓGICA ESPECÍFICA PARA NÚMEROS (SUB-EJES)
     elif st.session_state.eje_actual == "🔢 Números" and st.session_state.sub_eje_actual is None:
-        st.markdown(f"## {st.session_state.eje_actual}")
-        st.markdown("### Selecciona un Sub-eje")
+        st.markdown("## 🔢 Números")
         se_col1, se_col2 = st.columns(2)
         if se_col1.button("🛡️ Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
         if se_col2.button("⚙️ Operatoria"): st.session_state.sub_eje_actual = "Operatoria"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.eje_actual = None; st.rerun()
 
     elif st.session_state.sub_seccion_actual is None:
-        # Se muestra el título del eje o sub-eje según corresponda
         titulo = st.session_state.sub_eje_actual if st.session_state.eje_actual == "🔢 Números" else st.session_state.eje_actual
         st.markdown(f"## {titulo}")
-        
         st.markdown('<div class="cat-container">', unsafe_allow_html=True)
         if st.button("📘 Teoría y Conceptos"): st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
         if st.button("📝 Ejercitación"): st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
-        
         if st.button("🔙 Volver"): 
             if st.session_state.eje_actual == "🔢 Números": st.session_state.sub_eje_actual = None
             else: st.session_state.eje_actual = None
@@ -139,22 +133,32 @@ if menu == "🏠 Dashboard PAES":
     elif st.session_state.clase_seleccionada is None:
         st.subheader(f"📚 Clases de {st.session_state.sub_eje_actual if st.session_state.eje_actual == '🔢 Números' else st.session_state.eje_actual}")
         
-        # FILTRO FINAL: Solo en Números -> Conjuntos -> Teoría aparece N01
+        # --- 7 BOTONES PARA CONJUNTOS ---
         if st.session_state.sub_eje_actual == "Conjuntos" and st.session_state.sub_seccion_actual == "Teoria":
-            if st.button("📖 N01: Teoría de Conjuntos"): 
-                st.session_state.clase_seleccionada = "N01"
-                st.rerun()
+            clases = [
+                ("📖 N01: Teoría de Conjuntos", "N01"),
+                ("📖 N02: Diagramas de Venn", "N02"),
+                ("📖 N03: Subconjuntos y Potencia", "N03"),
+                ("📖 N04: Operaciones de Unión e Intersección", "N04"),
+                ("📖 N05: Diferencia y Complemento", "N05"),
+                ("📖 N06: Cardinalidad de Conjuntos", "N06"),
+                ("📖 N07: Aplicaciones y Problemas", "N07")
+            ]
+            for nombre, code in clases:
+                if st.button(nombre):
+                    st.session_state.clase_seleccionada = code
+                    st.rerun()
         else:
             st.info("✨ Próximamente contenido disponible.")
 
         if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
 
     else:
-        if st.session_state.clase_seleccionada == "N01":
-            st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-            st.markdown("# N01: Teoría de Conjuntos")
-            st.markdown("Aprender Teoría de Conjuntos es aprender a pensar con orden...")
-            st.markdown('</div>', unsafe_allow_html=True)
+        # PANTALLA DE CLASE
+        st.markdown('<div class="clase-box">', unsafe_allow_html=True)
+        st.markdown(f"# Clase {st.session_state.clase_seleccionada}")
+        st.markdown(f"Contenido en desarrollo para la sesión {st.session_state.clase_seleccionada}...")
+        st.markdown('</div>', unsafe_allow_html=True)
             
         if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
 
