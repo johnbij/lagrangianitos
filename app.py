@@ -8,18 +8,21 @@ import pytz
 
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
+# Estados para controlar la navegación profunda
 if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
 if 'sub_seccion_actual' not in st.session_state:
     st.session_state.sub_seccion_actual = None
+if 'rama_datos' not in st.session_state:
+    st.session_state.rama_datos = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (DISEÑO DE LA CASA) :::::::::::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (DISEÑO UNIFICADO Y ROBUSTO) ::::::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
     <style>
-    /* Barras superiores */
+    /* Cabeceras */
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
     .titulo-header { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
     .info-header { font-size: 14px; opacity: 0.9; }
@@ -47,7 +50,7 @@ st.markdown("""
         border-radius: 8px !important;
     }
 
-    /* BOTONES DE CATEGORÍAS (Teoría y Ejercitación) */
+    /* BOTONES DE CATEGORÍAS (Muebles de la casa) */
     .cat-container div.stButton > button { 
         min-height: 85px !important; 
         border-radius: 15px !important; 
@@ -60,8 +63,6 @@ st.markdown("""
         border: 1px solid #e0e0e0 !important;
         box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
     }
-    
-    .clase-box { max-width: 900px; margin: 0 auto; padding: 10px; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -82,6 +83,7 @@ with st.sidebar:
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
+    # Render de Cabeceras
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
@@ -92,7 +94,7 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("") 
 
-    # ::: PANTALLA DE INICIO (4 EJES) :::
+    # ::: PANTALLA DE INICIO (4 EJES PRINCIPALES) :::
     if st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
@@ -107,49 +109,60 @@ if menu == "🏠 Dashboard PAES":
         if c4.button("📊 Datos y Azar\nProbabilidad y Estadística", key="m_d", use_container_width=True):
             st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
-    # ::: NAVEGACIÓN INTERNA (🏠 N A G D) :::
+    # ::: VISTA DE EJE SELECCIONADO :::
     else:
+        # Menú de navegación rápida (siempre visible dentro de un eje)
         n_cols = st.columns(5)
-        if n_cols[0].button("🏠", key="n_h"):
-            st.session_state.eje_actual = None; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[1].button("N", key="n_n"):
+        if n_cols[0].button("🏠", key="nav_h"):
+            st.session_state.eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.rama_datos = None; st.rerun()
+        if n_cols[1].button("N", key="nav_n"):
             st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[2].button("A", key="n_a"):
+        if n_cols[2].button("A", key="nav_a"):
             st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[3].button("G", key="n_g"):
+        if n_cols[3].button("G", key="nav_g"):
             st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_seccion_actual = None; st.rerun()
-        if n_cols[4].button("D", key="n_d"):
-            st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.rerun()
+        if n_cols[4].button("D", key="nav_d"):
+            st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.session_state.rama_datos = None; st.rerun()
 
         st.write("---")
-
-        # ::: CONTENIDO DINÁMICO POR EJE :::
         st.markdown(f"## {st.session_state.eje_actual}")
 
-        if st.session_state.sub_seccion_actual is None:
-            # Botones de Teoría y Ejercitación para el eje seleccionado
+        # --- Lógica específica para DATOS Y AZAR ---
+        if st.session_state.eje_actual == "📊 Datos y Azar" and st.session_state.rama_datos is None:
             st.markdown('<div class="cat-container">', unsafe_allow_html=True)
+            if st.button("📈 Estadística", key="btn_est"):
+                st.session_state.rama_datos = "Estadística"; st.rerun()
+            if st.button("🎲 Probabilidad", key="btn_prob"):
+                st.session_state.rama_datos = "Probabilidad"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+            st.info("🚀 Elige una rama para ver su material.")
+
+        # --- Vista de Teoría/Ejercitación (Para todos los ejes) ---
+        elif st.session_state.sub_seccion_actual is None:
+            if st.session_state.eje_actual == "📊 Datos y Azar":
+                st.write(f"Rama seleccionada: **{st.session_state.rama_datos}**")
             
+            st.markdown('<div class="cat-container">', unsafe_allow_html=True)
             if st.button("📘 Teoría y Conceptos", key="btn_teoria"):
                 st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
-                
             if st.button("📝 Ejercitación y Práctica", key="btn_ejercitacion"):
                 st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
-                
             st.markdown('</div>', unsafe_allow_html=True)
-            st.info("🚀 Selecciona una modalidad para comenzar.")
             
+            # Botón para retroceder solo en Datos y Azar
+            if st.session_state.eje_actual == "📊 Datos y Azar":
+                if st.button("⬅️ Volver a elegir rama"):
+                    st.session_state.rama_datos = None; st.rerun()
+        
+        # --- Vista de Contenido Final ---
         else:
-            # Vista cuando ya seleccionaste Teoría o Ejercitación
-            if st.session_state.sub_seccion_actual == "Teoria":
-                st.subheader(f"📚 Teoría: {st.session_state.eje_actual}")
-                st.info("Aquí irán las clases y explicaciones paso a paso.")
-            else:
-                st.subheader(f"📝 Ejercitación: {st.session_state.eje_actual}")
-                st.info("Aquí irán los cuestionarios y pautas explicativas.")
+            tipo = "Teoría" if st.session_state.sub_seccion_actual == "Teoria" else "Ejercitación"
+            st.subheader(f"📍 {tipo}")
+            st.info(f"🚀 Aquí se cargará el material de {tipo} para este eje.")
             
             if st.button("🔙 Volver a opciones"):
                 st.session_state.sub_seccion_actual = None; st.rerun()
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
+    st.write("Próximamente podrás descargar tus guías aquí.")
