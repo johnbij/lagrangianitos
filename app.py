@@ -18,38 +18,38 @@ if 'cronometro_activo' not in st.session_state: st.session_state.cronometro_acti
 if 'tiempo_inicio' not in st.session_state: st.session_state.tiempo_inicio = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (EXTREMO PARA BORRAR CAJAS) :::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (REPARADO Y SIN CAJAS SOBRANTES) ::::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
     <style>
-    /* Estilos generales */
+    /* Headers principales */
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
-    .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
+    .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; margin-bottom: 20px; }
+    
+    /* Cronómetro */
     .crono-container-barton { background-color: white; padding: 10px; border-radius: 10px; text-align: center; border: 2px solid #3b71ca; }
     .crono-digital-azul { font-family: 'Courier New', monospace; font-size: 32px; font-weight: bold; color: #3b71ca; }
     
     /* Botones */
     [data-testid="stHorizontalBlock"] button { width: 100% !important; min-height: 55px !important; font-size: 20px !important; font-weight: bold !important; border-radius: 8px !important; }
-    
-    /* ELIMINACIÓN DE ESPACIOS FANTASMA */
-    /* Esto quita el espacio que Streamlit pone entre bloques de markdown */
+
+    /* ELIMINACIÓN DEL RECUADRO BLANCO (EL RAYADO CON PLUMÓN) */
+    /* Quitamos el padding excesivo que Streamlit pone por defecto en los contenedores de texto */
     [data-testid="stVerticalBlock"] > div {
-        padding-top: 0rem !important;
-        padding-bottom: 0rem !important;
-        margin-top: 0rem !important;
-        margin-bottom: 0rem !important;
+        padding-top: 0px !important;
+        margin-top: 0px !important;
     }
 
-    /* CAJA DE CLASE PURA */
-    .clase-limpia {
+    /* CAJA DE LA CLASE: Optimizada */
+    .clase-box-final {
         background-color: white;
-        padding: 0px 30px 30px 30px; /* 0 arriba para pegar al botón */
+        padding: 30px;
         border-radius: 15px;
         border: 1px solid #e0e0e0;
         color: #1a1a1a;
+        margin-top: -15px; /* Esto sube la clase para eliminar el espacio blanco */
     }
-    .clase-limpia h1 { margin-top: 0px !important; padding-top: 20px !important; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -69,15 +69,14 @@ with st.sidebar:
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
+    # Reloj y Tiempo
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div style="font-size: 20px; font-weight: bold;">🐉 Lagrangianitos. Tus recursos PAES M1</div><div style="font-size: 14px; opacity: 0.9;">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
-    
     dias_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).days
     st.markdown(f'<div class="header-rojo">⏳ Días para PAES: {dias_paes} </div>', unsafe_allow_html=True)
 
-    # Cronómetro
-    st.write("")
+    # Cronómetro Digital
     c1, c2 = st.columns([1, 3])
     with c1:
         if not st.session_state.cronometro_activo:
@@ -93,81 +92,79 @@ if menu == "🏠 Dashboard PAES":
 
     st.divider()
 
-    # Lógica de Navegación Simple
+    # --- LÓGICA DE NAVEGACIÓN ---
     if st.session_state.eje_actual is None:
+        st.subheader("Selecciona un Eje")
         if st.button("🔢 Números"): st.session_state.eje_actual = "🔢 Números"; st.rerun()
     
     elif st.session_state.sub_eje_actual is None:
+        st.subheader("🔢 Números")
         if st.button("🛡️ 1. Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.eje_actual = None; st.rerun()
 
     elif st.session_state.sub_seccion_actual is None:
+        st.subheader("🛡️ Conjuntos")
         if st.button("📘 Teoría y Conceptos"): st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.sub_eje_actual = None; st.rerun()
 
     elif st.session_state.clase_seleccionada is None:
+        st.subheader("Clases")
         if st.button("📖 N01: Teoría de Conjuntos"): st.session_state.clase_seleccionada = "N01"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
 
     else:
-        # --- PANTALLA DE CLASE SIN CAJAS SOBRANTES ---
-        if st.button("🔙 Volver al listado"): 
+        # --- PANTALLA DE CLASE FINAL ---
+        if st.button("🔙 Volver"): 
             st.session_state.clase_seleccionada = None
             st.rerun()
         
-        # Usamos un solo bloque de Markdown para que Streamlit no meta divs entre medio
-        st.markdown(f"""
-        <div class="clase-limpia">
-
+        # Contenedor que "succiona" el contenido hacia arriba para borrar el espacio blanco
+        st.markdown('<div class="clase-box-final">', unsafe_allow_html=True)
+        
+        st.markdown("""
 # <span style="color:darkblue">Eje Números</span>
-## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
+## <span style="color:darkblue">N01: Teoría de Conjuntos</span>
 
 ---
 
-### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
-Bienvenido a la primera página de un viaje que no tiene vuelta atrás. Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas.
+### 🛡️ 1. El Portal
+Aprender Teoría de Conjuntos es aprender a pensar con orden y entender que todo gran sistema se basa en quién pertenece a qué.
 
 ---
 
-### 🛡️ 2. Crónica del Infinito: El Legado de Georg Cantor
-A finales del siglo XIX, **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido.
+### 🛡️ 2. El Legado de Cantor
+Georg Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos.
 
 ---
 
 ### 🛡️ 3. El Marco de Referencia
-* **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos.
+* **El Universo ($\mathcal{U}$):** Contiene todos los elementos del problema.
 * **El Vacío ($\emptyset$):** Un conjunto sin elementos.
 * **Pertenencia ($\in$):** Relación de un elemento hacia un conjunto.
 
-> **Típ:** ... Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
+> **Típ:** ... Si $A \subset B$, entonces $A \cap B = A$ y $A \cup B = B$.
 
 ---
 
-### 🛡️ 4. Operaciones de "1000 Puntos"
+### 🛡️ 4. Operaciones
 * **Unión ($\cup$):** Agrupar todos los elementos.
-* **Intersección ($\cap$):** Solo los elementos que se repiten.
-* **Diferencia ($-$):** Al primer conjunto le borras lo que sea del segundo.
+* **Intersección ($\cap$):** Solo los elementos comunes.
+* **Diferencia ($-$):** Quitar los elementos del segundo al primero.
 
 ---
 
-### 🛡️ 5. Cardinalidad y Conjunto Potencia
-* **Cardinalidad ($n$):** Número de elementos únicos de un conjunto.
-* **Conjunto Potencia:** Total de subconjuntos es $2^n$.
+### 🛡️ 5. Cardinalidad
+* **Total de Subconjuntos:** $2^n$
 
 > **Típ:** ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**.
 
 ---
 
-### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
-Cada círculo representa un conjunto, y las superposiciones muestran las intersecciones. El rectángulo exterior representa el Universo.
-
----
-
 > "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".  
 > — **Georg Cantor**
-
-        </div>
         """, unsafe_allow_html=True)
+        
+        st.markdown('</div>', unsafe_allow_html=True)
 
 if st.session_state.cronometro_activo:
     time.sleep(1)
