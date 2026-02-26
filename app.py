@@ -109,7 +109,6 @@ if menu == "🏠 Dashboard PAES":
         else:
             if st.session_state.clase_seleccionada == "N01":
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-                # IMPORTANTE: st.markdown con texto pegado al margen izquierdo para evitar modo código
                 st.markdown("""
 # <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
@@ -117,53 +116,59 @@ if menu == "🏠 Dashboard PAES":
 ---
 
 ### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
-Bienvenido a la primera página de un viaje que no tiene vuelta atrás. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
+Bienvenido a la primera página de un viaje que no tiene vuelta atrás. A menudo, nos enseñan que las matemáticas son un conjunto de reglas para calcular el vuelto o aprobar un examen, pero eso es como decir que la música es solo saber apretar teclas. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
 
-Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas. Prepárate para una apertura de mente donde el infinito deja de ser un concepto místico y se convierte en un terreno que podemos cartografiar.
+Este eje de **Números** no se trata de hacer cuentas rápidas; se trata de aprender a clasificar el caos. Durante las próximas unidades, descubriremos que los números no están "tirados" en el espacio, sino que habitan en estructuras organizadas llamadas **Conjuntos**. Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas. Prepárate para una apertura de mente donde el infinito deja de ser un concepto místico y se convierte en un terreno que podemos cartografiar.
 
 ---
 
 ### 🛡️ 2. Crónica del Infinito: El Legado de Georg Cantor
-A finales del siglo XIX, un hombre decidió desafiar a la teología y a la ciencia de su tiempo. **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido. Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles. En la PAES, este lenguaje es tu escudo.
+A finales del siglo XIX, un hombre decidió desafiar a la teología y a la ciencia de su tiempo. **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido. Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles. Su valentía permitió que hoy podamos definir con precisión quirúrgica qué es un número. En la PAES, este lenguaje es tu escudo: si dominas los conjuntos, dominas las instrucciones de la prueba.
 
 ---
 
 ### 🛡️ 3. El Marco de Referencia: Universo, Vacío y Subconjuntos
-* **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos de un problema.
-* **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos. Es subconjunto de cualquier conjunto por definición.
-* **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto.
+Para que exista el orden, debe existir un límite y una jerarquía clara:
+
+* **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos de un problema. Nada existe fuera del universo.
+* **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos. Es la representación de la nada matemática y es subconjunto de cualquier conjunto por definición.
+* **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto. (Ej: Manzana $\in$ Frutas).
 * **Subconjunto o Inclusión ($\subset$):** Se dice que $A$ es subconjunto de $B$ ($A \subset B$) si **todos** los elementos de $A$ están también en $B$.
 
-> **Típ:** Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
+> **Típ:** ... Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
 
 ---
 
 ### 🛡️ 4. Operaciones de "1000 Puntos"
+Estas operaciones son las que "mueven" los elementos entre conjuntos:
 
 | Operación | Símbolo | Significado Lógico | Carpintería Técnica |
 | :--- | :---: | :--- | :--- |
-| **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos. |
-| **Intersección** | $\cap$ | $x \in A$ **y** $x \in B$ | Solo los que se repiten. |
-| **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Al primero le borras el segundo. |
-| **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Lo que le falta para ser el Universo. |
+| **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos de ambos. |
+| **Intersección** | $\cap$ | $x \in A$ **y** $x \in B$ | Solo los elementos que se repiten. |
+| **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Al primer conjunto le borras lo que sea del segundo. |
+| **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Todo lo que le falta a A para ser el Universo. |
 
 ---
 
 ### 🛡️ 5. Cardinalidad y Conjunto Potencia
-* **Cardinalidad ($n$):** Número de elementos únicos. Se denota como $n(A)$.
-* **Regla de Oro de la Unión:** $n(A \cup B) = n(A) + n(B) - n(A \cap B)$.
-* **Total de Subconjuntos:** $$2^n$$
+* **Cardinalidad ($n$):** Llamamos cardinalidad al número de elementos únicos de un conjunto. Se denota como $\#A = n$ o $n(A)$.
+* **Regla de Oro de la Unión:** $\#(A \cup B) = \#A + \#B - \#(A \cap B)$.
+* **Conjunto Potencia:** Es el conjunto formado por todos los subconjuntos posibles de $A$.
+* **Total de Subconjuntos:** Si la cardinalidad de un conjunto es $n$, el total de subconjuntos que se pueden formar es:
+$$2^n$$
 
-> **Típ:** El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**.
+> **Típ:** ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**. Si agregas un elemento a la bolsa, el conjunto potencia crece al doble.
 
 ---
 
 ### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
-
-Los diagramas de Venn-Euler nos permiten visualizar las relaciones entre conjuntos de manera intuitiva.
+Para dominar la PAES, debes "ver" la operación antes de calcularla. Los diagramas de Venn-Euler nos permiten visualizar las relaciones entre conjuntos de manera intuitiva. Cada círculo representa un conjunto, y las superposiciones muestran las intersecciones. El rectángulo exterior representa el Universo.
 
 ---
-*"En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla."* — **Georg Cantor**
+
+> "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".
+> — **Georg Cantor**
 """, unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
             else:
