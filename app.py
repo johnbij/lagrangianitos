@@ -111,11 +111,13 @@ if menu == "🏠 Dashboard PAES":
         if e_col3.button("📐 Geometría"): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
         if e_col4.button("📊 Datos y Azar"): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
     
+    # SUB-EJES DE NÚMEROS
     elif st.session_state.eje_actual == "🔢 Números" and st.session_state.sub_eje_actual is None:
         st.markdown("## 🔢 Números")
-        se_col1, se_col2 = st.columns(2)
+        se_col1, se_col2, se_col3 = st.columns(3)
         if se_col1.button("🛡️ Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
         if se_col2.button("⚙️ Operatoria"): st.session_state.sub_eje_actual = "Operatoria"; st.rerun()
+        if se_col3.button("⚖️ Razones y Proporciones"): st.session_state.sub_eje_actual = "Razones"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.eje_actual = None; st.rerun()
 
     elif st.session_state.sub_seccion_actual is None:
@@ -133,7 +135,7 @@ if menu == "🏠 Dashboard PAES":
     elif st.session_state.clase_seleccionada is None:
         st.subheader(f"📚 Clases de {st.session_state.sub_eje_actual if st.session_state.eje_actual == '🔢 Números' else st.session_state.eje_actual}")
         
-        # --- 7 BOTONES PARA CONJUNTOS ---
+        # FILTRO ESPECÍFICO PARA CONJUNTOS
         if st.session_state.sub_eje_actual == "Conjuntos" and st.session_state.sub_seccion_actual == "Teoria":
             clases = [
                 ("📖 N01: Teoría de Conjuntos", "N01"),
@@ -145,9 +147,7 @@ if menu == "🏠 Dashboard PAES":
                 ("📖 N07: Los Números Reales", "N07")
             ]
             for nombre, code in clases:
-                if st.button(nombre):
-                    st.session_state.clase_seleccionada = code
-                    st.rerun()
+                if st.button(nombre): st.session_state.clase_seleccionada = code; st.rerun()
         else:
             st.info("✨ Próximamente contenido disponible.")
 
@@ -159,10 +159,8 @@ if menu == "🏠 Dashboard PAES":
         st.markdown(f"# Clase {st.session_state.clase_seleccionada}")
         st.markdown(f"Contenido en desarrollo para la sesión {st.session_state.clase_seleccionada}...")
         st.markdown('</div>', unsafe_allow_html=True)
-            
         if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
 
-# Refresco para el cronómetro
 if st.session_state.cronometro_activo:
     time.sleep(1)
     st.rerun()
