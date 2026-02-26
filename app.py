@@ -19,7 +19,7 @@ if 'cronometro_activo' not in st.session_state: st.session_state.cronometro_acti
 if 'tiempo_inicio' not in st.session_state: st.session_state.tiempo_inicio = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (REVISADOS PARA QUITAR EL ESPACIO BLANCO) :::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
@@ -30,7 +30,6 @@ st.markdown("""
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
     .timer-item { font-size: 16px; font-weight: bold; }
 
-    /* CRONÓMETRO BARTON: Fondo blanco, Números Azules */
     .crono-container-barton { 
         background-color: white; padding: 10px; border-radius: 10px; 
         text-align: center; border: 2px solid #3b71ca;
@@ -39,7 +38,10 @@ st.markdown("""
     
     [data-testid="stHorizontalBlock"] button { width: 100% !important; min-height: 55px !important; font-size: 20px !important; font-weight: bold !important; border-radius: 8px !important; }
     .cat-container div.stButton > button { min-height: 85px !important; border-radius: 15px !important; margin-bottom: 15px !important; width: 100% !important; font-size: 18px !important; text-align: left !important; padding-left: 20px !important; border: 1px solid #e0e0e0 !important; box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important; }
-    .clase-box { background-color: white; padding: 30px; border-radius: 15px; border: 1px solid #e0e0e0; color: #1a1a1a; }
+    
+    /* CAJA DE CLASE OPTIMIZADA: Redujimos el padding superior de 30px a 5px para eliminar lo blanco que sobraba */
+    .clase-box { background-color: white; padding: 5px 30px 30px 30px; border-radius: 15px; border: 1px solid #e0e0e0; color: #1a1a1a; margin-top: -10px; }
+    .clase-box h1 { margin-top: 0px !important; padding-top: 0px !important; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -67,7 +69,6 @@ if menu == "🏠 Dashboard PAES":
     horas_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).seconds // 3600
     st.markdown(f'<div class="header-rojo"><div class="timer-item">⏳ Días para PAES: {dias_paes}</div><div class="timer-item">Hrs: {horas_paes}</div></div>', unsafe_allow_html=True)
 
-    # --- SECCIÓN CRONÓMETRO ---
     st.write("")
     c_crono1, c_crono2 = st.columns([1, 3])
     with c_crono1:
@@ -91,7 +92,6 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("") 
 
-    # --- NAVEGACIÓN SUPERIOR ---
     n_cols = st.columns(5)
     if n_cols[0].button("🏠", key="n_h"): st.session_state.eje_actual = None; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
     if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
@@ -101,7 +101,6 @@ if menu == "🏠 Dashboard PAES":
 
     st.divider()
 
-    # --- LÓGICA DE NAVEGACIÓN ---
     if st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         e_col1, e_col2 = st.columns(2)
@@ -111,7 +110,6 @@ if menu == "🏠 Dashboard PAES":
         if e_col3.button("📐 Geometría"): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
         if e_col4.button("📊 Datos y Azar"): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
     
-    # SUB-EJES DE NÚMEROS
     elif st.session_state.eje_actual == "🔢 Números" and st.session_state.sub_eje_actual is None:
         st.markdown("## 🔢 Números")
         se_col1, se_col2, se_col3 = st.columns(3)
@@ -134,32 +132,22 @@ if menu == "🏠 Dashboard PAES":
 
     elif st.session_state.clase_seleccionada is None:
         st.subheader(f"📚 Clases de {st.session_state.sub_eje_actual if st.session_state.eje_actual == '🔢 Números' else st.session_state.eje_actual}")
-        
-        # FILTRO ESPECÍFICO PARA CONJUNTOS
         if st.session_state.sub_eje_actual == "Conjuntos" and st.session_state.sub_seccion_actual == "Teoria":
-            clases = [
-                ("📖 N01: Teoría de Conjuntos", "N01"),
-                ("📖 N02: Los Números Naturales", "N02"),
-                ("📖 N03: Los Números Cardinales", "N03"),
-                ("📖 N04: Los Números Enteros", "N04"),
-                ("📖 N05: Los Números Racionales", "N05"),
-                ("📖 N06: Los Números Irracionales", "N06"),
-                ("📖 N07: Los Números Reales", "N07")
-            ]
+            clases = [("📖 N01: Teoría de Conjuntos", "N01"), ("📖 N02: Los Números Naturales", "N02"), ("📖 N03: Los Números Cardinales", "N03"), ("📖 N04: Los Números Enteros", "N04"), ("📖 N05: Los Números Racionales", "N05"), ("📖 N06: Los Números Irracionales", "N06"), ("📖 N07: Los Números Reales", "N07")]
             for nombre, code in clases:
                 if st.button(nombre): st.session_state.clase_seleccionada = code; st.rerun()
         else:
             st.info("✨ Próximamente contenido disponible.")
-
         if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
 
     else:
-        # PANTALLA DE CLASE
-        st.markdown('<div class="clase-box">', unsafe_allow_html=True)
+        # PANTALLA DE CLASE SIN ESPACIOS BLANCOS SOBRANTES
+        if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
         
+        st.markdown('<div class="clase-box">', unsafe_allow_html=True)
         if st.session_state.clase_seleccionada == "N01":
             st.markdown("""
-
+# <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
 
 ---
@@ -198,6 +186,7 @@ Estas operaciones son las que "mueven" los elementos entre conjuntos:
 | **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Al primer conjunto le borras lo que sea del segundo. |
 | **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Todo lo que le falta a A para ser el Universo. |
 
+
 ---
 
 ### 🛡️ 5. Cardinalidad y Conjunto Potencia
@@ -206,6 +195,7 @@ Estas operaciones son las que "mueven" los elementos entre conjuntos:
 * **Conjunto Potencia:** Es el conjunto formado por todos los subconjuntos posibles de $A$.
 * **Total de Subconjuntos:** Si la cardinalidad de un conjunto es $n$, el total de subconjuntos que se pueden formar es:
 $$2^n$$
+
 
 > **Típ:** ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**. Si agregas un elemento a la bolsa, el conjunto potencia crece al doble.
 
@@ -221,12 +211,10 @@ Para dominar la PAES, debes "ver" la operación antes de calcularla. Los diagram
             """, unsafe_allow_html=True)
         else:
             st.markdown(f"# Clase {st.session_state.clase_seleccionada}")
-            st.markdown(f"Contenido en desarrollo para la sesión {st.session_state.clase_seleccionada}...")
+            st.markdown(f"Contenido en desarrollo...")
         
         st.markdown('</div>', unsafe_allow_html=True)
-        if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
 
-# Refresco para el cronómetro
 if st.session_state.cronometro_activo:
     time.sleep(1)
     st.rerun()
