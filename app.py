@@ -56,7 +56,7 @@ if 'crono' not in st.session_state: st.session_state.crono = False
 zona_cl = pytz.timezone('America/Santiago')
 ahora = datetime.now(zona_cl)
 st.markdown(f'<div class="header-azul">🐉 Lagrangianitos. Tus recursos PAES M1 | 📍 Santiago, Chile</div>', unsafe_allow_html=True)
-st.markdown(f'<div class="header-rojo">⏳ Días: 108 | Hrs: 20</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="header-rojo">⏳ Días para la PAES: 108 | Hrs: 20</div>', unsafe_allow_html=True)
 
 # CRONÓMETRO (Restaurado)
 with st.container(border=True):
