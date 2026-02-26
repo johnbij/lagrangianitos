@@ -18,38 +18,34 @@ if 'cronometro_activo' not in st.session_state: st.session_state.cronometro_acti
 if 'tiempo_inicio' not in st.session_state: st.session_state.tiempo_inicio = None
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-# :::: 2. ESTILOS CSS (REPARADO Y SIN CAJAS SOBRANTES) ::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS (ELIMINACIÓN RADICAL DE ESPACIOS) :::::::::::::::::::::::
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 st.markdown("""
     <style>
-    /* Headers principales */
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
     .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; margin-bottom: 20px; }
-    
-    /* Cronómetro */
     .crono-container-barton { background-color: white; padding: 10px; border-radius: 10px; text-align: center; border: 2px solid #3b71ca; }
     .crono-digital-azul { font-family: 'Courier New', monospace; font-size: 32px; font-weight: bold; color: #3b71ca; }
     
-    /* Botones */
+    /* Botones de navegación */
     [data-testid="stHorizontalBlock"] button { width: 100% !important; min-height: 55px !important; font-size: 20px !important; font-weight: bold !important; border-radius: 8px !important; }
 
-    /* ELIMINACIÓN DEL RECUADRO BLANCO (EL RAYADO CON PLUMÓN) */
-    /* Quitamos el padding excesivo que Streamlit pone por defecto en los contenedores de texto */
-    [data-testid="stVerticalBlock"] > div {
-        padding-top: 0px !important;
-        margin-top: 0px !important;
-    }
+    /* ELIMINAR ESPACIO SUPERIOR DE STREAMLIT */
+    .block-container { padding-top: 2rem !important; }
 
-    /* CAJA DE LA CLASE: Optimizada */
-    .clase-box-final {
+    /* CAJA DE CLASE: Aquí metemos todo para que no sobre nada blanco */
+    .clase-box-full {
         background-color: white;
-        padding: 30px;
+        padding: 25px 35px 35px 35px;
         border-radius: 15px;
         border: 1px solid #e0e0e0;
         color: #1a1a1a;
-        margin-top: -15px; /* Esto sube la clase para eliminar el espacio blanco */
+        margin-top: -10px;
     }
+    
+    /* Ajuste para que el texto de la clase no tenga margen arriba del h1 */
+    .clase-box-full h1:first-child { margin-top: 0px !important; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -69,14 +65,14 @@ with st.sidebar:
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 if menu == "🏠 Dashboard PAES":
-    # Reloj y Tiempo
     zona_cl = pytz.timezone('America/Santiago')
     ahora = datetime.now(zona_cl)
     st.markdown(f'<div class="header-azul"><div style="font-size: 20px; font-weight: bold;">🐉 Lagrangianitos. Tus recursos PAES M1</div><div style="font-size: 14px; opacity: 0.9;">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
     dias_paes = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).days
     st.markdown(f'<div class="header-rojo">⏳ Días para PAES: {dias_paes} </div>', unsafe_allow_html=True)
 
-    # Cronómetro Digital
+    # Cronómetro
+    st.write("")
     c1, c2 = st.columns([1, 3])
     with c1:
         if not st.session_state.cronometro_activo:
@@ -92,78 +88,90 @@ if menu == "🏠 Dashboard PAES":
 
     st.divider()
 
-    # --- LÓGICA DE NAVEGACIÓN ---
+    # Navegación
     if st.session_state.eje_actual is None:
-        st.subheader("Selecciona un Eje")
         if st.button("🔢 Números"): st.session_state.eje_actual = "🔢 Números"; st.rerun()
-    
     elif st.session_state.sub_eje_actual is None:
-        st.subheader("🔢 Números")
         if st.button("🛡️ 1. Conjuntos"): st.session_state.sub_eje_actual = "Conjuntos"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.eje_actual = None; st.rerun()
-
     elif st.session_state.sub_seccion_actual is None:
-        st.subheader("🛡️ Conjuntos")
         if st.button("📘 Teoría y Conceptos"): st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.sub_eje_actual = None; st.rerun()
-
     elif st.session_state.clase_seleccionada is None:
-        st.subheader("Clases")
         if st.button("📖 N01: Teoría de Conjuntos"): st.session_state.clase_seleccionada = "N01"; st.rerun()
         if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
-
     else:
-        # --- PANTALLA DE CLASE FINAL ---
-        if st.button("🔙 Volver"): 
+        # --- CLASE N01 COMPLETA Y SIN ESPACIOS ---
+        
+        # El botón de volver está justo antes del div de la clase para evitar saltos
+        if st.button("🔙 Volver al listado"): 
             st.session_state.clase_seleccionada = None
             st.rerun()
+
+        st.markdown('<div class="clase-box-full">', unsafe_allow_html=True)
         
-        # Contenedor que "succiona" el contenido hacia arriba para borrar el espacio blanco
-        st.markdown('<div class="clase-box-final">', unsafe_allow_html=True)
-        
+        # AQUÍ VA TU CLASE TAL CUAL LA PEGASTE
         st.markdown("""
 # <span style="color:darkblue">Eje Números</span>
-## <span style="color:darkblue">N01: Teoría de Conjuntos</span>
+## <span style="color:darkblue">N01: Teoría de Conjuntos - El Lenguaje Maestro</span>
 
 ---
 
-### 🛡️ 1. El Portal
-Aprender Teoría de Conjuntos es aprender a pensar con orden y entender que todo gran sistema se basa en quién pertenece a qué.
+### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
+Bienvenido a la primera página de un viaje que no tiene vuelta atrás. A menudo, nos enseñan que las matemáticas son un conjunto de reglas para calcular el vuelto o aprobar un examen, pero eso es como decir que la música es solo saber apretar teclas. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
+
+Este eje de **Números** no se trata de hacer cuentas rápidas; se trata de aprender a clasificar el caos. Durante las próximas unidades, descubriremos que los números no están "tirados" en el espacio, sino que habitan en estructuras organizadas llamadas **Conjuntos**. Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas. Prepárate para una apertura de mente donde el infinito deja de ser un concepto místico y se convierte en un terreno que podemos cartografiar.
 
 ---
 
-### 🛡️ 2. El Legado de Cantor
-Georg Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos.
+### 🛡️ 2. Crónica del Infinito: El Legado de Georg Cantor
+A finales del siglo XIX, un hombre decidió desafiar a la teología y a la ciencia de su tiempo. **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido. Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles. Su valentía permitió que hoy podamos definir con precisión quirúrgica qué es un número. En la PAES, este lenguaje es tu escudo: si dominas los conjuntos, dominas las instrucciones de la prueba.
 
 ---
 
-### 🛡️ 3. El Marco de Referencia
-* **El Universo ($\mathcal{U}$):** Contiene todos los elementos del problema.
-* **El Vacío ($\emptyset$):** Un conjunto sin elementos.
-* **Pertenencia ($\in$):** Relación de un elemento hacia un conjunto.
+### 🛡️ 3. El Marco de Referencia: Universo, Vacío y Subconjuntos
+Para que exista el orden, debe existir un límite y una jerarquía clara:
 
-> **Típ:** ... Si $A \subset B$, entonces $A \cap B = A$ y $A \cup B = B$.
+* **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos de un problema. Nada existe fuera del universo.
+* **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos. Es la representación de la nada matemática y es subconjunto de cualquier conjunto por definición.
+* **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto. (Ej: Manzana $\in$ Frutas).
+* **Subconjunto o Inclusión ($\subset$):** Se dice que $A$ es subconjunto de $B$ ($A \subset B$) si **todos** los elementos de $A$ están también en $B$.
 
----
-
-### 🛡️ 4. Operaciones
-* **Unión ($\cup$):** Agrupar todos los elementos.
-* **Intersección ($\cap$):** Solo los elementos comunes.
-* **Diferencia ($-$):** Quitar los elementos del segundo al primero.
+> **Típ:** ... Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
 
 ---
 
-### 🛡️ 5. Cardinalidad
-* **Total de Subconjuntos:** $2^n$
+### 🛡️ 4. Operaciones de "1000 Puntos"
+Estas operaciones son las que "mueven" los elementos entre conjuntos:
 
-> **Típ:** ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**.
+| Operación | Símbolo | Significado Lógico | Carpintería Técnica |
+| :--- | :---: | :--- | :--- |
+| **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos de ambos. |
+| **Intersección** | $\cap$ | $x \in A$ **y** $x \in B$ | Solo los elementos que se repiten. |
+| **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Al primer conjunto le borras lo que sea del segundo. |
+| **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Todo lo que le falta a A para ser el Universo. |
 
 ---
 
-> "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".  
+### 🛡️ 5. Cardinalidad y Conjunto Potencia
+* **Cardinalidad ($n$):** Llamamos cardinalidad al número de elementos únicos de un conjunto. Se denota como $\#A = n$ o $n(A)$.
+* **Regla de Oro de la Unión:** $\#(A \cup B) = \#A + \#B - \#(A \cap B)$.
+* **Conjunto Potencia:** Es el conjunto formado por todos los subconjuntos posibles de $A$.
+* **Total de Subconjuntos:** Si la cardinalidad de un conjunto es $n$, el total de subconjuntos que se pueden formar es:
+$$2^n$$
+
+> **Típ:** ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**. Si agregas un elemento a la bolsa, el conjunto potencia crece al doble.
+
+---
+
+### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
+Para dominar la PAES, debes "ver" la operación antes de calcularla. Los diagramas de Venn-Euler nos permiten visualizar las relaciones entre conjuntos de manera intuitiva. Cada círculo representa un conjunto, y las superposiciones muestran las intersecciones. El rectángulo exterior representa el Universo.
+
+---
+
+> "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".
 > — **Georg Cantor**
         """, unsafe_allow_html=True)
-        
         st.markdown('</div>', unsafe_allow_html=True)
 
 if st.session_state.cronometro_activo:
