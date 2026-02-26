@@ -13,8 +13,6 @@ if 'eje_actual' not in st.session_state:
     st.session_state.eje_actual = None
 if 'sub_seccion_actual' not in st.session_state:
     st.session_state.sub_seccion_actual = None
-if 'rama_datos' not in st.session_state:
-    st.session_state.rama_datos = None
 if 'clase_seleccionada' not in st.session_state:
     st.session_state.clase_seleccionada = None
 
@@ -109,12 +107,10 @@ if menu == "🏠 Dashboard PAES":
                 if not st.session_state.cronometro_activo:
                     if st.button("▶️ Iniciar", key="btn_start"):
                         st.session_state.tiempo_inicio = time.time()
-                        st.session_state.cronometro_activo = True
-                        st.rerun()
+                        st.session_state.cronometro_activo = True; st.rerun()
                 else:
                     if st.button("⏹️ Parar", key="btn_stop"):
-                        st.session_state.cronometro_activo = False
-                        st.rerun()
+                        st.session_state.cronometro_activo = False; st.rerun()
             with col_crono:
                 if st.session_state.cronometro_activo:
                     secs = int(time.time() - st.session_state.tiempo_inicio)
@@ -140,29 +136,32 @@ if menu == "🏠 Dashboard PAES":
         else:
             if st.session_state.clase_seleccionada == "N01":
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-                st.markdown("""
-# Eje Números
+                st.markdown("""# Eje Números
 ## N01: Teoría de Conjuntos - El Lenguaje Maestro
 
 ---
 
 ### 🛡️ 1. El Portal: El Viaje que Cambia la Mirada
-Bienvenido a la primera página de un viaje que no tiene vuelta atrás. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
+Bienvenido a la primera página de un viaje que no tiene vuelta atrás. A menudo, nos enseñan que las matemáticas son un conjunto de reglas para calcular el vuelto o aprobar un examen, pero eso es como decir que la música es solo saber apretar teclas. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
 
-Este eje de **Números** no se trata de hacer cuentas rápidas; se trata de aprender a clasificar el caos. Durante las próximas unidades, descubriremos que los números no están "tirados" en el espacio, sino que habitan en estructuras organizadas llamadas **Conjuntos**. Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas.
+Este eje de **Números** no se trata de hacer cuentas rápidas; se trata de aprender a clasificar el caos. Durante las próximas unidades, descubriremos que los números no están "tirados" en el espacio, sino que habitan en estructuras organizadas llamadas **Conjuntos**. Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas. Prepárate para una apertura de mente donde el infinito deja de ser un concepto místico y se convierte en un terreno que podemos cartografiar.
 
 ### 🛡️ 2. Crónica del Infinito: El Legado de Georg Cantor
-A finales del siglo XIX, **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido. Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles. Su valentía permitió que hoy podamos definir con precisión quirúrgica qué es un número.
+A finales del siglo XIX, un hombre decidió desafiar a la teología y a la ciencia de su tiempo. **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido. Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles. Su valentía permitió que hoy podamos definir con precisión quirúrgica qué es un número. En la PAES, este lenguaje es tu escudo: si dominas los conjuntos, dominas las instrucciones de la prueba.
 
 ### 🛡️ 3. El Marco de Referencia: Universo, Vacío y Subconjuntos
-* **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos.
-* **El Vacío ($\emptyset$):** Un conjunto sin elementos.
-* **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto.
-* **Subconjunto ($\subset$):** $A \subset B$ si **todos** los elementos de $A$ están también en $B$.
+Para que exista el orden, debe existir un límite y una jerarquía clara:
+
+* **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos de un problema. Nada existe fuera del universo.
+* **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos. Es la representación de la nada matemática y es subconjunto de cualquier conjunto por definición.
+* **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto. (Ej: Manzana $\in$ Frutas).
+* **Subconjunto o Inclusión ($\subset$):** Se dice que $A$ es subconjunto de $B$ ($A \subset B$) si **todos** los elementos de $A$ están también en $B$.
 
 > **Típ:** Anota: tip ... Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
 
 ### 🛡️ 4. Operaciones de "1000 Puntos"
+Estas operaciones son las que "mueven" los elementos entre conjuntos:
+
 | Operación | Símbolo | Significado Lógico | Carpintería Técnica |
 | :--- | :---: | :--- | :--- |
 | **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos de ambos. |
@@ -171,69 +170,84 @@ A finales del siglo XIX, **Georg Cantor** se atrevió a decir que el infinito no
 | **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Todo lo que le falta a A para ser el Universo. |
 
 ### 🛡️ 5. Cardinalidad y Conjunto Potencia
-* **Cardinalidad ($n$):** Número de elementos únicos.
+* **Cardinalidad ($n$):** Llamamos cardinalidad al número de elementos únicos de un conjunto. Se denota como $\#A = n$ o $n(A)$.
 * **Regla de Oro de la Unión:** $\#(A \cup B) = \#A + \#B - \#(A \cap B)$.
-* **Conjunto Potencia:** Todos los subconjuntos posibles de $A$.
-* **Total de Subconjuntos:** $2^n$
-
-> **Típ:** Anota: tip ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**.
+* **Conjunto Potencia:** Es el conjunto formado por todos los subconjuntos posibles de $A$.
+* **Total de Subconjuntos:** Si la cardinalidad de un conjunto es $n$, el total de subconjuntos que se pueden formar es:
+$$2^n$$
+> **Típ:** Anota: tip ... El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**. Si agregas un elemento a la bolsa, el conjunto potencia crece al doble.
 
 ### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
-Para dominar la PAES, debes "ver" la operación antes de calcularla.
-                
 
 
 > "En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".
-> — **Georg Cantor**
-                """, unsafe_allow_html=True)
+> — **Georg Cantor**""", unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
             
             elif st.session_state.clase_seleccionada == "N02":
                 st.markdown('<div class="clase-box">', unsafe_allow_html=True)
-                st.markdown("""
-# <span style="color:darkblue">Eje Números</span>
+                st.markdown("""# <span style="color:darkblue">Eje Números</span>
 ## <span style="color:darkblue">N02: Los Números Naturales ($\mathbb{N}$) - El Génesis del Conteo</span>
 
 ---
 
 ### 🛡️ 1. El Portal: El Instinto de Cuantificar
-Los Números Naturales fueron descubiertos como la herramienta de supervivencia definitiva para contar presas, días y ciclos.
+Mucho antes de que existieran las pizarras o los computadores, el ser humano tuvo una necesidad vital: **¿Cuántos hay?** Los Números Naturales no fueron inventados; fueron descubiertos como la herramienta de supervivencia definitiva para contar presas, días y ciclos.
 
 ---
 
 ### 🛡️ 2. Crónica del Origen: El Hueso de Ishango y Peano
-**Giuseppe Peano** demostró que solo necesitábamos un punto de partida (el 1) y un sucesor para construir todo el universo matemático.
+Hace más de 20.000 años, alguien talló marcas en un hueso (el Hueso de Ishango) para llevar una cuenta. Siglos después, **Giuseppe Peano** definió los "Axiomas de Peano", demostrando que solo necesitábamos un punto de partida (el 1) y un sucesor para construir todo el universo matemático.
 
 ---
 
 ### 🛡️ 3. Definición y Características Formales
+Se denota con la letra $\mathbb{N}$ y se define como el conjunto infinito:
 $$\mathbb{N} = \{1, 2, 3, 4, 5, 6, 7, ...\}$$
 
-* **Primer Elemento:** El **1** es el inicio absoluto.
+* **Primer Elemento:** El **1** es el inicio absoluto. Carece de antecesor en este conjunto.
 * **Infinitud:** No existe un número máximo.
-* **Discretitud:** Entre el 4 y el 5 **no hay nada**.
+* **Discretitud:** Es un conjunto "con saltos". Entre el 4 y el 5 **no hay nada**.
 
 ---
 
-### 🛡️ 4. La Ley de Tricotomía
-Establece que para $a, b \in \mathbb{N}$, solo una es posible: $a < b$, $a > b$, o $a = b$.
+### 🛡️ 4. La Ley de Tricotomía: El Juez de los Números
+Esta es la regla que permite el orden. Establece que si tomas dos números naturales cualesquiera, $a$ y $b$, **solo una** de estas tres realidades es posible:
+1. **$a < b$** ($a$ está a la izquierda de $b$).
+2. **$a > b$** ($a$ está a la derecha de $b$).
+3. **$a = b$** (Son el mismo número).
 
 ---
 
 ### 🛡️ 5. Relaciones de Vecindad
-* **El Sucesor:** $(n + 1)$.
-* **El Antecesor:** $(n - 1)$, con excepción del 1.
-
-> **Típ:** Anota: tip ... Si el antecesor de $n$ es natural, $n$ no puede ser 1.
+* **El Sucesor:** Todo $n \in \mathbb{N}$ tiene un sucesor único: $(n + 1)$.
+* **El Antecesor:** Todo $n \in \mathbb{N}$, **con excepción del 1**, tiene un antecesor único: $(n - 1)$.
+    * **Típ:** Anota: tip ... Si un problema dice que "el antecesor de $n$ es natural", el contrato te dice que $n$ no puede ser 1.
 
 ---
 
-### 🛡️ 6. Las Reglas del Juego: Propiedades
-* **Clausura:** Cerrado en Adición y Multiplicación. No en Resta ni División.
-* **Conmutativa, Asociativa y Distributiva.**
+### 🛡️ 6. Las Reglas del Juego: Propiedades Estructurales
+Para operar en $\mathbb{N}$, debemos conocer las leyes que gobiernan el comportamiento de los números:
 
-> "El número es la sustancia de todas las cosas". — **Pitágoras**
-                """, unsafe_allow_html=True)
+* **Clausura (Cierre):** Un conjunto es "cerrado" si al operar dos de sus elementos, el resultado **siempre** es un elemento del mismo conjunto.
+* **Conmutativa:** El orden de los sumandos o factores no altera el resultado ($a + b = b + a$).
+* **Asociativa:** La forma en que agrupas los números no cambia el total $(a + b) + c = a + (b + c)$.
+* **Distributiva:** La multiplicación se "reparte" sobre la suma: $a \cdot (b + c) = (a \cdot b) + (a \cdot c)$.
+
+**Análisis de Clausura en $\mathbb{N}$:**
+| Operación | ¿Es Cerrada? | Carpintería Técnica |
+| :--- | :---: | :--- |
+| **Adición (+)** | ✅ SÍ | Natural + Natural = Siempre Natural. |
+| **Multiplicación ($\cdot$)** | ✅ SÍ | Natural $\cdot$ Natural = Siempre Natural. |
+| **Sustracción (-)** | ❌ NO | Si el sustraendo es mayor, sales del conjunto. |
+| **División (:)** | ❌ NO | No toda división resulta en un número "entero". |
+
+> **Típ:** Anota: tip ... En la PAES, la propiedad distributiva es el motor de la factorización. Si la aprendes bien aquí, el álgebra será mucho más fácil.
+
+---
+
+> "El número es la sustancia de todas las cosas".
+> — **Pitágoras**""", unsafe_allow_html=True)
                 st.markdown('</div>', unsafe_allow_html=True)
             
             if st.button("🔙 Volver al listado"): st.session_state.clase_seleccionada = None; st.rerun()
