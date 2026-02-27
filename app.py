@@ -402,7 +402,7 @@ elif menu == "🐉 Bienvenida":
         color: white;
         margin-bottom: 30px;
     }
-    .bienvenida-dragon { font-size: 80px; margin-bottom: 10px; }
+    .bienvenida-dragon { font-size: 110px; margin-bottom: 15px; }
     .bienvenida-titulo { font-size: 36px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
     .bienvenida-lema {
         font-size: 20px;
@@ -411,7 +411,7 @@ elif menu == "🐉 Bienvenida":
         font-weight: bold;
         margin-bottom: 20px;
     }
-    .bienvenida-sub { font-size: 15px; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+    .bienvenida-sub { font-size: 18px; font-weight: 700; opacity: 0.95; max-width: 500px; margin: 0 auto; line-height: 1.6; }
 
     .card-eje {
         border-radius: 15px;
