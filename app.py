@@ -1,69 +1,170 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-import matplotlib
+from datetime import datetime
 import pytz
 import time
-from datetime import datetime
 
-# Bloqueo de renderizado para evitar errores en la nube
-matplotlib.use('Agg')
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::: 1. CONFIGURACIÓN Y ESTADOS :::::::::::::::::::::::::::::::::::::::::::::
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-st.set_page_config(page_title="Lagrangianitos Hub", layout="wide")
+st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
-# --- CSS SEGURO (Solo lo estético, sin romper columnas) ---
+if 'eje_actual' not in st.session_state:
+    st.session_state.eje_actual = None
+if 'sub_seccion_actual' not in st.session_state:
+    st.session_state.sub_seccion_actual = None
+if 'rama_datos' not in st.session_state:
+    st.session_state.rama_datos = None
+if 'clase_seleccionada' not in st.session_state:
+    st.session_state.clase_seleccionada = None
+
+# --- ESTADOS DEL CRONÓMETRO ---
+if 'cronometro_activo' not in st.session_state:
+    st.session_state.cronometro_activo = False
+if 'tiempo_inicio' not in st.session_state:
+    st.session_state.tiempo_inicio = None
+
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::: 2. ESTILOS CSS :::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 st.markdown("""
     <style>
-    .header-azul { background-color: #3b71ca; padding: 20px; border-radius: 15px 15px 0 0; color: white; text-align: center; font-size: 20px; font-weight: bold; }
-    .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; font-weight: bold; }
-    .clase-box { background-color: white; padding: 25px; border-radius: 15px; border: 1px solid #e0e0e0; color: #1a1a1a; margin-top: 20px; }
-    .crono-digital { font-family: 'Courier New', monospace; font-size: 32px; font-weight: bold; color: #3b71ca; }
+    .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
+    .titulo-header { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
+    .info-header { font-size: 14px; opacity: 0.9; }
+    .header-rojo { background-color: #cc0000; padding: 10px; color: white; display: flex; justify-content: space-around; border-radius: 0 0 15px 15px; }
+    .timer-item { font-size: 16px; font-weight: bold; }
+
+    [data-testid="stHorizontalBlock"] { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 4px !important; }
+    [data-testid="stHorizontalBlock"] > div { flex: 1 1 0% !important; min-width: 0 !important; }
+    [data-testid="stHorizontalBlock"] button { width: 100% !important; min-height: 55px !important; font-size: 20px !important; font-weight: bold !important; border-radius: 8px !important; }
+
+    .cat-container div.stButton > button { 
+        min-height: 85px !important; border-radius: 15px !important; margin-bottom: 15px !important;
+        width: 100% !important; font-size: 18px !important; text-align: left !important;
+        padding-left: 20px !important; border: 1px solid #e0e0e0 !important; box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
+    }
+    .clase-box { background-color: white; padding: 30px; border-radius: 15px; border: 1px solid #e0e0e0; color: #1a1a1a; }
     
-    /* Esto ayuda a que en el celu los botones no se vean gigantes */
-    .stButton button { width: 100%; min-height: 45px; }
+    /* Estilo para el Cronómetro dentro de la caja */
+    .crono-digital {
+        font-family: 'Courier New', monospace;
+        font-size: 35px;
+        font-weight: bold;
+        color: #3b71ca;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# Estados de la sesión
-if 'eje' not in st.session_state: st.session_state.eje = None
-if 'clase' not in st.session_state: st.session_state.clase = None
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::: 3. BARRA LATERAL :::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-# --- HEADER (Restaurado como la foto 14:28) ---
-zona_cl = pytz.timezone('America/Santiago')
-ahora = datetime.now(zona_cl)
-st.markdown(f'<div class="header-azul">🐉 Lagrangianitos. Tus recursos PAES M1</div>', unsafe_allow_html=True)
-st.markdown(f'<div class="header-rojo"><span>⏳ Días: 108</span><span>Hrs: 20</span></div>', unsafe_allow_html=True)
+with st.sidebar:
+    st.markdown("# 🚀 Perfil\n**Barton**")
+    st.divider()
+    menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
+    st.divider()
+    st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
 
-# --- NAVEGACIÓN PRINCIPAL ---
-# Usamos columnas estándar de Streamlit para que sea estable
-st.write("")
-c1, c2, c3, c4, c5 = st.columns(5)
-if c1.button("🏠"): st.session_state.eje = None; st.session_state.clase = None; st.rerun()
-if c2.button("N"): st.session_state.eje = "Números"; st.session_state.clase = None; st.rerun()
-if c3.button("A"): st.session_state.eje = "Álgebra"; st.rerun()
-if c4.button("G"): st.session_state.eje = "Geometría"; st.rerun()
-if c5.button("D"): st.session_state.eje = "Datos"; st.rerun()
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+# :::: 4. DASHBOARD PRINCIPAL :::::::::::::::::::::::::::::::::::::::::::::::::
+# :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-st.divider()
-
-# --- CRONÓMETRO (En su caja original) ---
-with st.container(border=True):
-    col_izq, col_der = st.columns([1, 1])
-    col_izq.button("▶️ Parar/Iniciar")
-    col_der.markdown('<div class="crono-digital">01:16</div>', unsafe_allow_html=True)
-
-# --- LÓGICA DE CONTENIDO ---
-if st.session_state.eje == "Números":
-    st.markdown("## 🔢 Números")
-    sub = st.radio("Subejes:", ["Conjuntos", "Operatoria", "Razones", "Ejercitación"], horizontal=True)
+if menu == "🏠 Dashboard PAES":
+    zona_cl = pytz.timezone('America/Santiago')
+    ahora = datetime.now(zona_cl)
+    st.markdown(f'<div class="header-azul"><div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div><div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div></div>', unsafe_allow_html=True)
     
-    if sub == "Conjuntos":
-        col_n1, col_n2 = st.columns(2)
-        if col_n1.button("📘 Teoría (N01)"): st.session_state.clase = "N01"
-        if col_n2.button("📘 Naturales (N02)"): st.session_state.clase = "N02"
+    dias = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).days
+    horas = (datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl) - ahora).seconds // 3600
+    st.markdown(f'<div class="header-rojo"><div class="timer-item">⏳ Días: {dias}</div><div class="timer-item">Hrs: {horas}</div></div>', unsafe_allow_html=True)
 
-# Mostrar la clase seleccionada
-if st.session_state.clase == "N01":
-    st.markdown('<div class="clase-box"><h1>N01: Teoría de Conjuntos</h1><p>Tu texto aquí...</p></div>', unsafe_allow_html=True)
-elif st.session_state.clase == "N02":
-    st.markdown('<div class="clase-box"><h1>N02: Números Naturales</h1><p>Tu texto aquí...</p></div>', unsafe_allow_html=True)
-    
+    st.write("") 
+
+    # --- BOTONES DE EJES (Mantenidos igual) ---
+    if st.session_state.eje_actual is None:
+        st.markdown("### 📚 Selecciona un Eje Temático")
+        c1, c2 = st.columns(2)
+        if c1.button("🔢 Números", key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números"; st.rerun()
+        if c2.button("📉 Álgebra", key="m_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
+        c3, c4 = st.columns(2)
+        if c3.button("📐 Geometría", key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
+        if c4.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
+
+    else:
+        n_cols = st.columns(5)
+        if n_cols[0].button("🏠", key="n_h"): st.session_state.eje_actual = None; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría"; st.session_state.sub_seccion_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = None; st.session_state.rama_datos = None; st.session_state.clase_seleccionada = None; st.rerun()
+
+        st.write("---")
+
+        # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        # :::: LA CAJA DEL CRONÓMETRO (AQUÍ APROVECHAMOS EL ESPACIO) ::::::::::::::
+        # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+        with st.container(border=True):
+            col_btn, col_crono = st.columns([1, 2])
+            with col_btn:
+                if not st.session_state.cronometro_activo:
+                    if st.button("▶️ Iniciar", key="btn_start_crono"):
+                        st.session_state.tiempo_inicio = time.time()
+                        st.session_state.cronometro_activo = True
+                        st.rerun()
+                else:
+                    if st.button("⏹️ Detener", key="btn_stop_crono"):
+                        st.session_state.cronometro_activo = False
+                        st.rerun()
+            with col_crono:
+                if st.session_state.cronometro_activo:
+                    secs = int(time.time() - st.session_state.tiempo_inicio)
+                    st.markdown(f'<span class="crono-digital">{secs//60:02d}:{secs%60:02d}</span>', unsafe_allow_html=True)
+                else:
+                    st.markdown('<span class="crono-digital" style="opacity:0.2;">00:00</span>', unsafe_allow_html=True)
+        
+        # --- LÓGICA DE NAVEGACIÓN DE CONTENIDO (Mantenida igual) ---
+        if st.session_state.sub_seccion_actual is None:
+            st.markdown(f"## {st.session_state.eje_actual}")
+            st.markdown('<div class="cat-container">', unsafe_allow_html=True)
+            if st.button("📘 Teoría y Conceptos", key="bt_t"): st.session_state.sub_seccion_actual = "Teoria"; st.rerun()
+            if st.button("📝 Ejercitación y Práctica", key="bt_e"): st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        elif st.session_state.clase_seleccionada is None:
+            st.subheader(f"📚 Clases de {st.session_state.eje_actual}")
+            st.markdown('<div class="cat-container">', unsafe_allow_html=True)
+            if st.button("📖 N01: Teoría de Conjuntos", key="n01"): st.session_state.clase_seleccionada = "N01"; st.rerun()
+            if st.button("📖 N02: Próximamente", key="n02"): st.session_state.clase_seleccionada = "N02"; st.rerun()
+            if st.button("📖 N03: Próximamente", key="n03"): st.session_state.clase_seleccionada = "N03"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+            if st.button("🔙 Volver"): st.session_state.sub_seccion_actual = None; st.rerun()
+
+        else:
+            if st.session_state.clase_seleccionada == "N01":
+                st.markdown('<div class="clase-box">', unsafe_allow_html=True)
+                st.markdown("""
+                # <span style="color:darkblue">N01: Teoría de Conjuntos</span>
+                ## <span style="color:darkblue">El Lenguaje Maestro</span>
+                
+                Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas.
+                """, unsafe_allow_html=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+            else:
+                st.info(f"🚀 La clase {st.session_state.clase_seleccionada} está en desarrollo.")
+            
+            if st.button("🔙 Volver al listado de clases"): st.session_state.clase_seleccionada = None; st.rerun()
+
+elif menu == "📂 Biblioteca de PDFs":
+    st.header("📂 Biblioteca de Recursos")
+
+# --- AUTO REFRESH PARA EL CRONÓMETRO ---
+if st.session_state.cronometro_activo:
+    time.sleep(1)
+    st.rerun()
+            
