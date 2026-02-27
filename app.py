@@ -144,11 +144,13 @@ if menu == "🏠 Dashboard PAES":
         if st.session_state.subcat_actual is None:
             st.markdown(f"## {eje}")
             for nombre_subcat in subcats.keys():
+                # Mismo patrón que funciona en pdf-btn
                 st.markdown(f'<div class="subcat-{color}">', unsafe_allow_html=True)
-                if st.button(nombre_subcat, key=f"subcat_{nombre_subcat}", use_container_width=True):
+                clicked = st.button(nombre_subcat, key=f"subcat_{nombre_subcat}", use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+                if clicked:
                     st.session_state.subcat_actual = nombre_subcat
                     st.rerun()
-                st.markdown('</div>', unsafe_allow_html=True)
 
         # NIVEL 2: Lista de clases dentro de la subcategoría
         elif st.session_state.clase_seleccionada is None:

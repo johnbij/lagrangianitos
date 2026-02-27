@@ -24,13 +24,13 @@ def aplicar_estilos():
         border: none !important;
     }
 
-    /* --- BOTONES DE SUBCATEGORÍAS por eje --- */
-    .subcat-rojo   div.stButton > button { background-color: #c0392b !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
-    .subcat-verde  div.stButton > button { background-color: #1b5e20 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
-    .subcat-morado div.stButton > button { background-color: #7b1fa2 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
+    /* --- BOTONES DE SUBCATEGORÍAS --- */
+    .subcat-rojo    div.stButton > button { background-color: #c0392b !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
+    .subcat-verde   div.stButton > button { background-color: #1b5e20 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
+    .subcat-morado  div.stButton > button { background-color: #7b1fa2 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
     .subcat-naranja div.stButton > button { background-color: #e65100 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
 
-    /* --- BOTONES DE CATEGORÍA (lista de clases) --- */
+    /* --- BOTONES DE LISTA DE CLASES --- */
     .cat-container div.stButton > button {
         min-height: 75px !important; border-radius: 12px !important; margin-bottom: 10px !important;
         width: 100% !important; font-size: 17px !important; text-align: left !important;
