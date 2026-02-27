@@ -452,6 +452,14 @@ elif menu == "🐉 Bienvenida":
         st.markdown('<div class="card-eje" style="background:#1b5e20;">📉 Álgebra<br><small>Álgebra · Funciones</small></div>', unsafe_allow_html=True)
         st.markdown('<div class="card-eje" style="background:#e65100;">📊 Datos y Azar<br><small>Estadística · Probabilidad</small></div>', unsafe_allow_html=True)
 
+    # CTA
+    st.write("")
+    col_iz, col_cta, col_der = st.columns([1, 2, 1])
+    with col_cta:
+        if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.rerun()
+
     # Metodología
     st.markdown('<div class="seccion-titulo">🛡️ Nuestra metodología</div>', unsafe_allow_html=True)
     st.markdown("""
@@ -464,11 +472,3 @@ elif menu == "🐉 Bienvenida":
     <span class="pill">📄 Material descargable</span>
     </div>
     """, unsafe_allow_html=True)
-
-    # CTA
-    st.write("")
-    col_iz, col_cta, col_der = st.columns([1, 2, 1])
-    with col_cta:
-        if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
-            st.session_state.menu_actual = "🏠 Dashboard PAES"
-            st.rerun()
