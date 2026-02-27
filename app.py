@@ -82,16 +82,8 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("")
 
-    # ── SECCIÓN PDF ──────────────────────────────────────────────────────────
-    if st.session_state.get('ir_a_pdf'):
-        st.session_state.ir_a_pdf = False
-        st.header("📂 Biblioteca de Recursos en PDF")
-        st.info("🚀 Aquí irán los materiales descargables. Próximamente.")
-        if st.button("🔙 Volver al inicio", key="volver_pdf"):
-            st.rerun()
-
     # ── PANTALLA INICIAL ─────────────────────────────────────────────────────
-    elif st.session_state.eje_actual is None:
+    if st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
 
         # CSS individual para cada botón de eje
@@ -128,7 +120,7 @@ if menu == "🏠 Dashboard PAES":
         with col_pdf:
             st.markdown('<div class="pdf-btn">', unsafe_allow_html=True)
             if st.button("📄 Materiales descargables en PDF", key="m_pdf", use_container_width=True):
-                st.session_state.ir_a_pdf = True
+                st.session_state.menu_actual = "📂 Biblioteca de PDFs"
                 st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
 
@@ -212,11 +204,32 @@ if menu == "🏠 Dashboard PAES":
             }}
             </style>
             """, unsafe_allow_html=True)
-            for nombre_subcat in subcats.keys():
-                if st.button(nombre_subcat, key=f"sc_{nombre_subcat}",
-                             use_container_width=True, type="primary"):
-                    st.session_state.subcat_actual = nombre_subcat
-                    st.rerun()
+            for nombre_subcat, clases_subcat in subcats.items():
+                # Calcular progreso: clases que NO usan render_proximamente
+                total = len(clases_subcat)
+                disponibles = sum(
+                    1 for c in clases_subcat.values()
+                    if c["render"].__name__ != "<lambda>"
+                )
+                if disponibles == total:
+                    badge = f"✅ {disponibles}/{total}"
+                elif disponibles > 0:
+                    badge = f"🟡 {disponibles}/{total}"
+                else:
+                    badge = f"🔒 0/{total}"
+
+                col_btn, col_badge = st.columns([4, 1])
+                with col_btn:
+                    if st.button(nombre_subcat, key=f"sc_{nombre_subcat}",
+                                 use_container_width=True, type="primary"):
+                        st.session_state.subcat_actual = nombre_subcat
+                        st.rerun()
+                with col_badge:
+                    st.markdown(
+                        f'<div style="text-align:center; font-size:15px; '
+                        f'font-weight:bold; padding-top:18px;">{badge}</div>',
+                        unsafe_allow_html=True
+                    )
 
         # NIVEL 2: lista de clases
         elif st.session_state.clase_seleccionada is None:
