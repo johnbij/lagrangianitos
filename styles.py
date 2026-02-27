@@ -26,8 +26,8 @@ def aplicar_estilos():
 
     /* --- BOTONES DE LISTA DE CLASES --- */
     .cat-container div.stButton > button {
-        min-height: 75px !important; border-radius: 12px !important; margin-bottom: 10px !important;
-        width: 100% !important; font-size: 17px !important; text-align: left !important;
+        min-height: 85px !important; border-radius: 12px !important; margin-bottom: 10px !important;
+        width: 100% !important; font-size: 22px !important; text-align: left !important;
         padding-left: 20px !important; border: 1px solid #e0e0e0 !important;
         box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
     }
