@@ -24,17 +24,18 @@ def aplicar_estilos():
         border: none !important;
     }
 
-    /* --- BOTONES DE EJES (colores individuales) --- */
-    div.eje-numeros   > div > div > button { background-color: #1a237e !important; color: white !important; border: none !important; }
-    div.eje-algebra   > div > div > button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
-    div.eje-geometria > div > div > button { background-color: #e65100 !important; color: white !important; border: none !important; }
-    div.eje-datos     > div > div > button { background-color: #b71c1c !important; color: white !important; border: none !important; }
+    /* --- BOTONES DE SUBCATEGORÍAS por eje --- */
+    .subcat-rojo   div.stButton > button { background-color: #c0392b !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
+    .subcat-verde  div.stButton > button { background-color: #1b5e20 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
+    .subcat-morado div.stButton > button { background-color: #7b1fa2 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
+    .subcat-naranja div.stButton > button { background-color: #e65100 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
 
-    /* --- BOTONES DE CATEGORÍA (Teoría / Ejercitación / Clases) --- */
+    /* --- BOTONES DE CATEGORÍA (lista de clases) --- */
     .cat-container div.stButton > button {
-        min-height: 85px !important; border-radius: 15px !important; margin-bottom: 15px !important;
-        width: 100% !important; font-size: 18px !important; text-align: left !important;
-        padding-left: 20px !important; border: 1px solid #e0e0e0 !important; box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
+        min-height: 75px !important; border-radius: 12px !important; margin-bottom: 10px !important;
+        width: 100% !important; font-size: 17px !important; text-align: left !important;
+        padding-left: 20px !important; border: 1px solid #e0e0e0 !important;
+        box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
     }
 
     /* --- BOTÓN PDF --- */

@@ -14,12 +14,11 @@ from styles import aplicar_estilos
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
 if 'eje_actual'         not in st.session_state: st.session_state.eje_actual         = None
-if 'sub_seccion_actual' not in st.session_state: st.session_state.sub_seccion_actual = None
-if 'rama_datos'         not in st.session_state: st.session_state.rama_datos         = None
+if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
 if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccionada = None
 if 'ir_a_pdf'           not in st.session_state: st.session_state.ir_a_pdf           = False
 if 'cronometro_activo'  not in st.session_state: st.session_state.cronometro_activo  = False
-if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio       = None
+if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio      = None
 
 # =============================================================================
 # 2. ESTILOS
@@ -84,23 +83,11 @@ if menu == "🏠 Dashboard PAES":
     elif st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
-        with c1:
-            st.markdown('<div class="eje-numeros">', unsafe_allow_html=True)
-            if st.button("🔢 Números",   key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
-        with c2:
-            st.markdown('<div class="eje-algebra">', unsafe_allow_html=True)
-            if st.button("📉 Álgebra",   key="m_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+        if c1.button("🔢 Números",      key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números";      st.rerun()
+        if c2.button("📉 Álgebra",      key="m_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra";      st.rerun()
         c3, c4 = st.columns(2)
-        with c3:
-            st.markdown('<div class="eje-geometria">', unsafe_allow_html=True)
-            if st.button("📐 Geometría", key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
-        with c4:
-            st.markdown('<div class="eje-datos">', unsafe_allow_html=True)
-            if st.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+        if c3.button("📐 Geometría",    key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría";    st.rerun()
+        if c4.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
         st.write("")
         col_iz, col_pdf, col_der = st.columns([1, 4, 1])
@@ -113,15 +100,17 @@ if menu == "🏠 Dashboard PAES":
 
     # ── DENTRO DE UN EJE ────────────────────────────────────────────────────
     else:
-        # Barra de navegación
+        # Barra de navegación superior
         n_cols = st.columns(5)
         if n_cols[0].button("🏠", key="n_h"):
-            st.session_state.eje_actual = st.session_state.sub_seccion_actual = st.session_state.clase_seleccionada = st.session_state.rama_datos = None
+            st.session_state.eje_actual = None
+            st.session_state.subcat_actual = None
+            st.session_state.clase_seleccionada = None
             st.rerun()
-        if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números";      st.session_state.sub_seccion_actual = st.session_state.clase_seleccionada = None; st.rerun()
-        if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra";      st.session_state.sub_seccion_actual = st.session_state.clase_seleccionada = None; st.rerun()
-        if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría";    st.session_state.sub_seccion_actual = st.session_state.clase_seleccionada = None; st.rerun()
-        if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.sub_seccion_actual = st.session_state.clase_seleccionada = st.session_state.rama_datos = None; st.rerun()
+        if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        if n_cols[4].button("D", key="n_d"): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
 
         st.write("---")
 
@@ -131,7 +120,7 @@ if menu == "🏠 Dashboard PAES":
             with col_btn:
                 if not st.session_state.cronometro_activo:
                     if st.button("▶️ Iniciar", key="btn_start_crono"):
-                        st.session_state.tiempo_inicio    = time.time()
+                        st.session_state.tiempo_inicio     = time.time()
                         st.session_state.cronometro_activo = True
                         st.rerun()
                 else:
@@ -145,34 +134,42 @@ if menu == "🏠 Dashboard PAES":
                 else:
                     st.markdown('<span class="crono-digital" style="opacity:0.2;">00:00</span>', unsafe_allow_html=True)
 
-        # Navegación de contenido
-        eje            = st.session_state.eje_actual
-        clases_del_eje = CONTENIDOS.get(eje, {})
+        # ── NAVEGACIÓN DE CONTENIDO ──────────────────────────────────────────
+        eje      = st.session_state.eje_actual
+        eje_data = CONTENIDOS.get(eje, {})
+        subcats  = eje_data.get("subcategorias", {})
+        color    = eje_data.get("color_subcats", "rojo")
 
-        if st.session_state.sub_seccion_actual is None:
+        # NIVEL 1: Selección de subcategoría
+        if st.session_state.subcat_actual is None:
             st.markdown(f"## {eje}")
-            st.markdown('<div class="cat-container">', unsafe_allow_html=True)
-            if st.button("📘 Teoría y Conceptos",      key="bt_t"): st.session_state.sub_seccion_actual = "Teoria";       st.rerun()
-            if st.button("📝 Ejercitación y Práctica", key="bt_e"): st.session_state.sub_seccion_actual = "Ejercitacion"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+            for nombre_subcat in subcats.keys():
+                st.markdown(f'<div class="subcat-{color}">', unsafe_allow_html=True)
+                if st.button(nombre_subcat, key=f"subcat_{nombre_subcat}", use_container_width=True):
+                    st.session_state.subcat_actual = nombre_subcat
+                    st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
 
+        # NIVEL 2: Lista de clases dentro de la subcategoría
         elif st.session_state.clase_seleccionada is None:
-            sub = st.session_state.sub_seccion_actual
-            st.subheader(f"📚 Clases de {eje}")
+            subcat = st.session_state.subcat_actual
+            clases = subcats.get(subcat, {})
+            st.subheader(f"{eje} › {subcat}")
             st.markdown('<div class="cat-container">', unsafe_allow_html=True)
-            for codigo, datos in clases_del_eje.get(sub, {}).items():
-                if st.button(datos["label"], key=f"cls_{codigo}"):
+            for codigo, datos in clases.items():
+                if st.button(datos["label"], key=f"cls_{codigo}", use_container_width=True):
                     st.session_state.clase_seleccionada = codigo
                     st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
-            if st.button("🔙 Volver", key="volver_sub"):
-                st.session_state.sub_seccion_actual = None
+            if st.button("🔙 Volver", key="volver_subcat"):
+                st.session_state.subcat_actual = None
                 st.rerun()
 
+        # NIVEL 3: Contenido de la clase
         else:
-            sub    = st.session_state.sub_seccion_actual
+            subcat = st.session_state.subcat_actual
             codigo = st.session_state.clase_seleccionada
-            clase  = clases_del_eje.get(sub, {}).get(codigo)
+            clase  = subcats.get(subcat, {}).get(codigo)
 
             if clase:
                 clase["render"]()
