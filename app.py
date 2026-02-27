@@ -188,8 +188,34 @@ if menu == "🏠 Dashboard PAES":
                 clase["render"]()
             else:
                 st.warning(f"Clase {codigo} no encontrada.")
-            if st.button("🔙 Volver al listado de clases", key="volver_lista"):
-                st.session_state.clase_seleccionada = None; st.rerun()
+
+            # Navegación anterior / siguiente
+            st.write("---")
+            codigos = list(subcats.get(subcat, {}).keys())
+            idx     = codigos.index(codigo)
+            anterior = codigos[idx - 1] if idx > 0 else None
+            siguiente = codigos[idx + 1] if idx < len(codigos) - 1 else None
+
+            col_ant, col_volver, col_sig = st.columns([2, 1, 2])
+
+            with col_ant:
+                if anterior:
+                    label_ant = subcats[subcat][anterior]["label"]
+                    if st.button(f"← {label_ant}", key="btn_anterior", use_container_width=True):
+                        st.session_state.clase_seleccionada = anterior
+                        st.rerun()
+
+            with col_volver:
+                if st.button("📋", key="volver_lista", use_container_width=True, help="Volver al listado"):
+                    st.session_state.clase_seleccionada = None
+                    st.rerun()
+
+            with col_sig:
+                if siguiente:
+                    label_sig = subcats[subcat][siguiente]["label"]
+                    if st.button(f"{label_sig} →", key="btn_siguiente", use_container_width=True):
+                        st.session_state.clase_seleccionada = siguiente
+                        st.rerun()
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
