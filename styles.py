@@ -24,12 +24,6 @@ def aplicar_estilos():
         border: none !important;
     }
 
-    /* --- BOTONES DE SUBCATEGORÍAS --- */
-    .subcat-rojo    div.stButton > button { background-color: #c0392b !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
-    .subcat-verde   div.stButton > button { background-color: #1b5e20 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
-    .subcat-morado  div.stButton > button { background-color: #7b1fa2 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
-    .subcat-naranja div.stButton > button { background-color: #e65100 !important; color: white !important; border: none !important; border-radius: 12px !important; min-height: 75px !important; font-size: 17px !important; font-weight: bold !important; width: 100% !important; margin-bottom: 10px !important; }
-
     /* --- BOTONES DE LISTA DE CLASES --- */
     .cat-container div.stButton > button {
         min-height: 75px !important; border-radius: 12px !important; margin-bottom: 10px !important;
@@ -59,5 +53,26 @@ def aplicar_estilos():
         width: 100%;
         display: block;
     }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+def css_boton_subcat(key, color_hex):
+    """Inyecta CSS justo antes del botón usando su key como selector aria-label."""
+    st.markdown(f"""
+    <style>
+    button[kind="secondary"][data-testid="baseButton-secondary"]:has(+ *),
+    div.stButton:has(> button[aria-label="{key}"]) > button,
+    div.stButton > button[title="{key}"] {{
+        background-color: {color_hex} !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        min-height: 75px !important;
+        font-size: 17px !important;
+        font-weight: bold !important;
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }}
     </style>
     """, unsafe_allow_html=True)

@@ -1,4 +1,5 @@
 from clases.numeros.n01 import render_N01
+from clases.numeros.n02 import render_N02
 from utils import render_proximamente
 
 # =============================================================================
@@ -12,7 +13,7 @@ CONTENIDOS = {
         "subcategorias": {
             "Conjuntos": {
                 "N01": {"label": "📖 N01: Teoría de Conjuntos", "render": render_N01},
-                "N02": {"label": "📖 N02: Próximamente",        "render": lambda: render_proximamente("N02")},
+                "N02": {"label": "📖 N02: Números Naturales",  "render": render_N02},
                 "N03": {"label": "📖 N03: Próximamente",        "render": lambda: render_proximamente("N03")},
                 "N04": {"label": "📖 N04: Próximamente",        "render": lambda: render_proximamente("N04")},
                 "N05": {"label": "📖 N05: Próximamente",        "render": lambda: render_proximamente("N05")},
