@@ -20,13 +20,6 @@ if 'ir_a_pdf'           not in st.session_state: st.session_state.ir_a_pdf      
 if 'cronometro_activo'  not in st.session_state: st.session_state.cronometro_activo  = False
 if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio      = None
 
-# =============================================================================
-# 2. ESTILOS
-# =============================================================================
-
-aplicar_estilos()
-
-# Colores de subcategorías por eje
 COLORES = {
     "rojo":    "#c0392b",
     "verde":   "#1b5e20",
@@ -34,45 +27,11 @@ COLORES = {
     "naranja": "#e65100",
 }
 
-def boton_subcat(nombre, color_hex, key):
-    """Inyecta CSS específico para este botón y lo renderiza."""
-    st.markdown(f"""
-        <style>
-        div[data-testid="stButton"] > button#btn_{key} {{
-            background-color: {color_hex} !important;
-        }}
-        [key="{key}"] button {{
-            background-color: {color_hex} !important;
-            color: white !important;
-            border: none !important;
-            border-radius: 12px !important;
-            min-height: 75px !important;
-            font-size: 17px !important;
-            font-weight: bold !important;
-            width: 100% !important;
-            margin-bottom: 10px !important;
-        }}
-        </style>
-    """, unsafe_allow_html=True)
-    st.markdown(f'<div class="subcat-color-{key}">', unsafe_allow_html=True)
-    st.markdown(f"""
-        <style>
-        .subcat-color-{key} div.stButton > button {{
-            background-color: {color_hex} !important;
-            color: white !important;
-            border: none !important;
-            border-radius: 12px !important;
-            min-height: 75px !important;
-            font-size: 17px !important;
-            font-weight: bold !important;
-            width: 100% !important;
-            margin-bottom: 10px !important;
-        }}
-        </style>
-    """, unsafe_allow_html=True)
-    clicked = st.button(nombre, key=key, use_container_width=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-    return clicked
+# =============================================================================
+# 2. ESTILOS
+# =============================================================================
+
+aplicar_estilos()
 
 # =============================================================================
 # 3. BARRA LATERAL
@@ -127,7 +86,7 @@ if menu == "🏠 Dashboard PAES":
         if st.button("🔙 Volver al inicio", key="volver_pdf"):
             st.rerun()
 
-    # ── PANTALLA INICIAL: selección de eje ──────────────────────────────────
+    # ── PANTALLA INICIAL ─────────────────────────────────────────────────────
     elif st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
@@ -150,10 +109,7 @@ if menu == "🏠 Dashboard PAES":
     else:
         n_cols = st.columns(5)
         if n_cols[0].button("🏠", key="n_h"):
-            st.session_state.eje_actual = None
-            st.session_state.subcat_actual = None
-            st.session_state.clase_seleccionada = None
-            st.rerun()
+            st.session_state.eje_actual = None; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         if n_cols[1].button("N", key="n_n"): st.session_state.eje_actual = "🔢 Números";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         if n_cols[2].button("A", key="n_a"): st.session_state.eje_actual = "📉 Álgebra";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         if n_cols[3].button("G", key="n_g"): st.session_state.eje_actual = "📐 Geometría";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
@@ -167,13 +123,10 @@ if menu == "🏠 Dashboard PAES":
             with col_btn:
                 if not st.session_state.cronometro_activo:
                     if st.button("▶️ Iniciar", key="btn_start_crono"):
-                        st.session_state.tiempo_inicio     = time.time()
-                        st.session_state.cronometro_activo = True
-                        st.rerun()
+                        st.session_state.tiempo_inicio = time.time(); st.session_state.cronometro_activo = True; st.rerun()
                 else:
                     if st.button("⏹️ Detener", key="btn_stop_crono"):
-                        st.session_state.cronometro_activo = False
-                        st.rerun()
+                        st.session_state.cronometro_activo = False; st.rerun()
             with col_crono:
                 if st.session_state.cronometro_activo and st.session_state.tiempo_inicio:
                     secs = int(time.time() - st.session_state.tiempo_inicio)
@@ -187,11 +140,28 @@ if menu == "🏠 Dashboard PAES":
         subcats  = eje_data.get("subcategorias", {})
         color    = COLORES.get(eje_data.get("color_subcats", "rojo"), "#c0392b")
 
-        # NIVEL 1: subcategorías
+        # NIVEL 1: subcategorías — botones con color usando type="primary" + CSS override
         if st.session_state.subcat_actual is None:
             st.markdown(f"## {eje}")
+            # Un solo bloque CSS que colorea todos los botones primary en esta pantalla
+            st.markdown(f"""
+            <style>
+            button[kind="primary"], div.stButton > button[data-testid="baseButton-primary"] {{
+                background-color: {color} !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 12px !important;
+                min-height: 75px !important;
+                font-size: 17px !important;
+                font-weight: bold !important;
+                width: 100% !important;
+                margin-bottom: 6px !important;
+            }}
+            </style>
+            """, unsafe_allow_html=True)
             for nombre_subcat in subcats.keys():
-                if boton_subcat(nombre_subcat, color, key=f"sc_{nombre_subcat}"):
+                if st.button(nombre_subcat, key=f"sc_{nombre_subcat}",
+                             use_container_width=True, type="primary"):
                     st.session_state.subcat_actual = nombre_subcat
                     st.rerun()
 
@@ -207,10 +177,9 @@ if menu == "🏠 Dashboard PAES":
                     st.rerun()
             st.markdown('</div>', unsafe_allow_html=True)
             if st.button("🔙 Volver", key="volver_subcat"):
-                st.session_state.subcat_actual = None
-                st.rerun()
+                st.session_state.subcat_actual = None; st.rerun()
 
-        # NIVEL 3: contenido de clase
+        # NIVEL 3: contenido
         else:
             subcat = st.session_state.subcat_actual
             codigo = st.session_state.clase_seleccionada
@@ -220,12 +189,7 @@ if menu == "🏠 Dashboard PAES":
             else:
                 st.warning(f"Clase {codigo} no encontrada.")
             if st.button("🔙 Volver al listado de clases", key="volver_lista"):
-                st.session_state.clase_seleccionada = None
-                st.rerun()
-
-# =============================================================================
-# 5. BIBLIOTECA DE PDFs
-# =============================================================================
+                st.session_state.clase_seleccionada = None; st.rerun()
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
