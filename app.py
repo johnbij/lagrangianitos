@@ -133,39 +133,30 @@ if menu == "🏠 Dashboard PAES":
 
     # ── DENTRO DE UN EJE ────────────────────────────────────────────────────
     else:
-        # CSS para barra de navegación con colores por eje
+        # CSS nth-child para colorear cada botón de la barra por posición
         st.markdown("""
         <style>
-        div.nav-n div.stButton > button { background-color: #c0392b !important; color: white !important; border: none !important; }
-        div.nav-a div.stButton > button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
-        div.nav-g div.stButton > button { background-color: #7b1fa2 !important; color: white !important; border: none !important; }
-        div.nav-d div.stButton > button { background-color: #e65100 !important; color: white !important; border: none !important; }
-        div.nav-home div.stButton > button { background-color: #1a1a2e !important; color: white !important; border: none !important; }
+        /* Barra nav: 5 columnas, cada una con su color */
+        [data-testid="stHorizontalBlock"] > div:nth-child(1) button { background-color: #1a1a2e !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"] > div:nth-child(2) button { background-color: #c0392b !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"] > div:nth-child(3) button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"] > div:nth-child(4) button { background-color: #7b1fa2 !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"] > div:nth-child(5) button { background-color: #e65100 !important; color: white !important; border: none !important; }
         </style>
         """, unsafe_allow_html=True)
 
         n_cols = st.columns(5)
         with n_cols[0]:
-            st.markdown('<div class="nav-home">', unsafe_allow_html=True)
             if st.button("🏠", key="n_h", use_container_width=True):
                 st.session_state.eje_actual = None; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
         with n_cols[1]:
-            st.markdown('<div class="nav-n">', unsafe_allow_html=True)
             if st.button("N", key="n_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
         with n_cols[2]:
-            st.markdown('<div class="nav-a">', unsafe_allow_html=True)
             if st.button("A", key="n_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
         with n_cols[3]:
-            st.markdown('<div class="nav-g">', unsafe_allow_html=True)
             if st.button("G", key="n_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
         with n_cols[4]:
-            st.markdown('<div class="nav-d">', unsafe_allow_html=True)
             if st.button("D", key="n_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
 
         st.write("---")
 
