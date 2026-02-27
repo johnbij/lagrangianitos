@@ -19,6 +19,9 @@ if 'rama_datos' not in st.session_state:
 if 'clase_seleccionada' not in st.session_state:
     st.session_state.clase_seleccionada = None
 
+if 'ir_a_pdf' not in st.session_state:
+    st.session_state.ir_a_pdf = False
+
 # --- ESTADOS DEL CRONÓMETRO ---
 if 'cronometro_activo' not in st.session_state:
     st.session_state.cronometro_activo = False
@@ -115,6 +118,17 @@ st.markdown("""
         padding-left: 20px !important; border: 1px solid #e0e0e0 !important; box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
     }
 
+    /* --- BOTÓN PDF --- */
+    .pdf-btn div.stButton > button {
+        background-color: #4a0e8f !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        min-height: 65px !important;
+        font-size: 18px !important;
+        font-weight: bold !important;
+    }
+
     /* --- CRONÓMETRO --- */
     .crono-digital {
         font-family: 'Courier New', monospace;
@@ -162,7 +176,14 @@ if menu == "🏠 Dashboard PAES":
     st.write("")
 
     # --- BOTONES DE EJES ---
-    if st.session_state.eje_actual is None:
+    if st.session_state.get('ir_a_pdf'):
+        st.session_state.ir_a_pdf = False
+        st.header("📂 Biblioteca de Recursos en PDF")
+        st.info("🚀 Aquí irán los materiales descargables. Próximamente.")
+        if st.button("🔙 Volver al inicio", key="volver_pdf"):
+            st.rerun()
+
+    elif st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
         if c1.button("🔢 Números",      key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números";      st.rerun()
@@ -170,6 +191,16 @@ if menu == "🏠 Dashboard PAES":
         c3, c4 = st.columns(2)
         if c3.button("📐 Geometría",    key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría";    st.rerun()
         if c4.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
+
+        # --- BOTÓN PDFs CENTRADO ---
+        st.write("")
+        col_iz, col_pdf, col_der = st.columns([1, 4, 1])
+        with col_pdf:
+            st.markdown('<div class="pdf-btn">', unsafe_allow_html=True)
+            if st.button("📄 Materiales descargables en PDF", key="m_pdf", use_container_width=True):
+                st.session_state.ir_a_pdf = True
+                st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
 
     else:
         # --- BARRA DE NAVEGACIÓN SUPERIOR ---
