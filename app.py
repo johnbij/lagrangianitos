@@ -134,14 +134,18 @@ if menu == "🏠 Dashboard PAES":
     # ── DENTRO DE UN EJE ────────────────────────────────────────────────────
     else:
         # CSS nth-child para colorear cada botón de la barra por posición
+        # Limitado al primer stHorizontalBlock de la página (la barra nav)
         st.markdown("""
         <style>
-        /* Barra nav: 5 columnas, cada una con su color */
-        [data-testid="stHorizontalBlock"] > div:nth-child(1) button { background-color: #1a1a2e !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"] > div:nth-child(2) button { background-color: #c0392b !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"] > div:nth-child(3) button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"] > div:nth-child(4) button { background-color: #7b1fa2 !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"] > div:nth-child(5) button { background-color: #e65100 !important; color: white !important; border: none !important; }
+        div.stButton > button[data-testid="baseButton-secondary"] {
+            background-color: inherit;
+        }
+        /* Barra nav: identificada por tener exactamente 5 columnas iguales */
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(1) button { background-color: #1a1a2e !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(2) button { background-color: #c0392b !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(3) button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(4) button { background-color: #7b1fa2 !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(5) button { background-color: #e65100 !important; color: white !important; border: none !important; }
         </style>
         """, unsafe_allow_html=True)
 
