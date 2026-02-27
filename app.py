@@ -41,7 +41,7 @@ aplicar_estilos()
 with st.sidebar:
     st.markdown("# 🚀 Perfil\n**Barton**")
     st.divider()
-    menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs", "🐉 Bienvenida"])
+    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
     st.divider()
     st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
 
