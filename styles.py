@@ -43,6 +43,48 @@ def aplicar_estilos():
         font-weight: bold !important;
     }
 
+    /* --- BOTÓN FLOTANTE HOME --- */
+    .fab-home {
+        position: fixed !important;
+        bottom: 25px !important;
+        right: 25px !important;
+        background: linear-gradient(135deg, #1a1a2e, #0f3460) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 50px !important;
+        padding: 14px 20px !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        cursor: pointer !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+        z-index: 9999 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        text-decoration: none !important;
+        transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .fab-home:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.4) !important;
+    }
+    .fab-container div.stButton > button {
+        position: fixed !important;
+        bottom: 25px !important;
+        right: 25px !important;
+        background: linear-gradient(135deg, #1a1a2e, #0f3460) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 50px !important;
+        padding: 14px 24px !important;
+        font-size: 18px !important;
+        font-weight: bold !important;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.35) !important;
+        z-index: 9999 !important;
+        min-height: unset !important;
+        width: auto !important;
+    }
+
     /* --- CRONÓMETRO --- */
     .crono-digital {
         font-family: 'Courier New', monospace;

@@ -309,6 +309,12 @@ if menu == "🏠 Dashboard PAES":
             barra_navegacion("bot")
 
 elif menu == "📂 Biblioteca de PDFs":
+    # Botón flotante → Dashboard
+    st.markdown('<div class="fab-container">', unsafe_allow_html=True)
+    if st.button("🏠 Dashboard", key="fab_pdf", use_container_width=False):
+        st.session_state.menu_actual = "🏠 Dashboard PAES"
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
     st.markdown("""
     <style>
     .pdf-card {
@@ -380,6 +386,12 @@ elif menu == "📂 Biblioteca de PDFs":
             )
 
 elif menu == "🐉 Bienvenida":
+    # Botón flotante → Dashboard
+    st.markdown('<div class="fab-container">', unsafe_allow_html=True)
+    if st.button("🏠 Dashboard", key="fab_bienvenida", use_container_width=False):
+        st.session_state.menu_actual = "🏠 Dashboard PAES"
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
     st.markdown("""
     <style>
     .bienvenida-hero {
