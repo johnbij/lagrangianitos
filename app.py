@@ -293,7 +293,75 @@ if menu == "🏠 Dashboard PAES":
             barra_navegacion("bot")
 
 elif menu == "📂 Biblioteca de PDFs":
-    st.header("📂 Biblioteca de Recursos")
+    st.markdown("""
+    <style>
+    .pdf-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px 25px;
+        margin-bottom: 15px;
+        border-left: 6px solid #4a0e8f;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .pdf-icon { font-size: 36px; }
+    .pdf-nombre { font-size: 16px; font-weight: bold; color: #1a1a2e; margin-bottom: 4px; }
+    .pdf-desc { font-size: 13px; color: #666; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+    <div style="background:linear-gradient(135deg,#4a0e8f,#1a1a2e);
+                border-radius:15px; padding:25px; color:white;
+                text-align:center; margin-bottom:25px;">
+        <div style="font-size:40px;">📂</div>
+        <div style="font-size:22px; font-weight:900; letter-spacing:2px;">BIBLIOTECA DE RECURSOS</div>
+        <div style="font-size:14px; opacity:0.8; margin-top:5px;">Material oficial PAES M1 para descargar</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    PDFS = [
+        {
+            "archivo": "pdfs/2026V-PaesM1.pdf",
+            "nombre":  "PAES M1 — Verano 2026",
+            "desc":    "Prueba oficial PAES Matemática 1 · Versión Verano 2026",
+            "icono":   "📝"
+        },
+        {
+            "archivo": "pdfs/2026V-ClavijeroPaesM1.pdf",
+            "nombre":  "Clavijero PAES M1 — Verano 2026",
+            "desc":    "Clavijero oficial con respuestas · Versión Verano 2026",
+            "icono":   "🔑"
+        },
+        {
+            "archivo": "pdfs/2027I-TemarioPaesM1.pdf",
+            "nombre":  "Temario PAES M1 — Invierno 2027",
+            "desc":    "Temario oficial PAES Matemática 1 · Versión Invierno 2027",
+            "icono":   "📋"
+        },
+    ]
+
+    for pdf in PDFS:
+        st.markdown(f"""
+        <div class="pdf-card">
+            <div class="pdf-icon">{pdf["icono"]}</div>
+            <div>
+                <div class="pdf-nombre">{pdf["nombre"]}</div>
+                <div class="pdf-desc">{pdf["desc"]}</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        with open(pdf["archivo"], "rb") as f:
+            st.download_button(
+                label=f"⬇️ Descargar {pdf['nombre']}",
+                data=f,
+                file_name=pdf["archivo"].split("/")[-1],
+                mime="application/pdf",
+                key=f"dl_{pdf['archivo']}",
+                use_container_width=True
+            )
 
 elif menu == "🐉 Bienvenida":
     st.markdown("""
