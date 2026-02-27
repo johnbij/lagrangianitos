@@ -19,6 +19,7 @@ if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccio
 if 'ir_a_pdf'           not in st.session_state: st.session_state.ir_a_pdf           = False
 if 'cronometro_activo'  not in st.session_state: st.session_state.cronometro_activo  = False
 if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio      = None
+if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vista   = False
 
 COLORES = {
     "rojo":    "#c0392b",
@@ -40,7 +41,7 @@ aplicar_estilos()
 with st.sidebar:
     st.markdown("# 🚀 Perfil\n**Barton**")
     st.divider()
-    menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
+    menu = st.radio("Ir a:", ["🏠 Dashboard PAES", "📂 Biblioteca de PDFs", "🐉 Bienvenida"])
     st.divider()
     st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
 
@@ -293,3 +294,99 @@ if menu == "🏠 Dashboard PAES":
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
+
+elif menu == "🐉 Bienvenida":
+    st.markdown("""
+    <style>
+    .bienvenida-hero {
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        border-radius: 20px;
+        padding: 50px 30px;
+        text-align: center;
+        color: white;
+        margin-bottom: 30px;
+    }
+    .bienvenida-dragon { font-size: 80px; margin-bottom: 10px; }
+    .bienvenida-titulo { font-size: 36px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
+    .bienvenida-lema {
+        font-size: 20px;
+        color: #f0c040;
+        font-style: italic;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .bienvenida-sub { font-size: 15px; opacity: 0.8; max-width: 500px; margin: 0 auto; }
+
+    .card-eje {
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .seccion-titulo {
+        font-size: 22px;
+        font-weight: bold;
+        color: #1a1a2e;
+        border-left: 5px solid #c0392b;
+        padding-left: 12px;
+        margin: 30px 0 15px 0;
+    }
+
+    .pill {
+        display: inline-block;
+        background: #f0f0f0;
+        border-radius: 20px;
+        padding: 6px 16px;
+        margin: 4px;
+        font-size: 14px;
+        color: #333;
+    }
+    </style>
+
+    <div class="bienvenida-hero">
+        <div class="bienvenida-dragon">🐉</div>
+        <div class="bienvenida-titulo">LAGRANGIANITOS</div>
+        <div class="bienvenida-lema">"Enseñamos conceptos, no solo tricks"</div>
+        <div class="bienvenida-sub">
+            Tu plataforma de preparación PAES M1.<br>
+            Matemática con profundidad, desde los fundamentos hasta la prueba.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Ejes disponibles
+    st.markdown('<div class="seccion-titulo">📚 Contenidos del curso</div>', unsafe_allow_html=True)
+    c1, c2 = st.columns(2)
+    with c1:
+        st.markdown('<div class="card-eje" style="background:#c0392b;">🔢 Números<br><small>Conjuntos · Operatoria · Razones</small></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-eje" style="background:#7b1fa2;">📐 Geometría<br><small>Figuras · Área y Volumen · Vectores</small></div>', unsafe_allow_html=True)
+    with c2:
+        st.markdown('<div class="card-eje" style="background:#1b5e20;">📉 Álgebra<br><small>Álgebra · Funciones</small></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-eje" style="background:#e65100;">📊 Datos y Azar<br><small>Estadística · Probabilidad</small></div>', unsafe_allow_html=True)
+
+    # Metodología
+    st.markdown('<div class="seccion-titulo">🛡️ Nuestra metodología</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="background:#f9f9f9; border-radius:15px; padding:20px; line-height:2;">
+    <span class="pill">📖 Clases con historia y contexto</span>
+    <span class="pill">📊 Visualizaciones interactivas</span>
+    <span class="pill">🧠 Profundidad conceptual</span>
+    <span class="pill">📝 Ejercitación dirigida</span>
+    <span class="pill">⏱️ Cronómetro de estudio</span>
+    <span class="pill">📄 Material descargable</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # CTA
+    st.write("")
+    col_iz, col_cta, col_der = st.columns([1, 2, 1])
+    with col_cta:
+        if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
+            st.session_state.bienvenida_vista = True
+            # Cambiar el menu via rerun no es posible directamente,
+            # así que usamos un mensaje
+            st.success("¡Usa el menú lateral para ir al Dashboard PAES! 👈")
