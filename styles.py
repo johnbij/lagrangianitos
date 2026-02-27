@@ -24,18 +24,18 @@ def aplicar_estilos():
         border: none !important;
     }
 
+    /* --- BOTONES DE EJES (colores individuales) --- */
+    div.eje-numeros   > div > div > button { background-color: #1a237e !important; color: white !important; border: none !important; }
+    div.eje-algebra   > div > div > button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
+    div.eje-geometria > div > div > button { background-color: #e65100 !important; color: white !important; border: none !important; }
+    div.eje-datos     > div > div > button { background-color: #b71c1c !important; color: white !important; border: none !important; }
+
     /* --- BOTONES DE CATEGORÍA (Teoría / Ejercitación / Clases) --- */
     .cat-container div.stButton > button {
         min-height: 85px !important; border-radius: 15px !important; margin-bottom: 15px !important;
         width: 100% !important; font-size: 18px !important; text-align: left !important;
         padding-left: 20px !important; border: 1px solid #e0e0e0 !important; box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
     }
-
-    /* --- BOTONES DE EJES (colores individuales) --- */
-    .eje-numeros div.stButton > button   { background-color: #1a237e !important; color: white !important; border: none !important; }
-    .eje-algebra div.stButton > button   { background-color: #1b5e20 !important; color: white !important; border: none !important; }
-    .eje-geometria div.stButton > button { background-color: #e65100 !important; color: white !important; border: none !important; }
-    .eje-datos div.stButton > button     { background-color: #b71c1c !important; color: white !important; border: none !important; }
 
     /* --- BOTÓN PDF --- */
     .pdf-btn div.stButton > button {
