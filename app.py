@@ -236,17 +236,12 @@ if menu == "🏠 Dashboard PAES":
             subcat = st.session_state.subcat_actual
             clases = subcats.get(subcat, {})
             st.subheader(f"{eje} › {subcat}")
-            # CSS para botones de lista — usa type secondary que podemos targetear
+            # CSS para botones de lista — selector directo al elemento p dentro del botón
             st.markdown("""
             <style>
-            div.stButton > button[kind="secondary"] {
-                min-height: 90px !important;
+            div.stButton > button p {
                 font-size: 20px !important;
-                border-radius: 12px !important;
-                margin-bottom: 10px !important;
-                text-align: left !important;
-                padding-left: 20px !important;
-                border: 2px solid #e0e0e0 !important;
+                font-weight: 600 !important;
             }
             </style>
             """, unsafe_allow_html=True)
