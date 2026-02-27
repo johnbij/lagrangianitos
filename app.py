@@ -20,6 +20,7 @@ if 'ir_a_pdf'           not in st.session_state: st.session_state.ir_a_pdf      
 if 'cronometro_activo'  not in st.session_state: st.session_state.cronometro_activo  = False
 if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio      = None
 if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vista   = False
+if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "🐉 Bienvenida"
 
 COLORES = {
     "rojo":    "#c0392b",
@@ -41,7 +42,9 @@ aplicar_estilos()
 with st.sidebar:
     st.markdown("# 🚀 Perfil\n**Barton**")
     st.divider()
-    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"])
+    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"],
+                    index=["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"].index(st.session_state.menu_actual))
+    st.session_state.menu_actual = menu
     st.divider()
     st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
 
@@ -454,7 +457,5 @@ elif menu == "🐉 Bienvenida":
     col_iz, col_cta, col_der = st.columns([1, 2, 1])
     with col_cta:
         if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
-            st.session_state.bienvenida_vista = True
-            # Cambiar el menu via rerun no es posible directamente,
-            # así que usamos un mensaje
-            st.success("¡Usa el menú lateral para ir al Dashboard PAES! 👈")
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.rerun()
