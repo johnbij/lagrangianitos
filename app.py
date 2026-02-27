@@ -181,41 +181,66 @@ if menu == "🏠 Dashboard PAES":
 
         # NIVEL 3: contenido
         else:
-            subcat = st.session_state.subcat_actual
-            codigo = st.session_state.clase_seleccionada
-            clase  = subcats.get(subcat, {}).get(codigo)
+            subcat  = st.session_state.subcat_actual
+            codigo  = st.session_state.clase_seleccionada
+            clase   = subcats.get(subcat, {}).get(codigo)
+
+            # Calcular anterior / siguiente
+            codigos  = list(subcats.get(subcat, {}).keys())
+            idx      = codigos.index(codigo)
+            anterior = codigos[idx - 1] if idx > 0 else None
+            siguiente = codigos[idx + 1] if idx < len(codigos) - 1 else None
+
+            # CSS para los botones de navegación con color del eje
+            st.markdown(f"""
+            <style>
+            .nav-clase div.stButton > button {{
+                background-color: {color} !important;
+                color: white !important;
+                border: none !important;
+                border-radius: 10px !important;
+                min-height: 60px !important;
+                font-size: 14px !important;
+                font-weight: bold !important;
+                width: 100% !important;
+            }}
+            </style>
+            """, unsafe_allow_html=True)
+
+            def barra_navegacion(sufijo):
+                st.markdown('<div class="nav-clase">', unsafe_allow_html=True)
+                col_ant, col_volver, col_sig = st.columns([2, 1, 2])
+                with col_ant:
+                    if anterior:
+                        label_ant = subcats[subcat][anterior]["label"]
+                        if st.button(f"← {label_ant}", key=f"btn_anterior_{sufijo}", use_container_width=True):
+                            st.session_state.clase_seleccionada = anterior
+                            st.rerun()
+                with col_volver:
+                    if st.button("📋", key=f"volver_lista_{sufijo}", use_container_width=True, help="Volver al listado"):
+                        st.session_state.clase_seleccionada = None
+                        st.rerun()
+                with col_sig:
+                    if siguiente:
+                        label_sig = subcats[subcat][siguiente]["label"]
+                        if st.button(f"{label_sig} →", key=f"btn_siguiente_{sufijo}", use_container_width=True):
+                            st.session_state.clase_seleccionada = siguiente
+                            st.rerun()
+                st.markdown('</div>', unsafe_allow_html=True)
+
+            # Barra ARRIBA (entre cronómetro y clase)
+            barra_navegacion("top")
+            st.write("---")
+
+            # Contenido de la clase
             if clase:
                 clase["render"]()
             else:
                 st.warning(f"Clase {codigo} no encontrada.")
 
-            # Navegación anterior / siguiente
+            # Barra ABAJO
             st.write("---")
-            codigos = list(subcats.get(subcat, {}).keys())
-            idx     = codigos.index(codigo)
-            anterior = codigos[idx - 1] if idx > 0 else None
-            siguiente = codigos[idx + 1] if idx < len(codigos) - 1 else None
-
-            col_ant, col_volver, col_sig = st.columns([2, 1, 2])
-
-            with col_ant:
-                if anterior:
-                    label_ant = subcats[subcat][anterior]["label"]
-                    if st.button(f"← {label_ant}", key="btn_anterior", use_container_width=True):
-                        st.session_state.clase_seleccionada = anterior
-                        st.rerun()
-
-            with col_volver:
-                if st.button("📋", key="volver_lista", use_container_width=True, help="Volver al listado"):
-                    st.session_state.clase_seleccionada = None
-                    st.rerun()
-
-            with col_sig:
-                if siguiente:
-                    label_sig = subcats[subcat][siguiente]["label"]
-                    if st.button(f"{label_sig} →", key="btn_siguiente", use_container_width=True):
-                        st.session_state.clase_seleccionada = siguiente
-                        st.rerun()
+            barra_navegacion("bot")
 
 elif menu == "📂 Biblioteca de PDFs":
     st.header("📂 Biblioteca de Recursos")
