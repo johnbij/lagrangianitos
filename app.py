@@ -21,6 +21,7 @@ if 'cronometro_activo'  not in st.session_state: st.session_state.cronometro_act
 if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio      = None
 if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vista   = False
 if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "🐉 Bienvenida"
+if 'ultimo_visto'       not in st.session_state: st.session_state.ultimo_visto       = None
 
 COLORES = {
     "rojo":    "#c0392b",
@@ -41,6 +42,12 @@ aplicar_estilos()
 
 with st.sidebar:
     st.markdown("# 🚀 Perfil\n**Barton**")
+    if st.session_state.ultimo_visto:
+        st.markdown(
+            f'<div style="background:#f0f0f0; border-radius:8px; padding:8px; font-size:12px; color:#555; margin-top:4px;">'
+            f'🕐 Último visto:<br><b>{st.session_state.ultimo_visto}</b></div>',
+            unsafe_allow_html=True
+        )
     st.divider()
     menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"],
                     index=["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"].index(st.session_state.menu_actual))
@@ -236,7 +243,7 @@ if menu == "🏠 Dashboard PAES":
             subcat = st.session_state.subcat_actual
             clases = subcats.get(subcat, {})
             st.subheader(f"{eje} › {subcat}")
-            # CSS para botones de lista — selector directo al elemento p dentro del botón
+            # CSS para botones de lista
             st.markdown("""
             <style>
             div.stButton > button p {
@@ -246,9 +253,15 @@ if menu == "🏠 Dashboard PAES":
             </style>
             """, unsafe_allow_html=True)
             for codigo, datos in clases.items():
-                if st.button(datos["label"], key=f"cls_{codigo}", use_container_width=True):
-                    st.session_state.clase_seleccionada = codigo
-                    st.rerun()
+                es_real = datos["render"].__name__ != "<lambda>"
+                if es_real:
+                    if st.button(datos["label"], key=f"cls_{codigo}", use_container_width=True):
+                        st.session_state.clase_seleccionada = codigo
+                        st.rerun()
+                else:
+                    # Botón deshabilitado con candado
+                    st.button(f"🔒 {datos['label'].split(': ',1)[-1] if ': ' in datos['label'] else datos['label']}",
+                              key=f"cls_{codigo}", use_container_width=True, disabled=True)
             if st.button("🔙 Volver", key="volver_subcat"):
                 st.session_state.subcat_actual = None; st.rerun()
 
@@ -258,11 +271,30 @@ if menu == "🏠 Dashboard PAES":
             codigo  = st.session_state.clase_seleccionada
             clase   = subcats.get(subcat, {}).get(codigo)
 
-            # Calcular anterior / siguiente
-            codigos  = list(subcats.get(subcat, {}).keys())
-            idx      = codigos.index(codigo)
-            anterior = codigos[idx - 1] if idx > 0 else None
+            # Calcular anterior / siguiente (solo entre clases reales)
+            codigos   = list(subcats.get(subcat, {}).keys())
+            codigos_reales = [c for c in codigos if subcats[subcat][c]["render"].__name__ != "<lambda>"]
+            idx       = codigos.index(codigo)
+            idx_real  = codigos_reales.index(codigo) if codigo in codigos_reales else -1
+            anterior  = codigos[idx - 1] if idx > 0 else None
             siguiente = codigos[idx + 1] if idx < len(codigos) - 1 else None
+
+            # Scroll automático al inicio
+            st.markdown("""
+            <script>
+                window.scrollTo(0, 0);
+            </script>
+            """, unsafe_allow_html=True)
+            # Truco más confiable para scroll en Streamlit
+            st.markdown('<div id="top-anchor"></div>', unsafe_allow_html=True)
+            st.markdown("""
+            <style>
+            #top-anchor { position: absolute; top: 0; }
+            </style>
+            <script>
+            document.getElementById('top-anchor')?.scrollIntoView();
+            </script>
+            """, unsafe_allow_html=True)
 
             # CSS para los botones de navegación con color del eje
             st.markdown(f"""
@@ -301,9 +333,42 @@ if menu == "🏠 Dashboard PAES":
                             st.rerun()
                 st.markdown('</div>', unsafe_allow_html=True)
 
-            # Barra ARRIBA (entre cronómetro y clase)
+            # Guardar último visto
+            label_actual = subcats.get(subcat, {}).get(codigo, {}).get("label", codigo)
+            st.session_state.ultimo_visto = f"{subcat} · {label_actual}"
+
+            # Indicador de posición + barra de progreso
+            total        = len(codigos)
+            reales_count = len(codigos_reales)
+            pos_texto    = f"Clase {idx + 1} de {total}"
+            progreso_pct = int((reales_count / total) * 100)
+            bloques_llenos = int(progreso_pct / 10)
+            barra = "█" * bloques_llenos + "░" * (10 - bloques_llenos)
+
+            st.markdown(
+                f'<div style="text-align:right; color:#888; font-size:14px; font-weight:600; margin-bottom:2px;">'
+                f'📍 {subcat} · {pos_texto}</div>'
+                f'<div style="text-align:right; color:{color}; font-size:12px; margin-bottom:6px;">'
+                f'{barra} {reales_count}/{total} disponibles</div>',
+                unsafe_allow_html=True
+            )
+
+            # Barra ARRIBA
             barra_navegacion("top")
             st.write("---")
+
+            # Tiempo estimado de lectura (aprox 200 palabras/min)
+            import inspect
+            try:
+                src = inspect.getsource(clase["render"])
+                palabras = len(src.split())
+                mins = max(1, round(palabras / 200))
+                st.markdown(
+                    f'<div style="color:#aaa; font-size:13px; margin-bottom:10px;">⏱ Tiempo estimado: ~{mins} min de lectura</div>',
+                    unsafe_allow_html=True
+                )
+            except Exception:
+                pass
 
             # Contenido de la clase
             if clase:
@@ -311,9 +376,36 @@ if menu == "🏠 Dashboard PAES":
             else:
                 st.warning(f"Clase {codigo} no encontrada.")
 
+            # Mensaje motivacional si es la última clase real de la subcategoría
+            es_ultima_real = (codigo == codigos_reales[-1]) if codigos_reales else False
+            no_hay_siguiente_real = siguiente is None or subcats[subcat][siguiente]["render"].__name__ == "<lambda>"
+            if es_ultima_real and no_hay_siguiente_real:
+                st.markdown(f"""
+                <div style="background:linear-gradient(135deg,{color},{color}99);
+                            border-radius:15px; padding:20px; text-align:center;
+                            color:white; margin:20px 0;">
+                    <div style="font-size:40px;">🏆</div>
+                    <div style="font-size:18px; font-weight:bold; margin:8px 0;">
+                        ¡Completaste {subcat}!
+                    </div>
+                    <div style="font-size:14px; opacity:0.9;">
+                        Has terminado las clases disponibles de esta sección. ¡Sigue así!
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+
             # Barra ABAJO
             st.write("---")
             barra_navegacion("bot")
+
+            # Botón volver arriba
+            st.markdown("""
+            <div style="text-align:center; margin-top:10px;">
+                <a href="#top-anchor" style="color:#888; font-size:13px; text-decoration:none;">
+                    ↑ Volver al inicio de la clase
+                </a>
+            </div>
+            """, unsafe_allow_html=True)
 
 elif menu == "📂 Biblioteca de PDFs":
     col_back, _ = st.columns([1, 4])
