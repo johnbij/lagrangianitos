@@ -3,4 +3,5 @@ matplotlib
 pytz
 pandas
 numpy
+streamlit-autorefresh
 
