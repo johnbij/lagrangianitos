@@ -26,6 +26,54 @@ if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio 
 
 aplicar_estilos()
 
+# Colores de subcategorías por eje
+COLORES = {
+    "rojo":    "#c0392b",
+    "verde":   "#1b5e20",
+    "morado":  "#7b1fa2",
+    "naranja": "#e65100",
+}
+
+def boton_subcat(nombre, color_hex, key):
+    """Inyecta CSS específico para este botón y lo renderiza."""
+    st.markdown(f"""
+        <style>
+        div[data-testid="stButton"] > button#btn_{key} {{
+            background-color: {color_hex} !important;
+        }}
+        [key="{key}"] button {{
+            background-color: {color_hex} !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+            min-height: 75px !important;
+            font-size: 17px !important;
+            font-weight: bold !important;
+            width: 100% !important;
+            margin-bottom: 10px !important;
+        }}
+        </style>
+    """, unsafe_allow_html=True)
+    st.markdown(f'<div class="subcat-color-{key}">', unsafe_allow_html=True)
+    st.markdown(f"""
+        <style>
+        .subcat-color-{key} div.stButton > button {{
+            background-color: {color_hex} !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+            min-height: 75px !important;
+            font-size: 17px !important;
+            font-weight: bold !important;
+            width: 100% !important;
+            margin-bottom: 10px !important;
+        }}
+        </style>
+    """, unsafe_allow_html=True)
+    clicked = st.button(nombre, key=key, use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+    return clicked
+
 # =============================================================================
 # 3. BARRA LATERAL
 # =============================================================================
@@ -100,7 +148,6 @@ if menu == "🏠 Dashboard PAES":
 
     # ── DENTRO DE UN EJE ────────────────────────────────────────────────────
     else:
-        # Barra de navegación superior
         n_cols = st.columns(5)
         if n_cols[0].button("🏠", key="n_h"):
             st.session_state.eje_actual = None
@@ -134,25 +181,21 @@ if menu == "🏠 Dashboard PAES":
                 else:
                     st.markdown('<span class="crono-digital" style="opacity:0.2;">00:00</span>', unsafe_allow_html=True)
 
-        # ── NAVEGACIÓN DE CONTENIDO ──────────────────────────────────────────
+        # ── NAVEGACIÓN ───────────────────────────────────────────────────────
         eje      = st.session_state.eje_actual
         eje_data = CONTENIDOS.get(eje, {})
         subcats  = eje_data.get("subcategorias", {})
-        color    = eje_data.get("color_subcats", "rojo")
+        color    = COLORES.get(eje_data.get("color_subcats", "rojo"), "#c0392b")
 
-        # NIVEL 1: Selección de subcategoría
+        # NIVEL 1: subcategorías
         if st.session_state.subcat_actual is None:
             st.markdown(f"## {eje}")
             for nombre_subcat in subcats.keys():
-                # Mismo patrón que funciona en pdf-btn
-                st.markdown(f'<div class="subcat-{color}">', unsafe_allow_html=True)
-                clicked = st.button(nombre_subcat, key=f"subcat_{nombre_subcat}", use_container_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-                if clicked:
+                if boton_subcat(nombre_subcat, color, key=f"sc_{nombre_subcat}"):
                     st.session_state.subcat_actual = nombre_subcat
                     st.rerun()
 
-        # NIVEL 2: Lista de clases dentro de la subcategoría
+        # NIVEL 2: lista de clases
         elif st.session_state.clase_seleccionada is None:
             subcat = st.session_state.subcat_actual
             clases = subcats.get(subcat, {})
@@ -167,17 +210,15 @@ if menu == "🏠 Dashboard PAES":
                 st.session_state.subcat_actual = None
                 st.rerun()
 
-        # NIVEL 3: Contenido de la clase
+        # NIVEL 3: contenido de clase
         else:
             subcat = st.session_state.subcat_actual
             codigo = st.session_state.clase_seleccionada
             clase  = subcats.get(subcat, {}).get(codigo)
-
             if clase:
                 clase["render"]()
             else:
                 st.warning(f"Clase {codigo} no encontrada.")
-
             if st.button("🔙 Volver al listado de clases", key="volver_lista"):
                 st.session_state.clase_seleccionada = None
                 st.rerun()
