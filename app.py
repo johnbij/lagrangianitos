@@ -84,11 +84,23 @@ if menu == "🏠 Dashboard PAES":
     elif st.session_state.eje_actual is None:
         st.markdown("### 📚 Selecciona un Eje Temático")
         c1, c2 = st.columns(2)
-        if c1.button("🔢 Números",      key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números";      st.rerun()
-        if c2.button("📉 Álgebra",      key="m_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra";      st.rerun()
+        with c1:
+            st.markdown('<div class="eje-numeros">', unsafe_allow_html=True)
+            if st.button("🔢 Números",   key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+        with c2:
+            st.markdown('<div class="eje-algebra">', unsafe_allow_html=True)
+            if st.button("📉 Álgebra",   key="m_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
         c3, c4 = st.columns(2)
-        if c3.button("📐 Geometría",    key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría";    st.rerun()
-        if c4.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
+        with c3:
+            st.markdown('<div class="eje-geometria">', unsafe_allow_html=True)
+            if st.button("📐 Geometría", key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+        with c4:
+            st.markdown('<div class="eje-datos">', unsafe_allow_html=True)
+            if st.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
 
         st.write("")
         col_iz, col_pdf, col_der = st.columns([1, 4, 1])

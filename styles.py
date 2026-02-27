@@ -31,6 +31,12 @@ def aplicar_estilos():
         padding-left: 20px !important; border: 1px solid #e0e0e0 !important; box-shadow: 0px 2px 4px rgba(0,0,0,0.05) !important;
     }
 
+    /* --- BOTONES DE EJES (colores individuales) --- */
+    .eje-numeros div.stButton > button   { background-color: #1a237e !important; color: white !important; border: none !important; }
+    .eje-algebra div.stButton > button   { background-color: #1b5e20 !important; color: white !important; border: none !important; }
+    .eje-geometria div.stButton > button { background-color: #e65100 !important; color: white !important; border: none !important; }
+    .eje-datos div.stButton > button     { background-color: #b71c1c !important; color: white !important; border: none !important; }
+
     /* --- BOTÓN PDF --- */
     .pdf-btn div.stButton > button {
         background-color: #4a0e8f !important;
