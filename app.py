@@ -60,7 +60,6 @@ with st.sidebar:
 # =============================================================================
 
 if menu == "🏠 Dashboard PAES":
-    st.query_params.clear()
 
     if st.session_state.cronometro_activo:
         st_autorefresh(interval=1000, limit=None, key="crono_refresh")
@@ -93,18 +92,20 @@ if menu == "🏠 Dashboard PAES":
     # ── PANTALLA INICIAL ─────────────────────────────────────────────────────
     if st.session_state.eje_actual is None:
 
-        # Detectar click via query_params
+        # Detectar click via query_params SOLO si no hay eje activo
         params = st.query_params
-        if "eje" in params:
+        if "eje" in params and st.session_state.eje_actual is None:
             ejes_map = {
                 "numeros":  "🔢 Números",
                 "algebra":  "📉 Álgebra",
                 "geometria":"📐 Geometría",
                 "datos":    "📊 Datos y Azar",
             }
-            st.session_state.eje_actual = ejes_map.get(params["eje"])
-            st.query_params.clear()
-            st.rerun()
+            eje_desde_url = ejes_map.get(params["eje"])
+            if eje_desde_url:
+                st.query_params.clear()
+                st.session_state.eje_actual = eje_desde_url
+                st.rerun()
 
         st.markdown("### 📚 Selecciona un Eje Temático")
 
@@ -216,9 +217,10 @@ if menu == "🏠 Dashboard PAES":
 
             # Detectar click via query_params
             params = st.query_params
-            if "subcat" in params:
-                st.session_state.subcat_actual = params["subcat"]
+            if "subcat" in params and st.session_state.subcat_actual is None:
+                subcat_desde_url = params["subcat"]
                 st.query_params.clear()
+                st.session_state.subcat_actual = subcat_desde_url
                 st.rerun()
 
             for nombre_subcat, clases_subcat in subcats.items():
