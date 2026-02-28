@@ -14,12 +14,26 @@ from clases.numeros.n13 import render_N13
 from clases.numeros.n14 import render_N14
 from clases.numeros.n15 import render_N15
 from clases.numeros.n16 import render_N16
+from clases.numeros.n17 import render_N17
+from clases.numeros.n18 import render_N18
+from clases.numeros.n19 import render_N19
+from clases.numeros.n20 import render_N20
+from clases.numeros.n21 import render_N21
+from clases.numeros.n22 import render_N22
+from clases.numeros.n23 import render_N23
+from clases.numeros.n24 import render_N24
+from clases.numeros.n25 import render_N25
+from clases.numeros.n26 import render_N26
+from clases.numeros.n27 import render_N27
+from clases.numeros.n28 import render_N28
+from clases.numeros.n29 import render_N29
+from clases.numeros.n30 import render_N30
+from clases.numeros.n31 import render_N31
+from clases.numeros.n32 import render_N32
+from clases.numeros.n33 import render_N33
+from clases.numeros.n34 import render_N34
+from clases.numeros.n35 import render_N35
 from utils import render_proximamente
-
-# =============================================================================
-# DICCIONARIO CENTRAL DE CONTENIDOS
-# Estructura: EJE > SUBCATEGORÍA > CÓDIGO > {label, render}
-# =============================================================================
 
 CONTENIDOS = {
     "🔢 Números": {
@@ -35,27 +49,38 @@ CONTENIDOS = {
                 "N07": {"label": "📖 N07: Números Reales",              "render": render_N07},
             },
             "Operatoria": {
-                "N08": {"label": "📖 N08: Primos y Divisibilidad",            "render": render_N08},
-                "N09": {"label": "📖 N09: El Infinito ♾️",                    "render": render_N09},
+                "N08": {"label": "📖 N08: Primos y Divisibilidad",             "render": render_N08},
+                "N09": {"label": "📖 N09: El Infinito ♾️",                     "render": render_N09},
                 "N10": {"label": "📖 N10: Mecánica de Operatoria (PAPOMUDAS)", "render": render_N10},
-                "N11": {"label": "📖 N11: Racionales I - Fracciones",         "render": render_N11},
-                "N12": {"label": "📖 N12: Racionales II - Operatoria en ℚ",   "render": render_N12},
-                "N13": {"label": "📖 N13: Racionales III - Decimales",        "render": render_N13},
-                "N14": {"label": "📖 N14: El Lenguaje del Reparto",           "render": render_N14},
-                "N15": {"label": "📖 N15: ADN de los Números",                "render": render_N15},
-                "N16": {"label": "📖 N16: El Orden en los Racionales",        "render": render_N16},
+                "N11": {"label": "📖 N11: Racionales I - Fracciones",          "render": render_N11},
+                "N12": {"label": "📖 N12: Racionales II - Operatoria en ℚ",    "render": render_N12},
+                "N13": {"label": "📖 N13: Racionales III - Decimales",         "render": render_N13},
+                "N14": {"label": "📖 N14: El Lenguaje del Reparto",            "render": render_N14},
+                "N15": {"label": "📖 N15: ADN de los Números",                 "render": render_N15},
+                "N16": {"label": "📖 N16: El Orden en los Racionales",         "render": render_N16},
             },
             "Potencias y Raíces": {
-                "PR01": {"label": "📖 PR01: Próximamente", "render": lambda: render_proximamente("PR01")},
-                "PR02": {"label": "📖 PR02: Próximamente", "render": lambda: render_proximamente("PR02")},
-                "PR03": {"label": "📖 PR03: Próximamente", "render": lambda: render_proximamente("PR03")},
+                "N17": {"label": "📖 N17: Potencias",                          "render": render_N17},
+                "N18": {"label": "📖 N18: Notación Científica",                "render": render_N18},
+                "N19": {"label": "📖 N19: Aproximaciones",                     "render": render_N19},
+                "N20": {"label": "📖 N20: Raíces",                             "render": render_N20},
+                "N21": {"label": "📖 N21: Racionalización Básica",             "render": render_N21},
+                "N22": {"label": "📖 N22: Racionalización Avanzada",           "render": render_N22},
             },
             "Razones y Proporciones": {
-                "R01": {"label": "📖 R01: Próximamente", "render": lambda: render_proximamente("R01")},
-                "R02": {"label": "📖 R02: Próximamente", "render": lambda: render_proximamente("R02")},
-                "R03": {"label": "📖 R03: Próximamente", "render": lambda: render_proximamente("R03")},
-                "R04": {"label": "📖 R04: Próximamente", "render": lambda: render_proximamente("R04")},
-                "R05": {"label": "📖 R05: Próximamente", "render": lambda: render_proximamente("R05")},
+                "N23": {"label": "📖 N23: Razones",                                    "render": render_N23},
+                "N24": {"label": "📖 N24: Proporciones",                               "render": render_N24},
+                "N25": {"label": "📖 N25: Simetría - Las 8 Caras de la Proporción",    "render": render_N25},
+                "N26": {"label": "📖 N26: Composición y Descomposición",               "render": render_N26},
+                "N27": {"label": "📖 N27: Reparto Proporcional Directo",               "render": render_N27},
+                "N28": {"label": "📖 N28: Reparto Inversamente Proporcional",          "render": render_N28},
+                "N29": {"label": "📖 N29: Manipulación de Fórmulas Científicas",       "render": render_N29},
+                "N30": {"label": "📖 N30: El Mapa de las Proporciones",                "render": render_N30},
+                "N31": {"label": "📖 N31: Proporcionalidad Directa",                   "render": render_N31},
+                "N32": {"label": "📖 N32: Proporcionalidad Inversa",                   "render": render_N32},
+                "N33": {"label": "📖 N33: Proporcionalidad Compuesta",                 "render": render_N33},
+                "N34": {"label": "📖 N34: De las Proporciones a las Igualdades",       "render": render_N34},
+                "N35": {"label": "📖 N35: Aplicaciones Maestras de las Proporciones",  "render": render_N35},
             },
             "Ejercitación": {
                 "NE01": {"label": "📝 NE01: Próximamente", "render": lambda: render_proximamente("NE01")},
@@ -136,11 +161,11 @@ CONTENIDOS = {
                 "D05": {"label": "📖 D05: Próximamente", "render": lambda: render_proximamente("D05")},
             },
             "Probabilidad": {
-                "PR01": {"label": "📖 PR01: Próximamente", "render": lambda: render_proximamente("PR01")},
-                "PR02": {"label": "📖 PR02: Próximamente", "render": lambda: render_proximamente("PR02")},
-                "PR03": {"label": "📖 PR03: Próximamente", "render": lambda: render_proximamente("PR03")},
-                "PR04": {"label": "📖 PR04: Próximamente", "render": lambda: render_proximamente("PR04")},
-                "PR05": {"label": "📖 PR05: Próximamente", "render": lambda: render_proximamente("PR05")},
+                "PB01": {"label": "📖 PB01: Próximamente", "render": lambda: render_proximamente("PB01")},
+                "PB02": {"label": "📖 PB02: Próximamente", "render": lambda: render_proximamente("PB02")},
+                "PB03": {"label": "📖 PB03: Próximamente", "render": lambda: render_proximamente("PB03")},
+                "PB04": {"label": "📖 PB04: Próximamente", "render": lambda: render_proximamente("PB04")},
+                "PB05": {"label": "📖 PB05: Próximamente", "render": lambda: render_proximamente("PB05")},
             },
             "Ejercitación": {
                 "DE01": {"label": "📝 DE01: Próximamente", "render": lambda: render_proximamente("DE01")},
