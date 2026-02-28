@@ -1,5 +1,10 @@
 from clases.numeros.n01 import render_N01
 from clases.numeros.n02 import render_N02
+from clases.numeros.n03 import render_N03
+from clases.numeros.n04 import render_N04
+from clases.numeros.n05 import render_N05
+from clases.numeros.n06 import render_N06
+from clases.numeros.n07 import render_N07
 from utils import render_proximamente
 
 # =============================================================================
@@ -12,11 +17,13 @@ CONTENIDOS = {
         "color_subcats": "rojo",
         "subcategorias": {
             "Conjuntos": {
-                "N01": {"label": "📖 N01: Teoría de Conjuntos", "render": render_N01},
-                "N02": {"label": "📖 N02: Números Naturales",  "render": render_N02},
-                "N03": {"label": "📖 N03: Próximamente",        "render": lambda: render_proximamente("N03")},
-                "N04": {"label": "📖 N04: Próximamente",        "render": lambda: render_proximamente("N04")},
-                "N05": {"label": "📖 N05: Próximamente",        "render": lambda: render_proximamente("N05")},
+                "N01": {"label": "📖 N01: Teoría de Conjuntos",        "render": render_N01},
+                "N02": {"label": "📖 N02: Números Naturales",           "render": render_N02},
+                "N03": {"label": "📖 N03: Números Cardinales",          "render": render_N03},
+                "N04": {"label": "📖 N04: Números Enteros",             "render": render_N04},
+                "N05": {"label": "📖 N05: Números Racionales",          "render": render_N05},
+                "N06": {"label": "📖 N06: Números Irracionales",        "render": render_N06},
+                "N07": {"label": "📖 N07: Números Reales",              "render": render_N07},
             },
             "Operatoria": {
                 "O01": {"label": "📖 O01: Próximamente", "render": lambda: render_proximamente("O01")},

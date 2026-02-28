@@ -4,6 +4,15 @@ import streamlit as st
 def aplicar_estilos():
     st.markdown("""
     <style>
+    /* --- LETRA MÁS GRANDE GLOBALMENTE --- */
+    .stMarkdown p, .stMarkdown li, .stMarkdown td, .stMarkdown th {
+        font-size: 17px !important;
+        line-height: 1.7 !important;
+    }
+    .stMarkdown h1 { font-size: 26px !important; }
+    .stMarkdown h2 { font-size: 22px !important; }
+    .stMarkdown h3 { font-size: 19px !important; }
+
     .header-azul { background-color: #3b71ca; padding: 15px; border-radius: 15px 15px 0 0; color: white; text-align: center; }
     .titulo-header { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
     .info-header { font-size: 14px; opacity: 0.9; }
