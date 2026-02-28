@@ -239,7 +239,8 @@ if menu == "🏠 Dashboard PAES":
         # NIVEL 2: lista de clases
         elif st.session_state.clase_seleccionada is None:
             subcat = st.session_state.subcat_actual
-            clases = subcats.get(subcat, {})
+            #clases = subcats.get(subcat, {})
+            clases = CONTENIDOS[st.session_state.eje_actual]["subcategorias"].get(subcat, {}) 
             st.subheader(f"{eje} › {subcat}")
             # CSS para botones de lista
             st.markdown("""
