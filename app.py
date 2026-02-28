@@ -82,7 +82,7 @@ if menu == "🏠 Dashboard PAES":
     st.markdown(
         f'<div class="header-rojo">'
         f'<div class="timer-item">⏳ Días: {dias}</div>'
-        f'<div class="timer-item">Hrs: {horas}</div>'
+        f'<div class="timer-item">Horas: {horas}</div>'
         f'</div>',
         unsafe_allow_html=True
     )
@@ -571,6 +571,6 @@ elif menu == "🐉 Bienvenida":
     <span class="pill">🧠 Profundidad conceptual</span>
     <span class="pill">📝 Ejercitación dirigida</span>
     <span class="pill">⏱️ Cronómetro de estudio</span>
-    <span class="pill">📄 Material descargable</span>
+    <span class="pill">📄 Material complementario descargable</span>
     </div>
     """, unsafe_allow_html=True)
