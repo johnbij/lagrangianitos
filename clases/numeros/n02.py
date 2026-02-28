@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 def render_N02():
 
     st.markdown("""
-
+# Eje Números
 ## N02: Los Números Naturales ($\\mathbb{N}$) - El Génesis del Conteo
 
 ---

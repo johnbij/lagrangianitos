@@ -7,7 +7,7 @@ def render_N01():
 
     # ── TÍTULO Y SECCIONES 1-3 ───────────────────────────────────────────────
     st.markdown("""
-
+# Eje Números
 ## N01: Teoría de Conjuntos - El Lenguaje Maestro
 
 ---
