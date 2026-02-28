@@ -60,6 +60,7 @@ with st.sidebar:
 # =============================================================================
 
 if menu == "🏠 Dashboard PAES":
+    st.query_params.clear()
 
     if st.session_state.cronometro_activo:
         st_autorefresh(interval=1000, limit=None, key="crono_refresh")
@@ -425,6 +426,7 @@ elif menu == "📂 Biblioteca de PDFs":
     col_back, _ = st.columns([1, 4])
     with col_back:
         if st.button("← Volver", key="back_pdf", use_container_width=True):
+            st.query_params.clear()
             st.session_state.menu_actual = "🏠 Dashboard PAES"
             st.rerun()
     st.markdown("""
@@ -575,6 +577,7 @@ elif menu == "🐉 Bienvenida":
     col_iz, col_cta, col_der = st.columns([1, 2, 1])
     with col_cta:
         if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
+            st.query_params.clear()
             st.session_state.menu_actual = "🏠 Dashboard PAES"
             st.rerun()
 
