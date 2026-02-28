@@ -91,60 +91,43 @@ if menu == "🏠 Dashboard PAES":
 
     # ── PANTALLA INICIAL ─────────────────────────────────────────────────────
     if st.session_state.eje_actual is None:
-
-        # Detectar click via query_params SOLO si no hay eje activo
-        params = st.query_params
-        if "eje" in params and st.session_state.eje_actual is None:
-            ejes_map = {
-                "numeros":  "🔢 Números",
-                "algebra":  "📉 Álgebra",
-                "geometria":"📐 Geometría",
-                "datos":    "📊 Datos y Azar",
-            }
-            eje_desde_url = ejes_map.get(params["eje"])
-            if eje_desde_url:
-                st.query_params.clear()
-                st.session_state.eje_actual = eje_desde_url
-                st.rerun()
-
         st.markdown("### 📚 Selecciona un Eje Temático")
 
-        # Botones HTML puros — color garantizado
-        col1, col2 = st.columns(2)
-        with col1:
-            st.markdown(f"""
-            <a href="?eje=numeros" target="_self"
-               style="display:block; background-color:#c0392b; color:white;
-                      text-decoration:none; border-radius:12px; padding:22px 10px;
-                      font-size:18px; font-weight:bold; text-align:center;
-                      margin-bottom:10px;">
-                🔢 Números
-            </a>""", unsafe_allow_html=True)
-            st.markdown(f"""
-            <a href="?eje=geometria" target="_self"
-               style="display:block; background-color:#7b1fa2; color:white;
-                      text-decoration:none; border-radius:12px; padding:22px 10px;
-                      font-size:18px; font-weight:bold; text-align:center;
-                      margin-bottom:10px;">
-                📐 Geometría
-            </a>""", unsafe_allow_html=True)
-        with col2:
-            st.markdown(f"""
-            <a href="?eje=algebra" target="_self"
-               style="display:block; background-color:#1b5e20; color:white;
-                      text-decoration:none; border-radius:12px; padding:22px 10px;
-                      font-size:18px; font-weight:bold; text-align:center;
-                      margin-bottom:10px;">
-                📉 Álgebra
-            </a>""", unsafe_allow_html=True)
-            st.markdown(f"""
-            <a href="?eje=datos" target="_self"
-               style="display:block; background-color:#e65100; color:white;
-                      text-decoration:none; border-radius:12px; padding:22px 10px;
-                      font-size:18px; font-weight:bold; text-align:center;
-                      margin-bottom:10px;">
-                📊 Datos y Azar
-            </a>""", unsafe_allow_html=True)
+        st.markdown("""
+        <style>
+        div[data-testid="stHorizontalBlock"] div.stButton:nth-child(1) button,
+        div[data-testid="stHorizontalBlock"] div.stButton:nth-child(2) button {
+            min-height: 80px !important;
+            font-size: 18px !important;
+            font-weight: bold !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 12px !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
+        # Fila 1
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background-color:#c0392b!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            if st.button("🔢 Números", key="m_n", use_container_width=True):
+                st.session_state.eje_actual = "🔢 Números"; st.rerun()
+        with c2:
+            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background-color:#1b5e20!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            if st.button("📉 Álgebra", key="m_a", use_container_width=True):
+                st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
+
+        # Fila 2
+        c3, c4 = st.columns(2)
+        with c3:
+            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background-color:#7b1fa2!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            if st.button("📐 Geometría", key="m_g", use_container_width=True):
+                st.session_state.eje_actual = "📐 Geometría"; st.rerun()
+        with c4:
+            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background-color:#e65100!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            if st.button("📊 Datos y Azar", key="m_d", use_container_width=True):
+                st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
         st.write("")
         col_iz, col_pdf, col_der = st.columns([1, 4, 1])
@@ -211,17 +194,9 @@ if menu == "🏠 Dashboard PAES":
         subcats  = eje_data.get("subcategorias", {})
         color    = COLORES.get(eje_data.get("color_subcats", "rojo"), "#c0392b")
 
-        # NIVEL 1: subcategorías — HTML puro para control total del color
+        # NIVEL 1: subcategorías
         if st.session_state.subcat_actual is None:
             st.markdown(f"## {eje}")
-
-            # Detectar click via query_params
-            params = st.query_params
-            if "subcat" in params and st.session_state.subcat_actual is None:
-                subcat_desde_url = params["subcat"]
-                st.query_params.clear()
-                st.session_state.subcat_actual = subcat_desde_url
-                st.rerun()
 
             for nombre_subcat, clases_subcat in subcats.items():
                 total = len(clases_subcat)
@@ -238,16 +213,22 @@ if menu == "🏠 Dashboard PAES":
 
                 col_btn, col_badge = st.columns([4, 1])
                 with col_btn:
-                    # Botón HTML puro con color garantizado
                     st.markdown(f"""
-                    <a href="?subcat={nombre_subcat}" target="_self"
-                       style="display:block; background-color:{color}; color:white;
-                              text-decoration:none; border-radius:12px; padding:18px 20px;
-                              font-size:18px; font-weight:bold; margin-bottom:8px;
-                              text-align:center; min-height:60px; line-height:1.4;">
-                        {nombre_subcat}
-                    </a>
+                    <style>
+                    div[data-testid="stHorizontalBlock"]:has(+ *) div[data-testid="column"]:first-child button {{
+                        background-color: {color} !important;
+                        color: white !important;
+                        border: none !important;
+                        border-radius: 12px !important;
+                        min-height: 75px !important;
+                        font-size: 18px !important;
+                        font-weight: bold !important;
+                    }}
+                    </style>
                     """, unsafe_allow_html=True)
+                    if st.button(nombre_subcat, key=f"sc_{nombre_subcat}", use_container_width=True):
+                        st.session_state.subcat_actual = nombre_subcat
+                        st.rerun()
                 with col_badge:
                     st.markdown(
                         f'<div style="text-align:center; font-size:15px; '
