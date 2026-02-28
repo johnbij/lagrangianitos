@@ -5,6 +5,15 @@ from clases.numeros.n04 import render_N04
 from clases.numeros.n05 import render_N05
 from clases.numeros.n06 import render_N06
 from clases.numeros.n07 import render_N07
+from clases.numeros.n08 import render_N08
+from clases.numeros.n09 import render_N09
+from clases.numeros.n10 import render_N10
+from clases.numeros.n11 import render_N11
+from clases.numeros.n12 import render_N12
+from clases.numeros.n13 import render_N13
+from clases.numeros.n14 import render_N14
+from clases.numeros.n15 import render_N15
+from clases.numeros.n16 import render_N16
 from utils import render_proximamente
 
 # =============================================================================
@@ -26,11 +35,15 @@ CONTENIDOS = {
                 "N07": {"label": "📖 N07: Números Reales",              "render": render_N07},
             },
             "Operatoria": {
-                "O01": {"label": "📖 O01: Próximamente", "render": lambda: render_proximamente("O01")},
-                "O02": {"label": "📖 O02: Próximamente", "render": lambda: render_proximamente("O02")},
-                "O03": {"label": "📖 O03: Próximamente", "render": lambda: render_proximamente("O03")},
-                "O04": {"label": "📖 O04: Próximamente", "render": lambda: render_proximamente("O04")},
-                "O05": {"label": "📖 O05: Próximamente", "render": lambda: render_proximamente("O05")},
+                "N08": {"label": "📖 N08: Primos y Divisibilidad",            "render": render_N08},
+                "N09": {"label": "📖 N09: El Infinito ♾️",                    "render": render_N09},
+                "N10": {"label": "📖 N10: Mecánica de Operatoria (PAPOMUDAS)", "render": render_N10},
+                "N11": {"label": "📖 N11: Racionales I - Fracciones",         "render": render_N11},
+                "N12": {"label": "📖 N12: Racionales II - Operatoria en ℚ",   "render": render_N12},
+                "N13": {"label": "📖 N13: Racionales III - Decimales",        "render": render_N13},
+                "N14": {"label": "📖 N14: El Lenguaje del Reparto",           "render": render_N14},
+                "N15": {"label": "📖 N15: ADN de los Números",                "render": render_N15},
+                "N16": {"label": "📖 N16: El Orden en los Racionales",        "render": render_N16},
             },
             "Razones y Proporciones": {
                 "R01": {"label": "📖 R01: Próximamente", "render": lambda: render_proximamente("R01")},
