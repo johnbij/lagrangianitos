@@ -91,36 +91,58 @@ if menu == "🏠 Dashboard PAES":
 
     # ── PANTALLA INICIAL ─────────────────────────────────────────────────────
     if st.session_state.eje_actual is None:
+
+        # Detectar click via query_params
+        params = st.query_params
+        if "eje" in params:
+            ejes_map = {
+                "numeros":  "🔢 Números",
+                "algebra":  "📉 Álgebra",
+                "geometria":"📐 Geometría",
+                "datos":    "📊 Datos y Azar",
+            }
+            st.session_state.eje_actual = ejes_map.get(params["eje"])
+            st.query_params.clear()
+            st.rerun()
+
         st.markdown("### 📚 Selecciona un Eje Temático")
 
-        # CSS individual para cada botón de eje
-        st.markdown("""
-        <style>
-        div.eje-n div.stButton > button { background-color: #c0392b !important; color: white !important; border: none !important; }
-        div.eje-a div.stButton > button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
-        div.eje-g div.stButton > button { background-color: #7b1fa2 !important; color: white !important; border: none !important; }
-        div.eje-d div.stButton > button { background-color: #e65100 !important; color: white !important; border: none !important; }
-        </style>
-        """, unsafe_allow_html=True)
-
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown('<div class="eje-n">', unsafe_allow_html=True)
-            if st.button("🔢 Números",   key="m_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
-        with c2:
-            st.markdown('<div class="eje-a">', unsafe_allow_html=True)
-            if st.button("📉 Álgebra",   key="m_a", use_container_width=True): st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
-        c3, c4 = st.columns(2)
-        with c3:
-            st.markdown('<div class="eje-g">', unsafe_allow_html=True)
-            if st.button("📐 Geometría", key="m_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
-        with c4:
-            st.markdown('<div class="eje-d">', unsafe_allow_html=True)
-            if st.button("📊 Datos y Azar", key="m_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+        # Botones HTML puros — color garantizado
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(f"""
+            <a href="?eje=numeros" target="_self"
+               style="display:block; background-color:#c0392b; color:white;
+                      text-decoration:none; border-radius:12px; padding:22px 10px;
+                      font-size:18px; font-weight:bold; text-align:center;
+                      margin-bottom:10px;">
+                🔢 Números
+            </a>""", unsafe_allow_html=True)
+            st.markdown(f"""
+            <a href="?eje=geometria" target="_self"
+               style="display:block; background-color:#7b1fa2; color:white;
+                      text-decoration:none; border-radius:12px; padding:22px 10px;
+                      font-size:18px; font-weight:bold; text-align:center;
+                      margin-bottom:10px;">
+                📐 Geometría
+            </a>""", unsafe_allow_html=True)
+        with col2:
+            st.markdown(f"""
+            <a href="?eje=algebra" target="_self"
+               style="display:block; background-color:#1b5e20; color:white;
+                      text-decoration:none; border-radius:12px; padding:22px 10px;
+                      font-size:18px; font-weight:bold; text-align:center;
+                      margin-bottom:10px;">
+                📉 Álgebra
+            </a>""", unsafe_allow_html=True)
+            st.markdown(f"""
+            <a href="?eje=datos" target="_self"
+               style="display:block; background-color:#e65100; color:white;
+                      text-decoration:none; border-radius:12px; padding:22px 10px;
+                      font-size:18px; font-weight:bold; text-align:center;
+                      margin-bottom:10px;">
+                📊 Datos y Azar
+            </a>""", unsafe_allow_html=True)
 
         st.write("")
         col_iz, col_pdf, col_der = st.columns([1, 4, 1])
