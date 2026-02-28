@@ -187,27 +187,18 @@ if menu == "🏠 Dashboard PAES":
         subcats  = eje_data.get("subcategorias", {})
         color    = COLORES.get(eje_data.get("color_subcats", "rojo"), "#c0392b")
 
-        # NIVEL 1: subcategorías — botones con color usando type="primary" + CSS override
+        # NIVEL 1: subcategorías — HTML puro para control total del color
         if st.session_state.subcat_actual is None:
             st.markdown(f"## {eje}")
-            # Un solo bloque CSS que colorea todos los botones primary en esta pantalla
-            st.markdown(f"""
-            <style>
-            button[kind="primary"], div.stButton > button[data-testid="baseButton-primary"] {{
-                background-color: {color} !important;
-                color: white !important;
-                border: none !important;
-                border-radius: 12px !important;
-                min-height: 75px !important;
-                font-size: 17px !important;
-                font-weight: bold !important;
-                width: 100% !important;
-                margin-bottom: 6px !important;
-            }}
-            </style>
-            """, unsafe_allow_html=True)
+
+            # Detectar click via query_params
+            params = st.query_params
+            if "subcat" in params:
+                st.session_state.subcat_actual = params["subcat"]
+                st.query_params.clear()
+                st.rerun()
+
             for nombre_subcat, clases_subcat in subcats.items():
-                # Calcular progreso: clases que NO usan render_proximamente
                 total = len(clases_subcat)
                 disponibles = sum(
                     1 for c in clases_subcat.values()
@@ -222,10 +213,16 @@ if menu == "🏠 Dashboard PAES":
 
                 col_btn, col_badge = st.columns([4, 1])
                 with col_btn:
-                    if st.button(nombre_subcat, key=f"sc_{nombre_subcat}",
-                                 use_container_width=True, type="primary"):
-                        st.session_state.subcat_actual = nombre_subcat
-                        st.rerun()
+                    # Botón HTML puro con color garantizado
+                    st.markdown(f"""
+                    <a href="?subcat={nombre_subcat}" target="_self"
+                       style="display:block; background-color:{color}; color:white;
+                              text-decoration:none; border-radius:12px; padding:18px 20px;
+                              font-size:18px; font-weight:bold; margin-bottom:8px;
+                              text-align:center; min-height:60px; line-height:1.4;">
+                        {nombre_subcat}
+                    </a>
+                    """, unsafe_allow_html=True)
                 with col_badge:
                     st.markdown(
                         f'<div style="text-align:center; font-size:15px; '
