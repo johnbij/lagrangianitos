@@ -45,6 +45,11 @@ CONTENIDOS = {
                 "N15": {"label": "📖 N15: ADN de los Números",                "render": render_N15},
                 "N16": {"label": "📖 N16: El Orden en los Racionales",        "render": render_N16},
             },
+            "Potencias y Raíces": {
+                "PR01": {"label": "📖 PR01: Próximamente", "render": lambda: render_proximamente("PR01")},
+                "PR02": {"label": "📖 PR02: Próximamente", "render": lambda: render_proximamente("PR02")},
+                "PR03": {"label": "📖 PR03: Próximamente", "render": lambda: render_proximamente("PR03")},
+            },
             "Razones y Proporciones": {
                 "R01": {"label": "📖 R01: Próximamente", "render": lambda: render_proximamente("R01")},
                 "R02": {"label": "📖 R02: Próximamente", "render": lambda: render_proximamente("R02")},
