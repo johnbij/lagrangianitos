@@ -33,6 +33,41 @@ from clases.numeros.n32 import render_N32
 from clases.numeros.n33 import render_N33
 from clases.numeros.n34 import render_N34
 from clases.numeros.n35 import render_N35
+from clases.algebra.a01 import render_A01
+from clases.algebra.a02 import render_A02
+from clases.algebra.a03 import render_A03
+from clases.algebra.a04 import render_A04
+from clases.algebra.a05 import render_A05
+from clases.algebra.f01 import render_F01
+from clases.algebra.f02 import render_F02
+from clases.algebra.f03 import render_F03
+from clases.algebra.f04 import render_F04
+from clases.algebra.f05 import render_F05
+from clases.geometria.g01 import render_G01
+from clases.geometria.g02 import render_G02
+from clases.geometria.g03 import render_G03
+from clases.geometria.g04 import render_G04
+from clases.geometria.g05 import render_G05
+from clases.geometria.p01 import render_P01
+from clases.geometria.p02 import render_P02
+from clases.geometria.p03 import render_P03
+from clases.geometria.p04 import render_P04
+from clases.geometria.p05 import render_P05
+from clases.geometria.v01 import render_V01
+from clases.geometria.v02 import render_V02
+from clases.geometria.v03 import render_V03
+from clases.geometria.v04 import render_V04
+from clases.geometria.v05 import render_V05
+from clases.datos.d01 import render_D01
+from clases.datos.d02 import render_D02
+from clases.datos.d03 import render_D03
+from clases.datos.d04 import render_D04
+from clases.datos.d05 import render_D05
+from clases.datos.pb01 import render_PB01
+from clases.datos.pb02 import render_PB02
+from clases.datos.pb03 import render_PB03
+from clases.datos.pb04 import render_PB04
+from clases.datos.pb05 import render_PB05
 from utils import render_proximamente
 
 CONTENIDOS = {
@@ -95,18 +130,18 @@ CONTENIDOS = {
         "color_subcats": "verde",
         "subcategorias": {
             "Álgebra": {
-                "A01": {"label": "📖 A01: Próximamente", "render": lambda: render_proximamente("A01")},
-                "A02": {"label": "📖 A02: Próximamente", "render": lambda: render_proximamente("A02")},
-                "A03": {"label": "📖 A03: Próximamente", "render": lambda: render_proximamente("A03")},
-                "A04": {"label": "📖 A04: Próximamente", "render": lambda: render_proximamente("A04")},
-                "A05": {"label": "📖 A05: Próximamente", "render": lambda: render_proximamente("A05")},
+                "A01": {"label": "📖 A01: Expresiones Algebraicas",              "render": render_A01},
+                "A02": {"label": "📖 A02: Productos Notables",                   "render": render_A02},
+                "A03": {"label": "📖 A03: Factorización",                        "render": render_A03},
+                "A04": {"label": "📖 A04: Ecuaciones de Primer Grado",           "render": render_A04},
+                "A05": {"label": "📖 A05: Inecuaciones y Sistemas de Ecuaciones","render": render_A05},
             },
             "Funciones": {
-                "F01": {"label": "📖 F01: Próximamente", "render": lambda: render_proximamente("F01")},
-                "F02": {"label": "📖 F02: Próximamente", "render": lambda: render_proximamente("F02")},
-                "F03": {"label": "📖 F03: Próximamente", "render": lambda: render_proximamente("F03")},
-                "F04": {"label": "📖 F04: Próximamente", "render": lambda: render_proximamente("F04")},
-                "F05": {"label": "📖 F05: Próximamente", "render": lambda: render_proximamente("F05")},
+                "F01": {"label": "📖 F01: Concepto de Función",                  "render": render_F01},
+                "F02": {"label": "📖 F02: Función Lineal y Afín",                "render": render_F02},
+                "F03": {"label": "📖 F03: Función Cuadrática",                   "render": render_F03},
+                "F04": {"label": "📖 F04: Función Exponencial y Logarítmica",    "render": render_F04},
+                "F05": {"label": "📖 F05: Composición y Transformaciones",       "render": render_F05},
             },
             "Ejercitación": {
                 "AE01": {"label": "📝 AE01: Próximamente", "render": lambda: render_proximamente("AE01")},
@@ -121,25 +156,25 @@ CONTENIDOS = {
         "color_subcats": "morado",
         "subcategorias": {
             "Formas y Figuras": {
-                "G01": {"label": "📖 G01: Próximamente", "render": lambda: render_proximamente("G01")},
-                "G02": {"label": "📖 G02: Próximamente", "render": lambda: render_proximamente("G02")},
-                "G03": {"label": "📖 G03: Próximamente", "render": lambda: render_proximamente("G03")},
-                "G04": {"label": "📖 G04: Próximamente", "render": lambda: render_proximamente("G04")},
-                "G05": {"label": "📖 G05: Próximamente", "render": lambda: render_proximamente("G05")},
+                "G01": {"label": "📖 G01: Ángulos y Rectas",                    "render": render_G01},
+                "G02": {"label": "📖 G02: Triángulos",                          "render": render_G02},
+                "G03": {"label": "📖 G03: Cuadriláteros y Polígonos",           "render": render_G03},
+                "G04": {"label": "📖 G04: Circunferencia y Círculo",            "render": render_G04},
+                "G05": {"label": "📖 G05: Transformaciones Isométricas",        "render": render_G05},
             },
             "Perímetro, Área y Volumen": {
-                "P01": {"label": "📖 P01: Próximamente", "render": lambda: render_proximamente("P01")},
-                "P02": {"label": "📖 P02: Próximamente", "render": lambda: render_proximamente("P02")},
-                "P03": {"label": "📖 P03: Próximamente", "render": lambda: render_proximamente("P03")},
-                "P04": {"label": "📖 P04: Próximamente", "render": lambda: render_proximamente("P04")},
-                "P05": {"label": "📖 P05: Próximamente", "render": lambda: render_proximamente("P05")},
+                "P01": {"label": "📖 P01: Perímetro de Figuras Planas",         "render": render_P01},
+                "P02": {"label": "📖 P02: Área de Figuras Planas",              "render": render_P02},
+                "P03": {"label": "📖 P03: Teorema de Pitágoras",                "render": render_P03},
+                "P04": {"label": "📖 P04: Cuerpos Geométricos y Volumen",       "render": render_P04},
+                "P05": {"label": "📖 P05: Área de Superficies",                 "render": render_P05},
             },
             "Vectores": {
-                "V01": {"label": "📖 V01: Próximamente", "render": lambda: render_proximamente("V01")},
-                "V02": {"label": "📖 V02: Próximamente", "render": lambda: render_proximamente("V02")},
-                "V03": {"label": "📖 V03: Próximamente", "render": lambda: render_proximamente("V03")},
-                "V04": {"label": "📖 V04: Próximamente", "render": lambda: render_proximamente("V04")},
-                "V05": {"label": "📖 V05: Próximamente", "render": lambda: render_proximamente("V05")},
+                "V01": {"label": "📖 V01: Vectores en el Plano",                "render": render_V01},
+                "V02": {"label": "📖 V02: Operaciones con Vectores",            "render": render_V02},
+                "V03": {"label": "📖 V03: Producto Punto y Ortogonalidad",      "render": render_V03},
+                "V04": {"label": "📖 V04: Ecuación de la Recta Vectorial",      "render": render_V04},
+                "V05": {"label": "📖 V05: Aplicaciones de Vectores",            "render": render_V05},
             },
             "Ejercitación": {
                 "GE01": {"label": "📝 GE01: Próximamente", "render": lambda: render_proximamente("GE01")},
@@ -154,18 +189,18 @@ CONTENIDOS = {
         "color_subcats": "naranja",
         "subcategorias": {
             "Estadística": {
-                "D01": {"label": "📖 D01: Próximamente", "render": lambda: render_proximamente("D01")},
-                "D02": {"label": "📖 D02: Próximamente", "render": lambda: render_proximamente("D02")},
-                "D03": {"label": "📖 D03: Próximamente", "render": lambda: render_proximamente("D03")},
-                "D04": {"label": "📖 D04: Próximamente", "render": lambda: render_proximamente("D04")},
-                "D05": {"label": "📖 D05: Próximamente", "render": lambda: render_proximamente("D05")},
+                "D01": {"label": "📖 D01: Tipos de Datos y Frecuencias",        "render": render_D01},
+                "D02": {"label": "📖 D02: Medidas de Tendencia Central",        "render": render_D02},
+                "D03": {"label": "📖 D03: Medidas de Dispersión y Posición",    "render": render_D03},
+                "D04": {"label": "📖 D04: Gráficos Estadísticos",               "render": render_D04},
+                "D05": {"label": "📖 D05: Análisis de Datos y Correlación",     "render": render_D05},
             },
             "Probabilidad": {
-                "PB01": {"label": "📖 PB01: Próximamente", "render": lambda: render_proximamente("PB01")},
-                "PB02": {"label": "📖 PB02: Próximamente", "render": lambda: render_proximamente("PB02")},
-                "PB03": {"label": "📖 PB03: Próximamente", "render": lambda: render_proximamente("PB03")},
-                "PB04": {"label": "📖 PB04: Próximamente", "render": lambda: render_proximamente("PB04")},
-                "PB05": {"label": "📖 PB05: Próximamente", "render": lambda: render_proximamente("PB05")},
+                "PB01": {"label": "📖 PB01: Espacio Muestral y Eventos",        "render": render_PB01},
+                "PB02": {"label": "📖 PB02: Probabilidad Clásica (Laplace)",    "render": render_PB02},
+                "PB03": {"label": "📖 PB03: Probabilidad Compuesta",            "render": render_PB03},
+                "PB04": {"label": "📖 PB04: Técnicas de Conteo y Combinatoria", "render": render_PB04},
+                "PB05": {"label": "📖 PB05: Variable Aleatoria y Distribuciones","render": render_PB05},
             },
             "Ejercitación": {
                 "DE01": {"label": "📝 DE01: Próximamente", "render": lambda: render_proximamente("DE01")},
