@@ -58,26 +58,3 @@ def render_proximamente(codigo):
         <div class="prox-badge">✨ Próximamente disponible</div>
     </div>
     """, unsafe_allow_html=True)
-
-
-def render_multiple_choice_quiz(questions, key_prefix):
-    for i, question in enumerate(questions, start=1):
-        st.markdown(f"**{i}. {question['question']}**")
-        option_keys = list(question["options"].keys())
-        option_texts = question["options"]
-        selected = st.radio(
-            "Selecciona una alternativa:",
-            options=["__none__"] + option_keys,
-            format_func=lambda option, option_texts=option_texts: "— Elegir alternativa —" if option == "__none__" else f"{option}) {option_texts[option]}",
-            key=f"{key_prefix}_q{i}",
-        )
-
-        if selected != "__none__":
-            if selected == question["answer"]:
-                st.success("✅ ¡Correcta!")
-            else:
-                st.error(f"❌ Incorrecta. La correcta es **{question['answer']}**.")
-            st.caption(f"🛠️ Mini-corrección: {question['explanation']}")
-
-        if i < len(questions):
-            st.markdown("---")

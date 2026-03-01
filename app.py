@@ -97,56 +97,10 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("")
 
-    # ── PANTALLA INICIAL ─────────────────────────────────────────────────────
+    # Si llegan al dashboard sin eje, redirigir a bienvenida
     if st.session_state.eje_actual is None:
-        st.markdown("### 📚 Selecciona un Eje Temático")
-
-        st.markdown("""
-        <style>
-        .eje-grid div.stButton > button {
-            min-height: 70px !important;
-            font-size: 16px !important;
-            font-weight: bold !important;
-            color: white !important;
-            border: none !important;
-            border-radius: 14px !important;
-            margin-bottom: 6px !important;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-
-        st.markdown('<div class="eje-grid">', unsafe_allow_html=True)
-
-        # Fila 1
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#e74c3c,#c0392b)!important;}</style>', unsafe_allow_html=True)
-            if st.button("🔢 Números", key="m_n", use_container_width=True):
-                st.session_state.eje_actual = "🔢 Números"; st.rerun()
-        with c2:
-            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#27ae60,#1b5e20)!important;}</style>', unsafe_allow_html=True)
-            if st.button("📉 Álgebra", key="m_a", use_container_width=True):
-                st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
-
-        # Fila 2
-        c3, c4 = st.columns(2)
-        with c3:
-            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#9b59b6,#7b1fa2)!important;}</style>', unsafe_allow_html=True)
-            if st.button("📐 Geometría", key="m_g", use_container_width=True):
-                st.session_state.eje_actual = "📐 Geometría"; st.rerun()
-        with c4:
-            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#f39c12,#e65100)!important;}</style>', unsafe_allow_html=True)
-            if st.button("📊 Datos y Azar", key="m_d", use_container_width=True):
-                st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
-
-        st.markdown('</div>', unsafe_allow_html=True)
-
-        st.write("")
-        st.markdown('<div class="pdf-btn">', unsafe_allow_html=True)
-        if st.button("📄 Materiales descargables en PDF", key="m_pdf", use_container_width=True):
-            st.session_state.menu_actual = "📂 Biblioteca de PDFs"
-            st.rerun()
-        st.markdown('</div>', unsafe_allow_html=True)
+        st.session_state.menu_actual = "🐉 Bienvenida"
+        st.rerun()
 
     # ── DENTRO DE UN EJE ────────────────────────────────────────────────────
     else:
@@ -507,15 +461,22 @@ elif menu == "📂 Biblioteca de PDFs":
             )
 
 elif menu == "🐉 Bienvenida":
+    zona_cl_bv = pytz.timezone('America/Santiago')
+    ahora_bv   = datetime.now(zona_cl_bv)
+    paes_date_bv = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl_bv)
+    delta_bv = paes_date_bv - ahora_bv
+    dias_bv  = delta_bv.days
+    horas_bv = delta_bv.seconds // 3600
+
     st.markdown("""
     <style>
     .bienvenida-hero {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        border-radius: 20px;
-        padding: 40px 20px;
+        border-radius: 20px 20px 0 0;
+        padding: 40px 20px 28px 20px;
         text-align: center;
         color: white;
-        margin-bottom: 24px;
+        margin-bottom: 0;
     }
     .bienvenida-dragon { font-size: 80px; margin-bottom: 10px; }
     .bienvenida-titulo { font-size: 28px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
@@ -530,15 +491,31 @@ elif menu == "🐉 Bienvenida":
         font-size: 15px; font-weight: 600; opacity: 0.95;
         max-width: 500px; margin: 0 auto; line-height: 1.6;
     }
-
-    .card-eje {
-        border-radius: 14px;
-        padding: 16px;
-        text-align: center;
+    .bienvenida-info {
+        font-size: 14px; opacity: 0.85; margin-top: 12px;
+    }
+    .bienvenida-countdown {
+        background: linear-gradient(135deg, #e74c3c, #cc0000);
+        border-radius: 0 0 20px 20px;
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-around;
         color: white;
+        margin-bottom: 24px;
+    }
+    .bienvenida-countdown .timer-item {
+        font-size: 16px;
         font-weight: bold;
-        font-size: 15px;
-        margin-bottom: 8px;
+    }
+
+    .eje-btn-bv div.stButton > button {
+        min-height: 80px !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 14px !important;
+        margin-bottom: 6px !important;
     }
 
     .seccion-titulo {
@@ -560,7 +537,10 @@ elif menu == "🐉 Bienvenida":
         color: #333;
     }
     </style>
+    """, unsafe_allow_html=True)
 
+    # Hero con countdown integrado
+    st.markdown(f"""
     <div class="bienvenida-hero">
         <div class="bienvenida-dragon">🐉</div>
         <div class="bienvenida-titulo">LAGRANGIANITOS</div>
@@ -569,24 +549,55 @@ elif menu == "🐉 Bienvenida":
             Tu plataforma de preparación PAES M1.<br>
             Matemática con profundidad, desde los fundamentos hasta la prueba. 🚀
         </div>
+        <div class="bienvenida-info">📍 Santiago · 🕒 {ahora_bv.strftime("%H:%M")}</div>
+    </div>
+    <div class="bienvenida-countdown">
+        <div class="timer-item">⏳ Días: {dias_bv}</div>
+        <div class="timer-item">Hrs: {horas_bv}</div>
     </div>
     """, unsafe_allow_html=True)
 
-    # Ejes disponibles
+    # Botones de ejes — navegan directo al eje en el dashboard
     st.markdown('<div class="seccion-titulo">📚 Contenidos del curso</div>', unsafe_allow_html=True)
+    st.markdown('<div class="eje-btn-bv">', unsafe_allow_html=True)
+
     c1, c2 = st.columns(2)
     with c1:
-        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">🔢 Números<br><small>Conjuntos · Operatoria · Razones</small></div>', unsafe_allow_html=True)
-        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#9b59b6,#7b1fa2);">📐 Geometría<br><small>Figuras · Área y Volumen · Vectores</small></div>', unsafe_allow_html=True)
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#e74c3c,#c0392b)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🔢 Números\nConjuntos · Operatoria · Razones", key="bv_n", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual  = "🔢 Números"
+            st.session_state.subcat_actual = None
+            st.session_state.clase_seleccionada = None
+            st.rerun()
     with c2:
-        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#27ae60,#1b5e20);">📉 Álgebra<br><small>Álgebra · Funciones</small></div>', unsafe_allow_html=True)
-        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#f39c12,#e65100);">📊 Datos y Azar<br><small>Estadística · Probabilidad</small></div>', unsafe_allow_html=True)
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#27ae60,#1b5e20)!important;}</style>', unsafe_allow_html=True)
+        if st.button("📉 Álgebra\nÁlgebra · Funciones", key="bv_a", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual  = "📉 Álgebra"
+            st.session_state.subcat_actual = None
+            st.session_state.clase_seleccionada = None
+            st.rerun()
 
-    # CTA
-    st.write("")
-    if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
-        st.session_state.menu_actual = "🏠 Dashboard PAES"
-        st.rerun()
+    c3, c4 = st.columns(2)
+    with c3:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#9b59b6,#7b1fa2)!important;}</style>', unsafe_allow_html=True)
+        if st.button("📐 Geometría\nFiguras · Área y Volumen · Vectores", key="bv_g", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual  = "📐 Geometría"
+            st.session_state.subcat_actual = None
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+    with c4:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#f39c12,#e65100)!important;}</style>', unsafe_allow_html=True)
+        if st.button("📊 Datos y Azar\nEstadística · Probabilidad", key="bv_d", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual  = "📊 Datos y Azar"
+            st.session_state.subcat_actual = None
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # Metodología
     st.markdown('<div class="seccion-titulo">🛡️ Nuestra metodología</div>', unsafe_allow_html=True)
