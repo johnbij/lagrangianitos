@@ -6,6 +6,7 @@ import pytz
 import streamlit as st
 
 RANKING_FILE = os.path.join(os.path.dirname(__file__), "ranking.json")
+ZONA_CL = pytz.timezone("America/Santiago")
 
 
 def _cargar_ranking():
@@ -34,7 +35,7 @@ def registrar_usuario(nick):
     clave = nick.lower()
     if clave in data:
         return False
-    zona_cl = pytz.timezone("America/Santiago")
+    zona_cl = ZONA_CL
     ahora = datetime.now(zona_cl).isoformat()
     data[clave] = {
         "nick": nick,
@@ -56,7 +57,7 @@ def registrar_clase(nick, codigo_clase):
         return
     if codigo_clase not in data[clave]["clases_vistas"]:
         data[clave]["clases_vistas"].append(codigo_clase)
-    zona_cl = pytz.timezone("America/Santiago")
+    zona_cl = ZONA_CL
     data[clave]["ultima_actividad"] = datetime.now(zona_cl).isoformat()
     _guardar_ranking(data)
 
@@ -93,6 +94,7 @@ def render_ranking():
 
     if not nick_actual:
         st.markdown("### 📝 Regístrate")
+        st.caption("Elige un nick único. Los nicks no tienen contraseña.")
         col_input, col_btn = st.columns([3, 1])
         with col_input:
             nick_input = st.text_input(

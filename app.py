@@ -23,7 +23,7 @@ if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio 
 if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vista   = False
 if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "🐉 Bienvenida"
 if 'ultimo_visto'       not in st.session_state: st.session_state.ultimo_visto       = None
-if 'nick_usuario'      not in st.session_state: st.session_state.nick_usuario      = ""
+if 'nick_usuario'      not in st.session_state: st.session_state.nick_usuario       = ""
 
 COLORES = {
     "rojo":    "#c0392b",
