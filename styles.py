@@ -223,10 +223,10 @@ def aplicar_estilos():
         .stMarkdown h2 { font-size: 18px !important; }
         .stMarkdown h3 { font-size: 16px !important; }
 
-        .titulo-header { font-size: 14px; }
+        .titulo-header { font-size: 14px !important; }
         .bienvenida-dragon { font-size: 50px !important; }
         .bienvenida-titulo { font-size: 20px !important; }
-        .crono-digital { font-size: 22px; }
+        .crono-digital { font-size: 22px !important; }
 
         [data-testid="stHorizontalBlock"] button {
             min-height: 40px !important;
