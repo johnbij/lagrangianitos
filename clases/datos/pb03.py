@@ -1,4 +1,5 @@
 import streamlit as st
+from utils import render_multiple_choice_quiz
 
 
 def render_PB03():
@@ -138,68 +139,16 @@ El **diagrama de árbol** es una herramienta visual para organizar todos los res
 """)
 
     with st.expander("❓ Cuestionario PB03: Probabilidad Compuesta", expanded=False):
-        st.markdown(r"""
-**1. Se lanza una moneda $3$ veces. $P(\text{3 caras}) =$**
-
-A) $\frac{1}{3}$
-B) $\frac{3}{8}$
-C) $\frac{1}{8}$
-D) $\frac{1}{2}$
-
----
-
-**2. Una urna tiene $5$ bolas rojas y $5$ azules. Se sacan $2$ CON reposición. $P(\text{ambas rojas}) =$**
-
-A) $\frac{1}{4}$
-B) $\frac{2}{9}$
-C) $\frac{1}{2}$
-D) $\frac{5}{10}$
-
----
-
-**3. Misma urna del problema 2, pero SIN reposición. $P(\text{ambas rojas}) =$**
-
-A) $\frac{1}{4}$
-B) $\frac{2}{9}$
-C) $\frac{5}{10}$
-D) $\frac{4}{9}$
-
----
-
-**4. Si $P(A) = \frac{1}{3}$ y $P(B|A) = \frac{1}{2}$, entonces $P(A \cap B) =$**
-
-A) $\frac{5}{6}$
-B) $\frac{1}{6}$
-C) $\frac{2}{3}$
-D) $\frac{1}{3}$
-
----
-
-**5. Dos dados se lanzan. Los resultados son:**
-
-A) Dependientes
-B) Independientes
-C) Mutuamente excluyentes
-D) Complementarios
-
----
-
-**6. En un diagrama de árbol, la probabilidad de un camino completo se obtiene:**
-
-A) Sumando las probabilidades de las ramas
-B) Multiplicando las probabilidades de las ramas
-C) Restando las probabilidades
-D) Dividiendo las probabilidades
-
----
-
-**7. De un mazo de $52$ cartas, se sacan $2$ cartas sin reposición. $P(\text{ambas ases}) =$**
-
-A) $\frac{4}{52} \cdot \frac{4}{52}$
-B) $\frac{4}{52} \cdot \frac{3}{51}$
-C) $\frac{4}{52} \cdot \frac{4}{51}$
-D) $\frac{2}{52}$
-""")
+        quiz_questions = [
+            {"question": "Se lanza una moneda $3$ veces. $P(\\text{3 caras}) =$", "options": {"A": "$\\frac{1}{3}$", "B": "$\\frac{3}{8}$", "C": "$\\frac{1}{8}$", "D": "$\\frac{1}{2}$"}, "answer": "C", "explanation": "Eventos independientes: $\\frac{1}{2}\\cdot\\frac{1}{2}\\cdot\\frac{1}{2}=\\frac{1}{8}$."},
+            {"question": "Una urna tiene $5$ bolas rojas y $5$ azules. Se sacan $2$ CON reposición. $P(\\text{ambas rojas}) =$", "options": {"A": "$\\frac{1}{4}$", "B": "$\\frac{2}{9}$", "C": "$\\frac{1}{2}$", "D": "$\\frac{5}{10}$"}, "answer": "A", "explanation": "Con reposición: $\\frac{5}{10}\\cdot\\frac{5}{10}=\\frac{1}{4}$."},
+            {"question": "Misma urna del problema 2, pero SIN reposición. $P(\\text{ambas rojas}) =$", "options": {"A": "$\\frac{1}{4}$", "B": "$\\frac{2}{9}$", "C": "$\\frac{5}{10}$", "D": "$\\frac{4}{9}$"}, "answer": "B", "explanation": "Sin reposición: $\\frac{5}{10}\\cdot\\frac{4}{9}=\\frac{20}{90}=\\frac{2}{9}$."},
+            {"question": "Si $P(A)=\\frac{1}{3}$ y $P(B|A)=\\frac{1}{2}$, entonces $P(A\\cap B) =$", "options": {"A": "$\\frac{5}{6}$", "B": "$\\frac{1}{6}$", "C": "$\\frac{2}{3}$", "D": "$\\frac{1}{3}$"}, "answer": "B", "explanation": "$P(A\\cap B)=P(A)\\cdot P(B|A)=\\frac{1}{6}$."},
+            {"question": "Dos dados se lanzan. Los resultados son:", "options": {"A": "Dependientes", "B": "Independientes", "C": "Mutuamente excluyentes", "D": "Complementarios"}, "answer": "B", "explanation": "El resultado de un dado no afecta al otro."},
+            {"question": "En un diagrama de árbol, la probabilidad de un camino completo se obtiene:", "options": {"A": "Sumando las probabilidades de las ramas", "B": "Multiplicando las probabilidades de las ramas", "C": "Restando las probabilidades", "D": "Dividiendo las probabilidades"}, "answer": "B", "explanation": "A lo largo de una secuencia de etapas, se multiplica."},
+            {"question": "De un mazo de $52$ cartas, se sacan $2$ cartas sin reposición. $P(\\text{ambas ases}) =$", "options": {"A": "$\\frac{4}{52} \\cdot \\frac{4}{52}$", "B": "$\\frac{4}{52} \\cdot \\frac{3}{51}$", "C": "$\\frac{4}{52} \\cdot \\frac{4}{51}$", "D": "$\\frac{2}{52}$"}, "answer": "B", "explanation": "Sin reposición, tras sacar un as quedan 3 ases entre 51 cartas."},
+        ]
+        render_multiple_choice_quiz(quiz_questions, key_prefix="pb03_quiz")
 
     with st.expander("🔑 Pauta Técnica PB03: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
