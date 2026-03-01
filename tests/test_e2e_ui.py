@@ -84,6 +84,28 @@ class TestE2EUI(unittest.TestCase):
         at.button(key="btn_cambiar_nick").click().run(timeout=60)
         self.assertEqual(at.button(key="btn_registrar").label, "Unirse 🚀")
 
+    def test_pdf_library_loads_all_repo_pdfs(self):
+        at = self._run_app()
+        at.radio[0].set_value("📂 Biblioteca de PDFs").run(timeout=60)
+
+        expected_count = len(list((Path(__file__).resolve().parents[1] / "pdfs").glob("*.pdf")))
+        rendered_count = sum(md.value.count('<div class="pdf-card">') for md in at.markdown)
+        self.assertEqual(rendered_count, expected_count)
+
+    def test_pb02_and_pb03_quiz_feedback_is_dynamic(self):
+        at = self._run_app()
+        at.radio[0].set_value("🏠 Dashboard PAES").run(timeout=60)
+        at.button(key="m_d").click().run(timeout=60)
+        at.button(key="sc_Probabilidad").click().run(timeout=60)
+
+        at.button(key="cls_PB02").click().run(timeout=60)
+        at.radio(key="pb02_quiz_q1").set_value("C").run(timeout=60)
+        self.assertTrue(any("✅ ¡Correcta!" in ok.value for ok in at.success))
+
+        at.button(key="btn_siguiente_top").click().run(timeout=60)
+        at.radio(key="pb03_quiz_q1").set_value("A").run(timeout=60)
+        self.assertTrue(any("❌ Incorrecta." in err.value for err in at.error))
+
 
 if __name__ == "__main__":
     unittest.main()

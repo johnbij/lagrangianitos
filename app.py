@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime
+from pathlib import Path
 import pytz
 import time
 from streamlit_autorefresh import st_autorefresh
@@ -448,44 +449,55 @@ elif menu == "📂 Biblioteca de PDFs":
     </div>
     """, unsafe_allow_html=True)
 
-    PDFS = [
-        {
-            "archivo": "pdfs/2026V-PaesM1.pdf",
-            "nombre":  "PAES M1 — Verano 2026",
-            "desc":    "Prueba oficial PAES Matemática 1 · Versión Verano 2026",
-            "icono":   "📝"
+    PDF_META = {
+        "2026V-PaesM1.pdf": {
+            "nombre": "PAES M1 — Verano 2026",
+            "desc": "Prueba oficial PAES Matemática 1 · Versión Verano 2026",
+            "icono": "📝",
         },
-        {
-            "archivo": "pdfs/2026V-ClavijeroPaesM1.pdf",
-            "nombre":  "Clavijero PAES M1 — Verano 2026",
-            "desc":    "Clavijero oficial con respuestas · Versión Verano 2026",
-            "icono":   "🔑"
+        "2026V-ClavijeroPaesM1.pdf": {
+            "nombre": "Clavijero PAES M1 — Verano 2026",
+            "desc": "Clavijero oficial con respuestas · Versión Verano 2026",
+            "icono": "🔑",
         },
-        {
-            "archivo": "pdfs/2027I-TemarioPaesM1.pdf",
-            "nombre":  "Temario PAES M1 — Invierno 2027",
-            "desc":    "Temario oficial PAES Matemática 1 · Versión Invierno 2027",
-            "icono":   "📋"
+        "2027I-TemarioPaesM1.pdf": {
+            "nombre": "Temario PAES M1 — Invierno 2027",
+            "desc": "Temario oficial PAES Matemática 1 · Versión Invierno 2027",
+            "icono": "📋",
         },
-    ]
+    }
 
-    for pdf in PDFS:
+    pdf_dir = Path(__file__).resolve().parent / "pdfs"
+    pdf_files = sorted(pdf_dir.glob("*.pdf"))
+
+    if not pdf_files:
+        st.warning("No se encontraron PDFs en la carpeta /pdfs.")
+
+    for pdf_path in pdf_files:
+        meta = PDF_META.get(
+            pdf_path.name,
+            {
+                "nombre": pdf_path.stem.replace("-", " "),
+                "desc": "Material agregado desde Drive y sincronizado al repositorio.",
+                "icono": "📄",
+            },
+        )
         st.markdown(f"""
         <div class="pdf-card">
-            <div class="pdf-icon">{pdf["icono"]}</div>
+            <div class="pdf-icon">{meta["icono"]}</div>
             <div>
-                <div class="pdf-nombre">{pdf["nombre"]}</div>
-                <div class="pdf-desc">{pdf["desc"]}</div>
+                <div class="pdf-nombre">{meta["nombre"]}</div>
+                <div class="pdf-desc">{meta["desc"]}</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
-        with open(pdf["archivo"], "rb") as f:
+        with pdf_path.open("rb") as f:
             st.download_button(
-                label=f"⬇️ Descargar {pdf['nombre']}",
+                label=f"⬇️ Descargar {meta['nombre']}",
                 data=f,
-                file_name=pdf["archivo"].split("/")[-1],
+                file_name=pdf_path.name,
                 mime="application/pdf",
-                key=f"dl_{pdf['archivo']}",
+                key=f"dl_{pdf_path.name}",
                 use_container_width=True
             )
 

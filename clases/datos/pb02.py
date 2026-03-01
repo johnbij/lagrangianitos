@@ -1,4 +1,5 @@
 import streamlit as st
+from utils import render_multiple_choice_quiz
 
 
 def render_PB02():
@@ -133,68 +134,16 @@ $$P(A) = 1 - P(A^c)$$
 """)
 
     with st.expander("❓ Cuestionario PB02: Probabilidad Clásica", expanded=False):
-        st.markdown(r"""
-**1. Se lanza un dado justo. $P(\text{obtener un } 5) =$**
-
-A) $\frac{1}{5}$
-B) $\frac{5}{6}$
-C) $\frac{1}{6}$
-D) $\frac{1}{3}$
-
----
-
-**2. Si $P(A) = 0{,}3$, entonces $P(A^c) =$**
-
-A) $0{,}3$
-B) $0{,}7$
-C) $1{,}3$
-D) $-0{,}3$
-
----
-
-**3. De una urna con $5$ bolas rojas y $3$ azules, la probabilidad de sacar una bola azul es:**
-
-A) $\frac{3}{5}$
-B) $\frac{5}{8}$
-C) $\frac{3}{8}$
-D) $\frac{5}{3}$
-
----
-
-**4. Al lanzar dos monedas, $P(\text{ambas caras}) =$**
-
-A) $\frac{1}{2}$
-B) $\frac{1}{3}$
-C) $\frac{1}{4}$
-D) $\frac{2}{4}$
-
----
-
-**5. Si $P(A) = \frac{1}{4}$ y $P(B) = \frac{1}{3}$, y $A$ y $B$ son mutuamente excluyentes, $P(A \cup B) =$**
-
-A) $\frac{1}{12}$
-B) $\frac{7}{12}$
-C) $\frac{1}{7}$
-D) $\frac{2}{7}$
-
----
-
-**6. De un mazo de $40$ cartas (baraja española), ¿cuál es la probabilidad de NO sacar un as?**
-
-A) $\frac{4}{40}$
-B) $\frac{1}{10}$
-C) $\frac{36}{40}$
-D) $\frac{39}{40}$
-
----
-
-**7. Se lanzan dos dados. ¿Cuántos resultados posibles hay en el espacio muestral?**
-
-A) $12$
-B) $36$
-C) $6$
-D) $24$
-""")
+        quiz_questions = [
+            {"question": "Se lanza un dado justo. $P(\\text{obtener un } 5) =$", "options": {"A": "$\\frac{1}{5}$", "B": "$\\frac{5}{6}$", "C": "$\\frac{1}{6}$", "D": "$\\frac{1}{3}$"}, "answer": "C", "explanation": "$P(5)=\\frac{1}{6}$: 1 caso favorable de 6 posibles."},
+            {"question": "Si $P(A) = 0{,}3$, entonces $P(A^c) =$", "options": {"A": "$0{,}3$", "B": "$0{,}7$", "C": "$1{,}3$", "D": "$-0{,}3$"}, "answer": "B", "explanation": "$P(A^c)=1-P(A)=1-0{,}3=0{,}7$."},
+            {"question": "De una urna con $5$ bolas rojas y $3$ azules, la probabilidad de sacar una bola azul es:", "options": {"A": "$\\frac{3}{5}$", "B": "$\\frac{5}{8}$", "C": "$\\frac{3}{8}$", "D": "$\\frac{5}{3}$"}, "answer": "C", "explanation": "Casos favorables/posibles: $\\frac{3}{8}$."},
+            {"question": "Al lanzar dos monedas, $P(\\text{ambas caras}) =$", "options": {"A": "$\\frac{1}{2}$", "B": "$\\frac{1}{3}$", "C": "$\\frac{1}{4}$", "D": "$\\frac{2}{4}$"}, "answer": "C", "explanation": "En $\\{CC,CS,SC,SS\\}$ solo $CC$ es favorable: $\\frac{1}{4}$."},
+            {"question": "Si $P(A)=\\frac{1}{4}$ y $P(B)=\\frac{1}{3}$, y $A$ y $B$ son mutuamente excluyentes, $P(A\\cup B) =$", "options": {"A": "$\\frac{1}{12}$", "B": "$\\frac{7}{12}$", "C": "$\\frac{1}{7}$", "D": "$\\frac{2}{7}$"}, "answer": "B", "explanation": "Mutuamente excluyentes: $P(A\\cup B)=P(A)+P(B)=\\frac{7}{12}$."},
+            {"question": "De un mazo de $40$ cartas (baraja española), ¿cuál es la probabilidad de NO sacar un as?", "options": {"A": "$\\frac{4}{40}$", "B": "$\\frac{1}{10}$", "C": "$\\frac{36}{40}$", "D": "$\\frac{39}{40}$"}, "answer": "C", "explanation": "Complemento: $1-\\frac{4}{40}=\\frac{36}{40}$."},
+            {"question": "Se lanzan dos dados. ¿Cuántos resultados posibles hay en el espacio muestral?", "options": {"A": "$12$", "B": "$36$", "C": "$6$", "D": "$24$"}, "answer": "B", "explanation": "$6\\times 6=36$ resultados equiprobables."},
+        ]
+        render_multiple_choice_quiz(quiz_questions, key_prefix="pb02_quiz")
 
     with st.expander("🔑 Pauta Técnica PB02: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
