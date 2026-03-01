@@ -11,7 +11,7 @@ from styles import aplicar_estilos
 # 1. CONFIGURACIÓN Y ESTADOS
 # =============================================================================
 
-st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
+st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
 
 if 'eje_actual'         not in st.session_state: st.session_state.eje_actual         = None
 if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
@@ -41,7 +41,7 @@ aplicar_estilos()
 # =============================================================================
 
 with st.sidebar:
-    st.markdown("# 🚀 Perfil\n**Barton**")
+    st.markdown("### 🐉 Lagrangianitos")
     if st.session_state.ultimo_visto:
         st.markdown(
             f'<div style="background:#f0f0f0; border-radius:8px; padding:8px; font-size:12px; color:#555; margin-top:4px;">'
@@ -53,7 +53,7 @@ with st.sidebar:
                     index=["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"].index(st.session_state.menu_actual))
     st.session_state.menu_actual = menu
     st.divider()
-    st.write("Sólo existen dos días en el año en los que no se puede hacer nada... Dalai Lama")
+    st.caption("💬 _\"Sólo existen dos días en el año en los que no se puede hacer nada.\"_ — Dalai Lama")
 
 # =============================================================================
 # 4. DASHBOARD PRINCIPAL
@@ -69,8 +69,8 @@ if menu == "🏠 Dashboard PAES":
 
     st.markdown(
         f'<div class="header-azul">'
-        f'<div class="titulo-header">🐉 Lagrangianitos. Tus recursos PAES M1</div>'
-        f'<div class="info-header">📍 Santiago, Chile | 🕒 {ahora.strftime("%H:%M")}</div>'
+        f'<div class="titulo-header">🐉 Lagrangianitos — PAES M1</div>'
+        f'<div class="info-header">📍 Santiago · 🕒 {ahora.strftime("%H:%M")}</div>'
         f'</div>',
         unsafe_allow_html=True
     )
@@ -95,64 +95,65 @@ if menu == "🏠 Dashboard PAES":
 
         st.markdown("""
         <style>
-        div[data-testid="stHorizontalBlock"] div.stButton:nth-child(1) button,
-        div[data-testid="stHorizontalBlock"] div.stButton:nth-child(2) button {
-            min-height: 80px !important;
-            font-size: 18px !important;
+        .eje-grid div.stButton > button {
+            min-height: 70px !important;
+            font-size: 16px !important;
             font-weight: bold !important;
             color: white !important;
             border: none !important;
-            border-radius: 12px !important;
+            border-radius: 14px !important;
+            margin-bottom: 6px !important;
         }
         </style>
         """, unsafe_allow_html=True)
 
+        st.markdown('<div class="eje-grid">', unsafe_allow_html=True)
+
         # Fila 1
         c1, c2 = st.columns(2)
         with c1:
-            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background-color:#c0392b!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#e74c3c,#c0392b)!important;}</style>', unsafe_allow_html=True)
             if st.button("🔢 Números", key="m_n", use_container_width=True):
                 st.session_state.eje_actual = "🔢 Números"; st.rerun()
         with c2:
-            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background-color:#1b5e20!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#27ae60,#1b5e20)!important;}</style>', unsafe_allow_html=True)
             if st.button("📉 Álgebra", key="m_a", use_container_width=True):
                 st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
 
         # Fila 2
         c3, c4 = st.columns(2)
         with c3:
-            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background-color:#7b1fa2!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            st.markdown('<style>div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#9b59b6,#7b1fa2)!important;}</style>', unsafe_allow_html=True)
             if st.button("📐 Geometría", key="m_g", use_container_width=True):
                 st.session_state.eje_actual = "📐 Geometría"; st.rerun()
         with c4:
-            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background-color:#e65100!important;color:white!important;border:none!important;min-height:80px!important;font-size:18px!important;font-weight:bold!important;border-radius:12px!important;}</style>', unsafe_allow_html=True)
+            st.markdown('<style>div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#f39c12,#e65100)!important;}</style>', unsafe_allow_html=True)
             if st.button("📊 Datos y Azar", key="m_d", use_container_width=True):
                 st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
 
+        st.markdown('</div>', unsafe_allow_html=True)
+
         st.write("")
-        col_iz, col_pdf, col_der = st.columns([1, 4, 1])
-        with col_pdf:
-            st.markdown('<div class="pdf-btn">', unsafe_allow_html=True)
-            if st.button("📄 Materiales descargables en PDF", key="m_pdf", use_container_width=True):
-                st.session_state.menu_actual = "📂 Biblioteca de PDFs"
-                st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('<div class="pdf-btn">', unsafe_allow_html=True)
+        if st.button("📄 Materiales descargables en PDF", key="m_pdf", use_container_width=True):
+            st.session_state.menu_actual = "📂 Biblioteca de PDFs"
+            st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # ── DENTRO DE UN EJE ────────────────────────────────────────────────────
     else:
         # CSS nth-child para colorear cada botón de la barra por posición
-        # Limitado al primer stHorizontalBlock de la página (la barra nav)
         st.markdown("""
         <style>
         div.stButton > button[data-testid="baseButton-secondary"] {
             background-color: inherit;
         }
-        /* Barra nav: identificada por tener exactamente 5 columnas iguales */
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(1) button { background-color: #1a1a2e !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(2) button { background-color: #c0392b !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(3) button { background-color: #1b5e20 !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(4) button { background-color: #7b1fa2 !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(5) button { background-color: #e65100 !important; color: white !important; border: none !important; }
+        /* Barra nav: 5 columnas */
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(1) button { background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(2) button { background: linear-gradient(135deg,#e74c3c,#c0392b) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(3) button { background: linear-gradient(135deg,#27ae60,#1b5e20) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(4) button { background: linear-gradient(135deg,#9b59b6,#7b1fa2) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(5) button { background: linear-gradient(135deg,#f39c12,#e65100) !important; color: white !important; border: none !important; }
         </style>
         """, unsafe_allow_html=True)
 
@@ -216,12 +217,12 @@ if menu == "🏠 Dashboard PAES":
                     st.markdown(f"""
                     <style>
                     div[data-testid="stHorizontalBlock"]:has(+ *) div[data-testid="column"]:first-child button {{
-                        background-color: {color} !important;
+                        background: linear-gradient(135deg, {color}, {color}cc) !important;
                         color: white !important;
                         border: none !important;
-                        border-radius: 12px !important;
-                        min-height: 75px !important;
-                        font-size: 18px !important;
+                        border-radius: 14px !important;
+                        min-height: 65px !important;
+                        font-size: 16px !important;
                         font-weight: bold !important;
                     }}
                     </style>
@@ -245,7 +246,7 @@ if menu == "🏠 Dashboard PAES":
             st.markdown("""
             <style>
             div.stButton > button p {
-                font-size: 20px !important;
+                font-size: 16px !important;
                 font-weight: 600 !important;
             }
             </style>
@@ -298,12 +299,12 @@ if menu == "🏠 Dashboard PAES":
             st.markdown(f"""
             <style>
             .nav-clase div.stButton > button {{
-                background-color: {color} !important;
+                background: linear-gradient(135deg, {color}, {color}cc) !important;
                 color: white !important;
                 border: none !important;
                 border-radius: 10px !important;
-                min-height: 60px !important;
-                font-size: 14px !important;
+                min-height: 50px !important;
+                font-size: 13px !important;
                 font-weight: bold !important;
                 width: 100% !important;
             }}
@@ -379,15 +380,15 @@ if menu == "🏠 Dashboard PAES":
             no_hay_siguiente_real = siguiente is None or subcats[subcat][siguiente]["render"].__name__ == "<lambda>"
             if es_ultima_real and no_hay_siguiente_real:
                 st.markdown(f"""
-                <div style="background:linear-gradient(135deg,{color},{color}99);
-                            border-radius:15px; padding:20px; text-align:center;
+                <div style="background:linear-gradient(135deg,{color},{color}88);
+                            border-radius:16px; padding:20px; text-align:center;
                             color:white; margin:20px 0;">
-                    <div style="font-size:40px;">🏆</div>
-                    <div style="font-size:18px; font-weight:bold; margin:8px 0;">
+                    <div style="font-size:36px;">🏆</div>
+                    <div style="font-size:16px; font-weight:bold; margin:8px 0;">
                         ¡Completaste {subcat}!
                     </div>
-                    <div style="font-size:14px; opacity:0.9;">
-                        Has terminado las clases disponibles de esta sección. ¡Sigue así!
+                    <div style="font-size:13px; opacity:0.9;">
+                        Has terminado las clases disponibles de esta sección. ¡Sigue así! 💪
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -406,37 +407,35 @@ if menu == "🏠 Dashboard PAES":
             """, unsafe_allow_html=True)
 
 elif menu == "📂 Biblioteca de PDFs":
-    col_back, _ = st.columns([1, 4])
-    with col_back:
-        if st.button("← Volver", key="back_pdf", use_container_width=True):
-            st.session_state.menu_actual = "🏠 Dashboard PAES"
-            st.rerun()
+    if st.button("← Volver", key="back_pdf"):
+        st.session_state.menu_actual = "🏠 Dashboard PAES"
+        st.rerun()
     st.markdown("""
     <style>
     .pdf-card {
         background: white;
-        border-radius: 15px;
-        padding: 20px 25px;
-        margin-bottom: 15px;
-        border-left: 6px solid #4a0e8f;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 12px;
+        border-left: 5px solid #6C63FF;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 12px;
     }
-    .pdf-icon { font-size: 36px; }
-    .pdf-nombre { font-size: 16px; font-weight: bold; color: #1a1a2e; margin-bottom: 4px; }
-    .pdf-desc { font-size: 13px; color: #666; }
+    .pdf-icon { font-size: 30px; }
+    .pdf-nombre { font-size: 15px; font-weight: bold; color: #1a1a2e; margin-bottom: 3px; }
+    .pdf-desc { font-size: 12px; color: #666; }
     </style>
     """, unsafe_allow_html=True)
 
     st.markdown("""
-    <div style="background:linear-gradient(135deg,#4a0e8f,#1a1a2e);
-                border-radius:15px; padding:25px; color:white;
-                text-align:center; margin-bottom:25px;">
-        <div style="font-size:40px;">📂</div>
-        <div style="font-size:22px; font-weight:900; letter-spacing:2px;">BIBLIOTECA DE RECURSOS</div>
-        <div style="font-size:14px; opacity:0.8; margin-top:5px;">Material oficial PAES M1 para descargar</div>
+    <div style="background:linear-gradient(135deg,#6C63FF,#1a1a2e);
+                border-radius:16px; padding:20px; color:white;
+                text-align:center; margin-bottom:20px;">
+        <div style="font-size:36px;">📂</div>
+        <div style="font-size:20px; font-weight:900; letter-spacing:2px;">BIBLIOTECA DE RECURSOS</div>
+        <div style="font-size:13px; opacity:0.8; margin-top:4px;">Material oficial PAES M1 para descargar</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -487,48 +486,51 @@ elif menu == "🐉 Bienvenida":
     .bienvenida-hero {
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
         border-radius: 20px;
-        padding: 50px 30px;
+        padding: 40px 20px;
         text-align: center;
         color: white;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
     }
-    .bienvenida-dragon { font-size: 110px; margin-bottom: 15px; }
-    .bienvenida-titulo { font-size: 36px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
+    .bienvenida-dragon { font-size: 80px; margin-bottom: 10px; }
+    .bienvenida-titulo { font-size: 28px; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
     .bienvenida-lema {
-        font-size: 20px;
+        font-size: 17px;
         color: #f0c040;
         font-style: italic;
         font-weight: bold;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
-    .bienvenida-sub { font-size: 18px; font-weight: 700; opacity: 0.95; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+    .bienvenida-sub {
+        font-size: 15px; font-weight: 600; opacity: 0.95;
+        max-width: 500px; margin: 0 auto; line-height: 1.6;
+    }
 
     .card-eje {
-        border-radius: 15px;
-        padding: 20px;
+        border-radius: 14px;
+        padding: 16px;
         text-align: center;
         color: white;
         font-weight: bold;
-        font-size: 16px;
-        margin-bottom: 10px;
+        font-size: 15px;
+        margin-bottom: 8px;
     }
 
     .seccion-titulo {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: bold;
         color: #1a1a2e;
-        border-left: 5px solid #c0392b;
+        border-left: 5px solid #6C63FF;
         padding-left: 12px;
-        margin: 30px 0 15px 0;
+        margin: 24px 0 12px 0;
     }
 
     .pill {
         display: inline-block;
         background: #f0f0f0;
         border-radius: 20px;
-        padding: 6px 16px;
+        padding: 6px 14px;
         margin: 4px;
-        font-size: 14px;
+        font-size: 13px;
         color: #333;
     }
     </style>
@@ -539,7 +541,7 @@ elif menu == "🐉 Bienvenida":
         <div class="bienvenida-lema">"Enseñamos conceptos, no solo tricks"</div>
         <div class="bienvenida-sub">
             Tu plataforma de preparación PAES M1.<br>
-            Matemática con profundidad, desde los fundamentos hasta la prueba.
+            Matemática con profundidad, desde los fundamentos hasta la prueba. 🚀
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -548,24 +550,22 @@ elif menu == "🐉 Bienvenida":
     st.markdown('<div class="seccion-titulo">📚 Contenidos del curso</div>', unsafe_allow_html=True)
     c1, c2 = st.columns(2)
     with c1:
-        st.markdown('<div class="card-eje" style="background:#c0392b;">🔢 Números<br><small>Conjuntos · Operatoria · Razones</small></div>', unsafe_allow_html=True)
-        st.markdown('<div class="card-eje" style="background:#7b1fa2;">📐 Geometría<br><small>Figuras · Área y Volumen · Vectores</small></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#e74c3c,#c0392b);">🔢 Números<br><small>Conjuntos · Operatoria · Razones</small></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#9b59b6,#7b1fa2);">📐 Geometría<br><small>Figuras · Área y Volumen · Vectores</small></div>', unsafe_allow_html=True)
     with c2:
-        st.markdown('<div class="card-eje" style="background:#1b5e20;">📉 Álgebra<br><small>Álgebra · Funciones</small></div>', unsafe_allow_html=True)
-        st.markdown('<div class="card-eje" style="background:#e65100;">📊 Datos y Azar<br><small>Estadística · Probabilidad</small></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#27ae60,#1b5e20);">📉 Álgebra<br><small>Álgebra · Funciones</small></div>', unsafe_allow_html=True)
+        st.markdown('<div class="card-eje" style="background:linear-gradient(135deg,#f39c12,#e65100);">📊 Datos y Azar<br><small>Estadística · Probabilidad</small></div>', unsafe_allow_html=True)
 
     # CTA
     st.write("")
-    col_iz, col_cta, col_der = st.columns([1, 2, 1])
-    with col_cta:
-        if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
-            st.session_state.menu_actual = "🏠 Dashboard PAES"
-            st.rerun()
+    if st.button("🚀 Ir al Dashboard", key="cta_dashboard", use_container_width=True):
+        st.session_state.menu_actual = "🏠 Dashboard PAES"
+        st.rerun()
 
     # Metodología
     st.markdown('<div class="seccion-titulo">🛡️ Nuestra metodología</div>', unsafe_allow_html=True)
     st.markdown("""
-    <div style="background:#f9f9f9; border-radius:15px; padding:20px; line-height:2;">
+    <div style="background:#f9f9f9; border-radius:14px; padding:16px; line-height:2;">
     <span class="pill">📖 Clases con historia y contexto</span>
     <span class="pill">📊 Visualizaciones interactivas</span>
     <span class="pill">🧠 Profundidad conceptual</span>
