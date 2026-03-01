@@ -3,7 +3,12 @@ from datetime import datetime
 from pathlib import Path
 import pytz
 import time
-from streamlit_autorefresh import st_autorefresh
+try:
+    from streamlit_autorefresh import st_autorefresh
+except ModuleNotFoundError:
+    def st_autorefresh(*args, **kwargs):
+        """No-op fallback when streamlit_autorefresh is unavailable."""
+        return None
 
 from contenidos import CONTENIDOS
 from styles import aplicar_estilos
