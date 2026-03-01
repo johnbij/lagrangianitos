@@ -1,5 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+from utils import render_multiple_choice_quiz
 
 
 def render_N03():
@@ -179,95 +180,19 @@ La PAES no siempre te dirá "use los cardinales". Usará estas frases clave:
 """)
 
     with st.expander("❓ Cuestionario N03: Números Cardinales", expanded=False):
-        st.markdown(r"""
-**1. ¿Cuál es el único número que pertenece al conjunto de los Cardinales ($\mathbb{N}_0$) pero NO al de los Naturales ($\mathbb{N}$)?**
-
-A) 1  
-B) 0  
-C) -1  
-D) No existe tal número.
-
----
-
-**2. Si $n$ es un número cardinal, ¿cuál es la condición para que $n$ NO tenga un antecesor en $\mathbb{N}_0$?**
-
-A) $n = 1$  
-B) $n$ debe ser par.  
-C) $n = 0$  
-D) Todos los cardinales tienen antecesor.
-
----
-
-**3. ¿Cuál de las siguientes frases representa al conjunto $\{0, 1, 2, 3, ...\}$?**
-
-A) Enteros positivos.  
-B) Enteros no positivos.  
-C) Enteros no negativos.  
-D) Naturales.
-
----
-
-**4. Respecto al número 0, ¿cuál de estas afirmaciones es CORRECTA?**
-
-A) Es un número impar.  
-B) Es el neutro multiplicativo.  
-C) Es un número par.  
-D) Es el sucesor de 1.
-
----
-
-**5. La expresión $\frac{5}{k-2}$ no está definida en los reales. ¿Cuál es el valor de $k$?**
-
-A) 0  
-B) 2  
-C) 5  
-D) -2
-
----
-
-**6. Si $A = \{ \text{enteros no negativos menores que 2} \}$, ¿cuál es la cardinalidad (cantidad de elementos) de $A$?**
-
-A) 1  
-B) 2  
-C) 3  
-D) Infinita
-
----
-
-**7. ¿Qué propiedad del cero se aplica en la operación $1.245 \cdot 0 = 0$?**
-
-A) Neutro aditivo  
-B) Elemento absorbente  
-C) Clausura  
-D) Distributividad
-
----
-
-**8. En el conjunto $\mathbb{N}_0$, ¿cuál es el antecesor del sucesor de 0?**
-
-A) 0  
-B) 1  
-C) 2  
-D) No existe
-
----
-
-**9. Si sumamos dos números cardinales cualesquiera, el resultado siempre será un número cardinal. Esto se debe a la propiedad de:**
-
-A) Conmutatividad  
-B) Asociatividad  
-C) Clausura  
-D) Tricotomía
-
----
-
-**10. "Sea $x$ un número tal que $x \in \mathbb{N}$". De esta afirmación se deduce que:**
-
-A) $x$ puede ser 0.  
-B) $x$ es estrictamente mayor que 0.  
-C) $x$ no tiene antecesor en $\mathbb{N}_0$.  
-D) $x$ es un entero no positivo.
-""")
+        quiz_questions = [
+            {"question": "¿Cuál es el único número que pertenece al conjunto de los Cardinales ($\\mathbb{N}_0$) pero NO al de los Naturales ($\\mathbb{N}$)?", "options": {"A": "1", "B": "0", "C": "-1", "D": "No existe tal número."}, "answer": "B", "explanation": "La definición de $\\mathbb{N}_0$ es $\\mathbb{N} \\cup \\{0\\}$. El cero es el único elemento extra."},
+            {"question": "Si $n$ es un número cardinal, ¿cuál es la condición para que $n$ NO tenga un antecesor en $\\mathbb{N}_0$?", "options": {"A": "$n = 1$", "B": "$n$ debe ser par.", "C": "$n = 0$", "D": "Todos los cardinales tienen antecesor."}, "answer": "C", "explanation": "En $\\mathbb{N}_0$, el 0 es el límite izquierdo del conjunto y no tiene antecesor."},
+            {"question": "¿Cuál de las siguientes frases representa al conjunto $\\{0, 1, 2, 3, ...\\}$?", "options": {"A": "Enteros positivos.", "B": "Enteros no positivos.", "C": "Enteros no negativos.", "D": "Naturales."}, "answer": "C", "explanation": "No negativos incluye al 0 y a todos los enteros positivos."},
+            {"question": "Respecto al número 0, ¿cuál de estas afirmaciones es CORRECTA?", "options": {"A": "Es un número impar.", "B": "Es el neutro multiplicativo.", "C": "Es un número par.", "D": "Es el sucesor de 1."}, "answer": "C", "explanation": "El 0 es par porque puede escribirse como $2\\cdot 0$."},
+            {"question": "La expresión $\\frac{5}{k-2}$ no está definida en los reales. ¿Cuál es el valor de $k$?", "options": {"A": "0", "B": "2", "C": "5", "D": "-2"}, "answer": "B", "explanation": "Una fracción es indefinida cuando su denominador vale 0. Aquí, $k-2=0$ implica $k=2$."},
+            {"question": "Si $A = \\{ \\text{enteros no negativos menores que 2} \\}$, ¿cuál es la cardinalidad (cantidad de elementos) de $A$?", "options": {"A": "1", "B": "2", "C": "3", "D": "Infinita"}, "answer": "B", "explanation": "Los elementos son $\\{0,1\\}$, por lo que hay 2 elementos."},
+            {"question": "¿Qué propiedad del cero se aplica en la operación $1.245 \\cdot 0 = 0$?", "options": {"A": "Neutro aditivo", "B": "Elemento absorbente", "C": "Clausura", "D": "Distributividad"}, "answer": "B", "explanation": "Cualquier número multiplicado por 0 da 0: propiedad de elemento absorbente."},
+            {"question": "En el conjunto $\\mathbb{N}_0$, ¿cuál es el antecesor del sucesor de 0?", "options": {"A": "0", "B": "1", "C": "2", "D": "No existe"}, "answer": "A", "explanation": "El sucesor de 0 es 1 y su antecesor vuelve a ser 0."},
+            {"question": "Si sumamos dos números cardinales cualesquiera, el resultado siempre será un número cardinal. Esto se debe a la propiedad de:", "options": {"A": "Conmutatividad", "B": "Asociatividad", "C": "Clausura", "D": "Tricotomía"}, "answer": "C", "explanation": "La clausura garantiza que operar elementos del conjunto produce otro elemento del mismo conjunto."},
+            {"question": "\"Sea $x$ un número tal que $x \\in \\mathbb{N}$\". De esta afirmación se deduce que:", "options": {"A": "$x$ puede ser 0.", "B": "$x$ es estrictamente mayor que 0.", "C": "$x$ no tiene antecesor en $\\mathbb{N}_0$.", "D": "$x$ es un entero no positivo."}, "answer": "B", "explanation": "Aquí $\\mathbb{N}=\\{1,2,3,\\dots\\}$, por eso $x$ debe ser mayor que 0."},
+        ]
+        render_multiple_choice_quiz(quiz_questions, key_prefix="n03_quiz")
 
     with st.expander("🔑 Pauta Técnica N03: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
