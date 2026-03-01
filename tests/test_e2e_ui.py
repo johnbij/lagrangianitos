@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from streamlit.testing.v1 import AppTest
 
@@ -105,6 +106,19 @@ class TestE2EUI(unittest.TestCase):
         at.button(key="btn_siguiente_top").click().run(timeout=60)
         at.radio(key="pb03_quiz_q1").set_value("A").run(timeout=60)
         self.assertTrue(any("❌ Incorrecta." in err.value for err in at.error))
+
+    def test_app_loads_without_streamlit_autorefresh_dependency(self):
+        original_import = __import__
+
+        def _import_with_missing_autorefresh(name, *args, **kwargs):
+            if name == "streamlit_autorefresh":
+                raise ModuleNotFoundError(name)
+            return original_import(name, *args, **kwargs)
+
+        with patch("builtins.__import__", side_effect=_import_with_missing_autorefresh):
+            at = AppTest.from_file(str(APP_PATH)).run(timeout=60)
+
+        self.assertEqual(at.radio[0].value, "🐉 Bienvenida")
 
 
 if __name__ == "__main__":
