@@ -6,6 +6,7 @@ from streamlit_autorefresh import st_autorefresh
 
 from contenidos import CONTENIDOS
 from styles import aplicar_estilos
+from logros import registrar_clase, render_ranking
 
 # =============================================================================
 # 1. CONFIGURACIÓN Y ESTADOS
@@ -22,6 +23,7 @@ if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio 
 if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vista   = False
 if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "🐉 Bienvenida"
 if 'ultimo_visto'       not in st.session_state: st.session_state.ultimo_visto       = None
+if 'nick_usuario'      not in st.session_state: st.session_state.nick_usuario       = ""
 
 COLORES = {
     "rojo":    "#c0392b",
@@ -49,8 +51,8 @@ with st.sidebar:
             unsafe_allow_html=True
         )
     st.divider()
-    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"],
-                    index=["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"].index(st.session_state.menu_actual))
+    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"],
+                    index=["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"].index(st.session_state.menu_actual))
     st.session_state.menu_actual = menu
     st.divider()
     st.caption("💬 _\"Sólo existen dos días en el año en los que no se puede hacer nada.\"_ — Dalai Lama")
@@ -336,6 +338,10 @@ if menu == "🏠 Dashboard PAES":
             label_actual = subcats.get(subcat, {}).get(codigo, {}).get("label", codigo)
             st.session_state.ultimo_visto = f"{subcat} · {label_actual}"
 
+            # Registrar clase vista para el ranking
+            if st.session_state.nick_usuario:
+                registrar_clase(st.session_state.nick_usuario, codigo)
+
             # Indicador de posición + barra de progreso
             total        = len(codigos)
             reales_count = len(codigos_reales)
@@ -405,6 +411,9 @@ if menu == "🏠 Dashboard PAES":
                 </a>
             </div>
             """, unsafe_allow_html=True)
+
+elif menu == "🏆 Ranking":
+    render_ranking()
 
 elif menu == "📂 Biblioteca de PDFs":
     if st.button("← Volver", key="back_pdf"):
