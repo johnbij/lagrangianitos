@@ -112,7 +112,7 @@ class TestE2EUI(unittest.TestCase):
 
         def _import_with_missing_autorefresh(name, *args, **kwargs):
             if name == "streamlit_autorefresh":
-                raise ModuleNotFoundError(name)
+                raise ModuleNotFoundError(f"No module named '{name}'")
             return original_import(name, *args, **kwargs)
 
         with patch("builtins.__import__", side_effect=_import_with_missing_autorefresh):

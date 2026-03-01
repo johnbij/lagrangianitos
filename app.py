@@ -7,6 +7,7 @@ try:
     from streamlit_autorefresh import st_autorefresh
 except ModuleNotFoundError:
     def st_autorefresh(*args, **kwargs):
+        """No-op fallback when streamlit_autorefresh is unavailable."""
         return None
 
 from contenidos import CONTENIDOS
