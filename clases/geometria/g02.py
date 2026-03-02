@@ -1,226 +1,205 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """
+<style>
+.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }
+</style>
+"""
 
 def render_G02():
-    st.title("G02: Triángulos — La Figura Indestructible")
+    st.markdown(_CSS, unsafe_allow_html=True)
+    st.title("G02: Triángulos, Pitágoras, Perímetro y Área")
+    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
     st.markdown(r"""
-### 🛡️ 1. El Portal: ¿Por qué el Triángulo es la Figura más Importante?
+### 🎬 Video 061 — Triángulos: Fundamentos
 
-De todas las figuras geométricas, el triángulo es la única que **no se deforma** al aplicar fuerza sobre sus vértices. Por eso los puentes, techos y estructuras metálicas se construyen con triángulos: es la figura **rígida** por excelencia.
+**Propiedad de oro:** En cualquier triángulo del universo, la suma de sus ángulos interiores es **siempre 180°**.
 
-Un **triángulo** es un polígono de tres lados, tres vértices y tres ángulos interiores. Es el polígono más simple y la base de toda la geometría plana.
+**Clasificación según los Lados:**
 
----
-
-### 🛡️ 1.1 Clasificación por Lados
-
-| Tipo | Propiedad de lados | Propiedad de ángulos |
-| :--- | :--- | :--- |
-| **Equilátero** | Tres lados iguales | Tres ángulos iguales de $60°$ |
-| **Isósceles** | Dos lados iguales | Dos ángulos basales iguales |
-| **Escaleno** | Tres lados distintos | Tres ángulos distintos |
-
----
-
-### 🛡️ 1.2 Clasificación por Ángulos
-
-| Tipo | Propiedad |
+| Tipo | Descripción |
 | :--- | :--- |
-| **Acutángulo** | Los tres ángulos son agudos ($< 90°$) |
-| **Rectángulo** | Tiene un ángulo recto ($= 90°$) |
-| **Obtusángulo** | Tiene un ángulo obtuso ($> 90°$) |
-
-> **Tip PAES:** Un triángulo puede pertenecer a ambas clasificaciones al mismo tiempo. Por ejemplo, un triángulo **isósceles rectángulo** tiene dos lados iguales y un ángulo de $90°$.
+| **Equilátero** | 3 lados iguales → 3 ángulos de 60° |
+| **Isósceles** | 2 lados iguales → 2 ángulos iguales en la base |
+| **Escaleno** | Todos los lados y ángulos distintos |
 
 ---
 
-### 🏛️ 1.3 Propiedades Fundamentales
+### 🎬 Video 062 — Clasificación por Ángulos y Desigualdad Triangular
 
-**Suma de ángulos interiores:**
+**Tipos según sus ángulos:**
+* **Acutángulo:** Los 3 ángulos son agudos (menores de 90°).
+* **Rectángulo:** Tiene exactamente un ángulo de 90°.
+* **Obtusángulo:** Tiene un ángulo obtuso (mayor de 90°).
 
-$$\alpha + \beta + \gamma = 180°$$
+**Desigualdad Triangular:** Para que un triángulo exista, la suma de **cualquiera de sus dos lados** debe ser **mayor** que el tercer lado.
 
-Esta es la propiedad más usada en la PAES. Si conoces dos ángulos, siempre puedes encontrar el tercero.
-
-**Ángulo exterior:**
-
-El ángulo exterior de un triángulo es igual a la **suma de los dos ángulos interiores no adyacentes**:
-
-$$\theta_{ext} = \alpha + \beta$$
-
-donde $\alpha$ y $\beta$ son los ángulos interiores no adyacentes al ángulo exterior $\theta_{ext}$.
-
-**Desigualdad triangular:**
-
-Para que tres segmentos formen un triángulo, la suma de cualesquiera dos lados debe ser **mayor** que el tercero:
-
-$$a + b > c, \quad a + c > b, \quad b + c > a$$
-
-> **Tip PAES:** Para verificar rápidamente, basta comprobar que la suma de los dos lados **menores** sea mayor que el lado **mayor**.
+> *Si tienes palitos de 2 cm, 2 cm y 10 cm, nunca podrás cerrar el triángulo. La línea recta es el camino más corto — si los otros dos lados no suman más que el tercero, nunca se van a tocar.*
 
 ---
 
-### 🛡️ 1.4 Congruencia de Triángulos
+### 🎬 Video 063 — Teorema de Pitágoras
 
-Dos triángulos son **congruentes** ($\cong$) si tienen exactamente la misma forma y tamaño. Los criterios son:
+Se aplica **solo** cuando hay un ángulo de 90°:
 
-| Criterio | Significado | Qué necesitas saber |
-| :--- | :--- | :--- |
-| **LLL** | Lado-Lado-Lado | Los tres lados de uno son iguales a los tres del otro |
-| **LAL** | Lado-Ángulo-Lado | Dos lados y el ángulo **comprendido** entre ellos son iguales |
-| **ALA** | Ángulo-Lado-Ángulo | Dos ángulos y el lado **comprendido** entre ellos son iguales |
+* **Catetos ($a, b$):** Los dos lados que forman la 'L'.
+* **Hipotenusa ($c$):** El lado más largo, siempre frente al ángulo recto.
 
-> **Cuidado:** El criterio **AAL** (Ángulo-Ángulo-Lado) también es válido, pero **LLA** no siempre lo es (caso ambiguo).
+$$a^2 + b^2 = c^2$$
 
----
+**Tríos Pitagóricos (ahorra tiempo en la prueba):**
 
-### 🛡️ 1.5 Semejanza de Triángulos
-
-Dos triángulos son **semejantes** ($\sim$) si tienen la misma forma pero pueden diferir en tamaño. Sus lados correspondientes son **proporcionales** y sus ángulos correspondientes son **iguales**.
-
-| Criterio | Significado |
-| :--- | :--- |
-| **AA** | Dos pares de ángulos iguales (el tercero queda determinado) |
-| **LAL** | Dos lados proporcionales y el ángulo comprendido igual |
-| **LLL** | Los tres pares de lados proporcionales |
-
-Si los triángulos son semejantes con razón de semejanza $k$, entonces:
-
-$$\frac{a'}{a} = \frac{b'}{b} = \frac{c'}{c} = k$$
-
----
-
-> "Un triángulo es la mitad de un paralelogramo, y eso basta para construir el mundo."
-> — **Euclides**
+| Trío | Verificación |
+| :---: | :--- |
+| $(3, 4, 5)$ | $9 + 16 = 25$ ✅ |
+| $(5, 12, 13)$ | $25 + 144 = 169$ ✅ |
+| $(8, 15, 17)$ | $64 + 225 = 289$ ✅ |
 """)
 
+    # ── FIGURA: Pitágoras ────────────────────────────────────────────────────
+    st.markdown("#### 📊 Visualización: Teorema de Pitágoras — Trío 3-4-5")
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+
+    # Triángulo rectángulo 3-4-5
+    ax.plot([0, 4, 0, 0], [0, 0, 3, 0], 'b-', lw=3)
+    ax.plot([0.3, 0.3, 0], [0, 0.3, 0.3], 'k-', lw=1.5)  # Cuadrito 90°
+    ax.fill([0, 4, 0], [0, 0, 3], color='#AED6F1', alpha=0.4)
+
+    ax.text(2, -0.4, "Cateto $a = 4$", ha='center', fontsize=12, color='#1a5276')
+    ax.text(-0.9, 1.5, "Cateto\n$b = 3$", va='center', fontsize=12, color='#1a5276')
+    ax.text(2.3, 1.9, "Hipotenusa $c = 5$", rotation=-36.8, fontsize=12,
+            fontweight='bold', color='#922b21')
+    ax.text(2, 3.5, r"$a^2 + b^2 = c^2$  →  $16 + 9 = 25$ ✅",
+            ha='center', fontsize=13, fontweight='bold')
+
+    ax.set_xlim(-2, 5.5); ax.set_ylim(-1, 4.5)
+    ax.axis('off')
+    ax.set_title("Teorema de Pitágoras: $3^2 + 4^2 = 5^2$", fontsize=14, fontweight='bold')
+    plt.tight_layout()
+    st.pyplot(fig)
+    plt.close()
+
+    st.markdown(r"""
+---
+
+### 🎬 Video 064 — Perímetro: El Cerco de Seguridad
+
+Es la suma de **todos los lados** de una figura. Mide la longitud total del borde.
+
+| Figura | Fórmula del Perímetro |
+| :--- | :--- |
+| **Cuadrado** | $P = 4 \cdot L$ |
+| **Rectángulo** | $P = 2(L + A)$ |
+| **Triángulo Equilátero** | $P = 3 \cdot L$ |
+| **Polígono Irregular** | $P = $ suma de todos sus lados |
+| **Circunferencia** | $P = 2\pi r$ |
+
+---
+
+### 🎬 Video 065 — Área: Control del Territorio
+
+El área mide el **espacio interior** de una figura (en unidades cuadradas).
+
+| Figura | Fórmula del Área |
+| :--- | :--- |
+| **Cuadrado** | $A = L^2$ |
+| **Rectángulo** | $A = B \cdot h$ |
+| **Triángulo** | $A = \dfrac{B \cdot h}{2}$ |
+| **Trapecio** | $A = \dfrac{(B_1 + B_2) \cdot h}{2}$ |
+| **Círculo** | $A = \pi r^2$ |
+
+> **Statham Tip:** *"Seba, dile que no se olvide de dividir por 2 en el triángulo. Un triángulo es la mitad de un rectángulo; si no divide, está calculando el doble del territorio."*
+""")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # ── EJEMPLOS ────────────────────────────────────────────────────────────
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería G02", expanded=False):
         st.markdown(r"""
-### E01: Encontrar un ángulo desconocido
+### E01: Identificar tipo de triángulo
 
-**Situación:** Un triángulo tiene ángulos de $45°$ y $78°$. ¿Cuánto mide el tercer ángulo?
-
-**La Carpintería:**
-1. Suma de ángulos interiores: $\alpha + \beta + \gamma = 180°$.
-2. $45° + 78° + \gamma = 180°$.
-3. $\gamma = 180° - 45° - 78° = 57°$.
+Un triángulo tiene ángulos de 90°, 40° y 50°.
+* Suma: $90° + 40° + 50° = 180°$ ✅
+* Tipo: **Rectángulo** (tiene un ángulo de 90°) y **Escaleno** (todos los ángulos y lados distintos).
 
 ---
 
-### E02: Ángulo exterior
+### E02: Aplicar Pitágoras
 
-**Situación:** En un triángulo, los ángulos interiores miden $50°$ y $65°$. ¿Cuánto mide el ángulo exterior adyacente al tercer ángulo?
+En un triángulo rectángulo con catetos $a = 5$ y $b = 12$. ¿Cuánto mide la hipotenusa?
 
-**La Carpintería:**
-1. El ángulo exterior es la suma de los dos interiores no adyacentes: $\theta_{ext} = 50° + 65° = 115°$.
-2. **Verificación:** El tercer ángulo interior es $180° - 50° - 65° = 65°$. Su suplemento es $180° - 65° = 115°$ ✅.
+$$c = \sqrt{5^2 + 12^2} = \sqrt{25 + 144} = \sqrt{169} = 13$$
 
----
-
-### E03: Desigualdad triangular
-
-**Situación:** ¿Pueden tres segmentos de longitudes $3$, $7$ y $12$ formar un triángulo?
-
-**La Carpintería:**
-1. Verificar: $3 + 7 = 10 > 12$? → $10 > 12$ es **falso**.
-2. **No pueden** formar un triángulo.
-3. La suma de los dos lados menores ($3 + 7 = 10$) no supera al lado mayor ($12$).
-
-| Verificación | Operación | ¿Cumple? |
-| :--- | :--- | :---: |
-| $3 + 7 > 12$ | $10 > 12$ | ❌ No |
+¡Es el trío $(5, 12, 13)$!
 
 ---
 
-### E04: Semejanza de triángulos
+### E03: Calcular el perímetro de un rectángulo
 
-**Situación:** Dos triángulos semejantes tienen lados $3$, $4$, $5$ y $6$, $x$, $10$ respectivamente. Encuentra $x$.
+Un rectángulo mide 8 cm de largo y 5 cm de ancho.
 
-**La Carpintería:**
-1. La razón de semejanza: $k = \dfrac{6}{3} = 2$. Verificamos: $\dfrac{10}{5} = 2$ ✅.
-2. El lado desconocido: $x = 4 \cdot 2 = 8$.
+$$P = 2(8 + 5) = 2 \cdot 13 = 26 \text{ cm}$$
 
-| Lado original | Factor $k$ | Lado semejante |
-| :--- | :---: | :--- |
-| $3$ | $\times 2$ | $6$ |
-| $4$ | $\times 2$ | $8$ |
-| $5$ | $\times 2$ | $10$ |
+---
+
+### E04: Calcular el área de un trapecio
+
+Bases de 10 cm y 6 cm, altura de 4 cm.
+
+$$A = \frac{(10 + 6) \cdot 4}{2} = \frac{16 \cdot 4}{2} = \frac{64}{2} = 32 \text{ cm}^2$$
+
+---
+
+### E05: Verificar desigualdad triangular
+
+¿Pueden ser lados de un triángulo: 3, 5 y 9?
+
+* $3 + 5 = 8 < 9$ ❌
+
+**No** pueden formar un triángulo.
 """)
 
-    with st.expander("❓ Cuestionario G02: Triángulos", expanded=False):
+    # ── QUIZ ────────────────────────────────────────────────────────────────
+    with st.expander("❓ Cuestionario G02: Triángulos y Medidas", expanded=False):
+        quiz = [
+            {"question": "Un triángulo tiene ángulos de 60°, 60° y 60°. Es:",
+             "options": {"A": "Isósceles y acutángulo", "B": "Equilátero y acutángulo", "C": "Escaleno y obtusángulo", "D": "Rectángulo e isósceles"},
+             "answer": "B", "explanation": "3 ángulos iguales de 60° → equilátero. Los 3 son agudos → acutángulo."},
+            {"question": r'En un triángulo rectángulo, los catetos miden 6 y 8. La hipotenusa mide:',
+             "options": {"A": "10", "B": "14", "C": r"$\sqrt{28}$", "D": "100"},
+             "answer": "A", "explanation": r"$\sqrt{6^2 + 8^2} = \sqrt{36+64} = \sqrt{100} = 10$. Trío 6-8-10 (múltiplo de 3-4-5)."},
+            {"question": "¿Pueden ser lados de un triángulo: 4, 4 y 9?",
+             "options": {"A": "Sí, forma un isósceles", "B": "No, viola la desigualdad triangular", "C": "Sí, forma un escaleno", "D": "No hay suficiente información"},
+             "answer": "B", "explanation": "$4 + 4 = 8 < 9$. Los dos lados no superan al tercero."},
+            {"question": "El perímetro de un cuadrado con lado 7 cm es:",
+             "options": {"A": "14 cm", "B": "28 cm", "C": "49 cm", "D": "21 cm"},
+             "answer": "B", "explanation": "$P = 4 \\times 7 = 28$ cm."},
+            {"question": r'El área de un triángulo con base 10 m y altura 6 m es:',
+             "options": {r"A": r"$60\ m^2$", "B": r"$30\ m^2$", "C": r"$15\ m^2$", "D": r"$120\ m^2$"},
+             "answer": "B", "explanation": r"$A = \frac{10 \times 6}{2} = 30\ m^2$. No olvidar el divisor 2."},
+            {"question": "Un rectángulo tiene largo 12 y ancho 4. Su perímetro es:",
+             "options": {"A": "48", "B": "32", "C": "16", "D": "64"},
+             "answer": "B", "explanation": r"$P = 2(12+4) = 2 \times 16 = 32$."},
+            {"question": r'La hipotenusa de un triángulo rectángulo es 13. Un cateto es 5. El otro cateto mide:',
+             "options": {"A": "8", "B": "12", "C": r"$\sqrt{8}$", "D": "18"},
+             "answer": "B", "explanation": r"$b = \sqrt{13^2 - 5^2} = \sqrt{169 - 25} = \sqrt{144} = 12$. Trío 5-12-13."},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="g02_quiz")
+
+    # ── PAUTA ───────────────────────────────────────────────────────────────
+    with st.expander("🔑 Pauta Técnica G02", expanded=False):
         st.markdown(r"""
-**1. Un triángulo tiene ángulos de $60°$, $60°$ y $60°$. ¿Cómo se clasifica?**
-
-A) Isósceles acutángulo
-B) Equilátero acutángulo
-C) Escaleno acutángulo
-D) Equilátero rectángulo
-
----
-
-**2. Si dos ángulos de un triángulo miden $35°$ y $90°$, ¿cuánto mide el tercero?**
-
-A) $45°$
-B) $55°$
-C) $65°$
-D) $125°$
-
----
-
-**3. ¿Cuál de las siguientes ternas de longitudes NO puede formar un triángulo?**
-
-A) $3, 4, 5$
-B) $5, 5, 8$
-C) $2, 3, 7$
-D) $6, 7, 10$
-
----
-
-**4. El ángulo exterior de un triángulo mide $130°$. Si uno de los ángulos interiores no adyacentes mide $55°$, ¿cuánto mide el otro?**
-
-A) $50°$
-B) $55°$
-C) $75°$
-D) $125°$
-
----
-
-**5. Dos triángulos tienen dos pares de ángulos iguales ($40°$ y $80°$). ¿Qué criterio de semejanza se aplica?**
-
-A) LLL
-B) LAL
-C) AA
-D) ALA
-
----
-
-**6. Si un triángulo isósceles tiene un ángulo de $100°$, ¿cuánto miden los ángulos basales?**
-
-A) $40°$ cada uno
-B) $50°$ cada uno
-C) $80°$ cada uno
-D) $30°$ cada uno
-
----
-
-**7. ¿Cuál es el criterio de congruencia que utiliza dos lados y el ángulo comprendido entre ellos?**
-
-A) LLL
-B) ALA
-C) LAL
-D) AA
-""")
-
-    with st.expander("🔑 Pauta Técnica G02: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
+| Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **B** | Tres ángulos de $60°$ implican tres lados iguales → equilátero. Todos los ángulos son agudos → acutángulo. |
-| **2** | **B** | $180° - 35° - 90° = 55°$. |
-| **3** | **C** | $2 + 3 = 5 < 7$. La suma de los dos menores no supera al mayor. |
-| **4** | **C** | Ángulo exterior = suma de interiores no adyacentes: $130° = 55° + x \Rightarrow x = 75°$. |
-| **5** | **C** | Dos pares de ángulos iguales → criterio AA de semejanza. El tercer ángulo queda determinado. |
-| **6** | **A** | El ángulo de $100°$ es el ángulo desigual. Los basales: $(180° - 100°) \div 2 = 40°$. |
-| **7** | **C** | LAL = Lado-Ángulo-Lado, donde el ángulo está comprendido entre los dos lados. |
+| **1** | **B** | 3 ángulos de 60° → equilátero. Todos agudos → acutángulo. |
+| **2** | **A** | $\sqrt{36+64} = 10$. Múltiplo del trío 3-4-5. |
+| **3** | **B** | $4+4=8 < 9$. No se cumple la desigualdad triangular. |
+| **4** | **B** | $4 \times 7 = 28$ cm. |
+| **5** | **B** | $\frac{10 \times 6}{2} = 30$. El triángulo es mitad del rectángulo. |
+| **6** | **B** | $2(12+4) = 32$. |
+| **7** | **B** | $\sqrt{169-25} = \sqrt{144} = 12$. Trío 5-12-13. |
 """)

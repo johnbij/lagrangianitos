@@ -1,218 +1,203 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """
+<style>
+.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }
+</style>
+"""
 
 def render_G03():
-    st.title("G03: Cuadriláteros y Polígonos — Más Allá del Triángulo")
+    st.markdown(_CSS, unsafe_allow_html=True)
+    st.title("G03: Círculo, Cuerpos en 3D y Transformaciones")
+    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
     st.markdown(r"""
-### 🛡️ 1. El Portal: Del Triángulo al Mundo de los Polígonos
+### 🎬 Video 066 — Círculo y Circunferencia
 
-Si el triángulo es el ladrillo básico de la geometría, los **cuadriláteros** y los **polígonos** son las paredes, pisos y techos que construimos con esos ladrillos. Todo polígono se puede descomponer en triángulos, y esa idea simple es la clave para entender sus propiedades.
+**Conceptos clave:**
+* **Radio ($r$):** Distancia del centro a cualquier punto del borde.
+* **Diámetro ($d = 2r$):** Cruza de lado a lado por el centro.
+* **Pi ($\pi \approx 3{,}14$):** La constante que relaciona el perímetro con el diámetro.
 
-Un **polígono** es una figura plana cerrada formada por segmentos de recta llamados **lados**. Un **cuadrilátero** es un polígono de cuatro lados.
+| Medida | Fórmula | Concepto |
+| :--- | :---: | :--- |
+| **Perímetro** | $2\pi r$ | La longitud del borde (la cuerda del cerco). |
+| **Área** | $\pi r^2$ | El espacio interior del círculo. |
 
----
-
-### 🛡️ 1.1 Clasificación de Cuadriláteros
-
-| Cuadrilátero | Lados paralelos | Propiedades clave |
-| :--- | :--- | :--- |
-| **Paralelogramo** | 2 pares de lados paralelos | Lados opuestos iguales, ángulos opuestos iguales, diagonales se bisecan |
-| **Rectángulo** | 2 pares de lados paralelos | Paralelogramo con 4 ángulos rectos, diagonales iguales |
-| **Rombo** | 2 pares de lados paralelos | Paralelogramo con 4 lados iguales, diagonales perpendiculares |
-| **Cuadrado** | 2 pares de lados paralelos | Rectángulo + Rombo: 4 lados iguales y 4 ángulos rectos |
-| **Trapecio** | 1 par de lados paralelos | Las bases son los lados paralelos |
-| **Trapezoide** | 0 pares de lados paralelos | Cuadrilátero general sin paralelismo |
-
-> **Tip PAES:** El cuadrado es simultáneamente un rectángulo, un rombo y un paralelogramo. La jerarquía es: cuadrado ⊂ rombo ⊂ paralelogramo y cuadrado ⊂ rectángulo ⊂ paralelogramo.
+> **Statham Tip:** *"Seba, dile al alumno que no confunda $r^2$ con $2r$. Un error ahí y el área se convierte en perímetro. Fatal."*
 
 ---
 
-### 🛡️ 1.2 Propiedades de las Diagonales
+### 🎬 Video 067 — Partes del Círculo (Arco y Sector)
 
-| Cuadrilátero | Diagonales iguales | Diagonales se bisecan | Diagonales perpendiculares |
-| :--- | :---: | :---: | :---: |
-| **Paralelogramo** | No necesariamente | ✅ Sí | No necesariamente |
-| **Rectángulo** | ✅ Sí | ✅ Sí | No necesariamente |
-| **Rombo** | No necesariamente | ✅ Sí | ✅ Sí |
-| **Cuadrado** | ✅ Sí | ✅ Sí | ✅ Sí |
-| **Trapecio isósceles** | ✅ Sí | No | No necesariamente |
+**Arco de Circunferencia:** Es un trozo del borde. Depende del ángulo central $\alpha$:
 
----
+$$L_{arco} = \frac{2\pi r \cdot \alpha}{360°}$$
 
-### 🏛️ 1.3 Suma de Ángulos Interiores de un Polígono
+**Sector Circular:** La "rebanada de pizza". Su área:
 
-Todo polígono de $n$ lados se puede dividir en $(n - 2)$ triángulos trazando diagonales desde un vértice. Como cada triángulo tiene $180°$, la suma de los ángulos interiores es:
+$$A_{sector} = \frac{\pi r^2 \cdot \alpha}{360°}$$
 
-$$S_i = (n - 2) \cdot 180°$$
-
-| Polígono | $n$ | Triángulos | Suma ángulos interiores |
-| :--- | :---: | :---: | :---: |
-| Triángulo | $3$ | $1$ | $180°$ |
-| Cuadrilátero | $4$ | $2$ | $360°$ |
-| Pentágono | $5$ | $3$ | $540°$ |
-| Hexágono | $6$ | $4$ | $720°$ |
-| Decágono | $10$ | $8$ | $1440°$ |
+**Clave:** Tanto el arco como el sector son proporcionales al ángulo. Si $\alpha = 180°$, obtienes exactamente la **mitad**.
 
 ---
 
-### 🛡️ 1.4 Polígonos Regulares
+### 🎬 Video 068 — Prismas y Cubos
 
-Un polígono es **regular** si todos sus lados son iguales y todos sus ángulos son iguales. En un polígono regular de $n$ lados, cada ángulo interior mide:
+**Volumen de un Prisma Recto:**
+$$V = \text{Área de la base} \times \text{Altura}$$
 
-$$\alpha = \frac{(n - 2) \cdot 180°}{n}$$
+**El Cubo (Hexaedro Regular):** Las 6 caras son cuadrados iguales de lado $a$.
 
-Y cada ángulo exterior mide:
-
-$$\beta = \frac{360°}{n}$$
-
-> **Dato clave:** La suma de todos los ángulos **exteriores** de cualquier polígono convexo es siempre $360°$, sin importar el número de lados.
-
----
-
-### 🛡️ 1.5 Número de Diagonales
-
-El número de diagonales de un polígono de $n$ lados es:
-
-$$d = \frac{n(n - 3)}{2}$$
-
-| Polígono | $n$ | Diagonales |
-| :--- | :---: | :---: |
-| Triángulo | $3$ | $0$ |
-| Cuadrilátero | $4$ | $2$ |
-| Pentágono | $5$ | $5$ |
-| Hexágono | $6$ | $9$ |
-| Decágono | $10$ | $35$ |
+| Medida | Fórmula |
+| :--- | :---: |
+| Volumen | $a^3$ |
+| Área Total | $6a^2$ |
 
 ---
 
-> "La naturaleza es un libro escrito en el lenguaje de la geometría."
-> — **Galileo Galilei**
+### 🎬 Video 069 — El Cilindro
+
+Un cilindro tiene dos **bases circulares** y una **cara lateral curva** (como una lata de bebida).
+
+| Medida | Fórmula | Intuición |
+| :--- | :---: | :--- |
+| **Volumen** | $\pi r^2 h$ | Base circular × altura |
+| **Área Lateral** | $2\pi r h$ | Un rectángulo "enrollado" |
+| **Área Total** | $2\pi r h + 2\pi r^2$ | Lateral + 2 tapas |
 """)
 
+    # ── FIGURA: Cono vs Cilindro ─────────────────────────────────────────────
+    st.markdown("#### 📊 Relación entre el Cono y el Cilindro")
+    fig, ax = plt.subplots(figsize=(6, 5))
+
+    # Cilindro (contorno azul)
+    ax.add_patch(plt.Rectangle((-2, 0), 4, 5, edgecolor='#1a5276', facecolor='none', lw=2.5, linestyle='--'))
+    ax.text(2.3, 2.5, "Cilindro\n$V = \\pi r^2 h$", color='#1a5276', fontsize=11)
+
+    # Cono inscrito
+    ax.fill([-2, 2, 0], [0, 0, 5], color='#f39c12', alpha=0.5)
+    ax.plot([-2, 2, 0, -2], [0, 0, 5, 0], 'k-', lw=2)
+    ax.text(0, 2, "Cono\n$V=\\frac{1}{3}\\pi r^2 h$", ha='center', va='center',
+            fontweight='bold', fontsize=12)
+
+    ax.text(0, -0.6, r"El cono = $\frac{1}{3}$ del cilindro con misma base y altura",
+            ha='center', fontsize=11, color='#922b21', fontweight='bold')
+
+    ax.set_xlim(-3.5, 5); ax.set_ylim(-1, 6)
+    ax.axis('off')
+    ax.set_title("Volúmenes: Cilindro y Cono Inscrito", fontsize=14, fontweight='bold')
+    plt.tight_layout()
+    st.pyplot(fig)
+    plt.close()
+
+    st.markdown(r"""
+---
+
+### 🎬 Video 070 — Transformaciones Isométricas: Introducción
+
+Una **isometría** es un movimiento que **conserva la forma y el tamaño** de la figura. La figura original y su imagen son **congruentes**.
+
+Los tres tipos de isometrías son:
+1. **Traslación:** Se desplaza la figura. No cambia orientación.
+2. **Reflexión (Simetría):** Se "voltea" la figura. Produce imagen espejo.
+3. **Rotación:** Se gira la figura alrededor de un punto.
+
+> **Statham Tip:** *"Isométrico significa 'igual medida'. Si la figura se achica o se agranda, ya no es isometría. No dejes que te engañen."*
+
+**Diferencia clave:** La **Homotecia** (próxima clase) también mueve la figura, pero cambia su tamaño → **NO es isometría**.
+""")
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # ── EJEMPLOS ────────────────────────────────────────────────────────────
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería G03", expanded=False):
         st.markdown(r"""
-### E01: Suma de ángulos de un cuadrilátero
+### E01: Área y perímetro del círculo
 
-**Situación:** Un cuadrilátero tiene tres ángulos de $85°$, $90°$ y $110°$. ¿Cuánto mide el cuarto ángulo?
+Una rueda tiene radio $r = 7$ cm. Calcular perímetro y área.
 
-**La Carpintería:**
-1. Suma de ángulos interiores de un cuadrilátero: $(4 - 2) \cdot 180° = 360°$.
-2. $85° + 90° + 110° + x = 360°$.
-3. $x = 360° - 285° = 75°$.
+* $P = 2 \pi r = 2 \times 3{,}14 \times 7 = 43{,}96$ cm
+* $A = \pi r^2 = 3{,}14 \times 49 = 153{,}86$ cm²
 
 ---
 
-### E02: Ángulo interior de un polígono regular
+### E02: Sector circular (rebanada de pizza)
 
-**Situación:** ¿Cuánto mide cada ángulo interior de un octógono regular?
+Sector con $r = 6$ y ángulo $\alpha = 90°$.
 
-**La Carpintería:**
-1. Fórmula: $\alpha = \dfrac{(n - 2) \cdot 180°}{n}$.
-2. $\alpha = \dfrac{(8 - 2) \cdot 180°}{8} = \dfrac{6 \cdot 180°}{8} = \dfrac{1080°}{8} = 135°$.
-
-| Paso | Cálculo | Resultado |
-| :--- | :--- | :---: |
-| Valor de $n$ | $n = 8$ | — |
-| Numerador | $(8-2) \cdot 180° = 1080°$ | — |
-| División | $1080° \div 8$ | $135°$ |
+* $L_{arco} = \dfrac{2\pi \times 6 \times 90}{360} = \dfrac{1080\pi}{360} = 3\pi \approx 9{,}42$
+* $A_{sector} = \dfrac{\pi \times 36 \times 90}{360} = 9\pi \approx 28{,}27$
 
 ---
 
-### E03: Diagonales de un polígono
+### E03: Volumen del cubo
 
-**Situación:** ¿Cuántas diagonales tiene un heptágono ($7$ lados)?
+Un cubo de arista $a = 4$ cm.
 
-**La Carpintería:**
-1. Fórmula: $d = \dfrac{n(n - 3)}{2}$.
-2. $d = \dfrac{7(7 - 3)}{2} = \dfrac{7 \cdot 4}{2} = \dfrac{28}{2} = 14$.
+* $V = 4^3 = 64$ cm³
+* $A_T = 6 \times 4^2 = 6 \times 16 = 96$ cm²
 
 ---
 
-### E04: Identificar un cuadrilátero por sus diagonales
+### E04: Volumen del cilindro
 
-**Situación:** Un cuadrilátero tiene diagonales que se bisecan mutuamente y son perpendiculares, pero no son iguales. ¿Qué cuadrilátero es?
+Cilindro con $r = 3$ cm y $h = 10$ cm.
 
-**La Carpintería:**
-1. Se bisecan → es un **paralelogramo**.
-2. Son perpendiculares → es un **rombo**.
-3. No son iguales → **no es un cuadrado** (el cuadrado tiene diagonales iguales).
-4. **Respuesta:** Es un **rombo** (que no es cuadrado).
+$$V = \pi r^2 h = \pi \times 9 \times 10 = 90\pi \approx 282{,}7 \text{ cm}^3$$
+
+---
+
+### E05: ¿Isometría o no?
+
+| Transformación | ¿Isometría? |
+| :--- | :---: |
+| Traslación de 5 unidades | ✅ Sí |
+| Ampliar la figura al doble | ❌ No (cambia el tamaño) |
+| Reflexión respecto al eje X | ✅ Sí |
+| Homotecia con $k = 3$ | ❌ No |
 """)
 
-    with st.expander("❓ Cuestionario G03: Cuadriláteros y Polígonos", expanded=False):
+    # ── QUIZ ────────────────────────────────────────────────────────────────
+    with st.expander("❓ Cuestionario G03: Círculo, 3D e Isometrías", expanded=False):
+        quiz = [
+            {"question": r'Un círculo tiene radio $r = 5$. Su área es:',
+             "options": {"A": r"$10\pi$", "B": r"$25\pi$", "C": r"$5\pi$", "D": r"$50\pi$"},
+             "answer": "B", "explanation": r"$A = \pi r^2 = \pi \times 25 = 25\pi$."},
+            {"question": r'El perímetro de un círculo con diámetro 10 es:',
+             "options": {"A": r"$5\pi$", "B": r"$20\pi$", "C": r"$10\pi$", "D": r"$100\pi$"},
+             "answer": "C", "explanation": r"$d = 10 \Rightarrow r = 5$. $P = 2\pi r = 10\pi$."},
+            {"question": r'Un sector circular tiene $r = 6$ y ángulo de 180°. Su área es:',
+             "options": {"A": r"$36\pi$", "B": r"$18\pi$", "C": r"$12\pi$", "D": r"$6\pi$"},
+             "answer": "B", "explanation": r"$A = \frac{\pi \times 36 \times 180}{360} = 18\pi$. Es la mitad del círculo."},
+            {"question": r'Un cubo tiene arista 3 cm. Su volumen es:',
+             "options": {"A": "9 cm³", "B": "54 cm³", "C": "27 cm³", "D": "18 cm³"},
+             "answer": "C", "explanation": r"$V = 3^3 = 27$ cm³."},
+            {"question": r'Un cubo tiene arista 3 cm. Su área total (todas las caras) es:',
+             "options": {"A": "54 cm²", "B": "18 cm²", "C": "27 cm²", "D": "36 cm²"},
+             "answer": "A", "explanation": r"$A_T = 6 \times 3^2 = 6 \times 9 = 54$ cm²."},
+            {"question": "¿Cuál de estas transformaciones NO es una isometría?",
+             "options": {"A": "Traslación", "B": "Reflexión", "C": "Homotecia", "D": "Rotación"},
+             "answer": "C", "explanation": "La homotecia cambia el tamaño de la figura. Las isometrías conservan forma Y tamaño."},
+            {"question": r'Un cilindro tiene $r=2$ y $h=5$. Su volumen es:',
+             "options": {"A": r"$40\pi$", "B": r"$20\pi$", "C": r"$10\pi$", "D": r"$4\pi$"},
+             "answer": "B", "explanation": r"$V = \pi r^2 h = \pi \times 4 \times 5 = 20\pi$."},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="g03_quiz")
+
+    # ── PAUTA ───────────────────────────────────────────────────────────────
+    with st.expander("🔑 Pauta Técnica G03", expanded=False):
         st.markdown(r"""
-**1. ¿Cuál es la suma de los ángulos interiores de un hexágono?**
-
-A) $540°$
-B) $600°$
-C) $720°$
-D) $1080°$
-
----
-
-**2. ¿Cuántas diagonales tiene un pentágono?**
-
-A) $3$
-B) $5$
-C) $7$
-D) $10$
-
----
-
-**3. Un paralelogramo tiene un ángulo de $70°$. ¿Cuánto miden los otros tres ángulos?**
-
-A) $70°$, $110°$, $110°$
-B) $70°$, $70°$, $150°$
-C) $110°$, $110°$, $70°$
-D) $70°$, $90°$, $130°$
-
----
-
-**4. ¿Cuánto mide cada ángulo exterior de un polígono regular de $12$ lados?**
-
-A) $15°$
-B) $30°$
-C) $36°$
-D) $150°$
-
----
-
-**5. ¿Cuál cuadrilátero tiene diagonales que son iguales, se bisecan mutuamente y son perpendiculares?**
-
-A) Rectángulo
-B) Rombo
-C) Cuadrado
-D) Trapecio
-
----
-
-**6. ¿Cuántos triángulos se forman al trazar todas las diagonales desde un vértice de un decágono?**
-
-A) $7$
-B) $8$
-C) $9$
-D) $10$
-
----
-
-**7. Un polígono regular tiene ángulos interiores de $120°$. ¿De cuántos lados es?**
-
-A) $5$
-B) $6$
-C) $8$
-D) $10$
-""")
-
-    with st.expander("🔑 Pauta Técnica G03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
+| Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **C** | $(6 - 2) \cdot 180° = 4 \cdot 180° = 720°$. |
-| **2** | **B** | $d = \frac{5(5-3)}{2} = \frac{5 \cdot 2}{2} = 5$. |
-| **3** | **A** | En un paralelogramo, ángulos opuestos son iguales y consecutivos son suplementarios: $70°$, $110°$, $70°$, $110°$. Los otros tres son $70°$, $110°$, $110°$. |
-| **4** | **B** | $\frac{360°}{12} = 30°$. |
-| **5** | **C** | Solo el cuadrado cumple las tres propiedades: iguales, se bisecan y perpendiculares. |
-| **6** | **B** | Desde un vértice de un polígono de $n$ lados se forman $n - 2$ triángulos: $10 - 2 = 8$. |
-| **7** | **B** | Si $\frac{(n-2) \cdot 180°}{n} = 120°$, entonces $(n-2) \cdot 180 = 120n$, $180n - 360 = 120n$, $60n = 360$, $n = 6$. Hexágono regular. |
+| **1** | **B** | $A = \pi r^2 = 25\pi$. No confundir con $2\pi r$. |
+| **2** | **C** | $r = d/2 = 5$. $P = 2\pi \times 5 = 10\pi$. |
+| **3** | **B** | 180° = mitad del círculo → $\frac{36\pi}{2} = 18\pi$. |
+| **4** | **C** | $V = 3^3 = 27$ cm³. |
+| **5** | **A** | $A_T = 6 \times 9 = 54$ cm². El cubo tiene 6 caras. |
+| **6** | **C** | La homotecia escala la figura. Las isometrías no cambian el tamaño. |
+| **7** | **B** | $V = \pi \times 4 \times 5 = 20\pi$. |
 """)
