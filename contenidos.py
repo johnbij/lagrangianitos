@@ -63,6 +63,12 @@ from clases.datos.pb03 import render_PB03
 from clases.datos.pb04 import render_PB04
 from clases.datos.pb05 import render_PB05
 
+from clases.geometria.g01 import render_G01
+from clases.geometria.g02 import render_G02
+from clases.geometria.g03 import render_G03
+from clases.geometria.g04 import render_G04
+from clases.geometria.g05 import render_G05
+
 from utils import render_proximamente
 
 CONTENIDOS = {
@@ -151,11 +157,11 @@ CONTENIDOS = {
         "color_subcats": "morado",
         "subcategorias": {
             "Formas y Figuras": {
-                "G01": {"label": "📖 G01: Próximamente", "render": lambda: render_proximamente("G01")},
-                "G02": {"label": "📖 G02: Próximamente", "render": lambda: render_proximamente("G02")},
-                "G03": {"label": "📖 G03: Próximamente", "render": lambda: render_proximamente("G03")},
-                "G04": {"label": "📖 G04: Próximamente", "render": lambda: render_proximamente("G04")},
-                "G05": {"label": "📖 G05: Próximamente", "render": lambda: render_proximamente("G05")},
+                "G01": {"label": "📖 G01: Plano Cartesiano, Distancia y Ángulos", "render": render_G01},
+                "G02": {"label": "📖 G02: Triángulos, Pitágoras, Perímetro y Área", "render": render_G02},
+                "G03": {"label": "📖 G03: Círculo, Cuerpos 3D e Isometrías", "render": render_G03},
+                "G04": {"label": "📖 G04: Traslación, Reflexión, Rotación y Semejanza", "render": render_G04},
+                "G05": {"label": "📖 G05: Tales, Escalas, Diagonal 3D y Simulacro", "render": render_G05},
             },
             "Perímetro, Área y Volumen": {
                 "P01": {"label": "📖 P01: Próximamente", "render": lambda: render_proximamente("P01")},
