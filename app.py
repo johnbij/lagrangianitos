@@ -2,13 +2,8 @@ import streamlit as st
 from datetime import datetime
 from pathlib import Path
 import pytz
-import time
-try:
-    from streamlit_autorefresh import st_autorefresh
-except ModuleNotFoundError:
-    def st_autorefresh(*args, **kwargs):
-        """No-op fallback when streamlit_autorefresh is unavailable."""
-        return None
+
+from contenidos import CONTENIDOS
 
 from contenidos import CONTENIDOS
 from styles import aplicar_estilos
@@ -24,8 +19,6 @@ if 'eje_actual'         not in st.session_state: st.session_state.eje_actual    
 if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
 if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccionada = None
 if 'ir_a_pdf'           not in st.session_state: st.session_state.ir_a_pdf           = False
-if 'cronometro_activo'  not in st.session_state: st.session_state.cronometro_activo  = False
-if 'tiempo_inicio'      not in st.session_state: st.session_state.tiempo_inicio      = None
 if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vista   = False
 if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "🐉 Bienvenida"
 if 'ultimo_visto'       not in st.session_state: st.session_state.ultimo_visto       = None
@@ -68,9 +61,6 @@ with st.sidebar:
 # =============================================================================
 
 if menu == "🏠 Dashboard PAES":
-
-    if st.session_state.cronometro_activo:
-        st_autorefresh(interval=1000, limit=None, key="crono_refresh")
 
     zona_cl = pytz.timezone('America/Santiago')
     ahora   = datetime.now(zona_cl)
@@ -133,23 +123,6 @@ if menu == "🏠 Dashboard PAES":
             if st.button("D", key="n_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
 
         st.write("---")
-
-        # Cronómetro
-        with st.container(border=True):
-            col_btn, col_crono = st.columns([1, 2])
-            with col_btn:
-                if not st.session_state.cronometro_activo:
-                    if st.button("▶️ Iniciar", key="btn_start_crono"):
-                        st.session_state.tiempo_inicio = time.time(); st.session_state.cronometro_activo = True; st.rerun()
-                else:
-                    if st.button("⏹️ Detener", key="btn_stop_crono"):
-                        st.session_state.cronometro_activo = False; st.rerun()
-            with col_crono:
-                if st.session_state.cronometro_activo and st.session_state.tiempo_inicio:
-                    secs = int(time.time() - st.session_state.tiempo_inicio)
-                    st.markdown(f'<span class="crono-digital">{secs//60:02d}:{secs%60:02d}</span>', unsafe_allow_html=True)
-                else:
-                    st.markdown('<span class="crono-digital" style="opacity:0.2;">00:00</span>', unsafe_allow_html=True)
 
         # ── NAVEGACIÓN ───────────────────────────────────────────────────────
         eje      = st.session_state.eje_actual
@@ -607,7 +580,6 @@ elif menu == "🐉 Bienvenida":
     <span class="pill">📊 Visualizaciones interactivas</span>
     <span class="pill">🧠 Profundidad conceptual</span>
     <span class="pill">📝 Ejercitación dirigida</span>
-    <span class="pill">⏱️ Cronómetro de estudio</span>
     <span class="pill">📄 Material descargable</span>
     </div>
     """, unsafe_allow_html=True)

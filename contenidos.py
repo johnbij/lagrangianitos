@@ -1,3 +1,4 @@
+# ── Números ──────────────────────────────────────────────────
 from clases.numeros.n01 import render_N01
 from clases.numeros.n02 import render_N02
 from clases.numeros.n03 import render_N03
@@ -33,6 +34,35 @@ from clases.numeros.n32 import render_N32
 from clases.numeros.n33 import render_N33
 from clases.numeros.n34 import render_N34
 from clases.numeros.n35 import render_N35
+
+# ── Álgebra ───────────────────────────────────────────────────
+from clases.algebra.a01 import render_A01
+from clases.algebra.a02 import render_A02
+from clases.algebra.a03 import render_A03
+from clases.algebra.a04 import render_A04
+from clases.algebra.a05 import render_A05
+
+# ── Funciones ─────────────────────────────────────────────────
+from clases.algebra.f01 import render_F01
+from clases.algebra.f02 import render_F02
+from clases.algebra.f03 import render_F03
+from clases.algebra.f04 import render_F04
+from clases.algebra.f05 import render_F05
+
+# ── Datos ─────────────────────────────────────────────────────
+from clases.datos.d01 import render_D01
+from clases.datos.d02 import render_D02
+from clases.datos.d03 import render_D03
+from clases.datos.d04 import render_D04
+from clases.datos.d05 import render_D05
+
+# ── Probabilidad ──────────────────────────────────────────────
+from clases.datos.pb01 import render_PB01
+from clases.datos.pb02 import render_PB02
+from clases.datos.pb03 import render_PB03
+from clases.datos.pb04 import render_PB04
+from clases.datos.pb05 import render_PB05
+
 from utils import render_proximamente
 
 CONTENIDOS = {
@@ -95,18 +125,18 @@ CONTENIDOS = {
         "color_subcats": "verde",
         "subcategorias": {
             "Álgebra": {
-                "A01": {"label": "📖 A01: Próximamente", "render": lambda: render_proximamente("A01")},
-                "A02": {"label": "📖 A02: Próximamente", "render": lambda: render_proximamente("A02")},
-                "A03": {"label": "📖 A03: Próximamente", "render": lambda: render_proximamente("A03")},
-                "A04": {"label": "📖 A04: Próximamente", "render": lambda: render_proximamente("A04")},
-                "A05": {"label": "📖 A05: Próximamente", "render": lambda: render_proximamente("A05")},
+                "A01": {"label": "📖 A01: Expresiones Algebraicas",     "render": render_A01},
+                "A02": {"label": "📖 A02: Productos Notables",           "render": render_A02},
+                "A03": {"label": "📖 A03: Factorización",                "render": render_A03},
+                "A04": {"label": "📖 A04: Ecuaciones de Primer Grado",   "render": render_A04},
+                "A05": {"label": "📖 A05: Inecuaciones y Sistemas",      "render": render_A05},
             },
             "Funciones": {
-                "F01": {"label": "📖 F01: Próximamente", "render": lambda: render_proximamente("F01")},
-                "F02": {"label": "📖 F02: Próximamente", "render": lambda: render_proximamente("F02")},
-                "F03": {"label": "📖 F03: Próximamente", "render": lambda: render_proximamente("F03")},
-                "F04": {"label": "📖 F04: Próximamente", "render": lambda: render_proximamente("F04")},
-                "F05": {"label": "📖 F05: Próximamente", "render": lambda: render_proximamente("F05")},
+                "F01": {"label": "📖 F01: Concepto de Función",                     "render": render_F01},
+                "F02": {"label": "📖 F02: Función Lineal y Afín",                   "render": render_F02},
+                "F03": {"label": "📖 F03: Función Cuadrática",                      "render": render_F03},
+                "F04": {"label": "📖 F04: Función Exponencial y Logarítmica",       "render": render_F04},
+                "F05": {"label": "📖 F05: Composición y Transformaciones",          "render": render_F05},
             },
             "Ejercitación": {
                 "AE01": {"label": "📝 AE01: Próximamente", "render": lambda: render_proximamente("AE01")},
@@ -154,18 +184,18 @@ CONTENIDOS = {
         "color_subcats": "naranja",
         "subcategorias": {
             "Estadística": {
-                "D01": {"label": "📖 D01: Próximamente", "render": lambda: render_proximamente("D01")},
-                "D02": {"label": "📖 D02: Próximamente", "render": lambda: render_proximamente("D02")},
-                "D03": {"label": "📖 D03: Próximamente", "render": lambda: render_proximamente("D03")},
-                "D04": {"label": "📖 D04: Próximamente", "render": lambda: render_proximamente("D04")},
-                "D05": {"label": "📖 D05: Próximamente", "render": lambda: render_proximamente("D05")},
+                "D01": {"label": "📖 D01: Tipos de Datos y Tablas",      "render": render_D01},
+                "D02": {"label": "📖 D02: Medidas de Tendencia Central",  "render": render_D02},
+                "D03": {"label": "📖 D03: Medidas de Dispersión",         "render": render_D03},
+                "D04": {"label": "📖 D04: Gráficos Estadísticos",         "render": render_D04},
+                "D05": {"label": "📖 D05: Análisis y Correlación",        "render": render_D05},
             },
             "Probabilidad": {
-                "PB01": {"label": "📖 PB01: Próximamente", "render": lambda: render_proximamente("PB01")},
-                "PB02": {"label": "📖 PB02: Próximamente", "render": lambda: render_proximamente("PB02")},
-                "PB03": {"label": "📖 PB03: Próximamente", "render": lambda: render_proximamente("PB03")},
-                "PB04": {"label": "📖 PB04: Próximamente", "render": lambda: render_proximamente("PB04")},
-                "PB05": {"label": "📖 PB05: Próximamente", "render": lambda: render_proximamente("PB05")},
+                "PB01": {"label": "📖 PB01: Espacio Muestral y Eventos",         "render": render_PB01},
+                "PB02": {"label": "📖 PB02: Probabilidad Clásica",               "render": render_PB02},
+                "PB03": {"label": "📖 PB03: Probabilidad Compuesta",             "render": render_PB03},
+                "PB04": {"label": "📖 PB04: Técnicas de Conteo",                 "render": render_PB04},
+                "PB05": {"label": "📖 PB05: Variable Aleatoria y Distribuciones","render": render_PB05},
             },
             "Ejercitación": {
                 "DE01": {"label": "📝 DE01: Próximamente", "render": lambda: render_proximamente("DE01")},
