@@ -10,14 +10,14 @@ def render_N10():
 
     ---
 
-    ### 🏛️ 1. Contexto Histórico: De las Piedras a los Algoritmos
+    ### 🏛️ Contexto Histórico: De las Piedras a los Algoritmos
     Durante milenios, la humanidad solo sabía sumar y restar (poner y quitar ovejas). La **Multiplicación** nació como un "atajo" para no sumar lo mismo mil veces, pero la **División**... la división fue el verdadero dolor de cabeza.
 
     En la Edad Media, saber dividir era considerado una habilidad de nivel universitario; la gente viajaba cientos de kilómetros solo para aprender el algoritmo de la división larga. ¿Por qué? Porque sin el **Cero** (que nos trajeron los árabes de la India) y sin un orden claro, repartir 1.543 sacos de trigo entre 12 familias era una misión imposible. El **PAPOMUDAS** no es un capricho moderno; es el resultado de siglos de errores, barcos hundidos por cálculos mal hechos y puentes caídos. Es el protocolo para que la lógica no se rompa.
 
     ---
 
-    ### 🛡️ 8.E.1 El Protocolo Universal: PAPOMUDAS
+    ### 🛡️ El Protocolo Universal: PAPOMUDAS
     En un taller, no puedes pintar antes de lijar. En matemática, no puedes sumar antes de multiplicar. El orden es sagrado para que el resultado sea único.
 
     ### 🛠️ La Jerarquía de Mando:
@@ -36,7 +36,7 @@ def render_N10():
 
     ---
 
-    ### 🛡️ 8.E.2 La Guerra de los Signos (Lógica de Sentido Común)
+    ### 🛡️  La Guerra de los Signos (Lógica de Sentido Común)
     Olvida la memoria mecánica. Entiende la lógica:
 
     * **Suma y Resta:** Piénsalo como dinero.
@@ -50,7 +50,7 @@ def render_N10():
 
     ---
 
-    ### 🛡️ 8.E.3 La División: Desmitificando el Monstruo
+    ### 🛡️ La División: Desmitificando el Monstruo
     Dividir no es más que **restar repetidamente**. Si digo $20 \div 5$, estoy preguntando: "¿Cuántas veces puedo quitarle 5 al 20 hasta que no quede nada?".
 
     **El truco de la coma (A prueba de errores):**
@@ -60,7 +60,7 @@ def render_N10():
 
     ---
 
-    ### 🛡️ 8.E.4 Multiplicación y División por potencias de 10
+    ### 🛡️  Multiplicación y División por potencias de 10
     Es como mover un mueble en el taller. La coma salta según la cantidad de ceros.
 
     **Ejemplos Paso a Paso:**
@@ -83,7 +83,7 @@ def render_N10():
 
     with st.expander("🚀 Guía de Ejemplos: El Taller de Operatoria", expanded=False):
         st.markdown(r"""
-### E02: La Trampa de la Prioridad Horizontal
+### 1: La Trampa de la Prioridad Horizontal
 **Situación:** Resolver $40 \div 5 \cdot 2$.
 **La Carpintería:** Muchos cometen el error de multiplicar $5 \cdot 2$ primero. Según el PAPOMUDAS, MU y DA tienen igual rango, se opera de izquierda a derecha.
 
@@ -94,7 +94,7 @@ def render_N10():
 
 ---
 
-### E03: Paréntesis Anidados (Cebolla Matemática)
+### 2: Paréntesis Anidados (Cebolla Matemática)
 **Situación:** Resolver $100 - [ 20 + (5 \cdot 4) ]$.
 **La Carpintería:** Se parte desde el "corazón" del ejercicio hacia afuera.
 
@@ -106,7 +106,7 @@ def render_N10():
 
 ---
 
-### E04: Suma y Resta de Signos Distintos
+### 3: Suma y Resta de Signos Distintos
 **Situación:** Resolver $-15 + 8 - 12 + 20$.
 **La Carpintería:** Una técnica segura es agrupar "deudas" y "haberes".
 
@@ -118,7 +118,7 @@ def render_N10():
 
 ---
 
-### E05: División con Divisor Decimal (Amplificación)
+### 4: División con Divisor Decimal (Amplificación)
 **Situación:** Resolver $7,5 \div 0,25$.
 **La Carpintería:** Limpiamos la coma del divisor multiplicando ambos por 100 (porque 0,25 tiene dos decimales).
 
@@ -130,7 +130,7 @@ def render_N10():
 
 ---
 
-### E06: Multiplicación por 0,1, 0,01, etc.
+### 5: Multiplicación por 0,1, 0,01, etc.
 **Situación:** Resolver $458 \cdot 0,01$.
 **La Carpintería:** Multiplicar por 0,01 es lo mismo que dividir por 100. La coma corre a la izquierda.
 
@@ -140,7 +140,7 @@ def render_N10():
 
 ---
 
-### E07: El Desafío del PAPOMUDAS Completo
+### 6: El Desafío del PAPOMUDAS Completo
 **Situación:** Resolver $5 + 2 \cdot 3^2 - (10 \div 2)$.
 
 | Prioridad | Operación | Estado de la Expresión |
@@ -152,7 +152,7 @@ def render_N10():
 
 ---
 
-### E08: Ley de Signos en Multiplicación Múltiple
+### 7: Ley de Signos en Multiplicación Múltiple
 **Situación:** Resolver $(-2) \cdot (-3) \cdot (-4)$.
 **La Carpintería:** Operamos par por par para no marearnos con los signos.
 
@@ -163,7 +163,7 @@ def render_N10():
 
 ---
 
-### E09: División con "Cero al Cociente"
+### 8: División con "Cero al Cociente"
 **Situación:** Resolver $1025 \div 5$.
 **La Carpintería:** Cuidado cuando el divisor no cabe en una cifra intermedia.
 
@@ -176,7 +176,7 @@ def render_N10():
 
 ---
 
-### E10: El "Fantasma" del Signo delante del Paréntesis
+### 9: El "Fantasma" del Signo delante del Paréntesis
 **Situación:** Resolver $15 - ( -3 + 8 )$.
 **La Carpintería:** El signo menos afuera cambia el sentido de TODO lo que esté adentro, o resolvemos adentro primero.
 
@@ -187,7 +187,7 @@ def render_N10():
 
 ---
 
-### E11: Potencias de 10 y Decimales Extremos
+### 10: Potencias de 10 y Decimales Extremos
 **Situación:** Resolver $0,004 \div 100$.
 **La Carpintería:** Dividir por 100 es encoger. Movemos la coma 2 espacios más a la izquierda.
 
