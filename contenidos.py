@@ -68,6 +68,27 @@ from clases.geometria.g02 import render_G02
 from clases.geometria.g03 import render_G03
 from clases.geometria.g04 import render_G04
 from clases.geometria.g05 import render_G05
+from clases.geometria.g06 import render_G06
+from clases.geometria.g07 import render_G07
+from clases.geometria.g08 import render_G08
+from clases.geometria.g09 import render_G09
+from clases.geometria.g10 import render_G10
+from clases.geometria.g11 import render_G11
+from clases.geometria.g12 import render_G12
+from clases.geometria.g13 import render_G13
+from clases.geometria.g14 import render_G14
+from clases.geometria.g15 import render_G15
+from clases.geometria.g16 import render_G16
+from clases.geometria.g17 import render_G17
+from clases.geometria.g18 import render_G18
+from clases.geometria.g19 import render_G19
+from clases.geometria.g20 import render_G20
+from clases.geometria.g21 import render_G21
+from clases.geometria.v01 import render_V01
+from clases.geometria.v02 import render_V02
+from clases.geometria.v03 import render_V03
+from clases.geometria.v04 import render_V04
+from clases.geometria.v05 import render_V05
 
 from utils import render_proximamente
 
@@ -156,33 +177,43 @@ CONTENIDOS = {
     "📐 Geometría": {
         "color_subcats": "morado",
         "subcategorias": {
-            "Formas y Figuras": {
-                "G01": {"label": "📖 G01: Plano Cartesiano, Distancia y Ángulos", "render": render_G01},
-                "G02": {"label": "📖 G02: Triángulos, Pitágoras, Perímetro y Área", "render": render_G02},
-                "G03": {"label": "📖 G03: Círculo, Cuerpos 3D e Isometrías", "render": render_G03},
-                "G04": {"label": "📖 G04: Traslación, Reflexión, Rotación y Semejanza", "render": render_G04},
-                "G05": {"label": "📖 G05: Tales, Escalas, Diagonal 3D y Simulacro", "render": render_G05},
+            "Plano y Coordenadas": {
+                "G01": {"label": "📖 G01: Topografía Inicial — El Plano Cartesiano",       "render": render_G01},
+                "G02": {"label": "📖 G02: Distancia entre Puntos",                         "render": render_G02},
+                "G03": {"label": "📖 G03: El Punto Medio",                                 "render": render_G03},
+                "G04": {"label": "📖 G04: Ángulos y Clasificación",                        "render": render_G04},
+                "G05": {"label": "📖 G05: Ángulos entre Paralelas y una Transversal",      "render": render_G05},
             },
-            "Perímetro, Área y Volumen": {
-                "P01": {"label": "📖 P01: Próximamente", "render": lambda: render_proximamente("P01")},
-                "P02": {"label": "📖 P02: Próximamente", "render": lambda: render_proximamente("P02")},
-                "P03": {"label": "📖 P03: Próximamente", "render": lambda: render_proximamente("P03")},
-                "P04": {"label": "📖 P04: Próximamente", "render": lambda: render_proximamente("P04")},
-                "P05": {"label": "📖 P05: Próximamente", "render": lambda: render_proximamente("P05")},
+            "Triángulos": {
+                "G06": {"label": "📖 G06: Triángulos — Los Cimientos de la Geometría",     "render": render_G06},
+                "G07": {"label": "📖 G07: Clasificación de Triángulos (por Ángulos)",      "render": render_G07},
+                "G08": {"label": "📖 G08: Clasificación de Triángulos (por Lados)",        "render": render_G08},
+                "G09": {"label": "📖 G09: Elementos Secundarios I — Alturas y Bisectrices","render": render_G09},
+                "G10": {"label": "📖 G10: Elementos Secundarios II — Simetrales y Transversales", "render": render_G10},
+            },
+            "Pitágoras, Áreas y Círculo": {
+                "G11": {"label": "📖 G11: Teorema de Pitágoras — La Llave Maestra",        "render": render_G11},
+                "G12": {"label": "📖 G12: Áreas y Perímetros I — Triángulos y Cuadriláteros", "render": render_G12},
+                "G13": {"label": "📖 G13: Círculo y Circunferencia — La Perfección del Radio", "render": render_G13},
+                "G14": {"label": "📖 G14: Ángulos en la Circunferencia",                   "render": render_G14},
+                "G15": {"label": "📖 G15: Teoremas de Euclides — Proporciones en el Triángulo Rectángulo", "render": render_G15},
+            },
+            "Semejanza y Transformaciones": {
+                "G16": {"label": "📖 G16: Teorema de Tales — Proporcionalidad entre Paralelas", "render": render_G16},
+                "G17": {"label": "📖 G17: Semejanza de Triángulos — Misma Forma, Distinto Tamaño", "render": render_G17},
+                "G18": {"label": "📖 G18: Homotecia — Ampliación y Reducción Vectorial",   "render": render_G18},
+                "G19": {"label": "📖 G19: Transformaciones Isométricas — Movimiento sin Deformación", "render": render_G19},
+            },
+            "Cuerpos 3D": {
+                "G20": {"label": "📖 G20: Cuerpos 3D I — Prismas y Cilindros",             "render": render_G20},
+                "G21": {"label": "📖 G21: Cuerpos 3D II — Pirámides, Conos y Esfera",      "render": render_G21},
             },
             "Vectores": {
-                "V01": {"label": "📖 V01: Próximamente", "render": lambda: render_proximamente("V01")},
-                "V02": {"label": "📖 V02: Próximamente", "render": lambda: render_proximamente("V02")},
-                "V03": {"label": "📖 V03: Próximamente", "render": lambda: render_proximamente("V03")},
-                "V04": {"label": "📖 V04: Próximamente", "render": lambda: render_proximamente("V04")},
-                "V05": {"label": "📖 V05: Próximamente", "render": lambda: render_proximamente("V05")},
-            },
-            "Ejercitación": {
-                "GE01": {"label": "📝 GE01: Próximamente", "render": lambda: render_proximamente("GE01")},
-                "GE02": {"label": "📝 GE02: Próximamente", "render": lambda: render_proximamente("GE02")},
-                "GE03": {"label": "📝 GE03: Próximamente", "render": lambda: render_proximamente("GE03")},
-                "GE04": {"label": "📝 GE04: Próximamente", "render": lambda: render_proximamente("GE04")},
-                "GE05": {"label": "📝 GE05: Próximamente", "render": lambda: render_proximamente("GE05")},
+                "V01": {"label": "📖 V01: Introducción a los Vectores — El Mapa del Movimiento", "render": render_V01},
+                "V02": {"label": "📖 V02: Operaciones con Vectores — Combinando Movimientos", "render": render_V02},
+                "V03": {"label": "📖 V03: Módulo y Distancia — ¿Cuánto mide el vector?",   "render": render_V03},
+                "V04": {"label": "📖 V04: Vectores e Isometrías — El Motor del Movimiento", "render": render_V04},
+                "V05": {"label": "📖 V05: Vectores en el Espacio — La Tercera Dimensión",  "render": render_V05},
             },
         },
     },
