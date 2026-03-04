@@ -10,35 +10,37 @@ _CSS = """
 """
 
 def render_G17():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G17: Semejanza de Triángulos — Misma Forma, Distinto Tamaño")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G17: Semejanza de Triángulos — Misma Forma, Distinto Tamaño")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G17: Semejanza de Triángulos - Misma Forma, Distinto Tamaño
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G17: Semejanza de Triángulos - Misma Forma, Distinto Tamaño
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Definición de Semejanza ($\sim$)
-Dos triángulos son semejantes si tienen sus **ángulos internos respectivamente iguales** (congruentes) y sus **lados homólogos proporcionales**.
-* **Lados homólogos:** Son los que están en la misma posición relativa (frente a ángulos iguales).
+    ### 🛡️ 1. Definición de Semejanza ($\sim$)
+    Dos triángulos son semejantes si tienen sus **ángulos internos respectivamente iguales** (congruentes) y sus **lados homólogos proporcionales**.
+    * **Lados homólogos:** Son los que están en la misma posición relativa (frente a ángulos iguales).
 
-### ⚖️ 2. Criterios de Semejanza (Cómo reconocerlos)
-Para no medir todo, usamos estos criterios mínimos:
-* **AA (Ángulo-Ángulo):** Si tienen dos ángulos iguales, el tercero también lo será. Es el más usado.
-* **LAL (Lado-Ángulo-Lado):** Tienen dos lados proporcionales y el ángulo comprendido entre ellos es igual.
-* **LLL (Lado-Lado-Lado):** Sus tres lados son proporcionales entre sí.
+    ### ⚖️ 2. Criterios de Semejanza (Cómo reconocerlos)
+    Para no medir todo, usamos estos criterios mínimos:
+    * **AA (Ángulo-Ángulo):** Si tienen dos ángulos iguales, el tercero también lo será. Es el más usado.
+    * **LAL (Lado-Ángulo-Lado):** Tienen dos lados proporcionales y el ángulo comprendido entre ellos es igual.
+    * **LLL (Lado-Lado-Lado):** Sus tres lados son proporcionales entre sí.
 
-### 📐 3. La Razón de Semejanza ($k$)
-Si dividimos un lado del triángulo grande por su homólogo del pequeño, obtenemos la constante $k$.
-* **Perímetros:** Están en razón $k$.
-* **Áreas:** Estarán en razón $k^2$ (¡Ojo con esto en la PAES!).
+    ### 📐 3. La Razón de Semejanza ($k$)
+    Si dividimos un lado del triángulo grande por su homólogo del pequeño, obtenemos la constante $k$.
+    * **Perímetros:** Están en razón $k$.
+    * **Áreas:** Estarán en razón $k^2$ (¡Ojo con esto en la PAES!).
 
-> **Newton Tip:** "Seba, dile a tu alumno: Semejanza es como ver una foto en el celular y hacer zoom. El triángulo no cambia sus ángulos, solo se hace más grande o más chico."
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: Semejanza es como ver una foto en el celular y hacer zoom. El triángulo no cambia sus ángulos, solo se hace más grande o más chico."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G17 (Paso a Paso)", expanded=False):
         st.markdown(r"""

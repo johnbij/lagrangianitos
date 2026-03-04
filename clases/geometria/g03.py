@@ -10,28 +10,30 @@ _CSS = """
 """
 
 def render_G03():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G03: El Punto Medio")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G03: El Punto Medio")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G03: El Punto Medio
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G03: El Punto Medio
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Definición
-El punto medio $M$ es aquel que divide a un segmento de recta en dos partes iguales. Es el "centro" entre dos puntos $A(x_1, y_1)$ y $B(x_2, y_2)$.
+    ### 🛡️ 1. Definición
+    El punto medio $M$ es aquel que divide a un segmento de recta en dos partes iguales. Es el "centro" entre dos puntos $A(x_1, y_1)$ y $B(x_2, y_2)$.
 
-### ⚖️ 2. La Fórmula
-Para encontrar las coordenadas del punto medio $M(x_m, y_m)$, calculamos el promedio de las coordenadas de los extremos:
+    ### ⚖️ 2. La Fórmula
+    Para encontrar las coordenadas del punto medio $M(x_m, y_m)$, calculamos el promedio de las coordenadas de los extremos:
 
-$$x_m = \frac{x_1 + x_2}{2}, \quad y_m = \frac{y_1 + y_2}{2}$$
+    $$x_m = \frac{x_1 + x_2}{2}, \quad y_m = \frac{y_1 + y_2}{2}$$
 
-> **Hawking Tip:** *"Es la media aritmética pura. Suma los extremos y divide por dos. No hay fórmula más simple en todo el plano."*
-""")
+    > **Hawking Tip:** *"Es la media aritmética pura. Suma los extremos y divide por dos. No hay fórmula más simple en todo el plano."*
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G03 (Paso a Paso)", expanded=False):
         st.markdown(r"""

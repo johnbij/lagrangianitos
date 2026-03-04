@@ -10,29 +10,31 @@ _CSS = """
 """
 
 def render_G06():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G06: Triángulos — Los Cimientos de la Geometría")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G06: Triángulos — Los Cimientos de la Geometría")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G06: Triángulos - Los Cimientos de la Geometría
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G06: Triángulos - Los Cimientos de la Geometría
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Definición y Elementos
-Un triángulo es un polígono de tres lados que se forma al unir tres puntos no colineales mediante segmentos de recta. Sus elementos principales son: **Vértices**, **Lados** y **Ángulos** (internos y externos).
+    ### 🛡️ 1. Definición y Elementos
+    Un triángulo es un polígono de tres lados que se forma al unir tres puntos no colineales mediante segmentos de recta. Sus elementos principales son: **Vértices**, **Lados** y **Ángulos** (internos y externos).
 
-### ⚖️ 2. Propiedades Fundamentales (Teoremas)
-* **Suma de Ángulos Internos:** En todo triángulo, la suma de sus tres ángulos interiores es siempre **180°**.
-* **Suma de Ángulos Externos:** La suma de los ángulos exteriores (uno por vértice) es siempre **360°**.
-* **Teorema del Ángulo Exterior:** La medida de un ángulo exterior es igual a la suma de los dos ángulos interiores no adyacentes a él.
-* **Desigualdad Triangular:** En todo triángulo, la suma de las longitudes de dos de sus lados debe ser mayor que la longitud del tercer lado ($a + b > c$).
+    ### ⚖️ 2. Propiedades Fundamentales (Teoremas)
+    * **Suma de Ángulos Internos:** En todo triángulo, la suma de sus tres ángulos interiores es siempre **180°**.
+    * **Suma de Ángulos Externos:** La suma de los ángulos exteriores (uno por vértice) es siempre **360°**.
+    * **Teorema del Ángulo Exterior:** La medida de un ángulo exterior es igual a la suma de los dos ángulos interiores no adyacentes a él.
+    * **Desigualdad Triangular:** En todo triángulo, la suma de las longitudes de dos de sus lados debe ser mayor que la longitud del tercer lado ($a + b > c$).
 
-> **Newton Tip:** "Típ: El triángulo es la única figura geométrica que no se deforma. Por eso las grúas y los puentes están llenos de triángulos. Si entiendes sus ángulos, entiendes la estabilidad del mundo."
-""")
+    > **Newton Tip:** "Típ: El triángulo es la única figura geométrica que no se deforma. Por eso las grúas y los puentes están llenos de triángulos. Si entiendes sus ángulos, entiendes la estabilidad del mundo."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G06 (Paso a Paso)", expanded=False):
         st.markdown(r"""

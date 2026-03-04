@@ -10,30 +10,32 @@ _CSS = """
 """
 
 def render_G02():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G02: Distancia entre Puntos")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G02: Distancia entre Puntos")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G02: Distancia entre Puntos
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G02: Distancia entre Puntos
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. La Fórmula del Alcance
-Para calcular la distancia entre $A(x_1, y_1)$ y $B(x_2, y_2)$, usamos el Teorema de Pitágoras aplicado al plano:
+    ### 🛡️ 1. La Fórmula del Alcance
+    Para calcular la distancia entre $A(x_1, y_1)$ y $B(x_2, y_2)$, usamos el Teorema de Pitágoras aplicado al plano:
 
-$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+    $$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
 
-### ⚖️ 2. Procedimiento
-1. Resta las coordenadas $x$ y elévalas al cuadrado.
-2. Resta las coordenadas $y$ y elévalas al cuadrado.
-3. Suma ambos resultados y saca la raíz cuadrada.
+    ### ⚖️ 2. Procedimiento
+    1. Resta las coordenadas $x$ y elévalas al cuadrado.
+    2. Resta las coordenadas $y$ y elévalas al cuadrado.
+    3. Suma ambos resultados y saca la raíz cuadrada.
 
-> **Statham Tip:** *"Dile que la distancia siempre es positiva. No importa si vas de A a B o de B a A, el camino mide lo mismo."*
-""")
+    > **Statham Tip:** *"Dile que la distancia siempre es positiva. No importa si vas de A a B o de B a A, el camino mide lo mismo."*
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G02 (Paso a Paso)", expanded=False):
         st.markdown(r"""

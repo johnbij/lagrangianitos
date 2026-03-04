@@ -10,34 +10,36 @@ _CSS = """
 """
 
 def render_G07():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G07: Clasificación de Triángulos (por Ángulos)")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G07: Clasificación de Triángulos (por Ángulos)")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G07: Clasificación de Triángulos (Ángulos)
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G07: Clasificación de Triángulos (Ángulos)
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Criterio de Clasificación
-Para clasificar un triángulo según sus ángulos, debemos observar la medida del ángulo más grande o la naturaleza de sus tres ángulos interiores.
+    ### 🛡️ 1. Criterio de Clasificación
+    Para clasificar un triángulo según sus ángulos, debemos observar la medida del ángulo más grande o la naturaleza de sus tres ángulos interiores.
 
-### ⚖️ 2. Los Tres Tipos Fundamentales
-* **Acutángulo:** Sus **tres** ángulos interiores son agudos (menores a 90°).
-* **Rectángulo:** Tiene **un** ángulo recto (exactamente 90°). Los otros dos ángulos son agudos y complementarios (suman 90°).
-* **Obtusángulo:** Tiene **un** ángulo obtuso (mayor a 90° y menor a 180°).
+    ### ⚖️ 2. Los Tres Tipos Fundamentales
+    * **Acutángulo:** Sus **tres** ángulos interiores son agudos (menores a 90°).
+    * **Rectángulo:** Tiene **un** ángulo recto (exactamente 90°). Los otros dos ángulos son agudos y complementarios (suman 90°).
+    * **Obtusángulo:** Tiene **un** ángulo obtuso (mayor a 90° y menor a 180°).
 
-### 📐 3. Relación con Pitágoras (Identificación)
-Si conocemos los lados $a, b$ y $c$ (siendo $c$ el mayor), podemos saber el tipo de ángulo sin transportador:
-* Si $a^2 + b^2 = c^2 \implies$ **Rectángulo**.
-* Si $a^2 + b^2 > c^2 \implies$ **Acutángulo**.
-* Si $a^2 + b^2 < c^2 \implies$ **Obtusángulo**.
+    ### 📐 3. Relación con Pitágoras (Identificación)
+    Si conocemos los lados $a, b$ y $c$ (siendo $c$ el mayor), podemos saber el tipo de ángulo sin transportador:
+    * Si $a^2 + b^2 = c^2 \implies$ **Rectángulo**.
+    * Si $a^2 + b^2 > c^2 \implies$ **Acutángulo**.
+    * Si $a^2 + b^2 < c^2 \implies$ **Obtusángulo**.
 
-> **Típ:** "Seba, dile a tu alumno que un triángulo nunca puede tener dos ángulos rectos ni dos obtusos, porque se pasaría de los 180° antes de cerrar la figura. ¡Física elemental!"
-""")
+    > **Típ:** "Seba, dile a tu alumno que un triángulo nunca puede tener dos ángulos rectos ni dos obtusos, porque se pasaría de los 180° antes de cerrar la figura. ¡Física elemental!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G07 (Paso a Paso)", expanded=False):
         st.markdown(r"""

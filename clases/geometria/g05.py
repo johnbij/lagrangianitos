@@ -10,29 +10,31 @@ _CSS = """
 """
 
 def render_G05():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G05: Ángulos entre Paralelas y una Transversal")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G05: Ángulos entre Paralelas y una Transversal")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G05: Ángulos entre Paralelas y una Transversal
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G05: Ángulos entre Paralelas y una Transversal
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. El Escenario
-Cuando dos rectas paralelas ($L_1 \parallel L_2$) son cortadas por una recta transversal (o secante), se forman 8 ángulos que guardan relaciones matemáticas específicas entre sí.
+    ### 🛡️ 1. El Escenario
+    Cuando dos rectas paralelas ($L_1 \parallel L_2$) son cortadas por una recta transversal (o secante), se forman 8 ángulos que guardan relaciones matemáticas específicas entre sí.
 
-### ⚖️ 2. Tipos de Ángulos y sus Propiedades
-* **Ángulos Correspondientes:** Están en la misma posición relativa. Son **Iguales**.
-* **Ángulos Alternos Internos:** Estás "dentro" de las paralelas, en lados opuestos de la secante. Son **Iguales**.
-* **Ángulos Alternos Externos:** Están "fuera" de las paralelas, en lados opuestos de la secante. Son **Iguales**.
-* **Ángulos Colaterales (Internos o Externos):** Están al mismo lado de la secante. Son **Suplementarios** (suman 180°).
+    ### ⚖️ 2. Tipos de Ángulos y sus Propiedades
+    * **Ángulos Correspondientes:** Están en la misma posición relativa. Son **Iguales**.
+    * **Ángulos Alternos Internos:** Estás "dentro" de las paralelas, en lados opuestos de la secante. Son **Iguales**.
+    * **Ángulos Alternos Externos:** Están "fuera" de las paralelas, en lados opuestos de la secante. Son **Iguales**.
+    * **Ángulos Colaterales (Internos o Externos):** Están al mismo lado de la secante. Son **Suplementarios** (suman 180°).
 
-> **Newton Tip:** "Típ: Si las rectas son paralelas, solo existen dos medidas de ángulos en todo el dibujo. O son iguales, o suman 180°. ¡No hay más ciencia!"
-""")
+    > **Newton Tip:** "Típ: Si las rectas son paralelas, solo existen dos medidas de ángulos en todo el dibujo. O son iguales, o suman 180°. ¡No hay más ciencia!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G05 (Paso a Paso)", expanded=False):
         st.markdown(r"""

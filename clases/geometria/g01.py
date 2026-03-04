@@ -10,33 +10,35 @@ _CSS = """
 """
 
 def render_G01():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G01: Topografía Inicial — El Plano Cartesiano")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G01: Topografía Inicial — El Plano Cartesiano")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G01: Topografía Inicial - El Plano
-**Eje:** Geometría | **Video:** 056
+        st.markdown(r"""
+    # 🎬 Clase G01: Topografía Inicial - El Plano
+    **Eje:** Geometría | **Video:** 056
 
----
+    ---
 
-### 🏛️ La Intuición de Descartes
-Cuenta la leyenda que **René Descartes** estaba en cama mirando una mosca caminar por el techo. Se preguntó: *¿Cómo puedo describir la posición exacta de esa mosca?* Así nacieron los ejes X e Y. Un sistema para que nadie se sintiera perdido en una superficie plana.
+    ### 🏛️ La Intuición de Descartes
+    Cuenta la leyenda que **René Descartes** estaba en cama mirando una mosca caminar por el techo. Se preguntó: *¿Cómo puedo describir la posición exacta de esa mosca?* Así nacieron los ejes X e Y. Un sistema para que nadie se sintiera perdido en una superficie plana.
 
-### ⚖️ 1. Las Reglas del Tablero
-* **Eje X (Abscisas):** El horizonte. Lo que avanzas o retrocedes.
-* **Eje Y (Ordenadas):** El vertical. Lo que subes o bajas.
-* **El Origen $(0,0)$:** El centro del mapa.
+    ### ⚖️ 1. Las Reglas del Tablero
+    * **Eje X (Abscisas):** El horizonte. Lo que avanzas o retrocedes.
+    * **Eje Y (Ordenadas):** El vertical. Lo que subes o bajas.
+    * **El Origen $(0,0)$:** El centro del mapa.
 
-### ⚖️ 2. Coordenadas $P(x, y)$
-El primer número manda en horizontal, el segundo en vertical.
-* **Cuadrante I:** $(+,+)$ | **Cuadrante II:** $(-,+)$
-* **Cuadrante III:** $(-,-)$ | **Cuadrante IV:** $(+,-)$
+    ### ⚖️ 2. Coordenadas $P(x, y)$
+    El primer número manda en horizontal, el segundo en vertical.
+    * **Cuadrante I:** $(+,+)$ | **Cuadrante II:** $(-,+)$
+    * **Cuadrante III:** $(-,-)$ | **Cuadrante IV:** $(+,-)$
 
-> **Galileo Tip:** "Escucha, el orden es sagrado: $(x, y)$. Primero caminas por el pasillo (X) y luego buscas el piso en el ascensor (Y). Si los cruzas, terminarás en la habitación equivocada."
-""")
+    > **Galileo Tip:** "Escucha, el orden es sagrado: $(x, y)$. Primero caminas por el pasillo (X) y luego buscas el piso en el ascensor (Y). Si los cruzas, terminarás en la habitación equivocada."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G01 (Paso a Paso)", expanded=False):
         st.markdown(r"""

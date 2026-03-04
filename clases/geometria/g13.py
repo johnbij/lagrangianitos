@@ -10,35 +10,37 @@ _CSS = """
 """
 
 def render_G13():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G13: Círculo y Circunferencia — La Perfección del Radio")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G13: Círculo y Circunferencia — La Perfección del Radio")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G13: Círculo y Circunferencia - La Perfección del Radio
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G13: Círculo y Circunferencia - La Perfección del Radio
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Conceptos Fundamentales
-Aunque se usan como sinónimos, técnicamente son distintos:
-* **Circunferencia:** Es la línea curva y cerrada donde todos sus puntos están a la misma distancia del centro (el borde).
-* **Círculo:** Es la superficie interior encerrada por la circunferencia (el área).
+    ### 🛡️ 1. Conceptos Fundamentales
+    Aunque se usan como sinónimos, técnicamente son distintos:
+    * **Circunferencia:** Es la línea curva y cerrada donde todos sus puntos están a la misma distancia del centro (el borde).
+    * **Círculo:** Es la superficie interior encerrada por la circunferencia (el área).
 
-### ⚖️ 2. Elementos Clave
-* **Radio ($r$):** Segmento que une el centro con cualquier punto de la circunferencia.
-* **Diámetro ($d$):** Cuerda que pasa por el centro. Equivale a dos radios ($d = 2r$).
-* **Cuerda:** Segmento que une dos puntos de la circunferencia.
-* **Tangente:** Recta que toca a la circunferencia en un solo punto (siempre perpendicular al radio en ese punto).
+    ### ⚖️ 2. Elementos Clave
+    * **Radio ($r$):** Segmento que une el centro con cualquier punto de la circunferencia.
+    * **Diámetro ($d$):** Cuerda que pasa por el centro. Equivale a dos radios ($d = 2r$).
+    * **Cuerda:** Segmento que une dos puntos de la circunferencia.
+    * **Tangente:** Recta que toca a la circunferencia en un solo punto (siempre perpendicular al radio en ese punto).
 
-### 📐 3. Fórmulas de Cálculo
-* **Perímetro (Longitud):** $P = 2 \cdot \pi \cdot r$  o  $P = \pi \cdot d$
-* **Área:** $A = \pi \cdot r^2$
+    ### 📐 3. Fórmulas de Cálculo
+    * **Perímetro (Longitud):** $P = 2 \cdot \pi \cdot r$  o  $P = \pi \cdot d$
+    * **Área:** $A = \pi \cdot r^2$
 
-> **Newton Tip:** "Seba, dile a tu alumno que $\pi$ (Pi) es aproximadamente 3,14, pero en la PAES muchas veces se deja expresado. ¡Que no se complique multiplicando decimales si las alternativas tienen el símbolo $\pi$!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno que $\pi$ (Pi) es aproximadamente 3,14, pero en la PAES muchas veces se deja expresado. ¡Que no se complique multiplicando decimales si las alternativas tienen el símbolo $\pi$!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G13 (Paso a Paso)", expanded=False):
         st.markdown(r"""

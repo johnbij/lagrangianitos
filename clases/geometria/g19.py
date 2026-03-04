@@ -10,37 +10,39 @@ _CSS = """
 """
 
 def render_G19():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G19: Transformaciones Isométricas — Movimiento sin Deformación")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G19: Transformaciones Isométricas — Movimiento sin Deformación")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G19: Transformaciones Isométricas - Movimiento sin Deformación
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G19: Transformaciones Isométricas - Movimiento sin Deformación
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Definición de Isometría
-Del griego *iso* (igual) y *metría* (medida). Son transformaciones que cambian la posición o el sentido de una figura pero **mantienen su forma y su tamaño** (congruencia).
+    ### 🛡️ 1. Definición de Isometría
+    Del griego *iso* (igual) y *metría* (medida). Son transformaciones que cambian la posición o el sentido de una figura pero **mantienen su forma y su tamaño** (congruencia).
 
-### ⚖️ 2. Los Tres Tipos Fundamentales
-* **Traslación:** Desplazar cada punto de la figura según un **vector de traslación** $\vec{v}(a, b)$. Se suma $a$ a las $x$ y $b$ a las $y$.
-* **Rotación:** Girar la figura respecto a un **centro de rotación** y un **ángulo $\alpha$**.
-    * El sentido positivo es antihorario (contrario al reloj).
-* **Simetría (Reflexión):**
-    * **Axial:** Respecto a una recta (eje). Actúa como un espejo.
-    * **Central:** Respecto a un punto (equivalente a una rotación de 180°).
+    ### ⚖️ 2. Los Tres Tipos Fundamentales
+    * **Traslación:** Desplazar cada punto de la figura según un **vector de traslación** $\vec{v}(a, b)$. Se suma $a$ a las $x$ y $b$ a las $y$.
+    * **Rotación:** Girar la figura respecto a un **centro de rotación** y un **ángulo $\alpha$**.
+        * El sentido positivo es antihorario (contrario al reloj).
+    * **Simetría (Reflexión):**
+        * **Axial:** Respecto a una recta (eje). Actúa como un espejo.
+        * **Central:** Respecto a un punto (equivalente a una rotación de 180°).
 
-### 📐 3. Puntos Clave en el Plano (Centro $O(0,0)$)
-Si rotamos un punto $(x, y)$ en sentido antihorario:
-* **90°:** $(-y, x)$
-* **180°:** $(-x, -y)$
-* **270°:** $(y, -x)$
+    ### 📐 3. Puntos Clave en el Plano (Centro $O(0,0)$)
+    Si rotamos un punto $(x, y)$ en sentido antihorario:
+    * **90°:** $(-y, x)$
+    * **180°:** $(-x, -y)$
+    * **270°:** $(y, -x)$
 
-> **Newton Tip:** "Seba, dile a tu alumno: en las isometrías, el área y el perímetro son SAGRADOS, no cambian. Si en un ejercicio te dicen que el área cambió, ¡no es isometría!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: en las isometrías, el área y el perímetro son SAGRADOS, no cambian. Si en un ejercicio te dicen que el área cambió, ¡no es isometría!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G19 (Paso a Paso)", expanded=False):
         st.markdown(r"""

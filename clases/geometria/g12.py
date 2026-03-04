@@ -10,35 +10,37 @@ _CSS = """
 """
 
 def render_G12():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G12: Áreas y Perímetros I — Triángulos y Cuadriláteros")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G12: Áreas y Perímetros I — Triángulos y Cuadriláteros")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G12: Áreas y Perímetros I - Triángulos y Cuadriláteros
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G12: Áreas y Perímetros I - Triángulos y Cuadriláteros
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Conceptos Base
-* **Perímetro ($P$):** Es la suma de todos los lados de una figura. Representa el contorno (medida lineal).
-* **Área ($A$):** Es la medida de la superficie encerrada por la figura (medida cuadrada).
+    ### 🛡️ 1. Conceptos Base
+    * **Perímetro ($P$):** Es la suma de todos los lados de una figura. Representa el contorno (medida lineal).
+    * **Área ($A$):** Es la medida de la superficie encerrada por la figura (medida cuadrada).
 
-### ⚖️ 2. Fórmulas de Triángulos
-* **Cualquier Triángulo:** $A = \frac{\text{base} \cdot \text{altura}}{2}$
-* **Triángulo Rectángulo:** $A = \frac{\text{cateto}_1 \cdot \text{cateto}_2}{2}$
-* **Triángulo Equilátero:** $A = \frac{a^2\sqrt{3}}{4}$ (donde $a$ es el lado).
+    ### ⚖️ 2. Fórmulas de Triángulos
+    * **Cualquier Triángulo:** $A = \frac{\text{base} \cdot \text{altura}}{2}$
+    * **Triángulo Rectángulo:** $A = \frac{\text{cateto}_1 \cdot \text{cateto}_2}{2}$
+    * **Triángulo Equilátero:** $A = \frac{a^2\sqrt{3}}{4}$ (donde $a$ es el lado).
 
-### 📐 3. Fórmulas de Cuadriláteros
-* **Cuadrado:** $P = 4a$ | $A = a^2$ o $A = \frac{d^2}{2}$ (con la diagonal).
-* **Rectángulo:** $P = 2(a + b)$ | $A = \text{base} \cdot \text{altura}$.
-* **Rombo:** $A = \frac{D \cdot d}{2}$ (producto de diagonales dividido por 2).
-* **Trapecio:** $A = \frac{(B + b) \cdot h}{2}$ (promedio de las bases por la altura).
+    ### 📐 3. Fórmulas de Cuadriláteros
+    * **Cuadrado:** $P = 4a$ | $A = a^2$ o $A = \frac{d^2}{2}$ (con la diagonal).
+    * **Rectángulo:** $P = 2(a + b)$ | $A = \text{base} \cdot \text{altura}$.
+    * **Rombo:** $A = \frac{D \cdot d}{2}$ (producto de diagonales dividido por 2).
+    * **Trapecio:** $A = \frac{(B + b) \cdot h}{2}$ (promedio de las bases por la altura).
 
-> **Newton Tip:** "Seba, dile a tu alumno: el área es cuántas baldosas caben dentro, el perímetro es cuánta cinta necesito para rodearlo. ¡Que no mezclen peras con manzanas!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: el área es cuántas baldosas caben dentro, el perímetro es cuánta cinta necesito para rodearlo. ¡Que no mezclen peras con manzanas!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G12 (Paso a Paso)", expanded=False):
         st.markdown(r"""

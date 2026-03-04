@@ -10,30 +10,32 @@ _CSS = """
 """
 
 def render_G09():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G09: Elementos Secundarios I — Alturas y Bisectrices")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G09: Elementos Secundarios I — Alturas y Bisectrices")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G09: Elementos Secundarios I - Alturas y Bisectrices
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G09: Elementos Secundarios I - Alturas y Bisectrices
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. La Altura ($h$)
-Es el segmento perpendicular que va desde un vértice al lado opuesto (o a su prolongación).
-* **Punto de intersección:** Las tres alturas se cortan en el **Ortocentro**.
-* **Dato clave:** En un triángulo obtusángulo, el ortocentro queda fuera del triángulo.
+    ### 🛡️ 1. La Altura ($h$)
+    Es el segmento perpendicular que va desde un vértice al lado opuesto (o a su prolongación).
+    * **Punto de intersección:** Las tres alturas se cortan en el **Ortocentro**.
+    * **Dato clave:** En un triángulo obtusángulo, el ortocentro queda fuera del triángulo.
 
-### ⚖️ 2. La Bisectriz ($b$)
-Es el rayo que divide a un ángulo interior en dos ángulos de igual medida (congruentes).
-* **Punto de intersección:** Las tres bisectrices se cortan en el **Incentro**.
-* **Propiedad:** El incentro es el centro de la circunferencia **inscrita** (la que toca los lados por dentro).
+    ### ⚖️ 2. La Bisectriz ($b$)
+    Es el rayo que divide a un ángulo interior en dos ángulos de igual medida (congruentes).
+    * **Punto de intersección:** Las tres bisectrices se cortan en el **Incentro**.
+    * **Propiedad:** El incentro es el centro de la circunferencia **inscrita** (la que toca los lados por dentro).
 
-> **Statham Tip:** *"Acuérdate: Altura = Perpendicular (90°). Bisectriz = Bisectar (partir el ángulo en dos). No las confundas o te vas a marear en los ejercicios de ángulos."*
-""")
+    > **Statham Tip:** *"Acuérdate: Altura = Perpendicular (90°). Bisectriz = Bisectar (partir el ángulo en dos). No las confundas o te vas a marear en los ejercicios de ángulos."*
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G09 (Paso a Paso)", expanded=False):
         st.markdown(r"""

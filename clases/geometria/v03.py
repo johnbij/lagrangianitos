@@ -10,35 +10,37 @@ _CSS = """
 """
 
 def render_V03():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("V03: Módulo y Distancia — ¿Cuánto mide el vector?")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("V03: Módulo y Distancia — ¿Cuánto mide el vector?")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase V03: Módulo y Distancia - ¿Cuánto mide el vector?
-**Eje:** Vectores | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase V03: Módulo y Distancia - ¿Cuánto mide el vector?
+    **Eje:** Vectores | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Módulo de un Vector ($|\vec{v}|$)
-El módulo es la longitud o magnitud del vector. Representa la distancia desde el origen $(0,0)$ hasta el punto $(x, y)$.
-* **Fórmula:** Se basa directamente en el Teorema de Pitágoras.
-$$|\vec{v}| = \sqrt{x^2 + y^2}$$
+    ### 🛡️ 1. Módulo de un Vector ($|\vec{v}|$)
+    El módulo es la longitud o magnitud del vector. Representa la distancia desde el origen $(0,0)$ hasta el punto $(x, y)$.
+    * **Fórmula:** Se basa directamente en el Teorema de Pitágoras.
+    $$|\vec{v}| = \sqrt{x^2 + y^2}$$
 
-### ⚖️ 2. Distancia entre dos puntos
-Si queremos saber la distancia entre el punto $A(x_1, y_1)$ y el punto $B(x_2, y_2)$, calculamos el módulo del vector $\vec{AB}$.
-* **Fórmula de Distancia ($d$):**
-$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+    ### ⚖️ 2. Distancia entre dos puntos
+    Si queremos saber la distancia entre el punto $A(x_1, y_1)$ y el punto $B(x_2, y_2)$, calculamos el módulo del vector $\vec{AB}$.
+    * **Fórmula de Distancia ($d$):**
+    $$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
 
-### 📐 3. Propiedades del Módulo
-1. **Siempre es positivo:** El módulo es una distancia, por lo tanto $|\vec{v}| \geq 0$.
-2. **Módulo de la ponderación:** $|k \cdot \vec{v}| = |k| \cdot |\vec{v}|$. Si multiplicas el vector por 3, su medida se triplica.
-3. **Vector Unitario:** Es aquel cuyo módulo es exactamente 1.
+    ### 📐 3. Propiedades del Módulo
+    1. **Siempre es positivo:** El módulo es una distancia, por lo tanto $|\vec{v}| \geq 0$.
+    2. **Módulo de la ponderación:** $|k \cdot \vec{v}| = |k| \cdot |\vec{v}|$. Si multiplicas el vector por 3, su medida se triplica.
+    3. **Vector Unitario:** Es aquel cuyo módulo es exactamente 1.
 
-> **Newton Tip:** "Seba, dile a tu alumno: el módulo es la hipotenusa de un triángulo imaginario donde los catetos son las coordenadas $x$ e $y$. ¡Si se sabe los tríos pitagóricos (3, 4, 5), ya tiene la mitad de los ejercicios resueltos!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: el módulo es la hipotenusa de un triángulo imaginario donde los catetos son las coordenadas $x$ e $y$. ¡Si se sabe los tríos pitagóricos (3, 4, 5), ya tiene la mitad de los ejercicios resueltos!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica V03 (Paso a Paso)", expanded=False):
         st.markdown(r"""

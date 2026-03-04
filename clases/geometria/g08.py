@@ -10,31 +10,33 @@ _CSS = """
 """
 
 def render_G08():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G08: Clasificación de Triángulos (por Lados)")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G08: Clasificación de Triángulos (por Lados)")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G08: Clasificación de Triángulos (Lados)
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G08: Clasificación de Triángulos (Lados)
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Criterio de Clasificación
-Este criterio se basa en la comparación de las longitudes de los tres segmentos que forman el triángulo. La medida de los lados determina directamente la medida de los ángulos opuestos.
+    ### 🛡️ 1. Criterio de Clasificación
+    Este criterio se basa en la comparación de las longitudes de los tres segmentos que forman el triángulo. La medida de los lados determina directamente la medida de los ángulos opuestos.
 
-### ⚖️ 2. Los Tres Tipos Fundamentales
-* **Equilátero:** Sus **tres** lados son de igual medida. Esto implica que sus tres ángulos internos también son iguales (cada uno mide 60°).
-* **Isósceles:** Tiene al menos **dos** lados de igual medida. Los ángulos opuestos a estos lados (ángulos de la base) también son iguales entre sí.
-* **Escaleno:** Sus **tres** lados tienen medidas distintas. En consecuencia, sus tres ángulos internos también son diferentes.
+    ### ⚖️ 2. Los Tres Tipos Fundamentales
+    * **Equilátero:** Sus **tres** lados son de igual medida. Esto implica que sus tres ángulos internos también son iguales (cada uno mide 60°).
+    * **Isósceles:** Tiene al menos **dos** lados de igual medida. Los ángulos opuestos a estos lados (ángulos de la base) también son iguales entre sí.
+    * **Escaleno:** Sus **tres** lados tienen medidas distintas. En consecuencia, sus tres ángulos internos también son diferentes.
 
-### 📐 3. Propiedad de Correspondencia
-En todo triángulo, al lado de mayor longitud se opone el ángulo de mayor medida, y al lado de menor longitud se opone el ángulo de menor medida.
+    ### 📐 3. Propiedad de Correspondencia
+    En todo triángulo, al lado de mayor longitud se opone el ángulo de mayor medida, y al lado de menor longitud se opone el ángulo de menor medida.
 
-> **Típ:** "Seba, dile a tu alumno que el equilátero es un caso especial de isósceles. Si tiene tres lados iguales, ¡por lógica tiene al menos dos! Pero en la PAES, el isósceles suele ser el que tiene 'solo' dos iguales."
-""")
+    > **Típ:** "Seba, dile a tu alumno que el equilátero es un caso especial de isósceles. Si tiene tres lados iguales, ¡por lógica tiene al menos dos! Pero en la PAES, el isósceles suele ser el que tiene 'solo' dos iguales."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G08 (Paso a Paso)", expanded=False):
         st.markdown(r"""

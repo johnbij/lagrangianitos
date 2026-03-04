@@ -10,36 +10,38 @@ _CSS = """
 """
 
 def render_V05():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("V05: Vectores en el Espacio — La Tercera Dimensión")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("V05: Vectores en el Espacio — La Tercera Dimensión")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase V05: Vectores en el Espacio - La Tercera Dimensión
-**Eje:** Vectores | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase V05: Vectores en el Espacio - La Tercera Dimensión
+    **Eje:** Vectores | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. El Sistema de Coordenadas 3D
-Para representar el espacio, añadimos un tercer eje perpendicular a los otros dos:
-* **Eje X:** Ancho (Abscisas)
-* **Eje Y:** Largo (Ordenadas)
-* **Eje Z:** Alto (Cotas)
-Un punto o vector se expresa como una terna ordenada: $\vec{v}(x, y, z)$.
+    ### 🛡️ 1. El Sistema de Coordenadas 3D
+    Para representar el espacio, añadimos un tercer eje perpendicular a los otros dos:
+    * **Eje X:** Ancho (Abscisas)
+    * **Eje Y:** Largo (Ordenadas)
+    * **Eje Z:** Alto (Cotas)
+    Un punto o vector se expresa como una terna ordenada: $\vec{v}(x, y, z)$.
 
-### ⚖️ 2. Operaciones en 3D
-Se mantienen las mismas reglas que en el plano, pero aplicadas a las tres componentes:
-* **Suma/Resta:** $(x_1, y_1, z_1) \pm (x_2, y_2, z_2) = (x_1 \pm x_2, \space y_1 \pm y_2, \space z_1 \pm z_2)$
-* **Ponderación:** $k \cdot (x, y, z) = (kx, ky, kz)$
+    ### ⚖️ 2. Operaciones en 3D
+    Se mantienen las mismas reglas que en el plano, pero aplicadas a las tres componentes:
+    * **Suma/Resta:** $(x_1, y_1, z_1) \pm (x_2, y_2, z_2) = (x_1 \pm x_2, \space y_1 \pm y_2, \space z_1 \pm z_2)$
+    * **Ponderación:** $k \cdot (x, y, z) = (kx, ky, kz)$
 
-### 📐 3. Módulo en el Espacio
-Para hallar la medida de un vector en 3D, extendemos el Teorema de Pitágoras:
-$$|\vec{v}| = \sqrt{x^2 + y^2 + z^2}$$
+    ### 📐 3. Módulo en el Espacio
+    Para hallar la medida de un vector en 3D, extendemos el Teorema de Pitágoras:
+    $$|\vec{v}| = \sqrt{x^2 + y^2 + z^2}$$
 
-> **Newton Tip:** "Seba, dile a tu alumno: trabajar en 3D es como estar en una habitación. El eje $X$ es una pared, el $Y$ es la otra y el $Z$ es la altura del techo. ¡La matemática no cambia, solo se vuelve más profunda!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: trabajar en 3D es como estar en una habitación. El eje $X$ es una pared, el $Y$ es la otra y el $Z$ es la altura del techo. ¡La matemática no cambia, solo se vuelve más profunda!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica V05 (Paso a Paso)", expanded=False):
         st.markdown(r"""

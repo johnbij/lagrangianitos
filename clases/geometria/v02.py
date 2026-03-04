@@ -10,37 +10,39 @@ _CSS = """
 """
 
 def render_V02():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("V02: Operaciones con Vectores — Combinando Movimientos")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("V02: Operaciones con Vectores — Combinando Movimientos")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase V02: Operaciones con Vectores - Combinando Movimientos
-**Eje:** Vectores | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase V02: Operaciones con Vectores - Combinando Movimientos
+    **Eje:** Vectores | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Suma de Vectores
-Para sumar dos vectores $\vec{u}(x_1, y_1)$ y $\vec{v}(x_2, y_2)$, sumamos sus componentes respectivas:
-$$\vec{u} + \vec{v} = (x_1 + x_2, \space y_1 + y_2)$$
-* **Gráficamente:** Se usa el **Método del Paralelogramo** o el **Método del Triángulo** (poner el inicio de uno en la punta del otro).
+    ### 🛡️ 1. Suma de Vectores
+    Para sumar dos vectores $\vec{u}(x_1, y_1)$ y $\vec{v}(x_2, y_2)$, sumamos sus componentes respectivas:
+    $$\vec{u} + \vec{v} = (x_1 + x_2, \space y_1 + y_2)$$
+    * **Gráficamente:** Se usa el **Método del Paralelogramo** o el **Método del Triángulo** (poner el inicio de uno en la punta del otro).
 
-### ⚖️ 2. Resta de Vectores
-Restar es sumar el opuesto. Si a $\vec{u}$ le restamos $\vec{v}$:
-$$\vec{u} - \vec{v} = (x_1 - x_2, \space y_1 - y_2)$$
-* **Gráficamente:** El vector resultante va desde la punta de $\vec{v}$ hasta la punta de $\vec{u}$.
+    ### ⚖️ 2. Resta de Vectores
+    Restar es sumar el opuesto. Si a $\vec{u}$ le restamos $\vec{v}$:
+    $$\vec{u} - \vec{v} = (x_1 - x_2, \space y_1 - y_2)$$
+    * **Gráficamente:** El vector resultante va desde la punta de $\vec{v}$ hasta la punta de $\vec{u}$.
 
-### 📐 3. Ponderación por un Escalar ($k \cdot \vec{v}$)
-Multiplicar un vector por un número real $k$ (escalar):
-$$k \cdot (x, y) = (k \cdot x, \space k \cdot y)$$
-* **Si $k > 1$:** El vector se alarga (amplificación).
-* **Si $0 < k < 1$:** El vector se acorta (reducción).
-* **Si $k < 0$:** El vector cambia de sentido (punta hacia el lado opuesto).
+    ### 📐 3. Ponderación por un Escalar ($k \cdot \vec{v}$)
+    Multiplicar un vector por un número real $k$ (escalar):
+    $$k \cdot (x, y) = (k \cdot x, \space k \cdot y)$$
+    * **Si $k > 1$:** El vector se alarga (amplificación).
+    * **Si $0 < k < 1$:** El vector se acorta (reducción).
+    * **Si $k < 0$:** El vector cambia de sentido (punta hacia el lado opuesto).
 
-> **Newton Tip:** "Seba, dile a tu alumno: sumar vectores es como dar pasos. Si caminas 3 pasos al norte y luego 2 al este, el vector resultante es el camino directo desde donde empezaste hasta donde terminaste."
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: sumar vectores es como dar pasos. Si caminas 3 pasos al norte y luego 2 al este, el vector resultante es el camino directo desde donde empezaste hasta donde terminaste."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica V02 (Paso a Paso)", expanded=False):
         st.markdown(r"""

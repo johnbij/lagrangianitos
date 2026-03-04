@@ -10,35 +10,37 @@ _CSS = """
 """
 
 def render_G15():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G15: Teoremas de Euclides — Proporciones en el Triángulo Rectángulo")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G15: Teoremas de Euclides — Proporciones en el Triángulo Rectángulo")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G15: Teoremas de Euclides - Proporciones en el Triángulo Rectángulo
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G15: Teoremas de Euclides - Proporciones en el Triángulo Rectángulo
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. El Escenario
-Para aplicar Euclides, necesitamos un **triángulo rectángulo** y trazar la **altura ($h_c$)** desde el ángulo recto hacia la hipotenusa. Esta altura divide a la hipotenusa en dos segmentos llamados **proyecciones** ($p$ y $q$).
+    ### 🛡️ 1. El Escenario
+    Para aplicar Euclides, necesitamos un **triángulo rectángulo** y trazar la **altura ($h_c$)** desde el ángulo recto hacia la hipotenusa. Esta altura divide a la hipotenusa en dos segmentos llamados **proyecciones** ($p$ y $q$).
 
-### ⚖️ 2. Los Dos Teoremas Fundamentales
-* **Teorema de la Altura:** El cuadrado de la altura es igual al producto de las proyecciones de los catetos.
-  $$h_c^2 = p \cdot q$$
+    ### ⚖️ 2. Los Dos Teoremas Fundamentales
+    * **Teorema de la Altura:** El cuadrado de la altura es igual al producto de las proyecciones de los catetos.
+      $$h_c^2 = p \cdot q$$
 
-* **Teorema del Cateto:** El cuadrado de cada cateto es igual al producto de su proyección por la hipotenusa completa ($c$).
-  $$a^2 = p \cdot c$$
-  $$b^2 = q \cdot c$$
+    * **Teorema del Cateto:** El cuadrado de cada cateto es igual al producto de su proyección por la hipotenusa completa ($c$).
+      $$a^2 = p \cdot c$$
+      $$b^2 = q \cdot c$$
 
-### 📐 3. Relación Adicional (Área)
-También se cumple que el producto de los catetos es igual al producto de la hipotenusa por la altura:
-$$a \cdot b = c \cdot h_c$$
+    ### 📐 3. Relación Adicional (Área)
+    También se cumple que el producto de los catetos es igual al producto de la hipotenusa por la altura:
+    $$a \cdot b = c \cdot h_c$$
 
-> **Newton Tip:** "Seba, dile a tu alumno: Euclides es el hermano de Pitágoras. Si con uno no puedes sacar el lado, el otro seguro te da la respuesta usando las proyecciones."
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: Euclides es el hermano de Pitágoras. Si con uno no puedes sacar el lado, el otro seguro te da la respuesta usando las proyecciones."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G15 (Paso a Paso)", expanded=False):
         st.markdown(r"""

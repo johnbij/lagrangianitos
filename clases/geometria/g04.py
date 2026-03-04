@@ -10,34 +10,36 @@ _CSS = """
 """
 
 def render_G04():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G04: Ángulos y Clasificación")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G04: Ángulos y Clasificación")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G04: Ángulos y Clasificación
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G04: Ángulos y Clasificación
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Definición
-Un ángulo es la región del plano comprendida entre dos semirrectas con un origen común llamado vértice.
+    ### 🛡️ 1. Definición
+    Un ángulo es la región del plano comprendida entre dos semirrectas con un origen común llamado vértice.
 
-### ⚖️ 2. Clasificación según su medida
-* **Agudo:** Mayor que 0° y menor que 90°.
-* **Recto:** Mide exactamente 90°.
-* **Obtuso:** Mayor que 90° y menor que 180°.
-* **Extendido/Llana:** Mide exactamente 180°.
-* **Completo:** Mide exactamente 360°.
+    ### ⚖️ 2. Clasificación según su medida
+    * **Agudo:** Mayor que 0° y menor que 90°.
+    * **Recto:** Mide exactamente 90°.
+    * **Obtuso:** Mayor que 90° y menor que 180°.
+    * **Extendido/Llana:** Mide exactamente 180°.
+    * **Completo:** Mide exactamente 360°.
 
-### 📏 3. Clasificación según la suma
-* **Complementarios:** Suman 90°.
-* **Suplementarios:** Suman 180°.
+    ### 📏 3. Clasificación según la suma
+    * **Complementarios:** Suman 90°.
+    * **Suplementarios:** Suman 180°.
 
-> **Hawking Tip:** *"Recuerda que el ángulo recto es la esquina perfecta, la base de casi toda la construcción geométrica."*
-""")
+    > **Hawking Tip:** *"Recuerda que el ángulo recto es la esquina perfecta, la base de casi toda la construcción geométrica."*
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G04 (Paso a Paso)", expanded=False):
         st.markdown(r"""

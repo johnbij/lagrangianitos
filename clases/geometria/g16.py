@@ -10,32 +10,34 @@ _CSS = """
 """
 
 def render_G16():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G16: Teorema de Tales — Proporcionalidad entre Paralelas")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G16: Teorema de Tales — Proporcionalidad entre Paralelas")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G16: Teorema de Tales - Proporcionalidad Entre Paralelas
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G16: Teorema de Tales - Proporcionalidad Entre Paralelas
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. El Teorema Fundamental
-Si tres o más rectas paralelas ($L_1 \parallel L_2 \parallel L_3$) son cortadas por dos rectas transversales ($S_1$ y $S_2$), los segmentos determinados en una de las transversales son **proporcionales** a los segmentos correspondientes en la otra.
+    ### 🛡️ 1. El Teorema Fundamental
+    Si tres o más rectas paralelas ($L_1 \parallel L_2 \parallel L_3$) son cortadas por dos rectas transversales ($S_1$ y $S_2$), los segmentos determinados en una de las transversales son **proporcionales** a los segmentos correspondientes en la otra.
 
-### ⚖️ 2. Tipos de Configuraciones
-* **Configuración Simple (Escalera):** Segmentos laterales proporcionales.
-  $$\frac{a}{b} = \frac{c}{d}$$
-* **Configuración en Triángulo:** Si una recta es paralela a un lado del triángulo, se forman segmentos proporcionales y triángulos semejantes.
-* **Configuración en "X" (Reloj de Arena):** Dos paralelas unidas por transversales que se cruzan. Los lados opuestos mantienen la razón.
+    ### ⚖️ 2. Tipos de Configuraciones
+    * **Configuración Simple (Escalera):** Segmentos laterales proporcionales.
+      $$\frac{a}{b} = \frac{c}{d}$$
+    * **Configuración en Triángulo:** Si una recta es paralela a un lado del triángulo, se forman segmentos proporcionales y triángulos semejantes.
+    * **Configuración en "X" (Reloj de Arena):** Dos paralelas unidas por transversales que se cruzan. Los lados opuestos mantienen la razón.
 
-### 📐 3. La Regla de Oro
-Lo más importante en Tales es el **orden**. Si empiezas de arriba hacia abajo en una transversal, debes hacer lo mismo en la otra. Si comparas "segmento corto" con "segmento total", debes repetir esa lógica en todo el ejercicio.
+    ### 📐 3. La Regla de Oro
+    Lo más importante en Tales es el **orden**. Si empiezas de arriba hacia abajo en una transversal, debes hacer lo mismo en la otra. Si comparas "segmento corto" con "segmento total", debes repetir esa lógica en todo el ejercicio.
 
-> **Newton Tip:** "Seba, dile a tu alumno que Tales es como una fotocopiadora: mantiene la forma y las proporciones, solo cambia el tamaño. ¡Si aprenden a armar la fracción, el ejercicio está resuelto!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno que Tales es como una fotocopiadora: mantiene la forma y las proporciones, solo cambia el tamaño. ¡Si aprenden a armar la fracción, el ejercicio está resuelto!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G16 (Paso a Paso)", expanded=False):
         st.markdown(r"""

@@ -10,37 +10,39 @@ _CSS = """
 """
 
 def render_G18():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G18: Homotecia — Ampliación y Reducción Vectorial")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G18: Homotecia — Ampliación y Reducción Vectorial")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G18: Homotecia - Ampliación y Reducción Vectorial
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G18: Homotecia - Ampliación y Reducción Vectorial
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Definición
-La homotecia es una transformación geométrica que permite obtener una figura semejante a otra a partir de un **centro de homotecia ($O$)** y una **razón de homotecia ($k$)**.
+    ### 🛡️ 1. Definición
+    La homotecia es una transformación geométrica que permite obtener una figura semejante a otra a partir de un **centro de homotecia ($O$)** y una **razón de homotecia ($k$)**.
 
-### ⚖️ 2. Tipos de Homotecia según la Razón ($k$)
-* **Directa ($k > 0$):** La figura resultante está al mismo lado del centro $O$ que la original.
-    * Si $|k| > 1$: Ampliación.
-    * Si $|k| < 1$: Reducción.
-* **Inversa ($k < 0$):** La figura resultante está al lado opuesto del centro $O$ (se ve "invertida").
+    ### ⚖️ 2. Tipos de Homotecia según la Razón ($k$)
+    * **Directa ($k > 0$):** La figura resultante está al mismo lado del centro $O$ que la original.
+        * Si $|k| > 1$: Ampliación.
+        * Si $|k| < 1$: Reducción.
+    * **Inversa ($k < 0$):** La figura resultante está al lado opuesto del centro $O$ (se ve "invertida").
 
-### 📐 3. Propiedades Clave
-1. Los puntos $O$, $P$ (original) y $P'$ (homotético) son siempre **colineales**.
-2. La distancia del centro al punto nuevo es $k$ veces la distancia al punto original: $OP' = k \cdot OP$.
-3. Al igual que en semejanza:
-    * Los lados están en razón $k$.
-    * Los perímetros están en razón $|k|$.
-    * Las áreas están en razón $k^2$.
+    ### 📐 3. Propiedades Clave
+    1. Los puntos $O$, $P$ (original) y $P'$ (homotético) son siempre **colineales**.
+    2. La distancia del centro al punto nuevo es $k$ veces la distancia al punto original: $OP' = k \cdot OP$.
+    3. Al igual que en semejanza:
+        * Los lados están en razón $k$.
+        * Los perímetros están en razón $|k|$.
+        * Las áreas están en razón $k^2$.
 
-> **Newton Tip:** "Seba, dile a tu alumno: la homotecia es como un proyector de cine. Si mueves la pantalla (la razón), la imagen se agranda o achica, pero la forma no se pierde porque los rayos salen del mismo punto (el centro)."
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: la homotecia es como un proyector de cine. Si mueves la pantalla (la razón), la imagen se agranda o achica, pero la forma no se pierde porque los rayos salen del mismo punto (el centro)."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G18 (Paso a Paso)", expanded=False):
         st.markdown(r"""

@@ -10,34 +10,36 @@ _CSS = """
 """
 
 def render_V04():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("V04: Vectores e Isometrías — El Motor del Movimiento")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("V04: Vectores e Isometrías — El Motor del Movimiento")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase V04: Vectores e Isometrías - El Motor del Movimiento
-**Eje:** Vectores | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase V04: Vectores e Isometrías - El Motor del Movimiento
+    **Eje:** Vectores | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Traslación: La Suma Vectorial
-La traslación es la aplicación más directa de los vectores. Trasladar un punto $P$ según un vector $\vec{v}$ es, simplemente, realizar una suma de componentes.
-* **Fórmula:** $P' = P + \vec{v}$
-* Si tienes una figura, aplicas el mismo vector a cada uno de sus vértices.
+    ### 🛡️ 1. Traslación: La Suma Vectorial
+    La traslación es la aplicación más directa de los vectores. Trasladar un punto $P$ según un vector $\vec{v}$ es, simplemente, realizar una suma de componentes.
+    * **Fórmula:** $P' = P + \vec{v}$
+    * Si tienes una figura, aplicas el mismo vector a cada uno de sus vértices.
 
-### ⚖️ 2. Composición de Traslaciones
-Si aplicas una traslación $\vec{u}$ y luego otra $\vec{v}$, el resultado es una única traslación equivalente a la **suma de ambos vectores**.
-$$\vec{v}_{final} = \vec{u} + \vec{v}$$
+    ### ⚖️ 2. Composición de Traslaciones
+    Si aplicas una traslación $\vec{u}$ y luego otra $\vec{v}$, el resultado es una única traslación equivalente a la **suma de ambos vectores**.
+    $$\vec{v}_{final} = \vec{u} + \vec{v}$$
 
-### 📐 3. Vectores en Rotaciones y Simetrías
-Aunque las rotaciones y simetrías cambian la orientación, podemos usar vectores para describir la posición de los puntos respecto al centro de giro o al eje:
-* **Rotación 180°:** Equivale a multiplicar el vector posición por el escalar $k = -1$.
-* **Simetría Central:** Es exactamente lo mismo que una ponderación por $-1$ desde el centro de simetría.
+    ### 📐 3. Vectores en Rotaciones y Simetrías
+    Aunque las rotaciones y simetrías cambian la orientación, podemos usar vectores para describir la posición de los puntos respecto al centro de giro o al eje:
+    * **Rotación 180°:** Equivale a multiplicar el vector posición por el escalar $k = -1$.
+    * **Simetría Central:** Es exactamente lo mismo que una ponderación por $-1$ desde el centro de simetría.
 
-> **Newton Tip:** "Seba, dile a tu alumno: si en la prueba te piden aplicar tres traslaciones seguidas, ¡no muevas la figura tres veces! Suma los tres vectores primero y mueve la figura una sola vez con el resultado. Ahorrarás tiempo valioso."
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: si en la prueba te piden aplicar tres traslaciones seguidas, ¡no muevas la figura tres veces! Suma los tres vectores primero y mueve la figura una sola vez con el resultado. Ahorrarás tiempo valioso."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica V04 (Paso a Paso)", expanded=False):
         st.markdown(r"""

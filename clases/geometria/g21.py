@@ -10,34 +10,36 @@ _CSS = """
 """
 
 def render_G21():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G21: Cuerpos 3D II — Pirámides, Conos y Esfera")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G21: Cuerpos 3D II — Pirámides, Conos y Esfera")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G21: Cuerpos 3D II - Pirámides, Conos y Esfera
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G21: Cuerpos 3D II - Pirámides, Conos y Esfera
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Cuerpos que terminan en punta (Pirámide y Cono)
-A diferencia de los prismas, estos cuerpos ocupan menos espacio. De hecho, ¡caben exactamente tres veces en un prisma de su misma base y altura!
-* **Volumen ($V$):** Es un tercio del área de la base por la altura.
-  $$V = \frac{A_{base} \cdot h}{3}$$
+    ### 🛡️ 1. Cuerpos que terminan en punta (Pirámide y Cono)
+    A diferencia de los prismas, estos cuerpos ocupan menos espacio. De hecho, ¡caben exactamente tres veces en un prisma de su misma base y altura!
+    * **Volumen ($V$):** Es un tercio del área de la base por la altura.
+      $$V = \frac{A_{base} \cdot h}{3}$$
 
-### ⚖️ 2. La Esfera: El cuerpo perfecto
-No tiene caras, ni bases, ni aristas. Solo depende de su **radio ($r$)**.
-* **Área Superficial:** $4 \cdot \pi \cdot r^2$ (equivale al área de 4 círculos grandes).
-* **Volumen:** $\frac{4}{3} \cdot \pi \cdot r^3$
+    ### ⚖️ 2. La Esfera: El cuerpo perfecto
+    No tiene caras, ni bases, ni aristas. Solo depende de su **radio ($r$)**.
+    * **Área Superficial:** $4 \cdot \pi \cdot r^2$ (equivale al área de 4 círculos grandes).
+    * **Volumen:** $\frac{4}{3} \cdot \pi \cdot r^3$
 
-### 📐 3. Elementos del Cono
-* **Generatriz ($g$):** Es la hipotenusa del triángulo rectángulo que gira para formar el cono.
-* **Relación Pitagórica:** $r^2 + h^2 = g^2$.
+    ### 📐 3. Elementos del Cono
+    * **Generatriz ($g$):** Es la hipotenusa del triángulo rectángulo que gira para formar el cono.
+    * **Relación Pitagórica:** $r^2 + h^2 = g^2$.
 
-> **Newton Tip:** "Seba, dile a tu alumno: si se le olvida la fórmula de la pirámide o el cono, que piense en el prisma y lo divida por 3. ¡Es el truco que nunca falla!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: si se le olvida la fórmula de la pirámide o el cono, que piense en el prisma y lo divida por 3. ¡Es el truco que nunca falla!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G21 (Paso a Paso)", expanded=False):
         st.markdown(r"""

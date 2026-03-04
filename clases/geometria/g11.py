@@ -10,34 +10,36 @@ _CSS = """
 """
 
 def render_G11():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G11: Teorema de Pitágoras — La Llave Maestra")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G11: Teorema de Pitágoras — La Llave Maestra")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G11: Teorema de Pitágoras - La Llave Maestra
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G11: Teorema de Pitágoras - La Llave Maestra
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. El Teorema Universal
-En todo **triángulo rectángulo** (aquel que tiene un ángulo de 90°), el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos:
+    ### 🛡️ 1. El Teorema Universal
+    En todo **triángulo rectángulo** (aquel que tiene un ángulo de 90°), el cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos:
 
-$$a^2 + b^2 = c^2$$
+    $$a^2 + b^2 = c^2$$
 
-Donde **$a$** y **$b$** son los catetos (lados que forman el ángulo recto) y **$c$** es la hipotenusa (el lado más largo frente al ángulo de 90°).
+    Donde **$a$** y **$b$** son los catetos (lados que forman el ángulo recto) y **$c$** es la hipotenusa (el lado más largo frente al ángulo de 90°).
 
-### ⚖️ 2. Tríos Pitagóricos (Ahorro de Tiempo)
-Existen combinaciones de números enteros que siempre cumplen el teorema. Si te los aprendes, no necesitas calcular raíces:
-* **(3, 4, 5):** El más común ($9 + 16 = 25$).
-* **(5, 12, 13):** Muy usado en la PAES ($25 + 144 = 169$).
-* **(8, 15, 17):** El nivel experto.
-* **Amplificaciones:** Cualquier múltiplo también funciona (ej: 6, 8, 10 es un 3, 4, 5 al doble).
+    ### ⚖️ 2. Tríos Pitagóricos (Ahorro de Tiempo)
+    Existen combinaciones de números enteros que siempre cumplen el teorema. Si te los aprendes, no necesitas calcular raíces:
+    * **(3, 4, 5):** El más común ($9 + 16 = 25$).
+    * **(5, 12, 13):** Muy usado en la PAES ($25 + 144 = 169$).
+    * **(8, 15, 17):** El nivel experto.
+    * **Amplificaciones:** Cualquier múltiplo también funciona (ej: 6, 8, 10 es un 3, 4, 5 al doble).
 
-> **Newton Tip:** "Seba, dile a tu alumno: si no hay ángulo de 90°, Pitágoras está de vacaciones. ¡No lo fuerces donde no hay un ángulo recto!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: si no hay ángulo de 90°, Pitágoras está de vacaciones. ¡No lo fuerces donde no hay un ángulo recto!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G11 (Paso a Paso)", expanded=False):
         st.markdown(r"""

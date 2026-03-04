@@ -10,35 +10,37 @@ _CSS = """
 """
 
 def render_V01():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("V01: Introducción a los Vectores — El Mapa del Movimiento")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("V01: Introducción a los Vectores — El Mapa del Movimiento")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase V01: Introducción a los Vectores - El Mapa del Movimiento
-**Eje:** Vectores | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase V01: Introducción a los Vectores - El Mapa del Movimiento
+    **Eje:** Vectores | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. ¿Qué es un Vector?
-A diferencia de un número común (escalar), un vector es una herramienta que nos indica tres cosas fundamentales:
-1. **Módulo (Magnitud):** Cuán "largo" es el vector (su valor numérico).
-2. **Dirección:** La recta sobre la que descansa el vector (indicada por el ángulo).
-3. **Sentido:** Hacia dónde apunta la flecha (indicado por la punta).
+    ### 🛡️ 1. ¿Qué es un Vector?
+    A diferencia de un número común (escalar), un vector es una herramienta que nos indica tres cosas fundamentales:
+    1. **Módulo (Magnitud):** Cuán "largo" es el vector (su valor numérico).
+    2. **Dirección:** La recta sobre la que descansa el vector (indicada por el ángulo).
+    3. **Sentido:** Hacia dónde apunta la flecha (indicado por la punta).
 
-### ⚖️ 2. Representación en el Plano
-Un vector $\vec{v}$ en el plano cartesiano se representa como un par ordenado $(x, y)$.
-* **Componente $x$:** Desplazamiento horizontal.
-* **Componente $y$:** Desplazamiento vertical.
+    ### ⚖️ 2. Representación en el Plano
+    Un vector $\vec{v}$ en el plano cartesiano se representa como un par ordenado $(x, y)$.
+    * **Componente $x$:** Desplazamiento horizontal.
+    * **Componente $y$:** Desplazamiento vertical.
 
-### 📐 3. Vector entre dos puntos
-Si tenemos un punto inicial $A(x_1, y_1)$ y un punto final $B(x_2, y_2)$, el vector $\vec{AB}$ se calcula restando:
-$$\vec{AB} = (x_2 - x_1, y_2 - y_1)$$
+    ### 📐 3. Vector entre dos puntos
+    Si tenemos un punto inicial $A(x_1, y_1)$ y un punto final $B(x_2, y_2)$, el vector $\vec{AB}$ se calcula restando:
+    $$\vec{AB} = (x_2 - x_1, y_2 - y_1)$$
 
-> **Newton Tip:** "Seba, dile a tu alumno: el vector no es un punto, es un RECORRIDO. El punto te dice dónde estás, el vector te dice cómo moverte de un lugar a otro."
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: el vector no es un punto, es un RECORRIDO. El punto te dice dónde estás, el vector te dice cómo moverte de un lugar a otro."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica V01 (Paso a Paso)", expanded=False):
         st.markdown(r"""

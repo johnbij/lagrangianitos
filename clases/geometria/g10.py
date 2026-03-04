@@ -10,31 +10,33 @@ _CSS = """
 """
 
 def render_G10():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G10: Elementos Secundarios II — Simetrales y Transversales")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G10: Elementos Secundarios II — Simetrales y Transversales")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G10: Elementos Secundarios II - Simetrales y Transversales
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G10: Elementos Secundarios II - Simetrales y Transversales
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. La Simetral (Mediatriz)
-Es la recta **perpendicular** a un lado del triángulo que pasa, exactamente, por su **punto medio**.
-* **Punto de intersección:** Las tres simetrales se cortan en el **Circuncentro**.
-* **Propiedad:** El circuncentro es el centro de la circunferencia **circunscrita** (la que pasa por los tres vértices).
-* **Dato clave:** No necesariamente pasa por el vértice opuesto (solo en el isósceles y equilátero).
+    ### 🛡️ 1. La Simetral (Mediatriz)
+    Es la recta **perpendicular** a un lado del triángulo que pasa, exactamente, por su **punto medio**.
+    * **Punto de intersección:** Las tres simetrales se cortan en el **Circuncentro**.
+    * **Propiedad:** El circuncentro es el centro de la circunferencia **circunscrita** (la que pasa por los tres vértices).
+    * **Dato clave:** No necesariamente pasa por el vértice opuesto (solo en el isósceles y equilátero).
 
-### ⚖️ 2. La Transversal de Gravedad ($t$)
-Es el segmento que une un vértice con el **punto medio** del lado opuesto.
-* **Punto de intersección:** Las tres transversales se cortan en el **Baricentro** (o Centro de Gravedad).
-* **Propiedad 2:1:** El baricentro divide a cada transversal en dos segmentos que están en razón $2:1$ (la parte que va al vértice es el doble que la que va al lado).
+    ### ⚖️ 2. La Transversal de Gravedad ($t$)
+    Es el segmento que une un vértice con el **punto medio** del lado opuesto.
+    * **Punto de intersección:** Las tres transversales se cortan en el **Baricentro** (o Centro de Gravedad).
+    * **Propiedad 2:1:** El baricentro divide a cada transversal en dos segmentos que están en razón $2:1$ (la parte que va al vértice es el doble que la que va al lado).
 
-> **Newton Tip:** "Seba, dile a tu alumno que el Baricentro es el punto de equilibrio. Si recortas el triángulo en cartón y pones el dedo ahí, no se cae. ¡Es física pura aplicada al papel!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno que el Baricentro es el punto de equilibrio. Si recortas el triángulo en cartón y pones el dedo ahí, no se cae. ¡Es física pura aplicada al papel!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G10 (Paso a Paso)", expanded=False):
         st.markdown(r"""

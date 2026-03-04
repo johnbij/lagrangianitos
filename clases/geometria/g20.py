@@ -10,35 +10,37 @@ _CSS = """
 """
 
 def render_G20():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G20: Cuerpos 3D I — Prismas y Cilindros")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G20: Cuerpos 3D I — Prismas y Cilindros")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G20: Cuerpos 3D I - Prismas y Cilindros
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G20: Cuerpos 3D I - Prismas y Cilindros
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Definiciones Básicas
-* **Cuerpos Poliedros (Prismas):** Tienen caras planas. Un prisma tiene dos bases paralelas iguales y caras laterales que son paralelogramos.
-* **Cuerpos Redondos (Cilindro):** Se generan al girar una figura plana alrededor de un eje. El cilindro nace de girar un rectángulo.
+    ### 🛡️ 1. Definiciones Básicas
+    * **Cuerpos Poliedros (Prismas):** Tienen caras planas. Un prisma tiene dos bases paralelas iguales y caras laterales que son paralelogramos.
+    * **Cuerpos Redondos (Cilindro):** Se generan al girar una figura plana alrededor de un eje. El cilindro nace de girar un rectángulo.
 
-### ⚖️ 2. Fórmulas Universales
-Para la mayoría de los prismas y el cilindro, la lógica es la misma:
-* **Área Total ($A_t$):** Es la suma del área de las dos bases ($2 \cdot A_b$) más el área lateral ($A_l$).
-* **Volumen ($V$):** Es el producto del área de la base por la altura ($h$).
-  $$V = A_base \cdot h$$
+    ### ⚖️ 2. Fórmulas Universales
+    Para la mayoría de los prismas y el cilindro, la lógica es la misma:
+    * **Área Total ($A_t$):** Es la suma del área de las dos bases ($2 \cdot A_b$) más el área lateral ($A_l$).
+    * **Volumen ($V$):** Es el producto del área de la base por la altura ($h$).
+      $$V = A_base \cdot h$$
 
-### 📐 3. El Cilindro de Cerca
-Como su base es un círculo ($A = \pi r^2$) y su "contorno" desplegado es un rectángulo:
-* **Área Lateral:** $2 \cdot \pi \cdot r \cdot h$
-* **Volumen:** $\pi \cdot r^2 \cdot h$
+    ### 📐 3. El Cilindro de Cerca
+    Como su base es un círculo ($A = \pi r^2$) y su "contorno" desplegado es un rectángulo:
+    * **Área Lateral:** $2 \cdot \pi \cdot r \cdot h$
+    * **Volumen:** $\pi \cdot r^2 \cdot h$
 
-> **Newton Tip:** "Seba, dile a tu alumno: el volumen es como llenar una piscina. Primero cubres el fondo (Área de la base) y luego vas subiendo capa por capa (Altura). ¡Es la misma fórmula para casi todo lo que sea 'recto'!"
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: el volumen es como llenar una piscina. Primero cubres el fondo (Área de la base) y luego vas subiendo capa por capa (Altura). ¡Es la misma fórmula para casi todo lo que sea 'recto'!"
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G20 (Paso a Paso)", expanded=False):
         st.markdown(r"""

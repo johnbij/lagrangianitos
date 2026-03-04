@@ -10,33 +10,35 @@ _CSS = """
 """
 
 def render_G14():
-    st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G14: Ángulos en la Circunferencia")
-    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("G14: Ángulos en la Circunferencia")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
-    st.markdown(r"""
-# 🎬 Clase G14: Ángulos en la Circunferencia
-**Eje:** Geometría | **Nivel:** Alcance del Objetivo
+        st.markdown(r"""
+    # 🎬 Clase G14: Ángulos en la Circunferencia
+    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
 
----
+    ---
 
-### 🛡️ 1. Ángulo del Centro
-Es aquel cuyo vértice es el centro de la circunferencia y sus lados son radios.
-* **Propiedad:** La medida del ángulo del centro es igual a la medida del arco que subtiende.
+    ### 🛡️ 1. Ángulo del Centro
+    Es aquel cuyo vértice es el centro de la circunferencia y sus lados son radios.
+    * **Propiedad:** La medida del ángulo del centro es igual a la medida del arco que subtiende.
 
-### ⚖️ 2. Ángulo Inscrito
-Es aquel cuyo vértice está sobre la circunferencia y sus lados son cuerdas.
-* **Propiedad Maestra:** El ángulo inscrito mide siempre la **mitad** del ángulo del centro que subtiende el mismo arco.
-* **Corolario:** Todos los ángulos inscritos que subtienden el mismo arco son iguales.
+    ### ⚖️ 2. Ángulo Inscrito
+    Es aquel cuyo vértice está sobre la circunferencia y sus lados son cuerdas.
+    * **Propiedad Maestra:** El ángulo inscrito mide siempre la **mitad** del ángulo del centro que subtiende el mismo arco.
+    * **Corolario:** Todos los ángulos inscritos que subtienden el mismo arco son iguales.
 
-### 📐 3. Casos Especiales
-* **Ángulo Semi-inscrito:** Formado por una cuerda y una tangente. Mide la mitad del arco que subtiende.
-* **Ángulo en la Semicircunferencia:** Todo ángulo inscrito que subtiende un diámetro es siempre un **ángulo recto (90°)**.
+    ### 📐 3. Casos Especiales
+    * **Ángulo Semi-inscrito:** Formado por una cuerda y una tangente. Mide la mitad del arco que subtiende.
+    * **Ángulo en la Semicircunferencia:** Todo ángulo inscrito que subtiende un diámetro es siempre un **ángulo recto (90°)**.
 
-> **Newton Tip:** "Seba, dile a tu alumno: si ves un triángulo dibujado dentro de un círculo y un lado es el diámetro, ¡automáticamente ese triángulo es rectángulo! Es el truco más rápido de la prueba."
-""")
+    > **Newton Tip:** "Seba, dile a tu alumno: si ves un triángulo dibujado dentro de un círculo y un lado es el diámetro, ¡automáticamente ese triángulo es rectángulo! Es el truco más rápido de la prueba."
+    """)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+
 
     with st.expander("🛠️ Ejercitación Técnica G14 (Paso a Paso)", expanded=False):
         st.markdown(r"""
