@@ -6,17 +6,17 @@ def render_N08():
         st.title("N08: La Arquitectura de los Números - Primos y Divisibilidad")
 
         st.markdown(r"""
-    ### 🏛️ 1. Contexto Histórico: Los Átomos de Grecia
+    ### 🏛️  Contexto Histórico: Los Átomos de Grecia
     Hace más de 2.300 años, en la Antigua Grecia, **Euclides** ya sabía que los números no eran todos iguales. Él se dio cuenta de que algunos números eran "básicos" (no se podían desarmar) y otros eran "construcciones".
 
     Euclides demostró que **existen infinitos números primos**. No importa qué tan grande sea el número que encuentres, siempre habrá un primo más grande. En la actualidad, estos números son la base de la **Criptografía**: cada vez que haces una transferencia bancaria o mandas un mensaje por WhatsApp, hay números primos gigantes protegiendo tus datos. Si puedes desarmar un número en sus primos, tienes la llave del candado.
 
     ---
 
-    ### 🛡️ 8.1 Los Ladrillos del Universo: Números Primos
+    ### 🛡️  Los Ladrillos del Universo: Números Primos
     Un número natural se considera **Primo** si y solo si tiene **exactamente dos divisores**: el 1 y sí mismo.
 
-    ### 🛡️ 8.2 Clasificación de los Naturales
+    ### 🛡️  Clasificación de los Naturales
     Para no perderse en la batalla, el alumno debe clasificar los números según cuántos divisores tienen:
 
     1. **El Uno (1):** Es el "paria". No es primo ni compuesto, porque solo tiene **un divisor** (él mismo).
@@ -25,7 +25,7 @@ def render_N08():
        * **El Gran 2:** Es el único primo par. Todos los demás son impares (pero ojo, no todos los impares son primos).
     3. **Números Compuestos:** Tienen **más de dos divisores**. Se pueden "desarmar".
 
-    ### 🛡️ 8.3 El "Club Exclusivo": ¿Quiénes quedan fuera?
+    ### 🛡️  El "Club Exclusivo": ¿Quiénes quedan fuera?
     Es vital entender por qué ciertos candidatos no califican como primos bajo el rigor matemático:
 
     * **¿Por qué el 0 no es primo?** Tiene infinitos divisores y no entra en la categoría de "átomo".
@@ -40,13 +40,13 @@ def render_N08():
 
     ---
 
-    ### 🛡️ 8.4 Teorema Fundamental de la Aritmética
+    ### 🛡️ Teorema Fundamental de la Aritmética
     Este es el corazón de la operatoria. Dice que todo número compuesto se puede expresar de forma **única** como un producto de números primos. Es la "huella dactilar" o el ADN del número.
 
     * **Ejemplo:** $60 = 2^2 \cdot 3 \cdot 5$.
     * No importa cómo empieces a desarmar el 60, al final siempre llegarás a dos "2", un "3" y un "5".
 
-    ### 🛡️ 8.5 Criterios de Divisibilidad (Velocidad de Combate)
+    ### 🛡️ Criterios de Divisibilidad (Velocidad de Combate)
     Para ganar tiempo en la PAES, hay que saber por quién "atacar" un número sin hacer la división:
 
     * **Por 2:** El número termina en 0 o cifra par ($2, 4, 6, 8$).
@@ -58,7 +58,7 @@ def render_N08():
 
     ---
 
-    ### 🛡️ 8.6 Algoritmos de Búsqueda: mcm y MCD
+    ### 🛡️ Algoritmos de Búsqueda: mcm y MCD
     Aquí se decide quién saca los 1000 puntos. La clave es la **intuición** detrás de la herramienta:
 
     * **MCD (Máximo Común Divisor): "Fragmentar"**. Se usa cuando necesitas **repartir, cortar o dividir** objetos de distintos tamaños en trozos que sean iguales y lo más grandes posibles.
@@ -82,7 +82,7 @@ def render_N08():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N08", expanded=False):
         st.markdown(r"""
-### E02: Descomposición y el "ADN" Numérico
+### 1: Descomposición y el "ADN" Numérico
 **Situación:** Encontrar la descomposición en factores primos del número 360.
 
 **La Carpintería:**
@@ -103,7 +103,7 @@ def render_N08():
 
 ---
 
-### E03: Aplicando el MCD (El Gran Repartidor)
+### 2: Aplicando el MCD (El Gran Repartidor)
 **Situación:** Un carpintero tiene dos tablones de madera de 120 cm y 180 cm. Quiere cortarlos en trozos iguales, lo más largos posibles y sin que sobre madera. ¿Cuánto debe medir cada trozo?
 
 **La Carpintería:**
@@ -121,7 +121,7 @@ def render_N08():
 
 ---
 
-### E04: Aplicando el mcm (El Gran Sincronizador)
+### 3: Aplicando el mcm (El Gran Sincronizador)
 **Situación:** En un faro, una luz parpadea cada 15 segundos y otra cada 20 segundos. Si acaban de coincidir, ¿en cuántos segundos volverán a brillar juntas?
 
 **La Carpintería:**
@@ -140,7 +140,7 @@ def render_N08():
 
 ---
 
-### E05: Criterios de Divisibilidad "Flash"
+### 4: Criterios de Divisibilidad "Flash"
 **Situación:** Sin dividir, determinar si 5.424 es divisible por 4 y por 6.
 
 **La Carpintería:**
@@ -156,7 +156,7 @@ def render_N08():
 
 ---
 
-### E06: Clasificación Express
+### 5: Clasificación Express
 **Situación:** Determinar si los números 1 y 91 son primos o compuestos.
 
 **La Carpintería:**
