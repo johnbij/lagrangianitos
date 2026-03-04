@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from datetime import datetime
 from pathlib import Path
 import pytz
@@ -213,22 +214,16 @@ if menu == "🏠 Dashboard PAES":
             anterior  = codigos[idx - 1] if idx > 0 else None
             siguiente = codigos[idx + 1] if idx < len(codigos) - 1 else None
 
-            # Scroll automático al inicio
-            st.markdown("""
-            <script>
-                window.scrollTo(0, 0);
-            </script>
-            """, unsafe_allow_html=True)
-            # Truco más confiable para scroll en Streamlit
-            st.markdown('<div id="top-anchor"></div>', unsafe_allow_html=True)
-            st.markdown("""
-            <style>
-            #top-anchor { position: absolute; top: 0; }
-            </style>
-            <script>
-            document.getElementById('top-anchor')?.scrollIntoView();
-            </script>
-            """, unsafe_allow_html=True)
+            # Scroll al inicio — usando window.parent para salir del iframe de Streamlit
+            components.html(
+                """<script>
+                window.parent.document.querySelector(
+                    '[data-testid="stAppViewContainer"]'
+                )?.scrollTo({top: 0, behavior: 'instant'});
+                window.parent.scrollTo(0, 0);
+                </script>""",
+                height=0
+            )
 
             # CSS para los botones de navegación con color del eje
             st.markdown(f"""
@@ -336,14 +331,16 @@ if menu == "🏠 Dashboard PAES":
             st.write("---")
             barra_navegacion("bot")
 
-            # Botón volver arriba
-            st.markdown("""
-            <div style="text-align:center; margin-top:10px;">
-                <a href="#top-anchor" style="color:#888; font-size:13px; text-decoration:none;">
-                    ↑ Volver al inicio de la clase
-                </a>
-            </div>
-            """, unsafe_allow_html=True)
+            # Botón volver arriba — scroll via components
+            if st.button("↑ Volver al inicio", key="scroll_top_btn", use_container_width=False):
+                components.html(
+                    """<script>
+                    window.parent.document.querySelector(
+                        '[data-testid="stAppViewContainer"]'
+                    )?.scrollTo({top: 0, behavior: 'smooth'});
+                    </script>""",
+                    height=0
+                )
 
 elif menu == "🏆 Ranking":
     render_ranking()
