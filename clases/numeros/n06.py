@@ -7,7 +7,7 @@ def render_N06():
         st.title("N06: Los Números Irracionales (ℐ o ℚ*) — Lo Inconmensurable")
 
         st.markdown(r"""
-    ### 🛡️ 1. El Portal: El Secreto que Rompió una Secta
+    ### 🛡️  El Portal: El Secreto que Rompió una Secta
 
     Para Pitágoras y sus seguidores, los números eran la esencia del universo y todo debía ser una fracción perfecta. Sin embargo, al intentar medir la diagonal de un cuadrado de lado 1, se encontraron con un monstruo: $\sqrt{2}$.
 
@@ -35,7 +35,7 @@ def render_N06():
         st.markdown(r"""
     ---
 
-    ### 🛡️ 2. Definición y Características
+    ### 🛡️ Definición y Características
 
     Un número es **Irracional** si su expresión decimal es **infinita y no tiene periodo** (no hay una secuencia que se repita jamás).
 
@@ -44,7 +44,7 @@ def render_N06():
 
     ---
 
-    ### 🛡️ 3. Los Tres Pilares (Reconocimiento M1)
+    ### 🛡️ Los Tres Pilares (Reconocimiento M1)
 
     Para la PAES, tu alumno debe identificar estos tres grupos a simple vista:
 
@@ -85,7 +85,7 @@ def render_N06():
         st.markdown(r"""
     ---
 
-    ### 🛡️ 4. Operativa: El "Virus" Irracional
+    ### 🛡️  Operativa: El "Virus" Irracional
 
     La mezcla de conjuntos tiene reglas de carpintería muy claras:
 
