@@ -6,17 +6,17 @@ def render_N11():
         st.title("N11: Números Racionales I - El Arte de Partir el Entero")
 
         st.markdown(r"""
-    ### 🏛️ 1. Contexto Histórico: El Ojo de Horus y la Herencia del Nilo
+    ### 🏛️ Contexto Histórico: El Ojo de Horus y la Herencia del Nilo
     Para los antiguos egipcios, las fracciones no eran solo números; eran una cuestión de supervivencia y justicia. Imagina que el Nilo inundaba las tierras y luego debías repartir el terreno entre 10 familias, pero solo tenías 7 parcelas. No podías simplemente decir "les toca un poco".
 
     Ellos inventaron un sistema basado en el **Ojo de Horus**. Según la leyenda, el dios Seth despedazó el ojo de Horus y el dios Thot lo reconstruyó, pero faltaba una pieza ($1/64$). Cada parte del ojo representaba una fracción unitaria ($1/2, 1/4, 1/8...$). Los egipcios escribían cualquier fracción como una suma de estas partes. Si un escriba fallaba en el cálculo, alguien se quedaba sin comer. Por eso, los **Racionales ($\mathbb{Q}$)** nacen de la "Razón": la comparación exacta entre lo que tengo y entre cuántos lo reparto.
 
     ---
 
-    ### 🛡️ 9.1 La Anatomía de la Fracción
+    ### 🛡️ La Anatomía de la Fracción
     Una fracción $\frac{a}{b}$ es un operador. El **denominador** ($b$) corta la unidad y el **numerador** ($a$) recolecta las piezas.
 
-    ### 🛡️ 9.2 El "Manual de Identidad" y el Entero Oculto
+    ### 🛡️ El "Manual de Identidad" y el Entero Oculto
     Es vital saber cuánta "hambre" quita una fracción:
 
     * **Fracciones Propias:** El numerador es menor que el denominador ($\frac{3}{4}$). **No alcanzan a completar 1 entero.** (Sobra pizza en la caja).
@@ -26,7 +26,7 @@ def render_N11():
 
     ---
 
-    ### 🛡️ 9.3 Amplificación y Simplificación: Ajustando el Calibre
+    ### 🛡️ Amplificación y Simplificación: Ajustando el Calibre
     * **Amplificar (Agrandar el formato):** Multiplicas arriba y abajo por el mismo número.
         * **Ejemplo:** $\frac{2}{3}$ amplificado por 4 $\rightarrow \frac{2 \cdot 4}{3 \cdot 4} = \frac{8}{12}$. Sigue siendo la misma cantidad de madera, pero cortada en trozos más chicos.
     * **Simplificar (Achicar el formato):** Divides ambos por su MCD.
@@ -35,7 +35,7 @@ def render_N11():
 
     ---
 
-    ### 🛡️ 9.4 Operatoria: El Protocolo de Taller
+    ### 🛡️ Operatoria: El Protocolo de Taller
     Aquí es donde aplicamos la mecánica de precisión:
 
     1. **Suma/Resta con Simplificación:** $\frac{3}{10} + \frac{1}{10} = \frac{4}{10}$ (¡No lo dejes así! Simplifica por 2) $\rightarrow \frac{2}{5}$.
@@ -46,7 +46,7 @@ def render_N11():
 
     ---
 
-    ### 🛡️ 9.5 Comparación Cruzada: El Puente al Álgebra
+    ### 🛡️ Comparación Cruzada: El Puente al Álgebra
     Para saber si $\frac{a}{b} = \frac{c}{d}$, o cuál es mayor, multiplicamos cruzado: $a \cdot d$ y $b \cdot c$.
     * Si $a \cdot d = b \cdot c$, las fracciones son **Equivalentes**.
     * Si $a \cdot d > b \cdot c$, entonces $\frac{a}{b} > \frac{c}{d}$.
@@ -66,7 +66,7 @@ def render_N11():
 
     with st.expander("🚀 Guía de Ejemplos: El Taller de Fracciones", expanded=False):
         st.markdown(r"""
-### E02: Transformación de Mixto a Impropio (El ciclo)
+### 1: Transformación de Mixto a Impropio (El ciclo)
 **Situación:** Tienes $3 \frac{2}{5}$ de material. ¿Cuántos quintos son en total?
 **La Carpintería:** Multiplicamos el entero por el denominador y sumamos el numerador. El denominador se mantiene.
 
@@ -78,7 +78,7 @@ def render_N11():
 
 ---
 
-### E03: Transformación de Impropio a Mixto (Buscando el entero)
+### 2: Transformación de Impropio a Mixto (Buscando el entero)
 **Situación:** Tienes $\frac{22}{4}$ de madera. ¿Cuántos tablones enteros tienes?
 **La Carpintería:** Dividimos 22 por 4. El cociente es el entero y el resto es la nueva fracción.
 
@@ -88,7 +88,7 @@ def render_N11():
 
 ---
 
-### E04: Simplificación de "Un solo golpe" (MCD)
+### 3: Simplificación de "Un solo golpe" (MCD)
 **Situación:** Reducir $\frac{48}{72}$ a su forma irreductible.
 **La Carpintería:** Buscamos el divisor más grande común (MCD). En este caso es 24.
 
@@ -98,7 +98,7 @@ def render_N11():
 
 ---
 
-### E05: Suma con mcm (Distinto Denominador)
+### 4: Suma con mcm (Distinto Denominador)
 **Situación:** Resolver $\frac{3}{4} + \frac{5}{6}$.
 **La Carpintería:** El mcm(4, 6) es 12. Amplificamos para igualar.
 
@@ -110,7 +110,7 @@ def render_N11():
 
 ---
 
-### E06: Resta con Enteros Ocultos
+### 5: Resta con Enteros Ocultos
 **Situación:** Resolver $2 - \frac{3}{5}$.
 **La Carpintería:** Ponemos un 1 "fantasma" debajo del 2 y operamos.
 
@@ -122,7 +122,7 @@ def render_N11():
 
 ---
 
-### E07: Simplificación Cruzada (Velocidad Pro)
+### 6: Simplificación Cruzada (Velocidad Pro)
 **Situación:** Resolver $\frac{14}{15} \cdot \frac{5}{21}$.
 **La Carpintería:** Antes de multiplicar números grandes, simplificamos el 14 con el 21 (por 7) y el 5 con el 15 (por 5).
 
@@ -134,7 +134,7 @@ def render_N11():
 
 ---
 
-### E08: División (Invertir y Multiplicar)
+### 7: División (Invertir y Multiplicar)
 **Situación:** Resolver $\frac{4}{9} \div \frac{2}{3}$.
 **La Carpintería:** Mantengo la primera, doy vuelta la segunda.
 
@@ -146,7 +146,7 @@ def render_N11():
 
 ---
 
-### E09: Comparación de Fracciones (El Baile Cruzado)
+### 8: Comparación de Fracciones (El Baile Cruzado)
 **Situación:** ¿Quién es mayor, $\frac{5}{8}$ o $\frac{7}{11}$?
 **La Carpintería:** Multiplicamos cruzado y comparamos los resultados.
 
@@ -158,7 +158,7 @@ def render_N11():
 
 ---
 
-### E10: Fracción de una Cantidad
+### 9: Fracción de una Cantidad
 **Situación:** Calcular los $\frac{3}{5}$ de 200.
 **La Carpintería:** La palabra "de" significa multiplicación.
 
@@ -170,7 +170,7 @@ def render_N11():
 
 ---
 
-### E11: Operatoria Combinada (PAPOMUDAS con Fracciones)
+### 10: Operatoria Combinada (PAPOMUDAS con Fracciones)
 **Situación:** Resolver $\frac{1}{2} + \frac{1}{3} \cdot \frac{1}{4}$.
 **La Carpintería:** Multiplicación antes que suma.
 
@@ -183,7 +183,7 @@ def render_N11():
 
     with st.expander("🚀 Guía de Ejemplos: Identidad y Conversión", expanded=False):
         st.markdown(r"""
-### E02: Del Dibujo a la Fracción
+### 1: Del Dibujo a la Fracción
 **Situación:** Una torta se corta en 8 trozos iguales y te comes 3.
 **La Carpintería:** Identificamos quién corta y quién recolecta.
 
@@ -195,7 +195,7 @@ def render_N11():
 
 ---
 
-### E03: Fracción Propia (La que no llena el envase)
+### 2: Fracción Propia (La que no llena el envase)
 **Situación:** Identificar si $\frac{5}{6}$ es mayor o menor a 1 entero.
 **La Carpintería:** Comparamos numerador vs denominador.
 
@@ -206,7 +206,7 @@ def render_N11():
 
 ---
 
-### E04: Transformación de Mixto a Impropio (El "Reloj")
+### 3: Transformación de Mixto a Impropio (El "Reloj")
 **Situación:** Tienes $2 \frac{3}{4}$ litros de bebida. ¿Cuántos cuartos son en total?
 **La Carpintería:** Multiplicamos el entero por el de abajo y sumamos el de arriba.
 
@@ -218,7 +218,7 @@ def render_N11():
 
 ---
 
-### E05: Transformación de Impropio a Mixto (Repartición)
+### 4: Transformación de Impropio a Mixto (Repartición)
 **Situación:** Tienes $\frac{13}{5}$ de chocolate. ¿Cuántas barras enteras hay?
 **La Carpintería:** Dividimos el de arriba por el de abajo.
 
@@ -228,7 +228,7 @@ def render_N11():
 
 ---
 
-### E06: Amplificación (Cambio de Escala)
+### 5: Amplificación (Cambio de Escala)
 **Situación:** Necesitas que la fracción $\frac{2}{3}$ tenga denominador 15.
 **La Carpintería:** Buscamos por cuánto multiplicar el 3 para que llegue a 15 ($15 \div 3 = 5$).
 
@@ -239,7 +239,7 @@ def render_N11():
 
 ---
 
-### E07: Simplificación Básica (La Mitad)
+### 6: Simplificación Básica (La Mitad)
 **Situación:** Achicar la fracción $\frac{12}{16}$.
 **La Carpintería:** Buscamos un divisor común. Probemos con el 2 (mitad).
 
@@ -250,7 +250,7 @@ def render_N11():
 
 ---
 
-### E08: Simplificación Avanzada (Usando el MCD)
+### 7: Simplificación Avanzada (Usando el MCD)
 **Situación:** Llevar $\frac{30}{45}$ a su forma irreductible de un solo golpe.
 **La Carpintería:** El divisor más grande común entre 30 y 45 es 15.
 
@@ -260,7 +260,7 @@ def render_N11():
 
 ---
 
-### E09: Fracciones Equivalentes (La Igualdad)
+### 8: Fracciones Equivalentes (La Igualdad)
 **Situación:** Comprobar si $\frac{1}{2}$ es igual a $\frac{5}{10}$.
 **La Carpintería:** Multiplicamos cruzado. Si da lo mismo, son hermanas.
 
@@ -272,7 +272,7 @@ def render_N11():
 
 ---
 
-### E10: Comparación de Magnitud (¿Quién es más grande?)
+### 9: Comparación de Magnitud (¿Quién es más grande?)
 **Situación:** ¿Qué es más, $\frac{3}{4}$ o $\frac{2}{3}$ de una pizza?
 **La Carpintería:** Aplicamos el baile cruzado.
 
@@ -284,7 +284,7 @@ def render_N11():
 
 ---
 
-### E11: El Entero Disfrazado
+### 10: El Entero Disfrazado
 **Situación:** ¿A qué equivale la fracción $\frac{12}{4}$?
 **La Carpintería:** Cuando el de abajo cabe justo en el de arriba.
 
