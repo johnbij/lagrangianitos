@@ -1,246 +1,141 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """<style>.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }</style>"""
 
 def render_A03():
-    st.title("A03: Factorización — Desarmar para Entender")
-
-    st.markdown(r"""
-### 🛡️ 1. El Portal: El Arte de Desarmar
-
-Si los Productos Notables eran atajos para **multiplicar**, la Factorización es el camino inverso: **desarmar** una expresión en sus piezas más simples. Es como desarmar un motor para entender cómo funciona cada pieza.
-
-Factorizar es escribir una expresión como un **producto de factores** más sencillos. Esta habilidad es fundamental para simplificar fracciones algebraicas, resolver ecuaciones cuadráticas y trabajar con funciones.
-
----
-
-### 🛡️ 3.1 Factor Común
-
-Es el método más básico: buscar qué tienen **en común** todos los términos y "sacarlo" afuera con un paréntesis.
-
-$$6x^3 + 9x^2 - 3x = 3x(2x^2 + 3x - 1)$$
-
-**Proceso:**
-1. Buscar el **MCD** de los coeficientes: $\text{MCD}(6, 9, 3) = 3$.
-2. Buscar la **menor potencia** de cada variable común: $x^1$.
-3. Dividir cada término por el factor común.
-
----
-
-### 🛡️ 3.2 Factor Común por Agrupación
-
-Cuando la expresión tiene **4 términos** y no hay factor común global, se agrupan de a pares:
-
-$$ax + ay + bx + by = a(x + y) + b(x + y) = (x + y)(a + b)$$
-
-**La clave:** Después de agrupar, debe aparecer un **binomio común** que se pueda extraer.
-
----
-
-### 🛡️ 3.3 Diferencia de Cuadrados
-
-Es el inverso de la suma por diferencia:
-
-$$\boxed{a^2 - b^2 = (a + b)(a - b)}$$
-
-**Ejemplo:** $25x^2 - 49 = (5x)^2 - 7^2 = (5x + 7)(5x - 7)$
-
-> **Tip PAES:** Para usar esta fórmula, ambos términos deben ser **cuadrados perfectos** y estar separados por una **resta**.
-
----
-
-### 🏛️ 3.4 Trinomio Cuadrado Perfecto (TCP)
-
-Es el inverso del cuadrado de un binomio:
-
-$$\boxed{a^2 + 2ab + b^2 = (a + b)^2}$$
-$$\boxed{a^2 - 2ab + b^2 = (a - b)^2}$$
-
-**¿Cómo verificar si un trinomio es TCP?**
-1. El primer y tercer término deben ser **cuadrados perfectos**.
-2. El término del medio debe ser $\pm 2 \cdot \sqrt{\text{primero}} \cdot \sqrt{\text{tercero}}$.
-
-**Ejemplo:** $x^2 - 10x + 25$
-- $\sqrt{x^2} = x$ ✅, $\sqrt{25} = 5$ ✅
-- $2(x)(5) = 10x$ ✅ (coincide con el término del medio)
-- **Resultado:** $(x - 5)^2$
-
----
-
-### 🛡️ 3.5 Trinomio de la Forma $x^2 + bx + c$
-
-Buscamos dos números $p$ y $q$ tales que:
-- $p + q = b$ (suman el coeficiente del término lineal)
-- $p \cdot q = c$ (su producto es el término independiente)
-
-$$x^2 + bx + c = (x + p)(x + q)$$
-
-**Ejemplo:** $x^2 + 7x + 12$
-- Buscamos dos números que sumen $7$ y multipliquen $12$.
-- $3 + 4 = 7$ ✅ y $3 \times 4 = 12$ ✅
-- **Resultado:** $(x + 3)(x + 4)$
-
-| Trinomio | $p + q$ | $p \cdot q$ | $p$ | $q$ | Factorización |
-| :--- | :---: | :---: | :---: | :---: | :--- |
-| $x^2 + 7x + 12$ | $7$ | $12$ | $3$ | $4$ | $(x+3)(x+4)$ |
-| $x^2 - 5x + 6$ | $-5$ | $6$ | $-2$ | $-3$ | $(x-2)(x-3)$ |
-| $x^2 + x - 12$ | $1$ | $-12$ | $4$ | $-3$ | $(x+4)(x-3)$ |
-| $x^2 - x - 6$ | $-1$ | $-6$ | $-3$ | $2$ | $(x-3)(x+2)$ |
-
----
-
-### 🛡️ 3.6 Completar el Cuadrado
-
-Es una técnica para transformar una expresión en un TCP más una constante:
-
-$$x^2 + bx = \left(x + \frac{b}{2}\right)^2 - \left(\frac{b}{2}\right)^2$$
-
-**Ejemplo:** $x^2 + 6x + 2$
-1. Tomar la mitad del coeficiente de $x$: $6/2 = 3$.
-2. Sumar y restar su cuadrado: $x^2 + 6x + 9 - 9 + 2$.
-3. Agrupar: $(x + 3)^2 - 7$.
-
-> Esta técnica es esencial para deducir la fórmula general de la ecuación cuadrática y para encontrar el vértice de una parábola.
-
----
-
-> "La factorización es el microscopio del álgebra: te muestra la estructura interna de las expresiones."
-> — **Leonhard Euler**
-""")
-
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería A03", expanded=False):
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("A03: Productos Notables — Atajos en el Código")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
         st.markdown(r"""
-### E01: Factor común simple
+    ### 🛡️ ¿Para qué sirven?
 
-**Situación:** Factorizar $12x^4 - 8x^3 + 4x^2$.
+    Hacer $(x+5)(x+5)$ multiplicando término a término es lento. Los productos notables son **patrones memorizados** que permiten saltarse el proceso manual, como funciones de acceso directo en un IDE.
 
-**La Carpintería:**
-1. **MCD de coeficientes:** $\text{MCD}(12, 8, 4) = 4$.
-2. **Menor potencia de $x$:** $x^2$.
-3. **Factor común:** $4x^2$.
-4. **Dividir cada término:** $12x^4 \div 4x^2 = 3x^2$; $8x^3 \div 4x^2 = 2x$; $4x^2 \div 4x^2 = 1$.
-5. **Resultado:** $4x^2(3x^2 - 2x + 1)$.
+    ---
 
-| Término | $\div 4x^2$ | Resultado |
-| :--- | :---: | :---: |
-| $12x^4$ | $12x^4 / 4x^2$ | $3x^2$ |
-| $-8x^3$ | $-8x^3 / 4x^2$ | $-2x$ |
-| $4x^2$ | $4x^2 / 4x^2$ | $1$ |
+    ### 🛡️ El Cuadrado del Binomio
 
----
+    $(a \pm b)^2 = a^2 \pm 2ab + b^2$
 
-### E02: Diferencia de cuadrados
+    * "El primero al cuadrado, ± el doble del primero por el segundo, + el segundo al cuadrado."
 
-**Situación:** Factorizar $81a^2 - 16b^2$.
+    > ⚠️ **Error crítico:** Muchos creen que $(a+b)^2 = a^2 + b^2$. ¡Falso! Falta el término central $2ab$.
 
-**La Carpintería:**
-1. **¿Son cuadrados perfectos?** $81a^2 = (9a)^2$ ✅ y $16b^2 = (4b)^2$ ✅.
-2. **¿Es una resta?** Sí ✅.
-3. **Aplicar fórmula:** $(9a + 4b)(9a - 4b)$.
+    ---
 
----
+    ### 🛡️ Suma por su Diferencia (El exterminador)
 
-### E03: Trinomio de la forma $x^2 + bx + c$
+    $(a + b)(a - b) = a^2 - b^2$
 
-**Situación:** Factorizar $x^2 - 3x - 18$.
+    Los términos centrales se cancelan entre sí. Es el más rápido de todos.
+    * Ejemplo: $(x+3)(x-3) = x^2 - 9$
 
-**La Carpintería:**
-1. **Identificar:** $b = -3$, $c = -18$.
-2. **Buscar $p$ y $q$:** Deben sumar $-3$ y multiplicar $-18$.
-3. **Probar:** $-6 + 3 = -3$ ✅ y $(-6)(3) = -18$ ✅.
-4. **Resultado:** $(x - 6)(x + 3)$.
+    ---
 
-| Intento | Suma | Producto | ¿Funciona? |
-| :--- | :---: | :---: | :---: |
-| $-9$ y $2$ | $-7$ | $-18$ | ❌ |
-| $-6$ y $3$ | $-3$ | $-18$ | ✅ |
+    ### 🛡️ Binomio con Término Común
 
----
+    $(x + a)(x + b) = x^2 + (a+b)x + (a \cdot b)$
 
-### E04: Completar el cuadrado
+    1. El primero al cuadrado: $x^2$
+    2. **Suma** de los números multiplicada por $x$: $(a+b)x$
+    3. **Producto** de los números: $a \cdot b$
 
-**Situación:** Escribir $x^2 - 8x + 10$ en la forma $(x - h)^2 + k$.
+    Ejemplo: $(x+5)(x+2) = x^2 + 7x + 10$
+    """)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-**La Carpintería:**
-1. **Mitad del coeficiente de $x$:** $-8/2 = -4$.
-2. **Su cuadrado:** $(-4)^2 = 16$.
-3. **Sumar y restar $16$:** $x^2 - 8x + 16 - 16 + 10$.
-4. **Agrupar:** $(x - 4)^2 - 6$.
-5. **Verificación:** $(x-4)^2 - 6 = x^2 - 8x + 16 - 6 = x^2 - 8x + 10$ ✅.
-""")
+        st.markdown("#### 📊 Visualización: Los tres patrones")
+        fig, axes = plt.subplots(1, 3, figsize=(15, 4.5))
 
-    with st.expander("❓ Cuestionario A03: Factorización", expanded=False):
+        x = np.linspace(-1, 5, 200)
+        axes[0].plot(x, x**2 + 8*x + 16, color='#1b5e20', lw=2.5, label=r'$(x+4)^2 = x^2+8x+16$')
+        axes[0].axhline(0, color='black', lw=0.8)
+        axes[0].set_title("Cuadrado del Binomio\n$(a+b)^2$", fontsize=12, fontweight='bold')
+        axes[0].set_xlabel("$x$"); axes[0].legend(fontsize=9); axes[0].grid(True, alpha=0.3)
+        axes[0].set_ylim(-5, 40)
+
+        axes[1].plot(x, x**2 - 9, color='#c0392b', lw=2.5, label=r'$(x+3)(x-3) = x^2-9$')
+        axes[1].axhline(0, color='black', lw=0.8)
+        axes[1].scatter([3, -3], [0, 0], color='#c0392b', s=80, zorder=5)
+        axes[1].set_title("Suma × Diferencia\n$a^2-b^2$", fontsize=12, fontweight='bold')
+        axes[1].set_xlabel("$x$"); axes[1].legend(fontsize=9); axes[1].grid(True, alpha=0.3)
+        axes[1].set_ylim(-15, 20)
+
+        axes[2].plot(x, x**2 + 7*x + 10, color='#7b1fa2', lw=2.5, label=r'$(x+5)(x+2)$')
+        axes[2].axhline(0, color='black', lw=0.8)
+        axes[2].scatter([-5, -2], [0, 0], color='#7b1fa2', s=80, zorder=5)
+        axes[2].set_title("Binomio c/ término común\n$(x+a)(x+b)$", fontsize=12, fontweight='bold')
+        axes[2].set_xlabel("$x$"); axes[2].legend(fontsize=9); axes[2].grid(True, alpha=0.3)
+        axes[2].set_ylim(-5, 30)
+
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
+
+
+    with st.expander("🚀 Guía de Ejemplos: Carpintería A03", expanded=False):
         st.markdown(r"""
-**1. Al factorizar $15x^3 - 10x^2 + 5x$, el factor común es:**
+### E01: Cuadrado del Binomio
 
-A) $5$
-B) $5x$
-C) $5x^2$
-D) $15x$
+| Expresión | Desarrollo | Resultado |
+| :--- | :--- | :--- |
+| $(x+4)^2$ | $x^2 + 2(x)(4) + 16$ | $x^2 + 8x + 16$ |
+| $(x-3)^2$ | $x^2 - 2(x)(3) + 9$ | $x^2 - 6x + 9$ |
+| $(2a+3b)^2$ | $4a^2 + 2(2a)(3b) + 9b^2$ | $4a^2 + 12ab + 9b^2$ |
 
----
+### E02: Suma × Diferencia
 
-**2. La factorización de $x^2 - 64$ es:**
+| Expresión | Resultado |
+| :--- | :--- |
+| $(x+7)(x-7)$ | $x^2 - 49$ |
+| $(m-5)(m+5)$ | $m^2 - 25$ |
 
-A) $(x - 8)^2$
-B) $(x + 8)^2$
-C) $(x + 8)(x - 8)$
-D) $(x - 32)(x + 2)$
+### E03: Binomio con término común
 
----
+$(x+7)(x+3)$: suma=$7+3=10$, producto=$7\cdot3=21$ → $x^2+10x+21$
 
-**3. ¿Cuál es la factorización de $x^2 + 10x + 25$?**
-
-A) $(x + 5)^2$
-B) $(x - 5)^2$
-C) $(x + 25)(x + 1)$
-D) $(x + 5)(x - 5)$
-
----
-
-**4. Al factorizar $x^2 + 5x + 6$, se obtiene:**
-
-A) $(x + 1)(x + 6)$
-B) $(x + 2)(x + 3)$
-C) $(x - 2)(x - 3)$
-D) $(x + 6)(x - 1)$
-
----
-
-**5. La factorización de $4x^2 - 12x + 9$ es:**
-
-A) $(2x - 3)^2$
-B) $(2x + 3)^2$
-C) $(4x - 3)(x - 3)$
-D) $(2x - 9)(2x - 1)$
-
----
-
-**6. Al completar el cuadrado en $x^2 + 4x - 5$, se obtiene:**
-
-A) $(x + 2)^2 - 9$
-B) $(x + 2)^2 + 9$
-C) $(x + 4)^2 - 5$
-D) $(x - 2)^2 - 9$
-
----
-
-**7. La factorización de $x^2 - x - 20$ es:**
-
-A) $(x - 5)(x + 4)$
-B) $(x + 5)(x - 4)$
-C) $(x - 10)(x + 2)$
-D) $(x - 20)(x + 1)$
+$(x-2)(x+5)$: suma=$-2+5=3$, producto=$-2\cdot5=-10$ → $x^2+3x-10$
 """)
+
+    with st.expander("❓ Cuestionario A03: Reconociendo Patrones", expanded=False):
+        quiz = [
+            {"question": r"Al desarrollar $(x + 4)^2$, el resultado correcto es:",
+             "options": {"A": r"$x^2 + 16$", "B": r"$x^2 + 4x + 16$", "C": r"$x^2 + 8x + 16$", "D": r"$2x + 8$"},
+             "answer": "C", "explanation": r"Término central: $2\cdot x \cdot 4 = 8x$."},
+            {"question": r"¿Cuál es el resultado de $(m - 5)(m + 5)$?",
+             "options": {"A": r"$m^2 - 10$", "B": r"$m^2 - 25$", "C": r"$m^2 + 25$", "D": r"$m^2 - 10m + 25$"},
+             "answer": "B", "explanation": r"Suma por diferencia: $a^2-b^2 = m^2-25$."},
+            {"question": r"En $(2a + 3b)^2$, ¿cuál es el término central?",
+             "options": {"A": r"$6ab$", "B": r"$12ab$", "C": r"$5ab$", "D": r"$10ab$"},
+             "answer": "B", "explanation": r"$2\cdot(2a)\cdot(3b) = 12ab$."},
+            {"question": r"El producto $(x + 7)(x + 3)$ da:",
+             "options": {"A": r"$x^2 + 10x + 21$", "B": r"$x^2 + 21x + 10$", "C": r"$x^2 + 10$", "D": r"$x^2 + 21$"},
+             "answer": "A", "explanation": r"Suma: $7+3=10$; producto: $7\cdot3=21$."},
+            {"question": r"¿Qué producto notable representa $a^2 - 81$?",
+             "options": {"A": r"$(a - 9)^2$", "B": r"$(a + 9)^2$", "C": r"$(a + 9)(a - 9)$", "D": r"$a(a - 81)$"},
+             "answer": "C", "explanation": r"Diferencia de cuadrados: $a^2 - 9^2$."},
+            {"question": r"En $(x - 1)^2$, ¿cuál es el signo del término central?",
+             "options": {"A": "Positivo", "B": "Negativo", "C": "Neutro", "D": "No tiene"},
+             "answer": "B", "explanation": "El signo del binomio define el del término central."},
+            {"question": r"¿Cuál es el desarrollo de $(3x + 1)^2$?",
+             "options": {"A": r"$9x^2 + 1$", "B": r"$3x^2 + 6x + 1$", "C": r"$9x^2 + 6x + 1$", "D": r"$9x^2 + 3x + 1$"},
+             "answer": "C", "explanation": r"$(3x)^2=9x^2$; $2\cdot3x\cdot1=6x$; $1^2=1$."},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="a03_quiz")
 
     with st.expander("🔑 Pauta Técnica A03: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
+| Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **B** | $\text{MCD}(15, 10, 5) = 5$ y la menor potencia de $x$ es $x^1$. Factor común: $5x$. |
-| **2** | **C** | Diferencia de cuadrados: $x^2 - 8^2 = (x+8)(x-8)$. No es un TCP porque no tiene término lineal. |
-| **3** | **A** | TCP: $\sqrt{x^2}=x$, $\sqrt{25}=5$, $2(x)(5)=10x$ ✅. Resultado: $(x+5)^2$. |
-| **4** | **B** | Buscamos $p+q=5$ y $pq=6$. Los números $2$ y $3$ cumplen: $2+3=5$, $2 \cdot 3=6$. |
-| **5** | **A** | TCP: $(2x)^2=4x^2$, $3^2=9$, $2(2x)(3)=12x$ ✅. El signo negativo da $(2x-3)^2$. |
-| **6** | **A** | Mitad de $4$ es $2$; $2^2=4$. $x^2+4x+4-4-5=(x+2)^2-9$. |
-| **7** | **A** | Buscamos $p+q=-1$ y $pq=-20$. Los números $-5$ y $4$: $-5+4=-1$, $(-5)(4)=-20$. |
+| **1** | **C** | $2\cdot x\cdot4 = 8x$. |
+| **2** | **B** | $m^2 - 5^2 = m^2 - 25$. |
+| **3** | **B** | $2\cdot(2a)\cdot(3b) = 12ab$. |
+| **4** | **A** | Suma $7+3=10$; producto $7\cdot3=21$. |
+| **5** | **C** | $a^2 - 9^2$: diferencia de cuadrados. |
+| **6** | **B** | El signo del binomio pasa al término central. |
+| **7** | **C** | $(3x)^2=9x^2$; $2\cdot3x\cdot1=6x$. |
 """)

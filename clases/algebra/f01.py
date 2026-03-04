@@ -1,227 +1,134 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """<style>.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }</style>"""
 
 def render_F01():
-    st.title("F01: Concepto de Función — El Lenguaje de las Relaciones")
-
-    st.markdown(r"""
-### 🛡️ 1. El Portal: ¿Qué es una Función?
-
-Imagina una máquina de jugos: metes una fruta y sale un jugo. Si metes una manzana, sale jugo de manzana; si metes una naranja, sale jugo de naranja. **Nunca** sale jugo de manzana y de naranja al mismo tiempo por la misma fruta. Eso es exactamente lo que ocurre con una **función**: a cada elemento de entrada le corresponde **exactamente un** elemento de salida.
-
-Formalmente, una **función** $f$ es una regla que asigna a cada elemento $x$ de un conjunto $A$ (llamado **dominio**) un único elemento $y$ de un conjunto $B$ (llamado **codominio**). Escribimos:
-
-$$f: A \to B \quad \text{donde} \quad y = f(x)$$
-
-La variable $x$ se llama **variable independiente** y la variable $y$ se llama **variable dependiente**, porque su valor *depende* de qué $x$ elijamos.
-
----
-
-### 🛡️ 1.1 Dominio, Codominio y Recorrido (Rango)
-
-Estos tres conceptos son el ADN de toda función:
-
-| Concepto | Definición | Ejemplo con $f(x) = x^2$ y $A = \{-2, -1, 0, 1, 2\}$ |
-| :--- | :--- | :--- |
-| **Dominio** | Conjunto de todos los valores de entrada permitidos | $\{-2, -1, 0, 1, 2\}$ |
-| **Codominio** | Conjunto donde "viven" las posibles salidas | $\mathbb{R}$ (todos los reales, por ejemplo) |
-| **Recorrido (Rango)** | Conjunto de salidas que **efectivamente** se obtienen | $\{0, 1, 4\}$ |
-
-> **Tip PAES:** El recorrido siempre es un subconjunto del codominio. No son lo mismo: el codominio es "el hotel completo", el recorrido son "las habitaciones que realmente se usan".
-
----
-
-### 🛡️ 1.2 Notación $f(x)$ y Evaluación
-
-La notación $f(x)$ se lee "f de x" y representa el valor de salida cuando la entrada es $x$. No es una multiplicación; es una **instrucción**:
-
-- Si $f(x) = 3x - 1$, entonces $f(2) = 3(2) - 1 = 5$.
-- Si $g(x) = x^2 + 1$, entonces $g(-3) = (-3)^2 + 1 = 10$.
-
-Puedes evaluar funciones con cualquier expresión, no solo números:
-
-$$f(a + 1) = 3(a + 1) - 1 = 3a + 3 - 1 = 3a + 2$$
-
----
-
-### 🏛️ 1.3 El Test de la Línea Vertical
-
-¿Cómo saber si un gráfico en el plano cartesiano representa una función? Usa el **test de la línea vertical**:
-
-> Si **cualquier línea vertical** que traces corta al gráfico en **a lo más un punto**, entonces el gráfico **sí** es una función.
-
-| Gráfico | ¿Es función? | Razón |
-| :--- | :---: | :--- |
-| Recta no vertical | ✅ Sí | Cada vertical la corta en exactamente un punto |
-| Parábola $y = x^2$ | ✅ Sí | Cada vertical corta en un solo punto |
-| Circunferencia $x^2 + y^2 = r^2$ | ❌ No | Una vertical puede cortar en dos puntos |
-| Recta vertical $x = 3$ | ❌ No | La vertical $x = 3$ corta en infinitos puntos |
-
----
-
-### 🛡️ 1.4 Representaciones de una Función
-
-Una función puede presentarse de varias formas equivalentes:
-
-| Representación | Ejemplo |
-| :--- | :--- |
-| **Verbal** | "A cada número le asigno su doble" |
-| **Algebraica (fórmula)** | $f(x) = 2x$ |
-| **Tabla de valores** | $x$: $0, 1, 2, 3$ → $f(x)$: $0, 2, 4, 6$ |
-| **Gráfica** | Una recta que pasa por el origen con pendiente $2$ |
-| **Diagrama de flechas** | Flechas de cada $x$ a su imagen $f(x)$ |
-
-La PAES puede presentar una función en cualquiera de estas formas y pedirte que la interpretes en otra.
-
----
-
-### 🏛️ 1.5 Clasificación: Inyectiva, Sobreyectiva y Biyectiva
-
-Estas clasificaciones describen "cómo se comporta" la función respecto a sus conjuntos:
-
-| Tipo | Definición | Ejemplo |
-| :--- | :--- | :--- |
-| **Inyectiva** (uno a uno) | Elementos distintos del dominio tienen imágenes distintas: si $x_1 \neq x_2$, entonces $f(x_1) \neq f(x_2)$ | $f(x) = 2x + 1$ es inyectiva |
-| **Sobreyectiva** (sobre) | Todo elemento del codominio es imagen de al menos un elemento del dominio (recorrido = codominio) | $f: \mathbb{R} \to \mathbb{R}$, $f(x) = x^3$ |
-| **Biyectiva** | Es inyectiva **y** sobreyectiva a la vez. Cada elemento del codominio tiene exactamente un preimagen | $f: \mathbb{R} \to \mathbb{R}$, $f(x) = 2x + 1$ |
-
-> **Test visual de inyectividad:** Si toda línea *horizontal* corta al gráfico en a lo más un punto, la función es inyectiva. Ejemplo: $f(x) = x^2$ **no** es inyectiva en $\mathbb{R}$ porque $f(2) = f(-2) = 4$.
-
----
-
-> "Una función es la idea más importante en toda la matemática."
-> — **Peter Dirichlet** (quien formalizó el concepto moderno de función)
-""")
-
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería F01", expanded=False):
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("F01: Conceptos Fundamentales de Funciones")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
         st.markdown(r"""
-### E01: Evaluar una función en distintos valores
+    ### 🛡️ Definición de Función
 
-**Situación:** Dada $f(x) = x^2 - 4x + 3$, calcular $f(0)$, $f(1)$, $f(3)$ y $f(-2)$.
+    Una función es una relación entre dos conjuntos donde a cada elemento del conjunto de entrada (**Dominio**) le corresponde **exactamente uno** del conjunto de llegada (**Codominio**).
 
-**La Carpintería:**
+    * **Input ($x$):** Preimagen.
+    * **Output ($f(x)$ o $y$):** Imagen.
 
-| $x$ | Sustitución | Cálculo | $f(x)$ |
-| :---: | :--- | :--- | :---: |
-| $0$ | $0^2 - 4(0) + 3$ | $0 - 0 + 3$ | $3$ |
-| $1$ | $1^2 - 4(1) + 3$ | $1 - 4 + 3$ | $0$ |
-| $3$ | $3^2 - 4(3) + 3$ | $9 - 12 + 3$ | $0$ |
-| $-2$ | $(-2)^2 - 4(-2) + 3$ | $4 + 8 + 3$ | $15$ |
+    ---
 
-El recorrido parcial observado es $\{0, 3, 15\}$.
+    ### 🛡️ Conceptos Clave
 
----
+    * **Dominio (Dom f):** El conjunto de todos los valores que $x$ puede tomar (inputs permitidos).
+    * **Codominio:** El conjunto de todos los posibles valores de llegada.
+    * **Recorrido / Rango (Rec f):** Los valores que la función entrega efectivamente (las imágenes reales).
+    * **Composición ($f \circ g$):** Aplicar una función dentro de otra. $f(g(x))$: primero $g$, luego $f$.
 
-### E02: Determinar el dominio de una función
+    ---
 
-**Situación:** ¿Cuál es el dominio de $f(x) = \dfrac{1}{x - 3}$?
+    ### 🛡️ Evaluación de una Función
 
-**La Carpintería:**
-1. **Restricción:** El denominador no puede ser cero.
-2. **Ecuación crítica:** $x - 3 = 0 \Rightarrow x = 3$.
-3. **Dominio:** Todos los reales excepto $3$, es decir, $\text{Dom}(f) = \mathbb{R} \setminus \{3\}$.
+    Evaluar = reemplazar $x$ por un valor específico.
+    > Si $f(x) = 2x + 3$, entonces $f(5) = 2(5) + 3 = 13$.
+    > Aquí **5** es la preimagen y **13** es la imagen.
+    """)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-> En la PAES suelen preguntar: "¿Para qué valor de $x$ la función no está definida?" Respuesta: $x = 3$.
+        st.markdown("#### 📊 Visualización: Diagrama sagital y función afín")
+        fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 
----
+        # Diagrama sagital
+        ax = axes[0]
+        circle1 = plt.Circle((0.2, 0.5), 0.18, color='#1565c0', fill=False, lw=2.5)
+        circle2 = plt.Circle((0.8, 0.5), 0.18, color='#c0392b', fill=False, lw=2.5)
+        ax.add_patch(circle1); ax.add_patch(circle2)
+        preimages = [0.35, 0.50, 0.65]
+        images    = [0.35, 0.50, 0.65]
+        for pi, im in zip(preimages, images):
+            ax.annotate("", xy=(0.62, im), xytext=(0.38, pi),
+                        arrowprops=dict(arrowstyle="->", color="black", lw=1.5))
+        for i, (pi, im) in enumerate(zip(preimages, images)):
+            ax.text(0.20, pi, f'$x_{i+1}$', ha='center', fontsize=12, color='#1565c0', fontweight='bold')
+            ax.text(0.80, im, f'$f(x_{i+1})$', ha='center', fontsize=11, color='#c0392b', fontweight='bold')
+        ax.text(0.20, 0.10, 'Dominio', ha='center', fontsize=11, color='#1565c0')
+        ax.text(0.80, 0.10, 'Codominio', ha='center', fontsize=11, color='#c0392b')
+        ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis('off')
+        ax.set_title("Diagrama Sagital: cada $x$ → un solo $f(x)$", fontsize=12, fontweight='bold')
 
-### E03: Aplicar el test de la línea vertical
+        # Función afín
+        x = np.linspace(-4, 4, 100)
+        y = 2*x + 3
+        axes[1].plot(x, y, color='#1b5e20', lw=2.5, label='$f(x) = 2x + 3$')
+        axes[1].scatter([5], [13], color='#c0392b', s=120, zorder=5, label='$f(5)=13$')
+        axes[1].axhline(0, color='black', lw=1); axes[1].axvline(0, color='black', lw=1)
+        axes[1].set_title("Evaluación: $f(5) = 2(5)+3 = 13$", fontsize=12, fontweight='bold')
+        axes[1].legend(fontsize=11); axes[1].grid(True, alpha=0.3)
 
-**Situación:** Determina si la relación $x^2 + y^2 = 25$ es una función.
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
 
-**La Carpintería:**
-1. **Despejar $y$:** $y = \pm\sqrt{25 - x^2}$.
-2. **Análisis:** Para $x = 0$, obtenemos $y = 5$ o $y = -5$. Dos valores de salida para una misma entrada.
-3. **Conclusión:** **No** es función porque no pasa el test de la línea vertical.
 
----
-
-### E04: Clasificar funciones
-
-**Situación:** Sea $f: \{1, 2, 3\} \to \{a, b, c, d\}$ definida por $f(1) = a$, $f(2) = c$, $f(3) = d$.
-
-**La Carpintería:**
-
-| Propiedad | ¿Se cumple? | Razón |
-| :--- | :---: | :--- |
-| ¿Inyectiva? | ✅ Sí | Cada entrada tiene imagen distinta: $a \neq c \neq d$ |
-| ¿Sobreyectiva? | ❌ No | El elemento $b$ del codominio no es imagen de ningún elemento |
-| ¿Biyectiva? | ❌ No | No es sobreyectiva |
-""")
-
-    with st.expander("❓ Cuestionario F01: Concepto de Función", expanded=False):
+    with st.expander("🚀 Guía de Ejemplos: Carpintería F01", expanded=False):
         st.markdown(r"""
-**1. ¿Cuál de las siguientes relaciones es una función?**
+### E01: Evaluación directa
 
-A) $\{(1, 2), (1, 3), (2, 4)\}$
-B) $\{(1, 2), (2, 3), (3, 4)\}$
-C) $\{(1, 2), (2, 2), (1, 5)\}$
-D) $x^2 + y^2 = 1$
+Si $f(x) = 3x - 5$:
+* $f(4) = 3(4) - 5 = 12 - 5 = 7$ → imagen de 4 es 7
+* $f(-1) = 3(-1) - 5 = -8$ → imagen de $-1$ es $-8$
 
----
+### E02: Composición de funciones
 
-**2. Si $f(x) = 3x - 5$, entonces $f(-2)$ es:**
+Si $f(x) = x^2$ y $g(x) = x + 1$, hallar $(f \circ g)(3)$:
+1. Primero $g$: $g(3) = 3 + 1 = 4$
+2. Luego $f$: $f(4) = 4^2 = 16$
+3. Resultado: $(f \circ g)(3) = 16$
 
-A) $-11$
-B) $-1$
-C) $1$
-D) $11$
+### E03: Identificar preimagen e imagen
 
----
-
-**3. El dominio de $f(x) = \dfrac{x}{x + 2}$ es:**
-
-A) $\mathbb{R}$
-B) $\mathbb{R} \setminus \{2\}$
-C) $\mathbb{R} \setminus \{-2\}$
-D) $\mathbb{R} \setminus \{0\}$
-
----
-
-**4. ¿Cuál gráfico NO representa una función?**
-
-A) Una parábola con vértice en el origen abierta hacia arriba
-B) Una recta con pendiente $2$
-C) Una circunferencia de radio $3$
-D) Una recta horizontal $y = 5$
-
----
-
-**5. Si $f(x) = x^2$ con dominio $\mathbb{R}$, entonces $f$ es:**
-
-A) Inyectiva y sobreyectiva
-B) Solo inyectiva
-C) Solo sobreyectiva
-D) Ni inyectiva ni sobreyectiva (sobre $\mathbb{R}$)
-
----
-
-**6. Si $f(x) = 2x + 1$ y $f(a) = 7$, entonces $a$ es:**
-
-A) $4$
-B) $3$
-C) $15$
-D) $6$
-
----
-
-**7. ¿Cuál es el recorrido de $f(x) = |x|$ con dominio $\mathbb{R}$?**
-
-A) $\mathbb{R}$
-B) $\{x \in \mathbb{R} : x > 0\}$
-C) $\{x \in \mathbb{R} : x \geq 0\}$
-D) $\{0\}$
+Si $f(2) = 10$:
+* **2** es la preimagen (input, pertenece al Dominio)
+* **10** es la imagen (output, pertenece al Recorrido)
 """)
+
+    with st.expander("❓ Cuestionario F01: Conceptos de Funciones", expanded=False):
+        quiz = [
+            {"question": r"Si $f(x) = 3x - 5$, ¿cuál es la imagen de 4?",
+             "options": {"A": "7", "B": "4", "C": "-5", "D": "17"},
+             "answer": "A", "explanation": r"$f(4) = 3(4)-5 = 12-5 = 7$."},
+            {"question": r"¿Cómo se llama el conjunto de todos los valores de entrada para los que $f$ está definida?",
+             "options": {"A": "Recorrido", "B": "Codominio", "C": "Dominio", "D": "Rango"},
+             "answer": "C", "explanation": "El Dominio es el set de datos de entrada permitidos."},
+            {"question": r"Si $f(2) = 10$, ¿cuál es correcta?",
+             "options": {"A": "10 es la preimagen de 2.", "B": "2 es la imagen de 10.", "C": "10 es la imagen de 2.", "D": "2 es el codominio."},
+             "answer": "C", "explanation": "El resultado (10) es la imagen del valor de entrada (2)."},
+            {"question": r"Si $f(x) = x^2$ y $g(x) = x+1$, ¿cuál es $(f \circ g)(3)$?",
+             "options": {"A": "10", "B": "16", "C": "12", "D": "9"},
+             "answer": "B", "explanation": r"Primero $g(3)=4$. Luego $f(4)=16$."},
+            {"question": r"El conjunto de los valores que la función efectivamente produce se llama:",
+             "options": {"A": "Dominio", "B": "Preimagen", "C": "Recorrido", "D": "Conjunto de partida"},
+             "answer": "C", "explanation": "El Recorrido (o Rango) son los outputs reales."},
+            {"question": r"¿Por qué $f(x) = 1/x$ no está definida en $x=0$?",
+             "options": {"A": "Porque 1 no se puede dividir.", "B": "Porque el dominio es solo positivo.", "C": "Porque dividir por cero es indefinido.", "D": "Porque $f(0) = 0$."},
+             "answer": "C", "explanation": "No se puede dividir por cero; 0 no pertenece al dominio."},
+            {"question": r"¿Cuál de las siguientes relaciones NO es una función?",
+             "options": {"A": r"$(1,2), (3,4), (5,6)$", "B": r"$(1,2), (1,3), (2,4)$", "C": r"$(0,0), (1,1), (2,4)$", "D": r"$(-1,1), (0,0), (1,1)$"},
+             "answer": "B", "explanation": r"El input $x=1$ tiene dos imágenes (2 y 3). No es función."},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="f01_quiz")
 
     with st.expander("🔑 Pauta Técnica F01: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
+| Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **B** | En A y C, el valor $x = 1$ tiene dos imágenes distintas, lo que viola la definición de función. D es una circunferencia, que no pasa el test vertical. |
-| **2** | **A** | $f(-2) = 3(-2) - 5 = -6 - 5 = -11$. |
-| **3** | **C** | El denominador $x + 2 = 0$ cuando $x = -2$. Ese valor se excluye del dominio. |
-| **4** | **C** | La circunferencia no pasa el test de la línea vertical: una vertical puede cortarla en dos puntos. |
-| **5** | **D** | No es inyectiva ($f(2) = f(-2) = 4$) y no es sobreyectiva sobre $\mathbb{R}$ (no produce valores negativos). |
-| **6** | **B** | $2a + 1 = 7 \Rightarrow 2a = 6 \Rightarrow a = 3$. |
-| **7** | **C** | El valor absoluto siempre es $\geq 0$, y para cada $y \geq 0$ existe $x$ tal que $|x| = y$. El recorrido es $[0, +\infty)$. |
+| **1** | **A** | $3(4)-5=7$. |
+| **2** | **C** | Dominio: conjunto de entradas válidas. |
+| **3** | **C** | $f(2)=10$ → 10 es la imagen de 2. |
+| **4** | **B** | $g(3)=4$; $f(4)=16$. |
+| **5** | **C** | Recorrido = imágenes reales. |
+| **6** | **C** | División por cero es indefinida. |
+| **7** | **B** | $x=1$ tiene dos imágenes → no es función. |
 """)

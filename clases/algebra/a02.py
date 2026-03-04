@@ -1,236 +1,158 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """
+<style>
+.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }
+</style>
+"""
 
 def render_A02():
-    st.title("A02: Productos Notables — Los Atajos del Álgebra")
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("A02: Multiplicación de Expresiones — La Propiedad Distributiva")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
+        st.markdown(r"""
+    ### 🛡️ El concepto de "Repartir" (Distribuir)
 
-    st.markdown(r"""
-### 🛡️ 1. El Portal: ¿Para Qué Memorizar Fórmulas?
+    En aritmética, $2 \cdot (3 + 5) = 16$ porque puedes sumar primero.
+    Pero en álgebra, cuando tienes $2x(x + 3)$, **no puedes sumar** lo de adentro. El factor de afuera tiene que entrar a "visitar" a cada término del paréntesis.
 
-Imagínate que cada vez que quieres ir de tu casa al colegio tuvieras que recorrer todas las calles una por una. Los **Productos Notables** son los atajos: caminos directos que ya fueron descubiertos y verificados, y que te ahorran una enorme cantidad de trabajo algebraico.
+    * **La Regla:** $a(b + c) = ab + ac$
 
-No se trata de memorizar por memorizar. Se trata de **reconocer patrones** que aparecen una y otra vez, tanto en la PAES como en la vida universitaria. Quien domina estos atajos, domina el álgebra.
+    ---
 
----
+    ### 🛡️ Multiplicación de Monomios (El choque de partículas)
 
-### 🛡️ 2.1 Cuadrado de un Binomio (Suma)
+    Antes de distribuir, hay que saber qué ocurre cuando dos términos chocan:
+    1. **Coeficientes:** se multiplican normal.
+    2. **Variables:** si son la misma letra, **se suman los exponentes**.
 
-$$\boxed{(a + b)^2 = a^2 + 2ab + b^2}$$
+    **Ejemplo:** $3x^2 \cdot 4x^3$
+    * Coeficientes: $3 \cdot 4 = 12$
+    * Letras: $x^2 \cdot x^3 = x^{2+3} = x^5$
+    * Resultado: $\mathbf{12x^5}$
 
-**¿De dónde sale?** Es simplemente multiplicar el binomio por sí mismo:
+    ---
 
-$$(a + b)(a + b) = a \cdot a + a \cdot b + b \cdot a + b \cdot b = a^2 + 2ab + b^2$$
+    ### 🛡️ Binomio × Binomio (Todos contra todos)
 
-> **Regla verbal:** "El cuadrado del primero, más el doble producto, más el cuadrado del segundo."
+    Cuando tienes $(a + b)(c + d)$, todos los del primer grupo saludan a todos los del segundo.
 
-**Ejemplo:** $(x + 3)^2 = x^2 + 2(x)(3) + 3^2 = x^2 + 6x + 9$
+    **Ejemplo Magistral:** $(x + 3)(x + 5)$
+    1. $x \cdot x = x^2$
+    2. $x \cdot 5 = 5x$
+    3. $3 \cdot x = 3x$
+    4. $3 \cdot 5 = 15$
+    * Resultado: $x^2 + 5x + 3x + 15$ → $\mathbf{x^2 + 8x + 15}$
 
----
+    ---
 
-### 🛡️ 2.2 Cuadrado de un Binomio (Resta)
+    ### 🛡️ El Peligro de los Signos
 
-$$\boxed{(a - b)^2 = a^2 - 2ab + b^2}$$
+    El signo pertenece al número que viene **después**.
+    * $-2x(x - 5)$:  $-2x \cdot x = -2x^2$  y  $-2x \cdot (-5) = +10x$ ¡Menos por menos da más!
+    """)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-La única diferencia con el anterior es el signo del **doble producto**, que ahora es negativo.
+        # FIGURA
+        st.markdown("#### 📊 Visualización: Distribución y Pendientes")
+        fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 
-> **Error clásico PAES:** Creer que $(a - b)^2 = a^2 - b^2$. ¡NO! Eso sería la diferencia de cuadrados, que es otra fórmula completamente distinta.
+        x = np.linspace(-2, 4, 100)
+        axes[0].plot(x, 2*x, label='$m = 2$ (Positiva pronunciada)', color='#1b5e20', lw=2.5)
+        axes[0].plot(x, 0.5*x, label='$m = 0.5$ (Positiva suave)', color='#1565c0', lw=2.5)
+        axes[0].plot(x, -x, label='$m = -1$ (Negativa)', color='#c0392b', lw=2.5)
+        axes[0].axhline(0, color='black', lw=1)
+        axes[0].axvline(0, color='black', lw=1)
+        axes[0].set_title("Interpretación de la pendiente $m$", fontsize=13, fontweight='bold')
+        axes[0].grid(True, alpha=0.3); axes[0].legend(fontsize=10)
 
-**Ejemplo:** $(2x - 5)^2 = (2x)^2 - 2(2x)(5) + 5^2 = 4x^2 - 20x + 25$
+        vals_x = [1, 2, 3]
+        vals_y = [(v+3)*(v+5) for v in vals_x]
+        table_data = [[f'$x={v}$', f'$x^2={v**2}$', f'$8x={8*v}$', f'Área$={r}$'] 
+                      for v, r in zip(vals_x, vals_y)]
+        axes[1].axis('off')
+        tbl = axes[1].table(cellText=table_data,
+                            colLabels=['Valor $x$', 'Término $x^2$', 'Término $8x$', 'Total $(x+3)(x+5)$'],
+                            loc='center', cellLoc='center')
+        tbl.scale(1, 2.2)
+        tbl.auto_set_font_size(False); tbl.set_fontsize(11)
+        axes[1].set_title("Verificación numérica: $(x+3)(x+5) = x^2+8x+15$",
+                          fontsize=12, fontweight='bold', pad=15)
 
----
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
 
-### 🛡️ 2.3 Suma por Diferencia (Diferencia de Cuadrados)
 
-$$\boxed{(a + b)(a - b) = a^2 - b^2}$$
+    with st.expander("🚀 Guía de Ejemplos: Carpintería A02", expanded=False):
+        st.markdown(r"""
+### E01: Multiplicación de monomios
 
-Cuando multiplicas una suma por su diferencia, los términos cruzados ($+ab$ y $-ab$) se cancelan y queda solo la **diferencia de los cuadrados**.
-
-**Ejemplo:** $(3x + 7)(3x - 7) = (3x)^2 - 7^2 = 9x^2 - 49$
-
-| Producto Notable | Fórmula | Resultado del Ejemplo |
+| Operación | Proceso | Resultado |
 | :--- | :--- | :--- |
-| $(a + b)^2$ | $a^2 + 2ab + b^2$ | $(x + 3)^2 = x^2 + 6x + 9$ |
-| $(a - b)^2$ | $a^2 - 2ab + b^2$ | $(2x - 5)^2 = 4x^2 - 20x + 25$ |
-| $(a + b)(a - b)$ | $a^2 - b^2$ | $(3x + 7)(3x - 7) = 9x^2 - 49$ |
+| $4a \cdot 3a^2$ | Coef: $4\cdot3=12$; Exp: $1+2=3$ | $12a^3$ |
+| $(-5m)(2n)$ | Signos distintos: $-$; $5\cdot2=10$ | $-10mn$ |
+| $(3x^2)^2$ | Coef: $3^2=9$; Exp: $2\cdot2=4$ | $9x^4$ |
 
----
+### E02: Distribución a un binomio
 
-### 🏛️ 2.4 Cubo de un Binomio
+$2x(x+4) = 2x\cdot x + 2x\cdot 4 = 2x^2 + 8x$
 
-Para la PAES M1, estos son menos frecuentes pero conviene conocerlos:
+### E03: Binomio × Binomio
 
-$$\boxed{(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3}$$
+$(x+2)(x+3)$:
+| Primer × Segundo | Resultado |
+| :--- | :--- |
+| $x \cdot x$ | $x^2$ |
+| $x \cdot 3$ | $3x$ |
+| $2 \cdot x$ | $2x$ |
+| $2 \cdot 3$ | $6$ |
+| **Total** | $x^2 + 5x + 6$ |
 
-$$\boxed{(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3}$$
+### E04: Signo negativo fuera
 
-> **Regla verbal para $(a + b)^3$:** "Cubo del primero, más tres veces el cuadrado del primero por el segundo, más tres veces el primero por el cuadrado del segundo, más el cubo del segundo."
-
-**Ejemplo:** $(x + 2)^3 = x^3 + 3x^2(2) + 3x(4) + 8 = x^3 + 6x^2 + 12x + 8$
-
----
-
-### 🛡️ 2.5 Producto de Binomios con Término Común
-
-$$(x + a)(x + b) = x^2 + (a + b)x + ab$$
-
-Este patrón aparece constantemente en factorización de trinomios:
-
-**Ejemplo:** $(x + 5)(x - 3) = x^2 + (5 + (-3))x + (5)(-3) = x^2 + 2x - 15$
-
----
-
-> "Las matemáticas son el lenguaje con el que Dios escribió el universo."
-> — **Galileo Galilei**
+$-(x - 3) = -x + 3$ — El negativo cambia el signo de TODOS los términos internos.
 """)
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería A02", expanded=False):
-        st.markdown(r"""
-### E01: Cuadrado de binomio (suma)
-
-**Situación:** Desarrollar $(3x + 4y)^2$.
-
-**La Carpintería:**
-1. **Identificar:** $a = 3x$, $b = 4y$.
-2. **Aplicar fórmula:** $a^2 + 2ab + b^2$.
-3. **Calcular cada parte:**
-   - $a^2 = (3x)^2 = 9x^2$
-   - $2ab = 2(3x)(4y) = 24xy$
-   - $b^2 = (4y)^2 = 16y^2$
-4. **Resultado:** $9x^2 + 24xy + 16y^2$.
-
-| Componente | Cálculo | Resultado |
-| :--- | :--- | :---: |
-| $a^2$ | $(3x)^2$ | $9x^2$ |
-| $2ab$ | $2(3x)(4y)$ | $24xy$ |
-| $b^2$ | $(4y)^2$ | $16y^2$ |
-
----
-
-### E02: Cuadrado de binomio (resta)
-
-**Situación:** Desarrollar $(5a - 2b)^2$.
-
-**La Carpintería:**
-1. **Identificar:** $a = 5a$, $b = 2b$.
-2. **Aplicar fórmula:** $a^2 - 2ab + b^2$.
-3. **Resultado:** $(5a)^2 - 2(5a)(2b) + (2b)^2 = 25a^2 - 20ab + 4b^2$.
-
----
-
-### E03: Suma por diferencia
-
-**Situación:** Calcular $(x^2 + 3)(x^2 - 3)$.
-
-**La Carpintería:**
-1. **Reconocer patrón:** Es $(a + b)(a - b)$ con $a = x^2$ y $b = 3$.
-2. **Aplicar fórmula:** $a^2 - b^2$.
-3. **Resultado:** $(x^2)^2 - 3^2 = x^4 - 9$.
-
----
-
-### E04: Cubo de binomio
-
-**Situación:** Desarrollar $(x - 1)^3$.
-
-**La Carpintería:**
-1. **Identificar:** $a = x$, $b = 1$.
-2. **Aplicar fórmula:** $a^3 - 3a^2b + 3ab^2 - b^3$.
-3. **Calcular:**
-   - $x^3 - 3x^2(1) + 3x(1)^2 - 1^3$
-   - $x^3 - 3x^2 + 3x - 1$
-
-| Componente | Cálculo | Resultado |
-| :--- | :--- | :---: |
-| $a^3$ | $x^3$ | $x^3$ |
-| $3a^2b$ | $3x^2(1)$ | $3x^2$ |
-| $3ab^2$ | $3x(1)$ | $3x$ |
-| $b^3$ | $1$ | $1$ |
-
----
-
-### E05: Producto con término común
-
-**Situación:** Desarrollar $(x + 7)(x - 4)$.
-
-**La Carpintería:**
-1. **Identificar:** Término común $x$, con $a = 7$ y $b = -4$.
-2. **Aplicar:** $x^2 + (7 + (-4))x + (7)(-4)$.
-3. **Resultado:** $x^2 + 3x - 28$.
-""")
-
-    with st.expander("❓ Cuestionario A02: Productos Notables", expanded=False):
-        st.markdown(r"""
-**1. ¿Cuál es el desarrollo de $(x + 5)^2$?**
-
-A) $x^2 + 25$
-B) $x^2 + 5x + 25$
-C) $x^2 + 10x + 25$
-D) $2x + 10$
-
----
-
-**2. El resultado de $(4a - 3b)^2$ es:**
-
-A) $16a^2 - 9b^2$
-B) $16a^2 - 24ab + 9b^2$
-C) $16a^2 + 24ab + 9b^2$
-D) $16a^2 - 12ab + 9b^2$
-
----
-
-**3. ¿Cuál es el resultado de $(x + 6)(x - 6)$?**
-
-A) $x^2 + 36$
-B) $x^2 - 36$
-C) $x^2 - 12x + 36$
-D) $x^2 + 12x + 36$
-
----
-
-**4. El desarrollo de $(2x + 1)^3$ es:**
-
-A) $8x^3 + 1$
-B) $8x^3 + 12x^2 + 6x + 1$
-C) $8x^3 + 6x^2 + 3x + 1$
-D) $4x^2 + 4x + 1$
-
----
-
-**5. El producto $(x + 3)(x - 5)$ es igual a:**
-
-A) $x^2 - 2x - 15$
-B) $x^2 + 2x - 15$
-C) $x^2 - 8x + 15$
-D) $x^2 - 15$
-
----
-
-**6. Si $(a + b)^2 = 49$ y $a^2 + b^2 = 25$, entonces $2ab$ vale:**
-
-A) $12$
-B) $24$
-C) $74$
-D) $7$
-
----
-
-**7. ¿Cuál de las siguientes expresiones es un trinomio cuadrado perfecto?**
-
-A) $x^2 + 6x + 8$
-B) $x^2 + 6x + 9$
-C) $x^2 + 5x + 9$
-D) $x^2 - 6x - 9$
-""")
+    with st.expander("❓ Cuestionario A02: Multiplicación Algebraica", expanded=False):
+        quiz = [
+            {"question": r"Al multiplicar $4a \cdot 3a^2$, el resultado es:",
+             "options": {"A": r"$7a^3$", "B": r"$12a^2$", "C": r"$12a^3$", "D": r"$12a$"},
+             "answer": "C", "explanation": r"$4\cdot3=12$; suma exponentes: $a^{1+2}=a^3$."},
+            {"question": r"¿Cuál es el resultado de $2x(x + 4)$?",
+             "options": {"A": r"$2x^2 + 8x$", "B": r"$2x + 8$", "C": r"$2x^2 + 4$", "D": r"$10x^2$"},
+             "answer": "A", "explanation": r"El $2x$ multiplica a $x$ y luego al $4$."},
+            {"question": r"Si multiplicamos $(-5m)(2n)$, obtenemos:",
+             "options": {"A": r"$-3mn$", "B": r"$10mn$", "C": r"$-10m + n$", "D": r"$-10mn$"},
+             "answer": "D", "explanation": "Signos distintos dan negativo. Las letras distintas se yuxtaponen."},
+            {"question": r"Resuelve $(x + 2)(x + 3)$:",
+             "options": {"A": r"$x^2 + 6$", "B": r"$x^2 + 5x + 6$", "C": r"$2x + 5$", "D": r"$x^2 + 2x + 6$"},
+             "answer": "B", "explanation": r"$x^2 + 3x + 2x + 6 = x^2 + 5x + 6$."},
+            {"question": r"¿Qué sucede con $-(x - 3)$ al eliminar el paréntesis?",
+             "options": {"A": r"$-x - 3$", "B": r"$x + 3$", "C": r"$-x + 3$", "D": r"$x - 3$"},
+             "answer": "C", "explanation": "El menos de afuera cambia el signo de CADA término interior."},
+            {"question": r"El área de un rectángulo de lados $(a + 2)$ y $(a + 5)$ es:",
+             "options": {"A": r"$2a + 7$", "B": r"$a^2 + 7a + 10$", "C": r"$a^2 + 10$", "D": r"$a^2 + 7a + 7$"},
+             "answer": "B", "explanation": r"$(a+2)(a+5) = a^2+5a+2a+10 = a^2+7a+10$."},
+            {"question": r"Si el lado de un cuadrado se duplica a $2s$, el área es:",
+             "options": {"A": r"$2s^2$", "B": r"$4s^2$", "C": r"$s^4$", "D": r"$2s$"},
+             "answer": "B", "explanation": r"$(2s)^2 = 4s^2$. ¡El área se cuadruplica!"},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="a02_quiz")
 
     with st.expander("🔑 Pauta Técnica A02: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
+| Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **C** | $(x+5)^2 = x^2 + 2(x)(5) + 25 = x^2 + 10x + 25$. El error clásico es olvidar el doble producto. |
-| **2** | **B** | $(4a-3b)^2 = 16a^2 - 2(4a)(3b) + 9b^2 = 16a^2 - 24ab + 9b^2$. El doble producto es negativo. |
-| **3** | **B** | Es suma por diferencia: $(x+6)(x-6) = x^2 - 36$. Los términos cruzados se cancelan. |
-| **4** | **B** | $(2x+1)^3 = (2x)^3 + 3(2x)^2(1) + 3(2x)(1)^2 + 1^3 = 8x^3 + 12x^2 + 6x + 1$. |
-| **5** | **A** | $(x+3)(x-5) = x^2 + (3-5)x + (3)(-5) = x^2 - 2x - 15$. |
-| **6** | **B** | $(a+b)^2 = a^2 + 2ab + b^2$, así $49 = 25 + 2ab$, luego $2ab = 24$. |
-| **7** | **B** | Para ser TCP: el doble producto debe coincidir. $2 \cdot x \cdot 3 = 6x$ ✅. En los demás no cuadra. |
+| **1** | **C** | $4\cdot3=12$; $a^1\cdot a^2 = a^3$. |
+| **2** | **A** | $2x\cdot x = 2x^2$; $2x\cdot 4 = 8x$. |
+| **3** | **D** | Signos distintos → negativo; $5\cdot2=10$; letras distintas juntas. |
+| **4** | **B** | $(x+2)(x+3)$: $x^2+3x+2x+6 = x^2+5x+6$. |
+| **5** | **C** | El $-$ de afuera invierte el signo de cada término. |
+| **6** | **B** | $(a+2)(a+5) = a^2+7a+10$. |
+| **7** | **B** | $(2s)^2 = 4s^2$. |
 """)

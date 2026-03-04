@@ -1,233 +1,151 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """<style>.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }</style>"""
 
 def render_F04():
-    st.title("F04: Función Exponencial y Logarítmica — El Crecimiento sin Límites")
-
-    st.markdown(r"""
-### 🛡️ 1. El Portal: Del Crecimiento Lento al Explosivo
-
-Imagina que depositas $\$100\,000$ en una cuenta que duplica tu dinero cada año. Al cabo de $1$ año tienes $\$200\,000$; al cabo de $2$ años, $\$400\,000$; al cabo de $10$ años, ¡más de $\$100$ millones! Este crecimiento "que se dispara" se llama **crecimiento exponencial**, y la función que lo modela es:
-
-$$f(x) = a^x \quad \text{con } a > 0 \text{ y } a \neq 1$$
-
-Donde $a$ es la **base** y $x$ es el **exponente** (que ahora es variable, no constante como en las potencias).
-
----
-
-### 🛡️ 1.1 Comportamiento de la Función Exponencial
-
-| Condición | Comportamiento | Ejemplo |
-| :---: | :--- | :--- |
-| $a > 1$ | **Crecimiento exponencial**: la función crece cada vez más rápido | $f(x) = 2^x$: $1, 2, 4, 8, 16, \ldots$ |
-| $0 < a < 1$ | **Decrecimiento exponencial**: la función decrece acercándose a $0$ | $f(x) = \left(\frac{1}{2}\right)^x$: $1, \frac{1}{2}, \frac{1}{4}, \ldots$ |
-
-Propiedades fundamentales del gráfico de $f(x) = a^x$:
-
-| Propiedad | Valor |
-| :--- | :--- |
-| **Dominio** | $\mathbb{R}$ (todos los reales) |
-| **Recorrido** | $(0, +\infty)$ (siempre positiva, nunca vale $0$) |
-| **Intercepto $y$** | $(0, 1)$ porque $a^0 = 1$ |
-| **Asíntota horizontal** | El eje $x$ ($y = 0$) |
-
-> **Tip PAES:** La función exponencial **nunca** toca el eje $x$. Se acerca infinitamente, pero jamás lo alcanza. Esto se llama **asíntota**.
-
----
-
-### 🏛️ 1.2 El Logaritmo: La Función Inversa
-
-Si la exponencial responde "¿cuánto vale $a^x$?", el **logaritmo** responde la pregunta inversa: "¿a qué exponente debo elevar $a$ para obtener un resultado dado?"
-
-$$\log_a(b) = c \quad \Longleftrightarrow \quad a^c = b$$
-
-Se lee "logaritmo en base $a$ de $b$". Es simplemente el **exponente** al que hay que elevar la base para obtener el argumento.
-
-| Forma logarítmica | Forma exponencial | Valor |
-| :--- | :--- | :---: |
-| $\log_2(8)$ | $2^? = 8$ | $3$ |
-| $\log_3(81)$ | $3^? = 81$ | $4$ |
-| $\log_{10}(1000)$ | $10^? = 1000$ | $3$ |
-| $\log_5(1)$ | $5^? = 1$ | $0$ |
-| $\log_4\!\left(\frac{1}{4}\right)$ | $4^? = \frac{1}{4}$ | $-1$ |
-
----
-
-### 🛡️ 1.3 Propiedades de los Logaritmos
-
-Estas propiedades transforman operaciones complicadas en sumas, restas y multiplicaciones:
-
-| Propiedad | Fórmula | Ejemplo |
-| :--- | :--- | :--- |
-| **Logaritmo de un producto** | $\log_a(M \cdot N) = \log_a(M) + \log_a(N)$ | $\log_2(8 \cdot 4) = \log_2(8) + \log_2(4) = 3 + 2 = 5$ |
-| **Logaritmo de un cociente** | $\log_a\!\left(\frac{M}{N}\right) = \log_a(M) - \log_a(N)$ | $\log_3(27/3) = \log_3(27) - \log_3(3) = 3 - 1 = 2$ |
-| **Logaritmo de una potencia** | $\log_a(M^n) = n \cdot \log_a(M)$ | $\log_2(4^3) = 3 \cdot \log_2(4) = 3 \cdot 2 = 6$ |
-| **Logaritmo de la base** | $\log_a(a) = 1$ | $\log_7(7) = 1$ |
-| **Logaritmo de 1** | $\log_a(1) = 0$ | $\log_5(1) = 0$ |
-
-> **Notación especial:** $\log(x)$ sin base suele significar $\log_{10}(x)$ (logaritmo común) y $\ln(x) = \log_e(x)$ (logaritmo natural, base $e \approx 2{,}718$).
-
----
-
-### 🛡️ 1.4 Ecuaciones Exponenciales Básicas
-
-Para resolver ecuaciones exponenciales, la estrategia principal es **igualar las bases**:
-
-$$2^{x+1} = 8 \quad \Rightarrow \quad 2^{x+1} = 2^3 \quad \Rightarrow \quad x + 1 = 3 \quad \Rightarrow \quad x = 2$$
-
-Cuando no puedes igualar las bases, aplicas logaritmo a ambos lados:
-
-$$3^x = 20 \quad \Rightarrow \quad x = \log_3(20) = \frac{\log(20)}{\log(3)} \approx 2{,}73$$
-
----
-
-### 🏛️ 1.5 Ecuaciones Logarítmicas Básicas
-
-Para resolver ecuaciones logarítmicas, convierte a forma exponencial:
-
-$$\log_2(x - 1) = 4 \quad \Rightarrow \quad x - 1 = 2^4 = 16 \quad \Rightarrow \quad x = 17$$
-
-> **Cuidado:** Siempre verifica que el argumento del logaritmo sea **positivo**. En el ejemplo: $x - 1 = 16 > 0$ ✅.
-
-| Tipo de ecuación | Estrategia | Ejemplo |
-| :--- | :--- | :--- |
-| $a^{f(x)} = a^{g(x)}$ | Igualar exponentes: $f(x) = g(x)$ | $5^{2x} = 5^6 \Rightarrow 2x = 6$ |
-| $a^x = k$ | Aplicar $\log_a$: $x = \log_a(k)$ | $10^x = 500$ |
-| $\log_a(f(x)) = c$ | Convertir: $f(x) = a^c$ | $\log_3(x) = 2 \Rightarrow x = 9$ |
-
----
-
-> "Los logaritmos, al reducir a unos pocos días el trabajo de muchos meses, duplican la vida de los astrónomos."
-> — **Pierre-Simon de Laplace**
-""")
-
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería F04", expanded=False):
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("F04: Función Cuadrática y sus Gráficas")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
         st.markdown(r"""
-### E01: Evaluar una función exponencial
+    ### 🛡️ Forma General
 
-**Situación:** Si $f(x) = 3 \cdot 2^x$, calcula $f(0)$, $f(3)$ y $f(-2)$.
+    $$f(x) = ax^2 + bx + c \quad (a \neq 0)$$
 
-**La Carpintería:**
+    Si $a = 0$, vuelve a ser lineal. El coeficiente $a$ es el "jefe" de la parábola.
 
-| $x$ | Sustitución | Cálculo | $f(x)$ |
-| :---: | :--- | :--- | :---: |
-| $0$ | $3 \cdot 2^0$ | $3 \cdot 1$ | $3$ |
-| $3$ | $3 \cdot 2^3$ | $3 \cdot 8$ | $24$ |
-| $-2$ | $3 \cdot 2^{-2}$ | $3 \cdot \frac{1}{4}$ | $\frac{3}{4}$ |
+    ---
 
-Observa: la función siempre es positiva y crece muy rápido.
+    ### 🛡️ Concavidad (El valor de $a$)
 
----
+    * **Si $a > 0$:** Parábola abierta hacia **arriba** (😊 forma $\cup$). Tiene un **Mínimo**.
+    * **Si $a < 0$:** Parábola abierta hacia **abajo** (😔 forma $\cap$). Tiene un **Máximo**.
 
-### E02: Convertir entre forma logarítmica y exponencial
+    ---
 
-**Situación:** Escribe en forma exponencial: $\log_5(125) = 3$.
+    ### 🛡️ Intersección con el eje Y
 
-**La Carpintería:**
-1. **Identificar:** Base = $5$, resultado = $125$, exponente = $3$.
-2. **Forma exponencial:** $5^3 = 125$ ✅.
+    El punto de corte con el eje $Y$ es siempre $(0, c)$. El valor de $c$ da la altura inicial.
 
-**Inverso:** Escribe $4^{-2} = \frac{1}{16}$ en forma logarítmica.
-1. **Base** = $4$, **resultado** = $\frac{1}{16}$, **exponente** = $-2$.
-2. **Forma logarítmica:** $\log_4\!\left(\frac{1}{16}\right) = -2$.
+    ---
 
----
+    ### 🛡️ El Vértice ($V$)
 
-### E03: Aplicar propiedades de logaritmos
+    Es el punto más alto o más bajo de la parábola.
+    $$x_v = \frac{-b}{2a} \qquad y_v = f(x_v)$$
 
-**Situación:** Simplifica $\log_2(32) - \log_2(4) + \log_2(8)$.
+    ---
 
-**La Carpintería:**
-1. **Evaluar cada uno:** $\log_2(32) = 5$, $\log_2(4) = 2$, $\log_2(8) = 3$.
-2. **Operar:** $5 - 2 + 3 = 6$.
-3. **Verificar con propiedades:** $\log_2\!\left(\frac{32 \cdot 8}{4}\right) = \log_2(64) = 6$ ✅.
+    ### 🛡️ El Eje de Simetría
 
----
+    Línea vertical que divide la parábola en dos mitades iguales: $x = \dfrac{-b}{2a}$
+    """)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-### E04: Resolver una ecuación exponencial
+        st.markdown("#### 📊 Visualización: Concavidad, Vértice y abertura")
+        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-**Situación:** Resuelve $4^{x-1} = 64$.
+        x = np.linspace(-2, 2, 200)
 
-**La Carpintería:**
-1. **Escribir con la misma base:** $4 = 2^2$ y $64 = 2^6$.
-2. **Reescribir:** $(2^2)^{x-1} = 2^6 \Rightarrow 2^{2(x-1)} = 2^6$.
-3. **Igualar exponentes:** $2(x - 1) = 6 \Rightarrow 2x - 2 = 6 \Rightarrow x = 4$.
-4. **Verificar:** $4^{4-1} = 4^3 = 64$ ✅.
-""")
+        # Abertura según a
+        axes[0].plot(x, 4*x**2,   color='#c0392b', lw=2.5, label='$a=4$ (estrecha)')
+        axes[0].plot(x, x**2,     color='black',   lw=2.5, label='$a=1$ (estándar)')
+        axes[0].plot(x, 0.2*x**2, color='#1565c0', lw=2.5, label='$a=0.2$ (ancha)')
+        axes[0].axhline(0, color='black', lw=1); axes[0].axvline(0, color='black', lw=1)
+        axes[0].set_title("Efecto de $a$: abertura", fontsize=12, fontweight='bold')
+        axes[0].set_ylim(-0.5, 5); axes[0].legend(fontsize=9); axes[0].grid(True, alpha=0.3)
 
-    with st.expander("❓ Cuestionario F04: Función Exponencial y Logarítmica", expanded=False):
+        # Vértice y eje de simetría
+        x2 = np.linspace(-1, 5, 200)
+        y2 = x2**2 - 4*x2 + 5    # vértice (2, 1)
+        axes[1].plot(x2, y2, color='#7b1fa2', lw=2.5, label=r'$x^2-4x+5$')
+        axes[1].axvline(2, color='#f39c12', lw=2, linestyle='--', label='Eje de simetría $x=2$')
+        axes[1].scatter([2], [1], color='black', s=140, zorder=5)
+        axes[1].annotate('Vértice $(2,1)$', xy=(2, 1), xytext=(2.7, 2),
+                         arrowprops=dict(facecolor='black', shrink=0.05), fontsize=10)
+        axes[1].axhline(0, color='black', lw=1); axes[1].axvline(0, color='black', lw=1)
+        axes[1].set_title("Vértice y eje de simetría", fontsize=12, fontweight='bold')
+        axes[1].legend(fontsize=9); axes[1].grid(True, alpha=0.3)
+
+        # Parábola hacia abajo con máximo
+        x3 = np.linspace(-1, 5, 200)
+        y3 = -x3**2 + 4*x3 + 1
+        axes[2].plot(x3, y3, color='purple', lw=2.5, label=r'$-x^2+4x+1$')
+        axes[2].axvline(2, color='gray', lw=1.5, linestyle=':', label='Eje: $x=2$')
+        axes[2].scatter([2], [5], color='black', s=140, zorder=5)
+        axes[2].annotate('Vértice $(2,5)$\n¡Máximo!', xy=(2, 5), xytext=(3, 4.2),
+                         arrowprops=dict(facecolor='black', shrink=0.05), fontsize=10)
+        axes[2].axhline(0, color='black', lw=1); axes[2].axvline(0, color='black', lw=1)
+        axes[2].set_title("$a<0$: máximo en el vértice", fontsize=12, fontweight='bold')
+        axes[2].legend(fontsize=9); axes[2].grid(True, alpha=0.3)
+
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
+
+
+    with st.expander("🚀 Guía de Ejemplos: Carpintería F04", expanded=False):
         st.markdown(r"""
-**1. El valor de $\log_2(64)$ es:**
+### E01: Identificar componentes
 
-A) $5$
-B) $6$
-C) $8$
-D) $32$
+$f(x) = 2x^2 - 4x + 5$: $a=2$ (>0, mínimo), $b=-4$, $c=5$ (corte Y en $(0,5)$)
 
----
+### E02: Calcular el vértice
 
-**2. ¿Cuál es el recorrido de $f(x) = 5^x$?**
+$f(x) = x^2 - 6x + 1$:
+1. $x_v = -(-6)/(2\cdot1) = 3$
+2. $y_v = f(3) = 9 - 18 + 1 = -8$
+3. Vértice: $(3, -8)$
 
-A) $\mathbb{R}$
-B) $(0, +\infty)$
-C) $[0, +\infty)$
-D) $[1, +\infty)$
+### E03: Trazar la parábola
 
----
-
-**3. Si $\log_3(x) = 4$, entonces $x$ es:**
-
-A) $12$
-B) $64$
-C) $81$
-D) $27$
-
----
-
-**4. $\log(100) + \log(10)$ es igual a:**
-
-A) $\log(1000)$
-B) $\log(110)$
-C) $1000$
-D) $3$
-
----
-
-**5. Si $2^x = 32$, entonces $x$ es:**
-
-A) $4$
-B) $5$
-C) $6$
-D) $16$
-
----
-
-**6. La función $f(x) = \left(\frac{1}{3}\right)^x$ es:**
-
-A) Creciente
-B) Decreciente
-C) Constante
-D) No es función
-
----
-
-**7. $\log_a(a^5)$ es igual a:**
-
-A) $a$
-B) $5a$
-C) $5$
-D) $a^5$
+Para $f(x) = x^2 - 3x - 4$:
+| $x$ | $f(x)$ |
+| :---: | :---: |
+| -1 | 0 |
+| 0 | -4 |
+| 4 | 0 |
+| 1.5 | -6.25 (vértice) |
 """)
+
+    with st.expander("❓ Cuestionario F04: Función Cuadrática", expanded=False):
+        quiz = [
+            {"question": r"Dada $f(x) = 2x^2 - 4x + 5$, ¿hacia dónde se abre la parábola?",
+             "options": {"A": "Hacia abajo, porque el 2 es positivo.", "B": "Hacia arriba, porque el 2 es positivo.", "C": "Hacia la derecha.", "D": "Hacia la izquierda."},
+             "answer": "B", "explanation": r"$a=2>0$ → concavidad hacia arriba (mínimo)."},
+            {"question": r"¿En qué punto corta al eje Y la función $f(x) = x^2 + 3x - 8$?",
+             "options": {"A": r"$(0, 3)$", "B": r"$(3, 0)$", "C": r"$(0, -8)$", "D": r"$(-8, 0)$"},
+             "answer": "C", "explanation": r"El corte con el eje $Y$ es $(0, c) = (0, -8)$."},
+            {"question": r"¿Cuál es la coordenada $x$ del vértice para $f(x) = x^2 - 6x + 1$?",
+             "options": {"A": "6", "B": "-3", "C": "3", "D": "0"},
+             "answer": "C", "explanation": r"$x_v = -(-6)/(2\cdot1) = 6/2 = 3$."},
+            {"question": r"Si $a < 0$ en una función cuadrática, la función tiene:",
+             "options": {"A": "Un punto mínimo.", "B": "Un punto máximo.", "C": "Ningún punto crítico.", "D": "Una línea recta."},
+             "answer": "B", "explanation": "Parábola hacia abajo = tope = máximo."},
+            {"question": r"¿Cuál es el eje de simetría de $f(x) = x^2 + 4x + 10$?",
+             "options": {"A": r"$x = 2$", "B": r"$x = 4$", "C": r"$x = -2$", "D": r"$x = -4$"},
+             "answer": "C", "explanation": r"$x = -4/(2\cdot1) = -2$."},
+            {"question": r"¿Qué representa la coordenada $y$ del vértice?",
+             "options": {"A": "El punto de corte con el eje $X$.", "B": "El valor máximo o mínimo de la función.", "C": "El coeficiente $b$.", "D": "La pendiente."},
+             "answer": "B", "explanation": "La $y$ del vértice es el valor extremo (máx o mín) de la función."},
+            {"question": r"En $f(x) = 5x^2 - 10$, ¿cuál es el valor de $b$?",
+             "options": {"A": "5", "B": "-10", "C": "0", "D": "10"},
+             "answer": "C", "explanation": r"No hay término con $x$ sola, por tanto $b=0$."},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="f04_quiz")
 
     with st.expander("🔑 Pauta Técnica F04: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
+| Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **B** | $2^6 = 64$, por lo tanto $\log_2(64) = 6$. |
-| **2** | **B** | La función exponencial con base $> 1$ toma todos los valores positivos, pero nunca vale $0$ ni negativos. Recorrido: $(0, +\infty)$. |
-| **3** | **C** | $\log_3(x) = 4 \Rightarrow x = 3^4 = 81$. |
-| **4** | **D** | $\log(100) + \log(10) = 2 + 1 = 3$. También: $\log(100 \cdot 10) = \log(1000) = 3$. Las opciones A y D son equivalentes; la respuesta numérica es $3$. |
-| **5** | **B** | $2^5 = 32$, así que $x = 5$. |
-| **6** | **B** | Cuando la base está entre $0$ y $1$, la función exponencial es decreciente. |
-| **7** | **C** | Por la propiedad $\log_a(a^n) = n$, el resultado es $5$. |
+| **1** | **B** | $a=2>0$ → abre hacia arriba. |
+| **2** | **C** | Corte eje $Y$: $(0, c)=(0,-8)$. |
+| **3** | **C** | $x_v=6/2=3$. |
+| **4** | **B** | $a<0$ → montaña → máximo. |
+| **5** | **C** | $x=-4/(2)=-2$. |
+| **6** | **B** | $y_v$ = valor extremo. |
+| **7** | **C** | No hay término $bx$, por tanto $b=0$. |
 """)

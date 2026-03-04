@@ -1,254 +1,144 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """<style>.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }</style>"""
 
 def render_A05():
-    st.title("A05: Inecuaciones y Sistemas de Ecuaciones Lineales — Rangos y Cruces")
-
-    st.markdown(r"""
-### 🛡️ 1. El Portal: Más Allá de la Igualdad
-
-No todo en la vida es exacto. A veces necesitas saber que tu nota debe ser **mayor que** 4,0 para aprobar, o que tu presupuesto debe ser **menor o igual a** cierta cantidad. Las **inecuaciones** manejan esa realidad: trabajan con desigualdades en vez de igualdades.
-
-Y cuando tienes **dos condiciones** que deben cumplirse al mismo tiempo (como "tengo $x$ billetes de mil y $y$ monedas de quinientos y el total es..."), entras al mundo de los **sistemas de ecuaciones**.
-
----
-
-### 🛡️ 5.1 Inecuaciones Lineales
-
-Una inecuación es una desigualdad que contiene una incógnita. Se resuelve igual que una ecuación, con una **regla de oro crucial**:
-
-$$\boxed{\text{Al multiplicar o dividir por un número NEGATIVO, se INVIERTE el sentido de la desigualdad.}}$$
-
-**Ejemplo:** Resolver $-3x + 6 > 0$.
-
-$$-3x > -6$$
-$$x < 2 \quad \text{(se invierte el } > \text{ a } < \text{ al dividir por } -3\text{)}$$
-
-**Solución:** $x \in (-\infty, 2)$ o equivalentemente $\{x \in \mathbb{R} : x < 2\}$.
-
-| Símbolo | Significado | Intervalo | Representación |
-| :---: | :--- | :--- | :--- |
-| $<$ | Menor que (estricto) | $(a, b)$ | Círculo abierto ○ |
-| $\leq$ | Menor o igual que | $[a, b]$ | Círculo cerrado ● |
-| $>$ | Mayor que (estricto) | $(a, b)$ | Círculo abierto ○ |
-| $\geq$ | Mayor o igual que | $[a, b]$ | Círculo cerrado ● |
-
----
-
-### 🛡️ 5.2 Inecuaciones con Paréntesis y Fracciones
-
-**Ejemplo:** Resolver $\dfrac{2x - 1}{3} \leq \dfrac{x + 2}{2}$.
-
-1. **MCM de 3 y 2:** $6$.
-2. **Multiplicar por 6:** $2(2x - 1) \leq 3(x + 2)$.
-3. **Distribuir:** $4x - 2 \leq 3x + 6$.
-4. **Agrupar:** $4x - 3x \leq 6 + 2$.
-5. **Resultado:** $x \leq 8$.
-6. **Solución:** $x \in (-\infty, 8]$.
-
-> **Tip PAES:** Como multiplicamos por $6$ (positivo), el sentido de la desigualdad **no cambia**.
-
----
-
-### 🏛️ 5.3 Sistemas de Ecuaciones Lineales 2×2
-
-Un sistema de dos ecuaciones con dos incógnitas busca el par $(x, y)$ que satisface **ambas** ecuaciones simultáneamente.
-
-$$\begin{cases} 2x + y = 7 \\ x - y = 2 \end{cases}$$
-
-Geométricamente, cada ecuación es una **recta** en el plano. La solución es el **punto de intersección** de ambas rectas.
-
-| Caso | Geométricamente | Algebraicamente | Soluciones |
-| :--- | :--- | :--- | :---: |
-| **Compatible determinado** | Las rectas se cortan | Solución única | $1$ |
-| **Compatible indeterminado** | Las rectas coinciden | Infinitas soluciones | $\infty$ |
-| **Incompatible** | Las rectas son paralelas | Sin solución | $0$ |
-
----
-
-### 🛡️ 5.4 Método de Sustitución
-
-**Idea:** Despejar una variable de una ecuación y reemplazarla en la otra.
-
-$$\begin{cases} x + 2y = 8 \quad \text{...(1)} \\ 3x - y = 1 \quad \text{...(2)} \end{cases}$$
-
-1. **De (1):** $x = 8 - 2y$.
-2. **Sustituir en (2):** $3(8 - 2y) - y = 1$.
-3. **Resolver:** $24 - 6y - y = 1 \Rightarrow -7y = -23 \Rightarrow y = \dfrac{23}{7}$.
-4. **Encontrar $x$:** $x = 8 - 2 \cdot \dfrac{23}{7} = \dfrac{56 - 46}{7} = \dfrac{10}{7}$.
-
----
-
-### 🛡️ 5.5 Método de Reducción (Eliminación)
-
-**Idea:** Multiplicar las ecuaciones por constantes para que al sumarlas se **elimine** una variable.
-
-$$\begin{cases} 2x + 3y = 12 \quad \text{...(1)} \\ 4x - 3y = 6 \quad \text{...(2)} \end{cases}$$
-
-1. **Observar:** Los coeficientes de $y$ ya son opuestos ($+3y$ y $-3y$).
-2. **Sumar (1) + (2):** $6x = 18 \Rightarrow x = 3$.
-3. **Reemplazar en (1):** $6 + 3y = 12 \Rightarrow y = 2$.
-4. **Solución:** $(3, 2)$.
-
----
-
-### 🛡️ 5.6 Método de Igualación
-
-**Idea:** Despejar la **misma variable** de ambas ecuaciones e igualar las expresiones obtenidas.
-
-$$\begin{cases} y = 2x + 1 \quad \text{...(1)} \\ y = -x + 7 \quad \text{...(2)} \end{cases}$$
-
-1. **Igualar:** $2x + 1 = -x + 7$.
-2. **Resolver:** $3x = 6 \Rightarrow x = 2$.
-3. **Encontrar $y$:** $y = 2(2) + 1 = 5$.
-4. **Solución:** $(2, 5)$.
-
----
-
-> "La esencia de las matemáticas reside en su libertad."
-> — **Georg Cantor**
-""")
-
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería A05", expanded=False):
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("A05: Trinomio Cuadrado Perfecto y Completación de Cuadrados")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
         st.markdown(r"""
-### E01: Inecuación con cambio de signo
+    ### 🛡️ El Trinomio Cuadrado Perfecto (TCP)
 
-**Situación:** Resolver $-2x + 4 \geq 10$.
+    Un trinomio es "Perfecto" cuando proviene directamente de un Cuadrado de Binomio.
 
-**La Carpintería:**
-1. **Restar 4:** $-2x \geq 6$.
-2. **Dividir por $-2$** (¡invertir!): $x \leq -3$.
-3. **Solución:** $x \in (-\infty, -3]$.
+    **¿Cómo reconocerlo?**
+    1. El primer término es cuadrado perfecto (ej: $x^2$).
+    2. El último término es cuadrado perfecto (ej: $25$).
+    3. **La prueba de fuego:** el término del medio = $2 \cdot \sqrt{\text{primero}} \cdot \sqrt{\text{último}}$
 
-| Paso | Operación | Desigualdad |
-| :--- | :--- | :--- |
-| Restar 4 | $-2x \geq 10 - 4$ | $-2x \geq 6$ |
-| Dividir por $-2$ | Se invierte $\geq$ a $\leq$ | $x \leq -3$ |
+    **Ejemplo:** $x^2 + 10x + 25$ → $\sqrt{x^2}=x$, $\sqrt{25}=5$, doble producto: $2\cdot x\cdot 5=10x$ ✅
 
-> **Clave:** Al dividir por $-2$ (negativo), el $\geq$ se convierte en $\leq$.
+    * **Factorización:** $x^2 + 10x + 25 = (x + 5)^2$
 
----
+    ---
 
-### E02: Sistema por sustitución
+    ### 🛡️ Completación de Cuadrados: "El truco del cero"
 
-**Situación:** Resolver $\begin{cases} x + y = 10 \\ 2x - y = 5 \end{cases}$
+    A veces la PAES te da un trinomio que **no es perfecto**. Por ejemplo: $x^2 + 6x + 5$.
+    Si fuera perfecto, el último número debería ser $(6/2)^2 = 9$. Pero tenemos 5.
 
-**La Carpintería:**
-1. **De la primera:** $y = 10 - x$.
-2. **Sustituir en la segunda:** $2x - (10 - x) = 5$.
-3. **Resolver:** $2x - 10 + x = 5 \Rightarrow 3x = 15 \Rightarrow x = 5$.
-4. **Encontrar $y$:** $y = 10 - 5 = 5$.
-5. **Solución:** $(5, 5)$.
-6. **Verificar:** $5 + 5 = 10$ ✅ y $10 - 5 = 5$ ✅.
+    **Un programador hackea la expresión sumando y restando lo que le falta:**
 
----
+    1. Toma el coeficiente de $x$ (el 6).
+    2. Divídelo por 2 (da 3).
+    3. Elévalo al cuadrado (da 9).
+    4. **Suma y resta ese 9** (sin alterar el valor).
 
-### E03: Sistema por reducción
+    **Paso a paso:**
+    * $x^2 + 6x + 5$
+    * $(x^2 + 6x + 9) - 9 + 5$
+    * $(x + 3)^2 - 4$
 
-**Situación:** Resolver $\begin{cases} 3x + 2y = 16 \\ 2x + 2y = 12 \end{cases}$
+    > **¿Para qué sirve?** Para encontrar el vértice de parábolas, resolver ecuaciones cuadráticas complejas y transformar círculos en geometría.
 
-**La Carpintería:**
-1. **Restar (2) de (1):** $(3x + 2y) - (2x + 2y) = 16 - 12$.
-2. **Simplificar:** $x = 4$.
-3. **Reemplazar en (2):** $8 + 2y = 12 \Rightarrow 2y = 4 \Rightarrow y = 2$.
-4. **Solución:** $(4, 2)$.
-5. **Verificar:** $12 + 4 = 16$ ✅ y $8 + 4 = 12$ ✅.
+    ---
 
-| Ecuación | $x = 4$ | $y = 2$ | Verificación |
-| :--- | :---: | :---: | :--- |
-| $3(4) + 2(2) = 16$ | $12$ | $4$ | $16 = 16$ ✅ |
-| $2(4) + 2(2) = 12$ | $8$ | $4$ | $12 = 12$ ✅ |
+    ### 🛡️ Resumen: Condición para ser TCP
 
----
+    $$c = \left(\frac{b}{2}\right)^2$$
 
-### E04: Problema de planteo con sistema
+    Si no se cumple, completamos cuadrados para forzarlo.
+    """)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-**Situación:** En una granja hay gallinas y conejos. En total hay 20 animales y 56 patas. ¿Cuántas gallinas y cuántos conejos hay?
+        st.markdown("#### 📊 Visualización: TCP vs. No-TCP y Vértice por completación")
+        fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 
-**La Carpintería:**
-1. **Variables:** $g$ = gallinas, $c$ = conejos.
-2. **Ecuación de animales:** $g + c = 20$.
-3. **Ecuación de patas:** $2g + 4c = 56$.
-4. **De (1):** $g = 20 - c$.
-5. **Sustituir en (2):** $2(20 - c) + 4c = 56 \Rightarrow 40 - 2c + 4c = 56 \Rightarrow 2c = 16 \Rightarrow c = 8$.
-6. **Encontrar $g$:** $g = 20 - 8 = 12$.
-7. **Respuesta:** Hay $12$ gallinas y $8$ conejos.
-8. **Verificar:** $12 + 8 = 20$ ✅ y $24 + 32 = 56$ ✅.
-""")
+        x = np.linspace(-7, 3, 300)
+        axes[0].plot(x, x**2 + 10*x + 25, color='#1b5e20', lw=2.5, label=r'TCP: $x^2+10x+25=(x+5)^2$')
+        axes[0].plot(x, x**2 + 10*x + 20, color='#c0392b', lw=2, linestyle='--', label=r'No TCP: $x^2+10x+20$')
+        axes[0].scatter([-5], [0], color='#1b5e20', s=100, zorder=5)
+        axes[0].axhline(0, color='black', lw=1); axes[0].axvline(0, color='black', lw=1)
+        axes[0].set_ylim(-10, 30)
+        axes[0].set_title("TCP toca en un punto; No-TCP tiene dos raíces", fontsize=12, fontweight='bold')
+        axes[0].legend(fontsize=9); axes[0].grid(True, alpha=0.3)
 
-    with st.expander("❓ Cuestionario A05: Inecuaciones y Sistemas", expanded=False):
+        x2 = np.linspace(-1, 7, 300)
+        y = x2**2 + 6*x2 + 5    # (x+3)^2 - 4 → vértice (-3, -4)
+        axes[1].plot(x2 - 8, y, color='#7b1fa2', lw=2.5, label=r'$f(x)=x^2+6x+5=(x+3)^2-4$')
+        axes[1].scatter([-3], [-4], color='#f39c12', s=120, zorder=5, label='Vértice $(-3,-4)$')
+        axes[1].axhline(0, color='black', lw=1); axes[1].axvline(0, color='black', lw=1)
+        axes[1].axvline(-3, color='gray', lw=1.2, linestyle=':', label='Eje de simetría $x=-3$')
+        axes[1].set_xlim(-7, 1); axes[1].set_ylim(-6, 10)
+        axes[1].set_title("Completación: vértice visible", fontsize=12, fontweight='bold')
+        axes[1].legend(fontsize=9); axes[1].grid(True, alpha=0.3)
+
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
+
+
+    with st.expander("🚀 Guía de Ejemplos: Carpintería A05", expanded=False):
         st.markdown(r"""
-**1. La solución de la inecuación $-4x > 12$ es:**
+### E01: Reconocer TCP
 
-A) $x > -3$
-B) $x < -3$
-C) $x > 3$
-D) $x < 3$
+| Trinomio | Prueba del medio | ¿Es TCP? |
+| :--- | :--- | :---: |
+| $x^2 + 6x + 9$ | $2\cdot x\cdot3=6x$ ✅ | **Sí** → $(x+3)^2$ |
+| $x^2 + 4x + 2$ | necesitaría $2^2=4$, pero tiene 2 ✖ | **No** |
+| $4x^2 + 12x + 9$ | $2\cdot2x\cdot3=12x$ ✅ | **Sí** → $(2x+3)^2$ |
 
----
+### E02: Completar cuadrado
 
-**2. El conjunto solución de $2x - 5 \leq 3$ es:**
+$x^2 + 8x + 3$:
+1. Mitad de 8 = 4; $4^2=16$
+2. $(x^2+8x+16) - 16 + 3 = (x+4)^2 - 13$
+3. Vértice: $(-4, -13)$
 
-A) $x \leq 4$
-B) $x \geq 4$
-C) $x \leq -1$
-D) $x \leq 1$
+### E03: Encontrar $c$ para que sea TCP
 
----
-
-**3. Si $\begin{cases} x + y = 7 \\ x - y = 3 \end{cases}$, entonces $x$ vale:**
-
-A) $2$
-B) $5$
-C) $3$
-D) $10$
-
----
-
-**4. ¿Cuál es la solución del sistema $\begin{cases} y = 3x \\ 2x + y = 10 \end{cases}$?**
-
-A) $(2, 6)$
-B) $(3, 9)$
-C) $(1, 3)$
-D) $(5, 15)$
-
----
-
-**5. Si un sistema de dos ecuaciones lineales no tiene solución, geométricamente las rectas son:**
-
-A) Coincidentes
-B) Perpendiculares
-C) Paralelas
-D) Secantes
-
----
-
-**6. Al resolver $\dfrac{x+1}{2} > 3$, se obtiene:**
-
-A) $x > 5$
-B) $x > 7$
-C) $x > 2,5$
-D) $x > 4$
-
----
-
-**7. El sistema $\begin{cases} 2x + 3y = 1 \\ 4x + 6y = 2 \end{cases}$ es:**
-
-A) Incompatible (sin solución)
-B) Compatible determinado (una solución)
-C) Compatible indeterminado (infinitas soluciones)
-D) Ninguna de las anteriores
+Si $x^2 + 12x + c$ debe ser TCP: $c = (12/2)^2 = 36$
 """)
+
+    with st.expander("❓ Cuestionario A05: Perfección y Hackeo Algebraico", expanded=False):
+        quiz = [
+            {"question": r"¿Cuál de los siguientes trinomios es un TCP?",
+             "options": {"A": r"$x^2 + 4x + 2$", "B": r"$x^2 + 6x + 9$", "C": r"$x^2 + 5x + 25$", "D": r"$x^2 + 10x + 100$"},
+             "answer": "B", "explanation": r"Mitad de 6 es 3; $3^2=9$. Calza perfecto."},
+            {"question": r"Si $x^2 + 12x + c$ debe ser TCP, ¿cuál es $c$?",
+             "options": {"A": "6", "B": "12", "C": "36", "D": "144"},
+             "answer": "C", "explanation": r"Mitad de 12 es 6; $6^2=36$."},
+            {"question": r"Al factorizar $x^2 - 14x + 49$, obtenemos:",
+             "options": {"A": r"$(x-7)(x+7)$", "B": r"$(x+7)^2$", "C": r"$(x-7)^2$", "D": r"$(x-49)^2$"},
+             "answer": "C", "explanation": r"Signo del medio es $-$, por lo que el binomio resta: $(x-7)^2$."},
+            {"question": r"Para completar cuadrados en $x^2 + 8x$, ¿qué número se suma y resta?",
+             "options": {"A": "4", "B": "8", "C": "16", "D": "64"},
+             "answer": "C", "explanation": r"Mitad de 8 es 4; $4^2=16$."},
+            {"question": r"$x^2 + 2x + 5$ escrito como cuadrado completado es:",
+             "options": {"A": r"$(x+1)^2 + 4$", "B": r"$(x+1)^2 + 5$", "C": r"$(x+2)^2 + 1$", "D": r"$(x+1)^2 - 4$"},
+             "answer": "A", "explanation": r"Mitad de 2 es 1; $1^2=1$. $(x^2+2x+1)-1+5=(x+1)^2+4$."},
+            {"question": r"Si $x^2 + bx + 16$ es TCP con $b > 0$, ¿cuál es $b$?",
+             "options": {"A": "4", "B": "8", "C": "16", "D": "32"},
+             "answer": "B", "explanation": r"$\sqrt{16}=4$; doble producto: $2\cdot1\cdot4=8$."},
+            {"question": r"Al completar cuadrados en $x^2 - 10x + 20$, obtenemos $(x-5)^2 + k$. ¿Cuál es $k$?",
+             "options": {"A": "5", "B": "-5", "C": "20", "D": "-25"},
+             "answer": "B", "explanation": r"$(x^2-10x+25)-25+20 = (x-5)^2 - 5$. Por tanto $k=-5$."},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="a05_quiz")
 
     with st.expander("🔑 Pauta Técnica A05: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
+| Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **B** | $-4x > 12 \Rightarrow x < -3$. Al dividir por $-4$, se invierte el signo de $>$ a $<$. |
-| **2** | **A** | $2x \leq 8 \Rightarrow x \leq 4$. Dividimos por $2$ (positivo), el signo no cambia. |
-| **3** | **B** | Sumando ambas: $2x = 10 \Rightarrow x = 5$. Método de reducción directo. |
-| **4** | **A** | Sustituir $y = 3x$ en la segunda: $2x + 3x = 10 \Rightarrow x = 2$, $y = 6$. |
-| **5** | **C** | Rectas paralelas tienen la misma pendiente pero distinto intercepto, por lo que nunca se cruzan. |
-| **6** | **A** | $x + 1 > 6 \Rightarrow x > 5$. Multiplicar por $2$ (positivo) no cambia el sentido. |
-| **7** | **C** | La segunda ecuación es el doble de la primera ($\times 2$). Son la misma recta, infinitas soluciones. |
+| **1** | **B** | Mitad de 6 = 3; $3^2=9$. TCP. |
+| **2** | **C** | $(12/2)^2=36$. |
+| **3** | **C** | Signo $-$ en el medio → $(x-7)^2$. |
+| **4** | **C** | $(8/2)^2=16$. |
+| **5** | **A** | $(x+1)^2 - 1 + 5 = (x+1)^2 + 4$. |
+| **6** | **B** | $2\cdot1\cdot4=8$. |
+| **7** | **B** | $(x-5)^2 - 25 + 20 = (x-5)^2 - 5$. |
 """)
