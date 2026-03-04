@@ -7,7 +7,7 @@ def render_N04():
         st.title("N04: Los Números Enteros (ℤ) — La Simetría y el Imperio de la Resta")
 
         st.markdown(r"""
-    ### 🛡️ 1. El Portal: El Escándalo de los Números "Absurdos"
+    ### 🛡️  El Portal: El Escándalo de los Números "Absurdos"
 
     Imagínate que eres un matemático griego de la época de Pitágoras. Para ti, los números son geometría: el 3 es un triángulo, el 4 es un cuadrado. Bajo esa lógica, **¿qué demonios es un -2?** ¿Un cuadrado con lados negativos? ¡Imposible! Durante más de mil años, Occidente se negó a aceptar los negativos, llamándolos *numeri absurdi*.
 
@@ -17,7 +17,7 @@ def render_N04():
 
     ---
 
-    ### 🛡️ 2. Definición y Características
+    ### 🛡️  Definición y Características
 
     Se denota con la letra $\mathbb{Z}$ y se define como el conjunto que incluye a los naturales, sus opuestos y el cero:
 
@@ -55,7 +55,7 @@ def render_N04():
         st.markdown(r"""
     ---
 
-    ### 🛡️ 3. Valor Absoluto ($|a|$): La Carpintería de la Distancia
+    ### 🛡️  Valor Absoluto ($|a|$): La Carpintería de la Distancia
 
     El valor absoluto es el "limpiador de signos". Epistemológicamente, mide la **distancia** de un número al cero. Como las distancias físicas no pueden ser negativas (no puedes correr -5 kilómetros), el resultado del valor absoluto es siempre $\geq 0$.
 
@@ -71,7 +71,7 @@ def render_N04():
 
     ---
 
-    ### 🛡️ 4. El Opuesto Aditivo
+    ### 🛡️  El Opuesto Aditivo
 
     En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a$ tal que al encontrarse se anulan: $a + (-a) = 0$.
 
@@ -79,7 +79,7 @@ def render_N04():
 
     ---
 
-    ### 🛡️ 5. Clausura: La Victoria de la Resta
+    ### 🛡️  Clausura: La Victoria de la Resta
 
     ¿Por qué nos mudamos de los Naturales a los Enteros? Por la **clausura de la sustracción**.
 
@@ -99,7 +99,7 @@ def render_N04():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N04", expanded=False):
         st.markdown(r"""
-### E01: Operativa de Signos y Clausura
+### 1: Operativa de Signos y Clausura
 
 **Situación:** Resolver la expresión $12 - (15 - 8)$ y determinar si el resultado pertenece a $\mathbb{Z}$.
 
@@ -116,7 +116,7 @@ def render_N04():
 
 ---
 
-### E02: El Valor Absoluto como Distancia
+### 2: El Valor Absoluto como Distancia
 
 **Situación:** Calcular el valor de $A = |-10| + |3| - |-5|$.
 
@@ -135,7 +135,7 @@ def render_N04():
 
 ---
 
-### E03: La Definición Axiomática (La Trampa del $-a$)
+### 3: La Definición Axiomática (La Trampa del $-a$)
 
 **Situación:** Si $x = -8$, ¿cuál es el valor de $-x$ y de $|x|$?
 
@@ -153,7 +153,7 @@ def render_N04():
 
 ---
 
-### E04: Relación de Orden y Tricotomía
+### 4: Relación de Orden y Tricotomía
 
 **Situación:** Dados $a = -15$ y $b = -10$, ¿cuál es la relación de orden correcta?
 
@@ -170,7 +170,7 @@ def render_N04():
 
 ---
 
-### E05: El Opuesto del Valor Absoluto
+### 5: El Opuesto del Valor Absoluto
 
 **Situación:** Resolver la expresión $-| -12 + 4 |$.
 
