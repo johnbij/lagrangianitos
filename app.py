@@ -292,22 +292,22 @@ if menu == "🏠 Dashboard PAES":
 
             # Tiempo estimado de lectura (aprox 200 palabras/min)
             import inspect
+            mins = 0
             try:
                 src = inspect.getsource(clase["render"])
                 palabras = len(src.split())
                 mins = max(1, round(palabras / 200))
-                st.markdown(
-                    f'<div style="color:#aaa; font-size:13px; margin-bottom:10px;">⏱ Tiempo estimado: ~{mins} min de lectura</div>',
-                    unsafe_allow_html=True
-                )
             except Exception:
                 pass
 
-            # Contenido de la clase
-            if clase:
-                clase["render"]()
-            else:
-                st.warning(f"Clase {codigo} no encontrada.")
+            # Contenido de la clase — dentro de expander
+            label_clase = clase["label"] if clase else codigo
+            tiempo_txt = f" · ⏱ ~{mins} min" if mins else ""
+            with st.expander(f"📖 {label_clase}{tiempo_txt}", expanded=False):
+                if clase:
+                    clase["render"]()
+                else:
+                    st.warning(f"Clase {codigo} no encontrada.")
 
             # Mensaje motivacional si es la última clase real de la subcategoría
             es_ultima_real = (codigo == codigos_reales[-1]) if codigos_reales else False
