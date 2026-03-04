@@ -6,14 +6,14 @@ def render_N12():
         st.title("N12: Operatoria en ℚ - El Protocolo de Precisión")
 
         st.markdown(r"""
-    ### 🏛️ 1. Contexto Histórico: El Caos de los Mares y el Orden de la Razón
+    ### 🏛️ Contexto Histórico: El Caos de los Mares y el Orden de la Razón
     Imagina estar en el siglo XVII, en medio del océano, tratando de calcular la posición de tu barco con un sextante. Un error de apenas $\frac{1}{64}$ en tus cálculos de navegación no significa un pequeño desvío; significa estrellarse contra un arrecife a kilómetros de tu destino.
 
     Durante el Renacimiento, la matemática de fracciones pasó de ser un truco de comerciantes a ser una cuestión de vida o muerte. Los grandes navegantes y astrónomos se dieron cuenta de que el mundo no se mide en números redondos, sino en las grietas que hay entre ellos. Para dominar esas grietas, tuvieron que estandarizar un **orden de batalla**. El PAPOMUDAS que usas hoy es el mismo código de honor que permitió a la humanidad mapear los continentes y las estrellas. No es solo aritmética; es la herramienta que domesticó el caos de lo infinitamente pequeño.
 
     ---
 
-    ### 🛡️ 9.B.1 El Protocolo Universal: PAPOMUDAS
+    ### 🛡️ El Protocolo Universal: PAPOMUDAS
     Las reglas no cambian, pero el riesgo de error aumenta. El orden sigue siendo:
 
     1. **PA (Paréntesis):** Resuelve lo de adentro primero.
@@ -23,27 +23,27 @@ def render_N12():
 
     ---
 
-    ### 🛡️ 9.B.2 El "Atajo del Pillo" (Fracciones Complejas)
+    ### 🛡️ El "Atajo del Pillo" (Fracciones Complejas)
     A veces verás un "castillo" de fracciones: $\frac{\frac{a}{b}}{\frac{c}{d}}$.
     No te marees con tantos pisos. Usa el **Atajo del Pillo**: multiplica los extremos (el de más arriba con el de más abajo) para el numerador, y los medios para el denominador.
     $$\frac{a \cdot d}{b \cdot c}$$
 
     ---
 
-    ### 🛡️ 9.B.3 El Método del Cruce Directo
+    ### 🛡️ El Método del Cruce Directo
     Cuando solo tienes **dos** fracciones y quieres velocidad, olvida la tabla del mcm. Haz el cruce:
     $$\frac{a}{b} + \frac{c}{d} = \frac{(a \cdot d) + (b \cdot c)}{b \cdot d}$$
 
     ---
 
-    ### 🛡️ 9.B.4 El "Efecto Espejo" del Signo Negativo
+    ### 🛡️ El "Efecto Espejo" del Signo Negativo
     El signo menos en una fracción es como un camaleón; puede estar en tres posiciones y seguir significando lo mismo:
     $$\left( -\frac{a}{b} \right) = \frac{-a}{b} = \frac{a}{-b}$$
     **Regla Táctica:** Nunca dejes el signo negativo en el denominador para operar. Súbelo siempre al numerador o déjalo frente a la fracción para que no se te olvide en el "baile" de la suma.
 
     ---
 
-    ### 🛡️ 9.B.5 La Identidad del Entero y el Factor $-1$
+    ### 🛡️ La Identidad del Entero y el Factor $-1$
     Todo número entero tiene una armadura invisible que lo convierte en fracción: el denominador $1$ ($n = \frac{n}{1}$).
     Además, recuerda que una fracción negativa como $-\frac{3}{4}$ es equivalente a multiplicar por un **factor de inversión**:
     $$(-1) \cdot \frac{3}{4} = \frac{-3}{4}$$
@@ -51,7 +51,7 @@ def render_N12():
 
     ---
 
-    ### 🛡️ 9.B.6 El Desafío del Maestro: La Expresión del Terror
+    ### 🛡️ El Desafío del Maestro: La Expresión del Terror
     Vamos a desarmar esta pieza de ingeniería usando **PAPOMUDAS**:
     $$\frac{1}{2} + \left( \frac{3}{4} - \frac{1}{2} \right) \div \frac{5}{2}$$
 
@@ -77,7 +77,7 @@ def render_N12():
 
     with st.expander("🚀 Guía de Ejemplos: Maestría en Operatoria Racional", expanded=False):
         st.markdown(r"""
-### E02: Suma de tres fracciones (El mcm en acción)
+### 1: Suma de tres fracciones (El mcm en acción)
 **Situación:** Resolver $\frac{1}{2} + \frac{2}{3} + \frac{3}{4}$.
 **La Carpintería:** Buscamos el mcm entre 2, 3 y 4, que es 12. Amplificamos cada una para que todas tengan denominador 12.
 
@@ -90,7 +90,7 @@ def render_N12():
 
 ---
 
-### E03: Resta con número mixto
+### 2: Resta con número mixto
 **Situación:** Resolver $3 \frac{1}{4} - \frac{5}{2}$.
 **La Carpintería:** Primero pasamos el mixto a fracción impropia y luego igualamos denominadores.
 
@@ -102,7 +102,7 @@ def render_N12():
 
 ---
 
-### E04: El Atajo del Pillo (Fracción Compleja)
+### 3: El Atajo del Pillo (Fracción Compleja)
 **Situación:** Resolver $\frac{\frac{3}{5}}{\frac{9}{10}}$.
 **La Carpintería:** Extremos arriba, medios abajo.
 
@@ -114,7 +114,7 @@ def render_N12():
 
 ---
 
-### E05: Multiplicación con "Limpieza" (Simplificación Cruzada)
+### 4: Multiplicación con "Limpieza" (Simplificación Cruzada)
 **Situación:** Resolver $\frac{25}{18} \cdot \frac{12}{35}$.
 **La Carpintería:** No multipliques $25 \cdot 12$. Simplifica el 25 con el 35 (por 5) y el 12 con el 18 (por 6).
 
@@ -126,7 +126,7 @@ def render_N12():
 
 ---
 
-### E06: División con Entero y Fracción
+### 5: División con Entero y Fracción
 **Situación:** Resolver $10 \div \frac{5}{4}$.
 **La Carpintería:** El 10 tiene un 1 abajo. Invertimos la segunda fracción.
 
@@ -138,7 +138,7 @@ def render_N12():
 
 ---
 
-### E07: El Factor -1 en la Operatoria
+### 6: El Factor -1 en la Operatoria
 **Situación:** Resolver $\frac{3}{4} + \left( - \frac{1}{2} \right) \cdot \frac{2}{3}$.
 **La Carpintería:** Multiplicación antes que suma. El signo menos se mantiene.
 
@@ -149,7 +149,7 @@ def render_N12():
 
 ---
 
-### E08: Paréntesis con Resta y Multiplicación
+### 7: Paréntesis con Resta y Multiplicación
 **Situación:** Resolver $\frac{4}{5} \cdot \left( 1 - \frac{1}{4} \right)$.
 **La Carpintería:** Resolvemos el "1 entero" como $4/4$ dentro del paréntesis.
 
@@ -160,7 +160,7 @@ def render_N12():
 
 ---
 
-### E09: Doble División (Izquierda a Derecha)
+### 8: Doble División (Izquierda a Derecha)
 **Situación:** Resolver $\frac{1}{2} \div \frac{1}{3} \div \frac{1}{4}$.
 **La Carpintería:** No hagas la segunda división primero. Sigue el orden de lectura.
 
@@ -172,7 +172,7 @@ def render_N12():
 
 ---
 
-### E10: El Castillo de Fracciones Combinado
+### 9: El Castillo de Fracciones Combinado
 **Situación:** Resolver $\frac{1 + \frac{1}{2}}{1 - \frac{1}{2}}$.
 **La Carpintería:** Resolvemos el numerador y el denominador por separado y luego aplicamos el Atajo del Pillo.
 
@@ -184,7 +184,7 @@ def render_N12():
 
 ---
 
-### E11: La Expresión del Terror II
+### 10: La Expresión del Terror II
 **Situación:** Resolver $\left[ \frac{2}{3} \div \left( \frac{1}{2} + \frac{1}{6} \right) \right] - 1$.
 
 | Prioridad | Operación | Resultado Parcial |
