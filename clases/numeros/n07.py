@@ -8,7 +8,7 @@ def render_N07():
         st.title("N07: Los Números Reales (ℝ) — La Recta Numérica Completa")
 
         st.markdown(r"""
-    ### 🛡️ 1. El Portal: El Mapa del Tesoro Completo
+    ### 🛡️ El Portal: El Mapa del Tesoro Completo
 
     Imagínate que hasta ahora estábamos explorando el mapa de una isla, pero solo veíamos los árboles (Naturales) o los senderos (Racionales). Los **Números Reales** son la isla completa, con cada grano de arena y cada gota de agua.
 
@@ -16,7 +16,7 @@ def render_N07():
 
     ---
 
-    ### 🛡️ 7.1 La Recta Numérica Continua
+    ### 🛡️ La Recta Numérica Continua
 
     Los Reales son el conjunto que llena la recta.
 
@@ -25,7 +25,7 @@ def render_N07():
 
     ---
 
-    ### 🛡️ 7.2 ¿Qué NO es un Real? (Zonas de Peligro)
+    ### 🛡️ ¿Qué NO es un Real? (Zonas de Peligro)
 
     Para la PAES, el alumno debe saber que hay "monstruos" fuera del mapa real:
 
@@ -34,7 +34,7 @@ def render_N07():
 
     ---
 
-    ### 🏛️ 7.3 El Rigor Técnico: ¿Qué es un Axioma y un Cuerpo?
+    ### 🏛️ El Rigor Técnico: ¿Qué es un Axioma y un Cuerpo?
 
     Antes de entrar a la tabla, hay que entender el idioma que hablamos en las grandes ligas (como en el plan común de ingeniería):
 
@@ -43,7 +43,7 @@ def render_N07():
 
     ---
 
-    ### 🛡️ 7.4 Los Axiomas de Cuerpo de los Reales
+    ### 🛡️ Los Axiomas de Cuerpo de los Reales
 
     Para que un conjunto sea un **Cuerpo**, debe cumplir estas leyes para cualquier trío de números $a, b, c \in \mathbb{R}$:
 
@@ -67,7 +67,7 @@ def render_N07():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N07", expanded=False):
         st.markdown(r"""
-### E02: El Filtro de la Realidad
+### 1: El Filtro de la Realidad
 
 **Situación:** Clasificar si los siguientes números pertenecen al conjunto de los Reales ($\mathbb{R}$): $\sqrt{25}$, $\sqrt{-25}$, $0/7$, $7/0$.
 
@@ -86,7 +86,7 @@ def render_N07():
 
 ---
 
-### E03: Aplicando el Axioma de Inverso
+### 2: Aplicando el Axioma de Inverso
 
 **Situación:** Hallar el inverso aditivo de $-3$ y el inverso multiplicativo de $2/5$.
 
@@ -101,7 +101,7 @@ def render_N07():
 
 ---
 
-### E04: Identificación de Propiedades (Axiomas)
+### 3: Identificación de Propiedades (Axiomas)
 
 **Situación:** ¿Qué axioma se aplica en la expresión $3 \cdot (x + 4) = 3x + 12$?
 
@@ -116,7 +116,7 @@ def render_N07():
 
 ---
 
-### E05: El Neutro en Operaciones Combinadas
+### 4: El Neutro en Operaciones Combinadas
 
 **Situación:** Resolver la expresión $\pi \cdot 1 + (5 + (-5))$ usando axiomas.
 
@@ -133,7 +133,7 @@ def render_N07():
 
 ---
 
-### E06: Jerarquía y Subconjuntos
+### 5: Jerarquía y Subconjuntos
 
 **Situación:** Indicar la clasificación más específica para el número $-4$.
 
