@@ -2,45 +2,47 @@ import streamlit as st
 
 
 def render_N27():
-    st.markdown("""## N27: Reparto Proporcional Directo - ¿Cómo dividimos la torta?
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown("""## N27: Reparto Proporcional Directo - ¿Cómo dividimos la torta?
 
----
+    ---
 
-### 🏛️ Contexto Histórico: El Código de Hammurabi y la Equidad
+    ### 🏛️ Contexto Histórico: El Código de Hammurabi y la Equidad
 
-Desde las primeras civilizaciones en Mesopotamia, el reparto de bienes no era al azar. En el **Código de Hammurabi**, ya se establecían reglas de proporcionalidad para dividir cosechas o pagar deudas según el aporte de cada ciudadano. Si un agricultor ponía más bueyes para la labranza, su parte de la cosecha debía ser mayor en una razón exacta. Este concepto de "justicia aritmética" es lo que hoy usamos para que nadie reciba ni un peso más ni un peso menos de lo que le corresponde según su esfuerzo o inversión.
+    Desde las primeras civilizaciones en Mesopotamia, el reparto de bienes no era al azar. En el **Código de Hammurabi**, ya se establecían reglas de proporcionalidad para dividir cosechas o pagar deudas según el aporte de cada ciudadano. Si un agricultor ponía más bueyes para la labranza, su parte de la cosecha debía ser mayor en una razón exacta. Este concepto de "justicia aritmética" es lo que hoy usamos para que nadie reciba ni un peso más ni un peso menos de lo que le corresponde según su esfuerzo o inversión.
 
----
+    ---
 
-<div style="background-color: #E3F2FD; border-left: 8px solid #1E88E5; padding: 25px; border-radius: 10px;">
-    <h2 style="color: #1565C0; margin-top: 0;">¿Qué es el Reparto Proporcional Directo?</h2>
-    Repartir una cantidad total <b>S</b> en partes directamente proporcionales a ciertos números <i>a, b, c...</i> significa que a mayor índice, mayor es la tajada.
-    <br><br>
-    <blockquote><b>Regla de Oro:</b> Si tu índice de participación es el doble, recibes el doble.</blockquote>
-</div>
+    <div style="background-color: #E3F2FD; border-left: 8px solid #1E88E5; padding: 25px; border-radius: 10px;">
+        <h2 style="color: #1565C0; margin-top: 0;">¿Qué es el Reparto Proporcional Directo?</h2>
+        Repartir una cantidad total <b>S</b> en partes directamente proporcionales a ciertos números <i>a, b, c...</i> significa que a mayor índice, mayor es la tajada.
+        <br><br>
+        <blockquote><b>Regla de Oro:</b> Si tu índice de participación es el doble, recibes el doble.</blockquote>
+    </div>
 
 
 
-### 🛡️ El Algoritmo de Reparto (Método k)
-Para no fallar y asegurar que el reparto sea exacto, sigue esta estructura:
+    ### 🛡️ El Algoritmo de Reparto (Método k)
+    Para no fallar y asegurar que el reparto sea exacto, sigue esta estructura:
 
-1.  **Asignar la constante:** Si las partes son proporcionales a $n_1, n_2$ y $n_3$, las partes reales que buscaremos son $n_1k, n_2k$ y $n_3k$.
-2.  **Plantear la Suma Total:** La suma de todas las partes debe ser igual al total a repartir ($S$). \\
-    $(n_1 + n_2 + n_3) \\cdot k = S$
-3.  **Calcular k:** $k = \\frac{S}{\\sum n_i}$ (Es el valor de "una parte" del total).
-4.  **Repartir:** Multiplicas $k$ por cada índice original para obtener los valores reales.
+    1.  **Asignar la constante:** Si las partes son proporcionales a $n_1, n_2$ y $n_3$, las partes reales que buscaremos son $n_1k, n_2k$ y $n_3k$.
+    2.  **Plantear la Suma Total:** La suma de todas las partes debe ser igual al total a repartir ($S$). \\
+        $(n_1 + n_2 + n_3) \\cdot k = S$
+    3.  **Calcular k:** $k = \\frac{S}{\\sum n_i}$ (Es el valor de "una parte" del total).
+    4.  **Repartir:** Multiplicas $k$ por cada índice original para obtener los valores reales.
 
-### 🛡️ Reparto con índices fraccionarios
-Si te dan índices como $1/2$ y $1/3$, trabajar con decimales es el camino al error.
+    ### 🛡️ Reparto con índices fraccionarios
+    Si te dan índices como $1/2$ y $1/3$, trabajar con decimales es el camino al error.
 
---------------
-**Típ:** Amplifica todos los índices por el **Mínimo Común Múltiplo (MCM)** de los denominadores. Así trabajarás con números enteros y el reparto será mucho más rápido y exacto. La proporción se mantiene idéntica.
+    --------------
+    **Típ:** Amplifica todos los índices por el **Mínimo Común Múltiplo (MCM)** de los denominadores. Así trabajarás con números enteros y el reparto será mucho más rápido y exacto. La proporción se mantiene idéntica.
 
----
+    ---
 
-"La justicia es una proporción constante entre el mérito y la recompensa."  
-— **Montesquieu**""", unsafe_allow_html=True)
-    st.markdown("---")
+    "La justicia es una proporción constante entre el mérito y la recompensa."  
+    — **Montesquieu**""", unsafe_allow_html=True)
+        st.markdown("---")
+
     with st.expander("📝 Guía de Ejemplos", expanded=False):
         st.markdown("""## 📝 Guía de Ejemplos: Reparto Proporcional Directo
 
@@ -84,67 +86,20 @@ Si te dan índices como $1/2$ y $1/3$, trabajar con decimales es el camino al er
 | 3 | Calcular parte menor | $4 \\cdot 20.000 = \\$80.000$ |
 | 4 | Calcular parte mayor | $9 \\cdot 20.000 = \\$180.000$ |""")
     with st.expander("❓ Cuestionario N27", expanded=False):
-        st.markdown("""# ❓ Cuestionario N27: Reparto Proporcional Directo
-
-**1. Si se reparten \\$800.000 en razón $3 : 5$, ¿cuánto recibe la parte menor?** \\
-A) 300.000 \\
-B) 500.000 \\
-C) 400.000 \\
-D) 150.000
-
-**2. Se dividen 240 puntos proporcionalmente a 1, 2 y 5. ¿Cuántos puntos corresponden a la parte más grande?** \\
-A) 150\\
-B) 120\\
-C) 180\\
-D) 30
-
-**3. En un reparto proporcional a 2, 4 y 6, la parte intermedia recibió 40 objetos. ¿Cuál es el valor de k?** \\
-A) 10\\
-B) 20\\
-C) 5\\
-D) 12
-
-**4. Tres socios invierten \\$1, \\$4 y \\$5 millones. Si la ganancia total es \\$2.000.000, ¿cuánto recibe el que menos invirtió?** \\
-A) 200.000\\
-B) 100.000\\
-C) 400.000\\
-D) 500.000
-
-**5. Si se reparten 900 metros de cable proporcionalmente a los números 2, 3 y 4, ¿cuánto mide el trozo más largo?** \\
-A) 400 m\\
-B) 300 m\\
-C) 450 m\\
-D) 200 m
-
-**6. Un premio de \\$150.000 se reparte entre dos ganadores en razón $2 : 3$. ¿Cuál es la diferencia de dinero entre ambos?** \\
-A) 30.000\\
-B) 60.000\\
-C) 90.000\\
-D) 50.000
-
-**7. En un reparto proporcional a 5 y 8, la parte mayor es \\$64.000. ¿Cuál es el total repartido?** \\
-A) 104.000\\
-B) 40.000\\
-C) 120.000\\
-D) 80.000
-
-**8. Al repartir una herencia proporcionalmente a las edades 10, 15 y 25 años, el total de índices es:** \\
-A) 50\\
-B) 40\\
-C) 25\\
-D) 60
-
-**9. Se reparte una cantidad en razón $1/3 : 1/5$. Si el total es 320, ¿cuánto recibe el índice $1/3$ (índice mayor)?** \\
-A) 200\\
-B) 120\\
-C) 160\\
-D) 100
-
-**10. Tres camiones transportan 600 toneladas. El primero hace 3 viajes, el segundo 5 viajes y el tercero 7 viajes. ¿Cuántas toneladas transportó el segundo?** \\
-A) 200 ton\\
-B) 120 ton\\
-C) 280 ton\\
-D) 150 ton""")
+        from utils import render_multiple_choice_quiz
+        quiz = [
+            {'question': 'Si se reparten \\$800.000 en razón $3 : 5$, ¿cuánto recibe la parte menor?', 'options': {'A': '300.000 \\', 'B': '500.000 \\', 'C': '400.000 \\', 'D': '150.000'}, 'answer': 'A', 'explanation': '$3k + 5k = 800.000 \\implies 8k = 800.000 \\implies k = 100.000$. Menor: $3k = 300.000$.'},
+            {'question': 'Se dividen 240 puntos proporcionalmente a 1, 2 y 5. ¿Cuántos puntos corresponden a la parte más grande?', 'options': {'A': '150\\', 'B': '120\\', 'C': '180\\', 'D': '30'}, 'answer': 'A', 'explanation': '$1k+2k+5k = 240 \\implies 8k = 240 \\implies k = 30$. Mayor: $5k = 150$.'},
+            {'question': 'En un reparto proporcional a 2, 4 y 6, la parte intermedia recibió 40 objetos. ¿Cuál es el valor de k?', 'options': {'A': '10\\', 'B': '20\\', 'C': '5\\', 'D': '12'}, 'answer': 'A', 'explanation': 'La intermedia es $4k$. Si $4k = 40 \\implies k = 10$.'},
+            {'question': 'Tres socios invierten \\$1, \\$4 y \\$5 millones. Si la ganancia total es \\$2.000.000, ¿cuánto recibe el que menos invirtió?', 'options': {'A': '200.000\\', 'B': '100.000\\', 'C': '400.000\\', 'D': '500.000'}, 'answer': 'A', 'explanation': 'Suma de índices: $1+4+5 = 10$. $10k = 2.000.000 \\implies k = 200.000$. Menor ($1k$): $200.000$.'},
+            {'question': 'Si se reparten 900 metros de cable proporcionalmente a los números 2, 3 y 4, ¿cuánto mide el trozo más largo?', 'options': {'A': '400 m\\', 'B': '300 m\\', 'C': '450 m\\', 'D': '200 m'}, 'answer': 'A', 'explanation': '$2k+3k+4k = 900 \\implies 9k = 900 \\implies k = 100$. Largo: $4 \\cdot 100 = 400$.'},
+            {'question': 'Un premio de \\$150.000 se reparte entre dos ganadores en razón $2 : 3$. ¿Cuál es la diferencia de dinero entre ambos?', 'options': {'A': '30.000\\', 'B': '60.000\\', 'C': '90.000\\', 'D': '50.000'}, 'answer': 'A', 'explanation': '$2k+3k=150.000 \\implies 5k=150.000 \\implies k=30.000$. Partes: 60k y 90k. Diferencia: 30k.'},
+            {'question': 'En un reparto proporcional a 5 y 8, la parte mayor es \\$64.000. ¿Cuál es el total repartido?', 'options': {'A': '104.000\\', 'B': '40.000\\', 'C': '120.000\\', 'D': '80.000'}, 'answer': 'A', 'explanation': '$8k = 64.000 \\implies k = 8.000$. Total ($13k$): $13 \\cdot 8.000 = 104.000$.'},
+            {'question': 'Al repartir una herencia proporcionalmente a las edades 10, 15 y 25 años, el total de índices es:', 'options': {'A': '50\\', 'B': '40\\', 'C': '25\\', 'D': '60'}, 'answer': 'A', 'explanation': 'Suma de los índices: $10 + 15 + 25 = 50$.'},
+            {'question': 'Se reparte una cantidad en razón $1/3 : 1/5$. Si el total es 320, ¿cuánto recibe el índice $1/3$ (índice mayor)?', 'options': {'A': '200\\', 'B': '120\\', 'C': '160\\', 'D': '100'}, 'answer': 'A', 'explanation': 'MCM(15). Índices: $5$ y $3$. $8k = 320 \\implies k = 40$. Parte $1/3$ (índice 5): $5 \\cdot 40 = 200$.'},
+            {'question': 'Tres camiones transportan 600 toneladas. El primero hace 3 viajes, el segundo 5 viajes y el tercero 7 viajes. ¿Cuántas toneladas transportó el segundo?', 'options': {'A': '200 ton\\', 'B': '120 ton\\', 'C': '280 ton\\', 'D': '150 ton'}, 'answer': 'A', 'explanation': '$3k+5k+7k = 600 \\implies 15k = 600 \\implies k = 40$. Segundo ($5k$): $200$ toneladas.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="n27_quiz")
     with st.expander("✅ Pauta - N27", expanded=False):
         st.markdown("""# ✅ Pauta - Cuestionario N27
 

@@ -4,64 +4,66 @@ import matplotlib.patches as mpatches
 
 
 def render_N07():
-    st.title("N07: Los Números Reales (ℝ) — La Recta Numérica Completa")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("N07: Los Números Reales (ℝ) — La Recta Numérica Completa")
 
-    st.markdown(r"""
-### 🛡️ 1. El Portal: El Mapa del Tesoro Completo
+        st.markdown(r"""
+    ### 🛡️ 1. El Portal: El Mapa del Tesoro Completo
 
-Imagínate que hasta ahora estábamos explorando el mapa de una isla, pero solo veíamos los árboles (Naturales) o los senderos (Racionales). Los **Números Reales** son la isla completa, con cada grano de arena y cada gota de agua.
+    Imagínate que hasta ahora estábamos explorando el mapa de una isla, pero solo veíamos los árboles (Naturales) o los senderos (Racionales). Los **Números Reales** son la isla completa, con cada grano de arena y cada gota de agua.
 
-Históricamente, la matemática pasó siglos intentando "tapar los hoyos" de la recta numérica. Cuando por fin unimos a los Racionales con los Irracionales, logramos la **Continuidad**. Si tiras un dardo a la recta numérica, no importa dónde caiga, SIEMPRE vas a clavar un Número Real. No hay vacíos.
+    Históricamente, la matemática pasó siglos intentando "tapar los hoyos" de la recta numérica. Cuando por fin unimos a los Racionales con los Irracionales, logramos la **Continuidad**. Si tiras un dardo a la recta numérica, no importa dónde caiga, SIEMPRE vas a clavar un Número Real. No hay vacíos.
 
----
+    ---
 
-### 🛡️ 7.1 La Recta Numérica Continua
+    ### 🛡️ 7.1 La Recta Numérica Continua
 
-Los Reales son el conjunto que llena la recta.
+    Los Reales son el conjunto que llena la recta.
 
-* **$\mathbb{R} = \mathbb{Q} \cup \mathbb{I}$**: Es la unión final.
-* **Disjuntos:** Recuerda que un número no puede estar en crisis de identidad: o es **$\mathbb{Q}$** o es **$\mathbb{I}$**. No hay nada en la intersección ($\mathbb{Q} \cap \mathbb{I} = \emptyset$).
+    * **$\mathbb{R} = \mathbb{Q} \cup \mathbb{I}$**: Es la unión final.
+    * **Disjuntos:** Recuerda que un número no puede estar en crisis de identidad: o es **$\mathbb{Q}$** o es **$\mathbb{I}$**. No hay nada en la intersección ($\mathbb{Q} \cap \mathbb{I} = \emptyset$).
 
----
+    ---
 
-### 🛡️ 7.2 ¿Qué NO es un Real? (Zonas de Peligro)
+    ### 🛡️ 7.2 ¿Qué NO es un Real? (Zonas de Peligro)
 
-Para la PAES, el alumno debe saber que hay "monstruos" fuera del mapa real:
+    Para la PAES, el alumno debe saber que hay "monstruos" fuera del mapa real:
 
-1. **Raíces de índice par con base negativa:** $\sqrt{-4}$. No existe ningún número real que al elevarlo al cuadrado te dé algo negativo. Eso es un número **Imaginario**.
-2. **Divisiones por cero:** $k/0$. Eso no es un número, es una **Indefinición**.
+    1. **Raíces de índice par con base negativa:** $\sqrt{-4}$. No existe ningún número real que al elevarlo al cuadrado te dé algo negativo. Eso es un número **Imaginario**.
+    2. **Divisiones por cero:** $k/0$. Eso no es un número, es una **Indefinición**.
 
----
+    ---
 
-### 🏛️ 7.3 El Rigor Técnico: ¿Qué es un Axioma y un Cuerpo?
+    ### 🏛️ 7.3 El Rigor Técnico: ¿Qué es un Axioma y un Cuerpo?
 
-Antes de entrar a la tabla, hay que entender el idioma que hablamos en las grandes ligas (como en el plan común de ingeniería):
+    Antes de entrar a la tabla, hay que entender el idioma que hablamos en las grandes ligas (como en el plan común de ingeniería):
 
-* **¿Qué es un Axioma?** Es una verdad absoluta que no requiere demostración. Es una regla de oro que aceptamos para poder empezar a construir todo lo demás.
-* **¿Qué es un Cuerpo?** Es una estructura matemática donde la suma y la multiplicación se portan "bien". Es decir, puedes operar sin miedo a que el sistema explote (mientras no dividas por cero).
+    * **¿Qué es un Axioma?** Es una verdad absoluta que no requiere demostración. Es una regla de oro que aceptamos para poder empezar a construir todo lo demás.
+    * **¿Qué es un Cuerpo?** Es una estructura matemática donde la suma y la multiplicación se portan "bien". Es decir, puedes operar sin miedo a que el sistema explote (mientras no dividas por cero).
 
----
+    ---
 
-### 🛡️ 7.4 Los Axiomas de Cuerpo de los Reales
+    ### 🛡️ 7.4 Los Axiomas de Cuerpo de los Reales
 
-Para que un conjunto sea un **Cuerpo**, debe cumplir estas leyes para cualquier trío de números $a, b, c \in \mathbb{R}$:
+    Para que un conjunto sea un **Cuerpo**, debe cumplir estas leyes para cualquier trío de números $a, b, c \in \mathbb{R}$:
 
-| Propiedad | Definición en Suma ($+$) | Definición en Multiplicación ($\cdot$) |
-| :--- | :--- | :--- |
-| **Clausura** | $a + b \in \mathbb{R}$ | $a \cdot b \in \mathbb{R}$ |
-| **Conmutatividad** | $a + b = b + a$ | $a \cdot b = b \cdot a$ |
-| **Asociatividad** | $a + (b + c) = (a + b) + c$ | $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ |
-| **Elemento Neutro** | $a + 0 = a$ | $a \cdot 1 = a$ |
-| **Elemento Inverso** | $a + (-a) = 0$ | $a \cdot \frac{1}{a} = 1$ (con $a \neq 0$) |
-| **Distributividad** | \multicolumn{2}{c\|}{$a \cdot (b + c) = ab + ac$} |
+    | Propiedad | Definición en Suma ($+$) | Definición en Multiplicación ($\cdot$) |
+    | :--- | :--- | :--- |
+    | **Clausura** | $a + b \in \mathbb{R}$ | $a \cdot b \in \mathbb{R}$ |
+    | **Conmutatividad** | $a + b = b + a$ | $a \cdot b = b \cdot a$ |
+    | **Asociatividad** | $a + (b + c) = (a + b) + c$ | $a \cdot (b \cdot c) = (a \cdot b) \cdot c$ |
+    | **Elemento Neutro** | $a + 0 = a$ | $a \cdot 1 = a$ |
+    | **Elemento Inverso** | $a + (-a) = 0$ | $a \cdot \frac{1}{a} = 1$ (con $a \neq 0$) |
+    | **Distributividad** | \multicolumn{2}{c\|}{$a \cdot (b + c) = ab + ac$} |
 
-> **Típ:** Los axiomas son como las leyes de la física en un videojuego. No te preguntas por qué la gravedad funciona, simplemente la usas para saltar. En la PAES, cuando despejas una ecuación, estás usando estos axiomas sin darte cuenta.
+    > **Típ:** Los axiomas son como las leyes de la física en un videojuego. No te preguntas por qué la gravedad funciona, simplemente la usas para saltar. En la PAES, cuando despejas una ecuación, estás usando estos axiomas sin darte cuenta.
 
----
+    ---
 
-> "Las leyes de la matemática no son meras invenciones humanas, son la descripción de la estructura misma de la realidad".
-> — **Roger Penrose**
-""")
+    > "Las leyes de la matemática no son meras invenciones humanas, son la descripción de la estructura misma de la realidad".
+    > — **Roger Penrose**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N07", expanded=False):
         st.markdown(r"""
@@ -149,96 +151,21 @@ Para que un conjunto sea un **Cuerpo**, debe cumplir estas leyes para cualquier 
 | $\mathbb{R}$ | ✅ Sí | Pertenece a la recta numérica. |
 """)
 
-    with st.expander("❓ Cuestionario N07: Los Números Reales", expanded=False):
-        st.markdown(r"""
-**1. ¿Cuál de los siguientes números NO pertenece al conjunto de los números Reales ($\mathbb{R}$)?**
-
-A) $\sqrt{2}$  
-B) $\sqrt{-9}$  
-C) $0 / \pi$  
-D) $-10,5$
-
----
-
-**2. Si $a$ es un número real, el axioma que garantiza que $a + 0 = a$ se denomina:**
-
-A) Clausura.  
-B) Elemento Neutro Aditivo.  
-C) Inverso Aditivo.  
-D) Conmutatividad.
-
----
-
-**3. ¿Cuál es el inverso multiplicativo de $-0,75$?**
-
-A) $0,75$  
-B) $4/3$  
-C) $-4/3$  
-D) $-3/4$
-
----
-
-**4. La expresión $a \cdot (b + c) = ab + ac$ es la representación del axioma de:**
-
-A) Asociatividad.  
-B) Conmutatividad.  
-C) Distributividad.  
-D) Inverso Multiplicativo.
-
----
-
-**5. Respecto a los subconjuntos de los Reales, ¿cuál de las siguientes afirmaciones es CORRECTA?**
-
-A) Todo número real es también un número racional.  
-B) El conjunto de los irracionales está contenido en los racionales.  
-C) Los Reales son la unión de los Racionales y los Irracionales.  
-D) El cero es el único número que es Racional e Irracional a la vez.
-
----
-
-**6. ¿Qué ocurre con la operación $5 / (4 - 4)$ en el conjunto de los Reales?**
-
-A) El resultado es $0$.  
-B) El resultado es $5$.  
-C) Es una indefinición (no es un número real).  
-D) El resultado es un número irracional.
-
----
-
-**7. El axioma de Conmutatividad en la multiplicación establece que:**
-
-A) El orden de los factores no altera el producto.  
-B) Todo número multiplicado por 1 es el mismo número.  
-C) Los números se pueden agrupar de distintas formas.  
-D) Todo número multiplicado por 0 es 0.
-
----
-
-**8. Si $x$ es un número irracional, ¿cuál de los siguientes números es SIEMPRE un número real?**
-
-A) $x + 5$  
-B) $x^2$  
-C) $x / 0$  
-D) $\sqrt{-x}$ (asumiendo $x$ positivo)
-
----
-
-**9. ¿Cuál es el inverso aditivo de $\sqrt{2}$?**
-
-A) $1 / \sqrt{2}$  
-B) $2$  
-C) $-\sqrt{2}$  
-D) $0$
-
----
-
-**10. Un número que puede ser escrito como $a/b$ (con $a, b \in \mathbb{Z}$ y $b \neq 0$) pertenece a $\mathbb{Q}$. Al unir todos estos con los que NO pueden escribirse así, formamos:**
-
-A) Los Enteros ($\mathbb{Z}$).  
-B) Los Imaginarios.  
-C) Los Reales ($\mathbb{R}$).  
-D) Los Naturales ($\mathbb{N}$).
-""")
+    with st.expander("❓ Cuestionario N07", expanded=False):
+        from utils import render_multiple_choice_quiz
+        quiz = [
+            {'question': '¿Cuál de los siguientes números NO pertenece al conjunto de los números Reales ($\\mathbb{R}$)?', 'options': {'A': '$\\sqrt{2}$', 'B': '$\\sqrt{-9}$', 'C': '$0 / \\pi$', 'D': '$-10,5$'}, 'answer': 'B', 'explanation': 'Las raíces de índice par (como la cuadrada) con cantidad subradical negativa no son reales, son imaginarias.'},
+            {'question': 'Si $a$ es un número real, el axioma que garantiza que $a + 0 = a$ se denomina:', 'options': {'A': 'Clausura.', 'B': 'Elemento Neutro Aditivo.', 'C': 'Inverso Aditivo.', 'D': 'Conmutatividad.'}, 'answer': 'B', 'explanation': 'El neutro es el elemento que "no altera" al otro en la operación. En la suma es el $0$.'},
+            {'question': '¿Cuál es el inverso multiplicativo de $-0,75$?', 'options': {'A': '$0,75$', 'B': '$4/3$', 'C': '$-4/3$', 'D': '$-3/4$'}, 'answer': 'C', 'explanation': '$-0,75 = -3/4$. Su inverso multiplicativo es "dar vuelta" la fracción manteniendo el signo: $-4/3$.'},
+            {'question': 'La expresión $a \\cdot (b + c) = ab + ac$ es la representación del axioma de:', 'options': {'A': 'Asociatividad.', 'B': 'Conmutatividad.', 'C': 'Distributividad.', 'D': 'Inverso Multiplicativo.'}, 'answer': 'C', 'explanation': 'Es la propiedad que permite distribuir el factor exterior a cada sumando del paréntesis.'},
+            {'question': 'Respecto a los subconjuntos de los Reales, ¿cuál de las siguientes afirmaciones es CORRECTA?', 'options': {'A': 'Todo número real es también un número racional.', 'B': 'El conjunto de los irracionales está contenido en los racionales.', 'C': 'Los Reales son la unión de los Racionales y los Irracionales.', 'D': 'El cero es el único número que es Racional e Irracional a la vez.'}, 'answer': 'C', 'explanation': 'Es la definición estructural de $\\mathbb{R}$: $\\mathbb{Q} \\cup \\mathbb{I}$.'},
+            {'question': '¿Qué ocurre con la operación $5 / (4 - 4)$ en el conjunto de los Reales?', 'options': {'A': 'El resultado es $0$.', 'B': 'El resultado es $5$.', 'C': 'Es una indefinición (no es un número real).', 'D': 'El resultado es un número irracional.'}, 'answer': 'C', 'explanation': '$4 - 4 = 0$. La división por cero no está definida en los números reales.'},
+            {'question': 'El axioma de Conmutatividad en la multiplicación establece que:', 'options': {'A': 'El orden de los factores no altera el producto.', 'B': 'Todo número multiplicado por 1 es el mismo número.', 'C': 'Los números se pueden agrupar de distintas formas.', 'D': 'Todo número multiplicado por 0 es 0.'}, 'answer': 'A', 'explanation': '$a \\cdot b = b \\cdot a$. El intercambio de posición no afecta el resultado final.'},
+            {'question': 'Si $x$ es un número irracional, ¿cuál de los siguientes números es SIEMPRE un número real?', 'options': {'A': '$x + 5$', 'B': '$x^2$', 'C': '$x / 0$', 'D': '$\\sqrt{-x}$ (asumiendo $x$ positivo)'}, 'answer': 'A', 'explanation': 'Por el axioma de clausura, la suma de dos reales (irracional + racional) siempre da un real.'},
+            {'question': '¿Cuál es el inverso aditivo de $\\sqrt{2}$?', 'options': {'A': '$1 / \\sqrt{2}$', 'B': '$2$', 'C': '$-\\sqrt{2}$', 'D': '$0$'}, 'answer': 'C', 'explanation': 'El inverso aditivo (u opuesto) es el mismo número con el signo contrario para que la suma sea $0$.'},
+            {'question': 'Un número que puede ser escrito como $a/b$ (con $a, b \\in \\mathbb{Z}$ y $b \\neq 0$) pertenece a $\\mathbb{Q}$. Al unir todos estos con los que NO pueden escribirse así, formamos:', 'options': {'A': 'Los Enteros ($\\mathbb{Z}$).', 'B': 'Los Imaginarios.', 'C': 'Los Reales ($\\mathbb{R}$).', 'D': 'Los Naturales ($\\mathbb{N}$).'}, 'answer': 'C', 'explanation': 'Es el resumen de la clase: Racionales + Irracionales = El universo Real completo.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="n07_quiz")
 
     with st.expander("🔑 Pauta Técnica N07: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""

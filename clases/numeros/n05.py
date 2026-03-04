@@ -3,98 +3,100 @@ import matplotlib.pyplot as plt
 
 
 def render_N05():
-    st.title("N05: Los Números Racionales (ℚ) — La Densidad y el Cociente")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("N05: Los Números Racionales (ℚ) — La Densidad y el Cociente")
 
-    st.markdown(r"""
-### 🛡️ 1. El Portal: El Arte de Partir el Todo
+        st.markdown(r"""
+    ### 🛡️ 1. El Portal: El Arte de Partir el Todo
 
-Hasta ahora, en nuestra carpintería matemática, solo trabajábamos con "piezas completas" (vigas de 1 metro, de 2 metros). Pero la realidad es más compleja: a veces necesitas media viga o un tercio de tabla.
+    Hasta ahora, en nuestra carpintería matemática, solo trabajábamos con "piezas completas" (vigas de 1 metro, de 2 metros). Pero la realidad es más compleja: a veces necesitas media viga o un tercio de tabla.
 
-El nombre **Racional** viene de "Razón" (un cociente entre dos cantidades). Los antiguos egipcios ya usaban fracciones para repartir el grano y medir tierras tras las crecidas del Nilo. Al crear $\mathbb{Q}$ (del italiano *Quoziente*), la humanidad logró por fin la **Clausura de la División**: ahora cualquier reparto tiene un número que lo representa.
+    El nombre **Racional** viene de "Razón" (un cociente entre dos cantidades). Los antiguos egipcios ya usaban fracciones para repartir el grano y medir tierras tras las crecidas del Nilo. Al crear $\mathbb{Q}$ (del italiano *Quoziente*), la humanidad logró por fin la **Clausura de la División**: ahora cualquier reparto tiene un número que lo representa.
 
----
+    ---
 
-### 🛡️ 2. Definición Formal y Axiomática
+    ### 🛡️ 2. Definición Formal y Axiomática
 
-Un número es **Racional** si y solo si puede expresarse como el cociente entre dos enteros:
+    Un número es **Racional** si y solo si puede expresarse como el cociente entre dos enteros:
 
-$$\mathbb{Q} = \left\{ \frac{a}{b} \mid a, b \in \mathbb{Z}, b \neq 0 \right\}$$
+    $$\mathbb{Q} = \left\{ \frac{a}{b} \mid a, b \in \mathbb{Z}, b \neq 0 \right\}$$
 
-**Análisis de los Componentes:**
-* **Numerador ($a$):** Es el "contador". Nos dice cuántas partes tomamos.
-* **Denominador ($b$):** Es el "divisor". Define en cuántas partes iguales se cortó la unidad.
-* **⚠️ La Restricción Suprema:** El denominador **jamás puede ser cero**. La división por cero es el "agujero negro" de la matemática; si la intentas, la lógica se rompe.
+    **Análisis de los Componentes:**
+    * **Numerador ($a$):** Es el "contador". Nos dice cuántas partes tomamos.
+    * **Denominador ($b$):** Es el "divisor". Define en cuántas partes iguales se cortó la unidad.
+    * **⚠️ La Restricción Suprema:** El denominador **jamás puede ser cero**. La división por cero es el "agujero negro" de la matemática; si la intentas, la lógica se rompe.
 
----
+    ---
 
-### 🛡️ 3. La Propiedad de Densidad: El Fin de los Saltos
+    ### 🛡️ 3. La Propiedad de Densidad: El Fin de los Saltos
 
-Este es el concepto clave para los 1000 puntos.
+    Este es el concepto clave para los 1000 puntos.
 
-* En $\mathbb{N}, \mathbb{N}_0$ y $\mathbb{Z}$, los niveles son **discretos** (hay saltos vacíos entre ellos). Existe el concepto de "el que viene después".
-* **En $\mathbb{Q}$ NO existe el sucesor ni el antecesor.** El conjunto es **Denso**.
+    * En $\mathbb{N}, \mathbb{N}_0$ y $\mathbb{Z}$, los niveles son **discretos** (hay saltos vacíos entre ellos). Existe el concepto de "el que viene después".
+    * **En $\mathbb{Q}$ NO existe el sucesor ni el antecesor.** El conjunto es **Denso**.
 
-**¿Qué significa esto?** Que entre dos racionales, por muy pegados que los dibujes, siempre hay **infinitos** números más. La recta ya no tiene puntos aislados, ahora es una alfombra casi continua.
-""")
+    **¿Qué significa esto?** Que entre dos racionales, por muy pegados que los dibujes, siempre hay **infinitos** números más. La recta ya no tiene puntos aislados, ahora es una alfombra casi continua.
+    """)
 
-    fig, ax = plt.subplots(figsize=(12, 3))
-    ax.axhline(0, color='black', lw=2)
-    racionales = {0: "0", 1/4: "1/4", 1/3: "1/3", 1/2: "1/2", 2/3: "2/3", 3/4: "3/4", 1: "1"}
-    for val, label in racionales.items():
-        color = 'red' if val in [0, 1] else 'blue'
-        ax.plot(val, 0, 'o', color=color, markersize=8)
-        ax.text(val, 0.05, label, ha='center', va='bottom', fontsize=11, fontweight='bold', color=color)
-    for d in range(5, 12):
-        for n in range(1, d):
-            v = n/d
-            if v not in racionales:
-                ax.plot(v, 0, '|', color='gray', alpha=0.5, markersize=10)
-    ax.set_xlim(-0.1, 1.1)
-    ax.set_ylim(-0.1, 0.2)
-    ax.axis('off')
-    plt.title("Propiedad de Densidad: Entre el 0 y el 1 existen infinitos Racionales", fontsize=14, fontweight='bold', pad=20)
-    plt.tight_layout()
-    st.pyplot(fig)
-    plt.close()
+        fig, ax = plt.subplots(figsize=(12, 3))
+        ax.axhline(0, color='black', lw=2)
+        racionales = {0: "0", 1/4: "1/4", 1/3: "1/3", 1/2: "1/2", 2/3: "2/3", 3/4: "3/4", 1: "1"}
+        for val, label in racionales.items():
+            color = 'red' if val in [0, 1] else 'blue'
+            ax.plot(val, 0, 'o', color=color, markersize=8)
+            ax.text(val, 0.05, label, ha='center', va='bottom', fontsize=11, fontweight='bold', color=color)
+        for d in range(5, 12):
+            for n in range(1, d):
+                v = n/d
+                if v not in racionales:
+                    ax.plot(v, 0, '|', color='gray', alpha=0.5, markersize=10)
+        ax.set_xlim(-0.1, 1.1)
+        ax.set_ylim(-0.1, 0.2)
+        ax.axis('off')
+        plt.title("Propiedad de Densidad: Entre el 0 y el 1 existen infinitos Racionales", fontsize=14, fontweight='bold', pad=20)
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
 
-    st.markdown(r"""
----
+        st.markdown(r"""
+    ---
 
-### 🛡️ 4. Representación Decimal y Clasificación
+    ### 🛡️ 4. Representación Decimal y Clasificación
 
-Todo racional se puede "disfrazar" de decimal dividiendo el numerador por el denominador. Solo existen tres especies en este reino:
+    Todo racional se puede "disfrazar" de decimal dividiendo el numerador por el denominador. Solo existen tres especies en este reino:
 
-1. **Decimales Finitos:** Tienen una cantidad limitada de cifras decimales (Ej: $1/4 = 0,25$).
-2. **Infinitos Periódicos:** El ciclo de repetición empieza inmediatamente tras la coma (Ej: $1/3 = 0,\bar{3}$).
-3. **Infinitos Semiperiódicos:** Tienen una parte que no se repite (anteperiodo) antes del periodo (Ej: $0,1\bar{6}$).
+    1. **Decimales Finitos:** Tienen una cantidad limitada de cifras decimales (Ej: $1/4 = 0,25$).
+    2. **Infinitos Periódicos:** El ciclo de repetición empieza inmediatamente tras la coma (Ej: $1/3 = 0,\bar{3}$).
+    3. **Infinitos Semiperiódicos:** Tienen una parte que no se repite (anteperiodo) antes del periodo (Ej: $0,1\bar{6}$).
 
----
+    ---
 
-### 🛡️ 5. Clausura: El Club casi Perfecto
+    ### 🛡️ 5. Clausura: El Club casi Perfecto
 
-| Operación | ¿Es Cerrada en $\mathbb{Q}$? | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **Suma / Resta / Multi.** | ✅ SÍ | Siempre dan otro racional. |
-| **División (:)** | ⚠️ CASI | Es cerrada **siempre y cuando el divisor no sea cero**. |
+    | Operación | ¿Es Cerrada en $\mathbb{Q}$? | Carpintería Técnica |
+    | :--- | :---: | :--- |
+    | **Suma / Resta / Multi.** | ✅ SÍ | Siempre dan otro racional. |
+    | **División (:)** | ⚠️ CASI | Es cerrada **siempre y cuando el divisor no sea cero**. |
 
----
+    ---
 
-### 🛡️ 6. Manteniendo la Igualdad: Amplificar y Simplificar
+    ### 🛡️ 6. Manteniendo la Igualdad: Amplificar y Simplificar
 
-Para trabajar con fracciones, debemos entender que una misma cantidad puede escribirse con distintos números sin cambiar su valor. Esto se conoce como **Fracciones Equivalentes**.
+    Para trabajar con fracciones, debemos entender que una misma cantidad puede escribirse con distintos números sin cambiar su valor. Esto se conoce como **Fracciones Equivalentes**.
 
-* **Amplificar:** Es multiplicar el numerador y el denominador por el mismo número natural ($>1$). Se usa principalmente para **igualar denominadores** y poder sumar o restar.
-    * Ejemplo: $\frac{2}{3} \xrightarrow{\cdot 4} \frac{8}{12}$ (Es la misma cantidad, pero cortada en trozos más chicos).
-* **Simplificar:** Es dividir el numerador y el denominador por un divisor común. Se usa para llegar a la **Fracción Irreducible**.
-    * Ejemplo: $\frac{15}{20} \xrightarrow{: 5} \frac{3}{4}$
+    * **Amplificar:** Es multiplicar el numerador y el denominador por el mismo número natural ($>1$). Se usa principalmente para **igualar denominadores** y poder sumar o restar.
+        * Ejemplo: $\frac{2}{3} \xrightarrow{\cdot 4} \frac{8}{12}$ (Es la misma cantidad, pero cortada en trozos más chicos).
+    * **Simplificar:** Es dividir el numerador y el denominador por un divisor común. Se usa para llegar a la **Fracción Irreducible**.
+        * Ejemplo: $\frac{15}{20} \xrightarrow{: 5} \frac{3}{4}$
 
-> **Típ:** En la PAES, nunca entregues una respuesta sin simplificar al máximo. Si tu cálculo te da $20/40$, es muy probable que en las alternativas solo aparezca el $1/2$. Simplificar es "limpiar" la zona de trabajo.
+    > **Típ:** En la PAES, nunca entregues una respuesta sin simplificar al máximo. Si tu cálculo te da $20/40$, es muy probable que en las alternativas solo aparezca el $1/2$. Simplificar es "limpiar" la zona de trabajo.
 
----
+    ---
 
-> "Las matemáticas son el lenguaje con el que se describe el mundo, y las fracciones son las palabras que nos permiten ser precisos".
-> — **Henri Poincaré**
-""")
+    > "Las matemáticas son el lenguaje con el que se describe el mundo, y las fracciones son las palabras que nos permiten ser precisos".
+    > — **Henri Poincaré**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N05", expanded=False):
         st.markdown(r"""
@@ -185,96 +187,21 @@ Para trabajar con fracciones, debemos entender que una misma cantidad puede escr
 | $2/8$ ($0,25$) | $4/8$ ($0,50$) | **3/8** ($0,375$) |
 """)
 
-    with st.expander("❓ Cuestionario N05: Números Racionales", expanded=False):
-        st.markdown(r"""
-**1. ¿Cuál de los siguientes números NO puede escribirse como una fracción de la forma $a/b$ con $b \neq 0$?**
-
-A) 0  
-B) $-10$  
-C) $1,\bar{3}$  
-D) Un decimal cuyas cifras no tienen patrón ni fin.
-
----
-
-**2. Al simplificar al máximo la fracción $45/60$, obtenemos:**
-
-A) $9/12$  
-B) $15/20$  
-C) $3/4$  
-D) $0,75$
-
----
-
-**3. ¿Qué número resulta al amplificar la fracción $2/7$ por 4?**
-
-A) $8/7$  
-B) $2/28$  
-C) $8/28$  
-D) $6/11$
-
----
-
-**4. El número decimal $0,4\bar{6}$ corresponde a la fracción:**
-
-A) $46/90$  
-B) $42/90$  
-C) $46/99$  
-D) $7/15$
-
----
-
-**5. Si sumamos dos números racionales, el resultado SIEMPRE será un racional. Esta propiedad se llama:**
-
-A) Densidad  
-B) Clausura  
-C) Conmutativa  
-D) Distributiva
-
----
-
-**6. ¿Cuál de las siguientes afirmaciones sobre la propiedad de densidad es CORRECTA?**
-
-A) Entre $1/2$ y $1/3$ no hay más números.  
-B) Solo existen números racionales entre enteros.  
-C) Entre cualquier pareja de racionales hay infinitos racionales.  
-D) El sucesor de $0,5$ es $0,6$.
-
----
-
-**7. Al dividir $1$ por $3$, el resultado es un decimal de tipo:**
-
-A) Finito  
-B) Infinito Periódico  
-C) Infinito Semiperiódico  
-D) No Racional
-
----
-
-**8. Si $x = 0,25$ y $y = 1/4$, ¿cuál de las siguientes opciones es verdadera?**
-
-A) $x > y$  
-B) $x < y$  
-C) $x = y$  
-D) No se pueden comparar.
-
----
-
-**9. La fracción irreducible equivalente a $12/100$ es:**
-
-A) $6/50$  
-B) $3/25$  
-C) $0,12$  
-D) $12/100$ no se puede simplificar.
-
----
-
-**10. En la división de racionales, la clausura falla únicamente cuando:**
-
-A) El dividendo es negativo.  
-B) El resultado es un decimal infinito.  
-C) El divisor es cero.  
-D) Las fracciones tienen distinto denominador.
-""")
+    with st.expander("❓ Cuestionario N05", expanded=False):
+        from utils import render_multiple_choice_quiz
+        quiz = [
+            {'question': '¿Cuál de los siguientes números NO puede escribirse como una fracción de la forma $a/b$ con $b \\neq 0$?', 'options': {'A': '0', 'B': '$-10$', 'C': '$1,\\bar{3}$', 'D': 'Un decimal cuyas cifras no tienen patrón ni fin.'}, 'answer': 'D', 'explanation': 'Los racionales requieren orden (periodo) o fin. Si el decimal es infinito y caótico, es Irracional.'},
+            {'question': 'Al simplificar al máximo la fracción $45/60$, obtenemos:', 'options': {'A': '$9/12$', 'B': '$15/20$', 'C': '$3/4$', 'D': '$0,75$'}, 'answer': 'C', 'explanation': '$45$ y $60$ son divisibles por $15$. $45:15=3$ y $60:15=4$.'},
+            {'question': '¿Qué número resulta al amplificar la fracción $2/7$ por 4?', 'options': {'A': '$8/7$', 'B': '$2/28$', 'C': '$8/28$', 'D': '$6/11$'}, 'answer': 'C', 'explanation': 'Amplificar es multiplicar arriba y abajo por el mismo número: $2\\cdot4=8$ y $7\\cdot4=28$.'},
+            {'question': 'El número decimal $0,4\\bar{6}$ corresponde a la fracción:', 'options': {'A': '$46/90$', 'B': '$42/90$', 'C': '$46/99$', 'D': '$7/15$'}, 'answer': 'D', 'explanation': 'Numerador: $46-4=42$. Denominador: $90$. Fracción $42/90$. Simplificando por 6 da $7/15$.'},
+            {'question': 'Si sumamos dos números racionales, el resultado SIEMPRE será un racional. Esta propiedad se llama:', 'options': {'A': 'Densidad', 'B': 'Clausura', 'C': 'Conmutativa', 'D': 'Distributiva'}, 'answer': 'B', 'explanation': 'La clausura garantiza que el resultado de la operación se mantiene dentro del mismo conjunto.'},
+            {'question': '¿Cuál de las siguientes afirmaciones sobre la propiedad de densidad es CORRECTA?', 'options': {'A': 'Entre $1/2$ y $1/3$ no hay más números.', 'B': 'Solo existen números racionales entre enteros.', 'C': 'Entre cualquier pareja de racionales hay infinitos racionales.', 'D': 'El sucesor de $0,5$ es $0,6$.'}, 'answer': 'C', 'explanation': 'Es la esencia de la densidad; la recta se vuelve "tupida" de números.'},
+            {'question': 'Al dividir $1$ por $3$, el resultado es un decimal de tipo:', 'options': {'A': 'Finito', 'B': 'Infinito Periódico', 'C': 'Infinito Semiperiódico', 'D': 'No Racional'}, 'answer': 'B', 'explanation': '$1:3 = 0,333...$ El periodo empieza inmediatamente tras la coma.'},
+            {'question': 'Si $x = 0,25$ y $y = 1/4$, ¿cuál de las siguientes opciones es verdadera?', 'options': {'A': '$x > y$', 'B': '$x < y$', 'C': '$x = y$', 'D': 'No se pueden comparar.'}, 'answer': 'C', 'explanation': '$0,25$ es la representación decimal de la fracción $1/4$. Son el mismo valor.'},
+            {'question': 'La fracción irreducible equivalente a $12/100$ es:', 'options': {'A': '$6/50$', 'B': '$3/25$', 'C': '$0,12$', 'D': '$12/100$ no se puede simplificar.'}, 'answer': 'B', 'explanation': 'Ambos son pares, dividimos por 4: $12:4=3$ y $100:4=25$.'},
+            {'question': 'En la división de racionales, la clausura falla únicamente cuando:', 'options': {'A': 'El dividendo es negativo.', 'B': 'El resultado es un decimal infinito.', 'C': 'El divisor es cero.', 'D': 'Las fracciones tienen distinto denominador.'}, 'answer': 'C', 'explanation': 'La división por cero es una indefinición, lo que rompe la regla de clausura en $\\mathbb{Q}$.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="n05_quiz")
 
     with st.expander("🔑 Pauta Técnica N05: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""

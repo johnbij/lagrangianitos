@@ -2,65 +2,67 @@ import streamlit as st
 
 
 def render_N11():
-    st.title("N11: Números Racionales I - El Arte de Partir el Entero")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("N11: Números Racionales I - El Arte de Partir el Entero")
 
-    st.markdown(r"""
-### 🏛️ 1. Contexto Histórico: El Ojo de Horus y la Herencia del Nilo
-Para los antiguos egipcios, las fracciones no eran solo números; eran una cuestión de supervivencia y justicia. Imagina que el Nilo inundaba las tierras y luego debías repartir el terreno entre 10 familias, pero solo tenías 7 parcelas. No podías simplemente decir "les toca un poco".
+        st.markdown(r"""
+    ### 🏛️ 1. Contexto Histórico: El Ojo de Horus y la Herencia del Nilo
+    Para los antiguos egipcios, las fracciones no eran solo números; eran una cuestión de supervivencia y justicia. Imagina que el Nilo inundaba las tierras y luego debías repartir el terreno entre 10 familias, pero solo tenías 7 parcelas. No podías simplemente decir "les toca un poco".
 
-Ellos inventaron un sistema basado en el **Ojo de Horus**. Según la leyenda, el dios Seth despedazó el ojo de Horus y el dios Thot lo reconstruyó, pero faltaba una pieza ($1/64$). Cada parte del ojo representaba una fracción unitaria ($1/2, 1/4, 1/8...$). Los egipcios escribían cualquier fracción como una suma de estas partes. Si un escriba fallaba en el cálculo, alguien se quedaba sin comer. Por eso, los **Racionales ($\mathbb{Q}$)** nacen de la "Razón": la comparación exacta entre lo que tengo y entre cuántos lo reparto.
+    Ellos inventaron un sistema basado en el **Ojo de Horus**. Según la leyenda, el dios Seth despedazó el ojo de Horus y el dios Thot lo reconstruyó, pero faltaba una pieza ($1/64$). Cada parte del ojo representaba una fracción unitaria ($1/2, 1/4, 1/8...$). Los egipcios escribían cualquier fracción como una suma de estas partes. Si un escriba fallaba en el cálculo, alguien se quedaba sin comer. Por eso, los **Racionales ($\mathbb{Q}$)** nacen de la "Razón": la comparación exacta entre lo que tengo y entre cuántos lo reparto.
 
----
+    ---
 
-### 🛡️ 9.1 La Anatomía de la Fracción
-Una fracción $\frac{a}{b}$ es un operador. El **denominador** ($b$) corta la unidad y el **numerador** ($a$) recolecta las piezas.
+    ### 🛡️ 9.1 La Anatomía de la Fracción
+    Una fracción $\frac{a}{b}$ es un operador. El **denominador** ($b$) corta la unidad y el **numerador** ($a$) recolecta las piezas.
 
-### 🛡️ 9.2 El "Manual de Identidad" y el Entero Oculto
-Es vital saber cuánta "hambre" quita una fracción:
+    ### 🛡️ 9.2 El "Manual de Identidad" y el Entero Oculto
+    Es vital saber cuánta "hambre" quita una fracción:
 
-* **Fracciones Propias:** El numerador es menor que el denominador ($\frac{3}{4}$). **No alcanzan a completar 1 entero.** (Sobra pizza en la caja).
-* **Fracciones Impropias:** El numerador es mayor o igual ($\frac{7}{3}$). **Superan el entero.**
-    * **Ejemplo Paso a Paso:** En $\frac{7}{3}$, nos preguntamos: ¿Cuántas veces cabe el 3 en el 7? Cabe **2 veces** y sobra **1**.
-    * **Resultado:** $\frac{7}{3} = 2 \frac{1}{3}$ (Tiene 2 enteros completos y un tercio de sobra).
+    * **Fracciones Propias:** El numerador es menor que el denominador ($\frac{3}{4}$). **No alcanzan a completar 1 entero.** (Sobra pizza en la caja).
+    * **Fracciones Impropias:** El numerador es mayor o igual ($\frac{7}{3}$). **Superan el entero.**
+        * **Ejemplo Paso a Paso:** En $\frac{7}{3}$, nos preguntamos: ¿Cuántas veces cabe el 3 en el 7? Cabe **2 veces** y sobra **1**.
+        * **Resultado:** $\frac{7}{3} = 2 \frac{1}{3}$ (Tiene 2 enteros completos y un tercio de sobra).
 
----
+    ---
 
-### 🛡️ 9.3 Amplificación y Simplificación: Ajustando el Calibre
-* **Amplificar (Agrandar el formato):** Multiplicas arriba y abajo por el mismo número.
-    * **Ejemplo:** $\frac{2}{3}$ amplificado por 4 $\rightarrow \frac{2 \cdot 4}{3 \cdot 4} = \frac{8}{12}$. Sigue siendo la misma cantidad de madera, pero cortada en trozos más chicos.
-* **Simplificar (Achicar el formato):** Divides ambos por su MCD.
-    * **Ejemplo:** $\frac{15}{20}$. El MCD entre 15 y 20 es 5.
-    * $\frac{15 \div 5}{20 \div 5} = \frac{3}{4}$. Esta es la **Fracción Irreductible**.
+    ### 🛡️ 9.3 Amplificación y Simplificación: Ajustando el Calibre
+    * **Amplificar (Agrandar el formato):** Multiplicas arriba y abajo por el mismo número.
+        * **Ejemplo:** $\frac{2}{3}$ amplificado por 4 $\rightarrow \frac{2 \cdot 4}{3 \cdot 4} = \frac{8}{12}$. Sigue siendo la misma cantidad de madera, pero cortada en trozos más chicos.
+    * **Simplificar (Achicar el formato):** Divides ambos por su MCD.
+        * **Ejemplo:** $\frac{15}{20}$. El MCD entre 15 y 20 es 5.
+        * $\frac{15 \div 5}{20 \div 5} = \frac{3}{4}$. Esta es la **Fracción Irreductible**.
 
----
+    ---
 
-### 🛡️ 9.4 Operatoria: El Protocolo de Taller
-Aquí es donde aplicamos la mecánica de precisión:
+    ### 🛡️ 9.4 Operatoria: El Protocolo de Taller
+    Aquí es donde aplicamos la mecánica de precisión:
 
-1. **Suma/Resta con Simplificación:** $\frac{3}{10} + \frac{1}{10} = \frac{4}{10}$ (¡No lo dejes así! Simplifica por 2) $\rightarrow \frac{2}{5}$.
-2. **Multiplicación (Simplificación Cruzada):**
-   $\frac{5}{9} \cdot \frac{3}{10}$. En vez de hacer $15/90$, simplificamos el 5 con el 10 (queda 1 y 2) y el 3 con el 9 (queda 1 y 3).
-   $\frac{1}{3} \cdot \frac{1}{2} = \frac{1}{6}$. **¡Mucho más rápido!**
-3. **División:** Mantienes la primera, inviertes la segunda y multiplicas.
+    1. **Suma/Resta con Simplificación:** $\frac{3}{10} + \frac{1}{10} = \frac{4}{10}$ (¡No lo dejes así! Simplifica por 2) $\rightarrow \frac{2}{5}$.
+    2. **Multiplicación (Simplificación Cruzada):**
+       $\frac{5}{9} \cdot \frac{3}{10}$. En vez de hacer $15/90$, simplificamos el 5 con el 10 (queda 1 y 2) y el 3 con el 9 (queda 1 y 3).
+       $\frac{1}{3} \cdot \frac{1}{2} = \frac{1}{6}$. **¡Mucho más rápido!**
+    3. **División:** Mantienes la primera, inviertes la segunda y multiplicas.
 
----
+    ---
 
-### 🛡️ 9.5 Comparación Cruzada: El Puente al Álgebra
-Para saber si $\frac{a}{b} = \frac{c}{d}$, o cuál es mayor, multiplicamos cruzado: $a \cdot d$ y $b \cdot c$.
-* Si $a \cdot d = b \cdot c$, las fracciones son **Equivalentes**.
-* Si $a \cdot d > b \cdot c$, entonces $\frac{a}{b} > \frac{c}{d}$.
+    ### 🛡️ 9.5 Comparación Cruzada: El Puente al Álgebra
+    Para saber si $\frac{a}{b} = \frac{c}{d}$, o cuál es mayor, multiplicamos cruzado: $a \cdot d$ y $b \cdot c$.
+    * Si $a \cdot d = b \cdot c$, las fracciones son **Equivalentes**.
+    * Si $a \cdot d > b \cdot c$, entonces $\frac{a}{b} > \frac{c}{d}$.
 
-**⚠️ Alerta de Futuro:** Este simple cruce es la base de las **Razones y Proporciones** que veremos más adelante. Además, entender esta igualdad ($a \cdot d = b \cdot c$) es lo que te permitirá resolver **Ecuaciones e Inecuaciones** complejas sin miedo a las fracciones. Si dominas este "baile cruzado", el álgebra será solo un trámite.
+    **⚠️ Alerta de Futuro:** Este simple cruce es la base de las **Razones y Proporciones** que veremos más adelante. Además, entender esta igualdad ($a \cdot d = b \cdot c$) es lo que te permitirá resolver **Ecuaciones e Inecuaciones** complejas sin miedo a las fracciones. Si dominas este "baile cruzado", el álgebra será solo un trámite.
 
----
+    ---
 
-> **Típ:** En la PAES, si el resultado de tu problema es una fracción, busca siempre simplificarla. Si no está tu resultado en las alternativas, es casi seguro que te falta la **Fracción Irreductible**.
+    > **Típ:** En la PAES, si el resultado de tu problema es una fracción, busca siempre simplificarla. Si no está tu resultado en las alternativas, es casi seguro que te falta la **Fracción Irreductible**.
 
----
+    ---
 
-> "Los números racionales son los puntos de luz en la recta numérica que nos permiten medir la realidad con precisión".
-> — **Leopold Kronecker**
-""")
+    > "Los números racionales son los puntos de luz en la recta numérica que nos permiten medir la realidad con precisión".
+    > — **Leopold Kronecker**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos: El Taller de Fracciones", expanded=False):
         st.markdown(r"""
@@ -291,3 +293,120 @@ Para saber si $\frac{a}{b} = \frac{c}{d}$, o cuál es mayor, multiplicamos cruza
 | $12 \div 4$ | La división es exacta | 3 |
 | **Conclusión** | Es una fracción entera | **3** |
 """)
+
+    with st.expander("❓ Cuestionario N11", expanded=False):
+        from utils import render_multiple_choice_quiz
+        import json as _json
+        _quiz_data = [
+            {
+                        "question": "¿Cuál es la fracción equivalente a $\\frac{2}{3}$ con denominador 12?",
+                        "options": {
+                                    "A": "$\\frac{4}{12}$",
+                                    "B": "$\\frac{6}{12}$",
+                                    "C": "$\\frac{8}{12}$",
+                                    "D": "$\\frac{9}{12}$"
+                        },
+                        "answer": "C",
+                        "explanation": "Multiplica numerador y denominador por 4: $\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$."
+            },
+            {
+                        "question": "$\\frac{3}{4} + \\frac{1}{4}$ es igual a:",
+                        "options": {
+                                    "A": "$\\frac{4}{8}$",
+                                    "B": "$\\frac{3}{16}$",
+                                    "C": "1",
+                                    "D": "$\\frac{4}{4}$"
+                        },
+                        "answer": "C",
+                        "explanation": "Con denominador igual se suman los numeradores: $\\frac{3+1}{4} = \\frac{4}{4} = 1$."
+            },
+            {
+                        "question": "¿Cuál es el resultado de $\\frac{2}{3} \\times \\frac{3}{4}$?",
+                        "options": {
+                                    "A": "$\\frac{5}{7}$",
+                                    "B": "$\\frac{6}{7}$",
+                                    "C": "$\\frac{1}{2}$",
+                                    "D": "$\\frac{8}{9}$"
+                        },
+                        "answer": "C",
+                        "explanation": "Se multiplica numerador con numerador y denominador con denominador: $\\frac{2 \\times 3}{3 \\times 4} = \\frac{6}{12} = \\frac{1}{2}$."
+            },
+            {
+                        "question": "$\\frac{5}{6} - \\frac{1}{3}$ es igual a:",
+                        "options": {
+                                    "A": "$\\frac{4}{3}$",
+                                    "B": "$\\frac{1}{2}$",
+                                    "C": "$\\frac{4}{6}$",
+                                    "D": "$\\frac{1}{3}$"
+                        },
+                        "answer": "B",
+                        "explanation": "El mcm de 6 y 3 es 6. $\\frac{5}{6} - \\frac{2}{6} = \\frac{3}{6} = \\frac{1}{2}$."
+            },
+            {
+                        "question": "¿Cómo se escribe el número mixto $2\\frac{1}{3}$ como fracción impropia?",
+                        "options": {
+                                    "A": "$\\frac{5}{3}$",
+                                    "B": "$\\frac{7}{3}$",
+                                    "C": "$\\frac{2}{3}$",
+                                    "D": "$\\frac{6}{3}$"
+                        },
+                        "answer": "B",
+                        "explanation": "$2 \\times 3 + 1 = 7$, por lo tanto $2\\frac{1}{3} = \\frac{7}{3}$."
+            },
+            {
+                        "question": "¿Cuál es el resultado de $\\frac{3}{4} \\div \\frac{1}{2}$?",
+                        "options": {
+                                    "A": "$\\frac{3}{8}$",
+                                    "B": "$\\frac{3}{2}$",
+                                    "C": "$\\frac{4}{3}$",
+                                    "D": "$\\frac{6}{4}$"
+                        },
+                        "answer": "B",
+                        "explanation": "Dividir por una fracción es multiplicar por su inverso: $\\frac{3}{4} \\times \\frac{2}{1} = \\frac{6}{4} = \\frac{3}{2}$."
+            },
+            {
+                        "question": "La fracción $\\frac{18}{24}$ simplificada es:",
+                        "options": {
+                                    "A": "$\\frac{9}{12}$",
+                                    "B": "$\\frac{3}{4}$",
+                                    "C": "$\\frac{6}{8}$",
+                                    "D": "$\\frac{2}{3}$"
+                        },
+                        "answer": "B",
+                        "explanation": "El MCD de 18 y 24 es 6. $\\frac{18 \\div 6}{24 \\div 6} = \\frac{3}{4}$."
+            },
+            {
+                        "question": "¿Cuál de estos números es racional?",
+                        "options": {
+                                    "A": "$\\sqrt{2}$",
+                                    "B": "$\\pi$",
+                                    "C": "$\\frac{7}{3}$",
+                                    "D": "$\\sqrt{5}$"
+                        },
+                        "answer": "C",
+                        "explanation": "Un número racional puede expresarse como cociente de enteros. $\\frac{7}{3}$ cumple eso; $\\sqrt{2}$, $\\pi$, $\\sqrt{5}$ son irracionales."
+            },
+            {
+                        "question": "$\\frac{1}{2} + \\frac{1}{3} + \\frac{1}{6}$ es igual a:",
+                        "options": {
+                                    "A": "$\\frac{3}{11}$",
+                                    "B": "$\\frac{1}{2}$",
+                                    "C": "1",
+                                    "D": "$\\frac{2}{3}$"
+                        },
+                        "answer": "C",
+                        "explanation": "El mcm de 2, 3 y 6 es 6. $\\frac{3}{6} + \\frac{2}{6} + \\frac{1}{6} = \\frac{6}{6} = 1$."
+            },
+            {
+                        "question": "Si $\\frac{x}{5} = \\frac{4}{20}$, entonces $x$ vale:",
+                        "options": {
+                                    "A": "4",
+                                    "B": "2",
+                                    "C": "1",
+                                    "D": "5"
+                        },
+                        "answer": "C",
+                        "explanation": "$\\frac{4}{20} = \\frac{1}{5}$, por lo tanto $x = 1$."
+            }
+]
+        render_multiple_choice_quiz(_quiz_data, key_prefix="n11_quiz")

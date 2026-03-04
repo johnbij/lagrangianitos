@@ -3,101 +3,103 @@ import matplotlib.pyplot as plt
 
 
 def render_N04():
-    st.title("N04: Los Números Enteros (ℤ) — La Simetría y el Imperio de la Resta")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("N04: Los Números Enteros (ℤ) — La Simetría y el Imperio de la Resta")
 
-    st.markdown(r"""
-### 🛡️ El Portal: El Escándalo de los Números "Absurdos"
+        st.markdown(r"""
+    ### 🛡️ 1. El Portal: El Escándalo de los Números "Absurdos"
 
-Imagínate que eres un matemático griego de la época de Pitágoras. Para ti, los números son geometría: el 3 es un triángulo, el 4 es un cuadrado. Bajo esa lógica, **¿qué demonios es un -2?** ¿Un cuadrado con lados negativos? ¡Imposible! Durante más de mil años, Occidente se negó a aceptar los negativos, llamándolos *numeri absurdi*.
+    Imagínate que eres un matemático griego de la época de Pitágoras. Para ti, los números son geometría: el 3 es un triángulo, el 4 es un cuadrado. Bajo esa lógica, **¿qué demonios es un -2?** ¿Un cuadrado con lados negativos? ¡Imposible! Durante más de mil años, Occidente se negó a aceptar los negativos, llamándolos *numeri absurdi*.
 
-Sin embargo, en el otro lado del mundo, los comerciantes de la Ruta de la Seda no tenían esos prejuicios. Los matemáticos indios como **Brahmagupta** (año 628) ya hablaban de "Fortuna" (positivos) y "Deuda" (negativos). Ellos entendieron que el universo es simétrico: por cada montaña hay un valle, por cada grado sobre cero hay uno bajo cero.
+    Sin embargo, en el otro lado del mundo, los comerciantes de la Ruta de la Seda no tenían esos prejuicios. Los matemáticos indios como **Brahmagupta** (año 628) ya hablaban de "Fortuna" (positivos) y "Deuda" (negativos). Ellos entendieron que el universo es simétrico: por cada montaña hay un valle, por cada grado sobre cero hay uno bajo cero.
 
-Al crear los Enteros ($\mathbb{Z}$, del alemán *Zahlen*), la humanidad dejó de ver los números como "cosas" y empezó a verlos como **posiciones y direcciones**. Fue el nacimiento del álgebra moderna.
+    Al crear los Enteros ($\mathbb{Z}$, del alemán *Zahlen*), la humanidad dejó de ver los números como "cosas" y empezó a verlos como **posiciones y direcciones**. Fue el nacimiento del álgebra moderna.
 
----
+    ---
 
-### 🛡️ Definición y Características
+    ### 🛡️ 2. Definición y Características
 
-Se denota con la letra $\mathbb{Z}$ y se define como el conjunto que incluye a los naturales, sus opuestos y el cero:
+    Se denota con la letra $\mathbb{Z}$ y se define como el conjunto que incluye a los naturales, sus opuestos y el cero:
 
-$$\mathbb{Z} = \{..., -3, -2, -1, 0, 1, 2, 3, ...\}$$
+    $$\mathbb{Z} = \{..., -3, -2, -1, 0, 1, 2, 3, ...\}$$
 
-* **El Espejo Infinito:** A diferencia de $\mathbb{N}$ y $\mathbb{N}_0$, aquí **no hay un primer elemento**. Si caminas hacia la izquierda, nunca encontrarás una pared.
-* **El Antecesor Universal:** En $\mathbb{Z}$, **absolutamente todos** los números tienen un antecesor y un sucesor. La estructura es perfectamente uniforme.
-* **Componentes del Conjunto:**
+    * **El Espejo Infinito:** A diferencia de $\mathbb{N}$ y $\mathbb{N}_0$, aquí **no hay un primer elemento**. Si caminas hacia la izquierda, nunca encontrarás una pared.
+    * **El Antecesor Universal:** En $\mathbb{Z}$, **absolutamente todos** los números tienen un antecesor y un sucesor. La estructura es perfectamente uniforme.
+    * **Componentes del Conjunto:**
 
-$\mathbb{Z}^+$: Enteros positivos (igual a $\mathbb{N}$).
+    $\mathbb{Z}^+$: Enteros positivos (igual a $\mathbb{N}$).
 
-$\mathbb{Z}^-$: Enteros negativos.
+    $\mathbb{Z}^-$: Enteros negativos.
 
-$\{0\}$: El origen (ni positivo ni negativo).
-""")
+    $\{0\}$: El origen (ni positivo ni negativo).
+    """)
 
-    fig, ax = plt.subplots(figsize=(12, 3))
-    ax.axhline(0, color='black', lw=2)
-    for x in range(-5, 6):
-        color = 'blue' if x > 0 else ('red' if x < 0 else 'black')
-        ax.plot(x, 0, 'o', color=color, markersize=8)
-        ax.text(x, -0.4, str(x), ha='center', fontsize=12, fontweight='bold')
-    ax.annotate('', xy=(3, 0.2), xytext=(0, 0.2), arrowprops=dict(arrowstyle='<->', color='blue', lw=2))
-    ax.text(1.5, 0.4, "|3| = 3", color='blue', ha='center', fontweight='bold')
-    ax.annotate('', xy=(-3, 0.2), xytext=(0, 0.2), arrowprops=dict(arrowstyle='<->', color='red', lw=2))
-    ax.text(-1.5, 0.4, "|-3| = 3", color='red', ha='center', fontweight='bold')
-    ax.set_xlim(-6, 6)
-    ax.set_ylim(-1, 1)
-    ax.axis('off')
-    plt.title("Simetría en los Enteros y Valor Absoluto", fontsize=14, fontweight='bold')
-    plt.tight_layout()
-    st.pyplot(fig)
-    plt.close()
+        fig, ax = plt.subplots(figsize=(12, 3))
+        ax.axhline(0, color='black', lw=2)
+        for x in range(-5, 6):
+            color = 'blue' if x > 0 else ('red' if x < 0 else 'black')
+            ax.plot(x, 0, 'o', color=color, markersize=8)
+            ax.text(x, -0.4, str(x), ha='center', fontsize=12, fontweight='bold')
+        ax.annotate('', xy=(3, 0.2), xytext=(0, 0.2), arrowprops=dict(arrowstyle='<->', color='blue', lw=2))
+        ax.text(1.5, 0.4, "|3| = 3", color='blue', ha='center', fontweight='bold')
+        ax.annotate('', xy=(-3, 0.2), xytext=(0, 0.2), arrowprops=dict(arrowstyle='<->', color='red', lw=2))
+        ax.text(-1.5, 0.4, "|-3| = 3", color='red', ha='center', fontweight='bold')
+        ax.set_xlim(-6, 6)
+        ax.set_ylim(-1, 1)
+        ax.axis('off')
+        plt.title("Simetría en los Enteros y Valor Absoluto", fontsize=14, fontweight='bold')
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
 
-    st.markdown(r"""
----
+        st.markdown(r"""
+    ---
 
-### 🛡️ Valor Absoluto ($|a|$): La Carpintería de la Distancia
+    ### 🛡️ 3. Valor Absoluto ($|a|$): La Carpintería de la Distancia
 
-El valor absoluto es el "limpiador de signos". Epistemológicamente, mide la **distancia** de un número al cero. Como las distancias físicas no pueden ser negativas (no puedes correr -5 kilómetros), el resultado del valor absoluto es siempre $\geq 0$.
+    El valor absoluto es el "limpiador de signos". Epistemológicamente, mide la **distancia** de un número al cero. Como las distancias físicas no pueden ser negativas (no puedes correr -5 kilómetros), el resultado del valor absoluto es siempre $\geq 0$.
 
-**Definición Axiomática:**
+    **Definición Axiomática:**
 
-$$|a| = \begin{cases} a & \text{si } a \ge 0 \\ -a & \text{si } a < 0 \end{cases}$$
+    $$|a| = \begin{cases} a & \text{si } a \ge 0 \\ -a & \text{si } a < 0 \end{cases}$$
 
-> **Típ:** Ese signo "$-$" en la segunda parte de la fórmula es un operador de cambio. Dice: "Si el número es negativo, ponle otro menos adelante para que se vuelva positivo". No es que el resultado sea negativo.
+    > **Típ:** Ese signo "$-$" en la segunda parte de la fórmula es un operador de cambio. Dice: "Si el número es negativo, ponle otro menos adelante para que se vuelva positivo". No es que el resultado sea negativo.
 
-**Propiedades de Mantenimiento:**
-1. **Simetría:** $|a| = |-a|$. (La distancia del 5 y el -5 al origen es la misma).
-2. **Multiplicativa:** $|a \cdot b| = |a| \cdot |b|$.
+    **Propiedades de Mantenimiento:**
+    1. **Simetría:** $|a| = |-a|$. (La distancia del 5 y el -5 al origen es la misma).
+    2. **Multiplicativa:** $|a \cdot b| = |a| \cdot |b|$.
 
----
+    ---
 
-### 🛡️ El Opuesto Aditivo
+    ### 🛡️ 4. El Opuesto Aditivo
 
-En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a$ tal que al encontrarse se anulan: $a + (-a) = 0$.
+    En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a$ tal que al encontrarse se anulan: $a + (-a) = 0$.
 
-> **Típ:** En la PAES, cuando te pidan el "opuesto" o "inverso aditivo", solo debes cambiar el signo. No lo confundas con el inverso multiplicativo (dar vuelta la fracción), que requiere que el resultado sea 1, no 0.
+    > **Típ:** En la PAES, cuando te pidan el "opuesto" o "inverso aditivo", solo debes cambiar el signo. No lo confundas con el inverso multiplicativo (dar vuelta la fracción), que requiere que el resultado sea 1, no 0.
 
----
+    ---
 
-### 🛡️ Clausura: La Victoria de la Resta
+    ### 🛡️ 5. Clausura: La Victoria de la Resta
 
-¿Por qué nos mudamos de los Naturales a los Enteros? Por la **clausura de la sustracción**.
+    ¿Por qué nos mudamos de los Naturales a los Enteros? Por la **clausura de la sustracción**.
 
-| Operación | ¿Es Cerrada en $\mathbb{Z}$? | Razón Técnica de Carpintería |
-| :--- | :---: | :--- |
-| **Adición (+)** | ✅ SÍ | Sumar deudas o fortunas siempre da un entero. |
-| **Sustracción (-)** | ✅ SÍ | **Aquí está el premio.** $3 - 10 = -7$, y el -7 vive en $\mathbb{Z}$. |
-| **Multiplicación ($\cdot$)** | ✅ SÍ | La regla de los signos mantiene el resultado en $\mathbb{Z}$. |
-| **División (:)** | ❌ NO | $1 : 2$ sigue rompiendo el conjunto. |
+    | Operación | ¿Es Cerrada en $\mathbb{Z}$? | Razón Técnica de Carpintería |
+    | :--- | :---: | :--- |
+    | **Adición (+)** | ✅ SÍ | Sumar deudas o fortunas siempre da un entero. |
+    | **Sustracción (-)** | ✅ SÍ | **Aquí está el premio.** $3 - 10 = -7$, y el -7 vive en $\mathbb{Z}$. |
+    | **Multiplicación ($\cdot$)** | ✅ SÍ | La regla de los signos mantiene el resultado en $\mathbb{Z}$. |
+    | **División (:)** | ❌ NO | $1 : 2$ sigue rompiendo el conjunto. |
 
----
+    ---
 
-> "Las matemáticas son el juez de lo que es posible; los números negativos son la prueba de que lo imposible es solo una dirección que aún no hemos tomado".
-> — **Ada Lovelace**
-""")
+    > "Las matemáticas son el juez de lo que es posible; los números negativos son la prueba de que lo imposible es solo una dirección que aún no hemos tomado".
+    > — **Ada Lovelace**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N04", expanded=False):
         st.markdown(r"""
-### 1: Operativa de Signos y Clausura
+### E01: Operativa de Signos y Clausura
 
 **Situación:** Resolver la expresión $12 - (15 - 8)$ y determinar si el resultado pertenece a $\mathbb{Z}$.
 
@@ -114,7 +116,7 @@ En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a
 
 ---
 
-### 2: El Valor Absoluto como Distancia
+### E02: El Valor Absoluto como Distancia
 
 **Situación:** Calcular el valor de $A = |-10| + |3| - |-5|$.
 
@@ -133,7 +135,7 @@ En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a
 
 ---
 
-### 3: La Definición Axiomática (La Trampa del $-a$)
+### E03: La Definición Axiomática (La Trampa del $-a$)
 
 **Situación:** Si $x = -8$, ¿cuál es el valor de $-x$ y de $|x|$?
 
@@ -151,7 +153,7 @@ En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a
 
 ---
 
-### 4: Relación de Orden y Tricotomía
+### E04: Relación de Orden y Tricotomía
 
 **Situación:** Dados $a = -15$ y $b = -10$, ¿cuál es la relación de orden correcta?
 
@@ -168,7 +170,7 @@ En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a
 
 ---
 
-### 5: El Opuesto del Valor Absoluto
+### E05: El Opuesto del Valor Absoluto
 
 **Situación:** Resolver la expresión $-| -12 + 4 |$.
 
@@ -185,96 +187,21 @@ En este conjunto, cada número tiene un "némesis". Para todo $a$, existe un $-a
 | 3 | Aplicar "$-$" externo | **-8** |
 """)
 
-    with st.expander("❓ Cuestionario N04: Números Enteros", expanded=False):
-        st.markdown(r"""
-**1. ¿Cuál es el resultado de la operación $-5 - (-8)$?**
-
-A) -13  
-B) -3  
-C) 3  
-D) 13
-
----
-
-**2. Si $x \in \mathbb{Z}^-$, ¿cuál de las siguientes afirmaciones es SIEMPRE verdadera respecto a $|x|$?**
-
-A) $|x| = x$  
-B) $|x| < 0$  
-C) $|x| = -x$  
-D) $|x| = 0$
-
----
-
-**3. La distancia entre el número -7 y el número 5 en la recta numérica es:**
-
-A) 2  
-B) -2  
-C) 12  
-D) -12
-
----
-
-**4. ¿Cuál de las siguientes frases define correctamente al conjunto de los números enteros?**
-
-A) Es el conjunto de los naturales y el cero.  
-B) Es la unión de los naturales, sus opuestos y el cero.  
-C) Es un conjunto con un primer elemento definido.  
-D) Es el conjunto donde la división es siempre cerrada.
-
----
-
-**5. Si el opuesto de $a$ es 15, ¿cuál es el valor de $a$?**
-
-A) 15  
-B) 0  
-C) -15  
-D) $|-15|$
-
----
-
-**6. ¿Cuál es el resultado de $-| -10 | + | -4 |$?**
-
-A) 14  
-B) 6  
-C) -6  
-D) -14
-
----
-
-**7. Si $a < b$, donde $a$ y $b$ son enteros negativos, entonces se cumple que:**
-
-A) $|a| < |b|$  
-B) $|a| > |b|$  
-C) $|a| = |b|$  
-D) $a$ está a la derecha de $b$ en la recta.
-
----
-
-**8. ¿Cuál de estas operaciones NO cumple la propiedad de clausura en $\mathbb{Z}$?**
-
-A) Suma  
-B) Resta  
-C) Multiplicación  
-D) División
-
----
-
-**9. Si $n$ es un entero par, ¿cuál es el sucesor par de $n + 1$?**
-
-A) $n + 2$  
-B) $n + 3$  
-C) $n$  
-D) $n + 4$
-
----
-
-**10. El valor absoluto de un número entero es:**
-
-A) Siempre mayor que cero.  
-B) Siempre menor que cero.  
-C) Siempre no negativo.  
-D) Siempre igual al número original.
-""")
+    with st.expander("❓ Cuestionario N04", expanded=False):
+        from utils import render_multiple_choice_quiz
+        quiz = [
+            {'question': '¿Cuál es el resultado de la operación $-5 - (-8)$?', 'options': {'A': '-13', 'B': '-3', 'C': '3', 'D': '13'}, 'answer': 'C', 'explanation': 'Aplicamos la regla de signos: $-5 - (-8) = -5 + 8$. Al tener signos distintos, restamos los valores absolutos ($8 - 5 = 3$) y conservamos el signo del mayor valor absoluto (+).'},
+            {'question': 'Si $x \\in \\mathbb{Z}^-$, ¿cuál de las siguientes afirmaciones es SIEMPRE verdadera respecto a $|x|$?', 'options': {'A': '$|x| = x$', 'B': '$|x| < 0$', 'C': '$|x| = -x$', 'D': '$|x| = 0$'}, 'answer': 'C', 'explanation': 'Esta es la definición axiomática. Si $x$ es negativo (por ejemplo $-5$), su valor absoluto es $-x$, es decir, $-(-5) = 5$. Esto garantiza que la distancia sea siempre positiva.'},
+            {'question': 'La distancia entre el número -7 y el número 5 en la recta numérica es:', 'options': {'A': '2', 'B': '-2', 'C': '12', 'D': '-12'}, 'answer': 'C', 'explanation': 'La distancia entre dos puntos $a$ y $b$ es $'},
+            {'question': '¿Cuál de las siguientes frases define correctamente al conjunto de los números enteros?', 'options': {'A': 'Es el conjunto de los naturales y el cero.', 'B': 'Es la unión de los naturales, sus opuestos y el cero.', 'C': 'Es un conjunto con un primer elemento definido.', 'D': 'Es el conjunto donde la división es siempre cerrada.'}, 'answer': 'B', 'explanation': 'Definición estructural de $\\mathbb{Z}$. A diferencia de los naturales, este conjunto requiere la simetría de los negativos y el elemento neutro (cero).'},
+            {'question': 'Si el opuesto de $a$ es 15, ¿cuál es el valor de $a$?', 'options': {'A': '15', 'B': '0', 'C': '-15', 'D': '$|-15|$'}, 'answer': 'C', 'explanation': 'El opuesto o inverso aditivo es simplemente cambiar el signo. Si el resultado de ese cambio es 15, el número original debía ser $-15$.'},
+            {'question': '¿Cuál es el resultado de $-| -10 | + | -4 |$?', 'options': {'A': '14', 'B': '6', 'C': '-6', 'D': '-14'}, 'answer': 'C', 'explanation': '¡Cuidado con el signo exterior! Primero resolvemos el valor absoluto: $'},
+            {'question': 'Si $a < b$, donde $a$ y $b$ son enteros negativos, entonces se cumple que:', 'options': {'A': '$|a| < |b|$', 'B': '$|a| > |b|$', 'C': '$|a| = |b|$', 'D': '$a$ está a la derecha de $b$ en la recta.'}, 'answer': 'B', 'explanation': 'En la recta numérica, mientras más a la izquierda está un negativo, "menor" es. Pero al estar más lejos del cero, su **distancia** (valor absoluto) es mayor. Ejemplo: $-100 < -1$, pero $'},
+            {'question': '¿Cuál de estas operaciones NO cumple la propiedad de clausura en $\\mathbb{Z}$?', 'options': {'A': 'Suma', 'B': 'Resta', 'C': 'Multiplicación', 'D': 'División'}, 'answer': 'D', 'explanation': 'La división es la operación "rebelde". Al dividir $1 : 2$, el resultado ($0,5$) no pertenece al conjunto de los enteros, por lo que no hay clausura.'},
+            {'question': 'Si $n$ es un entero par, ¿cuál es el sucesor par de $n + 1$?', 'options': {'A': '$n + 2$', 'B': '$n + 3$', 'C': '$n$', 'D': '$n + 4$'}, 'answer': 'A', 'explanation': 'Si $n$ es par (ej: 4), $n+1$ es impar (5). El sucesor de 5 es 6, que se escribe como $4+2$, es decir, $n+2$. Los pares van de 2 en 2.'},
+            {'question': 'El valor absoluto de un número entero es:', 'options': {'A': 'Siempre mayor que cero.', 'B': 'Siempre menor que cero.', 'C': 'Siempre no negativo.', 'D': 'Siempre igual al número original.'}, 'answer': 'C', 'explanation': '**Trampa conceptual:** Muchos dicen "siempre positivo", pero el valor absoluto de 0 es 0, y el 0 no es positivo. Por eso lo correcto es "no negativo" ($\\geq 0$).'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="n04_quiz")
 
     with st.expander("🔑 Pauta Técnica N04: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""

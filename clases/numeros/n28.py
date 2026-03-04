@@ -2,41 +2,43 @@ import streamlit as st
 
 
 def render_N28():
-    st.markdown("""## N28: Reparto Inversamente Proporcional - La Lógica Invertida
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown("""## N28: Reparto Inversamente Proporcional - La Lógica Invertida
 
----
+    ---
 
-### 🏛️  Contexto Histórico: El Reparto de Cargas en la Ingeniería Antigua
+    ### 🏛️  Contexto Histórico: El Reparto de Cargas en la Ingeniería Antigua
 
-En la construcción de los grandes acueductos romanos, los ingenieros enfrentaban un problema de proporcionalidad inversa: la presión del agua y el diámetro del tubo. Para que el sistema no colapsara, entendían que a **menor** diámetro de la tubería, la velocidad del agua debía ser **mayor**. No era un reparto directo; era una relación donde una cantidad crecía mientras la otra disminuía para mantener el equilibrio del sistema. Hoy aplicamos esa misma "lógica invertida" para repartir premios por faltas o tiempos en una carrera: el que hace menos tiempo, se lleva el premio más grande.
+    En la construcción de los grandes acueductos romanos, los ingenieros enfrentaban un problema de proporcionalidad inversa: la presión del agua y el diámetro del tubo. Para que el sistema no colapsara, entendían que a **menor** diámetro de la tubería, la velocidad del agua debía ser **mayor**. No era un reparto directo; era una relación donde una cantidad crecía mientras la otra disminuía para mantener el equilibrio del sistema. Hoy aplicamos esa misma "lógica invertida" para repartir premios por faltas o tiempos en una carrera: el que hace menos tiempo, se lleva el premio más grande.
 
----
+    ---
 
-<div style="background-color: #E3F2FD; border-left: 8px solid #1E88E5; padding: 25px; border-radius: 10px;">
-    <h2 style="color: #1565C0; margin-top: 0;"> Concepto de Reparto Inverso</h2>
-    Repartir una cantidad <b>S</b> en partes inversamente proporcionales (I.P.) a ciertos números <i>a, b, c...</i> significa que las partes recibidas son <b>directamente proporcionales</b> a sus inversos: $\\frac{1}{a}, \\frac{1}{b}, \\frac{1}{c}...$
-    <br><br>
-    <blockquote><b>Regla de Oro:</b> A menor índice de reparto, mayor es la parte recibida. ¡Es al revés que el reparto directo!</blockquote>
-</div>
+    <div style="background-color: #E3F2FD; border-left: 8px solid #1E88E5; padding: 25px; border-radius: 10px;">
+        <h2 style="color: #1565C0; margin-top: 0;"> Concepto de Reparto Inverso</h2>
+        Repartir una cantidad <b>S</b> en partes inversamente proporcionales (I.P.) a ciertos números <i>a, b, c...</i> significa que las partes recibidas son <b>directamente proporcionales</b> a sus inversos: $\\frac{1}{a}, \\frac{1}{b}, \\frac{1}{c}...$
+        <br><br>
+        <blockquote><b>Regla de Oro:</b> A menor índice de reparto, mayor es la parte recibida. ¡Es al revés que el reparto directo!</blockquote>
+    </div>
 
 
 
-### 🛡️  El Algoritmo "Invertir y Amplificar" (Paso a Paso)
-Para no trabajar con fracciones complicadas, usamos este procedimiento técnico:
+    ### 🛡️  El Algoritmo "Invertir y Amplificar" (Paso a Paso)
+    Para no trabajar con fracciones complicadas, usamos este procedimiento técnico:
 
-1.  **Invertir los índices:** Si los números son $2$ y $3$, escribimos sus inversos: $\\frac{1}{2}$ y $\\frac{1}{3}$.
-2.  **M.C.M. para limpiar:** Buscamos el Mínimo Común Múltiplo de los denominadores.
-3.  **Amplificar:** Multiplicamos cada fracción por el M.C.M. para obtener números enteros.
-4.  **Aplicar Método k:** Con esos nuevos números enteros, hacemos un reparto directo normal.
+    1.  **Invertir los índices:** Si los números son $2$ y $3$, escribimos sus inversos: $\\frac{1}{2}$ y $\\frac{1}{3}$.
+    2.  **M.C.M. para limpiar:** Buscamos el Mínimo Común Múltiplo de los denominadores.
+    3.  **Amplificar:** Multiplicamos cada fracción por el M.C.M. para obtener números enteros.
+    4.  **Aplicar Método k:** Con esos nuevos números enteros, hacemos un reparto directo normal.
 
-----------
-**Típ:** El reparto inverso es simplemente un reparto directo disfrazado. Si inviertes los índices y amplificas, el problema se vuelve exactamente igual a los que vimos en la clase anterior.
+    ----------
+    **Típ:** El reparto inverso es simplemente un reparto directo disfrazado. Si inviertes los índices y amplificas, el problema se vuelve exactamente igual a los que vimos en la clase anterior.
 
----
+    ---
 
-"La simplicidad es la máxima sofisticación."  
-— **Leonardo da Vinci**""", unsafe_allow_html=True)
-    st.markdown("---")
+    "La simplicidad es la máxima sofisticación."  
+    — **Leonardo da Vinci**""", unsafe_allow_html=True)
+        st.markdown("---")
+
     with st.expander("📝 Guía de Ejemplos", expanded=False):
         st.markdown("""## 📝 Guía de Ejemplos: Dominando el Reparto Inverso
 
@@ -81,67 +83,20 @@ Para no trabajar con fracciones complicadas, usamos este procedimiento técnico:
 | 2 | Plantear diferencia | $3k - 2k = 20.000 \\implies k = 20.000$ |
 | 3 | Calcular total ($3k+2k$) | $5k = 5 \\cdot 20.000 = \\$100.000$ |""")
     with st.expander("❓ Cuestionario N28", expanded=False):
-        st.markdown("""# ❓ Cuestionario N28: Reparto Inverso
-
-**1. Si se reparten \\$220.000 de forma I.P. a 2 y 9, ¿cuánto recibe la parte menor (la asociada al 9)?** \\
-A) 40.000\\
-B) 180.000\\
-C) 110.000\\
-D) 20.000
-
-**2. Al repartir 60 unidades de forma I.P. a 1, 2 y 3, el M.C.M. que debemos usar para limpiar los índices es:** \\
-A) 3\\
-B) 6\\
-C) 12\\
-D) 1
-
-**3. Se reparte una herencia de forma I.P. a las edades 20 y 25. ¿Cuál es la razón entre las partes recibidas?** \\
-A) $4 : 5$ \\
-B) $5 : 4$ \\
-C) $20 : 25$ \\
-D) $1 : 2$
-
-**4. Si repartimos 70 objetos I.P. a 3 y 4, ¿cuántos objetos recibe la parte mayor?** \\
-A) 30\\
-B) 40\\
-C) 35\\
-D) 50
-
-**5. Tres amigos se reparten una cuenta de 37.000 pesos de forma I.P. a la cantidad de dinero que traían: 2.000, 3.000 y 4.000. ¿Cuál es el valor de k tras simplificar los índices? (M.C.M. 12)** \\
-A) 1.000\\
-B) 3.000\\
-C) 4.000\\
-D) 2.000
-
-**6. Al repartir I.P. a los números 4, 5 y 10, los nuevos índices directos tras amplificar por el M.C.M. (20) son:** \\
-A) $5, 4$ y $2$ \\
-B) $10, 5$ y $4$ \\
-C) $4, 5$ y $10$ \\
-D) $1, 2$ y $5$
-
-**7. Si se reparte un premio I.P. a las faltas cometidas (2 y 5) y el que menos faltó recibe \\$50.000, ¿cuánto recibe el otro?** \\
-A) 20.000\\
-B) 25.000\\
-C) 125.000\\
-D) 10.000
-
-**8. La expresión "repartir I.P. a x" es equivalente a:** \\
-A) Repartir directamente a x \\
-B) Repartir directamente a 1/x \\
-C) Repartir directamente a x² \\
-D) No existe tal equivalencia
-
-**9. Se reparte una cantidad I.P. a 1/2 y 1/3. Esto equivale a un reparto directo a:** \\
-A) 2 y 3 \\
-B) 3 y 2\\
-C) 1/2 y 1/3\\
-D) 6 y 1
-
-**10. Si al repartir una suma I.P. a 3 y 6, la parte mayor es 40, ¿cuál es la suma total repartida?** \\
-A) 60\\
-B) 120\\
-C) 80\\
-D) 90""")
+        from utils import render_multiple_choice_quiz
+        quiz = [
+            {'question': 'Si se reparten \\$220.000 de forma I.P. a 2 y 9, ¿cuánto recibe la parte menor (la asociada al 9)?', 'options': {'A': '40.000\\', 'B': '180.000\\', 'C': '110.000\\', 'D': '20.000'}, 'answer': 'A', 'explanation': 'Inversos: $1/2$ y $1/9$. M.C.M. = 18. Índices: 9 y 2. $11k = 220.000 \\implies k = 20.000$. Parte menor (índice 2): \\$40.000.'},
+            {'question': 'Al repartir 60 unidades de forma I.P. a 1, 2 y 3, el M.C.M. que debemos usar para limpiar los índices es:', 'options': {'A': '3\\', 'B': '6\\', 'C': '12\\', 'D': '1'}, 'answer': 'B', 'explanation': 'Los denominadores de los inversos son 1, 2 y 3. El M.C.M.(1, 2, 3) = 6.'},
+            {'question': 'Se reparte una herencia de forma I.P. a las edades 20 y 25. ¿Cuál es la razón entre las partes recibidas?', 'options': {'A': '$4 : 5$ \\', 'B': '$5 : 4$ \\', 'C': '$20 : 25$ \\', 'D': '$1 : 2$'}, 'answer': 'B', 'explanation': 'Inversos: $1/20$ y $1/25$. M.C.M. = 100. Índices: 5 y 4. La razón es $5 : 4$.'},
+            {'question': 'Si repartimos 70 objetos I.P. a 3 y 4, ¿cuántos objetos recibe la parte mayor?', 'options': {'A': '30\\', 'B': '40\\', 'C': '35\\', 'D': '50'}, 'answer': 'B', 'explanation': 'Inversos: $1/3$ y $1/4$. M.C.M. = 12. Índices: 4 y 3. $7k = 70 \\implies k = 10$. Parte mayor: $4 \\cdot 10 = 40$.'},
+            {'question': 'Tres amigos se reparten una cuenta de 37.000 pesos de forma I.P. a la cantidad de dinero que traían: 2.000, 3.000 y 4.000. ¿Cuál es el valor de k tras simplificar los índices? (M.C.M. 12)', 'options': {'A': '1.000\\', 'B': '3.000\\', 'C': '4.000\\', 'D': '2.000'}, 'answer': 'B', 'explanation': 'Inversos: $1/2, 1/3, 1/4$ (quitando los miles). M.C.M. = 12. Índices: 6, 4, 3. $13k = 39.000 \\implies k = 3.000$ (ajustando el valor total del ejemplo).'},
+            {'question': 'Al repartir I.P. a los números 4, 5 y 10, los nuevos índices directos tras amplificar por el M.C.M. (20) son:', 'options': {'A': '$5, 4$ y $2$ \\', 'B': '$10, 5$ y $4$ \\', 'C': '$4, 5$ y $10$ \\', 'D': '$1, 2$ y $5$'}, 'answer': 'A', 'explanation': '$1/4 \\cdot 20 = 5$; $1/5 \\cdot 20 = 4$; $1/10 \\cdot 20 = 2$.'},
+            {'question': 'Si se reparte un premio I.P. a las faltas cometidas (2 y 5) y el que menos faltó recibe \\$50.000, ¿cuánto recibe el otro?', 'options': {'A': '20.000\\', 'B': '25.000\\', 'C': '125.000\\', 'D': '10.000'}, 'answer': 'A', 'explanation': 'Índices directos: 5 y 2. El que menos faltó ($5k$) recibe 50.000 $\\implies k = 10.000$. El otro ($2k$) recibe 20.000.'},
+            {'question': 'La expresión "repartir I.P. a x" es equivalente a:', 'options': {'A': 'Repartir directamente a x \\', 'B': 'Repartir directamente a 1/x \\', 'C': 'Repartir directamente a x² \\', 'D': 'No existe tal equivalencia'}, 'answer': 'B', 'explanation': 'Definición fundamental de proporcionalidad inversa.'},
+            {'question': 'Se reparte una cantidad I.P. a 1/2 y 1/3. Esto equivale a un reparto directo a:', 'options': {'A': '2 y 3 \\', 'B': '3 y 2\\', 'C': '1/2 y 1/3\\', 'D': '6 y 1'}, 'answer': 'A', 'explanation': 'Al invertir los inversos ($1/2$ y $1/3$) volvemos a los originales 2 y 3 para el reparto directo.'},
+            {'question': 'Si al repartir una suma I.P. a 3 y 6, la parte mayor es 40, ¿cuál es la suma total repartida?', 'options': {'A': '60\\', 'B': '120\\', 'C': '80\\', 'D': '90'}, 'answer': 'A', 'explanation': 'Inversos $1/3, 1/6$. M.C.M. = 6. Índices: 2 y 1. Parte mayor $2k = 40 \\implies k = 20$. Total: $3k = 3 \\cdot 20 = 60$.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="n28_quiz")
     with st.expander("✅ Pauta - N28", expanded=False):
         st.markdown("""# ✅ Pauta - Cuestionario N28
 

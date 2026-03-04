@@ -2,76 +2,78 @@ import streamlit as st
 
 
 def render_N12():
-    st.title("N12: Operatoria en ℚ - El Protocolo de Precisión")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("N12: Operatoria en ℚ - El Protocolo de Precisión")
 
-    st.markdown(r"""
-### 🏛️ 1. Contexto Histórico: El Caos de los Mares y el Orden de la Razón
-Imagina estar en el siglo XVII, en medio del océano, tratando de calcular la posición de tu barco con un sextante. Un error de apenas $\frac{1}{64}$ en tus cálculos de navegación no significa un pequeño desvío; significa estrellarse contra un arrecife a kilómetros de tu destino.
+        st.markdown(r"""
+    ### 🏛️ 1. Contexto Histórico: El Caos de los Mares y el Orden de la Razón
+    Imagina estar en el siglo XVII, en medio del océano, tratando de calcular la posición de tu barco con un sextante. Un error de apenas $\frac{1}{64}$ en tus cálculos de navegación no significa un pequeño desvío; significa estrellarse contra un arrecife a kilómetros de tu destino.
 
-Durante el Renacimiento, la matemática de fracciones pasó de ser un truco de comerciantes a ser una cuestión de vida o muerte. Los grandes navegantes y astrónomos se dieron cuenta de que el mundo no se mide en números redondos, sino en las grietas que hay entre ellos. Para dominar esas grietas, tuvieron que estandarizar un **orden de batalla**. El PAPOMUDAS que usas hoy es el mismo código de honor que permitió a la humanidad mapear los continentes y las estrellas. No es solo aritmética; es la herramienta que domesticó el caos de lo infinitamente pequeño.
+    Durante el Renacimiento, la matemática de fracciones pasó de ser un truco de comerciantes a ser una cuestión de vida o muerte. Los grandes navegantes y astrónomos se dieron cuenta de que el mundo no se mide en números redondos, sino en las grietas que hay entre ellos. Para dominar esas grietas, tuvieron que estandarizar un **orden de batalla**. El PAPOMUDAS que usas hoy es el mismo código de honor que permitió a la humanidad mapear los continentes y las estrellas. No es solo aritmética; es la herramienta que domesticó el caos de lo infinitamente pequeño.
 
----
+    ---
 
-### 🛡️ 9.B.1 El Protocolo Universal: PAPOMUDAS
-Las reglas no cambian, pero el riesgo de error aumenta. El orden sigue siendo:
+    ### 🛡️ 9.B.1 El Protocolo Universal: PAPOMUDAS
+    Las reglas no cambian, pero el riesgo de error aumenta. El orden sigue siendo:
 
-1. **PA (Paréntesis):** Resuelve lo de adentro primero.
-2. **PO (Potencias):** (Próxima clase).
-3. **MU - DA (Multiplicación y División):** De izquierda a derecha.
-4. **S - R (Suma y Resta):** Al final, siempre con el **mcm**.
+    1. **PA (Paréntesis):** Resuelve lo de adentro primero.
+    2. **PO (Potencias):** (Próxima clase).
+    3. **MU - DA (Multiplicación y División):** De izquierda a derecha.
+    4. **S - R (Suma y Resta):** Al final, siempre con el **mcm**.
 
----
+    ---
 
-### 🛡️ 9.B.2 El "Atajo del Pillo" (Fracciones Complejas)
-A veces verás un "castillo" de fracciones: $\frac{\frac{a}{b}}{\frac{c}{d}}$.
-No te marees con tantos pisos. Usa el **Atajo del Pillo**: multiplica los extremos (el de más arriba con el de más abajo) para el numerador, y los medios para el denominador.
-$$\frac{a \cdot d}{b \cdot c}$$
+    ### 🛡️ 9.B.2 El "Atajo del Pillo" (Fracciones Complejas)
+    A veces verás un "castillo" de fracciones: $\frac{\frac{a}{b}}{\frac{c}{d}}$.
+    No te marees con tantos pisos. Usa el **Atajo del Pillo**: multiplica los extremos (el de más arriba con el de más abajo) para el numerador, y los medios para el denominador.
+    $$\frac{a \cdot d}{b \cdot c}$$
 
----
+    ---
 
-### 🛡️ 9.B.3 El Método del Cruce Directo
-Cuando solo tienes **dos** fracciones y quieres velocidad, olvida la tabla del mcm. Haz el cruce:
-$$\frac{a}{b} + \frac{c}{d} = \frac{(a \cdot d) + (b \cdot c)}{b \cdot d}$$
+    ### 🛡️ 9.B.3 El Método del Cruce Directo
+    Cuando solo tienes **dos** fracciones y quieres velocidad, olvida la tabla del mcm. Haz el cruce:
+    $$\frac{a}{b} + \frac{c}{d} = \frac{(a \cdot d) + (b \cdot c)}{b \cdot d}$$
 
----
+    ---
 
-### 🛡️ 9.B.4 El "Efecto Espejo" del Signo Negativo
-El signo menos en una fracción es como un camaleón; puede estar en tres posiciones y seguir significando lo mismo:
-$$\left( -\frac{a}{b} \right) = \frac{-a}{b} = \frac{a}{-b}$$
-**Regla Táctica:** Nunca dejes el signo negativo en el denominador para operar. Súbelo siempre al numerador o déjalo frente a la fracción para que no se te olvide en el "baile" de la suma.
+    ### 🛡️ 9.B.4 El "Efecto Espejo" del Signo Negativo
+    El signo menos en una fracción es como un camaleón; puede estar en tres posiciones y seguir significando lo mismo:
+    $$\left( -\frac{a}{b} \right) = \frac{-a}{b} = \frac{a}{-b}$$
+    **Regla Táctica:** Nunca dejes el signo negativo en el denominador para operar. Súbelo siempre al numerador o déjalo frente a la fracción para que no se te olvide en el "baile" de la suma.
 
----
+    ---
 
-### 🛡️ 9.B.5 La Identidad del Entero y el Factor $-1$
-Todo número entero tiene una armadura invisible que lo convierte en fracción: el denominador $1$ ($n = \frac{n}{1}$).
-Además, recuerda que una fracción negativa como $-\frac{3}{4}$ es equivalente a multiplicar por un **factor de inversión**:
-$$(-1) \cdot \frac{3}{4} = \frac{-3}{4}$$
-Este $-1$ es el que "da vuelta" el sentido de tus sumas y restas en la recta numérica.
+    ### 🛡️ 9.B.5 La Identidad del Entero y el Factor $-1$
+    Todo número entero tiene una armadura invisible que lo convierte en fracción: el denominador $1$ ($n = \frac{n}{1}$).
+    Además, recuerda que una fracción negativa como $-\frac{3}{4}$ es equivalente a multiplicar por un **factor de inversión**:
+    $$(-1) \cdot \frac{3}{4} = \frac{-3}{4}$$
+    Este $-1$ es el que "da vuelta" el sentido de tus sumas y restas en la recta numérica.
 
----
+    ---
 
-### 🛡️ 9.B.6 El Desafío del Maestro: La Expresión del Terror
-Vamos a desarmar esta pieza de ingeniería usando **PAPOMUDAS**:
-$$\frac{1}{2} + \left( \frac{3}{4} - \frac{1}{2} \right) \div \frac{5}{2}$$
+    ### 🛡️ 9.B.6 El Desafío del Maestro: La Expresión del Terror
+    Vamos a desarmar esta pieza de ingeniería usando **PAPOMUDAS**:
+    $$\frac{1}{2} + \left( \frac{3}{4} - \frac{1}{2} \right) \div \frac{5}{2}$$
 
-**Paso 1: Paréntesis (Resta con cruce directo)**
-$\frac{3}{4} - \frac{1}{2} = \frac{6 - 4}{8} = \frac{2}{8} = \frac{1}{4}$
+    **Paso 1: Paréntesis (Resta con cruce directo)**
+    $\frac{3}{4} - \frac{1}{2} = \frac{6 - 4}{8} = \frac{2}{8} = \frac{1}{4}$
 
-**Paso 2: División (Invertir y multiplicar)**
-$\frac{1}{4} \div \frac{5}{2} = \frac{1}{4} \cdot \frac{2}{5} = \frac{2}{20} = \frac{1}{10}$
+    **Paso 2: División (Invertir y multiplicar)**
+    $\frac{1}{4} \div \frac{5}{2} = \frac{1}{4} \cdot \frac{2}{5} = \frac{2}{20} = \frac{1}{10}$
 
-**Paso 3: Suma Final (mcm)**
-$\frac{1}{2} + \frac{1}{10} = \frac{5}{10} + \frac{1}{10} = \frac{6}{10} = \frac{3}{5}$
+    **Paso 3: Suma Final (mcm)**
+    $\frac{1}{2} + \frac{1}{10} = \frac{5}{10} + \frac{1}{10} = \frac{6}{10} = \frac{3}{5}$
 
----
+    ---
 
-> **Típ:** Si el ejercicio se ve muy grande, no intentes resolverlo de un viaje. Desarma los paréntesis primero como si fueran cajas pequeñas y luego junta todo.
+    > **Típ:** Si el ejercicio se ve muy grande, no intentes resolverlo de un viaje. Desarma los paréntesis primero como si fueran cajas pequeñas y luego junta todo.
 
----
+    ---
 
-> "Las fracciones son el lenguaje que usa la naturaleza para decirnos que nada es perfecto, pero todo es proporcional".
-> — **Euclides (atribuido)**
-""")
+    > "Las fracciones son el lenguaje que usa la naturaleza para decirnos que nada es perfecto, pero todo es proporcional".
+    > — **Euclides (atribuido)**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos: Maestría en Operatoria Racional", expanded=False):
         st.markdown(r"""
@@ -192,110 +194,21 @@ $\frac{1}{2} + \frac{1}{10} = \frac{5}{10} + \frac{1}{10} = \frac{6}{10} = \frac
 | 3. Final | | **0** |
 """)
 
-    with st.expander("❓ Cuestionario N12: Operatoria de Élite", expanded=False):
-        st.markdown(r"""
-> **Protocolo de Navegación:** Resuelve con calma. Cada signo y cada paréntesis tiene una razón de ser. No te saltes pasos si no quieres chocar con el arrecife.
-
-**1. ¿Cuál es el resultado de $\frac{1}{2} + \frac{1}{3} \cdot \frac{3}{4}$?**
-\
-A) $\frac{5}{8}$
-\
-B) $\frac{3}{4}$
-\
-C) $\frac{5}{12}$
-\
-D) $\frac{1}{4}$
-
-**2. Al resolver $\frac{2}{3} \div \frac{4}{3} \cdot \frac{1}{2}$, se obtiene:**
-\
-A) 1
-\
-B) $\frac{1}{4}$
-\
-C) $\frac{4}{9}$
-\
-D) $\frac{1}{2}$
-
-**3. ¿Qué valor resulta de la expresión $\frac{\frac{2}{5}}{\frac{4}{15}}$?**
-\
-A) $\frac{8}{75}$
-\
-B) $\frac{3}{2}$
-\
-C) $\frac{2}{3}$
-\
-D) 6
-
-**4. El resultado de $1 - \left( \frac{1}{2} - \frac{1}{4} \right)$ es:**
-\
-A) $\frac{3}{4}$
-\
-B) $\frac{1}{4}$
-\
-C) $\frac{1}{2}$
-\
-D) $\frac{5}{4}$
-
-**5. Si calculamos $\left( -\frac{2}{3} \right) \cdot \left( -\frac{3}{4} \right)$, el resultado es:**
-\
-A) $-\frac{1}{2}$
-\
-B) $\frac{6}{12}$
-\
-C) $\frac{1}{2}$
-\
-D) $-\frac{5}{12}$
-
-**6. ¿Cuál es el valor de $\frac{1}{2} \div 2$?**
-\
-A) 1
-\
-B) $\frac{1}{4}$
-\
-C) 4
-\
-D) $\frac{1}{2}$
-
-**7. Al resolver $\frac{3}{4} - \frac{1}{2} + \frac{5}{4}$, el resultado simplificado es:**
-\
-A) $\frac{3}{2}$
-\
-B) $\frac{7}{4}$
-\
-C) 1
-\
-D) $\frac{9}{4}$
-
-**8. El valor de la expresión $\frac{1 + \frac{1}{3}}{2}$ es:**
-\
-A) $\frac{4}{3}$
-\
-B) $\frac{8}{3}$
-\
-C) $\frac{2}{3}$
-\
-D) $\frac{1}{3}$
-
-**9. ¿Cuál es el resultado de $\frac{2}{5} \cdot \frac{10}{3} \div \frac{4}{3}$?**
-\
-A) 1
-\
-B) $\frac{16}{25}$
-\
-C) $\frac{4}{3}$
-\
-D) $\frac{8}{15}$
-
-**10. La expresión del terror: $\left( \frac{1}{2} + \frac{1}{2} \right) \cdot \frac{3}{4} - \frac{1}{4}$ resulta en:**
-\
-A) $\frac{1}{2}$
-\
-B) 1
-\
-C) $\frac{3}{4}$
-\
-D) 0
-""")
+    with st.expander("❓ Cuestionario N12", expanded=False):
+        from utils import render_multiple_choice_quiz
+        quiz = [
+            {'question': '¿Cuál es el resultado de $\\frac{1}{2} + \\frac{1}{3} \\cdot \\frac{3}{4}$?**\n\\', 'options': {'A': '$\\frac{5}{8}$', 'B': '$\\frac{3}{4}$', 'C': '$\\frac{5}{12}$', 'D': '$\\frac{1}{4}$'}, 'answer': 'B', 'explanation': 'Mult. primero: $\\frac{1}{3} \\cdot \\frac{3}{4} = \\frac{1}{4}$. Luego $\\frac{1}{2} + \\frac{1}{4} = \\frac{2}{4} + \\frac{1}{4} = \\frac{3}{4}$.'},
+            {'question': 'Al resolver $\\frac{2}{3} \\div \\frac{4}{3} \\cdot \\frac{1}{2}$, se obtiene:**\n\\', 'options': {'A': '1', 'B': '$\\frac{1}{4}$', 'C': '$\\frac{4}{9}$', 'D': '$\\frac{1}{2}$'}, 'answer': 'B', 'explanation': 'Izquierda a derecha: $\\frac{2}{3} \\cdot \\frac{3}{4} = \\frac{1}{2}$. Luego $\\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$.'},
+            {'question': '¿Qué valor resulta de la expresión $\\frac{\\frac{2}{5}}{\\frac{4}{15}}$?**\n\\', 'options': {'A': '$\\frac{8}{75}$', 'B': '$\\frac{3}{2}$', 'C': '$\\frac{2}{3}$', 'D': '6'}, 'answer': 'B', 'explanation': '**Atajo del Pillo:** $(2 \\cdot 15) / (5 \\cdot 4) = 30/20 = 3/2$.'},
+            {'question': 'El resultado de $1 - \\left( \\frac{1}{2} - \\frac{1}{4} \\right)$ es:**\n\\', 'options': {'A': '$\\frac{3}{4}$', 'B': '$\\frac{1}{4}$', 'C': '$\\frac{1}{2}$', 'D': '$\\frac{5}{4}$'}, 'answer': 'A', 'explanation': 'Paréntesis: $1/2 - 1/4 = 1/4$. Luego $1 - 1/4 = 3/4$.'},
+            {'question': 'Si calculamos $\\left( -\\frac{2}{3} \\right) \\cdot \\left( -\\frac{3}{4} \\right)$, el resultado es:**\n\\', 'options': {'A': '$-\\frac{1}{2}$', 'B': '$\\frac{6}{12}$', 'C': '$\\frac{1}{2}$', 'D': '$-\\frac{5}{12}$'}, 'answer': 'C', 'explanation': 'Menos por menos es más. Simplificando el 3: $2/4 = 1/2$.'},
+            {'question': '¿Cuál es el valor de $\\frac{1}{2} \\div 2$?**\n\\', 'options': {'A': '1', 'B': '$\\frac{1}{4}$', 'C': '4', 'D': '$\\frac{1}{2}$'}, 'answer': 'B', 'explanation': 'Es $\\frac{1}{2} \\cdot \\frac{1}{2} = 1/4$. El entero 2 tiene un 1 abajo.'},
+            {'question': 'Al resolver $\\frac{3}{4} - \\frac{1}{2} + \\frac{5}{4}$, el resultado simplificado es:**\n\\', 'options': {'A': '$\\frac{3}{2}$', 'B': '$\\frac{7}{4}$', 'C': '1', 'D': '$\\frac{9}{4}$'}, 'answer': 'A', 'explanation': 'mcm es 4: $3/4 - 2/4 + 5/4 = 6/4 = 3/2$.'},
+            {'question': 'El valor de la expresión $\\frac{1 + \\frac{1}{3}}{2}$ es:**\n\\', 'options': {'A': '$\\frac{4}{3}$', 'B': '$\\frac{8}{3}$', 'C': '$\\frac{2}{3}$', 'D': '$\\frac{1}{3}$'}, 'answer': 'C', 'explanation': 'Numerador: $4/3$. Luego $\\frac{4/3}{2/1}$ (Atajo del Pillo) $= 4/6 = 2/3$.'},
+            {'question': '¿Cuál es el resultado de $\\frac{2}{5} \\cdot \\frac{10}{3} \\div \\frac{4}{3}$?**\n\\', 'options': {'A': '1', 'B': '$\\frac{16}{25}$', 'C': '$\\frac{4}{3}$', 'D': '$\\frac{8}{15}$'}, 'answer': 'A', 'explanation': 'Mult: $20/15 = 4/3$. Luego $4/3 \\div 4/3 = 1$.'},
+            {'question': 'La expresión del terror: $\\left( \\frac{1}{2} + \\frac{1}{2} \\right) \\cdot \\frac{3}{4} - \\frac{1}{4}$ resulta en:**\n\\', 'options': {'A': '$\\frac{1}{2}$', 'B': '1', 'C': '$\\frac{3}{4}$', 'D': '0'}, 'answer': 'A', 'explanation': 'Paréntesis: $1 \\cdot 3/4 = 3/4$. Luego $3/4 - 1/4 = 2/4 = 1/2$.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="n12_quiz")
 
     with st.expander("🔑 Pauta Técnica N12: Control de Navegación", expanded=False):
         st.markdown(r"""

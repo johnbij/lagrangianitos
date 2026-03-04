@@ -2,82 +2,84 @@ import streamlit as st
 
 
 def render_N10():
-    st.title("N10: Mecánica de Operatoria - El Manual de Seguridad del Taller")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("N10: Mecánica de Operatoria - El Manual de Seguridad del Taller")
 
-    st.markdown(r"""
-**Eje:** Números | **Nivel:** Control de Errores Críticos
+        st.markdown(r"""
+    **Eje:** Números | **Nivel:** Control de Errores Críticos
 
----
+    ---
 
-### 🏛️ 1. Contexto Histórico: De las Piedras a los Algoritmos
-Durante milenios, la humanidad solo sabía sumar y restar (poner y quitar ovejas). La **Multiplicación** nació como un "atajo" para no sumar lo mismo mil veces, pero la **División**... la división fue el verdadero dolor de cabeza.
+    ### 🏛️ 1. Contexto Histórico: De las Piedras a los Algoritmos
+    Durante milenios, la humanidad solo sabía sumar y restar (poner y quitar ovejas). La **Multiplicación** nació como un "atajo" para no sumar lo mismo mil veces, pero la **División**... la división fue el verdadero dolor de cabeza.
 
-En la Edad Media, saber dividir era considerado una habilidad de nivel universitario; la gente viajaba cientos de kilómetros solo para aprender el algoritmo de la división larga. ¿Por qué? Porque sin el **Cero** (que nos trajeron los árabes de la India) y sin un orden claro, repartir 1.543 sacos de trigo entre 12 familias era una misión imposible. El **PAPOMUDAS** no es un capricho moderno; es el resultado de siglos de errores, barcos hundidos por cálculos mal hechos y puentes caídos. Es el protocolo para que la lógica no se rompa.
+    En la Edad Media, saber dividir era considerado una habilidad de nivel universitario; la gente viajaba cientos de kilómetros solo para aprender el algoritmo de la división larga. ¿Por qué? Porque sin el **Cero** (que nos trajeron los árabes de la India) y sin un orden claro, repartir 1.543 sacos de trigo entre 12 familias era una misión imposible. El **PAPOMUDAS** no es un capricho moderno; es el resultado de siglos de errores, barcos hundidos por cálculos mal hechos y puentes caídos. Es el protocolo para que la lógica no se rompa.
 
----
+    ---
 
-### 🛡️ 8.E.1 El Protocolo Universal: PAPOMUDAS
-En un taller, no puedes pintar antes de lijar. En matemática, no puedes sumar antes de multiplicar. El orden es sagrado para que el resultado sea único.
+    ### 🛡️ 8.E.1 El Protocolo Universal: PAPOMUDAS
+    En un taller, no puedes pintar antes de lijar. En matemática, no puedes sumar antes de multiplicar. El orden es sagrado para que el resultado sea único.
 
-### 🛠️ La Jerarquía de Mando:
-1. **PA (Paréntesis)**
-2. **PO (Potencias)**
-3. **MU - DA (Multiplicación y División)** de izquierda a derecha.
-4. **S (Suma y Resta)** de izquierda a derecha.
+    ### 🛠️ La Jerarquía de Mando:
+    1. **PA (Paréntesis)**
+    2. **PO (Potencias)**
+    3. **MU - DA (Multiplicación y División)** de izquierda a derecha.
+    4. **S (Suma y Resta)** de izquierda a derecha.
 
-**Ejemplo de Aplicación Paso a Paso:**
-Ejercicio: $20 + [ 5 \cdot (2^3 - 3) ]$
+    **Ejemplo de Aplicación Paso a Paso:**
+    Ejercicio: $20 + [ 5 \cdot (2^3 - 3) ]$
 
-* **Paso 1 (Potencia dentro del paréntesis):** $20 + [ 5 \cdot (8 - 3) ]$
-* **Paso 2 (Resolver paréntesis circular):** $20 + [ 5 \cdot 5 ]$
-* **Paso 3 (Resolver corchete/multiplicación):** $20 + 25$
-* **Paso 4 (Suma final):** $45$
+    * **Paso 1 (Potencia dentro del paréntesis):** $20 + [ 5 \cdot (8 - 3) ]$
+    * **Paso 2 (Resolver paréntesis circular):** $20 + [ 5 \cdot 5 ]$
+    * **Paso 3 (Resolver corchete/multiplicación):** $20 + 25$
+    * **Paso 4 (Suma final):** $45$
 
----
+    ---
 
-### 🛡️ 8.E.2 La Guerra de los Signos (Lógica de Sentido Común)
-Olvida la memoria mecánica. Entiende la lógica:
+    ### 🛡️ 8.E.2 La Guerra de los Signos (Lógica de Sentido Común)
+    Olvida la memoria mecánica. Entiende la lógica:
 
-* **Suma y Resta:** Piénsalo como dinero.
-    * **Signos Iguales:** Si debes 5 ($-5$) y pides prestado 3 más ($-3$), ahora debes 8 ($-8$). Se suman las deudas o los haberes.
-    * **Signos Distintos:** Si tienes 10 ($+10$) pero debes 15 ($-15$), pagas y quedas debiendo 5 ($-5$). Es una resta donde manda el que tiene más "fuerza".
+    * **Suma y Resta:** Piénsalo como dinero.
+        * **Signos Iguales:** Si debes 5 ($-5$) y pides prestado 3 más ($-3$), ahora debes 8 ($-8$). Se suman las deudas o los haberes.
+        * **Signos Distintos:** Si tienes 10 ($+10$) pero debes 15 ($-15$), pagas y quedas debiendo 5 ($-5$). Es una resta donde manda el que tiene más "fuerza".
 
-* **Multiplicación y División:** Aquí el signo es un "operador de dirección".
-    * El amigo (+) de mi amigo (+) es mi **amigo (+)**.
-    * El enemigo (-) de mi enemigo (-) es mi **amigo (+)**.
-    * El enemigo (-) de mi amigo (+) es mi **enemigo (-)**.
+    * **Multiplicación y División:** Aquí el signo es un "operador de dirección".
+        * El amigo (+) de mi amigo (+) es mi **amigo (+)**.
+        * El enemigo (-) de mi enemigo (-) es mi **amigo (+)**.
+        * El enemigo (-) de mi amigo (+) es mi **enemigo (-)**.
 
----
+    ---
 
-### 🛡️ 8.E.3 La División: Desmitificando el Monstruo
-Dividir no es más que **restar repetidamente**. Si digo $20 \div 5$, estoy preguntando: "¿Cuántas veces puedo quitarle 5 al 20 hasta que no quede nada?".
+    ### 🛡️ 8.E.3 La División: Desmitificando el Monstruo
+    Dividir no es más que **restar repetidamente**. Si digo $20 \div 5$, estoy preguntando: "¿Cuántas veces puedo quitarle 5 al 20 hasta que no quede nada?".
 
-**El truco de la coma (A prueba de errores):**
-El cerebro humano odia dividir por "pedazos" (decimales). Si tienes $12 \div 0,2$, la técnica es **amplificar**.
-* Multiplicas el dividendo y el divisor por 10: $120 \div 2 = 60$.
-* ¡Es el mismo resultado y no te arriesgaste con la coma!
+    **El truco de la coma (A prueba de errores):**
+    El cerebro humano odia dividir por "pedazos" (decimales). Si tienes $12 \div 0,2$, la técnica es **amplificar**.
+    * Multiplicas el dividendo y el divisor por 10: $120 \div 2 = 60$.
+    * ¡Es el mismo resultado y no te arriesgaste con la coma!
 
----
+    ---
 
-### 🛡️ 8.E.4 Multiplicación y División por potencias de 10
-Es como mover un mueble en el taller. La coma salta según la cantidad de ceros.
+    ### 🛡️ 8.E.4 Multiplicación y División por potencias de 10
+    Es como mover un mueble en el taller. La coma salta según la cantidad de ceros.
 
-**Ejemplos Paso a Paso:**
+    **Ejemplos Paso a Paso:**
 
-* **Multiplicación ($45,67 \cdot 100$):**
-    * Hay 2 ceros, la coma se mueve 2 lugares a la **derecha**.
-    * $45,67 \rightarrow 456,7 \rightarrow 4567$
-* **División ($12,8 \div 1000$):**
-    * Hay 3 ceros, la coma se mueve 3 lugares a la **izquierda**.
-    * $12,8 \rightarrow 1,28 \rightarrow 0,128 \rightarrow 0,0128$
+    * **Multiplicación ($45,67 \cdot 100$):**
+        * Hay 2 ceros, la coma se mueve 2 lugares a la **derecha**.
+        * $45,67 \rightarrow 456,7 \rightarrow 4567$
+    * **División ($12,8 \div 1000$):**
+        * Hay 3 ceros, la coma se mueve 3 lugares a la **izquierda**.
+        * $12,8 \rightarrow 1,28 \rightarrow 0,128 \rightarrow 0,0128$
 
-> **Típ:** Si al mover la coma hacia la izquierda te quedas sin números, rellena con ceros. El cero es el guardián de la posición vacía.
+    > **Típ:** Si al mover la coma hacia la izquierda te quedas sin números, rellena con ceros. El cero es el guardián de la posición vacía.
 
----
+    ---
 
-> "La aritmética es ser capaz de contar hasta veinte sin quitarse los zapatos".
-> — **Mickey Mouse**
-""")
+    > "La aritmética es ser capaz de contar hasta veinte sin quitarse los zapatos".
+    > — **Mickey Mouse**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos: El Taller de Operatoria", expanded=False):
         st.markdown(r"""
@@ -194,110 +196,21 @@ Es como mover un mueble en el taller. La coma salta según la cantidad de ceros.
 | 0,004 | 0,0004 $\rightarrow$ 0,00004 | **0,00004** |
 """)
 
-    with st.expander("❓ Cuestionario N10: Mecánica de Operatoria", expanded=False):
-        st.markdown(r"""
-> **¡Atención al Detalle!** En este cuestionario, un signo o un orden mal aplicado te llevará a la alternativa trampa. Respira y aplica el PAPOMUDAS.
-
-**1. ¿Cuál es el resultado de $12 - 4 \cdot 2 + 5$?**
-\
-A) 21
-\
-B) 9
-\
-C) 13
-\
-D) 24
-
-**2. Al resolver $30 \div 5 \cdot 3$, el resultado correcto es:**
-\
-A) 2
-\
-B) 18
-\
-C) 10
-\
-D) 45
-
-**3. El valor de la expresión $-10 - (-5) + (-8)$ es:**
-\
-A) -23
-\
-B) -13
-\
-C) -7
-\
-D) -3
-
-**4. ¿Cuál es el resultado de $2 \cdot [ 15 - (2^3 + 2) ]$?**
-\
-A) 10
-\
-B) 20
-\
-C) 5
-\
-D) 30
-
-**5. Si dividimos $1,2$ por $0,02$, obtenemos:**
-\
-A) 0,6
-\
-B) 6
-\
-C) 60
-\
-D) 600
-
-**6. ¿Qué resultado se obtiene de $100 \div 10^2 + 5 \cdot 0$?**
-\
-A) 1
-\
-B) 0
-\
-C) 6
-\
-D) 10
-
-**7. El resultado de $(-2) \cdot (-1) \cdot (-3) \cdot (-2)$ es:**
-\
-A) 12
-\
-B) -12
-\
-C) 6
-\
-D) -6
-
-**8. Si a $-15$ le restamos $-20$, el resultado es:**
-\
-A) -35
-\
-B) 35
-\
-C) -5
-\
-D) 5
-
-**9. Al multiplicar $0,045$ por $1.000$, el resultado es:**
-\
-A) 4,5
-\
-B) 45
-\
-C) 450
-\
-D) 0,45
-
-**10. ¿Cuál es el valor de $50 - 2 \cdot (10 - 4 \cdot 2)$?**
-\
-A) 96
-\
-B) 46
-\
-C) 42
-\
-D) 38
-""")
+    with st.expander("❓ Cuestionario N10", expanded=False):
+        from utils import render_multiple_choice_quiz
+        quiz = [
+            {'question': '¿Cuál es el resultado de $12 - 4 \\cdot 2 + 5$?**\n\\', 'options': {'A': '21', 'B': '9', 'C': '13', 'D': '24'}, 'answer': 'B', 'explanation': 'Multiplicación primero: $12 - 8 + 5 = 4 + 5 = 9$.'},
+            {'question': 'Al resolver $30 \\div 5 \\cdot 3$, el resultado correcto es:**\n\\', 'options': {'A': '2', 'B': '18', 'C': '10', 'D': '45'}, 'answer': 'B', 'explanation': 'De izquierda a derecha: $30 \\div 5 = 6$, luego $6 \\cdot 3 = 18$.'},
+            {'question': 'El valor de la expresión $-10 - (-5) + (-8)$ es:**\n\\', 'options': {'A': '-23', 'B': '-13', 'C': '-7', 'D': '-3'}, 'answer': 'B', 'explanation': '$-10 + 5 - 8 \\rightarrow -5 - 8 = -13$.'},
+            {'question': '¿Cuál es el resultado de $2 \\cdot [ 15 - (2^3 + 2) ]$?**\n\\', 'options': {'A': '10', 'B': '20', 'C': '5', 'D': '30'}, 'answer': 'A', 'explanation': 'Paréntesis: $(8+2)=10 \\rightarrow 2 \\cdot [15-10] \\rightarrow 2 \\cdot 5 = 10$.'},
+            {'question': 'Si dividimos $1,2$ por $0,02$, obtenemos:**\n\\', 'options': {'A': '0,6', 'B': '6', 'C': '60', 'D': '600'}, 'answer': 'C', 'explanation': 'Amplificar por 100: $120 \\div 2 = 60$.'},
+            {'question': '¿Qué resultado se obtiene de $100 \\div 10^2 + 5 \\cdot 0$?**\n\\', 'options': {'A': '1', 'B': '0', 'C': '6', 'D': '10'}, 'answer': 'A', 'explanation': 'Potencia: $100 \\div 100 + 0 \\rightarrow 1 + 0 = 1$.'},
+            {'question': 'El resultado de $(-2) \\cdot (-1) \\cdot (-3) \\cdot (-2)$ es:**\n\\', 'options': {'A': '12', 'B': '-12', 'C': '6', 'D': '-6'}, 'answer': 'A', 'explanation': 'Cuatro signos negativos (par) resulta en positivo: $2 \\cdot 1 \\cdot 3 \\cdot 2 = 12$.'},
+            {'question': 'Si a $-15$ le restamos $-20$, el resultado es:**\n\\', 'options': {'A': '-35', 'B': '35', 'C': '-5', 'D': '5'}, 'answer': 'D', 'explanation': '$-15 - (-20) = -15 + 20 = 5$.'},
+            {'question': 'Al multiplicar $0,045$ por $1.000$, el resultado es:**\n\\', 'options': {'A': '4,5', 'B': '45', 'C': '450', 'D': '0,45'}, 'answer': 'B', 'explanation': 'Tres ceros, la coma corre 3 espacios a la derecha: $45$.'},
+            {'question': '¿Cuál es el valor de $50 - 2 \\cdot (10 - 4 \\cdot 2)$?**\n\\', 'options': {'A': '96', 'B': '46', 'C': '42', 'D': '38'}, 'answer': 'B', 'explanation': 'Paréntesis interior: $10 - 8 = 2 \\rightarrow 50 - 2 \\cdot 2 \\rightarrow 50 - 4 = 46$.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="n10_quiz")
 
     with st.expander("🔑 Pauta Técnica N10: Mecánica de Operatoria", expanded=False):
         st.markdown(r"""
