@@ -6,22 +6,22 @@ def render_N02():
     with st.expander("📚 Teoría", expanded=False):
 
         st.markdown("""
-    # Eje Números
+  
     ## N02: Los Números Naturales ($\\mathbb{N}$) - El Génesis del Conteo
 
     ---
 
-    ### 🛡️ 1. El Portal: El Instinto de Cuantificar
+    ### 🛡️  El Portal: El Instinto de Cuantificar
     Mucho antes de que existieran las pizarras o los computadores, el ser humano tuvo una necesidad vital: **¿Cuántos hay?** Los Números Naturales no fueron inventados; fueron descubiertos como la herramienta de supervivencia definitiva para contar presas, días y ciclos.
 
     ---
 
-    ### 🛡️ 2. Crónica del Origen: El Hueso de Ishango y Peano
+    ### 🛡️  Crónica del Origen: El Hueso de Ishango y Peano
     Hace más de 20.000 años, alguien talló marcas en un hueso (el Hueso de Ishango) para llevar una cuenta. Siglos después, **Giuseppe Peano** definió los "Axiomas de Peano", demostrando que solo necesitábamos un punto de partida (el 1) y un sucesor para construir todo el universo matemático.
 
     ---
 
-    ### 🛡️ 3. Definición y Características Formales
+    ### 🛡️  Definición y Características Formales
     Se denota con la letra $\\mathbb{N}$ y se define como el conjunto infinito:
     $$\\mathbb{N} = \\{1, 2, 3, 4, 5, 6, 7, ...\\}$$
     * **Primer Elemento:** El **1** es el inicio absoluto. Carece de antecesor en este conjunto.
@@ -49,7 +49,7 @@ def render_N02():
         st.markdown("""
     ---
 
-    ### 🛡️ 4. La Ley de Tricotomía: El Juez de los Números
+    ### 🛡️  La Ley de Tricotomía: El Juez de los Números
     Esta es la regla que permite el orden. Establece que si tomas dos números naturales cualesquiera, $a$ y $b$, **solo una** de estas tres realidades es posible:
     1. **$a < b$** ($a$ está a la izquierda de $b$).
     2. **$a > b$** ($a$ está a la derecha de $b$).
@@ -57,7 +57,7 @@ def render_N02():
 
     ---
 
-    ### 🛡️ 5. Relaciones de Vecindad
+    ### 🛡️  Relaciones de Vecindad
     * **El Sucesor:** Todo $n \\in \\mathbb{N}$ tiene un sucesor único: $(n + 1)$.
     * **El Antecesor:** Todo $n \\in \\mathbb{N}$, **con excepción del 1**, tiene un antecesor único: $(n - 1)$.
 
@@ -65,7 +65,7 @@ def render_N02():
 
     ---
 
-    ### 🛡️ 6. Las Reglas del Juego: Propiedades Estructurales
+    ### 🛡️  Las Reglas del Juego: Propiedades Estructurales
     Para operar en $\\mathbb{N}$, debemos conocer las leyes que gobiernan el comportamiento de los números:
     * **Clausura (Cierre):** Un conjunto es "cerrado" si al operar dos de sus elementos, el resultado **siempre** es un elemento del mismo conjunto.
     * **Conmutativa:** El orden de los sumandos o factores no altera el resultado ($a + b = b + a$).
