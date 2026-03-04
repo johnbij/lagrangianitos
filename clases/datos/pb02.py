@@ -3,79 +3,81 @@ from utils import render_multiple_choice_quiz
 
 
 def render_PB02():
-    st.title("PB02: Probabilidad Clásica — La Regla de Laplace")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("PB02: Probabilidad Clásica — La Regla de Laplace")
 
-    st.markdown(r"""
-### 🛡️ 1. El Portal: Medir la Incertidumbre con un Número
+        st.markdown(r"""
+    ### 🛡️ 1. El Portal: Medir la Incertidumbre con un Número
 
-¿Qué tan probable es que llueva mañana? ¿Qué chance tienes de sacar un $6$ con un dado? La probabilidad asigna un **número entre $0$ y $1$** a cada evento, donde $0$ significa imposible y $1$ significa seguro. La **Regla de Laplace** es el método más directo para calcular probabilidades cuando todos los resultados son **igualmente probables**.
+    ¿Qué tan probable es que llueva mañana? ¿Qué chance tienes de sacar un $6$ con un dado? La probabilidad asigna un **número entre $0$ y $1$** a cada evento, donde $0$ significa imposible y $1$ significa seguro. La **Regla de Laplace** es el método más directo para calcular probabilidades cuando todos los resultados son **igualmente probables**.
 
----
+    ---
 
-### 🛡️ 2. Definición Clásica de Probabilidad (Laplace)
+    ### 🛡️ 2. Definición Clásica de Probabilidad (Laplace)
 
-$$P(A) = \frac{|A|}{|\Omega|} = \frac{\text{casos favorables}}{\text{casos posibles}}$$
+    $$P(A) = \frac{|A|}{|\Omega|} = \frac{\text{casos favorables}}{\text{casos posibles}}$$
 
-**Condición clave:** Todos los resultados del espacio muestral deben ser **equiprobables** (tener la misma probabilidad).
+    **Condición clave:** Todos los resultados del espacio muestral deben ser **equiprobables** (tener la misma probabilidad).
 
----
+    ---
 
-### 🛡️ 3. Propiedades Fundamentales
+    ### 🛡️ 3. Propiedades Fundamentales
 
-| Propiedad | Fórmula | Significado |
-| :--- | :---: | :--- |
-| Rango | $0 \leq P(A) \leq 1$ | Toda probabilidad está entre $0$ y $1$ |
-| Evento seguro | $P(\Omega) = 1$ | Algún resultado siempre ocurre |
-| Evento imposible | $P(\emptyset) = 0$ | Lo imposible tiene probabilidad $0$ |
-| Complemento | $P(A^c) = 1 - P(A)$ | La probabilidad de que NO ocurra $A$ |
-| Unión (excl.) | $P(A \cup B) = P(A) + P(B)$ | Si $A \cap B = \emptyset$ |
-| Unión (general) | $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ | Para cualquier par de eventos |
+    | Propiedad | Fórmula | Significado |
+    | :--- | :---: | :--- |
+    | Rango | $0 \leq P(A) \leq 1$ | Toda probabilidad está entre $0$ y $1$ |
+    | Evento seguro | $P(\Omega) = 1$ | Algún resultado siempre ocurre |
+    | Evento imposible | $P(\emptyset) = 0$ | Lo imposible tiene probabilidad $0$ |
+    | Complemento | $P(A^c) = 1 - P(A)$ | La probabilidad de que NO ocurra $A$ |
+    | Unión (excl.) | $P(A \cup B) = P(A) + P(B)$ | Si $A \cap B = \emptyset$ |
+    | Unión (general) | $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ | Para cualquier par de eventos |
 
-> **Tip PAES:** Muchas veces es más fácil calcular $P(A^c)$ y luego $P(A) = 1 - P(A^c)$, especialmente cuando $A$ tiene muchos casos favorables.
+    > **Tip PAES:** Muchas veces es más fácil calcular $P(A^c)$ y luego $P(A) = 1 - P(A^c)$, especialmente cuando $A$ tiene muchos casos favorables.
 
----
+    ---
 
-### 🛡️ 4. Probabilidades Clásicas — Situaciones Frecuentes
+    ### 🛡️ 4. Probabilidades Clásicas — Situaciones Frecuentes
 
-#### 🎲 Dado justo (6 caras)
-| Evento | Casos favorables | $P$ |
-| :--- | :---: | :---: |
-| Obtener un $4$ | $1$ | $\frac{1}{6}$ |
-| Obtener un par | $\{2, 4, 6\}$ → $3$ | $\frac{3}{6} = \frac{1}{2}$ |
-| Obtener un primo | $\{2, 3, 5\}$ → $3$ | $\frac{1}{2}$ |
-| Obtener más de $4$ | $\{5, 6\}$ → $2$ | $\frac{1}{3}$ |
+    #### 🎲 Dado justo (6 caras)
+    | Evento | Casos favorables | $P$ |
+    | :--- | :---: | :---: |
+    | Obtener un $4$ | $1$ | $\frac{1}{6}$ |
+    | Obtener un par | $\{2, 4, 6\}$ → $3$ | $\frac{3}{6} = \frac{1}{2}$ |
+    | Obtener un primo | $\{2, 3, 5\}$ → $3$ | $\frac{1}{2}$ |
+    | Obtener más de $4$ | $\{5, 6\}$ → $2$ | $\frac{1}{3}$ |
 
-#### 🪙 Monedas
-| Experimento | $|\Omega|$ | Evento | $P$ |
-| :--- | :---: | :--- | :---: |
-| $1$ moneda | $2$ | Cara | $\frac{1}{2}$ |
-| $2$ monedas | $4$ | Exactamente $1$ cara | $\frac{2}{4} = \frac{1}{2}$ |
-| $3$ monedas | $8$ | Las $3$ caras | $\frac{1}{8}$ |
+    #### 🪙 Monedas
+    | Experimento | $|\Omega|$ | Evento | $P$ |
+    | :--- | :---: | :--- | :---: |
+    | $1$ moneda | $2$ | Cara | $\frac{1}{2}$ |
+    | $2$ monedas | $4$ | Exactamente $1$ cara | $\frac{2}{4} = \frac{1}{2}$ |
+    | $3$ monedas | $8$ | Las $3$ caras | $\frac{1}{8}$ |
 
-#### 🃏 Baraja española (40 cartas, 4 palos)
-| Evento | Casos favorables | $P$ |
-| :--- | :---: | :---: |
-| Sacar un as | $4$ | $\frac{4}{40} = \frac{1}{10}$ |
-| Sacar una carta de oros | $10$ | $\frac{10}{40} = \frac{1}{4}$ |
-| Sacar el $7$ de espadas | $1$ | $\frac{1}{40}$ |
+    #### 🃏 Baraja española (40 cartas, 4 palos)
+    | Evento | Casos favorables | $P$ |
+    | :--- | :---: | :---: |
+    | Sacar un as | $4$ | $\frac{4}{40} = \frac{1}{10}$ |
+    | Sacar una carta de oros | $10$ | $\frac{10}{40} = \frac{1}{4}$ |
+    | Sacar el $7$ de espadas | $1$ | $\frac{1}{40}$ |
 
----
+    ---
 
-### 🛡️ 5. Probabilidad del Complemento
+    ### 🛡️ 5. Probabilidad del Complemento
 
-Si calcular $P(A)$ directamente es difícil, usa el complemento:
+    Si calcular $P(A)$ directamente es difícil, usa el complemento:
 
-$$P(A) = 1 - P(A^c)$$
+    $$P(A) = 1 - P(A^c)$$
 
-**Ejemplo:** ¿Cuál es la probabilidad de obtener **al menos un $6$** al lanzar dos dados?
-- Es más fácil calcular $P(\text{ningún } 6) = \frac{5}{6} \times \frac{5}{6} = \frac{25}{36}$.
-- Entonces $P(\text{al menos un } 6) = 1 - \frac{25}{36} = \frac{11}{36}$.
+    **Ejemplo:** ¿Cuál es la probabilidad de obtener **al menos un $6$** al lanzar dos dados?
+    - Es más fácil calcular $P(\text{ningún } 6) = \frac{5}{6} \times \frac{5}{6} = \frac{25}{36}$.
+    - Entonces $P(\text{al menos un } 6) = 1 - \frac{25}{36} = \frac{11}{36}$.
 
----
+    ---
 
-> *"La probabilidad es el sentido común reducido a cálculo."*
-> — **Pierre-Simon Laplace**
-""")
+    > *"La probabilidad es el sentido común reducido a cálculo."*
+    > — **Pierre-Simon Laplace**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería PB02", expanded=False):
         st.markdown(r"""

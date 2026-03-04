@@ -1,109 +1,112 @@
+from utils import render_multiple_choice_quiz
 import streamlit as st
 
 
 def render_PB04():
-    st.title("PB04: Técnicas de Conteo y Combinatoria — Contar sin Enumerar")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("PB04: Técnicas de Conteo y Combinatoria — Contar sin Enumerar")
 
-    st.markdown(r"""
-### 🛡️ 1. El Portal: ¿Cuántas Formas Hay?
+        st.markdown(r"""
+    ### 🛡️ 1. El Portal: ¿Cuántas Formas Hay?
 
-Antes de calcular una probabilidad con Laplace ($P = \frac{\text{favorables}}{\text{posibles}}$), necesitas **contar** esos casos. Cuando el espacio muestral es grande, enumerar uno por uno es impracticable. Las técnicas de conteo te dan atajos poderosos para determinar $|A|$ y $|\Omega|$ de forma eficiente.
+    Antes de calcular una probabilidad con Laplace ($P = \frac{\text{favorables}}{\text{posibles}}$), necesitas **contar** esos casos. Cuando el espacio muestral es grande, enumerar uno por uno es impracticable. Las técnicas de conteo te dan atajos poderosos para determinar $|A|$ y $|\Omega|$ de forma eficiente.
 
----
+    ---
 
-### 🛡️ 2. Principio Multiplicativo
+    ### 🛡️ 2. Principio Multiplicativo
 
-Si una tarea se realiza en **etapas sucesivas**, donde la etapa $1$ tiene $n_1$ opciones, la etapa $2$ tiene $n_2$ opciones, etc., el total de formas es:
+    Si una tarea se realiza en **etapas sucesivas**, donde la etapa $1$ tiene $n_1$ opciones, la etapa $2$ tiene $n_2$ opciones, etc., el total de formas es:
 
-$$\text{Total} = n_1 \times n_2 \times \cdots \times n_k$$
+    $$\text{Total} = n_1 \times n_2 \times \cdots \times n_k$$
 
-**Ejemplo:** Un menú ofrece $3$ entradas, $4$ platos de fondo y $2$ postres → total de menús = $3 \times 4 \times 2 = 24$.
+    **Ejemplo:** Un menú ofrece $3$ entradas, $4$ platos de fondo y $2$ postres → total de menús = $3 \times 4 \times 2 = 24$.
 
----
+    ---
 
-### 🛡️ 3. Principio Aditivo
+    ### 🛡️ 3. Principio Aditivo
 
-Si una tarea se puede hacer de **una forma O de otra** (formas mutuamente excluyentes), el total es:
+    Si una tarea se puede hacer de **una forma O de otra** (formas mutuamente excluyentes), el total es:
 
-$$\text{Total} = n_1 + n_2 + \cdots + n_k$$
+    $$\text{Total} = n_1 + n_2 + \cdots + n_k$$
 
-**Ejemplo:** Puedo ir al trabajo en bus ($5$ líneas) o en metro ($3$ líneas) → total de opciones = $5 + 3 = 8$.
+    **Ejemplo:** Puedo ir al trabajo en bus ($5$ líneas) o en metro ($3$ líneas) → total de opciones = $5 + 3 = 8$.
 
-> **Clave:** Multiplicativo = "Y" (etapas). Aditivo = "O" (alternativas).
+    > **Clave:** Multiplicativo = "Y" (etapas). Aditivo = "O" (alternativas).
 
----
+    ---
 
-### 🛡️ 4. Factorial ($n!$)
+    ### 🛡️ 4. Factorial ($n!$)
 
-$$n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1$$
+    $$n! = n \times (n-1) \times (n-2) \times \cdots \times 2 \times 1$$
 
-| $n$ | $n!$ |
-| :---: | :---: |
-| $0$ | $1$ (por definición) |
-| $1$ | $1$ |
-| $3$ | $6$ |
-| $5$ | $120$ |
-| $6$ | $720$ |
-| $10$ | $3.628.800$ |
+    | $n$ | $n!$ |
+    | :---: | :---: |
+    | $0$ | $1$ (por definición) |
+    | $1$ | $1$ |
+    | $3$ | $6$ |
+    | $5$ | $120$ |
+    | $6$ | $720$ |
+    | $10$ | $3.628.800$ |
 
-> **Uso:** $n!$ cuenta el número de formas de **ordenar** $n$ objetos distintos en fila.
+    > **Uso:** $n!$ cuenta el número de formas de **ordenar** $n$ objetos distintos en fila.
 
----
+    ---
 
-### 🛡️ 5. Permutaciones
+    ### 🛡️ 5. Permutaciones
 
-Una **permutación** es una disposición ordenada de elementos. El **orden importa**.
+    Una **permutación** es una disposición ordenada de elementos. El **orden importa**.
 
-**Permutaciones de $n$ objetos tomados de $r$ en $r$:**
+    **Permutaciones de $n$ objetos tomados de $r$ en $r$:**
 
-$$P(n, r) = \frac{n!}{(n-r)!}$$
+    $$P(n, r) = \frac{n!}{(n-r)!}$$
 
-**Ejemplo:** ¿De cuántas formas se pueden elegir presidente, vicepresidente y secretario de un grupo de $10$ personas?
+    **Ejemplo:** ¿De cuántas formas se pueden elegir presidente, vicepresidente y secretario de un grupo de $10$ personas?
 
-$$P(10, 3) = \frac{10!}{7!} = 10 \times 9 \times 8 = 720$$
+    $$P(10, 3) = \frac{10!}{7!} = 10 \times 9 \times 8 = 720$$
 
----
+    ---
 
-### 🛡️ 6. Combinaciones
+    ### 🛡️ 6. Combinaciones
 
-Una **combinación** es una selección donde el **orden NO importa**.
+    Una **combinación** es una selección donde el **orden NO importa**.
 
-$$\binom{n}{k} = C(n, k) = \frac{n!}{k!(n-k)!}$$
+    $$\binom{n}{k} = C(n, k) = \frac{n!}{k!(n-k)!}$$
 
-**Ejemplo:** ¿De cuántas formas se pueden elegir $3$ delegados de un grupo de $10$ personas (sin importar el cargo)?
+    **Ejemplo:** ¿De cuántas formas se pueden elegir $3$ delegados de un grupo de $10$ personas (sin importar el cargo)?
 
-$$\binom{10}{3} = \frac{10!}{3! \cdot 7!} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1} = 120$$
+    $$\binom{10}{3} = \frac{10!}{3! \cdot 7!} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1} = 120$$
 
----
+    ---
 
-### 🛡️ 7. ¿Permutación o Combinación?
+    ### 🛡️ 7. ¿Permutación o Combinación?
 
-| Pregunta clave | Si sí → | Si no → |
-| :--- | :--- | :--- |
-| ¿Importa el orden? | **Permutación** | **Combinación** |
+    | Pregunta clave | Si sí → | Si no → |
+    | :--- | :--- | :--- |
+    | ¿Importa el orden? | **Permutación** | **Combinación** |
 
-| Situación | ¿Importa el orden? | Tipo |
-| :--- | :---: | :--- |
-| Elegir presidente y secretario | Sí | Permutación |
-| Elegir un comité de $3$ personas | No | Combinación |
-| Formar una clave de $4$ dígitos | Sí | Permutación |
-| Elegir $5$ cartas de un mazo | No | Combinación |
+    | Situación | ¿Importa el orden? | Tipo |
+    | :--- | :---: | :--- |
+    | Elegir presidente y secretario | Sí | Permutación |
+    | Elegir un comité de $3$ personas | No | Combinación |
+    | Formar una clave de $4$ dígitos | Sí | Permutación |
+    | Elegir $5$ cartas de un mazo | No | Combinación |
 
----
+    ---
 
-### 🛡️ 8. Variaciones con Repetición
+    ### 🛡️ 8. Variaciones con Repetición
 
-Cuando los elementos se pueden **repetir** y el orden importa:
+    Cuando los elementos se pueden **repetir** y el orden importa:
 
-$$VR(n, r) = n^r$$
+    $$VR(n, r) = n^r$$
 
-**Ejemplo:** Claves de $4$ dígitos (cada dígito de $0$ a $9$): $10^4 = 10.000$.
+    **Ejemplo:** Claves de $4$ dígitos (cada dígito de $0$ a $9$): $10^4 = 10.000$.
 
----
+    ---
 
-> *"Contar es la primera habilidad matemática; saber contar bien, la última."*
-> — **Anónimo**
-""")
+    > *"Contar es la primera habilidad matemática; saber contar bien, la última."*
+    > — **Anónimo**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería PB04", expanded=False):
         st.markdown(r"""
@@ -162,69 +165,16 @@ $$VR(n, r) = n^r$$
 """)
 
     with st.expander("❓ Cuestionario PB04: Técnicas de Conteo", expanded=False):
-        st.markdown(r"""
-**1. $5!$ es igual a:**
-
-A) $25$
-B) $120$
-C) $60$
-D) $720$
-
----
-
-**2. ¿Cuántas formas hay de ordenar las letras de la palabra "SOL"?**
-
-A) $3$
-B) $6$
-C) $9$
-D) $27$
-
----
-
-**3. Se eligen $2$ delegados de un curso de $10$ alumnos (sin importar el cargo). ¿Cuántas formas hay?**
-
-A) $90$
-B) $45$
-C) $20$
-D) $100$
-
----
-
-**4. Una placa de auto tiene $4$ letras seguidas de $2$ dígitos (con repetición). ¿Cuántas placas distintas hay?**
-
-A) $26^4 \times 10^2$
-B) $26 \times 10$
-C) $\binom{26}{4} \times \binom{10}{2}$
-D) $26 + 10$
-
----
-
-**5. $\binom{5}{2}$ es igual a:**
-
-A) $25$
-B) $20$
-C) $10$
-D) $\frac{5}{2}$
-
----
-
-**6. ¿Cuál es la diferencia entre permutación y combinación?**
-
-A) En la permutación no importa el orden
-B) En la combinación importa el orden
-C) En la permutación importa el orden; en la combinación, no
-D) Son lo mismo
-
----
-
-**7. ¿Cuántas claves de $3$ dígitos se pueden formar con los números del $1$ al $5$ SIN repetir?**
-
-A) $125$
-B) $60$
-C) $10$
-D) $15$
-""")
-
+        quiz_questions = [
+            {"question": "$5!$ es igual a:", "options": {"A": "$25$", "B": "$120$", "C": "$60$", "D": "$720$"}, "answer": "B", "explanation": "$5!=5\\times4\\times3\\times2\\times1=120$."},
+            {"question": "¿Cuántas formas hay de ordenar las letras de 'SOL'?", "options": {"A": "$3$", "B": "$6$", "C": "$9$", "D": "$27$"}, "answer": "B", "explanation": "$3!=6$."},
+            {"question": "Se eligen $2$ delegados de $10$ alumnos (sin importar cargo). ¿Cuántas formas?", "options": {"A": "$90$", "B": "$45$", "C": "$20$", "D": "$100$"}, "answer": "B", "explanation": "$\\binom{10}{2}=45$."},
+            {"question": "Una placa tiene $4$ letras y $2$ dígitos (con repetición). ¿Cuántas placas hay?", "options": {"A": "$26^4\\times10^2$", "B": "$26\\times10$", "C": "$\\binom{26}{4}\\times\\binom{10}{2}$", "D": "$26+10$"}, "answer": "A", "explanation": "Con repetición: $26^4\\cdot10^2$."},
+            {"question": "$\\binom{5}{2}$ es igual a:", "options": {"A": "$25$", "B": "$20$", "C": "$10$", "D": "$\\dfrac{5}{2}$"}, "answer": "C", "explanation": "$\\binom{5}{2}=\\frac{5\\times4}{2}=10$."},
+            {"question": "¿Cuál es la diferencia entre permutación y combinación?", "options": {"A": "En la permutación no importa el orden", "B": "En la combinación importa el orden", "C": "En la permutación importa el orden; en la combinación, no", "D": "Son lo mismo"}, "answer": "C", "explanation": "Permutación: orden importa. Combinación: orden no importa."},
+            {"question": "Claves de $3$ dígitos del $1$ al $5$ SIN repetir. ¿Cuántas hay?", "options": {"A": "$125$", "B": "$60$", "C": "$10$", "D": "$15$"}, "answer": "B", "explanation": "$P(5,3)=5\\times4\\times3=60$."},
+        ]
+        render_multiple_choice_quiz(quiz_questions, key_prefix="pb04_quiz")
     with st.expander("🔑 Pauta Técnica PB04: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
 | Pregunta | Respuesta | Carpintería Técnica |

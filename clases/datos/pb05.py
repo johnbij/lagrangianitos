@@ -1,111 +1,114 @@
+from utils import render_multiple_choice_quiz
 import streamlit as st
 
 
 def render_PB05():
-    st.title("PB05: Variable Aleatoria y Distribuciones de Probabilidad — Cuando el Azar Tiene Estructura")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("PB05: Variable Aleatoria y Distribuciones de Probabilidad — Cuando el Azar Tiene Estructura")
 
-    st.markdown(r"""
-### 🛡️ 1. El Portal: Asignar Números al Azar
+        st.markdown(r"""
+    ### 🛡️ 1. El Portal: Asignar Números al Azar
 
-Hasta ahora, hablamos de eventos como "sacar cara" o "obtener un número par". Pero a menudo queremos trabajar con **números**: ¿cuántas caras salen al lanzar $3$ monedas? ¿Cuánto gano en un juego de azar? Una **variable aleatoria** es una función que asigna un valor numérico a cada resultado del espacio muestral.
+    Hasta ahora, hablamos de eventos como "sacar cara" o "obtener un número par". Pero a menudo queremos trabajar con **números**: ¿cuántas caras salen al lanzar $3$ monedas? ¿Cuánto gano en un juego de azar? Una **variable aleatoria** es una función que asigna un valor numérico a cada resultado del espacio muestral.
 
----
+    ---
 
-### 🛡️ 2. Variable Aleatoria Discreta
+    ### 🛡️ 2. Variable Aleatoria Discreta
 
-Una variable aleatoria $X$ es **discreta** cuando toma un número **finito** o **contable** de valores.
+    Una variable aleatoria $X$ es **discreta** cuando toma un número **finito** o **contable** de valores.
 
-**Ejemplo:** $X$ = "número de caras al lanzar $3$ monedas". Los valores posibles son $X \in \{0, 1, 2, 3\}$.
+    **Ejemplo:** $X$ = "número de caras al lanzar $3$ monedas". Los valores posibles son $X \in \{0, 1, 2, 3\}$.
 
----
+    ---
 
-### 🛡️ 3. Tabla de Distribución de Probabilidad
+    ### 🛡️ 3. Tabla de Distribución de Probabilidad
 
-Resume todos los valores posibles de $X$ y su probabilidad:
+    Resume todos los valores posibles de $X$ y su probabilidad:
 
-| $x_i$ | $P(X = x_i)$ |
-| :---: | :---: |
-| $0$ | $\frac{1}{8}$ |
-| $1$ | $\frac{3}{8}$ |
-| $2$ | $\frac{3}{8}$ |
-| $3$ | $\frac{1}{8}$ |
-| **Total** | $1$ |
+    | $x_i$ | $P(X = x_i)$ |
+    | :---: | :---: |
+    | $0$ | $\frac{1}{8}$ |
+    | $1$ | $\frac{3}{8}$ |
+    | $2$ | $\frac{3}{8}$ |
+    | $3$ | $\frac{1}{8}$ |
+    | **Total** | $1$ |
 
-**Propiedades:**
-1. $P(X = x_i) \geq 0$ para todo $i$.
-2. $\sum P(X = x_i) = 1$.
+    **Propiedades:**
+    1. $P(X = x_i) \geq 0$ para todo $i$.
+    2. $\sum P(X = x_i) = 1$.
 
----
+    ---
 
-### 🛡️ 4. Esperanza Matemática ($E(X)$)
+    ### 🛡️ 4. Esperanza Matemática ($E(X)$)
 
-La esperanza (o valor esperado) es el **promedio ponderado** de los valores de $X$:
+    La esperanza (o valor esperado) es el **promedio ponderado** de los valores de $X$:
 
-$$E(X) = \sum_{i} x_i \cdot P(X = x_i)$$
+    $$E(X) = \sum_{i} x_i \cdot P(X = x_i)$$
 
-**Ejemplo (3 monedas):**
+    **Ejemplo (3 monedas):**
 
-$$E(X) = 0 \cdot \frac{1}{8} + 1 \cdot \frac{3}{8} + 2 \cdot \frac{3}{8} + 3 \cdot \frac{1}{8} = \frac{0 + 3 + 6 + 3}{8} = \frac{12}{8} = 1{,}5$$
+    $$E(X) = 0 \cdot \frac{1}{8} + 1 \cdot \frac{3}{8} + 2 \cdot \frac{3}{8} + 3 \cdot \frac{1}{8} = \frac{0 + 3 + 6 + 3}{8} = \frac{12}{8} = 1{,}5$$
 
-**Interpretación:** Si repitieras el experimento muchas veces, en promedio obtendrías $1{,}5$ caras por lanzamiento.
+    **Interpretación:** Si repitieras el experimento muchas veces, en promedio obtendrías $1{,}5$ caras por lanzamiento.
 
-> **Tip PAES:** La esperanza **no** tiene que ser un valor entero, aunque $X$ solo tome valores enteros.
+    > **Tip PAES:** La esperanza **no** tiene que ser un valor entero, aunque $X$ solo tome valores enteros.
 
----
+    ---
 
-### 🛡️ 5. Varianza y Desviación Estándar de $X$
+    ### 🛡️ 5. Varianza y Desviación Estándar de $X$
 
-$$Var(X) = E(X^2) - [E(X)]^2$$
+    $$Var(X) = E(X^2) - [E(X)]^2$$
 
-donde $E(X^2) = \sum x_i^2 \cdot P(X = x_i)$.
+    donde $E(X^2) = \sum x_i^2 \cdot P(X = x_i)$.
 
-$$\sigma_X = \sqrt{Var(X)}$$
+    $$\sigma_X = \sqrt{Var(X)}$$
 
-**Ejemplo (continuando con las 3 monedas):**
+    **Ejemplo (continuando con las 3 monedas):**
 
-$E(X^2) = 0^2 \cdot \frac{1}{8} + 1^2 \cdot \frac{3}{8} + 2^2 \cdot \frac{3}{8} + 3^2 \cdot \frac{1}{8} = \frac{0+3+12+9}{8} = 3$.
+    $E(X^2) = 0^2 \cdot \frac{1}{8} + 1^2 \cdot \frac{3}{8} + 2^2 \cdot \frac{3}{8} + 3^2 \cdot \frac{1}{8} = \frac{0+3+12+9}{8} = 3$.
 
-$Var(X) = 3 - (1{,}5)^2 = 3 - 2{,}25 = 0{,}75$.
+    $Var(X) = 3 - (1{,}5)^2 = 3 - 2{,}25 = 0{,}75$.
 
-$\sigma_X = \sqrt{0{,}75} \approx 0{,}87$.
+    $\sigma_X = \sqrt{0{,}75} \approx 0{,}87$.
 
----
+    ---
 
-### 🛡️ 6. Distribución Binomial (Intuición)
+    ### 🛡️ 6. Distribución Binomial (Intuición)
 
-Cuando un experimento tiene solo **dos resultados** (éxito/fracaso), se repite $n$ veces de forma **independiente** y la probabilidad de éxito es $p$ constante, se aplica la distribución binomial:
+    Cuando un experimento tiene solo **dos resultados** (éxito/fracaso), se repite $n$ veces de forma **independiente** y la probabilidad de éxito es $p$ constante, se aplica la distribución binomial:
 
-$$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+    $$P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
-| Parámetro | Significado |
-| :--- | :--- |
-| $n$ | Número de repeticiones |
-| $p$ | Probabilidad de éxito en cada repetición |
-| $k$ | Número de éxitos deseados |
+    | Parámetro | Significado |
+    | :--- | :--- |
+    | $n$ | Número de repeticiones |
+    | $p$ | Probabilidad de éxito en cada repetición |
+    | $k$ | Número de éxitos deseados |
 
-**Esperanza:** $E(X) = n \cdot p$.
+    **Esperanza:** $E(X) = n \cdot p$.
 
-**Varianza:** $Var(X) = n \cdot p \cdot (1-p)$.
+    **Varianza:** $Var(X) = n \cdot p \cdot (1-p)$.
 
-**Ejemplo:** Se lanza una moneda $10$ veces. ¿Cuál es la probabilidad de obtener exactamente $3$ caras?
+    **Ejemplo:** Se lanza una moneda $10$ veces. ¿Cuál es la probabilidad de obtener exactamente $3$ caras?
 
-$$P(X = 3) = \binom{10}{3} \left(\frac{1}{2}\right)^3 \left(\frac{1}{2}\right)^7 = 120 \cdot \frac{1}{1024} = \frac{120}{1024} \approx 0{,}117$$
+    $$P(X = 3) = \binom{10}{3} \left(\frac{1}{2}\right)^3 \left(\frac{1}{2}\right)^7 = 120 \cdot \frac{1}{1024} = \frac{120}{1024} \approx 0{,}117$$
 
----
+    ---
 
-### 🛡️ 7. Ley de los Grandes Números
+    ### 🛡️ 7. Ley de los Grandes Números
 
-A medida que el número de repeticiones de un experimento aleatorio **aumenta**, el promedio de los resultados observados se **acerca** al valor esperado $E(X)$.
+    A medida que el número de repeticiones de un experimento aleatorio **aumenta**, el promedio de los resultados observados se **acerca** al valor esperado $E(X)$.
 
-**Ejemplo:** Si lanzas un dado $6$ veces, probablemente no obtendrás exactamente un promedio de $3{,}5$. Pero si lo lanzas $6.000$ veces, el promedio se acercará mucho a $3{,}5$.
+    **Ejemplo:** Si lanzas un dado $6$ veces, probablemente no obtendrás exactamente un promedio de $3{,}5$. Pero si lo lanzas $6.000$ veces, el promedio se acercará mucho a $3{,}5$.
 
-> **Tip PAES:** La ley de los grandes números NO dice que los resultados se "compensan" a corto plazo. No existe la "deuda" del azar.
+    > **Tip PAES:** La ley de los grandes números NO dice que los resultados se "compensan" a corto plazo. No existe la "deuda" del azar.
 
----
+    ---
 
-> *"La probabilidad es paciencia. A largo plazo, las frecuencias relativas convergen a las probabilidades teóricas."*
-> — **Jakob Bernoulli**
-""")
+    > *"La probabilidad es paciencia. A largo plazo, las frecuencias relativas convergen a las probabilidades teóricas."*
+    > — **Jakob Bernoulli**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería PB05", expanded=False):
         st.markdown(r"""
@@ -157,69 +160,16 @@ A medida que el número de repeticiones de un experimento aleatorio **aumenta**,
 """)
 
     with st.expander("❓ Cuestionario PB05: Variable Aleatoria y Distribuciones", expanded=False):
-        st.markdown(r"""
-**1. Si $X$ tiene la distribución: $P(X=1) = 0{,}2$, $P(X=2) = 0{,}5$, $P(X=3) = 0{,}3$, entonces $E(X) =$**
-
-A) $2$
-B) $2{,}0$
-C) $2{,}1$
-D) $1{,}8$
-
----
-
-**2. Para que una tabla sea una distribución de probabilidad válida, se requiere que:**
-
-A) Todas las probabilidades sean positivas
-B) Al menos una probabilidad sea $1$
-C) La suma de todas las probabilidades sea $1$ y cada una sea $\geq 0$
-D) La suma sea mayor que $1$
-
----
-
-**3. En una distribución binomial con $n = 4$ y $p = 0{,}5$, la esperanza $E(X)$ es:**
-
-A) $0{,}5$
-B) $4$
-C) $2$
-D) $8$
-
----
-
-**4. La ley de los grandes números establece que:**
-
-A) Después de muchas caras, debe salir sello
-B) El promedio de resultados se acerca al valor esperado con muchas repeticiones
-C) La probabilidad cambia con cada repetición
-D) Todo resultado es igualmente probable
-
----
-
-**5. Un juego cuesta $\$1.000$ para participar. Ganas $\$3.000$ con probabilidad $\frac{1}{4}$ y pierdes con probabilidad $\frac{3}{4}$. ¿Cuál es la ganancia neta esperada?**
-
-A) $\$750$
-B) $-\$250$
-C) $\$0$
-D) $\$500$
-
----
-
-**6. $P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$ corresponde a la distribución:**
-
-A) Normal
-B) Uniforme
-C) Binomial
-D) Poisson
-
----
-
-**7. Si $X$ solo toma los valores $0$ y $1$, con $P(X=1) = p$, entonces $E(X) =$**
-
-A) $0$
-B) $1$
-C) $p$
-D) $1-p$
-""")
-
+        quiz_questions = [
+            {"question": "Si $P(X=1)=0{,}2$, $P(X=2)=0{,}5$, $P(X=3)=0{,}3$, entonces $E(X)=$", "options": {"A": "$2$", "B": "$2{,}0$", "C": "$2{,}1$", "D": "$1{,}8$"}, "answer": "C", "explanation": "$E(X)=1(0{,}2)+2(0{,}5)+3(0{,}3)=2{,}1$."},
+            {"question": "Para que una tabla sea distribución válida se requiere que:", "options": {"A": "Todas las probabilidades sean positivas", "B": "Al menos una sea $1$", "C": "La suma sea $1$ y cada $P\\geq0$", "D": "La suma sea $>1$"}, "answer": "C", "explanation": "Dos condiciones: $P\\geq0$ y suma total $=1$."},
+            {"question": "Distribución binomial con $n=4$ y $p=0{,}5$. $E(X)=$", "options": {"A": "$0{,}5$", "B": "$4$", "C": "$2$", "D": "$8$"}, "answer": "C", "explanation": "$E(X)=np=4\\cdot0{,}5=2$."},
+            {"question": "La ley de los grandes números establece que:", "options": {"A": "Después de muchas caras, debe salir sello", "B": "El promedio se acerca al valor esperado con muchas repeticiones", "C": "La probabilidad cambia con cada repetición", "D": "Todo resultado es igualmente probable"}, "answer": "B", "explanation": "Con muchas repeticiones el promedio converge al valor esperado."},
+            {"question": "Un juego cuesta $\\$1.000$. Ganas $\\$3.000$ con $P=\\frac{1}{4}$. Ganancia neta esperada:", "options": {"A": "$\\$750$", "B": "$-\\$250$", "C": "$\\$0$", "D": "$\\$500$"}, "answer": "B", "explanation": "$(2000)\\cdot\\frac{1}{4}+(-1000)\\cdot\\frac{3}{4}=500-750=-250$."},
+            {"question": "$P(X=k)=\\binom{n}{k}p^k(1-p)^{n-k}$ corresponde a la distribución:", "options": {"A": "Normal", "B": "Uniforme", "C": "Binomial", "D": "Poisson"}, "answer": "C", "explanation": "Es la fórmula exacta de la distribución binomial."},
+            {"question": "Si $X$ toma $0$ y $1$ con $P(X=1)=p$, entonces $E(X)=$", "options": {"A": "$0$", "B": "$1$", "C": "$p$", "D": "$1-p$"}, "answer": "C", "explanation": "$E(X)=0\\cdot(1-p)+1\\cdot p=p$. Variable de Bernoulli."},
+        ]
+        render_multiple_choice_quiz(quiz_questions, key_prefix="pb05_quiz")
     with st.expander("🔑 Pauta Técnica PB05: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
 | Pregunta | Respuesta | Carpintería Técnica |

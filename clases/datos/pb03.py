@@ -3,92 +3,94 @@ from utils import render_multiple_choice_quiz
 
 
 def render_PB03():
-    st.title("PB03: Probabilidad Compuesta — Eventos Dependientes e Independientes")
+    with st.expander("📚 Teoría", expanded=False):
+        st.title("PB03: Probabilidad Compuesta — Eventos Dependientes e Independientes")
 
-    st.markdown(r"""
-### 🛡️ 1. El Portal: Cuando los Eventos se Combinan
+        st.markdown(r"""
+    ### 🛡️ 1. El Portal: Cuando los Eventos se Combinan
 
-En muchas situaciones reales no ocurre un solo evento, sino una **secuencia** de eventos. ¿Qué probabilidad hay de sacar dos ases seguidos de una baraja? La respuesta depende de si el primer evento **afecta** o no al segundo. Este concepto es central en la PAES y se trabaja con diagramas de árbol y las reglas de multiplicación.
+    En muchas situaciones reales no ocurre un solo evento, sino una **secuencia** de eventos. ¿Qué probabilidad hay de sacar dos ases seguidos de una baraja? La respuesta depende de si el primer evento **afecta** o no al segundo. Este concepto es central en la PAES y se trabaja con diagramas de árbol y las reglas de multiplicación.
 
----
+    ---
 
-### 🛡️ 2. Eventos Independientes
+    ### 🛡️ 2. Eventos Independientes
 
-Dos eventos $A$ y $B$ son **independientes** si la ocurrencia de uno **no afecta** la probabilidad del otro.
+    Dos eventos $A$ y $B$ son **independientes** si la ocurrencia de uno **no afecta** la probabilidad del otro.
 
-$$P(A \cap B) = P(A) \cdot P(B)$$
+    $$P(A \cap B) = P(A) \cdot P(B)$$
 
-**Ejemplo:** Lanzar un dado y luego una moneda:
-- $P(\text{dado } = 3) = \frac{1}{6}$, $P(\text{cara}) = \frac{1}{2}$.
-- $P(3 \text{ y cara}) = \frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}$.
+    **Ejemplo:** Lanzar un dado y luego una moneda:
+    - $P(\text{dado } = 3) = \frac{1}{6}$, $P(\text{cara}) = \frac{1}{2}$.
+    - $P(3 \text{ y cara}) = \frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}$.
 
-> El resultado del dado no cambia la probabilidad de la moneda.
+    > El resultado del dado no cambia la probabilidad de la moneda.
 
----
+    ---
 
-### 🛡️ 3. Eventos Dependientes
+    ### 🛡️ 3. Eventos Dependientes
 
-Dos eventos son **dependientes** si la ocurrencia de uno **sí modifica** la probabilidad del otro. Se usa la probabilidad condicional.
+    Dos eventos son **dependientes** si la ocurrencia de uno **sí modifica** la probabilidad del otro. Se usa la probabilidad condicional.
 
-$$P(A \cap B) = P(A) \cdot P(B|A)$$
+    $$P(A \cap B) = P(A) \cdot P(B|A)$$
 
----
+    ---
 
-### 🛡️ 4. Probabilidad Condicional
+    ### 🛡️ 4. Probabilidad Condicional
 
-La probabilidad de $A$ **dado que** ya ocurrió $B$ es:
+    La probabilidad de $A$ **dado que** ya ocurrió $B$ es:
 
-$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \quad P(B) > 0$$
+    $$P(A|B) = \frac{P(A \cap B)}{P(B)}, \quad P(B) > 0$$
 
-**Interpretación:** Restringimos el espacio muestral a los casos donde $B$ ya ocurrió, y dentro de esos, contamos los que también cumplen $A$.
+    **Interpretación:** Restringimos el espacio muestral a los casos donde $B$ ya ocurrió, y dentro de esos, contamos los que también cumplen $A$.
 
----
+    ---
 
-### 🛡️ 5. Con Reposición vs Sin Reposición
+    ### 🛡️ 5. Con Reposición vs Sin Reposición
 
-| Situación | Tipo | ¿Qué cambia? |
-| :--- | :--- | :--- |
-| **Con reposición** | Independiente | El elemento se devuelve → las probabilidades no cambian |
-| **Sin reposición** | Dependiente | El elemento no se devuelve → el total disminuye y la composición puede cambiar |
+    | Situación | Tipo | ¿Qué cambia? |
+    | :--- | :--- | :--- |
+    | **Con reposición** | Independiente | El elemento se devuelve → las probabilidades no cambian |
+    | **Sin reposición** | Dependiente | El elemento no se devuelve → el total disminuye y la composición puede cambiar |
 
-**Ejemplo:** Urna con $3$ rojas y $2$ azules.
+    **Ejemplo:** Urna con $3$ rojas y $2$ azules.
 
-| Extracción | Con reposición | Sin reposición |
-| :--- | :--- | :--- |
-| $P(\text{1.ª roja})$ | $\frac{3}{5}$ | $\frac{3}{5}$ |
-| $P(\text{2.ª roja})$ | $\frac{3}{5}$ | $\frac{2}{4} = \frac{1}{2}$ |
-| $P(\text{ambas rojas})$ | $\frac{3}{5} \cdot \frac{3}{5} = \frac{9}{25}$ | $\frac{3}{5} \cdot \frac{2}{4} = \frac{6}{20} = \frac{3}{10}$ |
+    | Extracción | Con reposición | Sin reposición |
+    | :--- | :--- | :--- |
+    | $P(\text{1.ª roja})$ | $\frac{3}{5}$ | $\frac{3}{5}$ |
+    | $P(\text{2.ª roja})$ | $\frac{3}{5}$ | $\frac{2}{4} = \frac{1}{2}$ |
+    | $P(\text{ambas rojas})$ | $\frac{3}{5} \cdot \frac{3}{5} = \frac{9}{25}$ | $\frac{3}{5} \cdot \frac{2}{4} = \frac{6}{20} = \frac{3}{10}$ |
 
----
+    ---
 
-### 🛡️ 6. Diagrama de Árbol
+    ### 🛡️ 6. Diagrama de Árbol
 
-El **diagrama de árbol** es una herramienta visual para organizar todos los resultados posibles de un experimento compuesto:
+    El **diagrama de árbol** es una herramienta visual para organizar todos los resultados posibles de un experimento compuesto:
 
-1. Cada **rama** representa un resultado posible.
-2. Cada rama se etiqueta con su probabilidad.
-3. La probabilidad de un **camino completo** se obtiene multiplicando las probabilidades de sus ramas.
-4. La probabilidad total de un evento se obtiene **sumando** las probabilidades de todos los caminos que lo incluyen.
+    1. Cada **rama** representa un resultado posible.
+    2. Cada rama se etiqueta con su probabilidad.
+    3. La probabilidad de un **camino completo** se obtiene multiplicando las probabilidades de sus ramas.
+    4. La probabilidad total de un evento se obtiene **sumando** las probabilidades de todos los caminos que lo incluyen.
 
-**Ejemplo simplificado (2 extracciones sin reposición, $3R$ y $2A$):**
+    **Ejemplo simplificado (2 extracciones sin reposición, $3R$ y $2A$):**
 
-```
-              ┌── R (2/4) → RR: 3/5 · 2/4 = 6/20
-         R (3/5)
-              └── A (2/4) → RA: 3/5 · 2/4 = 6/20
-         
-              ┌── R (3/4) → AR: 2/5 · 3/4 = 6/20
-         A (2/5)
-              └── A (1/4) → AA: 2/5 · 1/4 = 2/20
-```
+    ```
+                  ┌── R (2/4) → RR: 3/5 · 2/4 = 6/20
+             R (3/5)
+                  └── A (2/4) → RA: 3/5 · 2/4 = 6/20
 
-**Verificación:** $\frac{6+6+6+2}{20} = \frac{20}{20} = 1$ ✅.
+                  ┌── R (3/4) → AR: 2/5 · 3/4 = 6/20
+             A (2/5)
+                  └── A (1/4) → AA: 2/5 · 1/4 = 2/20
+    ```
 
----
+    **Verificación:** $\frac{6+6+6+2}{20} = \frac{20}{20} = 1$ ✅.
 
-> *"La suerte no existe; lo que llamas suerte es el cuidado en los detalles."*
-> — **Voltaire**
-""")
+    ---
+
+    > *"La suerte no existe; lo que llamas suerte es el cuidado en los detalles."*
+    > — **Voltaire**
+    """)
+
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería PB03", expanded=False):
         st.markdown(r"""

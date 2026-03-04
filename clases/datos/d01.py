@@ -1,238 +1,132 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """<style>.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }</style>"""
 
 def render_D01():
-    st.title("D01: Tipos de Datos y Tablas de Frecuencia — Ordenando el Mundo con Números")
-
-    st.markdown(r"""
-### 🛡️ 1. El Portal: ¿Qué Son los Datos?
-
-Cada vez que mides, cuentas o clasificas algo, estás generando **datos**. La estadística es la disciplina que nos enseña a recopilarlos, organizarlos, analizarlos e interpretarlos para tomar decisiones informadas. En la PAES, saber distinguir el tipo de dato y construir una tabla de frecuencia es el primer paso para responder correctamente.
-
----
-
-### 🛡️ 1.1 Población y Muestra
-
-| Concepto | Definición | Ejemplo |
-| :--- | :--- | :--- |
-| **Población** | Conjunto **total** de individuos o elementos que se estudian | Todos los estudiantes de Chile |
-| **Muestra** | Subconjunto representativo de la población | 500 estudiantes seleccionados al azar |
-
-> **Tip PAES:** Si el enunciado dice "se encuestó a **todos** los alumnos del curso", estás trabajando con una **población** (del curso). Si dice "se seleccionaron al azar 30 alumnos", es una **muestra**.
-
----
-
-### 🛡️ 2. Clasificación de Variables
-
-Las variables se dividen en dos grandes familias:
-
-| Tipo | Subtipo | ¿Qué mide? | Ejemplo |
-| :--- | :--- | :--- | :--- |
-| **Cualitativa (categórica)** | Nominal | Categorías sin orden | Color favorito, género |
-| **Cualitativa** | Ordinal | Categorías con orden | Nivel educacional (básica, media, superior) |
-| **Cuantitativa** | Discreta | Valores contables (enteros) | N.° de hermanos, goles en un partido |
-| **Cuantitativa** | Continua | Valores medibles (cualquier real) | Estatura ($1{,}73$ m), temperatura ($36{,}5°$C) |
-
-> **Regla rápida:** Si puedes contar → **discreta**. Si puedes medir con decimales infinitos → **continua**. Si no es un número → **cualitativa**.
-
----
-
-### 🛡️ 3. Frecuencias: Las Columnas que Cuentan la Historia
-
-| Frecuencia | Símbolo | ¿Qué indica? | Fórmula |
-| :--- | :---: | :--- | :--- |
-| **Absoluta** | $f_i$ | Cuántas veces aparece cada dato | Contar |
-| **Relativa** | $h_i$ | Proporción respecto al total | $h_i = \dfrac{f_i}{n}$ |
-| **Porcentual** | $\%$ | Porcentaje respecto al total | $h_i \times 100\%$ |
-| **Absoluta acumulada** | $F_i$ | Suma de frecuencias absolutas hasta ese valor | $F_i = f_1 + f_2 + \cdots + f_i$ |
-| **Relativa acumulada** | $H_i$ | Suma de frecuencias relativas hasta ese valor | $H_i = h_1 + h_2 + \cdots + h_i$ |
-
-> **Verificación:** La suma de todas las $f_i$ debe ser $n$ (total de datos). La suma de todas las $h_i$ debe ser $1$.
-
----
-
-### 🛡️ 4. Tabla de Frecuencia para Datos No Agrupados
-
-Si los datos toman pocos valores distintos, se construye una tabla directa.
-
-**Ejemplo:** Notas de 10 alumnos: $5, 6, 4, 5, 7, 5, 6, 4, 5, 6$.
-
-| Nota ($x_i$) | $f_i$ | $h_i$ | $F_i$ | $H_i$ |
-| :---: | :---: | :---: | :---: | :---: |
-| $4$ | $2$ | $0{,}20$ | $2$ | $0{,}20$ |
-| $5$ | $4$ | $0{,}40$ | $6$ | $0{,}60$ |
-| $6$ | $3$ | $0{,}30$ | $9$ | $0{,}90$ |
-| $7$ | $1$ | $0{,}10$ | $10$ | $1{,}00$ |
-| **Total** | $10$ | $1{,}00$ | — | — |
-
----
-
-### 🛡️ 5. Tabla de Frecuencia para Datos Agrupados en Intervalos
-
-Cuando los datos son continuos o hay muchos valores distintos, se agrupan en **intervalos** (clases).
-
-**Pasos para construirla:**
-1. Determinar el **rango**: $R = x_{\max} - x_{\min}$.
-2. Elegir el número de clases $k$ (frecuentemente $k \approx \sqrt{n}$).
-3. Calcular la **amplitud** de cada clase: $A = \dfrac{R}{k}$ (se redondea hacia arriba).
-4. Construir los intervalos con la convención $[a, b)$ (cerrado a la izquierda, abierto a la derecha).
-5. La **marca de clase** es el punto medio del intervalo: $m_i = \dfrac{a + b}{2}$.
-
-| Intervalo | Marca de clase ($m_i$) | $f_i$ | $h_i$ | $F_i$ |
-| :---: | :---: | :---: | :---: | :---: |
-| $[150, 155)$ | $152{,}5$ | $3$ | $0{,}15$ | $3$ |
-| $[155, 160)$ | $157{,}5$ | $7$ | $0{,}35$ | $10$ |
-| $[160, 165)$ | $162{,}5$ | $6$ | $0{,}30$ | $16$ |
-| $[165, 170)$ | $167{,}5$ | $4$ | $0{,}20$ | $20$ |
-| **Total** | — | $20$ | $1{,}00$ | — |
-
----
-
-> *"Los datos son el nuevo petróleo, pero sin refinar no sirven de nada."*
-> — **Clive Humby**
-""")
-
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería D01", expanded=False):
+    with st.expander("📚 Teoría", expanded=False):
+        st.markdown(_CSS, unsafe_allow_html=True)
+        st.title("D01: Epistemología — Historia y la Necesidad de Medir")
+        st.markdown('<div class="clase-body">', unsafe_allow_html=True)
         st.markdown(r"""
-### E01: Clasificar variables
+    ### 🛡️ Contexto Histórico: El Control del Caos
 
-**Situación:** Un hospital registra de cada paciente: nombre, tipo de sangre, edad, peso y número de consultas previas. Clasifica cada variable.
+    La estadística no nació en un laboratorio, nació en los palacios y en las morgues por una necesidad puramente práctica.
 
-**La Carpintería:**
-1. **Nombre** → Cualitativa nominal (categoría sin orden numérico).
-2. **Tipo de sangre** (A, B, AB, O) → Cualitativa nominal.
-3. **Edad** (en años cumplidos: $25, 30, \ldots$) → Cuantitativa discreta (valores enteros contables).
-4. **Peso** ($68{,}3$ kg, $72{,}1$ kg) → Cuantitativa continua (admite decimales infinitos).
-5. **Número de consultas previas** ($0, 1, 2, \ldots$) → Cuantitativa discreta.
+    * **La Necesidad de Estado:** Desde el Antiguo Egipto hasta el Imperio Romano, la estadística era "Censo". De ahí su nombre: *Statisticum* (relativo al Estado).
+    * **La Peste y el Nacimiento de la Tendencia:** En el Londres del siglo XVII, **John Graunt** fue el primero en notar que, aunque la muerte de una persona parece azarosa, la de miles sigue un **patrón predecible**.
+    * **La Ingeniería y la Calidad:** Con la Revolución Industrial, la estadística pasó de "contar gente" a "asegurar procesos", controlando la variabilidad inevitable de materiales y naturaleza.
 
-| Variable | Tipo | Subtipo |
-| :--- | :--- | :--- |
-| Nombre | Cualitativa | Nominal |
-| Tipo de sangre | Cualitativa | Nominal |
-| Edad (años cumplidos) | Cuantitativa | Discreta |
-| Peso | Cuantitativa | Continua |
-| N.° de consultas | Cuantitativa | Discreta |
+    ---
 
----
+    ### 🛡️ El Concepto de Incertidumbre
 
-### E02: Construir tabla de frecuencia (datos no agrupados)
+    En la ciencia existen dos tipos de fenómenos:
+    1. **Deterministas:** Si sueltas una piedra, cae. El resultado es único y predecible.
+    2. **Aleatorios:** Si lanzas un dado o mides una pieza fabricada, el resultado varía. Aquí entra la Estadística: el estudio científico de la **variabilidad**.
 
-**Situación:** En una prueba, 15 alumnos obtuvieron: $3, 4, 5, 5, 6, 4, 5, 7, 6, 5, 4, 6, 5, 4, 6$.
+    ---
 
-**La Carpintería:**
-1. Ordenar datos: $3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6, 6, 6, 7$.
-2. Contar frecuencias absolutas.
-3. Calcular $h_i = f_i / 15$.
-4. Acumular.
+    ### 🛡️ Población, Muestra y el "Salto" Inferencial
 
-| $x_i$ | $f_i$ | $h_i$ | $F_i$ | $H_i$ |
-| :---: | :---: | :---: | :---: | :---: |
-| $3$ | $1$ | $0{,}067$ | $1$ | $0{,}067$ |
-| $4$ | $4$ | $0{,}267$ | $5$ | $0{,}333$ |
-| $5$ | $5$ | $0{,}333$ | $10$ | $0{,}667$ |
-| $6$ | $4$ | $0{,}267$ | $14$ | $0{,}933$ |
-| $7$ | $1$ | $0{,}067$ | $15$ | $1{,}000$ |
-| **Total** | $15$ | $1{,}000$ | — | — |
+    * **Población ($N$):** El universo completo. Su medida se llama **Parámetro** (la verdad absoluta, muchas veces inalcanzable).
+    * **Muestra ($n$):** La parte que realmente medimos. Su medida se llama **Estadístico**.
 
-**Verificación:** $\sum f_i = 15$ ✅ y $\sum h_i = 1$ ✅.
+    **Regla mnemotécnica: PP-EM → Parámetro para la Población, Estadístico para la Muestra.**
 
----
+    La inferencia estadística es el "salto" desde lo que vemos en la muestra hacia lo que concluimos de la población.
+    """)
+        st.markdown('</div>', unsafe_allow_html=True)
 
-### E03: Construir tabla con intervalos
+        st.markdown("#### 📊 Visualización: Variables y tipos de datos")
+        fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
-**Situación:** Se miden las estaturas (cm) de 20 estudiantes: $152, 158, 161, 155, 167, 163, 154, 159, 160, 166, 157, 162, 168, 153, 156, 164, 161, 155, 165, 160$.
+        categorias = ['Matemática', 'Lenguaje', 'Historia', 'Cs. Naturales', 'Ed. Física']
+        puntajes   = [450, 520, 410, 480, 390]
+        colors     = ['#4285f4','#ea4335','#fbbc04','#34a853','#9b59b6']
+        axes[0].bar(categorias, puntajes, color=colors, edgecolor='black', alpha=0.85)
+        axes[0].set_title("Ejemplo: Puntaje promedio por ramo", fontsize=12, fontweight='bold')
+        axes[0].set_ylabel("Puntaje"); axes[0].set_ylim(300, 600)
+        axes[0].grid(True, alpha=0.3, axis='y')
+        for i, v in enumerate(puntajes):
+            axes[0].text(i, v+3, str(v), ha='center', fontsize=10, fontweight='bold')
 
-**La Carpintería:**
-1. **Rango:** $R = 168 - 152 = 16$.
-2. **N.° de clases:** $k = \sqrt{20} \approx 4{,}47 \Rightarrow k = 4$.
-3. **Amplitud:** $A = 16 / 4 = 4$.
-4. **Intervalos:** $[152, 156)$, $[156, 160)$, $[160, 164)$, $[164, 168]$.
-5. Clasificar cada dato en su intervalo y contar.
+        tipos  = ['Cuantitativa\nContinua', 'Cuantitativa\nDiscreta', 'Cualitativa\nOrdinal', 'Cualitativa\nNominal']
+        ejems  = ['Temperatura\nAltura\nPeso', 'Nº de hijos\nNº de fallas\nPuntaje', 'Nivel de\nEducación\nGrado', 'Color\nNacionalidad\nSexo']
+        y_pos  = [3, 2, 1, 0]
+        axes[1].axis('off')
+        for y, t, e in zip(y_pos, tipos, ejems):
+            axes[1].text(0.05, y/3+0.08, t, fontsize=11, fontweight='bold',
+                         bbox=dict(boxstyle='round', facecolor='#e3f2fd', alpha=0.7))
+            axes[1].text(0.55, y/3+0.08, e, fontsize=9, color='#333', va='center')
+        axes[1].set_xlim(0, 1); axes[1].set_ylim(-0.1, 1.3)
+        axes[1].set_title("Clasificación de variables", fontsize=12, fontweight='bold')
 
-| Intervalo | $m_i$ | $f_i$ | $h_i$ | $F_i$ |
-| :---: | :---: | :---: | :---: | :---: |
-| $[152, 156)$ | $154$ | $5$ | $0{,}25$ | $5$ |
-| $[156, 160)$ | $158$ | $4$ | $0{,}20$ | $9$ |
-| $[160, 164)$ | $162$ | $6$ | $0{,}30$ | $15$ |
-| $[164, 168]$ | $166$ | $5$ | $0{,}25$ | $20$ |
-| **Total** | — | $20$ | $1{,}00$ | — |
+        plt.tight_layout()
+        st.pyplot(fig)
+        plt.close()
 
-**Marca de clase:** $m_i = \frac{152 + 156}{2} = 154$, etc.
-""")
 
-    with st.expander("❓ Cuestionario D01: Tipos de Datos y Tablas de Frecuencia", expanded=False):
+    with st.expander("🚀 Guía de Ejemplos: Carpintería D01", expanded=False):
         st.markdown(r"""
-**1. La variable "número de hijos" de una familia es:**
+### E01: Identificar Población vs. Muestra
 
-A) Cualitativa nominal
-B) Cuantitativa continua
-C) Cuantitativa discreta
-D) Cualitativa ordinal
+**Situación:** Un investigador encuesta a 500 universitarios para saber cuántas horas estudian.
 
----
+| Concepto | En este caso |
+| :--- | :--- |
+| Población | Todos los universitarios del país |
+| Muestra | Los 500 encuestados |
+| Parámetro | La media real de horas de toda la población |
+| Estadístico | La media calculada con los 500 encuestados |
 
-**2. Si en una encuesta de $n = 40$ personas, un dato aparece $8$ veces, su frecuencia relativa es:**
+### E02: Clasificar variables
 
-A) $8$
-B) $0{,}08$
-C) $0{,}20$
-D) $20$
-
----
-
-**3. La suma de todas las frecuencias relativas de una tabla debe ser:**
-
-A) $0$
-B) $100$
-C) $n$
-D) $1$
-
----
-
-**4. ¿Cuál de las siguientes variables es cualitativa ordinal?**
-
-A) Color de ojos
-B) Nivel de satisfacción (bajo, medio, alto)
-C) Temperatura corporal
-D) Número de mascotas
-
----
-
-**5. En una tabla de datos agrupados, la marca de clase del intervalo $[20, 30)$ es:**
-
-A) $20$
-B) $30$
-C) $25$
-D) $10$
-
----
-
-**6. Si la frecuencia acumulada hasta la clase $[40, 50)$ es $35$ y la frecuencia absoluta de esa clase es $10$, entonces la frecuencia acumulada hasta la clase anterior es:**
-
-A) $45$
-B) $35$
-C) $25$
-D) $10$
-
----
-
-**7. En un estudio, se seleccionan 200 personas de un país con 19 millones de habitantes. Las 200 personas corresponden a:**
-
-A) La población
-B) Una variable
-C) La muestra
-D) Un parámetro
+| Variable | Tipo |
+| :--- | :--- |
+| Temperatura corporal | Cuantitativa continua |
+| Número de hermanos | Cuantitativa discreta |
+| Nivel de satisfacción (bajo/medio/alto) | Cualitativa ordinal |
+| Color de ojos | Cualitativa nominal |
 """)
+
+    with st.expander("❓ Cuestionario D01: Fundamentos e Historia", expanded=False):
+        quiz = [
+            {"question": r'¿Qué motivó el análisis de las "Tablas de Mortalidad" por John Graunt?',
+             "options": {"A": "Inventar los seguros de vida modernos.", "B": "Encontrar patrones de salud pública ante las pestes.", "C": "Inventariar las riquezas del reino.", "D": "El estudio de juegos de azar."},
+             "answer": "B", "explanation": "Graunt buscaba predecir tendencias de mortalidad cuando las epidemias parecían sin regla."},
+            {"question": r"Si un equipo analiza 50 vigas de un lote de 5.000, ¿cómo se llaman esas 50 vigas?",
+             "options": {"A": "Población.", "B": "Parámetro.", "C": "Muestra.", "D": "Estadístico."},
+             "answer": "C", "explanation": "La muestra es el subconjunto representativo que se extrae para ser estudiado."},
+            {"question": r"La medida calculada a partir de una muestra se llama:",
+             "options": {"A": "Parámetro.", "B": "Estadístico.", "C": "Coeficiente.", "D": "Inferencia."},
+             "answer": "B", "explanation": "PP-EM: Estadístico para la Muestra."},
+            {"question": r"¿Cuál de las siguientes es una variable cuantitativa continua?",
+             "options": {"A": "Número de hermanos.", "B": "Estadístico.", "C": "Temperatura corporal.", "D": "Nivel de educación."},
+             "answer": "C", "explanation": "Continua: puede tomar cualquier valor (decimales) en un rango."},
+            {"question": r"La inferencia estadística consiste en:",
+             "options": {"A": "Calcular promedios de datos exactos.", "B": "Extrapolar conclusiones de la muestra hacia la población.", "C": "Contar datos en una tabla.", "D": "Construir gráficos de barras."},
+             "answer": "B", "explanation": "Inferir es 'saltar' de lo observado en la muestra hacia la población."},
+            {"question": r"El nivel de satisfacción 'bajo/medio/alto' es una variable:",
+             "options": {"A": "Cuantitativa discreta.", "B": "Cuantitativa continua.", "C": "Cualitativa ordinal.", "D": "Cualitativa nominal."},
+             "answer": "C", "explanation": "Hay jerarquía (uno es 'mayor' que otro) pero no son números."},
+            {"question": r"¿Por qué la estadística es esencial en ingeniería?",
+             "options": {"A": "Para calcular exactamente cada pieza.", "B": "Para diseñar gráficos bonitos.", "C": "Para controlar y predecir la variabilidad inevitable.", "D": "Para evitar usar matemáticas."},
+             "answer": "C", "explanation": "La estadística controla la variabilidad en los procesos industriales."},
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="d01_quiz")
 
     with st.expander("🔑 Pauta Técnica D01: Carpintería de Soluciones", expanded=False):
         st.markdown(r"""
 | Pregunta | Respuesta | Carpintería Técnica |
 | :--- | :---: | :--- |
-| **1** | **C** | El número de hijos se cuenta ($0, 1, 2, \ldots$). Es cuantitativa discreta. |
-| **2** | **C** | $h_i = \frac{8}{40} = 0{,}20$. Frecuencia relativa = frecuencia absoluta dividida por el total. |
-| **3** | **D** | $\sum h_i = 1$ siempre. Si se expresa en porcentaje, sería $100\%$. |
-| **4** | **B** | "Bajo, medio, alto" son categorías con un orden natural → ordinal. |
-| **5** | **C** | $m_i = \frac{20 + 30}{2} = 25$. La marca de clase es el promedio de los extremos del intervalo. |
-| **6** | **C** | $F_{\text{anterior}} = F_i - f_i = 35 - 10 = 25$. La acumulada crece sumando la frecuencia de cada clase. |
-| **7** | **C** | Las 200 personas son un subconjunto seleccionado de la población → muestra. |
+| **1** | **B** | Graunt buscaba patrones en las epidemias. |
+| **2** | **C** | Subconjunto representativo = muestra. |
+| **3** | **B** | PP-EM: **E**stadístico para la **M**uestra. |
+| **4** | **C** | Temperatura = continua (decimales posibles). |
+| **5** | **B** | Inferencia = saltar de muestra a población. |
+| **6** | **C** | Con jerarquía y no numérica = ordinal. |
+| **7** | **C** | Estadística controla la variabilidad. |
 """)
