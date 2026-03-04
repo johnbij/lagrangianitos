@@ -6,14 +6,14 @@ def render_N13():
         st.title("N13: Números Racionales II - Decimales y la Fracción Generatriz")
 
         st.markdown(r"""
-    ### 🏛️ 1. Contexto Histórico: El Triunfo de la Coma
+    ### 🏛️  Contexto Histórico: El Triunfo de la Coma
     Durante siglos, las fracciones como $\frac{1}{2}$ o $\frac{3}{4}$ dominaron el mundo. Pero cuando el comercio y la ciencia se volvieron más rápidos, escribir fracciones para todo era muy lento. En el siglo XVI, el matemático Simon Stevin introdujo la idea de las "fracciones decimales". Su objetivo era que la gente pudiera operar con fracciones con la misma facilidad que con los números enteros.
 
     Sin embargo, el mundo se dividió: los ingleses usaban el **punto** y los europeos la **coma**. Hoy, en Chile y la mayoría de los países hispanos, usamos la coma para separar el "entero" de la "parte pequeña". Lo que el alumno debe entender es que un decimal no es un número nuevo; es simplemente una fracción con un disfraz diferente, diseñada para ser medida en potencias de 10.
 
     ---
 
-    ### 🛡️ 10.1 Tipos de Decimales Racionales
+    ### 🛡️  Tipos de Decimales Racionales
     No todos los decimales son iguales. En el conjunto $\mathbb{Q}$ (racionales), tenemos tres familias:
 
     1. **Decimales Finitos:** Tienen un fin claro. Ejemplo: $0,25$.
@@ -22,14 +22,14 @@ def render_N13():
 
     ---
 
-    ### 🛡️ 10.2 De Fracción a Decimal (El Camino de Ida)
+    ### 🛡️ De Fracción a Decimal (El Camino de Ida)
     Para convertir una fracción a decimal, solo debes hacer lo que la fracción dice: **Dividir**.
     * **Ejemplo:** $\frac{3}{4} \rightarrow 3 \div 4 = 0,75$.
     * **Ejemplo:** $\frac{1}{3} \rightarrow 1 \div 3 = 0,333... = 0,\bar{3}$.
 
     ---
 
-    ### 🛡️ 10.3 De Decimal a Fracción (La Fracción Generatriz)
+    ### 🛡️ De Decimal a Fracción (La Fracción Generatriz)
     Este es el "Atajo del Pillo" para volver a la base. Cada tipo tiene su regla:
 
     * **Para Finitos:** Escribes el número completo arriba (sin coma) y abajo un 1 seguido de tantos **ceros** como decimales haya.
@@ -41,14 +41,14 @@ def render_N13():
 
     ---
 
-    ### 🛡️ 10.4 Aproximaciones: El Ojo del Carpintero
+    ### 🛡️ Aproximaciones: El Ojo del Carpintero
     En el taller, a veces no necesitamos el número exacto, sino uno que nos sirva.
     * **Truncamiento:** Es "cortar" el número a sangre fría en la posición pedida. Lo que sobra se borra.
     * **Redondeo:** Miras la cifra siguiente. Si es 5 o más, le sumas 1 a la posición anterior. Si es menor a 5, se queda igual.
 
     ---
 
-    ### 🛡️ 10.5 Operatoria con Decimales
+    ### 🛡️ Operatoria con Decimales
     * **Suma/Resta:** **La coma sobre la coma.** Si faltan espacios, rellena con ceros.
     * **Multiplicación:** Multiplica como si no hubiera coma. Al final, cuenta cuántos decimales había en total y corre la coma de derecha a izquierda.
     * **División:** ¡Usa la técnica de N10! Amplifica para "matar" la coma del divisor.
