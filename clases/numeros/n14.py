@@ -6,14 +6,14 @@ def render_N14():
         st.title("N14: El Lenguaje del Reparto - Algoritmos y Vocabulario")
 
         st.markdown(r"""
-    ### 🏛️ 1. Contexto Histórico: El Nacimiento de la Raya Fraccionaria
+    ### 🏛️ Contexto Histórico: El Nacimiento de la Raya Fraccionaria
     ¿Te has fijado que el signo de división ($\div$) es literalmente una fracción con dos puntos? Durante siglos, cada cultura escribía la división como podía. Los árabes introdujeron la **"barra de fracción"** (al-ghubar) para separar lo que tengo de lo que reparto.
 
     Pero antes de la fracción, existió el **Algoritmo de la División**. Los babilonios y egipcios necesitaban saber no solo cuánto tocaba, sino cuánto sobraba. Si repartes 13 flechas entre 3 guerreros, a cada uno le tocan 4, pero sobra 1. Esa "sobra" es la que obligó a inventar los decimales y las fracciones. No es solo un cálculo; es la contabilidad de la realidad.
 
     ---
 
-    ### 🛡️ 9.C.1 Las Partes del Motor (Vocabulario Técnico)
+    ### 🛡️ Las Partes del Motor (Vocabulario Técnico)
     En el taller, si pides un "cosito" nadie te entiende. En matemática, cada parte tiene su nombre:
 
     * **Factor:** Es cualquier número que se está multiplicando para dar un resultado.
@@ -24,7 +24,7 @@ def render_N14():
 
     ---
 
-    ### 🛡️ 9.C.2 El Algoritmo de la División (La Identidad)
+    ### 🛡️ El Algoritmo de la División (La Identidad)
     Para cualquier par de números naturales $D$ (Dividendo) y $d$ (divisor), existen siempre un único cociente $q$ y un resto $r$ que cumplen:
     $$D = d \cdot q + r$$
     **Condición sagrada:** El resto ($r$) siempre debe ser menor que el divisor ($d$). Si el resto es más grande, es que todavía puedes seguir repartiendo.
@@ -38,14 +38,14 @@ def render_N14():
 
     ---
 
-    ### 🛡️ 9.C.3 ¿Por qué usamos la notación de Fracción?
+    ### 🛡️ ¿Por qué usamos la notación de Fracción?
     Usamos la barra $\frac{a}{b}$ por una razón de "limpieza" táctica:
     1. **Precisión:** $1 \div 3$ es $0,3333...$ (nunca terminas de escribirlo). En cambio, $\frac{1}{3}$ es el valor exacto, sin perder ni un átomo de información.
     2. **Operatividad:** Es mucho más fácil simplificar $\frac{120}{180}$ que andar dividiendo números gigantes con decimales. La fracción es la "forma comprimida" de una división.
 
     ---
 
-    ### 🛡️ 9.C.4 Factores vs. Divisores (La gran confusión)
+    ### 🛡️ Factores vs. Divisores (La gran confusión)
     * Los **Factores** construyen el número (multiplicando).
     * Los **Divisores** desarman el número (dividiendo).
     * **Dato de Pillo:** En los números enteros, los factores y los divisores son prácticamente los mismos. Si 3 es factor de 12 ($3 \cdot 4$), entonces 3 también es divisor de 12 ($12 \div 3$).
