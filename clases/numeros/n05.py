@@ -7,7 +7,7 @@ def render_N05():
         st.title("N05: Los Números Racionales (ℚ) — La Densidad y el Cociente")
 
         st.markdown(r"""
-    ### 🛡️ 1. El Portal: El Arte de Partir el Todo
+    ### 🛡️  El Portal: El Arte de Partir el Todo
 
     Hasta ahora, en nuestra carpintería matemática, solo trabajábamos con "piezas completas" (vigas de 1 metro, de 2 metros). Pero la realidad es más compleja: a veces necesitas media viga o un tercio de tabla.
 
@@ -15,7 +15,7 @@ def render_N05():
 
     ---
 
-    ### 🛡️ 2. Definición Formal y Axiomática
+    ### 🛡️ Definición Formal y Axiomática
 
     Un número es **Racional** si y solo si puede expresarse como el cociente entre dos enteros:
 
@@ -28,7 +28,7 @@ def render_N05():
 
     ---
 
-    ### 🛡️ 3. La Propiedad de Densidad: El Fin de los Saltos
+    ### 🛡️  La Propiedad de Densidad: El Fin de los Saltos
 
     Este es el concepto clave para los 1000 puntos.
 
@@ -61,7 +61,7 @@ def render_N05():
         st.markdown(r"""
     ---
 
-    ### 🛡️ 4. Representación Decimal y Clasificación
+    ### 🛡️  Representación Decimal y Clasificación
 
     Todo racional se puede "disfrazar" de decimal dividiendo el numerador por el denominador. Solo existen tres especies en este reino:
 
@@ -71,7 +71,7 @@ def render_N05():
 
     ---
 
-    ### 🛡️ 5. Clausura: El Club casi Perfecto
+    ### 🛡️  Clausura: El Club casi Perfecto
 
     | Operación | ¿Es Cerrada en $\mathbb{Q}$? | Carpintería Técnica |
     | :--- | :---: | :--- |
@@ -80,7 +80,7 @@ def render_N05():
 
     ---
 
-    ### 🛡️ 6. Manteniendo la Igualdad: Amplificar y Simplificar
+    ### 🛡️  Manteniendo la Igualdad: Amplificar y Simplificar
 
     Para trabajar con fracciones, debemos entender que una misma cantidad puede escribirse con distintos números sin cambiar su valor. Esto se conoce como **Fracciones Equivalentes**.
 
