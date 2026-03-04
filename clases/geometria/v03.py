@@ -1,215 +1,74 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """
+<style>
+.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }
+</style>
+"""
 
 def render_V03():
-    st.title("V03: Producto Punto y Ortogonalidad — El Ángulo Secreto")
+    st.markdown(_CSS, unsafe_allow_html=True)
+    st.title("V03: Módulo y Distancia — ¿Cuánto mide el vector?")
+    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
     st.markdown(r"""
-### 🛡️ 1. Definición del Producto Escalar (Producto Punto)
-
-Dados dos vectores $\vec{u} = (u_1, u_2)$ y $\vec{v} = (v_1, v_2)$, el **producto escalar** (o producto punto) se define como:
-
-$$\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2$$
-
-> **Importante:** El resultado del producto punto es un **número** (escalar), no un vector.
-
-| $\vec{u}$ | $\vec{v}$ | $\vec{u} \cdot \vec{v}$ |
-| :--- | :--- | :---: |
-| $(3, 4)$ | $(2, -1)$ | $3(2) + 4(-1) = 2$ |
-| $(1, 0)$ | $(0, 1)$ | $1(0) + 0(1) = 0$ |
-| $(5, 2)$ | $(5, 2)$ | $25 + 4 = 29$ |
+# 🎬 Clase V03: Módulo y Distancia - ¿Cuánto mide el vector?
+**Eje:** Vectores | **Nivel:** Alcance del Objetivo
 
 ---
 
-### 🛡️ 2. Forma Geométrica del Producto Punto
+### 🛡️ 1. Módulo de un Vector ($|\vec{v}|$)
+El módulo es la longitud o magnitud del vector. Representa la distancia desde el origen $(0,0)$ hasta el punto $(x, y)$.
+* **Fórmula:** Se basa directamente en el Teorema de Pitágoras.
+$$|\vec{v}| = \sqrt{x^2 + y^2}$$
 
-El producto punto también se puede expresar como:
+### ⚖️ 2. Distancia entre dos puntos
+Si queremos saber la distancia entre el punto $A(x_1, y_1)$ y el punto $B(x_2, y_2)$, calculamos el módulo del vector $\vec{AB}$.
+* **Fórmula de Distancia ($d$):**
+$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
 
-$$\vec{u} \cdot \vec{v} = \|\vec{u}\| \cdot \|\vec{v}\| \cdot \cos \theta$$
+### 📐 3. Propiedades del Módulo
+1. **Siempre es positivo:** El módulo es una distancia, por lo tanto $|\vec{v}| \geq 0$.
+2. **Módulo de la ponderación:** $|k \cdot \vec{v}| = |k| \cdot |\vec{v}|$. Si multiplicas el vector por 3, su medida se triplica.
+3. **Vector Unitario:** Es aquel cuyo módulo es exactamente 1.
 
-donde $\theta$ es el **ángulo** entre los dos vectores ($0° \leq \theta \leq 180°$).
-
----
-
-### 🛡️ 3. Ángulo entre Dos Vectores
-
-Combinando ambas formas:
-
-$$\cos \theta = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \cdot \|\vec{v}\|} = \frac{u_1 v_1 + u_2 v_2}{\sqrt{u_1^2 + u_2^2} \cdot \sqrt{v_1^2 + v_2^2}}$$
-
-| Valor de $\vec{u} \cdot \vec{v}$ | Ángulo $\theta$ | Relación |
-| :--- | :--- | :--- |
-| $> 0$ | Agudo ($0° < \theta < 90°$) | Vectores "apuntan" hacia el mismo lado |
-| $= 0$ | Recto ($\theta = 90°$) | Vectores perpendiculares |
-| $< 0$ | Obtuso ($90° < \theta < 180°$) | Vectores "se oponen" |
-
----
-
-### 🛡️ 4. Vectores Perpendiculares (Ortogonales)
-
-Dos vectores son **perpendiculares** (ortogonales) si y solo si su producto punto es cero:
-
-$$\vec{u} \perp \vec{v} \iff \vec{u} \cdot \vec{v} = 0$$
-
-$$\iff u_1 v_1 + u_2 v_2 = 0$$
-
-> **Tip PAES:** Si $\vec{v} = (a, b)$, entonces $\vec{v}^{\perp} = (-b, a)$ o $(b, -a)$ son perpendiculares a $\vec{v}$.
-
----
-
-### 🛡️ 5. Proyección de un Vector sobre Otro
-
-La **proyección** de $\vec{u}$ sobre $\vec{v}$ es el vector:
-
-$$\text{proy}_{\vec{v}} \vec{u} = \frac{\vec{u} \cdot \vec{v}}{\|\vec{v}\|^2} \cdot \vec{v}$$
-
-El **escalar** de la proyección (componente escalar) es:
-
-$$\text{comp}_{\vec{v}} \vec{u} = \frac{\vec{u} \cdot \vec{v}}{\|\vec{v}\|}$$
-
----
-
-### 🛡️ 6. Propiedades del Producto Punto
-
-| Propiedad | Expresión |
-| :--- | :--- |
-| Conmutativa | $\vec{u} \cdot \vec{v} = \vec{v} \cdot \vec{u}$ |
-| Distributiva | $\vec{u} \cdot (\vec{v} + \vec{w}) = \vec{u} \cdot \vec{v} + \vec{u} \cdot \vec{w}$ |
-| Escalar | $(k\vec{u}) \cdot \vec{v} = k(\vec{u} \cdot \vec{v})$ |
-| Auto-producto | $\vec{v} \cdot \vec{v} = \|\vec{v}\|^2$ |
-
----
-
-> *"La perpendicular es el camino más corto entre un punto y una recta."*
-> — **Principio geométrico fundamental**
+> **Newton Tip:** "Seba, dile a tu alumno: el módulo es la hipotenusa de un triángulo imaginario donde los catetos son las coordenadas $x$ e $y$. ¡Si se sabe los tríos pitagóricos (3, 4, 5), ya tiene la mitad de los ejercicios resueltos!"
 """)
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería V03", expanded=False):
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    with st.expander("🛠️ Ejercitación Técnica V03 (Paso a Paso)", expanded=False):
         st.markdown(r"""
-### E01: Calcular el producto punto
+## 🛠️ Ejercitación Técnica V03 (Paso a Paso)
 
-**Situación:** Dados $\vec{u} = (4, -3)$ y $\vec{v} = (2, 6)$, calcula $\vec{u} \cdot \vec{v}$.
-
-**La Carpintería:**
-1. $\vec{u} \cdot \vec{v} = (4)(2) + (-3)(6) = 8 - 18 = -10$.
-2. Como el resultado es **negativo**, el ángulo entre ellos es **obtuso**.
-
----
-
-### E02: Verificar perpendicularidad
-
-**Situación:** ¿Son perpendiculares $\vec{a} = (3, 5)$ y $\vec{b} = (5, -3)$?
-
-**La Carpintería:**
-1. $\vec{a} \cdot \vec{b} = (3)(5) + (5)(-3) = 15 - 15 = 0$.
-2. Como $\vec{a} \cdot \vec{b} = 0$, los vectores **sí son perpendiculares** ✅.
-
----
-
-### E03: Ángulo entre dos vectores
-
-**Situación:** Calcula el ángulo entre $\vec{u} = (1, \sqrt{3})$ y $\vec{v} = (1, 0)$.
-
-**La Carpintería:**
-1. $\vec{u} \cdot \vec{v} = (1)(1) + (\sqrt{3})(0) = 1$.
-2. $\|\vec{u}\| = \sqrt{1 + 3} = 2$, $\|\vec{v}\| = 1$.
-3. $\cos \theta = \frac{1}{2 \cdot 1} = \frac{1}{2}$.
-4. $\theta = 60°$.
-
-| Paso | Valor |
-| :--- | :---: |
-| $\vec{u} \cdot \vec{v}$ | $1$ |
-| $\|\vec{u}\|$ | $2$ |
-| $\|\vec{v}\|$ | $1$ |
-| $\cos \theta$ | $\frac{1}{2}$ |
-| **$\theta$** | **$60°$** |
-
----
-
-### E04: Proyección vectorial
-
-**Situación:** Proyecta $\vec{u} = (4, 3)$ sobre $\vec{v} = (1, 0)$.
-
-**La Carpintería:**
-1. $\vec{u} \cdot \vec{v} = 4(1) + 3(0) = 4$.
-2. $\|\vec{v}\|^2 = 1$.
-3. $\text{proy}_{\vec{v}} \vec{u} = \frac{4}{1}(1, 0) = (4, 0)$.
-4. La proyección de $\vec{u}$ sobre el eje $x$ es $(4, 0)$, lo cual tiene sentido geométrico.
+| ID | Desafío | Paso a Paso | Resultado |
+| :--- | :--- | :--- | :--- |
+| **E01** | Calcular el módulo del vector $\vec{v}(3, 4)$. | 1. Aplicar fórmula: $\sqrt{3^2 + 4^2}$.<br>2. $\sqrt{9 + 16} = \sqrt{25}$. | **5** |
+| **E02** | Hallar la distancia entre $A(1, 2)$ y $B(4, 6)$. | 1. Calcular vector $\vec{AB}: (4-1, 6-2) = (3, 4)$.<br>2. Calcular su módulo (ver E01). | **5** |
+| **E03** | ¿Cuál es el módulo del vector $\vec{w}(-6, 8)$? | 1. $\sqrt{(-6)^2 + 8^2} = \sqrt{36 + 64}$.<br>2. $\sqrt{100} = 10$. | **10** |
+| **E04** | Si $|\vec{v}| = 13$ y su componente $x=5$, ¿cuánto vale $y$? | 1. $5^2 + y^2 = 13^2 \implies 25 + y^2 = 169$.<br>2. $y^2 = 144$. | **12** |
+| **E05** | ¿Cuál es el módulo del vector nulo $(0, 0)$? | 1. $\sqrt{0^2 + 0^2} = 0$. | **0** |
 """)
 
-    with st.expander("❓ Cuestionario V03: Producto Punto y Ortogonalidad", expanded=False):
+    with st.expander("❓ Cuestionario V03", expanded=False):
+        quiz = [
+            {'question': 'La magnitud o longitud de un vector se denomina:', 'options': {'A': 'Sentido', 'B': 'Dirección', 'C': 'Módulo', 'D': 'Trayectoria'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'El módulo del vector $(-3, -4)$ es:', 'options': {'A': '-5', 'B': '7', 'C': '5', 'D': '25'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'Si un vector tiene módulo 10 y se pondera por $k = 3$, su nuevo módulo es:', 'options': {'A': '10', 'B': '13', 'C': '30', 'D': '100'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'La distancia entre los puntos $(0, 0)$ y $(12, 5)$ es:', 'options': {'A': '17', 'B': '13', 'C': '7', 'D': '$\\sqrt{17}$'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'Si el módulo de un vector es 1, se dice que es un vector:', 'options': {'A': 'Nulo', 'B': 'Posición', 'C': 'Unitario', 'D': 'Isométrico'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'El módulo del vector $(0, -7)$ es:', 'options': {'A': '-7', 'B': '0', 'C': '7', 'D': '49'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'Para calcular la distancia entre dos puntos $P_1$ y $P_2$, aplicamos:', 'options': {'A': 'El Teorema de Tales', 'B': 'El Teorema de Pitágoras', 'C': 'El Teorema de Euclides', 'D': 'Solo una resta simple'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'Si un vector $\\vec{v}$ tiene módulo 5, ¿cuánto mide el vector $-2\\vec{v}$?', 'options': {'A': '-10', 'B': '10', 'C': '5', 'D': '3'}, 'answer': 'A', 'explanation': ''},
+            {'question': '¿Cuál de los siguientes vectores tiene el mayor módulo?', 'options': {'A': '$(1, 1)$', 'B': '$(0, 2)$', 'C': '$(-2, 0)$', 'D': '$(2, 1)$'}, 'answer': 'A', 'explanation': ''},
+            {'question': 'Si las componentes de un vector son iguales $(a, a)$, su módulo es:', 'options': {'A': '$2a$', 'B': '$a^2$', 'C': '$a\\sqrt{2}$', 'D': '$2a^2$'}, 'answer': 'A', 'explanation': ''}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="v03_quiz")
+
+    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V03)", expanded=False):
         st.markdown(r"""
-**1. ¿Cuál es el producto punto de $\vec{u} = (3, 7)$ y $\vec{v} = (2, -1)$?**
 
-A) $-1$
-B) $1$
-C) $-5$
-D) $13$
-
----
-
-**2. Si $\vec{a} \cdot \vec{b} = 0$, entonces $\vec{a}$ y $\vec{b}$ son:**
-
-A) Paralelos
-B) Iguales
-C) Perpendiculares
-D) Opuestos
-
----
-
-**3. ¿Cuál vector es perpendicular a $\vec{v} = (4, -2)$?**
-
-A) $(4, 2)$
-B) $(2, 4)$
-C) $(-2, -4)$
-D) $(1, 2)$
-
----
-
-**4. Si $\vec{u} = (1, 0)$ y $\vec{v} = (0, 1)$, ¿cuál es el ángulo entre ellos?**
-
-A) $0°$
-B) $45°$
-C) $90°$
-D) $180°$
-
----
-
-**5. $\vec{v} \cdot \vec{v}$ es igual a:**
-
-A) $\vec{v}$
-B) $2\vec{v}$
-C) $\|\vec{v}\|$
-D) $\|\vec{v}\|^2$
-
----
-
-**6. Si el producto punto de dos vectores es negativo, el ángulo entre ellos es:**
-
-A) Agudo
-B) Recto
-C) Obtuso
-D) Llano
-
----
-
-**7. ¿Cuál es el valor de $k$ para que $(k, 3)$ y $(6, -2)$ sean perpendiculares?**
-
-A) $-9$
-B) $1$
-C) $-1$
-D) $9$
-""")
-
-    with st.expander("🔑 Pauta Técnica V03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **A** | $(3)(2) + (7)(-1) = 6 - 7 = -1$. |
-| **2** | **C** | Producto punto cero $\Leftrightarrow$ vectores perpendiculares (ortogonales). |
-| **3** | **D** | $(4)(1) + (-2)(2) = 4 - 4 = 0$ ✅. Nota: $(2,4)$ da $8-8=0$ también, pero (D) $(1,2)$ cumple. |
-| **4** | **C** | $\vec{u} \cdot \vec{v} = 0$, por lo tanto $\theta = 90°$. |
-| **5** | **D** | $\vec{v} \cdot \vec{v} = v_1^2 + v_2^2 = \|\vec{v}\|^2$. Es un escalar, no un vector. |
-| **6** | **C** | Si $\vec{u} \cdot \vec{v} < 0$ entonces $\cos\theta < 0$, luego $90° < \theta < 180°$ (obtuso). |
-| **7** | **B** | $(k)(6) + (3)(-2) = 0 \Rightarrow 6k - 6 = 0 \Rightarrow k = 1$. |
 """)

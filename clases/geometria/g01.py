@@ -11,194 +11,73 @@ _CSS = """
 
 def render_G01():
     st.markdown(_CSS, unsafe_allow_html=True)
-    st.title("G01: Plano Cartesiano, Distancia y Punto Medio")
+    st.title("G01: Topografía Inicial — El Plano Cartesiano")
     st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
     st.markdown(r"""
-### 🎬 Video 056 — El Plano Cartesiano
-
-Es el mapa de operaciones. Se compone de dos ejes perpendiculares:
-
-* **Eje X (Abscisas):** El eje horizontal.
-* **Eje Y (Ordenadas):** El eje vertical.
-* **Origen:** El punto $(0,0)$, donde ambos ejes se cruzan.
-
-Los ejes dividen el plano en 4 **cuadrantes**:
-
-| Cuadrante | Signo de $x$ | Signo de $y$ |
-| :--- | :---: | :---: |
-| **I** | $+$ | $+$ |
-| **II** | $-$ | $+$ |
-| **III** | $-$ | $-$ |
-| **IV** | $+$ | $-$ |
-
-> **Statham Tip:** *"Seba, dile que el orden importa. En el código y en el mapa, primero caminas (X) y luego subes (Y). Si lo haces al revés, caes en una trampa."*
+# 🎬 Clase G01: Topografía Inicial - El Plano
+**Eje:** Geometría | **Video:** 056
 
 ---
 
-### 🎬 Video 057 — Distancia entre Dos Puntos
+### 🏛️ La Intuición de Descartes
+Cuenta la leyenda que **René Descartes** estaba en cama mirando una mosca caminar por el techo. Se preguntó: *¿Cómo puedo describir la posición exacta de esa mosca?* Así nacieron los ejes X e Y. Un sistema para que nadie se sintiera perdido en una superficie plana.
 
-Para calcular la distancia entre $A(x_1, y_1)$ y $B(x_2, y_2)$, usamos el Teorema de Pitágoras aplicado al plano:
+### ⚖️ 1. Las Reglas del Tablero
+* **Eje X (Abscisas):** El horizonte. Lo que avanzas o retrocedes.
+* **Eje Y (Ordenadas):** El vertical. Lo que subes o bajas.
+* **El Origen $(0,0)$:** El centro del mapa.
 
-$$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+### ⚖️ 2. Coordenadas $P(x, y)$
+El primer número manda en horizontal, el segundo en vertical.
+* **Cuadrante I:** $(+,+)$ | **Cuadrante II:** $(-,+)$
+* **Cuadrante III:** $(-,-)$ | **Cuadrante IV:** $(+,-)$
 
-**Procedimiento:**
-1. Resta las coordenadas $x$ y elévalas al cuadrado.
-2. Resta las coordenadas $y$ y elévalas al cuadrado.
-3. Suma ambos resultados y saca la raíz cuadrada.
-
-> La distancia siempre es positiva. No importa si vas de $A$ a $B$ o de $B$ a $A$, el camino mide lo mismo.
-
----
-
-### 🎬 Video 058 — Punto Medio
-
-El punto medio $M$ divide al segmento en dos partes exactamente iguales. Es el promedio de las coordenadas:
-
-$$M = \left( \frac{x_1 + x_2}{2},\ \frac{y_1 + y_2}{2} \right)$$
-
-**Ejemplo:** Si $A(2, 4)$ y $B(8, 10)$:
-* $x_M = (2 + 8) / 2 = 5$
-* $y_M = (4 + 10) / 2 = 7$
-* **Punto Medio:** $M(5, 7)$
-""")
-
-    # ── FIGURA: Plano Cartesiano ─────────────────────────────────────────────
-    st.markdown("#### 📊 El Plano Cartesiano y sus Cuadrantes")
-    fig, ax = plt.subplots(figsize=(6, 6))
-    ax.axhline(0, color='black', linewidth=2)
-    ax.axvline(0, color='black', linewidth=2)
-
-    puntos = [(3, 4), (-3, 4), (-3, -4), (3, -4)]
-    etiquetas = ['I (+,+)', 'II (-,+)', 'III (-,-)', 'IV (+,-)']
-    colores = ['#1b5e20', '#c0392b', '#6C63FF', '#e67e22']
-
-    for (x, y), et, col in zip(puntos, etiquetas, colores):
-        ax.scatter(x, y, color=col, s=120, zorder=5)
-        ax.text(x, y + 0.6, f'{et}\nP({x},{y})', ha='center', color=col, fontweight='bold', fontsize=10)
-        ax.plot([x, x], [0, y], color=col, linestyle='--', alpha=0.4)
-        ax.plot([0, x], [y, y], color=col, linestyle='--', alpha=0.4)
-
-    ax.set_xlim(-6, 6); ax.set_ylim(-6, 6)
-    ax.grid(True, linestyle=':', alpha=0.5)
-    ax.set_xlabel("Eje X (Abscisas)", fontsize=11)
-    ax.set_ylabel("Eje Y (Ordenadas)", fontsize=11)
-    ax.set_title("Plano Cartesiano — Los 4 Cuadrantes", fontsize=14, fontweight='bold')
-    plt.tight_layout()
-    st.pyplot(fig)
-    plt.close()
-
-    st.markdown(r"""
----
-
-### 🎬 Video 059 — Ángulos y su Clasificación
-
-| Nombre | Medida | Visualización |
-| :--- | :--- | :--- |
-| **Agudo** | Menor a 90° | Cerrado, "afilado" |
-| **Recto** | Exactamente 90° | Forma una 'L' perfecta |
-| **Obtuso** | Entre 90° y 180° | Abierto, ancho |
-| **Extendido** | Exactamente 180° | Una línea recta |
-
-**Relaciones importantes:**
-* **Complementarios:** Dos ángulos que suman 90°. Ej: 30° y 60°.
-* **Suplementarios:** Dos ángulos que suman 180°. Ej: 120° y 60°.
-* **Opuestos por el vértice:** Se forman cuando dos rectas se cruzan; los ángulos opuestos son **siempre iguales**.
-
----
-
-### 🎬 Video 060 — Ángulos entre Paralelas
-
-Cuando una **transversal** (una recta que cruza) corta dos rectas paralelas, se forman 8 ángulos. Solo hay **dos medidas** distintas que se repiten.
-
-* **Ángulos Correspondientes:** Misma posición relativa → Son **iguales**.
-* **Alternos Internos:** Dentro de las paralelas en lados opuestos → Son **iguales**.
-* **Alternos Externos:** Fuera en lados opuestos → Son **iguales**.
-* **Co-internos (Conjugados):** Interior, mismo lado → Suman **180°**.
-
-> **Statham Tip:** *"Seba, dile que busque la letra 'Z'. Los ángulos que quedan dentro de las esquinas de la Z son alternos internos y siempre son iguales. Es el truco de reconocimiento más rápido."*
+> **Galileo Tip:** "Escucha, el orden es sagrado: $(x, y)$. Primero caminas por el pasillo (X) y luego buscas el piso en el ascensor (Y). Si los cruzas, terminarás en la habitación equivocada."
 """)
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # ── EJEMPLOS ────────────────────────────────────────────────────────────
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería G01", expanded=False):
+    with st.expander("🛠️ Ejercitación Técnica G01 (Paso a Paso)", expanded=False):
         st.markdown(r"""
-### E01: Identificar coordenadas y cuadrante
+## 🛠️ Ejercitación Técnica G01 (Paso a Paso)
 
-**Datos:** $P(-3, 5)$, $Q(4, -2)$, $R(0, 7)$
-
-| Punto | Cuadrante | Signo de X | Signo de Y |
+| ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| $P(-3, 5)$ | **II** | Negativo | Positivo |
-| $Q(4, -2)$ | **IV** | Positivo | Negativo |
-| $R(0, 7)$ | Eje Y | — | Positivo |
-
----
-
-### E02: Calcular distancia entre dos puntos
-
-**Datos:** $A(1, 2)$ y $B(4, 6)$
-
-$$d = \sqrt{(4-1)^2 + (6-2)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$$
-
-La distancia es **5 unidades**. (¡Un trío pitagórico 3-4-5!)
-
----
-
-### E03: Encontrar el punto medio
-
-**Datos:** $C(3, -1)$ y $D(7, 5)$
-
-$$M = \left(\frac{3+7}{2},\ \frac{-1+5}{2}\right) = \left(5,\ 2\right)$$
-
----
-
-### E04: Ángulos entre paralelas
-
-Si una transversal corta dos paralelas formando un ángulo de 65°, ¿cuánto mide el ángulo co-interno?
-
-* Los co-internos suman 180°.
-* $180° - 65° = 115°$
+| **E01** | Ubicar el punto $P(-3, 4)$ | 1. Parto en el origen $(0,0)$.<br>2. Me muevo 3 unidades a la izquierda (X es -3).<br>3. Subo 4 unidades (Y es 4). | **Punto en el II Cuadrante** |
+| **E02** | ¿Cuál es la distancia entre $(0,0)$ y $(3,4)$? | 1. Dibujar el triángulo rectángulo con base 3 y altura 4.<br>2. Aplicar Pitágoras: $c^2 = 3^2 + 4^2 = 9 + 16 = 25$.<br>3. Calcular $\sqrt{25}$. | **5 unidades** |
+| **E03** | Calcular el punto medio entre $A(2, 4)$ y $B(6, 10)$ | 1. Promedio de las X: $(2+6)/2 = 4$.<br>2. Promedio de las Y: $(4+10)/2 = 7$.<br>3. Armar el par ordenado $(X_m, Y_m)$. | **$M(4, 7)$** |
+| **E04** | Reflejar el punto $(5, 2)$ respecto al eje X. | 1. El valor de X se mantiene intacto (5).<br>2. El valor de Y cambia de signo (espejo horizontal). | **$(5, -2)$** |
+| **E05** | ¿Dónde se ubica un punto cuya coordenada es $(0, -6)$? | 1. Al ser $x=0$, no hay movimiento lateral.<br>2. Al ser $y=-6$, el punto bajó por el eje vertical. | **Eje Y negativo** |
 """)
 
-    # ── QUIZ ────────────────────────────────────────────────────────────────
-    with st.expander("❓ Cuestionario G01: Plano, Distancia y Ángulos", expanded=False):
+    with st.expander("❓ Cuestionario G01", expanded=False):
         quiz = [
-            {"question": r'El punto $P(-2, 5)$ se ubica en el cuadrante:',
-             "options": {"A": "I", "B": "II", "C": "III", "D": "IV"},
-             "answer": "B", "explanation": r"El Cuadrante II tiene $x$ negativo e $y$ positivo."},
-            {"question": r'La distancia entre $A(0, 0)$ y $B(3, 4)$ es:',
-             "options": {"A": "5", "B": "7", "C": r"$\sqrt{7}$", "D": "3,5"},
-             "answer": "A", "explanation": r"$d = \sqrt{3^2 + 4^2} = \sqrt{9+16} = \sqrt{25} = 5$. Trío 3-4-5."},
-            {"question": r'El punto medio entre $A(2, 6)$ y $B(8, 2)$ es:',
-             "options": {"A": r"$(5, 4)$", "B": r"$(6, 8)$", "C": r"$(4, 5)$", "D": r"$(10, 8)$"},
-             "answer": "A", "explanation": r"$M_x = (2+8)/2 = 5$; $M_y = (6+2)/2 = 4$."},
-            {"question": "Dos ángulos son complementarios. Uno mide 38°. ¿Cuánto mide el otro?",
-             "options": {"A": "142°", "B": "62°", "C": "52°", "D": "128°"},
-             "answer": "C", "explanation": "Complementarios suman 90°. $90° - 38° = 52°$."},
-            {"question": "Una transversal corta dos paralelas. Un ángulo mide 70°. Su alterno interno mide:",
-             "options": {"A": "110°", "B": "70°", "C": "20°", "D": "140°"},
-             "answer": "B", "explanation": "Los ángulos alternos internos son siempre iguales."},
-            {"question": r'Una transversal corta dos paralelas. Un ángulo mide 115°. Su co-interno (conjugado) mide:',
-             "options": {"A": "65°", "B": "115°", "C": "25°", "D": "75°"},
-             "answer": "A", "explanation": "Los co-internos son suplementarios: $180° - 115° = 65°$."},
-            {"question": r'¿En cuál cuadrante tienen ambas coordenadas signo negativo?',
-             "options": {"A": "I", "B": "II", "C": "III", "D": "IV"},
-             "answer": "C", "explanation": "El Cuadrante III tiene $x < 0$ e $y < 0$."},
+            {'question': 'Un punto cuya abscisa es negativa y cuya ordenada es positiva se encuentra en el:', 'options': {'A': 'I Cuadrante', 'B': 'II Cuadrante', 'C': 'III Cuadrante', 'D': 'IV Cuadrante'}, 'answer': 'B', 'explanation': '¡No te pierdas! Si la abscisa ($x$) es negativa y la ordenada ($y$) es positiva, significa que te moviste a la izquierda y subiste. Eso define al **Segundo Cuadrante**. ¡Visualízalo!'},
+            {'question': '¿Cuál es la distancia entre los puntos $A(1, 5)$ y $B(1, -2)$?', 'options': {'A': '3 unidades', 'B': '4 unidades', 'C': '7 unidades', 'D': '10 unidades'}, 'answer': 'C', 'explanation': 'Mira los puntos: $A(1, 5)$ y $B(1, -2)$. ¿Ves que el 1 no cambió? Solo te moviste verticalmente. Desde el 5 positivo hasta el 2 negativo hay 7 pasos de distancia. $'},
+            {'question': 'El punto medio del segmento con extremos $( -4, 8)$ y $(2, 2)$ es:', 'options': {'A': '$(-1, 5)$', 'B': '$(-2, 10)$', 'C': '$(3, 3)$', 'D': '$(1, 5)$'}, 'answer': 'A', 'explanation': 'El punto medio es simplemente el promedio. Suma las X: $-4 + 2 = -2$, y la mitad es $-1$. Suma las Y: $8 + 2 = 10$, y la mitad es $5$. El centro de ese universo es $(-1, 5)$. ¡Es lógica pura!'},
+            {'question': 'Si reflejamos el punto $P(3, 4)$ respecto al eje X, ¿cuáles son sus nuevas coordenadas?', 'options': {'A': '$(-3, 4)$', 'B': '$(3, -4)$', 'C': '$(-3, -4)$', 'D': '$(4, 3)$'}, 'answer': 'B', 'explanation': 'La simetría respecto al eje X es como un reflejo en el agua: lo que está arriba pasa abajo, pero la posición horizontal no cambia. El punto $(3,4)$ se convierte en $(3,-4)$.'},
+            {'question': '¿En qué cuadrante se ubica un punto donde tanto la abscisa como la ordenada son negativas?', 'options': {'A': 'I Cuadrante', 'B': 'II Cuadrante', 'C': 'III Cuadrante', 'D': 'IV Cuadrante'}, 'answer': 'C', 'explanation': '¡Cuidado aquí! En el tercer cuadrante te mueves a la izquierda (X negativo) y bajas (Y negativo). La combinación $(-,-)$ es la trampa final del plano.'},
+            {'question': 'Si un punto está sobre el eje Y, ¿qué valor es garantizado que sea 0?', 'options': {'A': 'La ordenada ($y$)', 'B': 'La abscisa ($x$)', 'C': 'Ambos son 0', 'D': 'Ninguno es 0'}, 'answer': 'B', 'explanation': 'Si no te mueves hacia los lados, estás clavado en la línea vertical. La línea vertical es donde la abscisa ($x$) es siempre cero.'},
+            {'question': '¿Cuál es la distancia entre el origen $(0,0)$ y el punto $P(3, -4)$?', 'options': {'A': '1 unidad', 'B': '5 unidades', 'C': '7 unidades', 'D': '25 unidades'}, 'answer': 'B', 'explanation': 'Es un clásico triángulo 3-4-5. La distancia del origen a $(x, y)$ es $\\sqrt{x^2+y^2}$. $\\sqrt{3^2+(-4)^2} = \\sqrt{9+16} = 5$.'},
+            {'question': 'Si $M(2, 3)$ es el punto medio entre $A(1, 1)$ y $B(x, y)$, ¿cuáles son los valores de $x$ e $y$?', 'options': {'A': '$(3, 5)$', 'B': '$(4, 6)$', 'C': '$(3, 2)$', 'D': '$(1, 2)$'}, 'answer': 'A', 'explanation': 'El punto medio es el promedio, así que deshaz el promedio: $2 = (1+x)/2 \\implies 4 = 1+x \\implies x=3$. $3 = (1+y)/2 \\implies 6 = 1+y \\implies y=5$.'},
+            {'question': '¿Qué operación transforma el punto $(2, 3)$ en $(-2, 3)$?', 'options': {'A': 'Reflexión respecto al eje X', 'B': 'Reflexión respecto al eje Y', 'C': 'Rotación 180°', 'D': 'Traslación'}, 'answer': 'B', 'explanation': 'Si cambias el signo de X, estás reflejando al otro lado del eje vertical. Es como un espejo que cambia izquierda por derecha.'},
+            {'question': 'El punto $A(-5, 0)$ se encuentra en:', 'options': {'A': 'El III Cuadrante', 'B': 'El II Cuadrante', 'C': 'El eje X', 'D': 'El eje Y'}, 'answer': 'C', 'explanation': 'Si la ordenada ($y$) es cero, no subiste ni bajaste. Estás sobre el eje X, específicamente 5 unidades a la izquierda del origen.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g01_quiz")
 
-    # ── PAUTA ───────────────────────────────────────────────────────────────
-    with st.expander("🔑 Pauta Técnica G01", expanded=False):
+    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G01)", expanded=False):
         st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
+| Pregunta | Respuesta | La Voz del Maestro |
 | :--- | :---: | :--- |
-| **1** | **B** | Cuadrante II: $x < 0$, $y > 0$. |
-| **2** | **A** | Trío pitagórico 3-4-5. $\sqrt{9+16}=5$. |
-| **3** | **A** | Promedio de cada coordenada: $(5, 4)$. |
-| **4** | **C** | $90° - 38° = 52°$. Los complementarios suman 90°. |
-| **5** | **B** | Alternos internos son iguales. |
-| **6** | **A** | Co-internos son suplementarios: $180° - 115° = 65°$. |
-| **7** | **C** | Cuadrante III: ambas negativas. |
+| **1** | **B** | **Galileo Tip:** "¡No te pierdas! Si la abscisa ($x$) es negativa y la ordenada ($y$) es positiva, significa que te moviste a la izquierda y subiste. Eso define al **Segundo Cuadrante**. ¡Visualízalo!" |
+| **2** | **C** | **Newton Tip:** "Mira los puntos: $A(1, 5)$ y $B(1, -2)$. ¿Ves que el 1 no cambió? Solo te moviste verticalmente. Desde el 5 positivo hasta el 2 negativo hay 7 pasos de distancia. $|5 - (-2)| = 7$. No gastes energía en Pitágoras si la línea es recta." |
+| **3** | **A** | **Hawking Tip:** "El punto medio es simplemente el promedio. Suma las X: $-4 + 2 = -2$, y la mitad es $-1$. Suma las Y: $8 + 2 = 10$, y la mitad es $5$. El centro de ese universo es $(-1, 5)$. ¡Es lógica pura!" |
+| **4** | **B** | **Curie Tip:** "La simetría respecto al eje X es como un reflejo en el agua: lo que está arriba pasa abajo, pero la posición horizontal no cambia. El punto $(3,4)$ se convierte en $(3,-4)$." |
+| **5** | **C** | **Galileo Tip:** "¡Cuidado aquí! En el tercer cuadrante te mueves a la izquierda (X negativo) y bajas (Y negativo). La combinación $(-,-)$ es la trampa final del plano." |
+| **6** | **B** | **Newton Tip:** "Si no te mueves hacia los lados, estás clavado en la línea vertical. La línea vertical es donde la abscisa ($x$) es siempre cero." |
+| **7** | **B** | **Hawking Tip:** "Es un clásico triángulo 3-4-5. La distancia del origen a $(x, y)$ es $\sqrt{x^2+y^2}$. $\sqrt{3^2+(-4)^2} = \sqrt{9+16} = 5$." |
+| **8** | **A** | **Curie Tip:** "El punto medio es el promedio, así que deshaz el promedio: $2 = (1+x)/2 \implies 4 = 1+x \implies x=3$. $3 = (1+y)/2 \implies 6 = 1+y \implies y=5$." |
+| **9** | **B** | **Galileo Tip:** "Si cambias el signo de X, estás reflejando al otro lado del eje vertical. Es como un espejo que cambia izquierda por derecha." |
+| **10** | **C** | **Newton Tip:** "Si la ordenada ($y$) es cero, no subiste ni bajaste. Estás sobre el eje X, específicamente 5 unidades a la izquierda del origen." |
 """)

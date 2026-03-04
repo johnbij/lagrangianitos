@@ -1,231 +1,86 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """
+<style>
+.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }
+</style>
+"""
 
 def render_V05():
-    st.title("V05: Aplicaciones de Vectores en Geometría Analítica — Vectores en Acción")
+    st.markdown(_CSS, unsafe_allow_html=True)
+    st.title("V05: Vectores en el Espacio — La Tercera Dimensión")
+    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
     st.markdown(r"""
-### 🛡️ 1. Punto Medio con Vectores
-
-El **punto medio** $M$ del segmento $\overline{AB}$, con $A(x_1, y_1)$ y $B(x_2, y_2)$, se obtiene como:
-
-$$M = \frac{1}{2}(\vec{OA} + \vec{OB}) = \left(\frac{x_1 + x_2}{2},\; \frac{y_1 + y_2}{2}\right)$$
-
-Vectorialmente, $\vec{OM} = \frac{1}{2}(\vec{OA} + \vec{OB})$, es decir, el promedio de los vectores posición.
+# 🎬 Clase V05: Vectores en el Espacio - La Tercera Dimensión
+**Eje:** Vectores | **Nivel:** Alcance del Objetivo
 
 ---
 
-### 🛡️ 2. Distancia de un Punto a una Recta
+### 🛡️ 1. El Sistema de Coordenadas 3D
+Para representar el espacio, añadimos un tercer eje perpendicular a los otros dos:
+* **Eje X:** Ancho (Abscisas)
+* **Eje Y:** Largo (Ordenadas)
+* **Eje Z:** Alto (Cotas)
+Un punto o vector se expresa como una terna ordenada: $\vec{v}(x, y, z)$.
 
-La distancia desde un punto $P(x_0, y_0)$ a la recta $ax + by + c = 0$ se calcula con:
+### ⚖️ 2. Operaciones en 3D
+Se mantienen las mismas reglas que en el plano, pero aplicadas a las tres componentes:
+* **Suma/Resta:** $(x_1, y_1, z_1) \pm (x_2, y_2, z_2) = (x_1 \pm x_2, \space y_1 \pm y_2, \space z_1 \pm z_2)$
+* **Ponderación:** $k \cdot (x, y, z) = (kx, ky, kz)$
 
-$$d(P, \ell) = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}$$
+### 📐 3. Módulo en el Espacio
+Para hallar la medida de un vector en 3D, extendemos el Teorema de Pitágoras:
+$$|\vec{v}| = \sqrt{x^2 + y^2 + z^2}$$
 
-Esta fórmula utiliza el vector normal $\vec{n} = (a, b)$ de la recta: la distancia es la magnitud de la proyección del vector $\vec{P_0 P}$ sobre $\vec{n}$.
-
-> **Tip PAES:** No olvides el **valor absoluto** en el numerador y la **raíz** en el denominador.
-
----
-
-### 🛡️ 3. Baricentro (Centroide) de un Triángulo
-
-El **baricentro** $G$ de un triángulo con vértices $A(x_1, y_1)$, $B(x_2, y_2)$ y $C(x_3, y_3)$ es el punto donde se cortan las tres medianas:
-
-$$G = \left(\frac{x_1 + x_2 + x_3}{3},\; \frac{y_1 + y_2 + y_3}{3}\right)$$
-
-Vectorialmente:
-
-$$\vec{OG} = \frac{1}{3}(\vec{OA} + \vec{OB} + \vec{OC})$$
-
-> **Propiedad:** El baricentro divide cada mediana en razón $2:1$ desde el vértice.
-
----
-
-### 🛡️ 4. Traslaciones Vectoriales
-
-Una **traslación** desplaza todos los puntos de una figura según un vector $\vec{t} = (a, b)$:
-
-$$P'(x', y') = P(x, y) + \vec{t} = (x + a,\; y + b)$$
-
-| Propiedad de la traslación | Descripción |
-| :--- | :--- |
-| Conserva distancias | $d(P', Q') = d(P, Q)$ |
-| Conserva ángulos | Los ángulos no cambian |
-| Conserva el paralelismo | Lados paralelos siguen paralelos |
-| Es una isometría | No deforma la figura |
-
----
-
-### 🛡️ 5. Aplicaciones en Navegación y Física
-
-Los vectores se usan para modelar situaciones reales:
-
-| Situación | Modelo vectorial |
-| :--- | :--- |
-| Velocidad del viento | Vector con magnitud (km/h) y dirección |
-| Fuerza resultante | Suma de vectores de fuerza |
-| Desplazamiento | Vector desde posición inicial a final |
-| Corriente marina | Suma con el vector de velocidad del barco |
-
-La **velocidad resultante** de un barco que navega con velocidad $\vec{v}_b$ en una corriente $\vec{v}_c$ es:
-
-$$\vec{v}_R = \vec{v}_b + \vec{v}_c$$
-
----
-
-### 🛡️ 6. Resumen de Fórmulas Clave
-
-| Concepto | Fórmula |
-| :--- | :--- |
-| Punto medio | $M = \left(\frac{x_1+x_2}{2}, \frac{y_1+y_2}{2}\right)$ |
-| Distancia punto-recta | $d = \frac{\|ax_0 + by_0 + c\|}{\sqrt{a^2+b^2}}$ |
-| Baricentro | $G = \left(\frac{x_1+x_2+x_3}{3}, \frac{y_1+y_2+y_3}{3}\right)$ |
-| Traslación | $P' = P + \vec{t}$ |
-
----
-
-> *"El universo no puede ser leído hasta que hayamos aprendido el lenguaje en el que está escrito. Está escrito en lenguaje matemático, y las letras son triángulos, círculos y otras figuras geométricas."*
-> — **Galileo Galilei**
+> **Newton Tip:** "Seba, dile a tu alumno: trabajar en 3D es como estar en una habitación. El eje $X$ es una pared, el $Y$ es la otra y el $Z$ es la altura del techo. ¡La matemática no cambia, solo se vuelve más profunda!"
 """)
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería V05", expanded=False):
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    with st.expander("🛠️ Ejercitación Técnica V05 (Paso a Paso)", expanded=False):
         st.markdown(r"""
-### E01: Punto medio de un segmento
+## 🛠️ Ejercitación Técnica V05 (Paso a Paso)
 
-**Situación:** Encuentra el punto medio de $A(2, 8)$ y $B(6, -4)$.
+| ID | Desafío | Paso a Paso | Resultado |
+| :--- | :--- | :--- | :--- |
+| **E01** | Sumar $\vec{u}(1, 2, 3)$ y $\vec{v}(0, -1, 4)$. | 1. Sumar cada eje: $(1+0, 2-1, 3+4)$. | **$(1, 1, 7)$** |
+| **E02** | Calcular el módulo del vector $\vec{w}(2, 2, 1)$. | 1. $\sqrt{2^2 + 2^2 + 1^2} = \sqrt{4 + 4 + 1}$.<br>2. $\sqrt{9} = 3$. | **3** |
+| **E03** | Ponderar $\vec{a}(5, -10, 15)$ por $k = 0,2$. | 1. Multiplicar cada parte por $0,2$ (o dividir por 5). | **$(1, -2, 3)$** |
+| **E04** | Hallar vector $\vec{AB}$ con $A(1, 1, 1)$ y $B(2, 3, 4)$. | 1. Restar $B - A: (2-1, 3-1, 4-1)$. | **$(1, 2, 3)$** |
+| **E05** | Distancia entre el origen $(0,0,0)$ y el punto $(3, 0, 4)$. | 1. Es el módulo de $(3, 0, 4) = \sqrt{3^2 + 0^2 + 4^2}$. | **5** |
+""")
 
-**La Carpintería:**
-1. $M = \left(\frac{2+6}{2},\; \frac{8+(-4)}{2}\right) = \left(\frac{8}{2},\; \frac{4}{2}\right) = (4, 2)$.
+    with st.expander("❓ Cuestionario V05", expanded=False):
+        quiz = [
+            {'question': 'El tercer eje que se añade en el espacio 3D se conoce como eje de las:', 'options': {'A': 'Abscisas', 'B': 'Ordenadas', 'C': 'Cotas', 'D': 'Diagonales'}, 'answer': 'C', 'explanation': 'X es ancho, Y es profundidad, Z es la cota o altura.'},
+            {'question': 'El módulo del vector $(1, 1, 1)$ es:', 'options': {'A': '1', 'B': '3', 'C': '$\\sqrt{3}$', 'D': '$\\sqrt{1}$'}, 'answer': 'C', 'explanation': '$\\sqrt{1^2 + 1^2 + 1^2} = \\sqrt{1+1+1} = \\sqrt{3}$. No la confundas con 3.'},
+            {'question': 'Si sumamos $(2, 4, 6)$ con $(-2, -4, -6)$, obtenemos:', 'options': {'A': '$(0, 0, 0)$', 'B': '$(4, 8, 12)$', 'C': '$(1, 1, 1)$', 'D': 'Un punto en el infinito'}, 'answer': 'A', 'explanation': 'Sumar un vector con su opuesto siempre nos lleva de vuelta al reposo, el vector nulo.'},
+            {'question': 'La ponderación de $(-3, 6, 9)$ por $k = -1/3$ resulta en:', 'options': {'A': '$(1, 2, 3)$', 'B': '$(1, -2, -3)$', 'C': '$(-1, 2, 3)$', 'D': '$(3, -6, -9)$'}, 'answer': 'B', 'explanation': 'El signo negativo invierte todo y el $1/3$ reduce los valores a la tercera parte.'},
+            {'question': 'Un vector en el espacio que solo tiene componente en el eje Z es un vector:', 'options': {'A': 'Horizontal', 'B': 'Vertical (en el plano XY)', 'C': 'Perpendicular al suelo (plano XY)', 'D': 'Nulo'}, 'answer': 'C', 'explanation': "Típ: Si no tiene ancho ni largo, solo le queda 'subir' desde el plano del suelo."},
+            {'question': 'El módulo del vector $(0, 12, 5)$ es:', 'options': {'A': '12', 'B': '17', 'C': '13', 'D': '5'}, 'answer': 'C', 'explanation': 'Es el trío pitagórico (5, 12, 13) pero en una posición distinta. La matemática no miente.'},
+            {'question': 'Si el punto inicial es $(1, 2, 3)$ y el vector es $(1, 1, 1)$, el punto final es:', 'options': {'A': '$(0, 0, 0)$', 'B': '$(2, 3, 4)$', 'C': '$(1, 1, 1)$', 'D': '$(2, 2, 2)$'}, 'answer': 'B', 'explanation': 'Suma componente a componente para trasladar el punto en el espacio.'},
+            {'question': 'En 3D, ¿cuántos planos de referencia se forman (XY, XZ, YZ)?', 'options': {'A': '1', 'B': '2', 'C': '3', 'D': '4'}, 'answer': 'C', 'explanation': 'Imagina el rincón de una caja: tienes el piso y dos paredes laterales.'},
+            {'question': 'El vector $(x, y, z)$ se encuentra en el origen si:', 'options': {'A': '$x = y$', 'B': '$z = 0$', 'C': '$x = 0, y = 0, z = 0$', 'D': '$x+y+z = 0$'}, 'answer': 'C', 'explanation': 'El origen es el punto de partida absoluto $(0,0,0)$.'},
+            {'question': 'La distancia entre $(1, 0, 0)$ y $(1, 0, 5)$ es:', 'options': {'A': '1', 'B': '5', 'C': '6', 'D': '$\\sqrt{26}$'}, 'answer': 'B', 'explanation': 'Típ: Como $x$ e $y$ son iguales, la distancia es simplemente la diferencia en $z$: $5 - 0 = 5$.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="v05_quiz")
 
-| Coordenada | Cálculo | Resultado |
-| :--- | :--- | :---: |
-| $x_M$ | $\frac{2+6}{2}$ | $4$ |
-| $y_M$ | $\frac{8+(-4)}{2}$ | $2$ |
-| **Punto medio** | | **(4, 2)** |
-
----
-
-### E02: Distancia de un punto a una recta
-
-**Situación:** ¿Cuál es la distancia del punto $P(1, 3)$ a la recta $3x - 4y + 5 = 0$?
-
-**La Carpintería:**
-1. $a = 3$, $b = -4$, $c = 5$, $(x_0, y_0) = (1, 3)$.
-2. Numerador: $|3(1) + (-4)(3) + 5| = |3 - 12 + 5| = |-4| = 4$.
-3. Denominador: $\sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$.
-4. $d = \frac{4}{5} = 0{,}8$ unidades.
-
----
-
-### E03: Baricentro de un triángulo
-
-**Situación:** Encuentra el baricentro del triángulo con vértices $A(0, 0)$, $B(6, 0)$ y $C(3, 9)$.
-
-**La Carpintería:**
-1. $G = \left(\frac{0+6+3}{3},\; \frac{0+0+9}{3}\right) = \left(\frac{9}{3},\; \frac{9}{3}\right) = (3, 3)$.
-
----
-
-### E04: Traslación de un triángulo
-
-**Situación:** Un triángulo tiene vértices $A(1, 2)$, $B(4, 2)$ y $C(1, 5)$. Se aplica la traslación $\vec{t} = (3, -1)$. ¿Cuáles son los nuevos vértices?
-
-**La Carpintería:**
-1. $A' = (1+3,\; 2+(-1)) = (4, 1)$.
-2. $B' = (4+3,\; 2+(-1)) = (7, 1)$.
-3. $C' = (1+3,\; 5+(-1)) = (4, 4)$.
-
-| Vértice original | $+ \vec{t} = (3, -1)$ | Vértice trasladado |
+    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V05)", expanded=False):
+        st.markdown(r"""
+| Pregunta | Respuesta | La Voz del Maestro |
 | :--- | :---: | :--- |
-| $A(1, 2)$ | → | $A'(4, 1)$ |
-| $B(4, 2)$ | → | $B'(7, 1)$ |
-| $C(1, 5)$ | → | $C'(4, 4)$ |
-
----
-
-### E05: Velocidad resultante (navegación)
-
-**Situación:** Un barco navega hacia el este a $15$ km/h ($\vec{v}_b = (15, 0)$) y la corriente marina empuja hacia el norte a $8$ km/h ($\vec{v}_c = (0, 8)$). ¿Cuál es la velocidad resultante?
-
-**La Carpintería:**
-1. $\vec{v}_R = \vec{v}_b + \vec{v}_c = (15, 0) + (0, 8) = (15, 8)$.
-2. Rapidez: $\|\vec{v}_R\| = \sqrt{225 + 64} = \sqrt{289} = 17$ km/h.
-3. El barco se mueve a **17 km/h** en una dirección entre el este y el norte.
-""")
-
-    with st.expander("❓ Cuestionario V05: Aplicaciones de Vectores", expanded=False):
-        st.markdown(r"""
-**1. ¿Cuál es el punto medio de $A(-2, 6)$ y $B(4, 2)$?**
-
-A) $(2, 8)$
-B) $(1, 4)$
-C) $(3, 4)$
-D) $(6, 8)$
-
----
-
-**2. La distancia del punto $P(0, 0)$ a la recta $3x + 4y - 10 = 0$ es:**
-
-A) $1$
-B) $2$
-C) $5$
-D) $10$
-
----
-
-**3. El baricentro de un triángulo con vértices $(0, 0)$, $(6, 0)$ y $(0, 6)$ es:**
-
-A) $(3, 3)$
-B) $(2, 2)$
-C) $(6, 6)$
-D) $(1, 1)$
-
----
-
-**4. Si se aplica la traslación $\vec{t} = (-2, 5)$ al punto $P(3, 1)$, ¿cuál es la imagen $P'$?**
-
-A) $(5, -4)$
-B) $(1, 6)$
-C) $(-2, 5)$
-D) $(5, 6)$
-
----
-
-**5. Un avión vuela con velocidad $\vec{v}_a = (200, 0)$ km/h y un viento sopla con $\vec{v}_v = (0, -50)$ km/h. ¿Cuál es la rapidez resultante?**
-
-A) $150$ km/h
-B) $\sqrt{42\,500}$ km/h
-C) $250$ km/h
-D) $50\sqrt{17}$ km/h
-
----
-
-**6. ¿Cuál propiedad NO conserva una traslación?**
-
-A) Distancias
-B) Ángulos
-C) Posición
-D) Paralelismo
-
----
-
-**7. El baricentro divide cada mediana en razón:**
-
-A) $1:1$ desde el vértice
-B) $1:2$ desde el vértice
-C) $2:1$ desde el vértice
-D) $3:1$ desde el vértice
-""")
-
-    with st.expander("🔑 Pauta Técnica V05: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | $M = \left(\frac{-2+4}{2}, \frac{6+2}{2}\right) = (1, 4)$. |
-| **2** | **B** | $d = \frac{|0+0-10|}{\sqrt{9+16}} = \frac{10}{5} = 2$. |
-| **3** | **B** | $G = \left(\frac{0+6+0}{3}, \frac{0+0+6}{3}\right) = (2, 2)$. |
-| **4** | **B** | $P' = (3+(-2), 1+5) = (1, 6)$. |
-| **5** | **D** | $\|\vec{v}_R\| = \sqrt{200^2 + 50^2} = \sqrt{42\,500} = 50\sqrt{17} \approx 206{,}2$ km/h. B y D son equivalentes. |
-| **6** | **C** | La traslación cambia la posición de los puntos, pero conserva distancias, ángulos y paralelismo. |
-| **7** | **C** | El baricentro está a $\frac{2}{3}$ del vértice y a $\frac{1}{3}$ del punto medio del lado opuesto, razón $2:1$. |
+| **1** | **C** | **Galileo Tip:** "X es ancho, Y es profundidad, Z es la cota o altura." |
+| **2** | **C** | **Newton Tip:** "$\sqrt{1^2 + 1^2 + 1^2} = \sqrt{1+1+1} = \sqrt{3}$. No la confundas con 3." |
+| **3** | **A** | **Hawking Tip:** "Sumar un vector con su opuesto siempre nos lleva de vuelta al reposo, el vector nulo." |
+| **4** | **B** | **Curie Tip:** "El signo negativo invierte todo y el $1/3$ reduce los valores a la tercera parte." |
+| **5** | **C** | **Statham Tip:** "Típ: Si no tiene ancho ni largo, solo le queda 'subir' desde el plano del suelo." |
+| **6** | **C** | **Newton Tip:** "Es el trío pitagórico (5, 12, 13) pero en una posición distinta. La matemática no miente." |
+| **7** | **B** | **Galileo Tip:** "Suma componente a componente para trasladar el punto en el espacio." |
+| **8** | **C** | **Hawking Tip:** "Imagina el rincón de una caja: tienes el piso y dos paredes laterales." |
+| **9** | **C** | **Curie Tip:** "El origen es el punto de partida absoluto $(0,0,0)$." |
+| **10** | **B** | **Statham Tip:** "Típ: Como $x$ e $y$ son iguales, la distancia es simplemente la diferencia en $z$: $5 - 0 = 5$." |
 """)

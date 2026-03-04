@@ -1,224 +1,87 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import numpy as np
+from utils import render_multiple_choice_quiz
 
+_CSS = """
+<style>
+.clase-body p, .clase-body li, .clase-body td, .clase-body th { font-size: 1.07rem !important; line-height: 1.8; }
+</style>
+"""
 
 def render_V02():
-    st.title("V02: Operaciones con Vectores — Sumando Flechas")
+    st.markdown(_CSS, unsafe_allow_html=True)
+    st.title("V02: Operaciones con Vectores — Combinando Movimientos")
+    st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
     st.markdown(r"""
+# 🎬 Clase V02: Operaciones con Vectores - Combinando Movimientos
+**Eje:** Vectores | **Nivel:** Alcance del Objetivo
+
+---
+
 ### 🛡️ 1. Suma de Vectores
+Para sumar dos vectores $\vec{u}(x_1, y_1)$ y $\vec{v}(x_2, y_2)$, sumamos sus componentes respectivas:
+$$\vec{u} + \vec{v} = (x_1 + x_2, \space y_1 + y_2)$$
+* **Gráficamente:** Se usa el **Método del Paralelogramo** o el **Método del Triángulo** (poner el inicio de uno en la punta del otro).
 
-Dados $\vec{u} = (u_1, u_2)$ y $\vec{v} = (v_1, v_2)$:
+### ⚖️ 2. Resta de Vectores
+Restar es sumar el opuesto. Si a $\vec{u}$ le restamos $\vec{v}$:
+$$\vec{u} - \vec{v} = (x_1 - x_2, \space y_1 - y_2)$$
+* **Gráficamente:** El vector resultante va desde la punta de $\vec{v}$ hasta la punta de $\vec{u}$.
 
-$$\vec{u} + \vec{v} = (u_1 + v_1,\; u_2 + v_2)$$
+### 📐 3. Ponderación por un Escalar ($k \cdot \vec{v}$)
+Multiplicar un vector por un número real $k$ (escalar):
+$$k \cdot (x, y) = (k \cdot x, \space k \cdot y)$$
+* **Si $k > 1$:** El vector se alarga (amplificación).
+* **Si $0 < k < 1$:** El vector se acorta (reducción).
+* **Si $k < 0$:** El vector cambia de sentido (punta hacia el lado opuesto).
 
-**Interpretación geométrica:**
-- **Regla del paralelogramo:** Se colocan ambos vectores con el mismo origen; la diagonal del paralelogramo es la suma.
-- **Regla del triángulo (punta-cola):** Se coloca el origen de $\vec{v}$ en la punta de $\vec{u}$; la suma va del origen de $\vec{u}$ a la punta de $\vec{v}$.
-
----
-
-### 🛡️ 2. Resta de Vectores
-
-$$\vec{u} - \vec{v} = (u_1 - v_1,\; u_2 - v_2)$$
-
-Geométricamente, $\vec{u} - \vec{v} = \vec{u} + (-\vec{v})$, es decir, se suma $\vec{u}$ con el opuesto de $\vec{v}$.
-
----
-
-### 🛡️ 3. Multiplicación por un Escalar
-
-Dado un escalar $k \in \mathbb{R}$ y un vector $\vec{v} = (v_1, v_2)$:
-
-$$k \cdot \vec{v} = (k \cdot v_1,\; k \cdot v_2)$$
-
-| Escalar $k$ | Efecto sobre $\vec{v}$ |
-| :--- | :--- |
-| $k > 1$ | Estira el vector (mismo sentido) |
-| $0 < k < 1$ | Comprime el vector (mismo sentido) |
-| $k = -1$ | Invierte el sentido |
-| $k < 0$ | Estira/comprime e invierte el sentido |
-| $k = 0$ | Resultado: vector nulo $\vec{0}$ |
-
-El módulo se escala: $\|k\vec{v}\| = |k| \cdot \|\vec{v}\|$.
-
----
-
-### 🛡️ 4. Combinación Lineal
-
-Una **combinación lineal** de vectores $\vec{u}$ y $\vec{v}$ es cualquier expresión de la forma:
-
-$$\alpha \vec{u} + \beta \vec{v}$$
-
-donde $\alpha, \beta \in \mathbb{R}$.
-
-Cualquier vector del plano se puede escribir como combinación lineal de dos vectores no paralelos. En particular:
-
-$$\vec{v} = v_1 \hat{i} + v_2 \hat{j}$$
-
----
-
-### 🛡️ 5. Propiedades de las Operaciones
-
-| Propiedad | Expresión |
-| :--- | :--- |
-| Conmutativa (suma) | $\vec{u} + \vec{v} = \vec{v} + \vec{u}$ |
-| Asociativa (suma) | $(\vec{u} + \vec{v}) + \vec{w} = \vec{u} + (\vec{v} + \vec{w})$ |
-| Elemento neutro | $\vec{v} + \vec{0} = \vec{v}$ |
-| Elemento opuesto | $\vec{v} + (-\vec{v}) = \vec{0}$ |
-| Distributiva escalar | $k(\vec{u} + \vec{v}) = k\vec{u} + k\vec{v}$ |
-| Distributiva vectorial | $(k_1 + k_2)\vec{v} = k_1 \vec{v} + k_2 \vec{v}$ |
-| Asociativa escalar | $k_1(k_2 \vec{v}) = (k_1 k_2)\vec{v}$ |
-
----
-
-### 🛡️ 6. Vectores Paralelos
-
-Dos vectores $\vec{u}$ y $\vec{v}$ son **paralelos** (o colineales) si uno es múltiplo escalar del otro:
-
-$$\vec{u} \parallel \vec{v} \iff \vec{u} = k \vec{v} \text{ para algún } k \in \mathbb{R}$$
-
-Equivalentemente: $\vec{u} = (u_1, u_2)$ y $\vec{v} = (v_1, v_2)$ son paralelos si y solo si:
-
-$$u_1 v_2 - u_2 v_1 = 0$$
-
----
-
-> *"Las matemáticas son la reina de las ciencias."*
-> — **Carl Friedrich Gauss**
+> **Newton Tip:** "Seba, dile a tu alumno: sumar vectores es como dar pasos. Si caminas 3 pasos al norte y luego 2 al este, el vector resultante es el camino directo desde donde empezaste hasta donde terminaste."
 """)
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería V02", expanded=False):
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    with st.expander("🛠️ Ejercitación Técnica V02 (Paso a Paso)", expanded=False):
         st.markdown(r"""
-### E01: Suma y resta de vectores
+## 🛠️ Ejercitación Técnica V02 (Paso a Paso)
 
-**Situación:** Dados $\vec{u} = (3, -2)$ y $\vec{v} = (-1, 5)$, calcula $\vec{u} + \vec{v}$ y $\vec{u} - \vec{v}$.
-
-**La Carpintería:**
-1. $\vec{u} + \vec{v} = (3 + (-1),\; -2 + 5) = (2, 3)$.
-2. $\vec{u} - \vec{v} = (3 - (-1),\; -2 - 5) = (4, -7)$.
-
-| Operación | Resultado |
-| :--- | :---: |
-| $\vec{u} + \vec{v}$ | $(2, 3)$ |
-| $\vec{u} - \vec{v}$ | $(4, -7)$ |
-
----
-
-### E02: Multiplicación por escalar
-
-**Situación:** Si $\vec{v} = (4, -3)$, calcula $2\vec{v}$, $-\vec{v}$ y $\frac{1}{2}\vec{v}$.
-
-**La Carpintería:**
-1. $2\vec{v} = (8, -6)$.
-2. $-\vec{v} = (-4, 3)$.
-3. $\frac{1}{2}\vec{v} = (2, -1{,}5)$.
-
-| Escalar | Resultado | Módulo |
-| :---: | :---: | :---: |
-| $2$ | $(8, -6)$ | $10$ |
-| $-1$ | $(-4, 3)$ | $5$ |
-| $\frac{1}{2}$ | $(2, -1{,}5)$ | $2{,}5$ |
-
-Módulo original: $\|\vec{v}\| = \sqrt{16+9} = 5$. Se confirma: $\|2\vec{v}\| = 2 \cdot 5 = 10$.
-
----
-
-### E03: Combinación lineal
-
-**Situación:** Expresa $\vec{w} = (7, 1)$ como combinación lineal de $\vec{u} = (2, 1)$ y $\vec{v} = (1, -1)$.
-
-**La Carpintería:**
-1. Buscamos $\alpha$ y $\beta$ tales que $\alpha(2, 1) + \beta(1, -1) = (7, 1)$.
-2. Sistema: $2\alpha + \beta = 7$ y $\alpha - \beta = 1$.
-3. Sumando: $3\alpha = 8 \Rightarrow \alpha = \frac{8}{3}$.
-4. De la segunda: $\beta = \alpha - 1 = \frac{8}{3} - 1 = \frac{5}{3}$.
-5. $\vec{w} = \frac{8}{3}\vec{u} + \frac{5}{3}\vec{v}$.
-
----
-
-### E04: Verificar paralelismo
-
-**Situación:** ¿Son paralelos $\vec{a} = (6, -4)$ y $\vec{b} = (-9, 6)$?
-
-**La Carpintería:**
-1. Comprobamos: $u_1 v_2 - u_2 v_1 = (6)(6) - (-4)(-9) = 36 - 36 = 0$.
-2. Como el resultado es $0$, **sí son paralelos**.
-3. Además, $\vec{b} = -\frac{3}{2}\vec{a}$ (sentidos opuestos).
+| ID | Desafío | Paso a Paso | Resultado |
+| :--- | :--- | :--- | :--- |
+| **E01** | Sumar $\vec{u}(2, 3)$ y $\vec{v}(5, -1)$. | 1. Sumar $x: 2 + 5 = 7$.<br>2. Sumar $y: 3 + (-1) = 2$. | **$(7, 2)$** |
+| **E02** | Restar $\vec{a}(4, 8) - \vec{b}(1, 2)$. | 1. Restar $x: 4 - 1 = 3$.<br>2. Restar $y: 8 - 2 = 6$. | **$(3, 6)$** |
+| **E03** | Ponderar el vector $\vec{w}(-2, 4)$ por $k=3$. | 1. Multiplicar cada parte por 3: $(-2 \cdot 3, 4 \cdot 3)$. | **$(-6, 12)$** |
+| **E04** | Hallar el inverso aditivo de $\vec{v}(5, -7)$. | 1. Multiplicar por $-1$: $(-5, 7)$. | **$(-5, 7)$** |
+| **E05** | Calcular $2\vec{u} + \vec{v}$ si $\vec{u}(1, 2)$ y $\vec{v}(3, 0)$. | 1. $2\vec{u} = (2, 4)$.<br>2. Sumar con $\vec{v}: (2+3, 4+0)$. | **$(5, 4)$** |
 """)
 
-    with st.expander("❓ Cuestionario V02: Operaciones con Vectores", expanded=False):
+    with st.expander("❓ Cuestionario V02", expanded=False):
+        quiz = [
+            {'question': 'La suma de los vectores $(3, 5)$ y $(-1, 2)$ es:', 'options': {'A': '$(2, 7)$', 'B': '$(4, 7)$', 'C': '$(2, 3)$', 'D': '$(4, 3)$'}, 'answer': 'A', 'explanation': 'Suma componente a componente: $3-1=2$ y $5+2=7$.'},
+            {'question': 'Si ponderamos el vector $(2, -4)$ por $k = 0,5$, el resultado es:', 'options': {'A': '$(4, -8)$', 'B': '$(1, -2)$', 'C': '$(1, 2)$', 'D': '$(2, -2)$'}, 'answer': 'B', 'explanation': 'Ponderar por 0,5 es lo mismo que dividir por 2. Mitad de cada uno.'},
+            {'question': 'El vector opuesto (inverso aditivo) de $\\vec{v}(a, b)$ es:', 'options': {'A': '$(b, a)$', 'B': '$(-a, b)$', 'C': '$(a, -b)$', 'D': '$(-a, -b)$'}, 'answer': 'D', 'explanation': "El opuesto es el que 'anula' al original, por eso ambos signos deben cambiar."},
+            {'question': 'Gráficamente, al sumar dos vectores por el método "punta y cola", el vector resultante une:', 'options': {'A': 'Las dos puntas', 'B': 'Los dos orígenes', 'C': 'El origen del primero con la punta del segundo', 'D': 'El origen del segundo con la punta del primero'}, 'answer': 'C', 'explanation': 'Es el camino más corto entre el inicio del viaje y el final del segundo tramo.'},
+            {'question': 'Si $k = -2$ y $\\vec{v} = (3, 1)$, entonces $k \\vec{v}$ es:', 'options': {'A': '$(-6, -2)$', 'B': '$(6, 2)$', 'C': '$(-6, 2)$', 'D': '$(1, -1)$'}, 'answer': 'A', 'explanation': 'Típ: El $-2$ multiplica a ambos, cambiando signos y duplicando valores.'},
+            {'question': '¿Qué ocurre con la dirección de un vector al multiplicarlo por $k = -1$?', 'options': {'A': 'Cambia la dirección', 'B': 'Se mantiene la dirección pero cambia el sentido', 'C': 'Se vuelve perpendicular', 'D': 'Se reduce a la mitad'}, 'answer': 'B', 'explanation': 'Ojo aquí: la recta (dirección) es la misma, solo que ahora la flecha mira hacia atrás.'},
+            {'question': 'Al restar $\\vec{u} - \\vec{u}$, el resultado es:', 'options': {'A': '$1$', 'B': '$\\vec{u}$', 'C': '$\\vec{0}(0, 0)$', 'D': '$-\\vec{u}$'}, 'answer': 'C', 'explanation': 'Cualquier vector restado por sí mismo nos devuelve al origen, el vector nulo.'},
+            {'question': 'Si $3 \\cdot (x, 4) = (6, 12)$, el valor de $x$ es:', 'options': {'A': '2', 'B': '3', 'C': '6', 'D': '18'}, 'answer': 'A', 'explanation': 'Simplemente despeja: $3x = 6$, entonces $x = 2$.'},
+            {'question': 'La operación $2 \\cdot (1, 3) + (0, -2)$ da como resultado:', 'options': {'A': '$(2, 4)$', 'B': '$(2, 1)$', 'C': '$(1, 4)$', 'D': '$(2, 6)$'}, 'answer': 'A', 'explanation': 'Primero el producto: $(2, 6)$. Luego la suma: $(2+0, 6-2) = (2, 4)$.'},
+            {'question': 'Dos vectores son paralelos si uno es la _____ del otro por un escalar:', 'options': {'A': 'Suma', 'B': 'Resta', 'C': 'Ponderación', 'D': 'Potencia'}, 'answer': 'C', 'explanation': 'Típ: Si puedes obtener un vector multiplicando el otro por un número, es que tienen la misma inclinación.'}
+        ]
+        render_multiple_choice_quiz(quiz, key_prefix="v02_quiz")
+
+    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V02)", expanded=False):
         st.markdown(r"""
-**1. Si $\vec{u} = (2, 5)$ y $\vec{v} = (3, -1)$, ¿cuánto es $\vec{u} + \vec{v}$?**
-
-A) $(5, 4)$
-B) $(5, 6)$
-C) $(-1, 6)$
-D) $(6, 4)$
-
----
-
-**2. Si $\vec{w} = (-4, 7)$, ¿cuánto es $3\vec{w}$?**
-
-A) $(-12, 21)$
-B) $(-1, 10)$
-C) $(12, -21)$
-D) $(-12, -21)$
-
----
-
-**3. Dados $\vec{a} = (1, 3)$ y $\vec{b} = (4, -2)$, ¿cuánto es $\vec{a} - \vec{b}$?**
-
-A) $(5, 1)$
-B) $(-3, 5)$
-C) $(3, -5)$
-D) $(-5, 1)$
-
----
-
-**4. ¿Cuál de los siguientes pares de vectores son paralelos?**
-
-A) $(2, 3)$ y $(4, 5)$
-B) $(1, -2)$ y $(-3, 6)$
-C) $(3, 1)$ y $(1, 3)$
-D) $(5, 0)$ y $(0, 5)$
-
----
-
-**5. Si $\vec{u} + \vec{v} = (6, 2)$ y $\vec{u} = (4, -1)$, entonces $\vec{v} =$**
-
-A) $(10, 1)$
-B) $(2, 3)$
-C) $(-2, -3)$
-D) $(2, -3)$
-
----
-
-**6. ¿Cuál es el módulo de $2\vec{v}$ si $\|\vec{v}\| = 7$?**
-
-A) $7$
-B) $9$
-C) $14$
-D) $49$
-
----
-
-**7. La combinación lineal $2(1, 0) + 3(0, 1)$ da como resultado:**
-
-A) $(2, 3)$
-B) $(3, 2)$
-C) $(5, 5)$
-D) $(6, 0)$
-""")
-
-    with st.expander("🔑 Pauta Técnica V02: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
+| Pregunta | Respuesta | La Voz del Maestro |
 | :--- | :---: | :--- |
-| **1** | **A** | $(2+3,\; 5+(-1)) = (5, 4)$. |
-| **2** | **A** | $3(-4, 7) = (-12, 21)$. |
-| **3** | **B** | $(1-4,\; 3-(-2)) = (-3, 5)$. |
-| **4** | **B** | $(1)(-3) \cdot$ test: $u_1 v_2 - u_2 v_1 = (1)(6) - (-2)(-3) = 6 - 6 = 0$. Son paralelos. |
-| **5** | **B** | $\vec{v} = (6,2) - (4,-1) = (2, 3)$. |
-| **6** | **C** | $\|2\vec{v}\| = |2| \cdot \|\vec{v}\| = 2 \cdot 7 = 14$. |
-| **7** | **A** | $2(1,0) + 3(0,1) = (2,0) + (0,3) = (2, 3)$. |
+| **1** | **A** | **Galileo Tip:** "Suma componente a componente: $3-1=2$ y $5+2=7$." |
+| **2** | **B** | **Newton Tip:** "Ponderar por 0,5 es lo mismo que dividir por 2. Mitad de cada uno." |
+| **3** | **D** | **Hawking Tip:** "El opuesto es el que 'anula' al original, por eso ambos signos deben cambiar." |
+| **4** | **C** | **Curie Tip:** "Es el camino más corto entre el inicio del viaje y el final del segundo tramo." |
+| **5** | **A** | **Statham Tip:** "Típ: El $-2$ multiplica a ambos, cambiando signos y duplicando valores." |
+| **6** | **B** | **Newton Tip:** "Ojo aquí: la recta (dirección) es la misma, solo que ahora la flecha mira hacia atrás." |
+| **7** | **C** | **Galileo Tip:** "Cualquier vector restado por sí mismo nos devuelve al origen, el vector nulo." |
+| **8** | **A** | **Hawking Tip:** "Simplemente despeja: $3x = 6$, entonces $x = 2$." |
+| **9** | **A** | **Curie Tip:** "Primero el producto: $(2, 6)$. Luego la suma: $(2+0, 6-2) = (2, 4)$." |
+| **10** | **C** | **Statham Tip:** "Típ: Si puedes obtener un vector multiplicando el otro por un número, es que tienen la misma inclinación." |
 """)
