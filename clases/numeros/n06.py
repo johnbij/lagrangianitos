@@ -99,14 +99,14 @@ def render_N06():
 
     ---
 
-    ### 🛡️ 5. Clausura: El Caos Total
+    ### 🛡️ Clausura: El Caos Total
 
     ¿Se cumple la clausura en $\mathbb{I}$? **Rotundamente NO.**
     Si sumas $\pi$ con $-\pi$, el resultado es $0$. Como el $0$ es racional, la suma de dos irracionales puede sacarte del conjunto. En los irracionales, ninguna operación básica es cerrada.
 
     ---
 
-    ### 🛡️ 6. El Cero: El Gran Impostor
+    ### 🛡️ El Cero: El Gran Impostor
 
     **Anótalo con fuego:** El número **0 NO es irracional**.
     Aunque el cero es "especial", se puede escribir como una fracción (ejemplo: $0/1$, $0/5$, etc.). Por lo tanto:
@@ -125,7 +125,7 @@ def render_N06():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N06", expanded=False):
         st.markdown(r"""
-### E02: El Filtro de Raíces
+### 1: El Filtro de Raíces
 
 **Situación:** Clasificar los siguientes números en Racionales o Irracionales: $\sqrt{49}$, $\sqrt{50}$, $\sqrt{0,25}$.
 
@@ -143,7 +143,7 @@ def render_N06():
 
 ---
 
-### E03: La Infección del Virus (Suma)
+### 2: La Infección del Virus (Suma)
 
 **Situación:** Determinar la naturaleza del número resultante de la expresión: $5 + \pi$.
 
@@ -159,7 +159,7 @@ def render_N06():
 
 ---
 
-### E04: La "Cura" en la Multiplicación
+### 3: La "Cura" en la Multiplicación
 
 **Situación:** Resolver $\sqrt{2} \cdot \sqrt{18}$ y clasificar el resultado.
 
@@ -176,7 +176,7 @@ def render_N06():
 
 ---
 
-### E05: Operando con el Número de Euler ($e$)
+### 4: Operando con el Número de Euler ($e$)
 
 **Situación:** ¿Qué tipo de número es $3e - e$?
 
@@ -192,7 +192,7 @@ def render_N06():
 
 ---
 
-### E06: El Cero y el Irracional (La Trampa)
+### 5: El Cero y el Irracional (La Trampa)
 
 **Situación:** Determinar el conjunto del resultado de $0 \cdot \sqrt{7}$.
 
