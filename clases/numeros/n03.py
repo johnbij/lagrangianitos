@@ -8,7 +8,7 @@ def render_N03():
         st.title("N03: Los Números Cardinales (ℕ₀) — La Conquista del Vacío")
 
         st.markdown(r"""
-    ### 🛡️ 1. El Portal: El Descubrimiento de la Nada
+    ### 🛡️ El Portal: El Descubrimiento de la Nada
 
     En el capítulo anterior vimos que los Naturales servían para contar lo que "estaba ahí". Pero, ¿cómo representamos la ausencia total? Durante siglos, la humanidad le tuvo miedo al vacío. No fue hasta que civilizaciones como la India y los Mayas entendieron que el "nada" también es una cantidad, que la matemática pudo avanzar hacia el álgebra moderna.
 
@@ -16,7 +16,7 @@ def render_N03():
 
     ---
 
-    ### 🛡️ 2. Definición y Notación
+    ### 🛡️ Definición y Notación
 
     Se denota con la letra $\mathbb{N}_0$ (o a veces $\mathbb{N} \cup \{0\}$) y se define como:
 
@@ -56,7 +56,7 @@ def render_N03():
         st.markdown(r"""
     ---
 
-    ### 🛡️ 3. El Cero bajo la Lupa (Protocolo PAES)
+    ### 🛡️  El Cero bajo la Lupa (Protocolo PAES)
 
     El cero no es un número cualquiera; es un agente especial con reglas propias que debes memorizar para evitar trampas:
 
@@ -67,7 +67,7 @@ def render_N03():
 
     ---
 
-    ### 🛡️ 4. Diccionario de Supervivencia (Lenguaje Técnico)
+    ### 🛡️  Diccionario de Supervivencia (Lenguaje Técnico)
 
     La PAES no siempre te dirá "use los cardinales". Usará estas frases clave:
 
@@ -78,7 +78,7 @@ def render_N03():
 
     ---
 
-    ### 🛡️ 5. Propiedades de Clausura en $\mathbb{N}_0$
+    ### 🛡️  Propiedades de Clausura en $\mathbb{N}_0$
 
     ¿Cambia algo respecto a los naturales?
 
@@ -94,7 +94,7 @@ def render_N03():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N03", expanded=False):
         st.markdown(r"""
-### E01: La Vecindad del Uno en Diferentes Conjuntos
+### 1: La Vecindad del Uno en Diferentes Conjuntos
 
 **Situación:** Determinar el antecesor del número 1 en el conjunto $\mathbb{N}$ y en el conjunto $\mathbb{N}_0$.
 
@@ -111,7 +111,7 @@ def render_N03():
 
 ---
 
-### E02: El Cero y la Paridad
+### 2: El Cero y la Paridad
 
 **Situación:** Si $x$ es un número natural, determinar si la expresión $2 \cdot (x - x)$ representa un número par.
 
@@ -129,7 +129,7 @@ def render_N03():
 
 ---
 
-### E03: Traducción de "Enteros No Negativos"
+### 3: Traducción de "Enteros No Negativos"
 
 **Situación:** Un problema PAES dice: *"Sea $n$ un entero no negativo menor que 3"*. ¿Cuáles son los posibles valores de $n$?
 
@@ -146,7 +146,7 @@ def render_N03():
 
 ---
 
-### E04: La Absorción y la Indefinición
+### 4: La Absorción y la Indefinición
 
 **Situación:** Evaluar la expresión $\frac{10 \cdot (5 - 5)}{x}$ sabiendo que $x$ es un número cardinal sin antecesor.
 
@@ -165,7 +165,7 @@ def render_N03():
 
 ---
 
-### E05: Clausura Extendida
+### 5: Clausura Extendida
 
 **Situación:** ¿Se cumple la propiedad de clausura para la sustracción en $\mathbb{N}_0$ si restamos dos números iguales?
 
