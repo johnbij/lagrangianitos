@@ -30,29 +30,22 @@ def init_session():
 
 
 def _handle_oauth_callback():
-    """
-    Después del redirect de Google, Supabase devuelve el token en los
-    query params de la URL. Esta función lo captura y guarda la sesión.
-    """
     if st.session_state.get("user"):
-        return  # Ya hay sesión, no hacer nada
+        return
 
     params = st.query_params
-    access_token = params.get("access_token")
-    refresh_token = params.get("refresh_token")
+    code = params.get("code")
 
-    if access_token and refresh_token:
+    if code:
         supabase = get_supabase_client()
         try:
-            response = supabase.auth.set_session(access_token, refresh_token)
+            response = supabase.auth.exchange_code_for_session({"auth_code": code})
             st.session_state.user = response.user
-            st.session_state.access_token = access_token
-            # Limpiar tokens de la URL
+            st.session_state.access_token = response.session.access_token
             st.query_params.clear()
             st.rerun()
         except Exception as e:
-            st.error(f"Error al recuperar sesión de Google: {e}")
-
+            st.error(f"Error al iniciar sesión con Google: {e}")
 
 def is_logged_in() -> bool:
     """Retorna True si hay un usuario autenticado en sesión."""
