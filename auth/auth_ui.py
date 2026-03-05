@@ -150,7 +150,9 @@ def _do_google_login():
             unsafe_allow_html=True
         )
         st.info("Redirigiendo a Google...")
+        st.write(response.url)
         st.stop()
+
     except Exception as e:
         st.error(f"Error al conectar con Google: {e}")
 
