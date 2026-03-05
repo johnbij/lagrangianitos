@@ -4,6 +4,21 @@ from datetime import datetime
 from pathlib import Path
 import pytz
 
+######
+from auth.auth_ui import init_session, is_logged_in, login_page, show_user_sidebar
+
+# Inicializar sesión
+init_session()
+
+# Si no está logueado, mostrar login y detener
+if not is_logged_in():
+    login_page()
+    st.stop()
+
+# Usuario autenticado — mostrar info en sidebar
+show_user_sidebar()
+
+########
 from contenidos import CONTENIDOS
 
 from contenidos import CONTENIDOS
