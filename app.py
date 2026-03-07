@@ -66,8 +66,10 @@ with st.sidebar:
             unsafe_allow_html=True
         )
     st.divider()
-    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"],
-                    index=["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"].index(st.session_state.menu_actual))
+    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs", "🎵 Subir Audio"],
+                    index=["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs", "🎵 Subir Audio"].index(st.session_state.menu_actual)
+                    if st.session_state.menu_actual in ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs", "🎵 Subir Audio"]
+                    else 0)
     st.session_state.menu_actual = menu
     st.divider()
     st.caption("💬 _\"Sólo existen dos días en el año en los que no se puede hacer nada.\"_ — Dalai Lama")
@@ -595,3 +597,114 @@ elif menu == "🐉 Bienvenida":
     <span class="pill">📄 Material descargable</span>
     </div>
     """, unsafe_allow_html=True)
+
+    if st.button("🏠 Ir al Dashboard PAES", key="cta_dashboard", use_container_width=True, type="primary"):
+        st.session_state.menu_actual = "🏠 Dashboard PAES"
+        st.session_state.eje_actual = None
+        st.session_state.subcat_actual = None
+        st.session_state.clase_seleccionada = None
+        st.rerun()
+
+elif menu == "🎵 Subir Audio":
+    MAX_AUDIO_BYTES = 250 * 1024 * 1024  # 250 MB
+
+    st.markdown("""
+    <div style="background:linear-gradient(135deg,#1a1a2e,#0f3460);
+                border-radius:16px; padding:20px; color:white;
+                text-align:center; margin-bottom:20px;">
+        <div style="font-size:36px;">🎵</div>
+        <div style="font-size:20px; font-weight:900; letter-spacing:2px;">SUBIR AUDIO</div>
+        <div style="font-size:13px; opacity:0.8; margin-top:4px;">MP3 · M4A · WAV · OGG — máx. 250 MB</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    uploaded = st.file_uploader(
+        "Selecciona un archivo de audio",
+        type=["mp3", "m4a", "wav", "ogg"],
+        help="Formatos permitidos: MP3, M4A, WAV, OGG. Tamaño máximo: 250 MB.",
+        key="audio_uploader",
+    )
+
+    if uploaded is not None:
+        file_size_mb = uploaded.size / (1024 * 1024)
+
+        if uploaded.size > MAX_AUDIO_BYTES:
+            st.error(
+                f"❌ El archivo **{uploaded.name}** pesa {file_size_mb:.1f} MB, "
+                "lo que supera el límite de 250 MB. "
+                "Por favor reduce el tamaño del archivo e inténtalo de nuevo."
+            )
+        else:
+            st.info(f"📁 Archivo recibido: **{uploaded.name}** ({file_size_mb:.1f} MB)")
+
+            audios_dir = Path(__file__).resolve().parent / "audios"
+            audios_dir.mkdir(exist_ok=True)
+            save_path = audios_dir / uploaded.name
+
+            _drive_link = None
+
+            # ── Intento Google Drive (opcional) ───────────────────────────────
+            _gd_cfg = st.secrets.get("google_drive", {})
+            if _gd_cfg.get("credentials_json") and _gd_cfg.get("folder_id"):
+                try:
+                    import json as _json
+                    from googleapiclient.discovery import build as _gd_build
+                    from googleapiclient.http import MediaIoBaseUpload as _MediaUpload
+                    from google.oauth2.service_account import Credentials as _GCreds
+                    import io as _io
+
+                    _creds_info = _json.loads(_gd_cfg["credentials_json"])
+                    _scopes = ["https://www.googleapis.com/auth/drive.file"]
+                    _creds = _GCreds.from_service_account_info(_creds_info, scopes=_scopes)
+                    _service = _gd_build("drive", "v3", credentials=_creds)
+
+                    _media = _MediaUpload(
+                        _io.BytesIO(uploaded.getvalue()),
+                        mimetype=uploaded.type or "application/octet-stream",
+                        resumable=True,
+                    )
+                    _file_meta = {
+                        "name": uploaded.name,
+                        "parents": [_gd_cfg["folder_id"]],
+                    }
+                    _gd_file = (
+                        _service.files()
+                        .create(body=_file_meta, media_body=_media, fields="id,webViewLink")
+                        .execute()
+                    )
+                    _drive_link = _gd_file.get("webViewLink")
+                except ImportError:
+                    st.warning(
+                        "⚠️ Las librerías de Google Drive no están instaladas. "
+                        "El archivo se guardará localmente."
+                    )
+                except Exception as _gd_err:
+                    st.warning(f"⚠️ No se pudo subir a Google Drive: {_gd_err}. El archivo se guardará localmente.")
+
+            # ── Guardar localmente ─────────────────────────────────────────────
+            try:
+                with save_path.open("wb") as _f:
+                    _f.write(uploaded.getbuffer())
+
+                if _drive_link:
+                    st.success(f"✅ Archivo subido a Google Drive correctamente.")
+                    st.markdown(f"🔗 [Ver en Google Drive]({_drive_link})", unsafe_allow_html=False)
+                else:
+                    st.success(f"✅ Archivo guardado localmente: **{uploaded.name}**")
+
+                with save_path.open("rb") as _dl:
+                    st.download_button(
+                        label=f"⬇️ Descargar {uploaded.name}",
+                        data=_dl,
+                        file_name=uploaded.name,
+                        mime=uploaded.type or "application/octet-stream",
+                        use_container_width=True,
+                        key="audio_download_btn",
+                    )
+            except OSError as _os_err:
+                st.error(
+                    f"❌ Error al guardar el archivo localmente: {_os_err}. "
+                    "Verifica que el servidor tenga permisos de escritura."
+                )
+            except Exception as _err:
+                st.error(f"❌ Error inesperado: {_err}")

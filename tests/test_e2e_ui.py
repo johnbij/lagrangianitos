@@ -18,8 +18,19 @@ class TestE2EUI(unittest.TestCase):
         cls._ranking_original = logros.RANKING_FILE
         logros.RANKING_FILE = str(Path(cls._tmpdir.name) / "ranking.json")
 
+        # Mock auth so tests run without Supabase credentials
+        cls._patch_init = patch("auth.auth_ui.init_session")
+        cls._patch_logged = patch("auth.auth_ui.is_logged_in", return_value=True)
+        cls._patch_sidebar = patch("auth.auth_ui.show_user_sidebar")
+        cls._patch_init.start()
+        cls._patch_logged.start()
+        cls._patch_sidebar.start()
+
     @classmethod
     def tearDownClass(cls):
+        cls._patch_init.stop()
+        cls._patch_logged.stop()
+        cls._patch_sidebar.stop()
         logros.RANKING_FILE = cls._ranking_original
         cls._tmpdir.cleanup()
 
@@ -34,6 +45,14 @@ class TestE2EUI(unittest.TestCase):
         at.button(key="cta_dashboard").click().run(timeout=60)
         self.assertEqual(at.radio[0].value, "🏠 Dashboard PAES")
         self.assertEqual(at.button(key="m_n").label, "🔢 Números")
+
+    def test_audio_upload_page_renders(self):
+        at = self._run_app()
+        at.radio[0].set_value("🎵 Subir Audio").run(timeout=60)
+        self.assertEqual(at.radio[0].value, "🎵 Subir Audio")
+        self.assertTrue(any("SUBIR AUDIO" in md.value for md in at.markdown))
+        # Header banner should mention accepted audio formats
+        self.assertTrue(any("MP3" in md.value for md in at.markdown))
 
     def test_sidebar_menu_renders_pages(self):
         at = self._run_app()

@@ -32,10 +32,11 @@ jobs:
           echo "🔍 Validando sintaxis de todos los archivos .py..."
           python -m py_compile app.py
           python -m py_compile styles.py
-          python -m py_compile utils.py
+          find utils -name "*.py" -exec python -m py_compile {} \;
           python -m py_compile contenidos.py
           python -m py_compile logros.py
           find clases -name "*.py" -exec python -m py_compile {} \;
+          find auth -name "*.py" -exec python -m py_compile {} \;
           echo "✅ Sintaxis validada correctamente"
 
       - name: Verificar imports
