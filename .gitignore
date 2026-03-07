@@ -7,3 +7,5 @@ site/
 .venv/
 .pytest_cache/
 .mypy_cache/
+audios/*
+!audios/.gitkeep
