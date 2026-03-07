@@ -606,7 +606,7 @@ elif menu == "🐉 Bienvenida":
         st.rerun()
 
 elif menu == "🎵 Subir Audio":
-    _MAX_AUDIO_BYTES = 250 * 1024 * 1024  # 250 MB
+    MAX_AUDIO_BYTES = 250 * 1024 * 1024  # 250 MB
 
     st.markdown("""
     <div style="background:linear-gradient(135deg,#1a1a2e,#0f3460);
@@ -628,7 +628,7 @@ elif menu == "🎵 Subir Audio":
     if uploaded is not None:
         file_size_mb = uploaded.size / (1024 * 1024)
 
-        if uploaded.size > _MAX_AUDIO_BYTES:
+        if uploaded.size > MAX_AUDIO_BYTES:
             st.error(
                 f"❌ El archivo **{uploaded.name}** pesa {file_size_mb:.1f} MB, "
                 "lo que supera el límite de 250 MB. "

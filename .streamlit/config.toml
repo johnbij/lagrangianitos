@@ -7,4 +7,4 @@ font = "sans serif"
 
 [server]
 headless = true
-maxUploadSize = 256
+maxUploadSize = 256  # 256 MB ceiling; enforced in app at 250 MB
