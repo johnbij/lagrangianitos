@@ -4,6 +4,12 @@ from datetime import datetime
 from pathlib import Path
 import pytz
 
+# =============================================================================
+# 1. CONFIGURACIÓN Y ESTADOS
+# =============================================================================
+
+st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
+
 ######
 from auth.auth_ui import init_session, is_logged_in, login_page, show_user_sidebar
 
@@ -20,16 +26,8 @@ show_user_sidebar()
 
 ########
 from contenidos import CONTENIDOS
-
-from contenidos import CONTENIDOS
 from styles import aplicar_estilos
 from logros import registrar_clase, render_ranking
-
-# =============================================================================
-# 1. CONFIGURACIÓN Y ESTADOS
-# =============================================================================
-
-st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
 
 if 'eje_actual'         not in st.session_state: st.session_state.eje_actual         = None
 if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
