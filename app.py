@@ -12,17 +12,19 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="ce
 
 ######
 from auth.auth_ui import init_session, is_logged_in, login_page, show_user_sidebar
+from auth.supabase_client import is_supabase_configured
 
 # Inicializar sesión
 init_session()
 
-# Si no está logueado, mostrar login y detener
-if not is_logged_in():
+# Si Supabase está configurado y no hay sesión, mostrar login
+if is_supabase_configured() and not is_logged_in():
     login_page()
     st.stop()
 
 # Usuario autenticado — mostrar info en sidebar
-show_user_sidebar()
+if is_supabase_configured():
+    show_user_sidebar()
 
 ########
 from contenidos import CONTENIDOS

@@ -32,9 +32,10 @@ jobs:
           echo "🔍 Validando sintaxis de todos los archivos .py..."
           python -m py_compile app.py
           python -m py_compile styles.py
-          python -m py_compile utils.py
           python -m py_compile contenidos.py
           python -m py_compile logros.py
+          find utils -name "*.py" -exec python -m py_compile {} \;
+          find auth -name "*.py" -exec python -m py_compile {} \;
           find clases -name "*.py" -exec python -m py_compile {} \;
           echo "✅ Sintaxis validada correctamente"
 
@@ -46,6 +47,8 @@ jobs:
           from styles import aplicar_estilos
           from logros import registrar_clase, render_ranking
           from utils import render_proximamente, render_multiple_choice_quiz
+          from auth.auth_ui import init_session, is_logged_in, login_page, show_user_sidebar
+          from auth.supabase_client import get_supabase_client, is_supabase_configured
           print('✅ Todos los imports funcionan correctamente')
           print(f'   - Ejes temáticos cargados: {len(CONTENIDOS)}')
           total_clases = sum(
