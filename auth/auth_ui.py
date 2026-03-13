@@ -15,7 +15,7 @@
 #    redirect_url = "https://tu-app.streamlit.app"   # o http://localhost:8501 en local
 
 import streamlit as st
-from auth.supabase_client import get_supabase_client
+from auth.supabase_client import get_supabase_client, is_supabase_configured
 
 
 def init_session():
@@ -31,6 +31,8 @@ def init_session():
 
 def _handle_oauth_callback():
     if st.session_state.get("user"):
+        return
+    if not is_supabase_configured():
         return
 
     params = st.query_params
@@ -143,7 +145,6 @@ def _do_google_login():
             unsafe_allow_html=True
         )
         st.info("Redirigiendo a Google...")
-        st.write(response.url)
         st.stop()
 
     except Exception as e:

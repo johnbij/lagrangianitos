@@ -17,7 +17,7 @@ ENTRYPOINT = "app.py"
 
 STLITE_VERSION = "0.73.0"
 
-REQUIREMENTS = ["matplotlib", "pandas", "numpy", "pytz"]
+REQUIREMENTS = ["matplotlib", "pandas", "numpy", "pytz", "streamlit-autorefresh"]
 
 EXCLUDE_DIRS = {".git", "__pycache__", "site", ".devcontainer", ".github", ".streamlit"}
 

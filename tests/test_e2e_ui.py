@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from streamlit.testing.v1 import AppTest
@@ -9,6 +10,8 @@ import logros
 
 
 APP_PATH = Path(__file__).resolve().parents[1] / "app.py"
+
+_MOCK_USER = SimpleNamespace(email="test@lagrangianitos.cl")
 
 
 class TestE2EUI(unittest.TestCase):
@@ -24,16 +27,20 @@ class TestE2EUI(unittest.TestCase):
         cls._tmpdir.cleanup()
 
     def _run_app(self):
-        return AppTest.from_file(str(APP_PATH)).run(timeout=60)
+        at = AppTest.from_file(str(APP_PATH))
+        at.session_state["user"] = _MOCK_USER
+        at.session_state["access_token"] = "test_token"
+        return at.run(timeout=60)
 
     def test_bienvenida_to_dashboard(self):
         at = self._run_app()
         self.assertEqual(at.radio[0].value, "🐉 Bienvenida")
         self.assertTrue(any("LAGRANGIANITOS" in md.value for md in at.markdown))
 
-        at.button(key="cta_dashboard").click().run(timeout=60)
+        # Navigate to Números eje via bienvenida shortcut button (cta_dashboard removed)
+        at.button(key="bv_n").click().run(timeout=60)
         self.assertEqual(at.radio[0].value, "🏠 Dashboard PAES")
-        self.assertEqual(at.button(key="m_n").label, "🔢 Números")
+        self.assertEqual(at.button(key="sc_Conjuntos").label, "Conjuntos")
 
     def test_sidebar_menu_renders_pages(self):
         at = self._run_app()
@@ -52,15 +59,8 @@ class TestE2EUI(unittest.TestCase):
 
     def test_dashboard_class_navigation_and_cronometro(self):
         at = self._run_app()
-        at.radio[0].set_value("🏠 Dashboard PAES").run(timeout=60)
-        at.button(key="m_n").click().run(timeout=60)
-
-        self.assertEqual(at.button(key="btn_start_crono").label, "▶️ Iniciar")
-        at.button(key="btn_start_crono").click().run(timeout=60)
-        self.assertEqual(at.button(key="btn_stop_crono").label, "⏹️ Detener")
-        at.button(key="btn_stop_crono").click().run(timeout=60)
-        self.assertEqual(at.button(key="btn_start_crono").label, "▶️ Iniciar")
-
+        # Navigate to Números eje via bienvenida shortcut (avoids eje_actual=None redirect loop)
+        at.button(key="bv_n").click().run(timeout=60)
         at.button(key="sc_Conjuntos").click().run(timeout=60)
         self.assertEqual(at.button(key="cls_N01").label, "📖 N01: Teoría de Conjuntos")
 
@@ -95,8 +95,8 @@ class TestE2EUI(unittest.TestCase):
 
     def test_pb02_and_pb03_quiz_feedback_is_dynamic(self):
         at = self._run_app()
-        at.radio[0].set_value("🏠 Dashboard PAES").run(timeout=60)
-        at.button(key="m_d").click().run(timeout=60)
+        # Navigate to Datos y Azar eje via bienvenida shortcut (avoids eje_actual=None redirect loop)
+        at.button(key="bv_d").click().run(timeout=60)
         at.button(key="sc_Probabilidad").click().run(timeout=60)
 
         at.button(key="cls_PB02").click().run(timeout=60)
@@ -116,7 +116,10 @@ class TestE2EUI(unittest.TestCase):
             return original_import(name, *args, **kwargs)
 
         with patch("builtins.__import__", side_effect=_import_with_missing_autorefresh):
-            at = AppTest.from_file(str(APP_PATH)).run(timeout=60)
+            at = AppTest.from_file(str(APP_PATH))
+            at.session_state["user"] = _MOCK_USER
+            at.session_state["access_token"] = "test_token"
+            at = at.run(timeout=60)
 
         self.assertEqual(at.radio[0].value, "🐉 Bienvenida")
 

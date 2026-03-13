@@ -4,32 +4,32 @@ from datetime import datetime
 from pathlib import Path
 import pytz
 
-######
-from auth.auth_ui import init_session, is_logged_in, login_page, show_user_sidebar
-
-# Inicializar sesión
-init_session()
-
-# Si no está logueado, mostrar login y detener
-if not is_logged_in():
-    login_page()
-    st.stop()
-
-# Usuario autenticado — mostrar info en sidebar
-show_user_sidebar()
-
-########
-from contenidos import CONTENIDOS
-
-from contenidos import CONTENIDOS
-from styles import aplicar_estilos
-from logros import registrar_clase, render_ranking
-
 # =============================================================================
 # 1. CONFIGURACIÓN Y ESTADOS
 # =============================================================================
 
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
+
+######
+from auth.auth_ui import init_session, is_logged_in, login_page, show_user_sidebar
+from auth.supabase_client import is_supabase_configured
+
+# Inicializar sesión
+init_session()
+
+# Si Supabase está configurado y no hay sesión, mostrar login
+if is_supabase_configured() and not is_logged_in():
+    login_page()
+    st.stop()
+
+# Usuario autenticado — mostrar info en sidebar
+if is_supabase_configured():
+    show_user_sidebar()
+
+########
+from contenidos import CONTENIDOS
+from styles import aplicar_estilos
+from logros import registrar_clase, render_ranking
 
 if 'eje_actual'         not in st.session_state: st.session_state.eje_actual         = None
 if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
