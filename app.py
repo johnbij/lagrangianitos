@@ -650,7 +650,19 @@ elif menu == "🐉 Bienvenida":
     """, unsafe_allow_html=True)
 
     st.write("")
-    st.markdown('<style>div[data-testid="stButton"]:has(button[data-testid="baseButton-primary"]) button { background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important; color: white !important; border: none !important; border-radius: 14px !important; min-height: 60px !important; font-size: 18px !important; font-weight: bold !important; }</style>', unsafe_allow_html=True)
+    st.markdown("""
+    <style>
+    div[data-testid="stButton"]:has(button[data-testid="baseButton-primary"]) button {
+        background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 14px !important;
+        min-height: 60px !important;
+        font-size: 18px !important;
+        font-weight: bold !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     if st.button("🚀 Ir al Dashboard PAES", key="cta_dashboard", use_container_width=True, type="primary"):
         st.session_state.menu_actual = "🏠 Dashboard PAES"
         st.session_state.eje_actual = None
