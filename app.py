@@ -4,30 +4,10 @@ from datetime import datetime
 from pathlib import Path
 import pytz
 
-######
-from auth.supabase_client import is_supabase_configured
-
-# Autenticación condicional: solo si Supabase está configurado
-if is_supabase_configured():
-    from auth.auth_ui import init_session, is_logged_in, login_page, show_user_sidebar
-
-    # Inicializar sesión
-    init_session()
-
-    # Si no está logueado, mostrar login y detener
-    if not is_logged_in():
-        login_page()
-        st.stop()
-
-    # Usuario autenticado — mostrar info en sidebar
-    show_user_sidebar()
-
-########
-from contenidos import CONTENIDOS
-
 from contenidos import CONTENIDOS
 from styles import aplicar_estilos
 from logros import registrar_clase, render_ranking
+from visitas import registrar_visita, obtener_visitas
 
 # =============================================================================
 # 1. CONFIGURACIÓN Y ESTADOS
@@ -43,6 +23,13 @@ if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vis
 if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "🐉 Bienvenida"
 if 'ultimo_visto'       not in st.session_state: st.session_state.ultimo_visto       = None
 if 'nick_usuario'      not in st.session_state: st.session_state.nick_usuario       = ""
+if 'crono_running'     not in st.session_state: st.session_state.crono_running      = False
+if 'crono_inicio'      not in st.session_state: st.session_state.crono_inicio       = None
+
+# Registrar visita una vez por sesión
+if 'visita_registrada' not in st.session_state:
+    st.session_state.visita_registrada = True
+    registrar_visita()
 
 COLORES = {
     "rojo":    "#c0392b",
@@ -63,6 +50,12 @@ aplicar_estilos()
 
 with st.sidebar:
     st.markdown("### 🐉 Lagrangianitos")
+    visitas_total = obtener_visitas()
+    st.markdown(
+        f'<div style="background:#eef2ff; border-radius:8px; padding:8px; font-size:12px; color:#3730a3; margin-top:4px; text-align:center;">'
+        f'👁️ <b>{visitas_total:,}</b> visitas</div>',
+        unsafe_allow_html=True
+    )
     if st.session_state.ultimo_visto:
         st.markdown(
             f'<div style="background:#f0f0f0; border-radius:8px; padding:8px; font-size:12px; color:#555; margin-top:4px;">'
@@ -107,10 +100,40 @@ if menu == "🏠 Dashboard PAES":
 
     st.write("")
 
-    # Si llegan al dashboard sin eje, redirigir a bienvenida
+    # Si no hay eje seleccionado, mostrar botones de selección de eje
     if st.session_state.eje_actual is None:
-        st.session_state.menu_actual = "🐉 Bienvenida"
-        st.rerun()
+        st.markdown("""
+        <style>
+        .eje-select div.stButton > button {
+            min-height: 80px !important;
+            font-size: 17px !important;
+            font-weight: bold !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 14px !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        st.markdown('<div class="eje-select">', unsafe_allow_html=True)
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown('<style>.eje-select div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#e74c3c,#c0392b)!important;}</style>', unsafe_allow_html=True)
+            if st.button("🔢 Números", key="m_n", use_container_width=True):
+                st.session_state.eje_actual = "🔢 Números"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        with c2:
+            st.markdown('<style>.eje-select div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#27ae60,#1b5e20)!important;}</style>', unsafe_allow_html=True)
+            if st.button("📉 Álgebra", key="m_a", use_container_width=True):
+                st.session_state.eje_actual = "📉 Álgebra"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        c3, c4 = st.columns(2)
+        with c3:
+            st.markdown('<style>.eje-select div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#9b59b6,#7b1fa2)!important;}</style>', unsafe_allow_html=True)
+            if st.button("📐 Geometría", key="m_g", use_container_width=True):
+                st.session_state.eje_actual = "📐 Geometría"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        with c4:
+            st.markdown('<style>.eje-select div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#f39c12,#e65100)!important;}</style>', unsafe_allow_html=True)
+            if st.button("📊 Datos y Azar", key="m_d", use_container_width=True):
+                st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        st.markdown('</div>', unsafe_allow_html=True)
 
     # ── DENTRO DE UN EJE ────────────────────────────────────────────────────
     else:
@@ -153,6 +176,32 @@ if menu == "🏠 Dashboard PAES":
         # NIVEL 1: subcategorías
         if st.session_state.subcat_actual is None:
             st.markdown(f"## {eje}")
+
+            # Cronómetro de estudio
+            col_crono_l, col_crono_r = st.columns([3, 1])
+            with col_crono_l:
+                if st.session_state.crono_running and st.session_state.crono_inicio:
+                    elapsed = datetime.now(pytz.timezone('America/Santiago')) - st.session_state.crono_inicio
+                    mins, secs = divmod(int(elapsed.total_seconds()), 60)
+                    st.markdown(
+                        f'<div style="font-size:15px; font-weight:bold; color:#6C63FF;">⏱ {mins:02d}:{secs:02d}</div>',
+                        unsafe_allow_html=True
+                    )
+                else:
+                    st.markdown('<div style="font-size:13px; color:#888;">⏱ Cronómetro de estudio</div>', unsafe_allow_html=True)
+            with col_crono_r:
+                if not st.session_state.crono_running:
+                    if st.button("▶️ Iniciar", key="btn_start_crono", use_container_width=True):
+                        st.session_state.crono_running = True
+                        st.session_state.crono_inicio = datetime.now(pytz.timezone('America/Santiago'))
+                        st.rerun()
+                else:
+                    if st.button("⏹️ Detener", key="btn_stop_crono", use_container_width=True):
+                        st.session_state.crono_running = False
+                        st.session_state.crono_inicio = None
+                        st.rerun()
+
+            st.write("")
 
             for nombre_subcat, clases_subcat in subcats.items():
                 total = len(clases_subcat)
@@ -538,7 +587,7 @@ elif menu == "🐉 Bienvenida":
             Tu plataforma de preparación PAES M1.<br>
             Matemática con profundidad, desde los fundamentos hasta la prueba. 🚀
         </div>
-        <div class="bienvenida-info">📍 Santiago · 🕒 {ahora_bv.strftime("%H:%M")}</div>
+        <div class="bienvenida-info">📍 Santiago · 🕒 {ahora_bv.strftime("%H:%M")} · 👁️ {obtener_visitas():,} visitas</div>
     </div>
     <div class="bienvenida-countdown">
         <div class="timer-item">⏳ Días: {dias_bv}</div>
@@ -599,3 +648,12 @@ elif menu == "🐉 Bienvenida":
     <span class="pill">📄 Material descargable</span>
     </div>
     """, unsafe_allow_html=True)
+
+    st.write("")
+    st.markdown('<style>div[data-testid="stButton"]:has(button[data-testid="baseButton-primary"]) button { background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important; color: white !important; border: none !important; border-radius: 14px !important; min-height: 60px !important; font-size: 18px !important; font-weight: bold !important; }</style>', unsafe_allow_html=True)
+    if st.button("🚀 Ir al Dashboard PAES", key="cta_dashboard", use_container_width=True, type="primary"):
+        st.session_state.menu_actual = "🏠 Dashboard PAES"
+        st.session_state.eje_actual = None
+        st.session_state.subcat_actual = None
+        st.session_state.clase_seleccionada = None
+        st.rerun()
