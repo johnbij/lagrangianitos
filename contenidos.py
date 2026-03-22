@@ -93,6 +93,39 @@ from clases.geometria.v05 import render_V05
 from utils import render_proximamente
 
 CONTENIDOS = {
+    "⚛️ Física": {
+        "color_subcats": "cian",
+        "subcategorias": {
+            "Ondas": {
+                "FO01": {"label": "📖 FO01: Naturaleza de las Ondas",          "render": lambda: render_proximamente("FO01")},
+                "FO02": {"label": "📖 FO02: Propiedades de las Ondas",          "render": lambda: render_proximamente("FO02")},
+                "FO03": {"label": "📖 FO03: Sonido y Acústica",                 "render": lambda: render_proximamente("FO03")},
+                "FO04": {"label": "📖 FO04: Luz y Óptica",                      "render": lambda: render_proximamente("FO04")},
+                "FO05": {"label": "📖 FO05: Fenómenos Ondulatorios",            "render": lambda: render_proximamente("FO05")},
+            },
+            "Mecánica": {
+                "FM01": {"label": "📖 FM01: Cinemática — Movimiento y Velocidad","render": lambda: render_proximamente("FM01")},
+                "FM02": {"label": "📖 FM02: Dinámica — Fuerzas y Leyes de Newton","render": lambda: render_proximamente("FM02")},
+                "FM03": {"label": "📖 FM03: Trabajo y Energía Mecánica",        "render": lambda: render_proximamente("FM03")},
+                "FM04": {"label": "📖 FM04: Cantidad de Movimiento",            "render": lambda: render_proximamente("FM04")},
+                "FM05": {"label": "📖 FM05: Movimiento Circular y Gravitación", "render": lambda: render_proximamente("FM05")},
+            },
+            "Energía": {
+                "FE01": {"label": "📖 FE01: Concepto de Energía",               "render": lambda: render_proximamente("FE01")},
+                "FE02": {"label": "📖 FE02: Energía Cinética y Potencial",      "render": lambda: render_proximamente("FE02")},
+                "FE03": {"label": "📖 FE03: Conservación de la Energía",        "render": lambda: render_proximamente("FE03")},
+                "FE04": {"label": "📖 FE04: Calor y Temperatura",               "render": lambda: render_proximamente("FE04")},
+                "FE05": {"label": "📖 FE05: Termodinámica Básica",              "render": lambda: render_proximamente("FE05")},
+            },
+            "Electricidad": {
+                "FEL01": {"label": "📖 FEL01: Carga Eléctrica y Campo",           "render": lambda: render_proximamente("FEL01")},
+                "FEL02": {"label": "📖 FEL02: Corriente Eléctrica",               "render": lambda: render_proximamente("FEL02")},
+                "FEL03": {"label": "📖 FEL03: Circuitos Eléctricos",              "render": lambda: render_proximamente("FEL03")},
+                "FEL04": {"label": "📖 FEL04: Magnetismo",                        "render": lambda: render_proximamente("FEL04")},
+                "FEL05": {"label": "📖 FEL05: Inducción Electromagnética",        "render": lambda: render_proximamente("FEL05")},
+            },
+        },
+    },
     "🔢 Números": {
         "color_subcats": "rojo",
         "subcategorias": {
