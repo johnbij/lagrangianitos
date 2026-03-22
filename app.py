@@ -36,6 +36,7 @@ COLORES = {
     "verde":   "#1b5e20",
     "morado":  "#7b1fa2",
     "naranja": "#e65100",
+    "cian":    "#006064",
 }
 
 # =============================================================================
@@ -143,16 +144,17 @@ if menu == "🏠 Dashboard PAES":
         div.stButton > button[data-testid="baseButton-secondary"] {
             background-color: inherit;
         }
-        /* Barra nav: 5 columnas */
+        /* Barra nav: 6 columnas */
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(1) button { background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(2) button { background: linear-gradient(135deg,#e74c3c,#c0392b) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(3) button { background: linear-gradient(135deg,#27ae60,#1b5e20) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(4) button { background: linear-gradient(135deg,#9b59b6,#7b1fa2) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(5) button { background: linear-gradient(135deg,#f39c12,#e65100) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(6) button { background: linear-gradient(135deg,#00acc1,#006064) !important; color: white !important; border: none !important; }
         </style>
         """, unsafe_allow_html=True)
 
-        n_cols = st.columns(5)
+        n_cols = st.columns(6)
         with n_cols[0]:
             if st.button("🏠", key="n_h", use_container_width=True):
                 st.session_state.eje_actual = None; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
@@ -164,6 +166,8 @@ if menu == "🏠 Dashboard PAES":
             if st.button("G", key="n_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         with n_cols[4]:
             if st.button("D", key="n_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        with n_cols[5]:
+            if st.button("⚛️", key="n_f", use_container_width=True): st.session_state.eje_actual = "⚛️ Física";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
 
         st.write("---")
 
@@ -645,26 +649,39 @@ elif menu == "🐉 Bienvenida":
     with f1:
         st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#00acc1,#006064)!important;}</style>', unsafe_allow_html=True)
         if st.button("🌊 Ondas", key="bv_f_ondas", use_container_width=True):
-            st.session_state.fisica_tema = "Ondas"
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚛️ Física"
+            st.session_state.subcat_actual = "Ondas"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
     with f2:
         st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#1565c0,#0d47a1)!important;}</style>', unsafe_allow_html=True)
         if st.button("⚙️ Mecánica", key="bv_f_mecanica", use_container_width=True):
-            st.session_state.fisica_tema = "Mecánica"
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚛️ Física"
+            st.session_state.subcat_actual = "Mecánica"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
 
     f3, f4 = st.columns(2)
     with f3:
         st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#e91e63,#880e4f)!important;}</style>', unsafe_allow_html=True)
         if st.button("⚡ Energía", key="bv_f_energia", use_container_width=True):
-            st.session_state.fisica_tema = "Energía"
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚛️ Física"
+            st.session_state.subcat_actual = "Energía"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
     with f4:
         st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#f9a825,#f57f17)!important;}</style>', unsafe_allow_html=True)
         if st.button("🔌 Electricidad", key="bv_f_electricidad", use_container_width=True):
-            st.session_state.fisica_tema = "Electricidad"
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚛️ Física"
+            st.session_state.subcat_actual = "Electricidad"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
 
     st.markdown('</div>', unsafe_allow_html=True)
-
-    if st.session_state.get("fisica_tema"):
-        st.info(f"📡 **{st.session_state.fisica_tema}** — Contenido próximamente disponible. ¡Estamos preparando las clases! 🚀")
 
     # Metodología
     st.markdown('<div class="seccion-titulo">🛡️ Nuestra metodología</div>', unsafe_allow_html=True)
