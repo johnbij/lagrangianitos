@@ -215,6 +215,13 @@ CONTENIDOS = {
                 "V04": {"label": "📖 V04: Vectores e Isometrías — El Motor del Movimiento", "render": render_V04},
                 "V05": {"label": "📖 V05: Vectores en el Espacio — La Tercera Dimensión",  "render": render_V05},
             },
+            "Ejercitación": {
+                "GE01": {"label": "📝 GE01: Próximamente", "render": lambda: render_proximamente("GE01")},
+                "GE02": {"label": "📝 GE02: Próximamente", "render": lambda: render_proximamente("GE02")},
+                "GE03": {"label": "📝 GE03: Próximamente", "render": lambda: render_proximamente("GE03")},
+                "GE04": {"label": "📝 GE04: Próximamente", "render": lambda: render_proximamente("GE04")},
+                "GE05": {"label": "📝 GE05: Próximamente", "render": lambda: render_proximamente("GE05")},
+            },
         },
     },
     "📊 Datos y Azar": {
