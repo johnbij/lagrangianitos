@@ -32,11 +32,13 @@ if 'visita_registrada' not in st.session_state:
     registrar_visita()
 
 COLORES = {
-    "rojo":    "#c0392b",
-    "verde":   "#1b5e20",
-    "morado":  "#7b1fa2",
-    "naranja": "#e65100",
-    "cian":    "#006064",
+    "rojo":      "#c0392b",
+    "verde":     "#1b5e20",
+    "morado":    "#7b1fa2",
+    "naranja":   "#e65100",
+    "cian":      "#006064",
+    "verde_bio": "#33691e",
+    "ambar":     "#ff8f00",
 }
 
 # =============================================================================
@@ -144,17 +146,19 @@ if menu == "🏠 Dashboard PAES":
         div.stButton > button[data-testid="baseButton-secondary"] {
             background-color: inherit;
         }
-        /* Barra nav: 6 columnas */
+        /* Barra nav: 8 columnas */
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(1) button { background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(2) button { background: linear-gradient(135deg,#e74c3c,#c0392b) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(3) button { background: linear-gradient(135deg,#27ae60,#1b5e20) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(4) button { background: linear-gradient(135deg,#9b59b6,#7b1fa2) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(5) button { background: linear-gradient(135deg,#f39c12,#e65100) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(6) button { background: linear-gradient(135deg,#00acc1,#006064) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(7) button { background: linear-gradient(135deg,#66bb6a,#33691e) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(8) button { background: linear-gradient(135deg,#ffa726,#ff8f00) !important; color: white !important; border: none !important; }
         </style>
         """, unsafe_allow_html=True)
 
-        n_cols = st.columns(6)
+        n_cols = st.columns(8)
         with n_cols[0]:
             if st.button("🏠", key="n_h", use_container_width=True):
                 st.session_state.eje_actual = None; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
@@ -168,6 +172,10 @@ if menu == "🏠 Dashboard PAES":
             if st.button("D", key="n_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         with n_cols[5]:
             if st.button("⚛️", key="n_f", use_container_width=True): st.session_state.eje_actual = "⚛️ Física";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        with n_cols[6]:
+            if st.button("🔬", key="n_b", use_container_width=True): st.session_state.eje_actual = "🔬 Biología";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        with n_cols[7]:
+            if st.button("⚗️", key="n_q", use_container_width=True): st.session_state.eje_actual = "⚗️ Química";     st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
 
         st.write("---")
 
@@ -678,6 +686,90 @@ elif menu == "🐉 Bienvenida":
             st.session_state.menu_actual = "🏠 Dashboard PAES"
             st.session_state.eje_actual = "⚛️ Física"
             st.session_state.subcat_actual = "Electricidad"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Botones de Biología
+    st.markdown('<div class="seccion-titulo">🔬 Contenido del curso Biología</div>', unsafe_allow_html=True)
+    st.markdown('<div class="eje-btn-bv">', unsafe_allow_html=True)
+
+    b1, b2 = st.columns(2)
+    with b1:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#66bb6a,#33691e)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🧫 Organización, Estructura\ny Función Celular", key="bv_b_celular", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "🔬 Biología"
+            st.session_state.subcat_actual = "Organización, Estructura y Función Celular"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+    with b2:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#26a69a,#004d40)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🧬 Herencia\ny Evolución", key="bv_b_herencia", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "🔬 Biología"
+            st.session_state.subcat_actual = "Herencia y Evolución"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+
+    b3, b4 = st.columns(2)
+    with b3:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#8d6e63,#4e342e)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🌿 Organismo\ny Ambiente", key="bv_b_ambiente", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "🔬 Biología"
+            st.session_state.subcat_actual = "Organismo y Ambiente"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+    with b4:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#42a5f5,#0d47a1)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🫀 Organismo y\nProcesos Biológicos", key="bv_b_procesos", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "🔬 Biología"
+            st.session_state.subcat_actual = "Organismo y Procesos Biológicos"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # Botones de Química
+    st.markdown('<div class="seccion-titulo">⚗️ Contenido del curso Química</div>', unsafe_allow_html=True)
+    st.markdown('<div class="eje-btn-bv">', unsafe_allow_html=True)
+
+    q1, q2 = st.columns(2)
+    with q1:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#ffa726,#ff8f00)!important;}</style>', unsafe_allow_html=True)
+        if st.button("⚛️ Estructura\nAtómica", key="bv_q_atomica", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚗️ Química"
+            st.session_state.subcat_actual = "Estructura Atómica"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+    with q2:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#ab47bc,#6a1b9a)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🧪 Química\nOrgánica", key="bv_q_organica", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚗️ Química"
+            st.session_state.subcat_actual = "Química Orgánica"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+
+    q3, q4 = st.columns(2)
+    with q3:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#ef5350,#b71c1c)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🔥 Reacciones Químicas\ny Estequiometría", key="bv_q_reacciones", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚗️ Química"
+            st.session_state.subcat_actual = "Reacciones Químicas y Estequiometría"
+            st.session_state.clase_seleccionada = None
+            st.rerun()
+    with q4:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#26c6da,#006064)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🌡️ Propiedades Coligativas\ny Termoquímica", key="bv_q_coligativas", use_container_width=True):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"
+            st.session_state.eje_actual = "⚗️ Química"
+            st.session_state.subcat_actual = "Propiedades Coligativas y Termoquímica"
             st.session_state.clase_seleccionada = None
             st.rerun()
 

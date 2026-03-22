@@ -283,4 +283,70 @@ CONTENIDOS = {
             },
         },
     },
+    "🔬 Biología": {
+        "color_subcats": "verde_bio",
+        "subcategorias": {
+            "Organización, Estructura y Función Celular": {
+                "BOE01": {"label": "📖 BOE01: La Célula — Unidad de Vida",              "render": lambda: render_proximamente("BOE01")},
+                "BOE02": {"label": "📖 BOE02: Tipos de Células y Organelos",            "render": lambda: render_proximamente("BOE02")},
+                "BOE03": {"label": "📖 BOE03: Membrana y Transporte Celular",           "render": lambda: render_proximamente("BOE03")},
+                "BOE04": {"label": "📖 BOE04: Ciclo Celular — Mitosis y Meiosis",       "render": lambda: render_proximamente("BOE04")},
+                "BOE05": {"label": "📖 BOE05: Metabolismo Celular",                     "render": lambda: render_proximamente("BOE05")},
+            },
+            "Herencia y Evolución": {
+                "BHE01": {"label": "📖 BHE01: ADN, ARN y Síntesis de Proteínas",        "render": lambda: render_proximamente("BHE01")},
+                "BHE02": {"label": "📖 BHE02: Herencia Mendeliana",                     "render": lambda: render_proximamente("BHE02")},
+                "BHE03": {"label": "📖 BHE03: Herencia No Mendeliana",                  "render": lambda: render_proximamente("BHE03")},
+                "BHE04": {"label": "📖 BHE04: Teoría Evolutiva de Darwin",              "render": lambda: render_proximamente("BHE04")},
+                "BHE05": {"label": "📖 BHE05: Mecanismos de Evolución",                 "render": lambda: render_proximamente("BHE05")},
+            },
+            "Organismo y Ambiente": {
+                "BOA01": {"label": "📖 BOA01: Ecosistemas y Biomas",                    "render": lambda: render_proximamente("BOA01")},
+                "BOA02": {"label": "📖 BOA02: Flujo de Energía y Ciclos Biogeoquímicos","render": lambda: render_proximamente("BOA02")},
+                "BOA03": {"label": "📖 BOA03: Relaciones Interespecíficas",             "render": lambda: render_proximamente("BOA03")},
+                "BOA04": {"label": "📖 BOA04: Dinámica de Poblaciones",                 "render": lambda: render_proximamente("BOA04")},
+                "BOA05": {"label": "📖 BOA05: Impacto Humano y Sustentabilidad",        "render": lambda: render_proximamente("BOA05")},
+            },
+            "Organismo y Procesos Biológicos": {
+                "BPB01": {"label": "📖 BPB01: Sistemas del Cuerpo Humano",              "render": lambda: render_proximamente("BPB01")},
+                "BPB02": {"label": "📖 BPB02: Nutrición y Digestión",                  "render": lambda: render_proximamente("BPB02")},
+                "BPB03": {"label": "📖 BPB03: Sistema Nervioso y Endocrino",            "render": lambda: render_proximamente("BPB03")},
+                "BPB04": {"label": "📖 BPB04: Reproducción y Desarrollo",               "render": lambda: render_proximamente("BPB04")},
+                "BPB05": {"label": "📖 BPB05: Inmunología y Salud",                     "render": lambda: render_proximamente("BPB05")},
+            },
+        },
+    },
+    "⚗️ Química": {
+        "color_subcats": "ambar",
+        "subcategorias": {
+            "Estructura Atómica": {
+                "QEA01": {"label": "📖 QEA01: El Átomo — Modelos Atómicos",             "render": lambda: render_proximamente("QEA01")},
+                "QEA02": {"label": "📖 QEA02: Tabla Periódica y Propiedades",           "render": lambda: render_proximamente("QEA02")},
+                "QEA03": {"label": "📖 QEA03: Configuración Electrónica",               "render": lambda: render_proximamente("QEA03")},
+                "QEA04": {"label": "📖 QEA04: Enlaces Químicos",                        "render": lambda: render_proximamente("QEA04")},
+                "QEA05": {"label": "📖 QEA05: Nomenclatura y Formulación",              "render": lambda: render_proximamente("QEA05")},
+            },
+            "Química Orgánica": {
+                "QQO01": {"label": "📖 QQO01: Introducción a la Química Orgánica",      "render": lambda: render_proximamente("QQO01")},
+                "QQO02": {"label": "📖 QQO02: Hidrocarburos — Alcanos, Alquenos, Alquinos","render": lambda: render_proximamente("QQO02")},
+                "QQO03": {"label": "📖 QQO03: Grupos Funcionales",                      "render": lambda: render_proximamente("QQO03")},
+                "QQO04": {"label": "📖 QQO04: Isomería",                                "render": lambda: render_proximamente("QQO04")},
+                "QQO05": {"label": "📖 QQO05: Reacciones Orgánicas",                    "render": lambda: render_proximamente("QQO05")},
+            },
+            "Reacciones Químicas y Estequiometría": {
+                "QRE01": {"label": "📖 QRE01: Tipos de Reacciones Químicas",            "render": lambda: render_proximamente("QRE01")},
+                "QRE02": {"label": "📖 QRE02: Balanceo de Ecuaciones",                  "render": lambda: render_proximamente("QRE02")},
+                "QRE03": {"label": "📖 QRE03: Estequiometría y Mol",                    "render": lambda: render_proximamente("QRE03")},
+                "QRE04": {"label": "📖 QRE04: Reactivo Limitante y Rendimiento",        "render": lambda: render_proximamente("QRE04")},
+                "QRE05": {"label": "📖 QRE05: Soluciones y Concentración",              "render": lambda: render_proximamente("QRE05")},
+            },
+            "Propiedades Coligativas y Termoquímica": {
+                "QPC01": {"label": "📖 QPC01: Propiedades Coligativas",                 "render": lambda: render_proximamente("QPC01")},
+                "QPC02": {"label": "📖 QPC02: Presión Osmótica y Ósmosis",              "render": lambda: render_proximamente("QPC02")},
+                "QPC03": {"label": "📖 QPC03: Entalpía y Calorimetría",                 "render": lambda: render_proximamente("QPC03")},
+                "QPC04": {"label": "📖 QPC04: Leyes de la Termodinámica",               "render": lambda: render_proximamente("QPC04")},
+                "QPC05": {"label": "📖 QPC05: Equilibrio Químico y Espontaneidad",      "render": lambda: render_proximamente("QPC05")},
+            },
+        },
+    },
 }
