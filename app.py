@@ -596,7 +596,7 @@ elif menu == "🐉 Bienvenida":
     """, unsafe_allow_html=True)
 
     # Botones de ejes — navegan directo al eje en el dashboard
-    st.markdown('<div class="seccion-titulo">📚 Contenidos del curso</div>', unsafe_allow_html=True)
+    st.markdown('<div class="seccion-titulo">📚 Contenidos del curso M1</div>', unsafe_allow_html=True)
     st.markdown('<div class="eje-btn-bv">', unsafe_allow_html=True)
 
     c1, c2 = st.columns(2)
@@ -636,6 +636,35 @@ elif menu == "🐉 Bienvenida":
             st.rerun()
 
     st.markdown('</div>', unsafe_allow_html=True)
+
+    # Botones de Física
+    st.markdown('<div class="seccion-titulo">⚛️ Contenido del curso Física</div>', unsafe_allow_html=True)
+    st.markdown('<div class="eje-btn-bv">', unsafe_allow_html=True)
+
+    f1, f2 = st.columns(2)
+    with f1:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#00acc1,#006064)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🌊 Ondas", key="bv_f_ondas", use_container_width=True):
+            st.session_state.fisica_tema = "Ondas"
+    with f2:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#1565c0,#0d47a1)!important;}</style>', unsafe_allow_html=True)
+        if st.button("⚙️ Mecánica", key="bv_f_mecanica", use_container_width=True):
+            st.session_state.fisica_tema = "Mecánica"
+
+    f3, f4 = st.columns(2)
+    with f3:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(1) button{background:linear-gradient(135deg,#e91e63,#880e4f)!important;}</style>', unsafe_allow_html=True)
+        if st.button("⚡ Energía", key="bv_f_energia", use_container_width=True):
+            st.session_state.fisica_tema = "Energía"
+    with f4:
+        st.markdown('<style>.eje-btn-bv div[data-testid="column"]:nth-child(2) button{background:linear-gradient(135deg,#f9a825,#f57f17)!important;}</style>', unsafe_allow_html=True)
+        if st.button("🔌 Electricidad", key="bv_f_electricidad", use_container_width=True):
+            st.session_state.fisica_tema = "Electricidad"
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    if st.session_state.get("fisica_tema"):
+        st.info(f"📡 **{st.session_state.fisica_tema}** — Contenido próximamente disponible. ¡Estamos preparando las clases! 🚀")
 
     # Metodología
     st.markdown('<div class="seccion-titulo">🛡️ Nuestra metodología</div>', unsafe_allow_html=True)
