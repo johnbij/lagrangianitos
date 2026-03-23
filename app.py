@@ -51,6 +51,16 @@ aplicar_estilos()
 # 3. BARRA LATERAL
 # =============================================================================
 
+# Sync sidebar radio widget state with programmatic navigation from button handlers.
+# We track the radio's value from the previous run (prev_nav_radio). If the radio
+# value didn't change (no user interaction) but menu_actual changed (button handler),
+# we update nav_radio before the widget renders so it reflects the new destination.
+if "nav_radio" not in st.session_state:
+    st.session_state.nav_radio = st.session_state.menu_actual
+elif (st.session_state.get("prev_nav_radio") == st.session_state.nav_radio and
+      st.session_state.nav_radio != st.session_state.menu_actual):
+    st.session_state.nav_radio = st.session_state.menu_actual
+
 with st.sidebar:
     st.markdown("### 🐉 Lagrangianitos")
     visitas_total = obtener_visitas()
@@ -67,10 +77,13 @@ with st.sidebar:
         )
     st.divider()
     menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"],
-                    index=["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"].index(st.session_state.menu_actual))
+                    key="nav_radio")
     st.session_state.menu_actual = menu
     st.divider()
     st.caption("💬 _\"Sólo existen dos días en el año en los que no se puede hacer nada.\"_ — Dalai Lama")
+
+# Save the radio value for next run's comparison (used to detect user vs programmatic changes)
+st.session_state.prev_nav_radio = st.session_state.nav_radio
 
 # =============================================================================
 # 4. DASHBOARD PRINCIPAL
