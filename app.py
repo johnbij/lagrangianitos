@@ -161,7 +161,7 @@ if menu == "🏠 Dashboard PAES":
         n_cols = st.columns(8)
         with n_cols[0]:
             if st.button("🏠", key="n_h", use_container_width=True):
-                st.session_state.eje_actual = None; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+                st.session_state.menu_actual = "🐉 Bienvenida"; st.session_state.eje_actual = None; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         with n_cols[1]:
             if st.button("N", key="n_n", use_container_width=True): st.session_state.eje_actual = "🔢 Números";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         with n_cols[2]:
