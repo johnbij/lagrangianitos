@@ -146,19 +146,20 @@ if menu == "🏠 Dashboard PAES":
         div.stButton > button[data-testid="baseButton-secondary"] {
             background-color: inherit;
         }
-        /* Barra nav: 8 columnas */
+        /* Barra nav fila 1: 5 columnas (home + 4 matematicas) */
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(1) button { background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(2) button { background: linear-gradient(135deg,#e74c3c,#c0392b) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(3) button { background: linear-gradient(135deg,#27ae60,#1b5e20) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(4) button { background: linear-gradient(135deg,#9b59b6,#7b1fa2) !important; color: white !important; border: none !important; }
         [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(5) button { background: linear-gradient(135deg,#f39c12,#e65100) !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(6) button { background: linear-gradient(135deg,#00acc1,#006064) !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(7) button { background: linear-gradient(135deg,#66bb6a,#33691e) !important; color: white !important; border: none !important; }
-        [data-testid="stHorizontalBlock"]:first-of-type > div:nth-child(8) button { background: linear-gradient(135deg,#ffa726,#ff8f00) !important; color: white !important; border: none !important; }
+        /* Barra nav fila 2: 3 columnas (ciencias: Física, Biología, Química) */
+        [data-testid="stHorizontalBlock"]:nth-of-type(2) > div:nth-child(1) button { background: linear-gradient(135deg,#00acc1,#006064) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:nth-of-type(2) > div:nth-child(2) button { background: linear-gradient(135deg,#66bb6a,#33691e) !important; color: white !important; border: none !important; }
+        [data-testid="stHorizontalBlock"]:nth-of-type(2) > div:nth-child(3) button { background: linear-gradient(135deg,#ffa726,#ff8f00) !important; color: white !important; border: none !important; }
         </style>
         """, unsafe_allow_html=True)
 
-        n_cols = st.columns(8)
+        n_cols = st.columns(5)
         with n_cols[0]:
             if st.button("🏠", key="n_h", use_container_width=True):
                 st.session_state.eje_actual = None; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
@@ -170,12 +171,14 @@ if menu == "🏠 Dashboard PAES":
             if st.button("G", key="n_g", use_container_width=True): st.session_state.eje_actual = "📐 Geometría";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
         with n_cols[4]:
             if st.button("D", key="n_d", use_container_width=True): st.session_state.eje_actual = "📊 Datos y Azar"; st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-        with n_cols[5]:
-            if st.button("⚛️", key="n_f", use_container_width=True): st.session_state.eje_actual = "⚛️ Física";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-        with n_cols[6]:
-            if st.button("🔬", key="n_b", use_container_width=True): st.session_state.eje_actual = "🔬 Biología";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
-        with n_cols[7]:
-            if st.button("⚗️", key="n_q", use_container_width=True): st.session_state.eje_actual = "⚗️ Química";     st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+
+        s_cols = st.columns(3)
+        with s_cols[0]:
+            if st.button("F", key="n_f", use_container_width=True): st.session_state.eje_actual = "⚛️ Física";      st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        with s_cols[1]:
+            if st.button("B", key="n_b", use_container_width=True): st.session_state.eje_actual = "🔬 Biología";    st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
+        with s_cols[2]:
+            if st.button("Q", key="n_q", use_container_width=True): st.session_state.eje_actual = "⚗️ Química";     st.session_state.subcat_actual = None; st.session_state.clase_seleccionada = None; st.rerun()
 
         st.write("---")
 
