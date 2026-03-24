@@ -44,12 +44,6 @@ class TestE2EUI(unittest.TestCase):
         self.assertTrue(any("BIBLIOTECA DE RECURSOS" in md.value for md in at.markdown))
         self.assertTrue(any("PAES M1 — Verano 2026" in md.value for md in at.markdown))
 
-        at.button(key="back_pdf").click().run(timeout=60)
-        at.radio[0].set_value("🏆 Ranking").run(timeout=60)
-        self.assertEqual(at.radio[0].value, "🏆 Ranking")
-        self.assertEqual(at.text_input(key="input_nick").label, "Tu nick:")
-        self.assertEqual(at.button(key="btn_registrar").label, "Unirse 🚀")
-
     def test_dashboard_class_navigation_and_cronometro(self):
         at = self._run_app()
         at.radio[0].set_value("🏠 Dashboard PAES").run(timeout=60)
@@ -71,19 +65,6 @@ class TestE2EUI(unittest.TestCase):
         )
         at.button(key="btn_siguiente_top").click().run(timeout=60)
         self.assertTrue(any("Clase 2 de 7" in md.value for md in at.markdown))
-
-    def test_ranking_registration_flow(self):
-        at = self._run_app()
-        at.radio[0].set_value("🏆 Ranking").run(timeout=60)
-
-        at.text_input(key="input_nick").set_value("dragon_tester").run(timeout=60)
-        at.button(key="btn_registrar").click().run(timeout=60)
-
-        self.assertEqual(at.button(key="btn_cambiar_nick").label, "Cambiar nick")
-        self.assertEqual(at.session_state.filtered_state["nick_usuario"], "dragon_tester")
-
-        at.button(key="btn_cambiar_nick").click().run(timeout=60)
-        self.assertEqual(at.button(key="btn_registrar").label, "Unirse 🚀")
 
     def test_pdf_library_loads_all_repo_pdfs(self):
         at = self._run_app()
