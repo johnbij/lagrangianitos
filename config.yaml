@@ -1,0 +1,23 @@
+credentials:
+  usernames:
+    admin:
+      name: Administrador
+      password: "$2b$12$2PGyBsoNLssJZdjzfM3Tcecv2An.qry2nj05h3Pgko7/MZuln2Ibq"  # admin123
+      email: admin@lagrangianitos.cl
+    profesor:
+      name: Profesor Demo
+      password: "$2b$12$hXrbXdXAxeiCIPiMjfvboO3JlanNSt5MnQIgoek.tyCSQcfo7Xewu"  # profesor456
+      email: profesor@lagrangianitos.cl
+    estudiante:
+      name: Estudiante Demo
+      password: "$2b$12$J2giL/Q.VfqIfW6ciJiM3esxtNYGF6Zyj16t7G4IEQadATASGpDDi"  # estudiante789
+      email: estudiante@lagrangianitos.cl
+
+cookie:
+  expiry_days: 30
+  key: lagrangianitos_auth_secret_key
+  name: lagrangianitos_auth_cookie
+
+preauthorized:
+  emails:
+    - nuevoprofesor@lagrangianitos.cl
