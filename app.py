@@ -51,15 +51,21 @@ aplicar_estilos()
 # 3. BARRA LATERAL
 # =============================================================================
 
+SIDEBAR_OPTIONS = ["🐉 Bienvenida", "🏆 Ranking", "📂 Biblioteca de PDFs"]
+
 # Sync sidebar radio widget state with programmatic navigation from button handlers.
-# We track the radio's value from the previous run (prev_nav_radio). If the radio
-# value didn't change (no user interaction) but menu_actual changed (button handler),
-# we update nav_radio before the widget renders so it reflects the new destination.
+# "🏠 Dashboard PAES" is no longer a sidebar option; when menu_actual is set to it
+# programmatically (via subject buttons in Bienvenida), the radio stays on "🐉 Bienvenida".
+_nav_radio_target = (
+    st.session_state.menu_actual
+    if st.session_state.menu_actual in SIDEBAR_OPTIONS
+    else "🐉 Bienvenida"
+)
 if "nav_radio" not in st.session_state:
-    st.session_state.nav_radio = st.session_state.menu_actual
+    st.session_state.nav_radio = _nav_radio_target
 elif (st.session_state.get("prev_nav_radio") == st.session_state.nav_radio and
-      st.session_state.nav_radio != st.session_state.menu_actual):
-    st.session_state.nav_radio = st.session_state.menu_actual
+      st.session_state.nav_radio != _nav_radio_target):
+    st.session_state.nav_radio = _nav_radio_target
 
 with st.sidebar:
     st.markdown("### 🐉 Lagrangianitos")
@@ -76,14 +82,24 @@ with st.sidebar:
             unsafe_allow_html=True
         )
     st.divider()
-    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"],
-                    key="nav_radio")
-    st.session_state.menu_actual = menu
+    menu_radio = st.radio("Ir a:", SIDEBAR_OPTIONS, key="nav_radio")
+    # Update menu_actual from the sidebar radio only when the user actively changes it
+    # (detected by comparing against the previous run's radio value).
+    _prev_radio = st.session_state.get("prev_nav_radio")
+    if _prev_radio is None or menu_radio != _prev_radio:
+        st.session_state.menu_actual = menu_radio
+        if _prev_radio is not None:
+            st.session_state.eje_actual = None
+            st.session_state.subcat_actual = None
+            st.session_state.clase_seleccionada = None
     st.divider()
     st.caption("💬 _\"Sólo existen dos días en el año en los que no se puede hacer nada.\"_ — Dalai Lama")
 
 # Save the radio value for next run's comparison (used to detect user vs programmatic changes)
 st.session_state.prev_nav_radio = st.session_state.nav_radio
+
+# Route based on menu_actual (may be "🏠 Dashboard PAES" set programmatically)
+menu = st.session_state.menu_actual
 
 # =============================================================================
 # 4. DASHBOARD PRINCIPAL
@@ -118,6 +134,9 @@ if menu == "🏠 Dashboard PAES":
 
     # Si no hay eje seleccionado, mostrar botones de selección de eje
     if st.session_state.eje_actual is None:
+        if st.button("← Volver al inicio", key="back_dashboard"):
+            st.session_state.menu_actual = "🐉 Bienvenida"
+            st.rerun()
         st.markdown("""
         <style>
         .eje-select div.stButton > button {
@@ -443,7 +462,7 @@ elif menu == "🏆 Ranking":
 
 elif menu == "📂 Biblioteca de PDFs":
     if st.button("← Volver", key="back_pdf"):
-        st.session_state.menu_actual = "🏠 Dashboard PAES"
+        st.session_state.menu_actual = "🐉 Bienvenida"
         st.rerun()
     st.markdown("""
     <style>
@@ -803,23 +822,3 @@ elif menu == "🐉 Bienvenida":
     </div>
     """, unsafe_allow_html=True)
 
-    st.write("")
-    st.markdown("""
-    <style>
-    div[data-testid="stButton"]:has(button[data-testid="baseButton-primary"]) button {
-        background: linear-gradient(135deg,#6C63FF,#1a1a2e) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 14px !important;
-        min-height: 60px !important;
-        font-size: 18px !important;
-        font-weight: bold !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    if st.button("🚀 Ir al Dashboard PAES", key="cta_dashboard", use_container_width=True, type="primary"):
-        st.session_state.menu_actual = "🏠 Dashboard PAES"
-        st.session_state.eje_actual = None
-        st.session_state.subcat_actual = None
-        st.session_state.clase_seleccionada = None
-        st.rerun()
