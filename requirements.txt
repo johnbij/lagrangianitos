@@ -5,4 +5,7 @@ pandas
 numpy
 streamlit-autorefresh
 supabase
+streamlit-authenticator
+PyYAML
+pytz
 
