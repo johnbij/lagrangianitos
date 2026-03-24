@@ -18,7 +18,6 @@ st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="ce
 if 'eje_actual'         not in st.session_state: st.session_state.eje_actual         = None
 if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
 if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccionada = None
-if 'ir_a_pdf'           not in st.session_state: st.session_state.ir_a_pdf           = False
 if 'bienvenida_vista'   not in st.session_state: st.session_state.bienvenida_vista   = False
 if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "🐉 Bienvenida"
 if 'ultimo_visto'       not in st.session_state: st.session_state.ultimo_visto       = None
@@ -76,7 +75,7 @@ with st.sidebar:
             unsafe_allow_html=True
         )
     st.divider()
-    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"],
+    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking"],
                     key="nav_radio")
     st.session_state.menu_actual = menu
     st.divider()
@@ -441,91 +440,6 @@ if menu == "🏠 Dashboard PAES":
 elif menu == "🏆 Ranking":
     render_ranking()
 
-elif menu == "📂 Biblioteca de PDFs":
-    if st.button("← Volver", key="back_pdf"):
-        st.session_state.menu_actual = "🏠 Dashboard PAES"
-        st.rerun()
-    st.markdown("""
-    <style>
-    .pdf-card {
-        background: white;
-        border-radius: 14px;
-        padding: 16px;
-        margin-bottom: 12px;
-        border-left: 5px solid #6C63FF;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-    .pdf-icon { font-size: 30px; }
-    .pdf-nombre { font-size: 15px; font-weight: bold; color: #1a1a2e; margin-bottom: 3px; }
-    .pdf-desc { font-size: 12px; color: #666; }
-    </style>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-    <div style="background:linear-gradient(135deg,#6C63FF,#1a1a2e);
-                border-radius:16px; padding:20px; color:white;
-                text-align:center; margin-bottom:20px;">
-        <div style="font-size:36px;">📂</div>
-        <div style="font-size:20px; font-weight:900; letter-spacing:2px;">BIBLIOTECA DE RECURSOS</div>
-        <div style="font-size:13px; opacity:0.8; margin-top:4px;">Material oficial PAES M1 para descargar</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    PDF_META = {
-        "2026V-PaesM1.pdf": {
-            "nombre": "PAES M1 — Verano 2026",
-            "desc": "Prueba oficial PAES Matemática 1 · Versión Verano 2026",
-            "icono": "📝",
-        },
-        "2026V-ClavijeroPaesM1.pdf": {
-            "nombre": "Clavijero PAES M1 — Verano 2026",
-            "desc": "Clavijero oficial con respuestas · Versión Verano 2026",
-            "icono": "🔑",
-        },
-        "2027I-TemarioPaesM1.pdf": {
-            "nombre": "Temario PAES M1 — Invierno 2027",
-            "desc": "Temario oficial PAES Matemática 1 · Versión Invierno 2027",
-            "icono": "📋",
-        },
-    }
-
-    pdf_dir = Path(__file__).resolve().parent / "pdfs"
-    pdf_files = sorted(pdf_dir.glob("*.pdf"))
-
-    if not pdf_files:
-        st.warning("No se encontraron PDFs en la carpeta /pdfs.")
-
-    for pdf_path in pdf_files:
-        meta = PDF_META.get(
-            pdf_path.name,
-            {
-                "nombre": pdf_path.stem.replace("-", " "),
-                "desc": "Material agregado desde Drive y sincronizado al repositorio.",
-                "icono": "📄",
-            },
-        )
-        st.markdown(f"""
-        <div class="pdf-card">
-            <div class="pdf-icon">{meta["icono"]}</div>
-            <div>
-                <div class="pdf-nombre">{meta["nombre"]}</div>
-                <div class="pdf-desc">{meta["desc"]}</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        with pdf_path.open("rb") as f:
-            st.download_button(
-                label=f"⬇️ Descargar {meta['nombre']}",
-                data=f,
-                file_name=pdf_path.name,
-                mime="application/pdf",
-                key=f"dl_{pdf_path.name}",
-                use_container_width=True
-            )
-
 elif menu == "🐉 Bienvenida":
     zona_cl_bv = pytz.timezone('America/Santiago')
     ahora_bv   = datetime.now(zona_cl_bv)
@@ -799,7 +713,6 @@ elif menu == "🐉 Bienvenida":
     <span class="pill">📊 Visualizaciones interactivas</span>
     <span class="pill">🧠 Profundidad conceptual</span>
     <span class="pill">📝 Ejercitación dirigida</span>
-    <span class="pill">📄 Material descargable</span>
     </div>
     """, unsafe_allow_html=True)
 

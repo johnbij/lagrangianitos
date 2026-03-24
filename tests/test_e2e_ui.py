@@ -38,13 +38,6 @@ class TestE2EUI(unittest.TestCase):
     def test_sidebar_menu_renders_pages(self):
         at = self._run_app()
 
-        at.radio[0].set_value("📂 Biblioteca de PDFs").run(timeout=60)
-        self.assertEqual(at.radio[0].value, "📂 Biblioteca de PDFs")
-        self.assertEqual(at.button(key="back_pdf").label, "← Volver")
-        self.assertTrue(any("BIBLIOTECA DE RECURSOS" in md.value for md in at.markdown))
-        self.assertTrue(any("PAES M1 — Verano 2026" in md.value for md in at.markdown))
-
-        at.button(key="back_pdf").click().run(timeout=60)
         at.radio[0].set_value("🏆 Ranking").run(timeout=60)
         self.assertEqual(at.radio[0].value, "🏆 Ranking")
         self.assertEqual(at.text_input(key="input_nick").label, "Tu nick:")
@@ -84,14 +77,6 @@ class TestE2EUI(unittest.TestCase):
 
         at.button(key="btn_cambiar_nick").click().run(timeout=60)
         self.assertEqual(at.button(key="btn_registrar").label, "Unirse 🚀")
-
-    def test_pdf_library_loads_all_repo_pdfs(self):
-        at = self._run_app()
-        at.radio[0].set_value("📂 Biblioteca de PDFs").run(timeout=60)
-
-        expected_count = len(list((Path(__file__).resolve().parents[1] / "pdfs").glob("*.pdf")))
-        rendered_count = sum(md.value.count('<div class="pdf-card">') for md in at.markdown)
-        self.assertEqual(rendered_count, expected_count)
 
     def test_pb02_and_pb03_quiz_feedback_is_dynamic(self):
         at = self._run_app()
