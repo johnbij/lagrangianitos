@@ -6,7 +6,7 @@ import pytz
 
 from contenidos import CONTENIDOS
 from styles import aplicar_estilos
-from logros import registrar_clase, render_ranking
+from logros import registrar_clase
 from visitas import registrar_visita, obtener_visitas
 
 # =============================================================================
@@ -76,7 +76,7 @@ with st.sidebar:
             unsafe_allow_html=True
         )
     st.divider()
-    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "🏆 Ranking", "📂 Biblioteca de PDFs"],
+    menu = st.radio("Ir a:", ["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"],
                     key="nav_radio")
     st.session_state.menu_actual = menu
     st.divider()
@@ -437,9 +437,6 @@ if menu == "🏠 Dashboard PAES":
                     </script>""",
                     height=0
                 )
-
-elif menu == "🏆 Ranking":
-    render_ranking()
 
 elif menu == "📂 Biblioteca de PDFs":
     if st.button("← Volver", key="back_pdf"):
