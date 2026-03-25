@@ -24,16 +24,15 @@ try:
     with open('config.yaml') as file:
         config = yaml.load(file, Loader=SafeLoader)
 except FileNotFoundError:
-    st.error("Error: No se encontró el archivo 'config.yaml' en el repositorio.")
+    st.error("Error: No se encontró el archivo 'config.yaml'. Verifica el nombre en tu repositorio.")
     st.stop()
 
-# Inicializar el autenticador
+# Inicializar el autenticador (Versión actualizada sin preauthorized)
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
     config['cookie']['key'],
-    config['cookie']['expiry_days'],
-    config['preauthorized']
+    config['cookie']['expiry_days']
 )
 
 # Renderizar Login
@@ -44,7 +43,7 @@ name, authentication_status, username = authenticator.login('Login', 'main')
 # =============================================================================
 
 if authentication_status:
-    # --- TODO EL CONTENIDO PROTEGIDO EMPIEZA AQUÍ ---
+    # --- CONTENIDO PROTEGIDO ---
     
     with st.sidebar:
         st.markdown(f"### 🐉 Bienvenido, {name}")
@@ -63,7 +62,7 @@ if authentication_status:
     if 'crono_running'     not in st.session_state: st.session_state.crono_running      = False
     if 'crono_inicio'      not in st.session_state: st.session_state.crono_inicio       = None
 
-    # Registrar visita una vez por sesión
+    # Registrar visita
     if 'visita_registrada' not in st.session_state:
         st.session_state.visita_registrada = True
         registrar_visita()
@@ -78,10 +77,9 @@ if authentication_status:
         "ambar":     "#ff8f00",
     }
 
-    # Aplicar tus estilos personalizados
     aplicar_estilos()
 
-    # Sincronización de navegación en barra lateral
+    # Sincronización de navegación
     if "nav_radio" not in st.session_state:
         st.session_state.nav_radio = st.session_state.menu_actual
     elif (st.session_state.get("prev_nav_radio") == st.session_state.nav_radio and
@@ -110,23 +108,58 @@ if authentication_status:
 
     st.session_state.prev_nav_radio = st.session_state.nav_radio
 
-    # --- LÓGICA DE MENÚS (DASHBOARD, BIBLIOTECA, BIENVENIDA) ---
-    # Nota para Seba: Pega aquí abajo tus bloques de 'if menu == ...' originales
+    # --- RENDERIZADO DE SECCIONES ---
 
     if menu == "🏠 Dashboard PAES":
-        st.title("🚀 Dashboard PAES M1")
-        # Aquí pega el código de tu dashboard que ya tenías
-        
+        zona_cl = pytz.timezone('America/Santiago')
+        ahora   = datetime.now(zona_cl)
+
+        st.markdown(
+            f'<div class="header-azul">'
+            f'<div class="titulo-header">🐉 Lagrangianitos — PAES M1</div>'
+            f'<div class="info-header">📍 Santiago · 🕒 {ahora.strftime("%H:%M")}</div>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+
+        paes_date = datetime(2026, 6, 15, 9, 0, 0, tzinfo=zona_cl)
+        delta = paes_date - ahora
+        dias  = delta.days
+        horas = delta.seconds // 3600
+        st.markdown(
+            f'<div class="header-rojo">'
+            f'<div class="timer-item">⏳ Días: {dias}</div>'
+            f'<div class="timer-item">Hrs: {horas}</div>'
+            f'</div>',
+            unsafe_allow_html=True
+        )
+
+        if st.session_state.eje_actual is None:
+            st.markdown('<div class="eje-select">', unsafe_allow_html=True)
+            c1, c2 = st.columns(2)
+            with c1:
+                if st.button("🔢 Números", key="m_n", use_container_width=True):
+                    st.session_state.eje_actual = "🔢 Números"; st.rerun()
+            with c2:
+                if st.button("📉 Álgebra", key="m_a", use_container_width=True):
+                    st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            if st.button("🔙 Volver al inicio", key="back_home"):
+                st.session_state.eje_actual = None; st.rerun()
+
     elif menu == "📂 Biblioteca de PDFs":
         st.title("📂 Biblioteca de Recursos")
-        # Aquí pega el código de tus PDFs
-        
+        st.write("Aquí puedes descargar tus guías y ensayos.")
+
     elif menu == "🐉 Bienvenida":
-        st.title("Bienvenido a Lagrangianitos")
-        # Aquí pega tu código de bienvenida
+        st.markdown('<div class="seccion-titulo">🐉 Bienvenidos a Lagrangianitos</div>', unsafe_allow_html=True)
+        st.write("Tu plataforma interactiva para dominar la PAES M1.")
+        if st.button("🚀 Ir al Dashboard PAES", type="primary"):
+            st.session_state.menu_actual = "🏠 Dashboard PAES"; st.rerun()
 
 elif authentication_status == False:
     st.error('Usuario o contraseña incorrectos.')
     
 elif authentication_status == None:
-    st.warning('Ingresa tus credenciales para acceder al Libro Digital.')
+    st.warning('Ingresa tus credenciales para acceder al contenido Premium.')
