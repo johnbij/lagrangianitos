@@ -7,14 +7,14 @@ import yaml
 from yaml.loader import SafeLoader
 import streamlit_authenticator as stauth
 
-# Importaciones de tus módulos locales
+# Importaciones de tus módulos locales (Asegúrate de que existan en tu repo)
 from contenidos import CONTENIDOS
 from styles import aplicar_estilos
 from logros import registrar_clase
 from visitas import registrar_visita, obtener_visitas
 
 # =============================================================================
-# 0. CONFIGURACIÓN DE PÁGINA Y SEGURIDAD (SIN SIDEBAR)
+# 0. CONFIGURACIÓN DE PÁGINA Y SEGURIDAD
 # =============================================================================
 
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
@@ -35,44 +35,43 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days']
 )
 
-# Render del Login en la pantalla principal
+# Render del Login en la pantalla principal (Ideal para móvil)
 authenticator.login(location='main')
 
 # =============================================================================
-# 1. LÓGICA SEGÚN ESTADO DE AUTENTICACIÓN
+# 1. LÓGICA TRAS EL LOGIN
 # =============================================================================
 
 if st.session_state["authentication_status"]:
     
-    # --- INICIALIZACIÓN DE ESTADOS (La "memoria" de navegación) ---
-    if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "Bienvenida"
-    if 'eje_actual'         not in st.session_state: st.session_state.eje_actual         = None
-    if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
+    # --- INICIALIZACIÓN DE ESTADOS (La "memoria" del Entrenador) ---
+    if 'menu_actual'        not in st.session_state: st.session_state.menu_actual = "Bienvenida"
+    if 'eje_actual'         not in st.session_state: st.session_state.eje_actual = None
+    if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual = None
     if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccionada = None
 
-    # Registrar visita (una sola vez por sesión)
+    # Registrar visita (una sola vez)
     if 'visita_registrada' not in st.session_state:
         st.session_state.visita_registrada = True
         registrar_visita()
 
-    # Aplicar tus estilos CSS personalizados
+    # Aplicar tus estilos CSS personalizados (Colores, bordes, etc)
     aplicar_estilos()
 
     # =============================================================================
-    # 2. RENDERIZADO DE SECCIONES (TODO EN PANTALLA PRINCIPAL)
+    # 2. RENDERIZADO DE SECCIONES (FLUJO PRINCIPAL)
     # =============================================================================
 
-    # --- SECCIÓN A: BIENVENIDA (Home) ---
+    # --- A. PANTALLA DE BIENVENIDA ---
     if st.session_state.menu_actual == "Bienvenida":
         st.markdown("<h1 style='text-align:center;'>🐉 Bienvenidos a Lagrangianitos</h1>", unsafe_allow_html=True)
-        st.write(f"Hola **{st.session_state['name']}**, prepárate para dominar la PAES M1.")
+        st.write(f"Hola **{st.session_state['name']}**, prepárate para el entrenamiento de élite.")
         
-        st.markdown("""
-        ### ¿Qué quieres hacer hoy?
-        """)
+        st.divider()
+        st.markdown("### ¿Qué quieres entrenar hoy?")
         
-        # BOTONES DE NAVEGACIÓN PRINCIPAL (Sustituyen a la barra lateral en móvil)
-        if st.button("🏠 Ir al Dashboard de Clases ahora", type="primary", use_container_width=True):
+        # Botones de navegación central
+        if st.button("🏠 Ir al Dashboard de Clases", type="primary", use_container_width=True):
             st.session_state.menu_actual = "Dashboard"
             st.rerun()
             
@@ -80,97 +79,120 @@ if st.session_state["authentication_status"]:
             st.session_state.menu_actual = "Biblioteca"
             st.rerun()
         
-        st.info("💡 Consejo: Revisa tus progresos en el Dashboard cada semana.")
+        st.info("💡 Consejo del Profe: La constancia le gana al talento. Dale átomos.")
 
-    # --- SECCIÓN B: DASHBOARD (M1 y FÍSICA) ---
+    # --- B. DASHBOARD (EL CORAZÓN DE LA APP) ---
     elif st.session_state.menu_actual == "Dashboard":
-        # Botón para volver al inicio siempre arriba
+        
+        # Botón para volver al Inicio siempre arriba
         if st.button("🔙 Volver al Inicio"):
             st.session_state.menu_actual = "Bienvenida"
             st.session_state.eje_actual = None
             st.rerun()
 
-        zona_cl = pytz.timezone('America/Santiago')
-        ahora = datetime.now(zona_cl)
-        st.markdown(f'<div class="header-azul">🐉 Dashboard — PAES M1 | 🕒 {ahora.strftime("%H:%M")}</div>', unsafe_allow_html=True)
-
+        # 1. SI NO HA ELEGIDO EJE: Mostramos las tarjetas de la segunda foto
         if st.session_state.eje_actual is None:
-            st.subheader("Selecciona un Eje para estudiar:")
+            st.markdown("<h2 style='text-align:center;'>🎯 Selección de Eje</h2>", unsafe_allow_html=True)
             
-            # Aquí recreamos las tarjetas de tu segunda foto
-            col1, col2 = st.columns(2)
-            with col1:
-                if st.button("🔢 Números\nConjuntos • Operatoria", use_container_width=True, key="d_num"):
-                    st.session_state.eje_actual = "Números"; st.rerun()
-                if st.button("📐 Geometría\nFiguras • Área • Vectores", use_container_width=True, key="d_geo"):
-                    st.session_state.eje_actual = "Geometría"; st.rerun()
+            c1, c2 = st.columns(2)
+            with c1:
+                # Los nombres aquí deben coincidir con las llaves de tu dict CONTENIDOS
+                if st.button("🔢 Números\nConjuntos • Operatoria", use_container_width=True, key="card_num"):
+                    st.session_state.eje_actual = "🔢 Números"; st.rerun()
+                if st.button("📐 Geometría\nFiguras • Área • Vectores", use_container_width=True, key="card_geo"):
+                    st.session_state.eje_actual = "📐 Geometría"; st.rerun()
             
-            with col2:
-                if st.button("📉 Álgebra\nÁlgebra • Funciones", use_container_width=True, key="d_alg"):
-                    st.session_state.eje_actual = "Álgebra"; st.rerun()
-                if st.button("📊 Datos y Azar\nEstadística • Probabilidad", use_container_width=True, key="d_dat"):
-                    st.session_state.eje_actual = "Datos"; st.rerun()
+            with col2 if 'col2' in locals() else c2: # Parche por si acaso
+                if st.button("📉 Álgebra\nÁlgebra • Funciones", use_container_width=True, key="card_alg"):
+                    st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
+                if st.button("📊 Datos y Azar\nEstadística • Probabilidad", use_container_width=True, key="card_dat"):
+                    st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
             
             st.divider()
             st.subheader("🟣 Contenido de Física")
             f1, f2 = st.columns(2)
             with f1:
-                st.button("🌊 Ondas", use_container_width=True)
-                st.button("⚡ Energía", use_container_width=True)
+                if st.button("🌊 Ondas", use_container_width=True): st.info("Próximamente")
             with f2:
-                st.button("⚙️ Mecánica", use_container_width=True)
-                st.button("🔌 Electricidad", use_container_width=True)
+                if st.button("⚙️ Mecánica", use_container_width=True): st.info("Próximamente")
 
+        # 2. SI YA ELIGIÓ EJE: Cargamos las clases desde contenidos.py
         else:
-            # Vista dentro de un Eje seleccionado
-            if st.button("🔙 Volver a los Ejes"):
+            eje = st.session_state.eje_actual
+            if st.button(f"🔙 Volver a Selección de Ejes"):
                 st.session_state.eje_actual = None; st.rerun()
-            st.title(f"Estudiando: {st.session_state.eje_actual}")
-            # Aquí iría el cargador de clases que ya tenías
+            
+            st.title(f"📍 {eje}")
+            
+            if eje in CONTENIDOS:
+                # Selector de Unidad/Subcategoría
+                subcategorias = list(CONTENIDOS[eje].keys())
+                subcat = st.selectbox("Selecciona la Unidad:", ["--- Elige ---"] + subcategorias)
+                
+                if subcat != "--- Elige ---":
+                    # Selector de Clase
+                    clases = CONTENIDOS[eje][subcat]
+                    clase_nom = st.selectbox("Elige la Clase:", ["--- Elige ---"] + list(clases.keys()))
+                    
+                    if clase_nom != "--- Elige ---":
+                        datos_clase = clases[clase_nom]
+                        st.divider()
+                        st.header(f"📖 {clase_nom}")
+                        
+                        # Render de Video
+                        if "video" in datos_clase and datos_clase["video"]:
+                            st.video(datos_clase["video"])
+                        
+                        # Render de Contenido/Texto
+                        if "descripcion" in datos_clase:
+                            st.write(datos_clase["descripcion"])
+                        
+                        # Logros / Guardado en DB (Próximamente Sheets)
+                        if st.button("✅ Marcar como completada"):
+                            registrar_clase(st.session_state['username'], eje, subcat, clase_nom)
+                            st.balloons()
+                            st.success("¡Clase registrada en tu historial!")
+            else:
+                st.warning("Aún no hay contenido en este eje. ¡Sigue entrenando los otros!")
 
-    # --- SECCIÓN C: BIBLIOTECA ---
+    # --- C. BIBLIOTECA ---
     elif st.session_state.menu_actual == "Biblioteca":
         if st.button("🔙 Volver al Inicio"):
             st.session_state.menu_actual = "Bienvenida"; st.rerun()
             
         st.title("📂 Biblioteca de Recursos")
-        st.write("Descarga aquí tus ensayos y guías.")
+        st.write("Descarga tus guías y ensayos personalizados.")
         
         pdf_dir = Path("pdfs")
         if pdf_dir.exists():
             for pdf in pdf_dir.glob("*.pdf"):
                 with open(pdf, "rb") as f:
-                    st.download_button(label=f"⬇️ {pdf.name}", data=f, file_name=pdf.name, use_container_width=True)
+                    st.download_button(label=f"⬇️ Descargar {pdf.name}", data=f, file_name=pdf.name, use_container_width=True)
         else:
-            st.info("No hay PDFs disponibles todavía.")
+            st.info("Sube tus archivos a la carpeta /pdfs para verlos aquí.")
 
     # =============================================================================
-    # 3. PIE DE PÁGINA (CONTROL DE ADMIN Y LOGOUT)
+    # 3. PIE DE PÁGINA (CONTROL DE ACCESOS Y ADMIN)
     # =============================================================================
     st.divider()
+    c_out, c_det = st.columns([1, 1])
     
-    # El Logout ahora está visible al final para que sea fácil salir en el cel
-    col_out, col_admin = st.columns([1, 1])
-    
-    with col_out:
+    with c_out:
         authenticator.logout('Cerrar Sesión', 'main')
     
-    with col_admin:
-        # Solo el admin ve el interruptor del modo detective
+    with c_det:
         if st.session_state["username"] == "admin":
-            modo_detective = st.toggle("🕵️ Modo Detective")
-            if modo_detective:
-                visitas_total = obtener_visitas()
-                st.write(f"👁️ Visitas: **{visitas_total}**")
-                st.warning("Panel Admin activo")
+            if st.toggle("🕵️ Modo Detective"):
+                vt = obtener_visitas()
+                st.write(f"Visitas totales: **{vt}**")
+                st.caption("Recuerda: Si hay muchas visitas de un mismo user, lo están compartiendo.")
 
 # =============================================================================
-# 4. MANEJO DE ACCESOS
+# 4. MANEJO DE LOGIN FALLIDO O VACÍO
 # =============================================================================
 
 elif st.session_state["authentication_status"] is False:
     st.error('Usuario o contraseña incorrectos.')
-    
 elif st.session_state["authentication_status"] is None:
-    st.markdown("<h2 style='text-align:center;'>🐉 Lagrangianitos Hub</h2>", unsafe_allow_html=True)
-    st.info("Entrenador de Élite: Ingresa tus credenciales para continuar.")
+    st.markdown("<h1 style='text-align:center;'>🐉 Lagrangianitos Hub</h1>", unsafe_allow_html=True)
+    st.info("Ingresa tus credenciales para acceder al entrenamiento.")
