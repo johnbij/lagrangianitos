@@ -14,7 +14,7 @@ from logros import registrar_clase
 from visitas import registrar_visita, obtener_visitas
 
 # =============================================================================
-# 0. CONFIGURACIÓN DE PÁGINA Y SEGURIDAD
+# 0. CONFIGURACIÓN DE PÁGINA Y SEGURIDAD (SIN SIDEBAR)
 # =============================================================================
 
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
@@ -35,7 +35,7 @@ authenticator = stauth.Authenticate(
     config['cookie']['expiry_days']
 )
 
-# Render del Login
+# Render del Login en la pantalla principal
 authenticator.login(location='main')
 
 # =============================================================================
@@ -44,100 +44,133 @@ authenticator.login(location='main')
 
 if st.session_state["authentication_status"]:
     
-    # --- INICIALIZACIÓN DE ESTADOS (Movido arriba para que el radio los use) ---
-    if 'menu_actual' not in st.session_state: 
-        st.session_state.menu_actual = "🐉 Bienvenida"
-    if 'eje_actual' not in st.session_state: 
-        st.session_state.eje_actual = None
+    # --- INICIALIZACIÓN DE ESTADOS (La "memoria" de navegación) ---
+    if 'menu_actual'        not in st.session_state: st.session_state.menu_actual        = "Bienvenida"
+    if 'eje_actual'         not in st.session_state: st.session_state.eje_actual         = None
+    if 'subcat_actual'      not in st.session_state: st.session_state.subcat_actual      = None
+    if 'clase_seleccionada' not in st.session_state: st.session_state.clase_seleccionada = None
 
-    # --- BARRA LATERAL ---
-    with st.sidebar:
-        st.markdown(f"### 🐉 Bienvenido, {st.session_state['name']}")
-        authenticator.logout('Cerrar Sesión', 'sidebar')
-        st.divider()
-
-        visitas_total = obtener_visitas()
-        st.markdown(f'<div style="text-align:center; font-size:12px;">👁️ <b>{visitas_total:,}</b> visitas</div>', unsafe_allow_html=True)
-        
-        modo_detective = False
-        if st.session_state["username"] == "admin":
-            st.divider()
-            modo_detective = st.toggle("🕵️ Modo Detective")
-        
-        if not modo_detective:
-            st.divider()
-            
-            # --- LA CORRECCIÓN ESTÁ AQUÍ ---
-            opciones_menu = ["🐉 Bienvenida", "🏠 Dashboard PAES", "📂 Biblioteca de PDFs"]
-            
-            # Calculamos en qué posición está el menú actual para que el radio no se resetee solo
-            if st.session_state.menu_actual in opciones_menu:
-                indice_previo = opciones_menu.index(st.session_state.menu_actual)
-            else:
-                indice_previo = 0
-
-            menu = st.radio(
-                "Ir a:", 
-                opciones_menu, 
-                index=indice_previo, # Esto sincroniza el radio con el botón
-                key="nav_radio"
-            )
-            st.session_state.menu_actual = menu
-            
-        st.divider()
-        st.caption("💬 \"Sólo existen dos días en el año en los que no se puede hacer nada.\" — Dalai Lama")
-
-    # Registrar visita
+    # Registrar visita (una sola vez por sesión)
     if 'visita_registrada' not in st.session_state:
         st.session_state.visita_registrada = True
         registrar_visita()
 
+    # Aplicar tus estilos CSS personalizados
     aplicar_estilos()
 
     # =============================================================================
-    # 2. RENDERIZADO DE SECCIONES
+    # 2. RENDERIZADO DE SECCIONES (TODO EN PANTALLA PRINCIPAL)
     # =============================================================================
 
-    # A. VISTA DETECTIVE (SEGURIDAD)
-    if modo_detective:
-        st.title("🕵️ Panel de Monitoreo (Admin)")
-        st.info("Vigilancia de accesos y comportamiento.")
-        # ... (Tu lógica de detective) ...
-
-    # B. DASHBOARD PAES
-    elif st.session_state.menu_actual == "🏠 Dashboard PAES":
-        st.title("🏠 Dashboard PAES M1")
-        # Aquí pones el código que genera la segunda foto que me mostraste
-        st.write("Selecciona una unidad para comenzar.")
+    # --- SECCIÓN A: BIENVENIDA (Home) ---
+    if st.session_state.menu_actual == "Bienvenida":
+        st.markdown("<h1 style='text-align:center;'>🐉 Bienvenidos a Lagrangianitos</h1>", unsafe_allow_html=True)
+        st.write(f"Hola **{st.session_state['name']}**, prepárate para dominar la PAES M1.")
         
-        c1, c2 = st.columns(2)
-        with c1:
-            if st.button("🔢 Números", use_container_width=True):
-                st.session_state.eje_actual = "🔢 Números"; st.rerun()
-        with c2:
-            if st.button("📉 Álgebra", use_container_width=True):
-                st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
-
-    # C. BIBLIOTECA
-    elif st.session_state.menu_actual == "📂 Biblioteca de PDFs":
-        st.title("📂 Biblioteca")
-        # ... (Tu lógica de PDFs) ...
-
-    # D. BIENVENIDA
-    elif st.session_state.menu_actual == "🐉 Bienvenida":
-        st.title("🐉 Bienvenidos a Lagrangianitos")
-        st.write(f"Hola **{st.session_state['name']}**.")
+        st.markdown("""
+        ### ¿Qué quieres hacer hoy?
+        """)
         
-        # EL BOTÓN AHORA SÍ FUNCIONARÁ
-        if st.button("🚀 Ir al Dashboard ahora", type="primary"):
-            st.session_state.menu_actual = "🏠 Dashboard PAES"
+        # BOTONES DE NAVEGACIÓN PRINCIPAL (Sustituyen a la barra lateral en móvil)
+        if st.button("🏠 Ir al Dashboard de Clases ahora", type="primary", use_container_width=True):
+            st.session_state.menu_actual = "Dashboard"
+            st.rerun()
+            
+        if st.button("📂 Abrir Biblioteca de PDFs", use_container_width=True):
+            st.session_state.menu_actual = "Biblioteca"
+            st.rerun()
+        
+        st.info("💡 Consejo: Revisa tus progresos en el Dashboard cada semana.")
+
+    # --- SECCIÓN B: DASHBOARD (M1 y FÍSICA) ---
+    elif st.session_state.menu_actual == "Dashboard":
+        # Botón para volver al inicio siempre arriba
+        if st.button("🔙 Volver al Inicio"):
+            st.session_state.menu_actual = "Bienvenida"
+            st.session_state.eje_actual = None
             st.rerun()
 
+        zona_cl = pytz.timezone('America/Santiago')
+        ahora = datetime.now(zona_cl)
+        st.markdown(f'<div class="header-azul">🐉 Dashboard — PAES M1 | 🕒 {ahora.strftime("%H:%M")}</div>', unsafe_allow_html=True)
+
+        if st.session_state.eje_actual is None:
+            st.subheader("Selecciona un Eje para estudiar:")
+            
+            # Aquí recreamos las tarjetas de tu segunda foto
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("🔢 Números\nConjuntos • Operatoria", use_container_width=True, key="d_num"):
+                    st.session_state.eje_actual = "Números"; st.rerun()
+                if st.button("📐 Geometría\nFiguras • Área • Vectores", use_container_width=True, key="d_geo"):
+                    st.session_state.eje_actual = "Geometría"; st.rerun()
+            
+            with col2:
+                if st.button("📉 Álgebra\nÁlgebra • Funciones", use_container_width=True, key="d_alg"):
+                    st.session_state.eje_actual = "Álgebra"; st.rerun()
+                if st.button("📊 Datos y Azar\nEstadística • Probabilidad", use_container_width=True, key="d_dat"):
+                    st.session_state.eje_actual = "Datos"; st.rerun()
+            
+            st.divider()
+            st.subheader("🟣 Contenido de Física")
+            f1, f2 = st.columns(2)
+            with f1:
+                st.button("🌊 Ondas", use_container_width=True)
+                st.button("⚡ Energía", use_container_width=True)
+            with f2:
+                st.button("⚙️ Mecánica", use_container_width=True)
+                st.button("🔌 Electricidad", use_container_width=True)
+
+        else:
+            # Vista dentro de un Eje seleccionado
+            if st.button("🔙 Volver a los Ejes"):
+                st.session_state.eje_actual = None; st.rerun()
+            st.title(f"Estudiando: {st.session_state.eje_actual}")
+            # Aquí iría el cargador de clases que ya tenías
+
+    # --- SECCIÓN C: BIBLIOTECA ---
+    elif st.session_state.menu_actual == "Biblioteca":
+        if st.button("🔙 Volver al Inicio"):
+            st.session_state.menu_actual = "Bienvenida"; st.rerun()
+            
+        st.title("📂 Biblioteca de Recursos")
+        st.write("Descarga aquí tus ensayos y guías.")
+        
+        pdf_dir = Path("pdfs")
+        if pdf_dir.exists():
+            for pdf in pdf_dir.glob("*.pdf"):
+                with open(pdf, "rb") as f:
+                    st.download_button(label=f"⬇️ {pdf.name}", data=f, file_name=pdf.name, use_container_width=True)
+        else:
+            st.info("No hay PDFs disponibles todavía.")
+
+    # =============================================================================
+    # 3. PIE DE PÁGINA (CONTROL DE ADMIN Y LOGOUT)
+    # =============================================================================
+    st.divider()
+    
+    # El Logout ahora está visible al final para que sea fácil salir en el cel
+    col_out, col_admin = st.columns([1, 1])
+    
+    with col_out:
+        authenticator.logout('Cerrar Sesión', 'main')
+    
+    with col_admin:
+        # Solo el admin ve el interruptor del modo detective
+        if st.session_state["username"] == "admin":
+            modo_detective = st.toggle("🕵️ Modo Detective")
+            if modo_detective:
+                visitas_total = obtener_visitas()
+                st.write(f"👁️ Visitas: **{visitas_total}**")
+                st.warning("Panel Admin activo")
+
 # =============================================================================
-# 3. MANEJO DE ACCESO DENEGADO
+# 4. MANEJO DE ACCESOS
 # =============================================================================
 
 elif st.session_state["authentication_status"] is False:
     st.error('Usuario o contraseña incorrectos.')
+    
 elif st.session_state["authentication_status"] is None:
-    st.markdown("<h1 style='text-align:center;'>🐉 Lagrangianitos Hub</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align:center;'>🐉 Lagrangianitos Hub</h2>", unsafe_allow_html=True)
+    st.info("Entrenador de Élite: Ingresa tus credenciales para continuar.")
