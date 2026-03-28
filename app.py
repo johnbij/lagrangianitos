@@ -18,20 +18,49 @@ st.markdown("""
         [data-testid="stSidebar"] {display: none;}
         [data-testid="stSidebarNav"] {display: none;}
         .block-container {padding-top: 1rem;}
+        
         .paes-header {
-            background-color: #0E2439; color: white; padding: 1.5rem;
-            text-align: center; border-radius: 15px; margin-bottom: 1rem;
+            background-color: #0E2439;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 1rem;
         }
-        .paes-header img { max-width: 120px; height: auto; margin-bottom: 10px; }
+        
+        .paes-header img {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
         .paes-header h1 {
-            color: white; font-weight: 800; font-size: clamp(1.2rem, 7vw, 2.5rem);
-            margin: 0.5rem 0; text-transform: uppercase;
+            color: white; 
+            font-weight: 800; 
+            font-size: clamp(1.2rem, 7vw, 2.5rem);
+            margin: 0.5rem 0;
+            text-transform: uppercase;
         }
+        
         .paes-header .lema { font-style: italic; color: #FFD700; font-size: 0.9rem; }
+        
         .contador-timer {
-            background-color: #D32F2F; color: white; padding: 0.8rem;
-            text-align: center; border-radius: 10px; margin-top: -0.5rem;
-            margin-bottom: 2rem; font-weight: bold; display: flex; justify-content: space-around;
+            background-color: #D32F2F;
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: -0.5rem;
+            margin-bottom: 2rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        /* Estilo para el botón de volver */
+        .stButton button[kind="secondary"] {
+            background-color: #f0f2f6;
+            border: 1px solid #dcdfe6;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -41,7 +70,7 @@ st.markdown("""
 # ==========================================
 
 def scroll_to_top():
-    """Versión simplificada que no falla porque no usa keys dinámicas."""
+    """Scroll simple sin keys para evitar errores de renderizado."""
     st.components.v1.html(
         "<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
         height=0
@@ -80,7 +109,6 @@ def render_timer():
 # ==========================================
 
 def main():
-    # Inicialización segura
     if 'logged_in' not in st.session_state: st.session_state.logged_in = False
     if 'page' not in st.session_state: st.session_state.page = "Inicio"
     if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
@@ -100,6 +128,7 @@ def main():
                     st.rerun()
                 else: st.error("Acceso denegado")
     else:
+        # --- PÁGINA INICIO ---
         if st.session_state.page == "Inicio":
             render_header()
             render_timer()
@@ -117,60 +146,72 @@ def main():
                         st.rerun()
             
             st.divider()
-            if st.button("🚪 Salir"):
+            if st.button("🚪 Cerrar Sesión"):
                 st.session_state.logged_in = False
                 st.rerun()
 
+        # --- PÁGINA VISOR ---
         elif st.session_state.page == "Visor":
-            if st.button("🏠 Volver al Menú", use_container_width=True):
+            # Botón de volver prominente al inicio del visor
+            if st.button("⬅️ VOLVER AL MENÚ PRINCIPAL", use_container_width=True):
                 st.session_state.page = "Inicio"
-                st.rerun()
-
-            st.divider()
-            m_data = CONTENIDOS[st.session_state.materia_sel]
-            ejes = list(m_data["subcategorias"].keys())
-            
-            idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
-            eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
-            
-            if eje_sel != st.session_state.eje_sel:
-                st.session_state.eje_sel = eje_sel
+                st.session_state.materia_sel = None
+                st.session_state.eje_sel = None
                 st.session_state.clase_idx = 0
                 st.rerun()
 
-            clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
-            ids_clases = list(clases_dict.keys())
-            st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
+            st.divider()
             
-            clase_id = st.selectbox(
-                "📖 Clase:", ids_clases, index=st.session_state.clase_idx,
-                format_func=lambda x: clases_dict[x]["label"]
-            )
+            m_data = CONTENIDOS[st.session_state.materia_sel]
+            ejes = list(m_data["subcategorias"].keys())
             
-            if ids_clases.index(clase_id) != st.session_state.clase_idx:
-                st.session_state.clase_idx = ids_clases.index(clase_id)
-                st.rerun()
+            # Selectores Desplegables
+            col_e, col_c = st.columns(2)
+            
+            with col_e:
+                idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
+                eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
+                if eje_sel != st.session_state.eje_sel:
+                    st.session_state.eje_sel = eje_sel
+                    st.session_state.clase_idx = 0
+                    st.rerun()
+
+            with col_c:
+                clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
+                ids_clases = list(clases_dict.keys())
+                st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
+                
+                clase_id = st.selectbox(
+                    "📖 Clase:", ids_clases, 
+                    index=st.session_state.clase_idx,
+                    format_func=lambda x: clases_dict[x]["label"]
+                )
+                if ids_clases.index(clase_id) != st.session_state.clase_idx:
+                    st.session_state.clase_idx = ids_clases.index(clase_id)
+                    st.rerun()
 
             st.divider()
             
-            # --- RENDER DE CLASE ---
+            # Contenido de la clase
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
             
             st.divider()
+            
+            # Navegación entre clases
             c1, c2 = st.columns(2)
             with c1:
                 if st.session_state.clase_idx > 0:
-                    if st.button("⬅️ Anterior"):
+                    if st.button("⬅️ Clase Anterior", use_container_width=True):
                         st.session_state.clase_idx -= 1
                         st.rerun()
             with c2:
                 if st.session_state.clase_idx < len(ids_clases) - 1:
-                    if st.button("Siguiente ➡️"):
+                    if st.button("Siguiente Clase ➡️", use_container_width=True):
                         st.session_state.clase_idx += 1
                         st.rerun()
             
-            # SCROLL AL FINAL: Solo después de que todo se dibujó
+            # Ejecutar scroll después de renderizar contenido
             scroll_to_top()
 
 if __name__ == "__main__":
