@@ -1,72 +1,133 @@
 import streamlit as st
-import os
 from contenidos import CONTENIDOS
 
-def scroll_top():
-    # Inyecta un pequeño JS para subir al inicio de la página
+def scroll_to_top():
+    """Inyecta JavaScript para volver arriba al cambiar de clase."""
     st.components.v1.html(
-        "<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
+        """
+        <script>
+            var mainContent = window.parent.document.querySelector('section.main');
+            if (mainContent) {
+                mainContent.scrollTo({top: 0, behavior: 'auto'});
+            }
+        </script>
+        """,
         height=0,
     )
 
-def main():
-    st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
+def login():
+    st.markdown("<h1 style='text-align:center;'>🐉 Lagrangianitos Hub</h1>", unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        user = st.text_input("Usuario")
+        password = st.text_input("Contraseña", type="password")
+        if st.button("Ingresar", use_container_width=True):
+            if user == "admin" and password == "pau2026":
+                st.session_state.logged_in = True
+                st.rerun()
+            else:
+                st.error("Credenciales incorrectas")
 
+def main():
+    st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
+
+    # --- CONTROL DE ACCESO ---
+    if 'logged_in' not in st.session_state:
+        st.session_state.logged_in = False
+    
+    if not st.session_state.logged_in:
+        login()
+        return
+
+    # --- ESTADOS DE NAVEGACIÓN ---
     if 'page' not in st.session_state:
         st.session_state.page = "Inicio"
     if 'materia_sel' not in st.session_state:
         st.session_state.materia_sel = None
+    if 'eje_sel' not in st.session_state:
+        st.session_state.eje_sel = None
     if 'clase_idx' not in st.session_state:
         st.session_state.clase_idx = 0
 
-    if st.session_state.page != "Inicio":
-        if st.button("⬅️ Volver al Menú Principal"):
+    # --- MENÚ LATERAL ---
+    with st.sidebar:
+        st.title("🚀 Navegación")
+        if st.button("🏠 Menú Principal", use_container_width=True):
             st.session_state.page = "Inicio"
-            st.session_state.materia_sel = None
-            st.session_state.clase_idx = 0
+            st.rerun()
+        st.divider()
+        if st.button("🚪 Cerrar Sesión", use_container_width=True):
+            st.session_state.logged_in = False
             st.rerun()
 
+    # --- PANTALLA DE INICIO ---
     if st.session_state.page == "Inicio":
-        st.markdown("<h1 style='text-align:center;'>🐉 Lagrangianitos</h1>", unsafe_allow_html=True)
-        for materia in CONTENIDOS.keys():
-            if st.button(materia, use_container_width=True):
-                st.session_state.materia_sel = materia
-                st.session_state.page = "Visor"
-                st.rerun()
+        st.markdown("<h1 style='text-align:center;'>📚 Entrenamiento M1</h1>", unsafe_allow_html=True)
+        
+        materias = list(CONTENIDOS.keys())
+        cols = st.columns(len(materias))
+        for i, materia in enumerate(materias):
+            with cols[i]:
+                if st.button(materia, use_container_width=True, height=100):
+                    st.session_state.materia_sel = materia
+                    st.session_state.page = "Visor"
+                    st.session_state.eje_sel = list(CONTENIDOS[materia]["subcategorias"].keys())[0]
+                    st.session_state.clase_idx = 0
+                    st.rerun()
 
+    # --- VISOR DE CLASES ---
     elif st.session_state.page == "Visor":
         materia_data = CONTENIDOS[st.session_state.materia_sel]
-        ejes = list(materia_data["subcategorias"].keys())
-        eje_sel = st.selectbox("🎯 Selecciona un Eje:", ejes)
         
-        clases_dict = materia_data["subcategorias"][eje_sel]
-        ids_clases = list(clases_dict.keys())
+        col_eje, col_clase = st.columns(2)
+        
+        ejes_list = list(materia_data["subcategorias"].keys())
+        with col_eje:
+            idx_eje = ejes_list.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes_list else 0
+            eje_escogido = st.selectbox("🎯 Eje Temático:", ejes_list, index=idx_eje)
+            
+            if eje_escogido != st.session_state.eje_sel:
+                st.session_state.eje_sel = eje_escogido
+                st.session_state.clase_idx = 0
+                st.rerun()
 
-        # Selector de clase
-        clase_id = st.selectbox(
-            "📖 Selecciona la Clase:",
-            ids_clases,
-            index=min(st.session_state.clase_idx, len(ids_clases)-1),
-            format_func=lambda x: clases_dict[x]["label"]
-        )
+        clases_dict = materia_data["subcategorias"][st.session_state.eje_sel]
+        ids_clases = list(clases_dict.keys())
+        
+        with col_clase:
+            idx_clase = min(st.session_state.clase_idx, len(ids_clases) - 1)
+            clase_id = st.selectbox(
+                "📖 Clase:", 
+                ids_clases, 
+                index=idx_clase,
+                format_func=lambda x: clases_dict[x]["label"]
+            )
+            if ids_clases.index(clase_id) != st.session_state.clase_idx:
+                st.session_state.clase_idx = ids_clases.index(clase_id)
+                st.rerun()
 
         st.divider()
 
-        # Renderizar contenido
         if "render" in clases_dict[clase_id]:
             clases_dict[clase_id]["render"]()
 
         st.divider()
 
-        # Botón Siguiente con Scroll al inicio
-        curr_idx = ids_clases.index(clase_id)
-        if curr_idx < len(ids_clases) - 1:
-            if st.button(f"Siguiente: {ids_clases[curr_idx+1]} ➡️", use_container_width=True):
-                st.session_state.clase_idx = curr_idx + 1
-                scroll_top() # Sube la página
-                st.rerun()
-        else:
-            st.success("🎉 ¡Eje completado!")
+        c1, spacer, c2 = st.columns([1, 2, 1])
+        with c1:
+            if st.session_state.clase_idx > 0:
+                if st.button("⬅️ Clase Anterior", use_container_width=True):
+                    st.session_state.clase_idx -= 1
+                    scroll_to_top()
+                    st.rerun()
+        with c2:
+            if st.session_state.clase_idx < len(ids_clases) - 1:
+                if st.button("Siguiente Clase ➡️", use_container_width=True):
+                    st.session_state.clase_idx += 1
+                    scroll_to_top()
+                    st.rerun()
+            else:
+                st.success("🎯 ¡Eje completado!")
 
 if __name__ == "__main__":
     main()
