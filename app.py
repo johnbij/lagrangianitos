@@ -1,228 +1,223 @@
 import streamlit as st
-from contenidos import CONTENIDOS
-from datetime import datetime, date
-import os
-import base64
 import pandas as pd
+import plotly.graph_objects as go
+from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
+from contenidos import CONTENIDOS
 
+# ==========================================
 # 1. CONFIGURACIÓN DE PÁGINA
-st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
+# ==========================================
+st.set_page_config(
+    page_title="Lagrangianitos - M1",
+    page_icon="🐉",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+# Conexión a Google Sheets
+conn = st.connection("gsheets", type=GSheetsConnection)
 
 # ==========================================
-# CONEXIÓN A GOOGLE SHEETS
+# 2. FUNCIONES DE DATOS
 # ==========================================
-conn = st.connection("gsheets", type=GSheetsConnection)
 
 def cargar_usuario(user_input, pass_input):
     try:
         df = conn.read(worksheet="Usuarios", ttl=0)
+        # Forzamos string para evitar líos con números en el Excel
         user_row = df[(df['User'].astype(str) == str(user_input)) & 
                       (df['Pass'].astype(str) == str(pass_input))]
         return user_row if not user_row.empty else None
-    except Exception as e:
-        st.error(f"Error de conexión con Sheets: {e}")
+    except Exception:
         return None
 
 def registrar_acceso(usuario):
-    """ Función secreta para el Modo Detective: registra quién entra """
     try:
         ahora = datetime.now()
-        # Intentamos sacar info básica de la sesión (IP info es limitada en Streamlit Cloud)
         nuevo_log = pd.DataFrame([{
             "User": usuario,
             "Fecha": ahora.strftime("%Y-%m-%d"),
             "Hora": ahora.strftime("%H:%M:%S"),
-            "IP_Info": "Acceso Web" # Aquí se podría extender con cabeceras HTTP si es necesario
+            "IP_Info": "Acceso Web"
         }])
-        
-        # Leemos lo existente y concatenamos
         df_existente = conn.read(worksheet="Logs_Acceso", ttl=0)
         df_final = pd.concat([df_existente, nuevo_log], ignore_index=True)
         conn.update(worksheet="Logs_Acceso", data=df_final)
     except:
-        pass # Que no se caiga la app si el log falla
+        pass
 
 # ==========================================
-# CONFIGURACIÓN VISUAL
+# 3. RADAR DE HABILIDADES
 # ==========================================
-LOGO_PATH = "logo.png"
-
-st.markdown("""
-    <style>
-        [data-testid="stSidebar"] {display: none;}
-        [data-testid="stSidebarNav"] {display: none;}
-        .block-container {padding-top: 1rem;}
-        .paes-header {
-            background-color: #0E2439;
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            border-radius: 15px;
-            margin-bottom: 1rem;
-            border-bottom: 4px solid #00F2FF;
+def render_radar(user_email):
+    try:
+        df_progreso = conn.read(worksheet="Progreso", ttl=0)
+        user_prog = df_progreso[(df_progreso['User'] == user_email) & (df_progreso['Completado'] == True)]
+        
+        # Mapeo exacto a las llaves de tu contenidos.py
+        mapping = {
+            'Números': 'Números',
+            'Álgebra': 'Álgebra y Funciones',
+            'Geometría': 'Geometría',
+            'Datos': 'Probabilidad y Estadística'
         }
-        .paes-header h1 { color: white; font-weight: 800; margin: 0.5rem 0; text-transform: uppercase; }
-        .btn-volver button { background-color: #0E2439 !important; color: white !important; font-weight: bold !important; }
-        .admin-box { background-color: #1a1a1a; padding: 20px; border-radius: 10px; border: 2px solid #D32F2F; }
-    </style>
-""", unsafe_allow_html=True)
+        
+        ejes_label = list(mapping.keys())
+        puntajes = []
 
-def render_header():
-    logo_html = ""
-    if os.path.exists(LOGO_PATH):
-        with open(LOGO_PATH, "rb") as f:
-            data = base64.b64encode(f.read()).decode("utf-8")
-            logo_html = f'<img src="data:image/png;base64,{data}" style="max-width:120px;">'
-    else:
-        logo_html = '<h1 style="font-size:3rem; margin:0;">🐉</h1>'
+        for label, llave_real in mapping.items():
+            # Contar total de clases en contenidos.py para este eje
+            subcats = CONTENIDOS["📐 Matemáticas"]["subcategorias"].get(llave_real, {})
+            total_clases = len(subcats)
+            
+            # Contar cuántas ha completado el usuario (basado en el ID de clase)
+            hechas = len(user_prog[user_prog['ID_Clase'].isin(subcats.keys())])
+            
+            progreso = (hechas / total_clases * 100) if total_clases > 0 else 0
+            puntajes.append(progreso)
 
-    st.markdown(f"""
-        <div class="paes-header">
-            {logo_html}
-            <h1>LAGRANGIANITOS</h1>
-            <p style="color: #FFD700; font-style: italic;">"Conceptos reales para puntajes reales"</p>
+        fig = go.Figure()
+        fig.add_trace(go.Scatterpolar(
+            r=puntajes + [puntajes[0]],
+            theta=ejes_label + [ejes_label[0]],
+            fill='toself',
+            fillcolor='rgba(0, 242, 255, 0.3)',
+            line=dict(color='#00F2FF', width=2)
+        ))
+
+        fig.update_layout(
+            polar=dict(
+                bgcolor='rgba(0,0,0,0)',
+                radialaxis=dict(visible=True, range=[0, 100], color="white", gridcolor="rgba(255,255,255,0.1)"),
+                angularaxis=dict(color="white")
+            ),
+            showlegend=False,
+            paper_bgcolor='rgba(0,0,0,0)',
+            height=300,
+            margin=dict(l=40, r=40, t=30, b=30)
+        )
+        st.plotly_chart(fig, use_container_width=True)
+    except:
+        st.info("🎯 Completa tu primera clase para activar el radar.")
+
+# ==========================================
+# 4. INTERFAZ VISUAL (UI)
+# ==========================================
+def header_principal():
+    st.markdown("""
+        <div style="background-color: #0E2439; color: white; padding: 1.5rem; text-align: center; border-radius: 15px; border-bottom: 4px solid #00F2FF; margin-bottom: 20px;">
+            <h1 style="margin:0; font-size: 2.5rem; font-weight:800; letter-spacing: 2px;">LAGRANGIANITOS</h1>
+            <p style="color: #FFD700; font-size: 1.1rem; margin:0;">M1: Conceptos Reales para Puntajes Reales</p>
         </div>
     """, unsafe_allow_html=True)
 
 # ==========================================
-# LÓGICA PRINCIPAL
+# 5. LÓGICA DE NAVEGACIÓN
 # ==========================================
-
 def main():
     if 'logged_in' not in st.session_state: st.session_state.logged_in = False
-    if 'user_data' not in st.session_state: st.session_state.user_data = None
     if 'page' not in st.session_state: st.session_state.page = "Inicio"
-    if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
-    if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
-    if 'clase_idx' not in st.session_state: st.session_state.clase_idx = 0
-    if 'do_scroll' not in st.session_state: st.session_state.do_scroll = False
 
+    # PANTALLA DE LOGIN
     if not st.session_state.logged_in:
-        render_header()
-        col1, col2, col3 = st.columns([0.2, 0.6, 0.2])
+        header_principal()
+        col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
-            st.markdown("### 🔐 Ingreso")
-            user_input = st.text_input("Usuario")
-            pass_input = st.text_input("Contraseña", type="password")
-            if st.button("🚀 Entrar al Hub", use_container_width=True):
-                res = cargar_usuario(user_input, pass_input)
-                if res is not None:
-                    st.session_state.logged_in = True
-                    st.session_state.user_data = res.iloc[0].to_dict()
-                    registrar_acceso(user_input) # Registramos el acceso
-                    st.rerun()
-                else:
-                    st.error("Datos incorrectos.")
+            with st.form("login_form"):
+                st.subheader("🔐 Acceso Alumnos")
+                u_input = st.text_input("Usuario (Email)")
+                p_input = st.text_input("Contraseña", type="password")
+                submit = st.form_submit_button("🚀 INGRESAR", use_container_width=True)
+                
+                if submit:
+                    res = cargar_usuario(u_input, p_input)
+                    if res is not None:
+                        st.session_state.logged_in = True
+                        st.session_state.user_data = res.iloc[0].to_dict()
+                        registrar_acceso(u_input)
+                        st.rerun()
+                    else:
+                        st.error("Credenciales incorrectas. Revisa mayúsculas/minúsculas.")
+
+    # PANTALLA POST-LOGIN
     else:
-        # PÁGINA: INICIO
+        user = st.session_state.user_data
+        
+        # --- PÁGINA: INICIO ---
         if st.session_state.page == "Inicio":
-            render_header()
-            u = st.session_state.user_data
-            st.info(f"👋 Hola **{u['User']}** | ✨ XP: {u['XP']} | 🏆 Nivel: {u['Nivel']}")
+            header_principal()
+            col_izq, col_der = st.columns([0.6, 0.4])
             
-            # --- SECCIÓN ADMIN: MODO DETECTIVE ---
-            if u['User'].lower() == 'admin':
-                with st.expander("🕵️‍♂️ MODO DETECTIVE (Solo Admin)"):
-                    st.markdown('<div class="admin-box">', unsafe_allow_html=True)
-                    if st.button("Revisar Logs de Acceso", use_container_width=True):
-                        st.session_state.page = "Admin_Detective"
-                        st.rerun()
-                    st.markdown('</div>', unsafe_allow_html=True)
-
-            st.subheader("📚 Contenidos M1")
-            materias = list(CONTENIDOS.keys())
-            cols = st.columns(2)
-            for i, m in enumerate(materias):
-                with cols[i % 2]:
-                    if st.button(f"📘 {m}", use_container_width=True, key=f"btn_{m}"):
-                        st.session_state.materia_sel = m
-                        st.session_state.eje_sel = list(CONTENIDOS[m]["subcategorias"].keys())[0]
-                        st.session_state.clase_idx = 0
+            with col_izq:
+                st.title(f"¡Hola, {user['User']}!")
+                st.markdown(f"**Rango:** {user['Nivel']} | **Puntos de Experiencia:** {user['XP']} XP")
+                st.divider()
+                
+                st.subheader("📚 Elige tu ruta de hoy:")
+                for materia in CONTENIDOS.keys():
+                    if st.button(f"{materia}", use_container_width=True):
+                        st.session_state.materia_sel = materia
                         st.session_state.page = "Visor"
-                        st.session_state.do_scroll = True
+                        st.rerun()
+                
+                if str(user['User']).lower() == 'admin':
+                    st.divider()
+                    if st.button("🕵️‍♂️ MODO DETECTIVE", type="secondary", use_container_width=True):
+                        st.session_state.page = "Admin"
                         st.rerun()
 
-            st.divider()
-            if st.button("🚪 Cerrar Sesión"):
-                for key in list(st.session_state.keys()): del st.session_state[key]
-                st.rerun()
+            with col_der:
+                st.markdown("<h4 style='text-align:center;'>Tu Dominio del Universo PAES</h4>", unsafe_allow_html=True)
+                render_radar(user['User'])
+                
+                st.divider()
+                if st.button("🚪 Cerrar Sesión", use_container_width=True):
+                    st.session_state.logged_in = False
+                    st.rerun()
 
-        # PÁGINA: MODO DETECTIVE (ADMIN)
-        elif st.session_state.page == "Admin_Detective":
-            st.title("🕵️‍♂️ Modo Detective: Rastreo de Pillos")
-            if st.button("⬅️ Volver al Inicio"):
+        # --- PÁGINA: VISOR DE CLASES ---
+        elif st.session_state.page == "Visor":
+            if st.button("⬅️ Volver al Hub"):
+                st.session_state.page = "Inicio"
+                st.rerun()
+            
+            m_sel = st.session_state.materia_sel
+            st.header(f"Explorando {m_sel}")
+            
+            # Selector de Eje y Clase
+            ejes = list(CONTENIDOS[m_sel]["subcategorias"].keys())
+            col_eje, col_clase = st.columns(2)
+            
+            with col_eje:
+                eje_sel = st.selectbox("🎯 Selecciona un Eje:", ejes)
+            
+            clases_opciones = CONTENIDOS[m_sel]["subcategorias"][eje_sel]
+            with col_clase:
+                clase_id = st.selectbox("📖 Selecciona la Clase:", 
+                                      list(clases_opciones.keys()), 
+                                      format_func=lambda x: clases_opciones[x]["label"])
+            
+            st.divider()
+            
+            # Renderizar el contenido de la clase
+            if "render" in clases_opciones[clase_id]:
+                clases_opciones[clase_id]["render"]()
+            else:
+                st.info("Esta clase está en preparación. ¡Vuelve pronto!")
+
+        # --- PÁGINA: ADMIN DETECTIVE ---
+        elif st.session_state.page == "Admin":
+            st.title("🕵️‍♂️ Panel de Control: Rastreo de Pillos")
+            if st.button("🏠 Volver al Inicio"):
                 st.session_state.page = "Inicio"
                 st.rerun()
             
             try:
                 df_logs = conn.read(worksheet="Logs_Acceso", ttl=0)
-                st.write("Últimos ingresos a la plataforma:")
                 st.dataframe(df_logs.sort_index(ascending=False), use_container_width=True)
-                
-                # Alerta básica de sospecha
-                conteo = df_logs['User'].value_counts()
-                st.subheader("🚩 Frecuencia de acceso por usuario")
-                st.bar_chart(conteo)
             except:
-                st.warning("No se encontró la pestaña 'Logs_Acceso' o está vacía.")
-
-        # PÁGINA: VISOR DE CLASES
-        elif st.session_state.page == "Visor":
-            if st.session_state.do_scroll:
-                st.markdown('<a name="top-anchor"></a>', unsafe_allow_html=True)
-                st.markdown('<meta http-equiv="refresh" content="0;url=#top-anchor">', unsafe_allow_html=True)
-                st.session_state.do_scroll = False
-            
-            if st.button("🏠 VOLVER AL MENÚ", use_container_width=True):
-                st.session_state.page = "Inicio"
-                st.rerun()
-
-            st.divider()
-            m_data = CONTENIDOS[st.session_state.materia_sel]
-            ejes = list(m_data["subcategorias"].keys())
-            idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
-            eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
-
-            if eje_sel != st.session_state.eje_sel:
-                st.session_state.eje_sel = eje_sel
-                st.session_state.clase_idx = 0
-                st.session_state.do_scroll = True
-                st.rerun()
-
-            clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
-            ids_clases = list(clases_dict.keys())
-            st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
-
-            clase_id = st.selectbox(
-                "📖 Clase:", ids_clases,
-                index=st.session_state.clase_idx,
-                format_func=lambda x: clases_dict[x]["label"]
-            )
-
-            if ids_clases.index(clase_id) != st.session_state.clase_idx:
-                st.session_state.clase_idx = ids_clases.index(clase_id)
-                st.session_state.do_scroll = True
-                st.rerun()
-
-            st.divider()
-            if "render" in clases_dict[clase_id]:
-                clases_dict[clase_id]["render"]()
-
-            st.divider()
-            c1, c2 = st.columns(2)
-            with c1:
-                if st.session_state.clase_idx > 0:
-                    if st.button("⬅️ Anterior", use_container_width=True):
-                        st.session_state.clase_idx -= 1
-                        st.session_state.do_scroll = True
-                        st.rerun()
-            with c2:
-                if st.session_state.clase_idx < len(ids_clases) - 1:
-                    if st.button("Siguiente ➡️", use_container_width=True):
-                        st.session_state.clase_idx += 1
-                        st.session_state.do_scroll = True
-                        st.rerun()
+                st.error("No se encontró la pestaña 'Logs_Acceso'.")
 
 if __name__ == "__main__":
     main()
