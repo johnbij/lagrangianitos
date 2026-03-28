@@ -18,43 +18,20 @@ st.markdown("""
         [data-testid="stSidebar"] {display: none;}
         [data-testid="stSidebarNav"] {display: none;}
         .block-container {padding-top: 1rem;}
-        
         .paes-header {
-            background-color: #0E2439;
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            border-radius: 15px;
-            margin-bottom: 1rem;
+            background-color: #0E2439; color: white; padding: 1.5rem;
+            text-align: center; border-radius: 15px; margin-bottom: 1rem;
         }
-        
-        .paes-header img {
-            max-width: 120px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
+        .paes-header img { max-width: 120px; height: auto; margin-bottom: 10px; }
         .paes-header h1 {
-            color: white; 
-            font-weight: 800; 
-            font-size: clamp(1.2rem, 7vw, 2.5rem);
-            margin: 0.5rem 0;
-            text-transform: uppercase;
+            color: white; font-weight: 800; font-size: clamp(1.2rem, 7vw, 2.5rem);
+            margin: 0.5rem 0; text-transform: uppercase;
         }
-        
         .paes-header .lema { font-style: italic; color: #FFD700; font-size: 0.9rem; }
-        
         .contador-timer {
-            background-color: #D32F2F;
-            color: white;
-            padding: 0.8rem;
-            text-align: center;
-            border-radius: 10px;
-            margin-top: -0.5rem;
-            margin-bottom: 2rem;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-around;
+            background-color: #D32F2F; color: white; padding: 0.8rem;
+            text-align: center; border-radius: 10px; margin-top: -0.5rem;
+            margin-bottom: 2rem; font-weight: bold; display: flex; justify-content: space-around;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -64,13 +41,11 @@ st.markdown("""
 # ==========================================
 
 def scroll_to_top():
-    """Solo ejecuta el scroll si hay una clase activa para evitar el error de la captura."""
-    if st.session_state.get('materia_sel') and st.session_state.get('eje_sel'):
-        unique_key = f"scroll_{st.session_state.clase_idx}_{st.session_state.eje_sel}"
-        st.components.v1.html(
-            f"<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
-            height=0, key=unique_key
-        )
+    """Versión simplificada que no falla porque no usa keys dinámicas."""
+    st.components.v1.html(
+        "<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
+        height=0
+    )
 
 def render_header():
     logo_html = ""
@@ -105,7 +80,7 @@ def render_timer():
 # ==========================================
 
 def main():
-    # Inicializar estados de sesión
+    # Inicialización segura
     if 'logged_in' not in st.session_state: st.session_state.logged_in = False
     if 'page' not in st.session_state: st.session_state.page = "Inicio"
     if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
@@ -147,9 +122,6 @@ def main():
                 st.rerun()
 
         elif st.session_state.page == "Visor":
-            # EL SCROLL SE LLAMA AQUÍ, CUANDO YA HAY CLASES
-            scroll_to_top()
-            
             if st.button("🏠 Volver al Menú", use_container_width=True):
                 st.session_state.page = "Inicio"
                 st.rerun()
@@ -158,7 +130,6 @@ def main():
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes = list(m_data["subcategorias"].keys())
             
-            # Selector de Eje
             idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
             eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
             
@@ -167,14 +138,12 @@ def main():
                 st.session_state.clase_idx = 0
                 st.rerun()
 
-            # Selector de Clase
             clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
             ids_clases = list(clases_dict.keys())
             st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
             
             clase_id = st.selectbox(
-                "📖 Clase:", ids_clases, 
-                index=st.session_state.clase_idx,
+                "📖 Clase:", ids_clases, index=st.session_state.clase_idx,
                 format_func=lambda x: clases_dict[x]["label"]
             )
             
@@ -184,7 +153,7 @@ def main():
 
             st.divider()
             
-            # MOSTRAR CONTENIDO
+            # --- RENDER DE CLASE ---
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
             
@@ -200,6 +169,9 @@ def main():
                     if st.button("Siguiente ➡️"):
                         st.session_state.clase_idx += 1
                         st.rerun()
+            
+            # SCROLL AL FINAL: Solo después de que todo se dibujó
+            scroll_to_top()
 
 if __name__ == "__main__":
     main()
