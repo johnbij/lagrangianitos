@@ -64,7 +64,6 @@ st.markdown("""
 # ==========================================
 
 def scroll_to_top():
-    """Scroll simple para evitar el error de la captura."""
     st.components.v1.html(
         "<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
         height=0
@@ -122,7 +121,6 @@ def main():
                     st.rerun()
                 else: st.error("Acceso denegado")
     else:
-        # --- PÁGINA INICIO ---
         if st.session_state.page == "Inicio":
             render_header()
             render_timer()
@@ -144,16 +142,14 @@ def main():
                 st.session_state.logged_in = False
                 st.rerun()
 
-        # --- PÁGINA VISOR ---
         elif st.session_state.page == "Visor":
-            # BOTÓN DE VOLVER (ARRIBA DEL TODO)
+            # BOTÓN DE VOLVER (AQUÍ ESTÁ, NO SE MUEVE)
             if st.button("🏠 VOLVER AL MENÚ", use_container_width=True):
                 st.session_state.page = "Inicio"
                 st.rerun()
 
             st.divider()
             
-            # Datos de la materia
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes = list(m_data["subcategorias"].keys())
             
@@ -182,13 +178,11 @@ def main():
 
             st.divider()
             
-            # Render del contenido
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
             
             st.divider()
             
-            # Botones de navegación inferior
             c1, c2 = st.columns(2)
             with c1:
                 if st.session_state.clase_idx > 0:
@@ -201,7 +195,6 @@ def main():
                         st.session_state.clase_idx += 1
                         st.rerun()
             
-            # Scroll al final
             scroll_to_top()
 
 if __name__ == "__main__":
