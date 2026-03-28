@@ -56,12 +56,6 @@ st.markdown("""
             display: flex;
             justify-content: space-around;
         }
-        
-        /* Estilo para el botón de volver */
-        .stButton button[kind="secondary"] {
-            background-color: #f0f2f6;
-            border: 1px solid #dcdfe6;
-        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -70,7 +64,7 @@ st.markdown("""
 # ==========================================
 
 def scroll_to_top():
-    """Scroll simple sin keys para evitar errores de renderizado."""
+    """Scroll simple para evitar el error de la captura."""
     st.components.v1.html(
         "<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
         height=0
@@ -152,66 +146,62 @@ def main():
 
         # --- PÁGINA VISOR ---
         elif st.session_state.page == "Visor":
-            # Botón de volver prominente al inicio del visor
-            if st.button("⬅️ VOLVER AL MENÚ PRINCIPAL", use_container_width=True):
+            # BOTÓN DE VOLVER (ARRIBA DEL TODO)
+            if st.button("🏠 VOLVER AL MENÚ", use_container_width=True):
                 st.session_state.page = "Inicio"
-                st.session_state.materia_sel = None
-                st.session_state.eje_sel = None
-                st.session_state.clase_idx = 0
                 st.rerun()
 
             st.divider()
             
+            # Datos de la materia
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes = list(m_data["subcategorias"].keys())
             
             # Selectores Desplegables
-            col_e, col_c = st.columns(2)
+            idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
+            eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
             
-            with col_e:
-                idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
-                eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
-                if eje_sel != st.session_state.eje_sel:
-                    st.session_state.eje_sel = eje_sel
-                    st.session_state.clase_idx = 0
-                    st.rerun()
+            if eje_sel != st.session_state.eje_sel:
+                st.session_state.eje_sel = eje_sel
+                st.session_state.clase_idx = 0
+                st.rerun()
 
-            with col_c:
-                clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
-                ids_clases = list(clases_dict.keys())
-                st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
-                
-                clase_id = st.selectbox(
-                    "📖 Clase:", ids_clases, 
-                    index=st.session_state.clase_idx,
-                    format_func=lambda x: clases_dict[x]["label"]
-                )
-                if ids_clases.index(clase_id) != st.session_state.clase_idx:
-                    st.session_state.clase_idx = ids_clases.index(clase_id)
-                    st.rerun()
+            clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
+            ids_clases = list(clases_dict.keys())
+            st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
+            
+            clase_id = st.selectbox(
+                "📖 Clase:", ids_clases, 
+                index=st.session_state.clase_idx,
+                format_func=lambda x: clases_dict[x]["label"]
+            )
+            
+            if ids_clases.index(clase_id) != st.session_state.clase_idx:
+                st.session_state.clase_idx = ids_clases.index(clase_id)
+                st.rerun()
 
             st.divider()
             
-            # Contenido de la clase
+            # Render del contenido
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
             
             st.divider()
             
-            # Navegación entre clases
+            # Botones de navegación inferior
             c1, c2 = st.columns(2)
             with c1:
                 if st.session_state.clase_idx > 0:
-                    if st.button("⬅️ Clase Anterior", use_container_width=True):
+                    if st.button("⬅️ Anterior", use_container_width=True):
                         st.session_state.clase_idx -= 1
                         st.rerun()
             with c2:
                 if st.session_state.clase_idx < len(ids_clases) - 1:
-                    if st.button("Siguiente Clase ➡️", use_container_width=True):
+                    if st.button("Siguiente ➡️", use_container_width=True):
                         st.session_state.clase_idx += 1
                         st.rerun()
             
-            # Ejecutar scroll después de renderizar contenido
+            # Scroll al final
             scroll_to_top()
 
 if __name__ == "__main__":
