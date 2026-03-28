@@ -114,6 +114,7 @@ def main():
     if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
     if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
     if 'clase_idx' not in st.session_state: st.session_state.clase_idx = 0
+    if 'do_scroll' not in st.session_state: st.session_state.do_scroll = False
 
     if not st.session_state.logged_in:
         render_header()
@@ -143,6 +144,7 @@ def main():
                         st.session_state.eje_sel = list(CONTENIDOS[m]["subcategorias"].keys())[0]
                         st.session_state.clase_idx = 0
                         st.session_state.page = "Visor"
+                        st.session_state.do_scroll = True
                         st.rerun()
             
             st.divider()
@@ -151,7 +153,11 @@ def main():
                 st.rerun()
 
         elif st.session_state.page == "Visor":
-            scroll_to_top()
+
+            # SCROLL AL INICIO si viene de cambio de clase o entrada nueva
+            if st.session_state.do_scroll:
+                scroll_to_top()
+                st.session_state.do_scroll = False
 
             # BOTÓN DE VOLVER AL MENÚ
             st.markdown('<div class="btn-volver">', unsafe_allow_html=True)
@@ -165,13 +171,13 @@ def main():
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes = list(m_data["subcategorias"].keys())
             
-            # Selectores Desplegables
             idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
             eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
             
             if eje_sel != st.session_state.eje_sel:
                 st.session_state.eje_sel = eje_sel
                 st.session_state.clase_idx = 0
+                st.session_state.do_scroll = True
                 st.rerun()
 
             clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
@@ -186,6 +192,7 @@ def main():
             
             if ids_clases.index(clase_id) != st.session_state.clase_idx:
                 st.session_state.clase_idx = ids_clases.index(clase_id)
+                st.session_state.do_scroll = True
                 st.rerun()
 
             st.divider()
@@ -200,13 +207,13 @@ def main():
                 if st.session_state.clase_idx > 0:
                     if st.button("⬅️ Anterior", use_container_width=True):
                         st.session_state.clase_idx -= 1
-                        scroll_to_top()
+                        st.session_state.do_scroll = True
                         st.rerun()
             with c2:
                 if st.session_state.clase_idx < len(ids_clases) - 1:
                     if st.button("Siguiente ➡️", use_container_width=True):
                         st.session_state.clase_idx += 1
-                        scroll_to_top()
+                        st.session_state.do_scroll = True
                         st.rerun()
 
 if __name__ == "__main__":
