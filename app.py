@@ -11,19 +11,18 @@ try:
     from contenidos import CONTENIDOS
     from styles import aplicar_estilos
     from logros import registrar_clase
-    from visitas import registrar_visita, obtener_visitas
+    from visitas import registrar_visita
 except ImportError:
     from Contenidos import CONTENIDOS
     from Styles import aplicar_estilos
     from Logros import registrar_clase
-    from Visitas import registrar_visita, obtener_visitas
+    from Visitas import registrar_visita
 
 # =============================================================================
 # 1. CONFIGURACIÓN Y SESIÓN (COOKIES)
 # =============================================================================
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
 
-# Cargar el YAML que ya tienes configurado con 30 días
 try:
     with open('config.yaml') as file:
         config = yaml.load(file, Loader=SafeLoader)
@@ -31,15 +30,14 @@ except FileNotFoundError:
     st.error("No se encontró config.yaml")
     st.stop()
 
-# Inicializar autenticador con los parámetros de tu YAML
+# Inicialización con 30 días de sesión desde tu YAML
 authenticator = stauth.Authenticate(
     config['credentials'],
     config['cookie']['name'],
     config['cookie']['key'],
-    cookie_expiry_days=config['cookie']['expiry_days']
+    config['cookie']['expiry_days']
 )
 
-# Login en pantalla principal
 authenticator.login(location='main')
 
 # =============================================================================
@@ -47,111 +45,77 @@ authenticator.login(location='main')
 # =============================================================================
 if st.session_state["authentication_status"]:
     
-    # Estados de memoria
     if 'menu_actual' not in st.session_state: st.session_state.menu_actual = "Bienvenida"
     if 'eje_actual'  not in st.session_state: st.session_state.eje_actual = None
 
-    # Registrar visita (opcional, si tienes el módulo visitas.py)
-    try:
-        if 'visita_registrada' not in st.session_state:
-            st.session_state.visita_registrada = True
-            registrar_visita()
-    except:
-        pass
-
     aplicar_estilos()
 
-    # --- SECCIÓN: BIENVENIDA ---
+    # --- PANTALLA BIENVENIDA ---
     if st.session_state.menu_actual == "Bienvenida":
         st.markdown("<h1 style='text-align:center;'>🐉 Lagrangianitos</h1>", unsafe_allow_html=True)
-        st.write(f"Hola **{st.session_state['name']}**, bienvenido al entrenamiento.")
+        st.write(f"Hola **{st.session_state['name']}**, bienvenido.")
         
         if st.button("🚀 Entrar al Dashboard", type="primary", use_container_width=True):
-            st.session_state.menu_actual = "Dashboard"
-            st.rerun()
+            st.session_state.menu_actual = "Dashboard"; st.rerun()
             
         if st.button("📂 Biblioteca de PDFs", use_container_width=True):
-            st.session_state.menu_actual = "Biblioteca"
-            st.rerun()
+            st.session_state.menu_actual = "Biblioteca"; st.rerun()
 
-    # --- SECCIÓN: DASHBOARD (MAPEO DE EMOJIS SEGÚN CAPTURA) ---
+    # --- DASHBOARD (MOTOR DE CONTENIDOS) ---
     elif st.session_state.menu_actual == "Dashboard":
         if st.button("🔙 Volver al Inicio"):
-            st.session_state.menu_actual = "Bienvenida"
-            st.session_state.eje_actual = None
-            st.rerun()
+            st.session_state.menu_actual = "Bienvenida"; st.session_state.eje_actual = None; st.rerun()
 
         if st.session_state.eje_actual is None:
-            st.markdown("### 🎯 Selecciona tu Eje")
-            c1, c2 = st.columns(2)
-            
-            with c1:
-                # LLAVES EXACTAS DE TU CONTENIDOS.PY (Vistas en el debug azul)
-                if st.button("🔢 Números", use_container_width=True):
-                    st.session_state.eje_actual = "1️⃣2️⃣3️⃣ Números"; st.rerun()
-                if st.button("📐 Geometría", use_container_width=True):
-                    st.session_state.eje_actual = "📐 Geometría"; st.rerun()
-                if st.button("⚛️ Física", use_container_width=True):
-                    st.session_state.eje_actual = "⚛️ Física"; st.rerun()
-            with c2:
-                if st.button("📉 Álgebra", use_container_width=True):
-                    st.session_state.eje_actual = "📉 Álgebra"; st.rerun()
-                if st.button("📊 Datos y Azar", use_container_width=True):
-                    st.session_state.eje_actual = "📊 Datos y Azar"; st.rerun()
-                if st.button("🧬 Biología/Química", use_container_width=True):
-                    st.session_state.eje_actual = "🔬 Biología"; st.rerun()
-
+            st.subheader("🎯 Selecciona tu Eje")
+            for eje in CONTENIDOS.keys():
+                if st.button(eje, use_container_width=True):
+                    st.session_state.eje_actual = eje; st.rerun()
         else:
             eje_key = st.session_state.eje_actual
-            if st.button("🔙 Cambiar de Eje"):
+            if st.button(f"🔙 Cambiar de Eje"):
                 st.session_state.eje_actual = None; st.rerun()
             
             st.title(f"📍 {eje_key}")
             
-            # Verificación del Diccionario
+            # Navegación en la estructura: CONTENIDOS[eje]["subcategorias"]
             if eje_key in CONTENIDOS:
-                unidades = list(CONTENIDOS[eje_key].keys())
-                u_sel = st.selectbox("Unidad:", ["--- Seleccionar ---"] + unidades)
+                subcats = CONTENIDOS[eje_key].get("subcategorias", {})
                 
-                if u_sel != "--- Seleccionar ---":
-                    clases = CONTENIDOS[eje_key][u_sel]
-                    c_sel = st.selectbox("Clase:", ["--- Seleccionar ---"] + list(clases.keys()))
+                if subcats:
+                    unidades = list(subcats.keys())
+                    u_sel = st.selectbox("📚 Unidad:", ["---"] + unidades)
                     
-                    if c_sel != "--- Seleccionar ---":
-                        data = clases[c_sel]
-                        st.divider()
-                        st.header(c_sel)
+                    if u_sel != "---":
+                        clases_dict = subcats[u_sel]
+                        mapeo = {v["label"]: k for k, v in clases_dict.items()}
+                        c_label = st.selectbox("📖 Clase:", ["---"] + list(mapeo.keys()))
                         
-                        # Mostrar Video
-                        if "video" in data and data["video"]:
-                            st.video(data["video"])
-                        
-                        # Mostrar Descripción
-                        if "descripcion" in data:
-                            st.write(data["descripcion"])
+                        if c_label != "---":
+                            clase_id = mapeo[c_label]
+                            clase_data = clases_dict[clase_id]
                             
-                        # Registrar Progreso
-                        if st.button("✅ Marcar como completada"):
-                            registrar_clase(st.session_state['username'], eje_key, u_sel, c_sel)
-                            st.balloons()
+                            st.divider()
+                            # EJECUCIÓN DEL RENDER
+                            if "render" in clase_data:
+                                clase_data["render"]()
+                                
+                            if st.button("✅ Terminar Clase"):
+                                registrar_clase(st.session_state['username'], eje_key, u_sel, c_label)
+                                st.balloons()
             else:
-                st.error(f"No encontré el eje '{eje_key}'")
-                st.info(f"Llaves en tu archivo: {list(CONTENIDOS.keys())}")
+                st.error("Error de carga.")
 
-    # --- SECCIÓN: BIBLIOTECA ---
+    # --- BIBLIOTECA ---
     elif st.session_state.menu_actual == "Biblioteca":
         if st.button("🔙 Volver"):
             st.session_state.menu_actual = "Bienvenida"; st.rerun()
-        st.title("📂 Biblioteca")
-        st.write("Aquí aparecerán tus archivos PDF.")
+        st.title("📂 PDFs")
 
-    # --- PIE DE PÁGINA ---
     st.divider()
     authenticator.logout('Cerrar Sesión', 'main')
 
-# Manejo de Login Fallido
 elif st.session_state["authentication_status"] is False:
-    st.error('Usuario o contraseña incorrectos.')
+    st.error('Usuario/Contraseña incorrectos.')
 elif st.session_state["authentication_status"] is None:
-    st.markdown("<h2 style='text-align:center;'>🐉 Lagrangianitos Hub</h2>", unsafe_allow_html=True)
-    st.info("Ingresa tus credenciales para acceder.")
+    st.markdown("<h2 style='text-align:center;'>🐉 Lagrangianitos</h2>", unsafe_allow_html=True)
