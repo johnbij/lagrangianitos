@@ -2,43 +2,36 @@ import streamlit as st
 from contenidos import CONTENIDOS
 from datetime import datetime, date
 
-# 1. CONFIGURACIÓN DE PÁGINA
+# 1. CONFIGURACIÓN DE PÁGINA (Debe ser lo primero)
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
 # ==========================================
-# CONFIGURACIÓN VISUAL (LOGO Y FECHA)
+# CONFIGURACIÓN VISUAL
 # ==========================================
-LOGO_URL = "https://raw.githubusercontent.com/tucarpeta/tu-repo/main/logo_dragon.png" 
 FECHA_PAES = date(2026, 11, 20) 
 
-# CSS para ocultar sidebar y arreglar el responsive del título
-st.markdown(f"""
+st.markdown("""
     <style>
-        [data-testid="stSidebar"] {{display: none;}}
-        [data-testid="stSidebarNav"] {{display: none;}}
-        .block-container {{padding-top: 1rem;}}
-
-        .paes-header {{
+        [data-testid="stSidebar"] {display: none;}
+        [data-testid="stSidebarNav"] {display: none;}
+        .block-container {padding-top: 1rem;}
+        .paes-header {
             background-color: #0E2439;
             color: white;
             padding: 1.5rem;
             text-align: center;
             border-radius: 15px;
             margin-bottom: 1rem;
-        }}
-        
-        .paes-header h1 {{
+        }
+        .paes-header h1 {
             color: white; 
             font-weight: 800; 
-            font-size: clamp(1.2rem, 7vw, 2.5rem); /* Evita que se corte el texto */
+            font-size: clamp(1.2rem, 7vw, 2.5rem);
             margin: 0.5rem 0;
             text-transform: uppercase;
-        }}
-        
-        .paes-header .lema {{ font-style: italic; color: #FFD700; font-size: 0.9rem; }}
-        .paes-header .info {{ font-size: 0.8rem; color: #CCCCCC; }}
-
-        .contador-timer {{
+        }
+        .paes-header .lema { font-style: italic; color: #FFD700; font-size: 0.9rem; }
+        .contador-timer {
             background-color: #D32F2F;
             color: white;
             padding: 0.8rem;
@@ -49,7 +42,7 @@ st.markdown(f"""
             font-weight: bold;
             display: flex;
             justify-content: space-around;
-        }}
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -58,12 +51,13 @@ st.markdown(f"""
 # ==========================================
 
 def scroll_to_top():
-    """JS para subir al inicio al cambiar de clase."""
-    unique_key = f"scroll_{st.session_state.get('clase_idx', 0)}_{st.session_state.get('eje_sel', 'none')}"
-    st.components.v1.html(
-        f"<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
-        height=0, key=unique_key
-    )
+    # SEGURO: Solo intentar scroll si existen las variables en session_state
+    if 'clase_idx' in st.session_state and 'eje_sel' in st.session_state:
+        unique_key = f"scroll_{st.session_state.clase_idx}_{st.session_state.eje_sel}"
+        st.components.v1.html(
+            f"<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
+            height=0, key=unique_key
+        )
 
 def render_header():
     st.markdown(f"""
@@ -88,104 +82,109 @@ def render_timer():
 # LÓGICA DE NAVEGACIÓN
 # ==========================================
 
+# Inicializar estados de sesión
 if 'logged_in' not in st.session_state: st.session_state.logged_in = False
 if 'page' not in st.session_state: st.session_state.page = "Inicio"
 if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
 if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
 if 'clase_idx' not in st.session_state: st.session_state.clase_idx = 0
 
-if not st.session_state.logged_in:
-    render_header()
-    col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
-    with col2:
-        user = st.text_input("Usuario")
-        password = st.text_input("Contraseña", type="password")
-        if st.button("Ingresar", use_container_width=True):
-            if user == "admin" and password == "admin":
-                st.session_state.logged_in = True
-                st.rerun()
-            else: st.error("Acceso denegado")
-else:
-    # --- PÁGINA INICIO ---
-    if st.session_state.page == "Inicio":
+def main():
+    if not st.session_state.logged_in:
         render_header()
-        render_timer()
-        st.subheader("📚 Contenidos del curso M1")
-        
-        materias = list(CONTENIDOS.keys())
-        cols = st.columns(2)
-        for i, m in enumerate(materias):
-            with cols[i % 2]:
-                if st.button(f"📘 {m}", use_container_width=True):
-                    st.session_state.materia_sel = m
-                    st.session_state.eje_sel = list(CONTENIDOS[m]["subcategorias"].keys())[0]
-                    st.session_state.clase_idx = 0
-                    st.session_state.page = "Visor"
+        col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
+        with col2:
+            st.markdown("### Ingreso")
+            user = st.text_input("Usuario")
+            password = st.text_input("Contraseña", type="password")
+            if st.button("Ingresar", use_container_width=True):
+                if user == "admin" and password == "admin":
+                    st.session_state.logged_in = True
                     st.rerun()
-        
-        st.divider()
-        if st.button("🚪 Salir"):
-            st.session_state.logged_in = False
-            st.rerun()
+                else:
+                    st.error("Acceso denegado")
+    else:
+        # --- PÁGINA INICIO ---
+        if st.session_state.page == "Inicio":
+            render_header()
+            render_timer()
+            st.subheader("📚 Contenidos del curso M1")
+            
+            materias = list(CONTENIDOS.keys())
+            cols = st.columns(2)
+            for i, m in enumerate(materias):
+                with cols[i % 2]:
+                    if st.button(f"📘 {m}", use_container_width=True, key=f"btn_{m}"):
+                        st.session_state.materia_sel = m
+                        st.session_state.eje_sel = list(CONTENIDOS[m]["subcategorias"].keys())[0]
+                        st.session_state.clase_idx = 0
+                        st.session_state.page = "Visor"
+                        st.rerun()
+            
+            st.divider()
+            if st.button("🚪 Salir"):
+                st.session_state.logged_in = False
+                st.rerun()
 
-    # --- PÁGINA VISOR (CON LOS SELECTORES QUE FALTABAN) ---
-    elif st.session_state.page == "Visor":
-        scroll_to_top()
-        
-        if st.button("🏠 Volver al Menú", use_container_width=True):
-            st.session_state.page = "Inicio"
-            st.rerun()
+        # --- PÁGINA VISOR ---
+        elif st.session_state.page == "Visor":
+            # Llamamos al scroll aquí, ya con sesión iniciada
+            scroll_to_top()
+            
+            if st.button("🏠 Volver al Menú", use_container_width=True):
+                st.session_state.page = "Inicio"
+                st.rerun()
 
-        st.divider()
-        
-        # DATOS DE LA MATERIA
-        m_data = CONTENIDOS[st.session_state.materia_sel]
-        ejes = list(m_data["subcategorias"].keys())
-        
-        # 1. SELECTOR DE EJE (DESPLEGABLE)
-        idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
-        eje_sel = st.selectbox("🎯 Selecciona Eje Temático:", ejes, index=idx_eje)
-        
-        if eje_sel != st.session_state.eje_sel:
-            st.session_state.eje_sel = eje_sel
-            st.session_state.clase_idx = 0
-            st.rerun()
+            st.divider()
+            
+            m_data = CONTENIDOS[st.session_state.materia_sel]
+            ejes = list(m_data["subcategorias"].keys())
+            
+            # Selector de Eje
+            idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
+            eje_sel = st.selectbox("🎯 Eje Temático:", ejes, index=idx_eje)
+            
+            if eje_sel != st.session_state.eje_sel:
+                st.session_state.eje_sel = eje_sel
+                st.session_state.clase_idx = 0
+                st.rerun()
 
-        # 2. SELECTOR DE CLASE (DESPLEGABLE)
-        clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
-        ids_clases = list(clases_dict.keys())
-        
-        # Validar índice
-        st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
-        
-        clase_id = st.selectbox(
-            "📖 Selecciona Clase:", 
-            ids_clases, 
-            index=st.session_state.clase_idx,
-            format_func=lambda x: clases_dict[x]["label"]
-        )
-        
-        if ids_clases.index(clase_id) != st.session_state.clase_idx:
-            st.session_state.clase_idx = ids_clases.index(clase_id)
-            st.rerun()
+            # Selector de Clase
+            clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
+            ids_clases = list(clases_dict.keys())
+            st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
+            
+            clase_id = st.selectbox(
+                "📖 Clase:", 
+                ids_clases, 
+                index=st.session_state.clase_idx,
+                format_func=lambda x: clases_dict[x]["label"]
+            )
+            
+            if ids_clases.index(clase_id) != st.session_state.clase_idx:
+                st.session_state.clase_idx = ids_clases.index(clase_id)
+                st.rerun()
 
-        st.divider()
+            st.divider()
 
-        # RENDER DEL CONTENIDO
-        if "render" in clases_dict[clase_id]:
-            clases_dict[clase_id]["render"]()
-        
-        st.divider()
+            # Render de la clase
+            if "render" in clases_dict[clase_id]:
+                clases_dict[clase_id]["render"]()
+            
+            st.divider()
 
-        # BOTONES NAVEGACIÓN INFERIOR
-        c1, c2 = st.columns(2)
-        with c1:
-            if st.session_state.clase_idx > 0:
-                if st.button("⬅️ Anterior"):
-                    st.session_state.clase_idx -= 1
-                    st.rerun()
-        with c2:
-            if st.session_state.clase_idx < len(ids_clases) - 1:
-                if st.button("Siguiente ➡️"):
-                    st.session_state.clase_idx += 1
-                    st.rerun()
+            # Navegación inferior
+            c1, c2 = st.columns(2)
+            with c1:
+                if st.session_state.clase_idx > 0:
+                    if st.button("⬅️ Anterior"):
+                        st.session_state.clase_idx -= 1
+                        st.rerun()
+            with c2:
+                if st.session_state.clase_idx < len(ids_clases) - 1:
+                    if st.button("Siguiente ➡️"):
+                        st.session_state.clase_idx += 1
+                        st.rerun()
+
+if __name__ == "__main__":
+    main()
