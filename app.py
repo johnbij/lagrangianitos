@@ -22,7 +22,7 @@ def login():
         user = st.text_input("Usuario")
         password = st.text_input("Contraseña", type="password")
         if st.button("Ingresar", use_container_width=True):
-            # ACCESO PARA TI: admin / admin
+            # Credenciales: admin / admin
             if user == "admin" and password == "admin":
                 st.session_state.logged_in = True
                 st.rerun()
@@ -62,12 +62,15 @@ def main():
     if st.session_state.page == "Inicio":
         st.markdown("<h1 style='text-align:center;'>📚 Entrenamiento M1</h1>", unsafe_allow_html=True)
         materias = list(CONTENIDOS.keys())
+        # Creamos columnas para las materias
         cols = st.columns(len(materias))
         for i, materia in enumerate(materias):
             with cols[i]:
-                if st.button(materia, use_container_width=True, height=100):
+                # ELIMINADO EL PARÁMETRO HEIGHT QUE DABA ERROR
+                if st.button(materia, use_container_width=True):
                     st.session_state.materia_sel = materia
                     st.session_state.page = "Visor"
+                    # Seleccionamos el primer eje de la materia por defecto
                     st.session_state.eje_sel = list(CONTENIDOS[materia]["subcategorias"].keys())[0]
                     st.session_state.clase_idx = 0
                     st.rerun()
@@ -99,10 +102,14 @@ def main():
                 st.rerun()
 
         st.divider()
+        
+        # Renderizado de la clase
         if "render" in clases_dict[clase_id]:
             clases_dict[clase_id]["render"]()
 
         st.divider()
+        
+        # Botones de navegación inferior
         c1, spacer, c2 = st.columns([1, 2, 1])
         with c1:
             if st.session_state.clase_idx > 0:
