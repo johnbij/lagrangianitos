@@ -52,7 +52,7 @@ from clases.algebra.f04 import render_F04
 from clases.algebra.f05 import render_F05
 
 # ==========================================
-# IMPORTACIONES: GEOMETRÍA
+# IMPORTACIONES: GEOMETRÍA (G01-G21 + V01-V05)
 # ==========================================
 from clases.geometria.g01 import render_G01
 from clases.geometria.g02 import render_G02
@@ -82,7 +82,7 @@ from clases.geometria.v04 import render_V04
 from clases.geometria.v05 import render_V05
 
 # ==========================================
-# IMPORTACIONES: PROBABILIDAD Y ESTADÍSTICA
+# IMPORTACIONES: DATOS Y AZAR (D01-D05 + PB01-PB05)
 # ==========================================
 from clases.datos.d01 import render_D01
 from clases.datos.d02 import render_D02
@@ -167,11 +167,11 @@ CONTENIDOS = {
                 "G14": {"label": "📏 G14: Áreas y Perímetros II", "render": render_G14},
                 "G15": {"label": "📏 G15: Cuerpos I", "render": render_G15},
                 "G16": {"label": "📏 G16: Cuerpos II", "render": render_G16},
-                "G17": {"label": "📏 G17: Analítica I", "render": render_G17},
-                "G18": {"label": "📏 G18: Analítica II", "render": render_G18},
-                "G19": {"label": "📏 G19: Repaso I", "render": render_G19},
-                "G20": {"label": "📏 G20: Repaso II", "render": render_G20},
-                "G21": {"label": "📏 G21: Ensayo Geometría", "render": render_G21},
+                "G17": {"label": "📏 G17: Geometría Analítica I", "render": render_G17},
+                "G18": {"label": "📏 G18: Geometría Analítica II", "render": render_G18},
+                "G19": {"label": "📏 G19: Repaso Geometría I", "render": render_G19},
+                "G20": {"label": "📏 G20: Repaso Geometría II", "render": render_G20},
+                "G21": {"label": "📏 G21: Ensayo Eje Geometría", "render": render_G21},
                 "V01": {"label": "🏹 V01: Vectores I", "render": render_V01},
                 "V02": {"label": "🏹 V02: Vectores II", "render": render_V02},
                 "V03": {"label": "🏹 V03: Vectores III", "render": render_V03},
@@ -183,7 +183,7 @@ CONTENIDOS = {
                 "D02": {"label": "📊 D02: Tendencia Central", "render": render_D02},
                 "D03": {"label": "📊 D03: Medidas de Posición", "render": render_D03},
                 "D04": {"label": "📊 D04: Medidas de Dispersión", "render": render_D04},
-                "D05": {"label": "📊 D05: Gráficos", "render": render_D05},
+                "D05": {"label": "📊 D05: Gráficos Estadísticos", "render": render_D05},
                 "PB01": {"label": "🎲 PB01: Conceptos Básicos", "render": render_PB01},
                 "PB02": {"label": "🎲 PB02: Reglas de Probabilidad", "render": render_PB02},
                 "PB03": {"label": "🎲 PB03: Probabilidad Condicional", "render": render_PB03},
