@@ -8,4 +8,6 @@ supabase
 streamlit-authenticator
 PyYAML
 pytz
+st-gsheets-connection
+pandas
 
