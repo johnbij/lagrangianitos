@@ -3,21 +3,20 @@ from contenidos import CONTENIDOS
 from datetime import datetime, date
 import os
 import base64
+import pandas as pd
 from streamlit_gsheets import GSheetsConnection
 
 # 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
 # ==========================================
-# CONEXIÓN A GOOGLE SHEETS (EL CEREBRO)
+# CONEXIÓN A GOOGLE SHEETS
 # ==========================================
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 def cargar_usuario(user_input, pass_input):
     try:
-        # ttl=0 fuerza a la app a leer el Sheets en tiempo real (sin caché)
         df = conn.read(worksheet="Usuarios", ttl=0)
-        # Convertimos todo a string para evitar atados con formatos de celda
         user_row = df[(df['User'].astype(str) == str(user_input)) & 
                       (df['Pass'].astype(str) == str(pass_input))]
         return user_row if not user_row.empty else None
@@ -25,11 +24,29 @@ def cargar_usuario(user_input, pass_input):
         st.error(f"Error de conexión con Sheets: {e}")
         return None
 
+def registrar_acceso(usuario):
+    """ Función secreta para el Modo Detective: registra quién entra """
+    try:
+        ahora = datetime.now()
+        # Intentamos sacar info básica de la sesión (IP info es limitada en Streamlit Cloud)
+        nuevo_log = pd.DataFrame([{
+            "User": usuario,
+            "Fecha": ahora.strftime("%Y-%m-%d"),
+            "Hora": ahora.strftime("%H:%M:%S"),
+            "IP_Info": "Acceso Web" # Aquí se podría extender con cabeceras HTTP si es necesario
+        }])
+        
+        # Leemos lo existente y concatenamos
+        df_existente = conn.read(worksheet="Logs_Acceso", ttl=0)
+        df_final = pd.concat([df_existente, nuevo_log], ignore_index=True)
+        conn.update(worksheet="Logs_Acceso", data=df_final)
+    except:
+        pass # Que no se caiga la app si el log falla
+
 # ==========================================
 # CONFIGURACIÓN VISUAL
 # ==========================================
 LOGO_PATH = "logo.png"
-FECHA_PAES = date(2026, 11, 20)
 
 st.markdown("""
     <style>
@@ -43,18 +60,11 @@ st.markdown("""
             text-align: center;
             border-radius: 15px;
             margin-bottom: 1rem;
+            border-bottom: 4px solid #00F2FF;
         }
         .paes-header h1 { color: white; font-weight: 800; margin: 0.5rem 0; text-transform: uppercase; }
-        .contador-timer {
-            background-color: #D32F2F;
-            color: white;
-            padding: 0.8rem;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            font-weight: bold;
-        }
         .btn-volver button { background-color: #0E2439 !important; color: white !important; font-weight: bold !important; }
+        .admin-box { background-color: #1a1a1a; padding: 20px; border-radius: 10px; border: 2px solid #D32F2F; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -71,7 +81,7 @@ def render_header():
         <div class="paes-header">
             {logo_html}
             <h1>LAGRANGIANITOS</h1>
-            <p style="color: #FFD700; font-style: italic;">"Enseñamos conceptos, no solo tricks"</p>
+            <p style="color: #FFD700; font-style: italic;">"Conceptos reales para puntajes reales"</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -80,7 +90,6 @@ def render_header():
 # ==========================================
 
 def main():
-    # Inicialización de estados
     if 'logged_in' not in st.session_state: st.session_state.logged_in = False
     if 'user_data' not in st.session_state: st.session_state.user_data = None
     if 'page' not in st.session_state: st.session_state.page = "Inicio"
@@ -93,25 +102,34 @@ def main():
         render_header()
         col1, col2, col3 = st.columns([0.2, 0.6, 0.2])
         with col2:
-            st.markdown("### 🔐 Ingreso Alumnos")
-            user = st.text_input("Usuario (Email)")
-            password = st.text_input("Contraseña", type="password")
+            st.markdown("### 🔐 Ingreso")
+            user_input = st.text_input("Usuario")
+            pass_input = st.text_input("Contraseña", type="password")
             if st.button("🚀 Entrar al Hub", use_container_width=True):
-                res = cargar_usuario(user, password)
+                res = cargar_usuario(user_input, pass_input)
                 if res is not None:
                     st.session_state.logged_in = True
                     st.session_state.user_data = res.iloc[0].to_dict()
+                    registrar_acceso(user_input) # Registramos el acceso
                     st.rerun()
                 else:
-                    st.error("Acceso denegado. Revisa tus datos en el Sheets.")
+                    st.error("Datos incorrectos.")
     else:
+        # PÁGINA: INICIO
         if st.session_state.page == "Inicio":
             render_header()
-            
-            # Info del Alumno desde el Sheets
             u = st.session_state.user_data
-            st.info(f"👋 ¡Hola **{u['User']}**! | 🏆 Nivel: {u['Nivel']} | ✨ XP: {u['XP']}")
+            st.info(f"👋 Hola **{u['User']}** | ✨ XP: {u['XP']} | 🏆 Nivel: {u['Nivel']}")
             
+            # --- SECCIÓN ADMIN: MODO DETECTIVE ---
+            if u['User'].lower() == 'admin':
+                with st.expander("🕵️‍♂️ MODO DETECTIVE (Solo Admin)"):
+                    st.markdown('<div class="admin-box">', unsafe_allow_html=True)
+                    if st.button("Revisar Logs de Acceso", use_container_width=True):
+                        st.session_state.page = "Admin_Detective"
+                        st.rerun()
+                    st.markdown('</div>', unsafe_allow_html=True)
+
             st.subheader("📚 Contenidos M1")
             materias = list(CONTENIDOS.keys())
             cols = st.columns(2)
@@ -130,8 +148,27 @@ def main():
                 for key in list(st.session_state.keys()): del st.session_state[key]
                 st.rerun()
 
+        # PÁGINA: MODO DETECTIVE (ADMIN)
+        elif st.session_state.page == "Admin_Detective":
+            st.title("🕵️‍♂️ Modo Detective: Rastreo de Pillos")
+            if st.button("⬅️ Volver al Inicio"):
+                st.session_state.page = "Inicio"
+                st.rerun()
+            
+            try:
+                df_logs = conn.read(worksheet="Logs_Acceso", ttl=0)
+                st.write("Últimos ingresos a la plataforma:")
+                st.dataframe(df_logs.sort_index(ascending=False), use_container_width=True)
+                
+                # Alerta básica de sospecha
+                conteo = df_logs['User'].value_counts()
+                st.subheader("🚩 Frecuencia de acceso por usuario")
+                st.bar_chart(conteo)
+            except:
+                st.warning("No se encontró la pestaña 'Logs_Acceso' o está vacía.")
+
+        # PÁGINA: VISOR DE CLASES
         elif st.session_state.page == "Visor":
-            # Manejo de scroll automático
             if st.session_state.do_scroll:
                 st.markdown('<a name="top-anchor"></a>', unsafe_allow_html=True)
                 st.markdown('<meta http-equiv="refresh" content="0;url=#top-anchor">', unsafe_allow_html=True)
@@ -142,8 +179,6 @@ def main():
                 st.rerun()
 
             st.divider()
-
-            # Lógica de navegación de clases (tu código original)
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes = list(m_data["subcategorias"].keys())
             idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
@@ -171,7 +206,6 @@ def main():
                 st.rerun()
 
             st.divider()
-            # Renderizado de la clase desde contenidos.py
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
 
