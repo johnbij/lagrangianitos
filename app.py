@@ -1,116 +1,106 @@
 import streamlit as st
 import os
-from contenidos import BIBLIOTECA_CONTENIDOS
+# Importamos el diccionario maestro desde contenidos.py
+from contenidos import CONTENIDOS
 
 def main():
-    st.set_page_config(page_title="Lagrangianitos", layout="centered")
+    st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="centered")
 
-    # --- ESTADO DE LA SESIÓN ---
+    # --- 1. GESTIÓN DE ESTADOS (Navegación) ---
     if 'page' not in st.session_state:
         st.session_state.page = "Inicio"
     if 'materia_sel' not in st.session_state:
         st.session_state.materia_sel = None
-    if 'eje_sel' not in st.session_state:
-        st.session_state.eje_sel = None
-    if 'unidad_idx' not in st.session_state:
-        st.session_state.unidad_idx = 0
+    if 'clase_idx' not in st.session_state:
+        st.session_state.clase_idx = 0
 
-    # --- NAVEGACIÓN: BOTÓN VOLVER ---
+    # --- 2. BOTÓN VOLVER (Siempre visible si no estás en el inicio) ---
     if st.session_state.page != "Inicio":
-        if st.button("⬅️ Volver al Inicio"):
+        if st.button("⬅️ Volver al Menú Principal"):
             st.session_state.page = "Inicio"
             st.session_state.materia_sel = None
-            st.session_state.eje_sel = None
-            st.session_state.unidad_idx = 0
+            st.session_state.clase_idx = 0
             st.rerun()
 
-    # --- PÁGINA: INICIO ---
+    # --- 3. PÁGINA DE INICIO (Botones de Materias) ---
     if st.session_state.page == "Inicio":
-        st.title("🚀 Lagrangianitos")
-        st.subheader("Selecciona tu Materia")
+        st.markdown("<h1 style='text-align:center;'>🐉 Lagrangianitos</h1>", unsafe_allow_html=True)
+        st.subheader("Selecciona tu área de entrenamiento:")
         
-        materias = list(BIBLIOTECA_CONTENIDOS.keys())
-        for mat in materias:
-            if st.button(f"📚 {mat}", use_container_width=True):
-                st.session_state.materia_sel = mat
-                st.session_state.page = "Ejes"
+        # Creamos los botones basados en las llaves de CONTENIDOS (Mate, Física, etc.)
+        for materia in CONTENIDOS.keys():
+            if st.button(materia, use_container_width=True):
+                st.session_state.materia_sel = materia
+                st.session_state.page = "Visor"
                 st.rerun()
         
         st.divider()
-        if st.button("📂 Biblioteca PDFs", use_container_width=True):
+        if st.button("📂 Biblioteca de PDFs", use_container_width=True):
             st.session_state.page = "PDFs"
             st.rerun()
 
-    # --- PÁGINA: SELECCIÓN DE EJE Y CLASE ---
-    elif st.session_state.page == "Ejes":
-        mat = st.session_state.materia_sel
-        st.header(f"🎯 {mat}")
-        
-        # 1. Selector de Eje
-        ejes_disponibles = list(BIBLIOTECA_CONTENIDOS[mat].keys())
-        eje_sel = st.selectbox("Selecciona un Eje:", ["-- Selecciona --"] + ejes_disponibles)
-        
-        if eje_sel != "-- Selecciona --":
-            st.session_state.eje_sel = eje_sel
-            unidades_dict = BIBLIOTECA_CONTENIDOS[mat][eje_sel]
-            
-            if unidades_dict:
-                unidades_lista = list(unidades_dict.keys())
-                
-                # 2. Selector de Unidad (Clase)
-                unidad_id = st.selectbox(
-                    "Selecciona la Clase:", 
-                    unidades_lista, 
-                    index=st.session_state.unidad_idx
-                )
-                
-                # --- RENDER DE CONTENIDO ---
-                datos = unidades_dict[unidad_id]
-                st.divider()
-                st.title(f"📖 {unidad_id}: {datos['titulo']}")
-                
-                # Video
-                st.video(f"https://www.youtube.com/watch?v={datos['video_id']}")
-                
-                # Espacio para el contenido (clases.py)
-                st.info("💡 Tip: Revisa el material de apoyo antes de contestar el cuestionario.")
-                
-                # Cuestionario
-                with st.expander(f"❓ {datos['cuestionario']}"):
-                    st.write("Selecciona la alternativa correcta:")
-                    # Ejemplo de pregunta
-                    st.radio("1. ¿Cuál es el conjunto vacío?", ["A", "B", "C", "D"], key=f"q1_{unidad_id}")
+    # --- 4. VISOR DE CLASES (La "Magia" de los desplegables) ---
+    elif st.session_state.page == "Visor":
+        materia_data = CONTENIDOS[st.session_state.materia_sel]
+        st.title(f"{st.session_state.materia_sel}")
 
-                # --- BOTÓN SIGUIENTE CLASE ---
-                st.divider()
-                curr_idx = unidades_lista.index(unidad_id)
-                if curr_idx < len(unidades_lista) - 1:
-                    if st.button("Próxima Clase ➡️"):
-                        st.session_state.unidad_idx = curr_idx + 1
-                        st.rerun()
-                else:
-                    st.success("✅ ¡Completaste todos los videos de este eje!")
+        # Nivel 1: Selector de Eje (Subcategoría)
+        ejes = list(materia_data["subcategorias"].keys())
+        eje_sel = st.selectbox("🎯 Selecciona un Eje:", ejes)
+
+        # Nivel 2: Selector de Clase (Unidad)
+        clases_dict = materia_data["subcategorias"][eje_sel]
+        
+        if clases_dict:
+            ids_clases = list(clases_dict.keys())
+            
+            # Formateamos el selector para que muestre el "label" (ej: "📖 N01: Teoría...")
+            clase_id = st.selectbox(
+                "📖 Selecciona la Clase:",
+                ids_clases,
+                index=min(st.session_state.clase_idx, len(ids_clases)-1),
+                format_func=lambda x: clases_dict[x]["label"]
+            )
+
+            st.divider()
+
+            # --- EJECUCIÓN DEL RENDER (Contenido de la clase) ---
+            render_func = clases_dict[clase_id]["render"]
+            try:
+                # Esto llama a render_N01(), render_A01(), etc.
+                render_func()
+            except Exception as e:
+                st.error(f"Hubo un problema al cargar el contenido: {e}")
+
+            # --- BOTÓN SIGUIENTE CLASE (Al final del texto) ---
+            st.divider()
+            curr_idx = ids_clases.index(clase_id)
+            
+            if curr_idx < len(ids_clases) - 1:
+                proxima_clase_nombre = clases_dict[ids_clases[curr_idx + 1]]["label"]
+                if st.button(f"Siguiente: {proxima_clase_nombre} ➡️", use_container_width=True):
+                    st.session_state.clase_idx = curr_idx + 1
+                    st.rerun()
             else:
-                st.warning("Próximamente contenido para este eje.")
+                st.success("🎉 ¡Has completado todas las clases de este eje!")
+        else:
+            st.info("Aún no hay clases cargadas en este eje. ¡Vuelve pronto!")
 
-    # --- PÁGINA: PDFs ---
+    # --- 5. BIBLIOTECA DE PDFs ---
     elif st.session_state.page == "PDFs":
-        st.header("📂 Biblioteca de Guías")
-        ruta_pdfs = "pdfs"
+        st.header("📂 Biblioteca de Guías y Recursos")
+        ruta = "pdfs"
+        if not os.path.exists(ruta): os.makedirs(ruta)
         
-        if not os.path.exists(ruta_pdfs):
-            os.makedirs(ruta_pdfs)
-            
-        archivos = [f for f in os.listdir(ruta_pdfs) if f.endswith('.pdf')]
-        
+        archivos = [f for f in os.listdir(ruta) if f.endswith('.pdf')]
         if archivos:
             for pdf in archivos:
-                col1, col2 = st.columns([3, 1])
-                col1.write(f"📄 {pdf}")
-                with open(os.path.join(ruta_pdfs, pdf), "rb") as f:
-                    col2.download_button("Descargar", f, file_name=pdf, key=pdf)
+                col_txt, col_btn = st.columns([3, 1])
+                col_txt.write(f"📄 {pdf}")
+                with open(os.path.join(ruta, pdf), "rb") as f:
+                    col_btn.download_button("Descargar", f, file_name=pdf, key=pdf)
         else:
-            st.info("No hay guías disponibles todavía. Sube tus archivos a la carpeta 'pdfs'.")
+            st.info("La carpeta de PDFs está vacía. Sube archivos para verlos aquí.")
 
 if __name__ == "__main__":
     main()
