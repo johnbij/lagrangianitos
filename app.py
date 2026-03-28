@@ -9,16 +9,20 @@ from streamlit_gsheets import GSheetsConnection
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
 # ==========================================
-# CONEXIÓN A GOOGLE SHEETS
+# CONEXIÓN A GOOGLE SHEETS (EL CEREBRO)
 # ==========================================
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 def cargar_usuario(user_input, pass_input):
     try:
-        df = conn.read(worksheet="Usuarios")
-        user_row = df[(df['User'] == user_input) & (df['Pass'] == str(pass_input))]
+        # ttl=0 fuerza a la app a leer el Sheets en tiempo real (sin caché)
+        df = conn.read(worksheet="Usuarios", ttl=0)
+        # Convertimos todo a string para evitar atados con formatos de celda
+        user_row = df[(df['User'].astype(str) == str(user_input)) & 
+                      (df['Pass'].astype(str) == str(pass_input))]
         return user_row if not user_row.empty else None
-    except:
+    except Exception as e:
+        st.error(f"Error de conexión con Sheets: {e}")
         return None
 
 # ==========================================
@@ -49,8 +53,6 @@ st.markdown("""
             border-radius: 10px;
             margin-bottom: 2rem;
             font-weight: bold;
-            display: flex;
-            justify-content: space-around;
         }
         .btn-volver button { background-color: #0E2439 !important; color: white !important; font-weight: bold !important; }
     </style>
@@ -69,16 +71,7 @@ def render_header():
         <div class="paes-header">
             {logo_html}
             <h1>LAGRANGIANITOS</h1>
-            <p style="color: #FFD700;">"Enseñamos conceptos, no solo tricks"</p>
-        </div>
-    """, unsafe_allow_html=True)
-
-def render_timer():
-    hoy = date.today()
-    dias = (FECHA_PAES - hoy).days
-    st.markdown(f"""
-        <div class="contador-timer">
-            <span>⏳ Días para la PAES: {max(0, dias)}</span>
+            <p style="color: #FFD700; font-style: italic;">"Enseñamos conceptos, no solo tricks"</p>
         </div>
     """, unsafe_allow_html=True)
 
@@ -87,6 +80,7 @@ def render_timer():
 # ==========================================
 
 def main():
+    # Inicialización de estados
     if 'logged_in' not in st.session_state: st.session_state.logged_in = False
     if 'user_data' not in st.session_state: st.session_state.user_data = None
     if 'page' not in st.session_state: st.session_state.page = "Inicio"
@@ -97,28 +91,28 @@ def main():
 
     if not st.session_state.logged_in:
         render_header()
-        col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
+        col1, col2, col3 = st.columns([0.2, 0.6, 0.2])
         with col2:
-            st.markdown("### Ingreso")
-            user = st.text_input("Usuario")
+            st.markdown("### 🔐 Ingreso Alumnos")
+            user = st.text_input("Usuario (Email)")
             password = st.text_input("Contraseña", type="password")
-            if st.button("Ingresar", use_container_width=True):
+            if st.button("🚀 Entrar al Hub", use_container_width=True):
                 res = cargar_usuario(user, password)
                 if res is not None:
                     st.session_state.logged_in = True
                     st.session_state.user_data = res.iloc[0].to_dict()
                     st.rerun()
                 else:
-                    st.error("Acceso denegado")
+                    st.error("Acceso denegado. Revisa tus datos en el Sheets.")
     else:
         if st.session_state.page == "Inicio":
             render_header()
-            render_timer()
             
+            # Info del Alumno desde el Sheets
             u = st.session_state.user_data
-            st.info(f"👤 Bienvenido, **{u['User']}** | ✨ XP: {u['XP']} | 🏆 Nivel: {u['Nivel']}")
+            st.info(f"👋 ¡Hola **{u['User']}**! | 🏆 Nivel: {u['Nivel']} | ✨ XP: {u['XP']}")
             
-            st.subheader("📚 Contenidos del curso M1")
+            st.subheader("📚 Contenidos M1")
             materias = list(CONTENIDOS.keys())
             cols = st.columns(2)
             for i, m in enumerate(materias):
@@ -133,23 +127,23 @@ def main():
 
             st.divider()
             if st.button("🚪 Cerrar Sesión"):
-                st.session_state.logged_in = False
+                for key in list(st.session_state.keys()): del st.session_state[key]
                 st.rerun()
 
         elif st.session_state.page == "Visor":
+            # Manejo de scroll automático
             if st.session_state.do_scroll:
                 st.markdown('<a name="top-anchor"></a>', unsafe_allow_html=True)
                 st.markdown('<meta http-equiv="refresh" content="0;url=#top-anchor">', unsafe_allow_html=True)
                 st.session_state.do_scroll = False
             
-            st.markdown('<div class="btn-volver">', unsafe_allow_html=True)
             if st.button("🏠 VOLVER AL MENÚ", use_container_width=True):
                 st.session_state.page = "Inicio"
                 st.rerun()
-            st.markdown('</div>', unsafe_allow_html=True)
 
             st.divider()
 
+            # Lógica de navegación de clases (tu código original)
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes = list(m_data["subcategorias"].keys())
             idx_eje = ejes.index(st.session_state.eje_sel) if st.session_state.eje_sel in ejes else 0
@@ -177,6 +171,7 @@ def main():
                 st.rerun()
 
             st.divider()
+            # Renderizado de la clase desde contenidos.py
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
 
