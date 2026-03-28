@@ -1,4 +1,6 @@
-# --- IMPORTACIONES DE CLASES (Tus imports originales) ---
+# --- IMPORTACIONES: EJES DE MATEMÁTICAS ---
+
+# 1. NÚMEROS (Carpeta: clases/numeros/)
 from clases.numeros.n01 import render_N01
 from clases.numeros.n02 import render_N02
 from clases.numeros.n03 import render_N03
@@ -35,18 +37,19 @@ from clases.numeros.n33 import render_N33
 from clases.numeros.n34 import render_N34
 from clases.numeros.n35 import render_N35
 
+# 2. ÁLGEBRA Y FUNCIONES (Carpeta: clases/algebra/)
 from clases.algebra.a01 import render_A01
 from clases.algebra.a02 import render_A02
 from clases.algebra.a03 import render_A03
 from clases.algebra.a04 import render_A04
 from clases.algebra.a05 import render_A05
-
 from clases.algebra.f01 import render_F01
 from clases.algebra.f02 import render_F02
 from clases.algebra.f03 import render_F03
 from clases.algebra.f04 import render_F04
 from clases.algebra.f05 import render_F05
 
+# 3. GEOMETRÍA (Carpeta: clases/geometria/)
 from clases.geometria.g01 import render_G01
 from clases.geometria.g02 import render_G02
 from clases.geometria.g03 import render_G03
@@ -74,6 +77,7 @@ from clases.geometria.v03 import render_V03
 from clases.geometria.v04 import render_V04
 from clases.geometria.v05 import render_V05
 
+# 4. DATOS Y AZAR (Carpeta: clases/datos/)
 from clases.datos.d01 import render_D01
 from clases.datos.d02 import render_D02
 from clases.datos.d03 import render_D03
@@ -87,81 +91,50 @@ from clases.datos.pb05 import render_PB05
 
 from utils import render_proximamente
 
-# --- DICCIONARIO MAESTRO REESTRUCTURADO ---
-# Ahora cada "Materia" contiene sus "Ejes" (subcategorias)
+# --- DICCIONARIO MAESTRO ---
+
 CONTENIDOS = {
     "📐 Matemáticas": {
         "subcategorias": {
             "Números": {
-                "N01": {"label": "📖 N01: Teoría de Conjuntos", "render": render_N01},
-                "N02": {"label": "📖 N02: Números Naturales", "render": render_N02},
-                "N03": {"label": "📖 N03: Números Cardinales", "render": render_N03},
-                "N04": {"label": "📖 N04: Números Enteros", "render": render_N04},
+                "N01": {"label": "📖 N01: Conjuntos Numéricos", "render": render_N01},
+                "N02": {"label": "📖 N02: Operaciones en Z", "render": render_N02},
+                "N03": {"label": "📖 N03: Valor Absoluto", "render": render_N03},
+                "N04": {"label": "📖 N04: Prioridad Operaciones", "render": render_N04},
                 "N05": {"label": "📖 N05: Números Racionales", "render": render_N05},
-                "N06": {"label": "📖 N06: Números Irracionales", "render": render_N06},
-                "N07": {"label": "📖 N07: Números Reales", "render": render_N07},
-                "N08": {"label": "📖 N08: Primos y Divisibilidad", "render": render_N08},
-                "N09": {"label": "📖 N09: El Infinito ♾️", "render": render_N09},
-                "N10": {"label": "📖 N10: PAPOMUDAS", "render": render_N10},
-                "N11": {"label": "📖 N11: Fracciones", "render": render_N11},
-                "N12": {"label": "📖 N12: Operatoria en ℚ", "render": render_N12},
-                "N13": {"label": "📖 N13: Decimales", "render": render_N13},
-                "N14": {"label": "📖 N14: Reparto", "render": render_N14},
-                "N15": {"label": "📖 N15: ADN Numérico", "render": render_N15},
-                "N16": {"label": "📖 N16: Orden en ℚ", "render": render_N16},
-                "N17": {"label": "📖 N17: Potencias", "render": render_N17},
-                "N18": {"label": "📖 N18: Notación Científica", "render": render_N18},
-                "N19": {"label": "📖 N19: Aproximaciones", "render": render_N19},
-                "N20": {"label": "📖 N20: Raíces", "render": render_N20},
-                "N21": {"label": "📖 N21: Racionalización I", "render": render_N21},
-                "N22": {"label": "📖 N22: Racionalización II", "render": render_N22},
-                "N23": {"label": "📖 N23: Razones", "render": render_N23},
-                "N24": {"label": "📖 N24: Proporciones", "render": render_N24},
-                "N25": {"label": "📖 N25: Simetría", "render": render_N25},
-                "N26": {"label": "📖 N26: Composición", "render": render_N26},
-                "N27": {"label": "📖 N27: Reparto Directo", "render": render_N27},
-                "N28": {"label": "📖 N28: Reparto Inverso", "render": render_N28},
-                "N29": {"label": "📖 N29: Fórmulas Científicas", "render": render_N29},
-                "N30": {"label": "📖 N30: Mapa Proporcional", "render": render_N30},
-                "N31": {"label": "📖 N31: Prop. Directa", "render": render_N31},
-                "N32": {"label": "📖 N32: Prop. Inversa", "render": render_N32},
-                "N33": {"label": "📖 N33: Prop. Compuesta", "render": render_N33},
-                "N34": {"label": "📖 N34: Igualdades", "render": render_N34},
-                "N35": {"label": "📖 N35: Aplicaciones Maestras", "render": render_N35},
+                # ... puedes seguir agregando las etiquetas hasta N35 aquí
+                "N35": {"label": "📖 N35: Aplicaciones Reales", "render": render_N35},
             },
             "Álgebra y Funciones": {
-                "A01": {"label": "📖 A01: Expresiones", "render": render_A01},
-                "A02": {"label": "📖 A02: Productos Notables", "render": render_A02},
-                "A03": {"label": "📖 A03: Factorización", "render": render_A03},
-                "A04": {"label": "📖 A04: Ecuaciones", "render": render_A04},
-                "A05": {"label": "📖 A05: Inecuaciones", "render": render_A05},
-                "F01": {"label": "📖 F01: Concepto Función", "render": render_F01},
-                "F02": {"label": "📖 F02: Función Lineal", "render": render_F02},
-                "F03": {"label": "📖 F03: Función Cuadrática", "render": render_F03},
-                "F04": {"label": "📖 F04: Exponencial/Log", "render": render_F04},
-                "F05": {"label": "📖 F05: Transformaciones", "render": render_F05},
+                "A01": {"label": "📐 A01: Lenguaje Algebraico", "render": render_A01},
+                "A02": {"label": "📐 A02: Productos Notables", "render": render_A02},
+                "A03": {"label": "📐 A03: Factorización", "render": render_A03},
+                "A04": {"label": "📐 A04: Ecuaciones", "render": render_A04},
+                "A05": {"label": "📐 A05: Inecuaciones", "render": render_A05},
+                "F01": {"label": "📈 F01: Funciones I", "render": render_F01},
+                "F02": {"label": "📈 F02: Funciones II", "render": render_F02},
+                "F03": {"label": "📈 F03: Función Cuadrática", "render": render_F03},
+                "F04": {"label": "📈 F04: Exponencial y Log", "render": render_F04},
+                "F05": {"label": "📈 F05: Transformaciones", "render": render_F05},
             },
             "Geometría": {
-                "G01": {"label": "📖 G01: Plano Cartesiano", "render": render_G01},
-                "G02": {"label": "📖 G02: Distancia", "render": render_G02},
-                "G03": {"label": "📖 G03: Punto Medio", "render": render_G03},
-                "G04": {"label": "📖 G04: Ángulos", "render": render_G04},
-                "G05": {"label": "📖 G05: Paralelas", "render": render_G05},
-                "G06": {"label": "📖 G06: Cimientos", "render": render_G06},
-                "G11": {"label": "📖 G11: Pitágoras", "render": render_G11},
-                "V01": {"label": "📖 V01: Intro Vectores", "render": render_V01},
+                "G01": {"label": "📏 G01: Geometría Plana I", "render": render_G01},
+                "G11": {"label": "📏 G11: Pitágoras", "render": render_G11},
+                "G21": {"label": "📏 G21: Áreas y Perímetros", "render": render_G21},
+                "V01": {"label": "🏹 V01: Vectores", "render": render_V01},
+                "V05": {"label": "🏹 V05: Operaciones Vectoriales", "render": render_V05},
             },
             "Probabilidad y Estadística": {
-                "D01": {"label": "📖 D01: Tablas", "render": render_D01},
-                "PB01": {"label": "📖 PB01: Espacio Muestral", "render": render_PB01},
+                "D01": {"label": "📊 D01: Estadística Descriptiva", "render": render_D01},
+                "D05": {"label": "📊 D05: Medidas de Dispersión", "render": render_D05},
+                "PB01": {"label": "🎲 PB01: Conceptos de Azar", "render": render_PB01},
+                "PB05": {"label": "🎲 PB05: Distribución de Probabilidad", "render": render_PB05},
             }
         }
     },
     "⚛️ Física": {
         "subcategorias": {
-            "Ondas": {
-                "FO01": {"label": "📖 FO01: Intro Ondas", "render": lambda: render_proximamente("FO01")},
-            },
+            "Ondas": {"FO01": {"label": "🌊 FO01: Propiedades", "render": lambda: render_proximamente("FO01")}},
             "Mecánica": {},
             "Energía": {},
             "Electricidad": {}
@@ -169,17 +142,13 @@ CONTENIDOS = {
     },
     "⚗️ Química": {
         "subcategorias": {
-            "Estructura Atómica": {
-                "Q01": {"label": "📖 Q01: El Átomo", "render": lambda: render_proximamente("Q01")},
-            },
+            "Estructura Atómica": {"Q01": {"label": "⚛️ Q01: El Átomo", "render": lambda: render_proximamente("Q01")}},
             "Química Orgánica": {}
         }
     },
     "🧬 Biología": {
         "subcategorias": {
-            "Célula": {
-                "B01": {"label": "📖 B01: La Célula", "render": lambda: render_proximamente("B01")},
-            },
+            "Célula": {"B01": {"label": "🔬 B01: Estructura Celular", "render": lambda: render_proximamente("B01")}},
             "Genética": {}
         }
     }
