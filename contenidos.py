@@ -1,5 +1,7 @@
+import streamlit as st
+
 # ==========================================
-# IMPORTACIONES: NÚMEROS (35 CLASES)
+# 1. IMPORTACIONES MATEMÁTICAS (COMPLETO)
 # ==========================================
 from clases.numeros.n01 import render_N01
 from clases.numeros.n02 import render_N02
@@ -37,9 +39,6 @@ from clases.numeros.n33 import render_N33
 from clases.numeros.n34 import render_N34
 from clases.numeros.n35 import render_N35
 
-# ==========================================
-# IMPORTACIONES: ÁLGEBRA Y FUNCIONES
-# ==========================================
 from clases.algebra.a01 import render_A01
 from clases.algebra.a02 import render_A02
 from clases.algebra.a03 import render_A03
@@ -51,9 +50,6 @@ from clases.algebra.f03 import render_F03
 from clases.algebra.f04 import render_F04
 from clases.algebra.f05 import render_F05
 
-# ==========================================
-# IMPORTACIONES: GEOMETRÍA (G01-G21 + V01-V05)
-# ==========================================
 from clases.geometria.g01 import render_G01
 from clases.geometria.g02 import render_G02
 from clases.geometria.g03 import render_G03
@@ -81,9 +77,6 @@ from clases.geometria.v03 import render_V03
 from clases.geometria.v04 import render_V04
 from clases.geometria.v05 import render_V05
 
-# ==========================================
-# IMPORTACIONES: DATOS Y AZAR (D01-D05 + PB01-PB05)
-# ==========================================
 from clases.datos.d01 import render_D01
 from clases.datos.d02 import render_D02
 from clases.datos.d03 import render_D03
@@ -96,47 +89,48 @@ from clases.datos.pb04 import render_PB04
 from clases.datos.pb05 import render_PB05
 
 # ==========================================
-# ESTRUCTURA PRINCIPAL DEL HUB
+# 2. ESTRUCTURA DE CONTENIDOS
 # ==========================================
+
 CONTENIDOS = {
     "📐 Matemáticas": {
         "subcategorias": {
             "Números": {
-                "N01": {"label": "📖 N01: Conjuntos Numéricos", "render": render_N01},
-                "N02": {"label": "📖 N02: Operaciones en Z", "render": render_N02},
-                "N03": {"label": "📖 N03: Valor Absoluto", "render": render_N03},
-                "N04": {"label": "📖 N04: Prioridad Operaciones", "render": render_N04},
-                "N05": {"label": "📖 N05: Números Racionales", "render": render_N05},
-                "N06": {"label": "📖 N06: Potencias I", "render": render_N06},
-                "N07": {"label": "📖 N07: Potencias II", "render": render_N07},
-                "N08": {"label": "📖 N08: Raíces I", "render": render_N08},
-                "N09": {"label": "📖 N09: Raíces II", "render": render_N09},
-                "N10": {"label": "📖 N10: Logaritmos I", "render": render_N10},
-                "N11": {"label": "📖 N11: Logaritmos II", "render": render_N11},
-                "N12": {"label": "📖 N12: Porcentajes I", "render": render_N12},
-                "N13": {"label": "📖 N13: Porcentajes II", "render": render_N13},
-                "N14": {"label": "📖 N14: Interés Simple", "render": render_N14},
-                "N15": {"label": "📖 N15: Interés Compuesto", "render": render_N15},
-                "N16": {"label": "📖 N16: Aproximaciones", "render": render_N16},
-                "N17": {"label": "📖 N17: Notación Científica", "render": render_N17},
-                "N18": {"label": "📖 N18: Razones y Proporciones", "render": render_N18},
-                "N19": {"label": "📖 N19: Proporcionalidad Directa", "render": render_N19},
-                "N20": {"label": "📖 N20: Proporcionalidad Inversa", "render": render_N20},
-                "N21": {"label": "📖 N21: Proporcionalidad Compuesta", "render": render_N21},
-                "N22": {"label": "📖 N22: Repaso General I", "render": render_N22},
-                "N23": {"label": "📖 N23: Repaso General II", "render": render_N23},
-                "N24": {"label": "📖 N24: Repaso General III", "render": render_N24},
-                "N25": {"label": "📖 N25: Repaso General IV", "render": render_N25},
-                "N26": {"label": "📖 N26: Desafíos Numéricos I", "render": render_N26},
-                "N27": {"label": "📖 N27: Desafíos Numéricos II", "render": render_N27},
-                "N28": {"label": "📖 N28: Análisis de Errores", "render": render_N28},
-                "N29": {"label": "📖 N29: Estrategias de Resolución I", "render": render_N29},
-                "N30": {"label": "📖 N30: Estrategias de Resolución II", "render": render_N30},
-                "N31": {"label": "📖 N31: Ensayo Eje Números I", "render": render_N31},
-                "N32": {"label": "📖 N32: Ensayo Eje Números II", "render": render_N32},
-                "N33": {"label": "📖 N33: Ensayo Eje Números III", "render": render_N33},
-                "N34": {"label": "📖 N34: Ensayo Eje Números IV", "render": render_N34},
-                "N35": {"label": "📖 N35: Ensayo Final Números", "render": render_N35},
+                "N01": {"label": "🔢 N01: Conjuntos Numéricos", "render": render_N01},
+                "N02": {"label": "🔢 N02: Operaciones en Z", "render": render_N02},
+                "N03": {"label": "🔢 N03: Valor Absoluto", "render": render_N03},
+                "N04": {"label": "🔢 N04: Prioridad Operaciones", "render": render_N04},
+                "N05": {"label": "🔢 N05: Números Racionales", "render": render_N05},
+                "N06": {"label": "🔢 N06: Potencias I", "render": render_N06},
+                "N07": {"label": "🔢 N07: Potencias II", "render": render_N07},
+                "N08": {"label": "🔢 N08: Raíces I", "render": render_N08},
+                "N09": {"label": "🔢 N09: Raíces II", "render": render_N09},
+                "N10": {"label": "🔢 N10: Logaritmos I", "render": render_N10},
+                "N11": {"label": "🔢 N11: Logaritmos II", "render": render_N11},
+                "N12": {"label": "🔢 N12: Porcentajes I", "render": render_N12},
+                "N13": {"label": "🔢 N13: Porcentajes II", "render": render_N13},
+                "N14": {"label": "🔢 N14: Interés Simple", "render": render_N14},
+                "N15": {"label": "🔢 N15: Interés Compuesto", "render": render_N15},
+                "N16": {"label": "🔢 N16: Aproximaciones", "render": render_N16},
+                "N17": {"label": "🔢 N17: Notación Científica", "render": render_N17},
+                "N18": {"label": "🔢 N18: Razones y Proporciones", "render": render_N18},
+                "N19": {"label": "🔢 N19: Proporcionalidad Directa", "render": render_N19},
+                "N20": {"label": "🔢 N20: Proporcionalidad Inversa", "render": render_N20},
+                "N21": {"label": "🔢 N21: Proporcionalidad Compuesta", "render": render_N21},
+                "N22": {"label": "🔢 N22: Repaso I", "render": render_N22},
+                "N23": {"label": "🔢 N23: Repaso II", "render": render_N23},
+                "N24": {"label": "🔢 N24: Repaso III", "render": render_N24},
+                "N25": {"label": "🔢 N25: Repaso IV", "render": render_N25},
+                "N26": {"label": "🔢 N26: Desafíos I", "render": render_N26},
+                "N27": {"label": "🔢 N27: Desafíos II", "render": render_N27},
+                "N28": {"label": "🔢 N28: Análisis Errores", "render": render_N28},
+                "N29": {"label": "🔢 N29: Estrategias I", "render": render_N29},
+                "N30": {"label": "🔢 N30: Estrategias II", "render": render_N30},
+                "N31": {"label": "🔢 N31: Ensayo I", "render": render_N31},
+                "N32": {"label": "🔢 N32: Ensayo II", "render": render_N32},
+                "N33": {"label": "🔢 N33: Ensayo III", "render": render_N33},
+                "N34": {"label": "🔢 N34: Ensayo IV", "render": render_N34},
+                "N35": {"label": "🔢 N35: Ensayo Final", "render": render_N35},
             },
             "Álgebra y Funciones": {
                 "A01": {"label": "📐 A01: Lenguaje Algebraico", "render": render_A01},
@@ -189,6 +183,47 @@ CONTENIDOS = {
                 "PB03": {"label": "🎲 PB03: Probabilidad Condicional", "render": render_PB03},
                 "PB04": {"label": "🎲 PB04: Técnicas de Conteo", "render": render_PB04},
                 "PB05": {"label": "🎲 PB05: Distribución Binomial", "render": render_PB05},
+            }
+        }
+    },
+    "⚛️ Física": {
+        "subcategorias": {
+            "Ondas y Óptica": {
+                "F01": {"label": "🌊 F01: Sonido", "render": lambda: st.info("Próximamente")},
+                "F02": {"label": "🔦 F02: Luz", "render": lambda: st.info("Próximamente")},
+            },
+            "Mecánica": {
+                "F03": {"label": "🏎️ F03: Cinemática", "render": lambda: st.info("Próximamente")},
+                "F04": {"label": "🏗️ F04: Dinámica", "render": lambda: st.info("Próximamente")},
+            },
+            "Energía": {
+                "F05": {"label": "🌡️ F05: Calor y Temperatura", "render": lambda: st.info("Próximamente")},
+            }
+        }
+    },
+    "🧪 Química": {
+        "subcategorias": {
+            "Estructura Atómica": {
+                "Q01": {"label": "⚛️ Q01: Modelos Atómicos", "render": lambda: st.info("Próximamente")},
+            },
+            "Química Orgánica": {
+                "Q03": {"label": "🧬 Q03: Introducción Orgánica", "render": lambda: st.info("Próximamente")},
+            },
+            "Reacciones": {
+                "Q04": {"label": "⚖️ Q04: Estequiometría", "render": lambda: st.info("Próximamente")},
+            }
+        }
+    },
+    "🌿 Biología": {
+        "subcategorias": {
+            "Célula": {
+                "B01": {"label": "🦠 B01: Estructura Celular", "render": lambda: st.info("Próximamente")},
+            },
+            "Herencia": {
+                "B03": {"label": "🧬 B03: Genética", "render": lambda: st.info("Próximamente")},
+            },
+            "Ecosistema": {
+                "B04": {"label": "🌍 B04: Ecología", "render": lambda: st.info("Próximamente")},
             }
         }
     }
