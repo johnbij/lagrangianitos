@@ -56,6 +56,13 @@ st.markdown("""
             display: flex;
             justify-content: space-around;
         }
+
+        .btn-volver button {
+            background-color: #0E2439 !important;
+            color: white !important;
+            border: none !important;
+            font-weight: bold !important;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -119,7 +126,8 @@ def main():
                 if user == "admin" and password == "admin":
                     st.session_state.logged_in = True
                     st.rerun()
-                else: st.error("Acceso denegado")
+                else:
+                    st.error("Acceso denegado")
     else:
         if st.session_state.page == "Inicio":
             render_header()
@@ -143,10 +151,14 @@ def main():
                 st.rerun()
 
         elif st.session_state.page == "Visor":
-            # BOTÓN DE VOLVER (AQUÍ ESTÁ, NO SE MUEVE)
+            scroll_to_top()
+
+            # BOTÓN DE VOLVER AL MENÚ
+            st.markdown('<div class="btn-volver">', unsafe_allow_html=True)
             if st.button("🏠 VOLVER AL MENÚ", use_container_width=True):
                 st.session_state.page = "Inicio"
                 st.rerun()
+            st.markdown('</div>', unsafe_allow_html=True)
 
             st.divider()
             
@@ -188,14 +200,14 @@ def main():
                 if st.session_state.clase_idx > 0:
                     if st.button("⬅️ Anterior", use_container_width=True):
                         st.session_state.clase_idx -= 1
+                        scroll_to_top()
                         st.rerun()
             with c2:
                 if st.session_state.clase_idx < len(ids_clases) - 1:
                     if st.button("Siguiente ➡️", use_container_width=True):
                         st.session_state.clase_idx += 1
+                        scroll_to_top()
                         st.rerun()
-            
-            scroll_to_top()
 
 if __name__ == "__main__":
     main()
