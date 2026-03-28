@@ -63,41 +63,19 @@ st.markdown("""
             border: none !important;
             font-weight: bold !important;
         }
+
+        /* Ancla invisible arriba del todo */
+        #top-anchor {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     </style>
 """, unsafe_allow_html=True)
 
 # ==========================================
 # FUNCIONES DE APOYO
 # ==========================================
-
-def scroll_to_top():
-    st.components.v1.html("""
-        <script>
-            function doScroll() {
-                // Intenta todos los selectores posibles según versión de Streamlit
-                var selectors = [
-                    'section.main',
-                    '.main',
-                    '[data-testid="stAppViewContainer"]',
-                    '[data-testid="block-container"]',
-                    'div.appview-container',
-                    'div.main'
-                ];
-                for (var i = 0; i < selectors.length; i++) {
-                    var el = window.parent.document.querySelector(selectors[i]);
-                    if (el) {
-                        el.scrollTop = 0;
-                        el.scrollTo({top: 0, behavior: 'instant'});
-                    }
-                }
-                window.parent.scrollTo({top: 0, behavior: 'instant'});
-            }
-            doScroll();
-            setTimeout(doScroll, 50);
-            setTimeout(doScroll, 150);
-            setTimeout(doScroll, 300);
-        </script>
-    """, height=0)
 
 def render_header():
     logo_html = ""
@@ -177,10 +155,17 @@ def main():
 
         elif st.session_state.page == "Visor":
 
-            # SCROLL al inicio de la página si corresponde
+            # ANCLA INVISIBLE - siempre está arriba del todo
+            # Si do_scroll=True, el link #top-anchor hace que el navegador salte aquí
             if st.session_state.do_scroll:
-                scroll_to_top()
+                st.markdown('<a name="top-anchor"></a>', unsafe_allow_html=True)
+                st.markdown(
+                    '<meta http-equiv="refresh" content="0;url=#top-anchor">',
+                    unsafe_allow_html=True
+                )
                 st.session_state.do_scroll = False
+            else:
+                st.markdown('<a name="top-anchor"></a>', unsafe_allow_html=True)
 
             # BOTÓN DE VOLVER AL MENÚ
             st.markdown('<div class="btn-volver">', unsafe_allow_html=True)
