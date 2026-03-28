@@ -1,13 +1,16 @@
 import streamlit as st
 from contenidos import CONTENIDOS
 from datetime import datetime, date
+import os
+import base64
 
-# 1. CONFIGURACIÓN DE PÁGINA (Debe ser lo primero)
+# 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
 # ==========================================
 # CONFIGURACIÓN VISUAL
 # ==========================================
+LOGO_PATH = "logo.png" 
 FECHA_PAES = date(2026, 11, 20) 
 
 st.markdown("""
@@ -15,6 +18,7 @@ st.markdown("""
         [data-testid="stSidebar"] {display: none;}
         [data-testid="stSidebarNav"] {display: none;}
         .block-container {padding-top: 1rem;}
+        
         .paes-header {
             background-color: #0E2439;
             color: white;
@@ -23,6 +27,13 @@ st.markdown("""
             border-radius: 15px;
             margin-bottom: 1rem;
         }
+        
+        .paes-header img {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
         .paes-header h1 {
             color: white; 
             font-weight: 800; 
@@ -30,7 +41,9 @@ st.markdown("""
             margin: 0.5rem 0;
             text-transform: uppercase;
         }
+        
         .paes-header .lema { font-style: italic; color: #FFD700; font-size: 0.9rem; }
+        
         .contador-timer {
             background-color: #D32F2F;
             color: white;
@@ -51,8 +64,8 @@ st.markdown("""
 # ==========================================
 
 def scroll_to_top():
-    # SEGURO: Solo intentar scroll si existen las variables en session_state
-    if 'clase_idx' in st.session_state and 'eje_sel' in st.session_state:
+    """Solo ejecuta el scroll si hay una clase activa para evitar el error de la captura."""
+    if st.session_state.get('materia_sel') and st.session_state.get('eje_sel'):
         unique_key = f"scroll_{st.session_state.clase_idx}_{st.session_state.eje_sel}"
         st.components.v1.html(
             f"<script>window.parent.document.querySelector('section.main').scrollTo(0,0);</script>",
@@ -60,8 +73,17 @@ def scroll_to_top():
         )
 
 def render_header():
+    logo_html = ""
+    if os.path.exists(LOGO_PATH):
+        with open(LOGO_PATH, "rb") as f:
+            data = base64.b64encode(f.read()).decode("utf-8")
+            logo_html = f'<img src="data:image/png;base64,{data}">'
+    else:
+        logo_html = '<h1 style="font-size:3rem; margin:0;">🐉</h1>'
+
     st.markdown(f"""
         <div class="paes-header">
+            {logo_html}
             <h1>LAGRANGIANITOS</h1>
             <p class="lema">"Enseñamos conceptos, no solo tricks"</p>
             <p class="info">📍 Santiago • 🕒 {datetime.now().strftime('%H:%M')} • 🚀 Preparación PAES M1</p>
@@ -79,17 +101,17 @@ def render_timer():
     """, unsafe_allow_html=True)
 
 # ==========================================
-# LÓGICA DE NAVEGACIÓN
+# LÓGICA PRINCIPAL
 # ==========================================
 
-# Inicializar estados de sesión
-if 'logged_in' not in st.session_state: st.session_state.logged_in = False
-if 'page' not in st.session_state: st.session_state.page = "Inicio"
-if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
-if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
-if 'clase_idx' not in st.session_state: st.session_state.clase_idx = 0
-
 def main():
+    # Inicializar estados de sesión
+    if 'logged_in' not in st.session_state: st.session_state.logged_in = False
+    if 'page' not in st.session_state: st.session_state.page = "Inicio"
+    if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
+    if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
+    if 'clase_idx' not in st.session_state: st.session_state.clase_idx = 0
+
     if not st.session_state.logged_in:
         render_header()
         col1, col2, col3 = st.columns([0.1, 0.8, 0.1])
@@ -101,10 +123,8 @@ def main():
                 if user == "admin" and password == "admin":
                     st.session_state.logged_in = True
                     st.rerun()
-                else:
-                    st.error("Acceso denegado")
+                else: st.error("Acceso denegado")
     else:
-        # --- PÁGINA INICIO ---
         if st.session_state.page == "Inicio":
             render_header()
             render_timer()
@@ -126,9 +146,8 @@ def main():
                 st.session_state.logged_in = False
                 st.rerun()
 
-        # --- PÁGINA VISOR ---
         elif st.session_state.page == "Visor":
-            # Llamamos al scroll aquí, ya con sesión iniciada
+            # EL SCROLL SE LLAMA AQUÍ, CUANDO YA HAY CLASES
             scroll_to_top()
             
             if st.button("🏠 Volver al Menú", use_container_width=True):
@@ -136,7 +155,6 @@ def main():
                 st.rerun()
 
             st.divider()
-            
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes = list(m_data["subcategorias"].keys())
             
@@ -155,8 +173,7 @@ def main():
             st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
             
             clase_id = st.selectbox(
-                "📖 Clase:", 
-                ids_clases, 
+                "📖 Clase:", ids_clases, 
                 index=st.session_state.clase_idx,
                 format_func=lambda x: clases_dict[x]["label"]
             )
@@ -166,14 +183,12 @@ def main():
                 st.rerun()
 
             st.divider()
-
-            # Render de la clase
+            
+            # MOSTRAR CONTENIDO
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
             
             st.divider()
-
-            # Navegación inferior
             c1, c2 = st.columns(2)
             with c1:
                 if st.session_state.clase_idx > 0:
