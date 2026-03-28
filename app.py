@@ -1,21 +1,15 @@
 import streamlit as st
 from contenidos import CONTENIDOS
-import os
 
-# 1. Configuración de página obligatoria al inicio
+# 1. CONFIGURACIÓN DE PÁGINA
 st.set_page_config(page_title="Lagrangianitos Hub", page_icon="🐉", layout="wide")
 
-# ==========================================
-# CONFIGURACIÓN DEL LOGO (CAMBIA ESTO)
-# ==========================================
-# Si es un archivo local, asegúrate de que esté en la misma carpeta o usa la ruta relativa
-# Ejemplo local: LOGO_PATH = "logo_dragon.png"
-# Ejemplo URL: LOGO_PATH = "https://tu-sitio.com/logo.png"
-LOGO_PATH = "https://via.placeholder.com/300x200.png?text=Logo+Dragon+Aqui" 
-# ==========================================
+# 2. RUTA DEL LOGO (Asegúrate de que el archivo esté en la misma carpeta)
+LOGO_PATH = "logo.png" 
 
+# 3. FUNCIÓN DE SCROLL AL INICIO
 def scroll_to_top():
-    """Inyecta JS para subir al inicio al cambiar de clase."""
+    """Inyecta JS para subir al inicio al cambiar de clase usando una key única."""
     unique_key = f"scroll_{st.session_state.get('clase_idx', 0)}_{st.session_state.get('eje_sel', 'none')}"
     st.components.v1.html(
         """
@@ -30,40 +24,40 @@ def scroll_to_top():
         key=unique_key
     )
 
+# 4. PANTALLA DE LOGIN
 def login():
-    # Estilo centrado para el login
     st.markdown("<h1 style='text-align:center;'>🐉 Lagrangianitos Hub</h1>", unsafe_allow_html=True)
     
-    # Intenta cargar el logo, si falla muestra un aviso
-    try:
-        st.image(LOGO_PATH, use_column_width=True)
-    except:
-        st.warning("⚠️ No se pudo cargar el logo. Revisa LOGO_PATH en app.py")
+    col_img_1, col_img_2, col_img_3 = st.columns([1, 1, 1])
+    with col_img_2:
+        try:
+            st.image(LOGO_PATH, use_container_width=True)
+        except:
+            st.info("Coloca tu archivo 'logo.png' en la carpeta raíz")
 
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
-        user = st.text_input("Usuario", key="login_user")
-        password = st.text_input("Contraseña", type="password", key="login_pass")
+        user = st.text_input("Usuario", key="user_input")
+        password = st.text_input("Contraseña", type="password", key="pass_input")
         if st.button("Ingresar", use_container_width=True):
-            # Credenciales corregidas: admin / admin
             if user == "admin" and password == "admin":
                 st.session_state.logged_in = True
                 st.rerun()
             else:
-                st.error("Credenciales incorrectas. Intenta con admin/admin")
+                st.error("Credenciales incorrectas")
 
+# 5. LÓGICA PRINCIPAL
 def main():
-    # --- OCULTAR BARRA LATERAL POR CSS ---
+    # CSS para ocultar la barra lateral y ajustar márgenes
     st.markdown("""
         <style>
             [data-testid="stSidebar"] {display: none;}
             [data-testid="stSidebarNav"] {display: none;}
-            /* Ajuste opcional para reducir el margen superior */
-            .block-container {padding-top: 1rem;}
+            .block-container {padding-top: 2rem;}
         </style>
     """, unsafe_allow_html=True)
 
-    # Inicialización de estados
+    # Inicializar estados de sesión
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
     if 'modo_detective' not in st.session_state:
@@ -81,84 +75,72 @@ def main():
         login()
         return
 
-    # --- PÁGINA DE INICIO ---
+    # --- PÁGINA DE INICIO (MENÚ PRINCIPAL) ---
     if st.session_state.page == "Inicio":
         st.markdown("<h1 style='text-align:center;'>📚 Entrenamiento M1</h1>", unsafe_allow_html=True)
         
-        # Centrar el logo en el inicio
         col_logo_1, col_logo_2, col_logo_3 = st.columns([1, 1, 1])
         with col_logo_2:
             try:
                 st.image(LOGO_PATH, width=300)
             except:
-                st.info("Espacio para el Logo del Dragón")
+                st.caption("Dragon Logo")
 
         st.divider()
-        st.subheader("Selecciona tu materia:")
+        st.subheader("Selecciona tu materia para comenzar:")
         
         materias = list(CONTENIDOS.keys())
-        if materias:
-            cols = st.columns(len(materias))
-            for i, materia in enumerate(materias):
-                with cols[i]:
-                    if st.button(materia, use_container_width=True, key=f"btn_{materia}"):
-                        st.session_state.materia_sel = materia
-                        st.session_state.page = "Visor"
-                        # Seleccionar primer eje y resetear índice
-                        st.session_state.eje_sel = list(CONTENIDOS[materia]["subcategorias"].keys())[0]
-                        st.session_state.clase_idx = 0
-                        st.rerun()
-        else:
-            st.warning("No se encontraron materias en contenidos.py")
-
+        cols = st.columns(len(materias))
+        for i, materia in enumerate(materias):
+            with cols[i]:
+                if st.button(materia, use_container_width=True, key=f"btn_main_{materia}"):
+                    st.session_state.materia_sel = materia
+                    st.session_state.page = "Visor"
+                    st.session_state.eje_sel = list(CONTENIDOS[materia]["subcategorias"].keys())[0]
+                    st.session_state.clase_idx = 0
+                    st.rerun()
+        
         st.divider()
         
-        # Herramientas al final
-        col_det, col_logout = st.columns([3, 1])
-        with col_det:
-            # st.toggle devuelve True/False directamente
-            check_detective = st.toggle("🔍 Modo Detective (Debug)", value=st.session_state.modo_detective)
-            if check_detective != st.session_state.modo_detective:
-                st.session_state.modo_detective = check_detective
-                st.rerun()
-
-        with col_logout:
+        c_det, c_out = st.columns([3, 1])
+        with c_det:
+            st.session_state.modo_detective = st.toggle("🔍 Modo Detective", value=st.session_state.modo_detective)
+        with c_out:
             if st.button("🚪 Cerrar Sesión", use_container_width=True):
                 st.session_state.logged_in = False
                 st.rerun()
 
-    # --- PÁGINA DEL VISOR ---
+    # --- PÁGINA DEL VISOR DE CLASES ---
     elif st.session_state.page == "Visor":
-        # Ejecutar scroll al inicio al cargar la página
         scroll_to_top()
         
-        # Cabecera del Visor
-        col_back, col_info_det = st.columns([3, 1])
-        with col_back:
+        c_nav, c_status = st.columns([4, 1])
+        with c_nav:
             if st.button("🏠 Volver al Menú Principal", use_container_width=True):
                 st.session_state.page = "Inicio"
                 st.rerun()
-        with col_info_det:
+        with c_status:
             if st.session_state.modo_detective:
-                st.caption("🕵️ Debug Activo")
+                st.success("🕵️ Modo Detective Activo")
 
         st.divider()
 
-        # Datos de la materia seleccionada
+        # Cargar datos de la materia
         materia_data = CONTENIDOS[st.session_state.materia_sel]
-        
-        # Selectores de Eje y Clase
-        col_eje, col_clase = st.columns(2)
         ejes_list = list(materia_data["subcategorias"].keys())
         
+        # Selectores superiores
+        col_eje, col_clase = st.columns(2)
+        
         with col_eje:
-            # Asegurar que el eje seleccionado exista, sino usar el primero
             if st.session_state.eje_sel not in ejes_list:
                 st.session_state.eje_sel = ejes_list[0]
             
-            idx_eje = ejes_list.index(st.session_state.eje_sel)
-            eje_escogido = st.selectbox("🎯 Eje Temático:", ejes_list, index=idx_eje, key="select_eje")
-            
+            eje_escogido = st.selectbox(
+                "🎯 Eje Temático:", 
+                ejes_list, 
+                index=ejes_list.index(st.session_state.eje_sel)
+            )
             if eje_escogido != st.session_state.eje_sel:
                 st.session_state.eje_sel = eje_escogido
                 st.session_state.clase_idx = 0
@@ -168,64 +150,55 @@ def main():
         ids_clases = list(clases_dict.keys())
         
         with col_clase:
-            # Asegurar que el índice esté dentro de rango
             st.session_state.clase_idx = min(st.session_state.clase_idx, len(ids_clases) - 1)
-            
             clase_id = st.selectbox(
                 "📖 Clase:", 
                 ids_clases, 
                 index=st.session_state.clase_idx,
-                format_func=lambda x: clases_dict[x]["label"],
-                key="select_clase"
+                format_func=lambda x: clases_dict[x]["label"]
             )
-            # Actualizar índice si cambió por el selectbox
-            new_idx = ids_clases.index(clase_id)
-            if new_idx != st.session_state.clase_idx:
-                st.session_state.clase_idx = new_idx
+            new_clase_idx = ids_clases.index(clase_id)
+            if new_clase_idx != st.session_state.clase_idx:
+                st.session_state.clase_idx = new_clase_idx
                 st.rerun()
 
-        # --- MODO DETECTIVE (DEBUG) ---
+        # MODO DETECTIVE (DEBUG)
         if st.session_state.modo_detective:
-            with st.expander("🕵️ Detalles Técnicos de la Clase (Debug)", expanded=True):
+            with st.expander("🛠️ Información de la Clase", expanded=True):
                 st.json({
                     "Materia": st.session_state.materia_sel,
                     "Eje": st.session_state.eje_sel,
-                    "ID Clase": clase_id,
-                    "Índice": st.session_state.clase_idx,
-                    "Label": clases_dict[clase_id]["label"],
-                    "Tiene Render": "render" in clases_dict[clase_id]
+                    "ID": clase_id,
+                    "Ruta": f"clases/{st.session_state.materia_sel}/{clase_id}.py"
                 })
 
         st.divider()
-        
-        # --- RENDERIZADO DEL CONTENIDO DE LA CLASE ---
+
+        # RENDERIZADO DEL CONTENIDO
         if "render" in clases_dict[clase_id]:
             try:
                 clases_dict[clase_id]["render"]()
             except Exception as e:
-                st.error(f"❌ Error al renderizar la clase: {e}")
-                if st.session_state.modo_detective:
-                    st.exception(e)
+                st.error(f"Error al cargar la clase: {e}")
         else:
-            st.error("❌ No se encontró la función 'render' para esta clase.")
+            st.error("No se encontró la función render.")
 
         st.divider()
-        
-        # --- NAVEGACIÓN INFERIOR (ANTERIOR / SIGUIENTE) ---
-        c1, spacer, c2 = st.columns([1, 1, 1])
-        with c1:
+
+        # NAVEGACIÓN INFERIOR
+        c_prev, c_spacer, c_next = st.columns([1, 1, 1])
+        with c_prev:
             if st.session_state.clase_idx > 0:
-                if st.button("⬅️ Clase Anterior", use_container_width=True, key="btn_ant"):
+                if st.button("⬅️ Anterior", use_container_width=True):
                     st.session_state.clase_idx -= 1
-                    # scroll_to_top() ya se ejecuta al inicio del renderizado
                     st.rerun()
-        with c2:
+        with c_next:
             if st.session_state.clase_idx < len(ids_clases) - 1:
-                if st.button("Siguiente Clase ➡️", use_container_width=True, key="btn_sig"):
+                if st.button("Siguiente ➡️", use_container_width=True):
                     st.session_state.clase_idx += 1
                     st.rerun()
             else:
-                st.success("🎯 ¡Has completado este eje temático!")
+                st.info("Has llegado al final de este eje.")
 
 if __name__ == "__main__":
     main()
