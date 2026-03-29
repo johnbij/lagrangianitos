@@ -270,3 +270,10 @@ def render_N01():
             }
 ]
         render_multiple_choice_quiz(_quiz_data, key_prefix="n01_quiz")
+        if st.button("🚀 ENVIAR RESPUESTAS Y COMPLETAR CLASE"):
+    # Llamamos a la función que creamos en app.py
+    exito = st.session_state.registrar_progreso("N01") 
+    if exito:
+        st.success("¡Progreso guardado! Revisa tu radar en el inicio.")
+        st.balloons()
+        
