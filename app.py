@@ -19,13 +19,12 @@ st.set_page_config(
 conn = st.connection("gsheets", type=GSheetsConnection)
 
 # ==========================================
-# 2. FUNCIONES DE DATOS
+# 2. FUNCIONES DE DATOS Y PROGRESO
 # ==========================================
 
 def cargar_usuario(user_input, pass_input):
     try:
         df = conn.read(worksheet="Usuarios", ttl=0)
-        # Forzamos string para evitar líos con números en el Excel
         user_row = df[(df['User'].astype(str) == str(user_input)) & 
                       (df['Pass'].astype(str) == str(pass_input))]
         return user_row if not user_row.empty else None
@@ -47,6 +46,32 @@ def registrar_acceso(usuario):
     except:
         pass
 
+def registrar_progreso(clase_id):
+    """Función maestra para que las clases guarden progreso al Sheets"""
+    try:
+        usuario_actual = st.session_state.user_data['User']
+        ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        nuevo_dato = pd.DataFrame([{
+            "User": usuario_actual,
+            "ID_Clase": clase_id,
+            "Completado": True,
+            "Timestamp": ahora
+        }])
+        
+        df_progreso = conn.read(worksheet="Progreso", ttl=0)
+        # Evitar duplicados: si ya existe esa clase para ese usuario, no la agregamos
+        if not ((df_progreso['User'] == usuario_actual) & (df_progreso['ID_Clase'] == clase_id)).any():
+            df_final = pd.concat([df_progreso, nuevo_dato], ignore_index=True)
+            conn.update(worksheet="Progreso", data=df_final)
+            return True
+    except Exception as e:
+        st.error(f"Error al guardar progreso: {e}")
+        return False
+
+# Exportamos la función al session_state para que sea accesible desde las clases hijas
+st.session_state.registrar_progreso = registrar_progreso
+
 # ==========================================
 # 3. RADAR DE HABILIDADES
 # ==========================================
@@ -55,7 +80,6 @@ def render_radar(user_email):
         df_progreso = conn.read(worksheet="Progreso", ttl=0)
         user_prog = df_progreso[(df_progreso['User'] == user_email) & (df_progreso['Completado'] == True)]
         
-        # Mapeo exacto a las llaves de tu contenidos.py
         mapping = {
             'Números': 'Números',
             'Álgebra': 'Álgebra y Funciones',
@@ -67,11 +91,8 @@ def render_radar(user_email):
         puntajes = []
 
         for label, llave_real in mapping.items():
-            # Contar total de clases en contenidos.py para este eje
             subcats = CONTENIDOS["📐 Matemáticas"]["subcategorias"].get(llave_real, {})
             total_clases = len(subcats)
-            
-            # Contar cuántas ha completado el usuario (basado en el ID de clase)
             hechas = len(user_prog[user_prog['ID_Clase'].isin(subcats.keys())])
             
             progreso = (hechas / total_clases * 100) if total_clases > 0 else 0
@@ -119,7 +140,6 @@ def main():
     if 'logged_in' not in st.session_state: st.session_state.logged_in = False
     if 'page' not in st.session_state: st.session_state.page = "Inicio"
 
-    # PANTALLA DE LOGIN
     if not st.session_state.logged_in:
         header_principal()
         col1, col2, col3 = st.columns([1, 2, 1])
@@ -138,13 +158,11 @@ def main():
                         registrar_acceso(u_input)
                         st.rerun()
                     else:
-                        st.error("Credenciales incorrectas. Revisa mayúsculas/minúsculas.")
+                        st.error("Credenciales incorrectas.")
 
-    # PANTALLA POST-LOGIN
     else:
         user = st.session_state.user_data
         
-        # --- PÁGINA: INICIO ---
         if st.session_state.page == "Inicio":
             header_principal()
             col_izq, col_der = st.columns([0.6, 0.4])
@@ -156,7 +174,7 @@ def main():
                 
                 st.subheader("📚 Elige tu ruta de hoy:")
                 for materia in CONTENIDOS.keys():
-                    if st.button(f"{materia}", use_container_width=True):
+                    if st.button(f"{materia}", key=f"btn_{materia}", use_container_width=True):
                         st.session_state.materia_sel = materia
                         st.session_state.page = "Visor"
                         st.rerun()
@@ -176,7 +194,6 @@ def main():
                     st.session_state.logged_in = False
                     st.rerun()
 
-        # --- PÁGINA: VISOR DE CLASES ---
         elif st.session_state.page == "Visor":
             if st.button("⬅️ Volver al Hub"):
                 st.session_state.page = "Inicio"
@@ -185,7 +202,6 @@ def main():
             m_sel = st.session_state.materia_sel
             st.header(f"Explorando {m_sel}")
             
-            # Selector de Eje y Clase
             ejes = list(CONTENIDOS[m_sel]["subcategorias"].keys())
             col_eje, col_clase = st.columns(2)
             
@@ -200,13 +216,11 @@ def main():
             
             st.divider()
             
-            # Renderizar el contenido de la clase
             if "render" in clases_opciones[clase_id]:
                 clases_opciones[clase_id]["render"]()
             else:
-                st.info("Esta clase está en preparación. ¡Vuelve pronto!")
+                st.info("Esta clase está en preparación.")
 
-        # --- PÁGINA: ADMIN DETECTIVE ---
         elif st.session_state.page == "Admin":
             st.title("🕵️‍♂️ Panel de Control: Rastreo de Pillos")
             if st.button("🏠 Volver al Inicio"):
