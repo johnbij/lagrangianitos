@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.graph_objects as go
 from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
 from contenidos import CONTENIDOS
@@ -64,7 +63,6 @@ def registrar_progreso(clase_id, buenas=0, totales=0):
         
         df_progreso = conn.read(worksheet="Progreso", ttl=0)
         
-        # Actualizar si ya existe o agregar nuevo
         mask = (df_progreso['User'] == usuario_actual) & (df_progreso['ID_Clase'] == clase_id)
         if mask.any():
             df_progreso.loc[mask, ["Buenas", "Malas", "Timestamp"]] = [buenas, malas, ahora]
@@ -78,11 +76,10 @@ def registrar_progreso(clase_id, buenas=0, totales=0):
         st.error(f"Error al guardar progreso: {e}")
         return False
 
-# Inyectamos la función en el session_state
 st.session_state.registrar_progreso = registrar_progreso
 
 # ==========================================
-# 3. VISUALIZACIÓN DE RENDIMIENTO (BARRAS ÚNICAS)
+# 3. VISUALIZACIÓN DE RENDIMIENTO (BOTONES PORCENTAJE)
 # ==========================================
 def render_stats(user_email):
     try:
@@ -90,52 +87,34 @@ def render_stats(user_email):
         user_prog = df_progreso[df_progreso['User'] == user_email]
         
         if user_prog.empty:
-            st.info("🎯 Completa tu primera clase para ver tus estadísticas.")
+            st.info("🎯 Completa tu primera clase para ver tu rendimiento.")
             return
 
-        # Gráfico de barras apiladas (Stack) para crear una sola columna por clase
-        fig = go.Figure()
-        
-        # Parte Azul: BUENAS (Base de la barra)
-        fig.add_trace(go.Bar(
-            x=user_prog['ID_Clase'],
-            y=user_prog['Buenas'],
-            name='Buenas',
-            marker_color='#007BFF',
-            hovertemplate='Buenas: %{y}<extra></extra>'
-        ))
-        
-        # Parte Roja: MALAS (Encima de las buenas)
-        fig.add_trace(go.Bar(
-            x=user_prog['ID_Clase'],
-            y=user_prog['Malas'],
-            name='Malas',
-            marker_color='#FF4136',
-            hovertemplate='Malas: %{y}<extra></extra>'
-        ))
+        total_buenas = user_prog['Buenas'].sum()
+        total_malas = user_prog['Malas'].sum()
+        total_preguntas = total_buenas + total_malas
 
-        fig.update_layout(
-            barmode='stack', # Apila los valores en una sola barra
-            height=350,
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            margin=dict(l=10, r=10, t=30, b=10),
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-            font=dict(color="white"),
-            xaxis=dict(
-                title="Cuestionario",
-                gridcolor="rgba(255,255,255,0.1)",
-                tickmode='array',
-                tickvals=user_prog['ID_Clase']
-            ),
-            yaxis=dict(
-                title="Total Preguntas",
-                gridcolor="rgba(255,255,255,0.1)",
-                dtick=1 # Escala de 1 en 1
-            ),
-            hovermode="x"
-        )
-        st.plotly_chart(fig, use_container_width=True)
+        p_buenas = (total_buenas / total_preguntas * 100) if total_preguntas > 0 else 0
+        p_malas = (total_malas / total_preguntas * 100) if total_preguntas > 0 else 0
+
+        col_ok, col_err = st.columns(2)
+        with col_ok:
+            st.markdown(f"""
+                <div style="background-color: #007BFF; padding: 20px; border-radius: 12px; text-align: center; border: 2px solid #00F2FF;">
+                    <p style="margin:0; font-size: 0.9rem; color: white; opacity: 0.9;">ÉXITO TOTAL</p>
+                    <h2 style="margin:0; color: white; font-size: 2rem;">{p_buenas:.1f}%</h2>
+                </div>
+            """, unsafe_allow_html=True)
+
+        with col_err:
+            st.markdown(f"""
+                <div style="background-color: #FF4136; padding: 20px; border-radius: 12px; text-align: center; border: 2px solid #FFAAAA;">
+                    <p style="margin:0; font-size: 0.9rem; color: white; opacity: 0.9;">ERROR TOTAL</p>
+                    <h2 style="margin:0; color: white; font-size: 2rem;">{p_malas:.1f}%</h2>
+                </div>
+            """, unsafe_allow_html=True)
+        
+        st.caption(f"📊 Resumen de {int(total_preguntas)} ejercicios realizados.")
     except:
         st.info("🎯 Completa un cuestionario para activar las estadísticas.")
 
@@ -176,7 +155,6 @@ def main():
                         st.rerun()
                     else:
                         st.error("Credenciales incorrectas.")
-
     else:
         user = st.session_state.user_data
         
@@ -188,7 +166,6 @@ def main():
                 st.title(f"¡Hola, {user['User']}!")
                 st.markdown(f"**Rango:** {user['Nivel']} | **Puntos de Experiencia:** {user['XP']} XP")
                 st.divider()
-                
                 st.subheader("📚 Elige tu ruta de hoy:")
                 for materia in CONTENIDOS.keys():
                     if st.button(f"{materia}", key=f"btn_{materia}", use_container_width=True):
@@ -204,9 +181,8 @@ def main():
                         st.rerun()
 
             with col_der:
-                st.markdown("<h4 style='text-align:center;'>Rendimiento por Clase</h4>", unsafe_allow_html=True)
+                st.markdown("<h4 style='text-align:center;'>Tu Rendimiento</h4>", unsafe_allow_html=True)
                 render_stats(user['User'])
-                
                 st.divider()
                 if st.button("🚪 Cerrar Sesión", use_container_width=True):
                     st.session_state.logged_in = False
@@ -219,7 +195,6 @@ def main():
             
             m_sel = st.session_state.materia_sel
             st.header(f"Explorando {m_sel}")
-            
             ejes = list(CONTENIDOS[m_sel]["subcategorias"].keys())
             col_eje, col_clase = st.columns(2)
             
@@ -228,7 +203,6 @@ def main():
             
             clases_dict = CONTENIDOS[m_sel]["subcategorias"][eje_sel]
             lista_ids = list(clases_dict.keys())
-
             default_index = 0
             if 'clase_target' in st.session_state and st.session_state.clase_target in lista_ids:
                 default_index = lista_ids.index(st.session_state.clase_target)
@@ -243,18 +217,13 @@ def main():
                 )
             
             st.divider()
-            
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
-                
                 st.divider()
                 indice_actual = lista_ids.index(clase_id)
-                
                 if indice_actual < len(lista_ids) - 1:
                     sig_id = lista_ids[indice_actual + 1]
-                    sig_label = clases_dict[sig_id]["label"]
-                    
-                    if st.button(f"Siguiente Clase: {sig_label} ➡️", use_container_width=True):
+                    if st.button(f"Siguiente Clase: {clases_dict[sig_id]['label']} ➡️", use_container_width=True):
                         st.session_state.clase_target = sig_id
                         st.rerun()
                 else:
@@ -263,16 +232,15 @@ def main():
                 st.info("Esta clase está en preparación.")
 
         elif st.session_state.page == "Admin":
-            st.title("🕵️‍♂️ Panel de Control: Rastreo de Pillos")
+            st.title("🕵️‍♂️ Panel de Control")
             if st.button("🏠 Volver al Inicio"):
                 st.session_state.page = "Inicio"
                 st.rerun()
-            
             try:
                 df_logs = conn.read(worksheet="Logs_Acceso", ttl=0)
                 st.dataframe(df_logs.sort_index(ascending=False), use_container_width=True)
             except:
-                st.error("No se encontró la pestaña 'Logs_Acceso'.")
+                st.error("Error al cargar logs.")
 
 if __name__ == "__main__":
     main()
