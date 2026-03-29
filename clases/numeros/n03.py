@@ -1,32 +1,30 @@
-from utils import render_multiple_choice_quiz
 import streamlit as st
 import matplotlib.pyplot as plt
 
-
 def render_N03():
     with st.expander("📚 Teoría", expanded=False):
-        st.title("N03: Los Números Cardinales (ℕ₀) — La Conquista del Vacío")
-
         st.markdown(r"""
+    ## N03: Los Números Cardinales ($\mathbb{N}_0$) — La Conquista del Vacío
+
+    ---
+
     ### 🛡️ El Portal: El Descubrimiento de la Nada
+    En el capítulo anterior vimos que los Naturales servían para contar lo que "estaba ahí". Pero, ¿cómo representamos la ausencia total? Durante siglos, la humanidad le tuvo miedo al vacío. No fue hasta que civilizaciones como la India y los Mayas entendieron que el "nada" también es una cantidad, que la matemática pudo avanzar hacia el álgebra moderna.[cite: 8]
 
-    En el capítulo anterior vimos que los Naturales servían para contar lo que "estaba ahí". Pero, ¿cómo representamos la ausencia total? Durante siglos, la humanidad le tuvo miedo al vacío. No fue hasta que civilizaciones como la India y los Mayas entendieron que el "nada" también es una cantidad, que la matemática pudo avanzar hacia el álgebra moderna.
-
-    Al añadir el **0** a nuestro conjunto de naturales, creamos los **Números Cardinales** (o Naturales Extendidos). Este pequeño cambio redefine las fronteras de lo que podemos calcular.
+    Al añadir el **0** a nuestro conjunto de naturales, creamos los **Números Cardinales** (o Naturales Extendidos). Este pequeño cambio redefine las fronteras de lo que podemos calcular.[cite: 8]
 
     ---
 
     ### 🛡️ Definición y Notación
-
-    Se denota con la letra $\mathbb{N}_0$ (o a veces $\mathbb{N} \cup \{0\}$) y se define como:
-
+    Se denota con la letra $\mathbb{N}_0$ (o a veces $\mathbb{N} \cup \{0\}$) y se define como:[cite: 8]
     $$\mathbb{N}_0 = \{0, 1, 2, 3, 4, 5, ...\}$$
 
-    * **Primer Elemento:** El **0** es ahora el inicio absoluto.
-    * **Cambio de Guardia:** En este conjunto, el **1 ya no es el límite**; ahora el 1 sí tiene un antecesor natural (el 0).
-    * **El Nuevo Muro:** El único número que carece de antecesor en $\mathbb{N}_0$ es el **0**.
+    * **Primer Elemento:** El **0** es ahora el inicio absoluto.[cite: 8]
+    * **Cambio de Guardia:** En este conjunto, el **1 ya no es el límite**; ahora el 1 sí tiene un antecesor natural (el 0).[cite: 8]
+    * **El Nuevo Muro:** El único número que carece de antecesor en $\mathbb{N}_0$ es el **0**.[cite: 8]
     """)
 
+        # ── FIGURA: Comparativa N vs N0 ───────────────────────────────
         fig, ax = plt.subplots(figsize=(12, 4))
         ax.set_xlim(-1, 7)
         ax.set_ylim(0.5, 2.5)
@@ -51,58 +49,45 @@ def render_N03():
         ax.axis('off')
         plt.tight_layout()
         st.pyplot(fig)
-        plt.close()
+        plt.close(fig)
 
         st.markdown(r"""
     ---
 
-    ### 🛡️  El Cero bajo la Lupa (Protocolo PAES)
+    ### 🛡️ El Cero bajo la Lupa (Protocolo PAES)
+    El cero no es un número cualquiera; es un agente especial con reglas propias:[cite: 8]
 
-    El cero no es un número cualquiera; es un agente especial con reglas propias que debes memorizar para evitar trampas:
-
-    1. **Paridad:** El 0 es un **número PAR**. Cumple con la fórmula $2k = n$, donde si $k=0$, entonces $n=0$.
-    2. **Neutro Aditivo:** Es el elemento que no hace nada en la suma: $a + 0 = a$.
-    3. **Elemento Absorbente:** En la multiplicación, el cero es un "agujero negro": $a \cdot 0 = 0$.
-    4. **La Prohibición:** La división **por cero** ($\frac{a}{0}$) no existe. Es una indefinición matemática. Si ves un denominador que puede ser cero, ahí hay una trampa.
-
-    ---
-
-    ### 🛡️  Diccionario de Supervivencia (Lenguaje Técnico)
-
-    La PAES no siempre te dirá "use los cardinales". Usará estas frases clave:
-
-    * **"Enteros positivos":** Se refiere a $\mathbb{N} = \{1, 2, 3, ...\}$ (El 0 queda FUERA).
-    * **"Enteros no negativos":** Se refiere a $\mathbb{N}_0 = \{0, 1, 2, 3, ...\}$ (El 0 queda DENTRO).
-
-    > **Típ:** La palabra **"no negativo"** es la forma elegante de la PAES para obligarte a incluir el cero. Si el problema dice "un número no negativo", y tú partes contando desde el 1, perdiste el ejercicio.
+    1. **Paridad:** El 0 es un **número PAR**.[cite: 8]
+    2. **Neutro Aditivo:** Es el elemento que no altera la suma: $a + 0 = a$.[cite: 8]
+    3. **Elemento Absorbente:** En la multiplicación: $a \cdot 0 = 0$.[cite: 8]
+    4. **La Prohibición:** La división **por cero** ($\frac{a}{0}$) no existe.[cite: 8]
 
     ---
 
-    ### 🛡️  Propiedades de Clausura en $\mathbb{N}_0$
+    ### 🛡️ Diccionario de Supervivencia (Lenguaje Técnico)
+    La PAES usará estas frases clave:[cite: 8]
 
-    ¿Cambia algo respecto a los naturales?
+    * **"Enteros positivos":** Se refiere a $\mathbb{N} = \{1, 2, 3, ...\}$.[cite: 8]
+    * **"Enteros no negativos":** Se refiere a $\mathbb{N}_0 = \{0, 1, 2, 3, ...\}$.[cite: 8]
 
-    * **Adición y Multiplicación:** Siguen siendo **Cerradas**.
-    * **Sustracción:** Sigue **SIN ser cerrada**, pero ganamos un caso: $a - a = 0$. Ahora podemos restar números iguales, algo que en $\mathbb{N}$ era prohibido.
+    > **Típ:** La palabra **"no negativo"** te obliga a incluir el cero. Si el problema dice "un número no negativo", y tú partes contando desde el 1, perdiste el ejercicio.[cite: 8]
+
+    ---
+
+    ### 🛡️ Propiedades de Clausura en $\mathbb{N}_0$
+    * **Adición y Multiplicación:** Siguen siendo **Cerradas**.[cite: 8]
+    * **Sustracción:** Sigue **SIN ser cerrada**, pero ganamos el caso: $a - a = 0$.[cite: 8]
 
     ---
 
     > "El cero es la mayor invención de la humanidad porque nos permite representar la nada como si fuera algo".
-    > — **Anónimo** (Relacionado con la invención del sistema posicional).
+    > — **Anónimo**
     """)
 
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N03", expanded=False):
         st.markdown(r"""
-### 1: La Vecindad del Uno en Diferentes Conjuntos
-
-**Situación:** Determinar el antecesor del número 1 en el conjunto $\mathbb{N}$ y en el conjunto $\mathbb{N}_0$.
-
-**La Carpintería:**
-1. **Analizar en $\mathbb{N}$:** El conjunto parte en el 1. No hay nada a su izquierda. El antecesor **no existe** en $\mathbb{N}$.
-2. **Analizar en $\mathbb{N}_0$:** El conjunto parte en el 0. Al restar 1 al número ($1-1$), obtenemos 0.
-3. **Verificar:** El 0 pertenece a $\mathbb{N}_0$.
-4. **Resultado:** En $\mathbb{N}_0$, el antecesor de 1 es el 0.
+### E02: La Vecindad del Uno en Diferentes Conjuntos[cite: 8]
 
 | Conjunto | Número | Antecesor ($n-1$) | ¿Existe en el conjunto? |
 | :--- | :---: | :---: | :---: |
@@ -111,16 +96,7 @@ def render_N03():
 
 ---
 
-### 2: El Cero y la Paridad
-
-**Situación:** Si $x$ es un número natural, determinar si la expresión $2 \cdot (x - x)$ representa un número par.
-
-**La Carpintería:**
-1. **Resolver el paréntesis:** $x - x = 0$.
-2. **Multiplicar:** $2 \cdot 0 = 0$.
-3. **Aplicar definición de Par:** Un número es par si se puede escribir como $2k$ (con $k$ entero).
-4. **Comprobar:** $0 = 2 \cdot 0$.
-5. **Resultado:** Sí, el resultado es 0, y el 0 es un **número par**.
+### E03: El Cero y la Paridad[cite: 8]
 
 | Expresión | Valor | Clasificación |
 | :--- | :---: | :--- |
@@ -129,15 +105,7 @@ def render_N03():
 
 ---
 
-### 3: Traducción de "Enteros No Negativos"
-
-**Situación:** Un problema PAES dice: *"Sea $n$ un entero no negativo menor que 3"*. ¿Cuáles son los posibles valores de $n$?
-
-**La Carpintería:**
-1. **Decodificar "No Negativo":** Significa que incluye al cero y a los positivos ($\mathbb{N}_0$).
-2. **Decodificar "Menor que 3":** Significa que el 3 no está incluido ($n < 3$).
-3. **Listar candidatos:** 0, 1, 2.
-4. **Resultado:** El conjunto de valores es $\{0, 1, 2\}$.
+### E04: Traducción de "Enteros No Negativos"[cite: 8]
 
 | Frase Técnica | Traducción Matemática | Valores |
 | :--- | :--- | :--- |
@@ -146,34 +114,17 @@ def render_N03():
 
 ---
 
-### 4: La Absorción y la Indefinición
-
-**Situación:** Evaluar la expresión $\frac{10 \cdot (5 - 5)}{x}$ sabiendo que $x$ es un número cardinal sin antecesor.
-
-**La Carpintería:**
-1. **Identificar x:** El único cardinal sin antecesor es $x = 0$.
-2. **Calcular numerador:** $10 \cdot (0) = 0$.
-3. **Plantear la división:** $\frac{0}{0}$.
-4. **Evaluar:** La división por cero es una **indefinición**. No importa que el numerador sea cero.
-5. **Resultado:** La expresión no está definida.
+### E05: La Absorción y la Indefinición[cite: 8]
 
 | Parte | Operación | Resultado |
 | :--- | :--- | :--- |
 | Numerador | $10 \cdot 0$ | 0 |
-| Denominador | Valor de $x$ | 0 |
+| Denominador | Valor de $x$ (donde $x=0$) | 0 |
 | **Total** | **$0 / 0$** | **🚫 Indefinido** |
 
 ---
 
-### 5: Clausura Extendida
-
-**Situación:** ¿Se cumple la propiedad de clausura para la sustracción en $\mathbb{N}_0$ si restamos dos números iguales?
-
-**La Carpintería:**
-1. **Definir la resta:** $a - a$.
-2. **Resultado:** 0.
-3. **Verificar pertenencia:** ¿El 0 pertenece a $\mathbb{N}_0$? Sí.
-4. **Conclusión:** A diferencia de los Naturales ($\mathbb{N}$), en los Cardinales ($\mathbb{N}_0$) la resta de números iguales **sí cumple** la clausura. (Pero la resta de un menor con un mayor sigue fallando).
+### E06: Clausura Extendida[cite: 8]
 
 | Operación | Conjunto N | Conjunto N0 |
 | :--- | :---: | :---: |
@@ -182,35 +133,23 @@ def render_N03():
 """)
 
     with st.expander("❓ Cuestionario N03: Números Cardinales", expanded=False):
+        from utils import render_multiple_choice_quiz
         quiz_questions = [
-            {"question": "¿Cuál es el único número que pertenece a $\\mathbb{N}_0$ pero NO a $\\mathbb{N}$?", "options": {"A": "$1$", "B": "$0$", "C": "$-1$", "D": "No existe tal número"}, "answer": "B", "explanation": "$\\mathbb{N}_0 = \\mathbb{N} \\cup \\{0\\}$. El cero es el único elemento que diferencia ambos conjuntos."},
-            {"question": "¿Cuál es la condición para que $n \\in \\mathbb{N}_0$ NO tenga antecesor?", "options": {"A": "$n=1$", "B": "$n$ es par", "C": "$n=0$", "D": "Todos los cardinales tienen antecesor"}, "answer": "C", "explanation": "En $\\mathbb{N}_0$ el $0$ es el límite izquierdo; no hay ningún número menor en ese conjunto."},
-            {"question": "¿Cuál de estas frases representa al conjunto $\\{0,1,2,3,\\ldots\\}$?", "options": {"A": "Enteros positivos", "B": "Enteros no positivos", "C": "Enteros no negativos", "D": "Naturales"}, "answer": "C", "explanation": "No negativos = sin signo menos, incluye obligatoriamente al cero y todos los positivos."},
-            {"question": "Respecto al número $0$, ¿cuál afirmación es CORRECTA?", "options": {"A": "Es impar", "B": "Es neutro multiplicativo", "C": "Es par", "D": "Es el sucesor de $1$"}, "answer": "C", "explanation": "El $0$ es par porque $0 = 2 \\cdot 0$. Error común: confundirlo con el neutro multiplicativo (que es el $1$)."},
-            {"question": "La expresión $\\frac{5}{k-2}$ no está definida. ¿Cuál es el valor de $k$?", "options": {"A": "$0$", "B": "$2$", "C": "$5$", "D": "$-2$"}, "answer": "B", "explanation": "El denominador no puede ser cero: $k-2=0 \\Rightarrow k=2$."},
-            {"question": "Si $A = \\{\\text{enteros no negativos menores que }2\\}$, la cardinalidad de $A$ es:", "options": {"A": "$1$", "B": "$2$", "C": "$3$", "D": "Infinita"}, "answer": "B", "explanation": "$A = \\{0,1\\}$, exactamente 2 elementos."},
-            {"question": "En $1245 \\cdot 0 = 0$, ¿qué propiedad del cero se aplica?", "options": {"A": "Neutro aditivo", "B": "Elemento absorbente", "C": "Clausura", "D": "Distributividad"}, "answer": "B", "explanation": "Cualquier número multiplicado por $0$ da $0$: propiedad absorbente (anulación)."},
-            {"question": "En $\\mathbb{N}_0$, ¿cuál es el antecesor del sucesor de $0$?", "options": {"A": "$0$", "B": "$1$", "C": "$2$", "D": "No existe"}, "answer": "A", "explanation": "Sucesor de $0$ es $1$; antecesor de $1$ es $0$. Volvemos al inicio."},
-            {"question": "Si sumo dos cardinales, el resultado siempre es cardinal. Esto se llama:", "options": {"A": "Conmutatividad", "B": "Asociatividad", "C": "Clausura", "D": "Tricotomía"}, "answer": "C", "explanation": "Clausura: operar dos elementos del conjunto produce otro elemento del mismo conjunto."},
-            {"question": "Si $x \\in \\mathbb{N}$, se deduce que:", "options": {"A": "$x$ puede ser $0$", "B": "$x$ es estrictamente mayor que $0$", "C": "$x$ no tiene antecesor en $\\mathbb{N}_0$", "D": "$x$ es entero no positivo"}, "answer": "B", "explanation": "$\\mathbb{N} = \\{1,2,3,\\ldots\\}$, todos son mayores que $0$."},
+            {"question": "¿Cuál es el único número que pertenece a $\\mathbb{N}_0$ pero NO a $\\mathbb{N}$?", "options": {"A": "$1$", "B": "$0$", "C": "$-1$", "D": "No existe tal número"}, "answer": "B", "explanation": "El cero es el único elemento que diferencia ambos conjuntos.[cite: 8]"},
+            {"question": "¿Cuál es la condición para que $n \\in \\mathbb{N}_0$ NO tenga antecesor?", "options": {"A": "$n=1$", "B": "$n$ es par", "C": "$n=0$", "D": "Todos los cardinales tienen antecesor"}, "answer": "C", "explanation": "En $\\mathbb{N}_0$ el $0$ es el límite inicial; no hay números menores.[cite: 8]"},
+            {"question": "¿Cuál de estas frases representa al conjunto $\\{0,1,2,3,\\ldots\\}$?", "options": {"A": "Enteros positivos", "B": "Enteros no positivos", "C": "Enteros no negativos", "D": "Naturales"}, "answer": "C", "explanation": "No negativos incluye obligatoriamente al cero y todos los positivos.[cite: 8]"},
+            {"question": "Respecto al número $0$, ¿cuál afirmación es CORRECTA?", "options": {"A": "Es impar", "B": "Es neutro multiplicativo", "C": "Es par", "D": "Es el sucesor de $1$"}, "answer": "C", "explanation": "El $0$ es par porque $0 = 2 \\cdot 0$.[cite: 8]"},
+            {"question": "La expresión $\\frac{5}{k-2}$ no está definida. ¿Cuál es el valor de $k$?", "options": {"A": "$0$", "B": "$2$", "C": "$5$", "D": "$-2$"}, "answer": "B", "explanation": "La división por cero es una indefinición; por tanto $k-2=0$.[cite: 8]"},
+            {"question": "Si $A = \\{\\text{enteros no negativos menores que }2\\}$, la cardinalidad de $A$ es:", "options": {"A": "$1$", "B": "$2$", "C": "$3$", "D": "Infinita"}, "answer": "B", "explanation": "$A = \\{0,1\\}$, tiene 2 elementos.[cite: 8]"},
+            {"question": "En $1245 \\cdot 0 = 0$, ¿qué propiedad del cero se aplica?", "options": {"A": "Neutro aditivo", "B": "Elemento absorbente", "C": "Clausura", "D": "Distributividad"}, "answer": "B", "explanation": "Propiedad absorbente: cualquier número por 0 da 0.[cite: 8]"},
+            {"question": "En $\\mathbb{N}_0$, ¿cuál es el antecesor del sucesor de $0$?", "options": {"A": "$0$", "B": "$1$", "C": "$2$", "D": "No existe"}, "answer": "A", "explanation": "Sucesor de 0 es 1; antecesor de 1 es 0.[cite: 8]"},
+            {"question": "Si sumo dos cardinales, el resultado siempre es cardinal. Esto se llama:", "options": {"A": "Conmutatividad", "B": "Asociatividad", "C": "Clausura", "D": "Tricotomía"}, "answer": "C", "explanation": "Clausura: operar elementos del conjunto produce otro del mismo conjunto.[cite: 8]"},
+            {"question": "Si $x \\in \\mathbb{N}$, se deduce que:", "options": {"A": "$x$ puede ser $0$", "B": "$x$ es estrictamente mayor que $0$", "C": "$x$ no tiene antecesor en $\\mathbb{N}_0$", "D": "$x$ es entero no positivo"}, "answer": "B", "explanation": "Los naturales parten desde el 1, por lo que todos son mayores que 0.[cite: 8]"},
         ]
         render_multiple_choice_quiz(quiz_questions, key_prefix="n03_quiz")
-    with st.expander("🔑 Pauta Técnica N03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
-| :--- | :---: | :--- |
-| **1** | **B** | La definición de $\mathbb{N}_0$ es $\mathbb{N} \cup \{0\}$. El cero es el único elemento que marca la diferencia entre ambos conjuntos. |
-| **2** | **C** | En los Cardinales, el 0 es el nuevo límite izquierdo. Como no hay números menores que él en este conjunto, no tiene antecesor. |
-| **3** | **C** | "No negativos" significa: "todos los que no tengan signo menos", lo que incluye obligatoriamente al cero y a los positivos. |
-| **4** | **C** | El 0 es par porque cumple la regla $2 \cdot k$: $2 \cdot 0 = 0$. Es un error común creer que es neutro o que no tiene paridad. |
-| **5** | **B** | Para que una fracción no esté definida, su denominador debe ser 0. Si $k - 2 = 0$, entonces $k$ debe valer 2. |
-| **6** | **B** | Los "no negativos menores que 2" son el $\{0, 1\}$. El conjunto tiene exactamente 2 elementos. |
-| **7** | **B** | Cualquier número multiplicado por 0 resulta en 0. Esta propiedad se llama elemento absorbente (anulación). |
-| **8** | **A** | El sucesor de 0 es 1 ($0+1$). El antecesor de 1 es 0 ($1-1$). Volvemos al punto de partida. |
-| **9** | **C** | La clausura es la "propiedad de club": si opero dos socios ($\mathbb{N}_0$), el resultado debe ser otro socio del club. |
-| **10** | **B** | Si $x \in \mathbb{N}$, entonces $x \in \{1, 2, 3, ...\}$. Todos estos valores son mayores que cero. |
 
----
-
-> **Típ:** "Cuidado con la pregunta 5. En la PAES, la indefinición por división por cero es una de las formas más comunes de descartar alternativas en suficiencia de datos."
-""")
+    if st.button("🚀 ENVIAR RESPUESTAS Y COMPLETAR CLASE"):
+        exito = st.session_state.registrar_progreso("N03") 
+        if exito:
+            st.success("¡Progreso guardado! Revisa tu radar en el inicio.")
+            st.balloons()
