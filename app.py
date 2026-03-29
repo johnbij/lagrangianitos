@@ -60,16 +60,17 @@ def registrar_progreso(clase_id):
         }])
         
         df_progreso = conn.read(worksheet="Progreso", ttl=0)
-        # Evitar duplicados: si ya existe esa clase para ese usuario, no la agregamos
+        # Evitar duplicados
         if not ((df_progreso['User'] == usuario_actual) & (df_progreso['ID_Clase'] == clase_id)).any():
             df_final = pd.concat([df_progreso, nuevo_dato], ignore_index=True)
             conn.update(worksheet="Progreso", data=df_final)
             return True
+        return True # Ya estaba completada
     except Exception as e:
         st.error(f"Error al guardar progreso: {e}")
         return False
 
-# Exportamos la función al session_state para que sea accesible desde las clases hijas
+# Inyectamos la función en el session_state
 st.session_state.registrar_progreso = registrar_progreso
 
 # ==========================================
@@ -177,6 +178,9 @@ def main():
                     if st.button(f"{materia}", key=f"btn_{materia}", use_container_width=True):
                         st.session_state.materia_sel = materia
                         st.session_state.page = "Visor"
+                        # Reset de selectores al cambiar de materia
+                        if 'eje_sel' in st.session_state: del st.session_state.eje_sel
+                        if 'clase_activa' in st.session_state: del st.session_state.clase_activa
                         st.rerun()
                 
                 if str(user['User']).lower() == 'admin':
@@ -206,18 +210,38 @@ def main():
             col_eje, col_clase = st.columns(2)
             
             with col_eje:
-                eje_sel = st.selectbox("🎯 Selecciona un Eje:", ejes)
+                eje_sel = st.selectbox("🎯 Selecciona un Eje:", ejes, key="eje_sel")
             
-            clases_opciones = CONTENIDOS[m_sel]["subcategorias"][eje_sel]
+            clases_dict = CONTENIDOS[m_sel]["subcategorias"][eje_sel]
+            lista_ids = list(clases_dict.keys())
+
             with col_clase:
-                clase_id = st.selectbox("📖 Selecciona la Clase:", 
-                                      list(clases_opciones.keys()), 
-                                      format_func=lambda x: clases_opciones[x]["label"])
+                clase_id = st.selectbox(
+                    "📖 Selecciona la Clase:", 
+                    lista_ids, 
+                    format_func=lambda x: clases_dict[x]["label"],
+                    key="clase_activa"
+                )
             
             st.divider()
             
-            if "render" in clases_opciones[clase_id]:
-                clases_opciones[clase_id]["render"]()
+            # 1. Renderizar el contenido de la clase (Teoría, Cuestionario, etc.)
+            if "render" in clases_dict[clase_id]:
+                clases_dict[clase_id]["render"]()
+                
+                # 2. Lógica del Botón "Siguiente Clase"
+                st.divider()
+                indice_actual = lista_ids.index(clase_id)
+                
+                if indice_actual < len(lista_ids) - 1:
+                    sig_id = lista_ids[indice_actual + 1]
+                    sig_label = clases_dict[sig_id]["label"]
+                    
+                    if st.button(f"Siguiente Clase: {sig_label} ➡️", use_container_width=True):
+                        st.session_state.clase_activa = sig_id
+                        st.rerun()
+                else:
+                    st.success("✨ ¡Has completado todas las clases de este eje!")
             else:
                 st.info("Esta clase está en preparación.")
 
