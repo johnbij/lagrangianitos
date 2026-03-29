@@ -82,7 +82,7 @@ def registrar_progreso(clase_id, buenas=0, totales=0):
 st.session_state.registrar_progreso = registrar_progreso
 
 # ==========================================
-# 3. VISUALIZACIÓN DE RENDIMIENTO (BARRAS)
+# 3. VISUALIZACIÓN DE RENDIMIENTO (BARRAS ÚNICAS)
 # ==========================================
 def render_stats(user_email):
     try:
@@ -93,35 +93,47 @@ def render_stats(user_email):
             st.info("🎯 Completa tu primera clase para ver tus estadísticas.")
             return
 
-        # Gráfico de barras apiladas
+        # Gráfico de barras apiladas (Stack) para crear una sola columna por clase
         fig = go.Figure()
         
-        # Barra de BUENAS (Azul)
+        # Parte Azul: BUENAS (Base de la barra)
         fig.add_trace(go.Bar(
             x=user_prog['ID_Clase'],
             y=user_prog['Buenas'],
             name='Buenas',
-            marker_color='#007BFF'
+            marker_color='#007BFF',
+            hovertemplate='Buenas: %{y}<extra></extra>'
         ))
         
-        # Barra de MALAS (Rojo)
+        # Parte Roja: MALAS (Encima de las buenas)
         fig.add_trace(go.Bar(
             x=user_prog['ID_Clase'],
             y=user_prog['Malas'],
             name='Malas',
-            marker_color='#FF4136'
+            marker_color='#FF4136',
+            hovertemplate='Malas: %{y}<extra></extra>'
         ))
 
         fig.update_layout(
-            barmode='stack',
-            height=300,
+            barmode='stack', # Apila los valores en una sola barra
+            height=350,
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
             margin=dict(l=10, r=10, t=30, b=10),
             legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
             font=dict(color="white"),
-            xaxis=dict(gridcolor="rgba(255,255,255,0.1)"),
-            yaxis=dict(gridcolor="rgba(255,255,255,0.1)")
+            xaxis=dict(
+                title="Cuestionario",
+                gridcolor="rgba(255,255,255,0.1)",
+                tickmode='array',
+                tickvals=user_prog['ID_Clase']
+            ),
+            yaxis=dict(
+                title="Total Preguntas",
+                gridcolor="rgba(255,255,255,0.1)",
+                dtick=1 # Escala de 1 en 1
+            ),
+            hovermode="x"
         )
         st.plotly_chart(fig, use_container_width=True)
     except:
@@ -182,7 +194,6 @@ def main():
                     if st.button(f"{materia}", key=f"btn_{materia}", use_container_width=True):
                         st.session_state.materia_sel = materia
                         st.session_state.page = "Visor"
-                        # Reset de selectores
                         st.session_state.clase_target = None 
                         st.rerun()
                 
@@ -218,7 +229,6 @@ def main():
             clases_dict = CONTENIDOS[m_sel]["subcategorias"][eje_sel]
             lista_ids = list(clases_dict.keys())
 
-            # Manejo de navegación externa (botón siguiente)
             default_index = 0
             if 'clase_target' in st.session_state and st.session_state.clase_target in lista_ids:
                 default_index = lista_ids.index(st.session_state.clase_target)
@@ -245,7 +255,6 @@ def main():
                     sig_label = clases_dict[sig_id]["label"]
                     
                     if st.button(f"Siguiente Clase: {sig_label} ➡️", use_container_width=True):
-                        # En lugar de asignar directo al state del widget, usamos una variable de salto
                         st.session_state.clase_target = sig_id
                         st.rerun()
                 else:
