@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 from streamlit_gsheets import GSheetsConnection
 from contenidos import CONTENIDOS
+import textwrap # <--- NUEVO: Para limpiar sangrías del Markdown
 
 # ==========================================
 # 1. CONFIGURACIÓN INICIAL
@@ -75,7 +76,10 @@ def main():
             p = st.text_input("Pass", type="password")
             if st.form_submit_button("🚀 Entrar"):
                 ud = cargar_usuario(u, p)
-                if ud: st.session_state.logged_in = True; st.session_state.user_data = ud; st.rerun()
+                if ud: 
+                    st.session_state.logged_in = True
+                    st.session_state.user_data = ud
+                    st.rerun()
                 else: st.error("Error")
     else:
         if st.session_state.page == "Inicio":
@@ -86,35 +90,34 @@ def main():
                 if st.button(f"📘 {mat}", use_container_width=True):
                     st.session_state.materia_sel = mat
                     st.session_state.page = "Visor"
-                    st.session_state.clase_target = None # Reset para cargar desde cero
+                    st.session_state.clase_target = None
                     st.rerun()
-            if st.button("🚪 Salir"): st.session_state.logged_in = False; st.rerun()
+            if st.button("🚪 Salir"): 
+                st.session_state.logged_in = False
+                st.rerun()
 
         elif st.session_state.page == "Visor":
-            if st.button("⬅️ Hub"): st.session_state.page = "Inicio"; st.rerun()
+            if st.button("⬅️ Hub"): 
+                st.session_state.page = "Inicio"
+                st.rerun()
             
-            # 1. Obtener Materia
             m_data = CONTENIDOS[st.session_state.materia_sel]
             ejes_disponibles = list(m_data["subcategorias"].keys())
             
             col_e, col_c = st.columns(2)
             
-            # 2. Selector de Eje (detecta si cambió para resetear clase)
             with col_e:
                 nuevo_eje = st.selectbox("🎯 Eje:", ejes_disponibles)
                 if nuevo_eje != st.session_state.eje_sel:
                     st.session_state.eje_sel = nuevo_eje
-                    st.session_state.clase_target = None # Forzar primera clase del nuevo eje
+                    st.session_state.clase_target = None
             
-            # 3. Obtener Clases del Eje seleccionado
             clases_dict = m_data["subcategorias"][st.session_state.eje_sel]
-            lista_ids = list(clases_dict.keys()) # AQUÍ LEEMOS TODAS LAS CLASES
+            lista_ids = list(clases_dict.keys())
 
-            # Sincronización de seguridad
             if st.session_state.clase_target not in lista_ids:
                 st.session_state.clase_target = lista_ids[0]
 
-            # 4. Selector de Clase (Actualiza dinámicamente)
             with col_c:
                 clase_actual = st.selectbox(
                     "📖 Clase:", 
@@ -127,8 +130,11 @@ def main():
 
             st.divider()
 
-            # 5. Renderizado y Botones de Navegación
+            # --- RENDERIZADO CORREGIDO ---
             if "render" in clases_dict[clase_actual]:
+                # Ejecutamos la función de la clase. 
+                # IMPORTANTE: Dentro de tus funciones render en contenidos.py, 
+                # asegúrate de usar st.markdown()
                 clases_dict[clase_actual]["render"]()
                 
                 st.divider()
