@@ -46,26 +46,34 @@ def registrar_acceso(usuario):
     except:
         pass
 
-def registrar_progreso(clase_id):
-    """Función maestra para que las clases guarden progreso al Sheets"""
+def registrar_progreso(clase_id, buenas=0, totales=0):
+    """Guarda progreso y resultados del cuestionario"""
     try:
         usuario_actual = st.session_state.user_data['User']
         ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        malas = totales - buenas
         
         nuevo_dato = pd.DataFrame([{
             "User": usuario_actual,
             "ID_Clase": clase_id,
             "Completado": True,
+            "Buenas": buenas,
+            "Malas": malas,
             "Timestamp": ahora
         }])
         
         df_progreso = conn.read(worksheet="Progreso", ttl=0)
-        # Evitar duplicados
-        if not ((df_progreso['User'] == usuario_actual) & (df_progreso['ID_Clase'] == clase_id)).any():
+        
+        # Actualizar si ya existe o agregar nuevo
+        mask = (df_progreso['User'] == usuario_actual) & (df_progreso['ID_Clase'] == clase_id)
+        if mask.any():
+            df_progreso.loc[mask, ["Buenas", "Malas", "Timestamp"]] = [buenas, malas, ahora]
+            df_final = df_progreso
+        else:
             df_final = pd.concat([df_progreso, nuevo_dato], ignore_index=True)
-            conn.update(worksheet="Progreso", data=df_final)
-            return True
-        return True # Ya estaba completada
+            
+        conn.update(worksheet="Progreso", data=df_final)
+        return True
     except Exception as e:
         st.error(f"Error al guardar progreso: {e}")
         return False
@@ -74,54 +82,50 @@ def registrar_progreso(clase_id):
 st.session_state.registrar_progreso = registrar_progreso
 
 # ==========================================
-# 3. RADAR DE HABILIDADES
+# 3. VISUALIZACIÓN DE RENDIMIENTO (BARRAS)
 # ==========================================
-def render_radar(user_email):
+def render_stats(user_email):
     try:
         df_progreso = conn.read(worksheet="Progreso", ttl=0)
-        user_prog = df_progreso[(df_progreso['User'] == user_email) & (df_progreso['Completado'] == True)]
+        user_prog = df_progreso[df_progreso['User'] == user_email]
         
-        mapping = {
-            'Números': 'Números',
-            'Álgebra': 'Álgebra y Funciones',
-            'Geometría': 'Geometría',
-            'Datos': 'Probabilidad y Estadística'
-        }
-        
-        ejes_label = list(mapping.keys())
-        puntajes = []
+        if user_prog.empty:
+            st.info("🎯 Completa tu primera clase para ver tus estadísticas.")
+            return
 
-        for label, llave_real in mapping.items():
-            subcats = CONTENIDOS["📐 Matemáticas"]["subcategorias"].get(llave_real, {})
-            total_clases = len(subcats)
-            hechas = len(user_prog[user_prog['ID_Clase'].isin(subcats.keys())])
-            
-            progreso = (hechas / total_clases * 100) if total_clases > 0 else 0
-            puntajes.append(progreso)
-
+        # Gráfico de barras apiladas
         fig = go.Figure()
-        fig.add_trace(go.Scatterpolar(
-            r=puntajes + [puntajes[0]],
-            theta=ejes_label + [ejes_label[0]],
-            fill='toself',
-            fillcolor='rgba(0, 242, 255, 0.3)',
-            line=dict(color='#00F2FF', width=2)
+        
+        # Barra de BUENAS (Azul)
+        fig.add_trace(go.Bar(
+            x=user_prog['ID_Clase'],
+            y=user_prog['Buenas'],
+            name='Buenas',
+            marker_color='#007BFF'
+        ))
+        
+        # Barra de MALAS (Rojo)
+        fig.add_trace(go.Bar(
+            x=user_prog['ID_Clase'],
+            y=user_prog['Malas'],
+            name='Malas',
+            marker_color='#FF4136'
         ))
 
         fig.update_layout(
-            polar=dict(
-                bgcolor='rgba(0,0,0,0)',
-                radialaxis=dict(visible=True, range=[0, 100], color="white", gridcolor="rgba(255,255,255,0.1)"),
-                angularaxis=dict(color="white")
-            ),
-            showlegend=False,
-            paper_bgcolor='rgba(0,0,0,0)',
+            barmode='stack',
             height=300,
-            margin=dict(l=40, r=40, t=30, b=30)
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            margin=dict(l=10, r=10, t=30, b=10),
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+            font=dict(color="white"),
+            xaxis=dict(gridcolor="rgba(255,255,255,0.1)"),
+            yaxis=dict(gridcolor="rgba(255,255,255,0.1)")
         )
         st.plotly_chart(fig, use_container_width=True)
     except:
-        st.info("🎯 Completa tu primera clase para activar el radar.")
+        st.info("🎯 Completa un cuestionario para activar las estadísticas.")
 
 # ==========================================
 # 4. INTERFAZ VISUAL (UI)
@@ -178,9 +182,8 @@ def main():
                     if st.button(f"{materia}", key=f"btn_{materia}", use_container_width=True):
                         st.session_state.materia_sel = materia
                         st.session_state.page = "Visor"
-                        # Reset de selectores al cambiar de materia
-                        if 'eje_sel' in st.session_state: del st.session_state.eje_sel
-                        if 'clase_activa' in st.session_state: del st.session_state.clase_activa
+                        # Reset de selectores
+                        st.session_state.clase_target = None 
                         st.rerun()
                 
                 if str(user['User']).lower() == 'admin':
@@ -190,8 +193,8 @@ def main():
                         st.rerun()
 
             with col_der:
-                st.markdown("<h4 style='text-align:center;'>Tu Dominio del Universo PAES</h4>", unsafe_allow_html=True)
-                render_radar(user['User'])
+                st.markdown("<h4 style='text-align:center;'>Rendimiento por Clase</h4>", unsafe_allow_html=True)
+                render_stats(user['User'])
                 
                 st.divider()
                 if st.button("🚪 Cerrar Sesión", use_container_width=True):
@@ -210,26 +213,30 @@ def main():
             col_eje, col_clase = st.columns(2)
             
             with col_eje:
-                eje_sel = st.selectbox("🎯 Selecciona un Eje:", ejes, key="eje_sel")
+                eje_sel = st.selectbox("🎯 Selecciona un Eje:", ejes, key="eje_sel_widget")
             
             clases_dict = CONTENIDOS[m_sel]["subcategorias"][eje_sel]
             lista_ids = list(clases_dict.keys())
+
+            # Manejo de navegación externa (botón siguiente)
+            default_index = 0
+            if 'clase_target' in st.session_state and st.session_state.clase_target in lista_ids:
+                default_index = lista_ids.index(st.session_state.clase_target)
 
             with col_clase:
                 clase_id = st.selectbox(
                     "📖 Selecciona la Clase:", 
                     lista_ids, 
+                    index=default_index,
                     format_func=lambda x: clases_dict[x]["label"],
-                    key="clase_activa"
+                    key="clase_selector_widget"
                 )
             
             st.divider()
             
-            # 1. Renderizar el contenido de la clase (Teoría, Cuestionario, etc.)
             if "render" in clases_dict[clase_id]:
                 clases_dict[clase_id]["render"]()
                 
-                # 2. Lógica del Botón "Siguiente Clase"
                 st.divider()
                 indice_actual = lista_ids.index(clase_id)
                 
@@ -238,7 +245,8 @@ def main():
                     sig_label = clases_dict[sig_id]["label"]
                     
                     if st.button(f"Siguiente Clase: {sig_label} ➡️", use_container_width=True):
-                        st.session_state.clase_activa = sig_id
+                        # En lugar de asignar directo al state del widget, usamos una variable de salto
+                        st.session_state.clase_target = sig_id
                         st.rerun()
                 else:
                     st.success("✨ ¡Has completado todas las clases de este eje!")
