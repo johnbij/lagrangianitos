@@ -16,9 +16,7 @@ def render_G07():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G07: Clasificación de Triángulos (Ángulos)
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
-
+    
     ---
 
     ### 🛡️ 1. Criterio de Clasificación
