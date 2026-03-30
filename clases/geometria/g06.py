@@ -16,9 +16,7 @@ def render_G06():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G06: Triángulos - Los Cimientos de la Geometría
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
-
+    
     ---
 
     ### 🛡️ 1. Definición y Elementos
