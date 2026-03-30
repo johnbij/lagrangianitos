@@ -16,9 +16,7 @@ def render_G03():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G03: El Punto Medio
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
-
+    
     ---
 
     ### 🛡️ 1. Definición
