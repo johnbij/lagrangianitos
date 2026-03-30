@@ -16,8 +16,7 @@ def render_G01():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G01: Topografía Inicial - El Plano
-    **Eje:** Geometría | **Video:** 056
+    
 
     ---
 
