@@ -16,8 +16,7 @@ def render_G04():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G04: Ángulos y Clasificación
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    
 
     ---
 
