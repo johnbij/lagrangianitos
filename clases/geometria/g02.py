@@ -16,8 +16,7 @@ def render_G02():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G02: Distancia entre Puntos
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    
 
     ---
 
