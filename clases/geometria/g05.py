@@ -16,8 +16,7 @@ def render_G05():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G05: Ángulos entre Paralelas y una Transversal
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    
 
     ---
 
