@@ -127,7 +127,7 @@ CONTENIDOS = {
                 "N29": {"label": "🔢 N29: Manipulando fórmulas", "render": render_N29},
                 "N30": {"label": "🔢 N30: Mapa de las proporciones", "render": render_N30},
                 "N31": {"label": "🔢 N31: Proporcionalidad Directa", "render": render_N31},
-                "N32": {"label": "🔢 N32: Proporcionalidad Inversa, "render": render_N32},
+                "N32": {"label": "🔢 N32: Proporcionalidad Inversa", "render": render_N32},
                 "N33": {"label": "🔢 N33: Proporcionalidad Compuesta", "render": render_N33},
                 "N34": {"label": "🔢 N34: Hacia las igualdades", "render": render_N34},
                 "N35": {"label": "🔢 N35: Aplicaciones de las proporciones", "render": render_N35},
