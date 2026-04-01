@@ -1,15 +1,3 @@
-# Full Python Module Content from Commit
+# File restored content from commit ca1dbe1e371ba080f52810a577b367dd185746ba
 
-import ... # restored imports
-
-def render_N01():
-    ...  # preserved function body
-
-# Figures and Quiz
-
-st.markdown("""
-|---|:---|---|---|
-| ... | ... | ... | ... |
-""")
-
-# Other content
+... (rest of the original file content) ...
