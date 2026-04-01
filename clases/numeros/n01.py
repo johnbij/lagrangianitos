@@ -1,148 +1,207 @@
 import streamlit as st
-import matplotlib.pyplot as plt
-from matplotlib.patches import Circle, Rectangle
+
 
 def render_N01():
     with st.expander("📚 Teoría", expanded=False):
+        st.markdown(r"""
+# N01: Teoría de Conjuntos - El Lenguaje Maestro
 
-        # ── TÍTULO Y SECCIONES 1-3 ───────────────────────────────────────────────
-        st.markdown("""
-    
-    ## N01: Teoría de Conjuntos - El Lenguaje Maestro
+---
 
-    ---
+### 🛡️ 1. El Portal
+Antes de entrar al universo de los números, necesitamos el lenguaje que los une a todos. La **Teoría de Conjuntos** es la **Gramática del Universo matemático**: el marco fundamental que define qué es un objeto, cómo se agrupan y cómo se relacionan entre sí.
 
-    ### 🛡️ El Portal: El Viaje que Cambia la Mirada
-    Bienvenido a la primera página de un viaje que no tiene vuelta atrás. A menudo, nos enseñan que las matemáticas son un conjunto de reglas para calcular el vuelto o aprobar un examen, pero eso es como decir que la música es solo saber apretar teclas. Lo que hoy iniciamos es la apertura de tus ojos ante la **Gramática del Universo**.
+Este es el punto de partida de todo viaje matemático serio. Sin él, el álgebra, los números y la probabilidad no tendrían cimientos.
 
-    Este eje de **Números** no se trata de hacer cuentas rápidas; se trata de aprender a clasificar el caos. Durante las próximas unidades, descubriremos que los números no están "tirados" en el espacio, sino que habitan en estructuras organizadas llamadas **Conjuntos**. Aprender Teoría de Conjuntos es aprender a pensar con orden, a establecer fronteras y a entender que todo gran sistema se basa en quién pertenece a qué y bajo qué reglas.
+---
 
-    ### 🛡️ Crónica del Infinito: El Legado de Georg Cantor
-    A finales del siglo XIX, **Georg Cantor** se atrevió a decir que el infinito no era un muro infranqueable, sino un jardín que podía ser medido. Cantor demostró que los conjuntos nos permiten comparar tamaños de infinitos que parecen imposibles. En la PAES, este lenguaje es tu escudo: si dominas los conjuntos, dominas las instrucciones de la prueba.
+### 🛡️ 2. Crónica del Infinito
+A finales del siglo XIX, el matemático alemán **Georg Cantor** se atrevió a lo impensable: trató el infinito como si fuera un objeto matemático concreto. Su idea revolucionaria fue que una colección de objetos bien definidos podía ser tratada como un ente matemático único: el **conjunto**.
 
-    ### 🛡️ El Marco de Referencia: Universo, Vacío y Subconjuntos
-    Para que exista el orden, debe existir un límite y una jerarquía clara:
+Su trabajo fue rechazado por muchos contemporáneos, pero hoy es la piedra angular de toda la matemática moderna.
 
-    * **El Universo ($\mathcal{U}$):** Es el contexto total que contiene todos los elementos de un problema.
-    * **El Vacío ($\emptyset$ o $\{\}$):** Un conjunto sin elementos. Es subconjunto de cualquier conjunto por definición.
-    * **Pertenencia ($\in$):** Relación de un **elemento** hacia un conjunto. (Ej: Manzana $\in$ Frutas).
-    * **Subconjunto o Inclusión ($\subset$):** Se dice que $A$ es subconjunto de $B$ ($A \subset B$) si **todos** los elementos de $A$ están también en $B$.
+---
 
-    > **Típ:** Si $A \subset B$, entonces la intersección es el más pequeño ($A \cap B = A$) y la unión es el más grande ($A \cup B = B$).
-    """)
+### 🛡️ 3. El Marco de Referencia
 
-        # ── FIGURA 1: Relación de Inclusión ─────────────────────────────────────
-        fig1, ax1 = plt.subplots(figsize=(8, 6))
-        ax1.add_patch(Rectangle((0, 0), 10, 8, color='#f0f0f0', ec='black', lw=2))
-        ax1.add_patch(Circle((5, 4), 3, color='#3498db', alpha=0.3, ec='blue', lw=2))
-        ax1.text(5, 6.5, "Conjunto B", fontsize=12, fontweight='bold', color='blue', ha='center')
-        ax1.add_patch(Circle((5, 4), 1.2, color='#2980b9', alpha=0.8, ec='navy', lw=2))
-        ax1.text(5, 4, "A ⊂ B", fontsize=12, fontweight='bold', color='white', ha='center', va='center')
-        ax1.set_xlim(-1, 11)
-        ax1.set_ylim(-1, 9)
-        ax1.axis('off')
-        fig1.suptitle("Relación de Inclusión (Subconjuntos)", fontsize=15, fontweight='bold')
-        st.pyplot(fig1)
-        plt.close(fig1)
+| Concepto | Símbolo | Definición |
+| :--- | :---: | :--- |
+| **Universo** | $\mathcal{U}$ | El conjunto que contiene a todos los elementos posibles en un contexto dado. |
+| **Vacío** | $\emptyset$ | El conjunto sin ningún elemento. Es subconjunto de cualquier conjunto. |
+| **Pertenencia** | $\in$ | $x \in A$ significa que el elemento $x$ está dentro del conjunto $A$. |
+| **Subconjunto** | $\subset$ | $A \subset B$ significa que todo elemento de $A$ también está en $B$. |
 
-        # ── SECCIONES 4 y 5 ─────────────────────────────────────────────────────
-        st.markdown("""
-    ### 🛡️ Operaciones de "1000 Puntos"
-    Estas operaciones son las que "mueven" los elementos entre conjuntos:
+> **Típ:** Si $A \subset B$, entonces $A \cap B = A$ y $A \cup B = B$. Esto es un atajo poderoso en la PAES.
 
-    | Operación | Símbolo | Significado Lógico | Carpintería Técnica |
-    | :--- | :---: | :--- | :--- |
-    | **Unión** | $\cup$ | $x \in A$ **o** $x \in B$ | Agrupar todos los elementos de ambos. |
-    | **Intersección** | $\cap$ | $x \in A$ **y** $x \in B$ | Solo los elementos que se repiten. |
-    | **Diferencia** | $-$ | $x \in A$ pero $x \notin B$ | Al primer conjunto le borras lo que sea del segundo. |
-    | **Complemento** | $A^c$ | $x \in \mathcal{U}$ pero $x \notin A$ | Todo lo que le falta a A para ser el Universo. |
+---
 
-    ### 🛡️ Cardinalidad y Conjunto Potencia
-    * **Cardinalidad ($n$):** Número de elementos únicos de un conjunto. Se denota como $\#A = n$.
-    * **Regla de Oro de la Unión:** $\#(A \cup B) = \#A + \#B - \#(A \cap B)$.
-    * **Total de Subconjuntos:** Si la cardinalidad de un conjunto es $n$, el total de subconjuntos es:
-    $$2^n$$
-    > **Típ:** El total de subconjuntos siempre incluye al **Vacío** y al **propio conjunto $A$**.
+### 🛡️ 4. Operaciones de "1000 Puntos"
 
-    ### 🛡️ Cartografía Visual (Diagramas de Venn-Euler)
-    """)
+| Operación | Símbolo | Definición | Ejemplo ($A=\{1,2,3\}$, $B=\{3,4,5\}$) |
+| :--- | :---: | :--- | :--- |
+| **Unión** | $A \cup B$ | Todos los elementos que están en $A$ **o** en $B$ (o en ambos). | $\{1,2,3,4,5\}$ |
+| **Intersección** | $A \cap B$ | Solo los elementos que están en $A$ **y** en $B$ al mismo tiempo. | $\{3\}$ |
+| **Diferencia** | $A - B$ | Los elementos de $A$ que **no** están en $B$. | $\{1,2\}$ |
+| **Complemento** | $A^c$ | Todo lo que está en el Universo $\mathcal{U}$ pero **fuera** de $A$. | Depende de $\mathcal{U}$ |
 
-        # ── FIGURA 2: Lámina de operaciones ─────────────────────────────────────
-        color_a, color_b, color_u = '#e74c3c', '#3498db', '#f1c40f'
-        fig2, axs = plt.subplots(2, 4, figsize=(20, 10))
-        fig2.patch.set_facecolor('white')
-        plt.subplots_adjust(wspace=0.4, hspace=0.4)
+---
 
-        # 1. Vacío
-        axs[0, 0].add_patch(Rectangle((0.1, 0.1), 0.8, 0.8, color='#f9f9f9', ec='black', lw=2))
-        axs[0, 0].text(0.5, 0.5, "Ø", fontsize=40, ha='center', va='center', alpha=0.3)
-        axs[0, 0].set_title("1. Conjunto Vacío", fontweight='bold')
+### 🛡️ 5. Cardinalidad y Conjunto Potencia
 
-        # 2. Intersección
-        axs[0, 1].add_patch(Circle((0.4, 0.5), 0.25, color=color_a, alpha=0.3, ec='red'))
-        axs[0, 1].add_patch(Circle((0.6, 0.5), 0.25, color=color_b, alpha=0.3, ec='blue'))
-        axs[0, 1].set_title("2. Intersección", fontweight='bold')
+* **Cardinalidad** ($\#A = n$): Es el número de elementos que tiene un conjunto.
+* **Regla de Oro** (Principio de Inclusión-Exclusión):
+$$\#(A \cup B) = \#A + \#B - \#(A \cap B)$$
+* **Conjunto Potencia** ($\mathcal{P}(A)$): Es el conjunto formado por **todos los subconjuntos posibles** de $A$, incluidos el conjunto vacío $\emptyset$ y el propio $A$.
+* **Fórmula:** Si $\#A = n$, entonces $\#\mathcal{P}(A) = 2^n$.
 
-        # 3. Unión
-        axs[0, 2].add_patch(Circle((0.4, 0.5), 0.25, color='purple', alpha=0.6))
-        axs[0, 2].add_patch(Circle((0.6, 0.5), 0.25, color='purple', alpha=0.6))
-        axs[0, 2].set_title("3. Unión (A ∪ B)", fontweight='bold')
+> **Típ:** El conjunto potencia **siempre** incluye al vacío $\emptyset$ y al conjunto completo $A$. ¡No los olvides en la cuenta!
 
-        # 4. Diferencia
-        axs[0, 3].add_patch(Circle((0.4, 0.5), 0.25, color=color_a, alpha=0.8, ec='red'))
-        axs[0, 3].add_patch(Circle((0.6, 0.5), 0.25, color='white', alpha=1.0))
-        axs[0, 3].set_title("4. Diferencia (A - B)", fontweight='bold')
+---
 
-        # 5. Complemento
-        axs[1, 0].add_patch(Rectangle((0.1, 0.1), 0.8, 0.8, color=color_u, alpha=0.3, ec='black'))
-        axs[1, 0].add_patch(Circle((0.5, 0.5), 0.25, color='white', ec='black'))
-        axs[1, 0].set_title("5. Complemento de A", fontweight='bold')
+### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
+Los **Diagramas de Venn-Euler** son la herramienta visual definitiva para representar conjuntos y sus operaciones. Se usan rectángulos para el Universo y círculos (u óvalos) para los conjuntos. Las zonas de superposición representan la intersección, mientras que las zonas exclusivas representan las diferencias.
 
-        # 6. Disjuntos
-        axs[1, 1].add_patch(Circle((0.25, 0.5), 0.2, color=color_a, alpha=0.5, ec='red'))
-        axs[1, 1].add_patch(Circle((0.75, 0.5), 0.2, color=color_b, alpha=0.5, ec='blue'))
-        axs[1, 1].set_title("6. Disjuntos", fontweight='bold')
+Son especialmente útiles para resolver problemas de conteo con múltiples grupos superpuestos.
 
-        # 7. Unión Disjunta
-        axs[1, 2].add_patch(Circle((0.25, 0.5), 0.2, color='gray', alpha=0.8))
-        axs[1, 2].add_patch(Circle((0.75, 0.5), 0.2, color='gray', alpha=0.8))
-        axs[1, 2].set_title("7. Unión Disjunta", fontweight='bold')
+---
 
-        # 8. Subconjunto
-        axs[1, 3].add_patch(Circle((0.5, 0.5), 0.35, color=color_b, alpha=0.3, ec='blue'))
-        axs[1, 3].add_patch(Circle((0.5, 0.5), 0.15, color=color_a, alpha=0.8, ec='red'))
-        axs[1, 3].set_title("8. Inclusión (A ⊂ B)", fontweight='bold')
+> *"En matemáticas, el arte de hacer preguntas es más valioso que el de resolver problemas."*
+>
+> — **Georg Cantor**
+""")
 
-        for ax in axs.flat:
-            ax.set_xlim(0, 1)
-            ax.set_ylim(0, 1)
-            ax.axis('off')
+    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N01", expanded=False):
+        st.markdown(r"""
+### E01: Identificación de Pertenencia
 
-        fig2.suptitle("LÁMINA TÉCNICA: OPERACIONES DE CONJUNTOS", fontsize=20, fontweight='bold')
-        st.pyplot(fig2)
-        plt.close(fig2)
+Dado el conjunto $V = \{m, n, \{p, q\}\}$, verifica las siguientes afirmaciones:
 
-        st.markdown("""
-    ---
-    > *"En matemáticas, el arte de proponer una pregunta debe ser de mayor valor que resolverla".*
-    >
-    > — **Georg Cantor**
-    """)
+| Afirmación | ¿Es verdadera? | Razón |
+| :--- | :---: | :--- |
+| $p \in V$ | ❌ NO | $p$ no es un elemento directo de $V$; está dentro del subconjunto $\{p,q\}$. |
+| $\{p, q\} \in V$ | ✅ SÍ | El objeto $\{p,q\}$ es un elemento directo de $V$. |
+| $q \in V$ | ❌ NO | $q$ no es un elemento directo de $V$; está dentro del subconjunto $\{p,q\}$. |
+| $\{m, n\} \in V$ | ❌ NO | $\{m,n\}$ no es un elemento de $V$; $m$ y $n$ son elementos separados. |
 
-    with st.expander("❓ Cuestionario N01", expanded=False):
+---
+
+### E02: Operaciones Básicas
+
+Dados $A = \{1,2,3,4,5\}$ y $B = \{3,4,5,6,7\}$:
+
+| Operación | Resultado |
+| :--- | :--- |
+| $A \cup B$ | $\{1,2,3,4,5,6,7\}$ |
+| $A \cap B$ | $\{3,4,5\}$ |
+| $A - B$ | $\{1,2\}$ |
+| $B - A$ | $\{6,7\}$ |
+
+---
+
+### E03: Cardinalidad y Conjunto Potencia
+
+Sea $C = \{a, b, c\}$. Entonces $\#C = 3$ y $\#\mathcal{P}(C) = 2^3 = 8$.
+
+Los 8 subconjuntos de $C$ son:
+
+$$\emptyset,\ \{a\},\ \{b\},\ \{c\},\ \{a,b\},\ \{a,c\},\ \{b,c\},\ \{a,b,c\}$$
+
+---
+
+### E04: Problema de Aplicación (Regla de Oro)
+
+En un curso de **40 alumnos**, 20 practican fútbol ($F$), 15 practican básquetbol ($B$) y 5 practican ambos deportes.
+
+**¿Cuántos no practican ninguno?**
+
+Paso 1 — Aplicar la Regla de Oro:
+$$\#(F \cup B) = \#F + \#B - \#(F \cap B) = 20 + 15 - 5 = 30$$
+
+Paso 2 — Calcular los que no practican ninguno:
+$$\text{Ninguno} = \text{Total} - \#(F \cup B) = 40 - 30 = \boxed{10}$$
+
+---
+
+### E05: Verificación de Subconjuntos
+
+Sea $M = \{2, 4, 6, 8\}$. ¿Cuál de las siguientes opciones es un subconjunto de $M$?
+
+| Conjunto | ¿Es subconjunto de $M$? | Razón |
+| :--- | :---: | :--- |
+| $\{2, 4, 10\}$ | ❌ NO | El 10 no pertenece a $M$. |
+| $\{6, 8, 0\}$ | ❌ NO | El 0 no pertenece a $M$. |
+| $\{2, 8\}$ | ✅ SÍ | Tanto el 2 como el 8 están en $M$. |
+| $\{4, 5, 6\}$ | ❌ NO | El 5 no pertenece a $M$. |
+""")
+
+    with st.expander("❓ Cuestionario N01: Teoría de Conjuntos", expanded=False):
         from utils import render_multiple_choice_quiz
         _quiz_data = [
             {
-                "question": "¿Cuál de las siguientes opciones es un conjunto BIEN DEFINIDO?",
-                "options": {"A": "Los números bonitos", "B": "Los números pares entre 1 y 10", "C": "Las personas altas", "D": "Las cosas grandes"},
-                "answer": "B",
-                "explanation": "Un conjunto bien definido permite saber sin ambigüedad si un elemento pertenece o no."
+                "question": "Si el conjunto $A$ tiene una cardinalidad $n = 5$, ¿cuántos subconjuntos tiene en total su conjunto potencia?",
+                "options": {"A": "$5$", "B": "$10$", "C": "$25$", "D": "$32$"},
+                "answer": "D",
+                "explanation": "Si $n = 5$, el total de subconjuntos es $2^5 = 32$."
             },
             {
-                "question": "El símbolo $\in$ significa:",
-                "options": {"A": "No pertenece", "B": "Es subconjunto de", "C": "Pertenece a", "D": "Es igual a"},
+                "question": "Dado el conjunto $V = \\{m, n, \\{p, q\\}\\}$, ¿cuál de las siguientes afirmaciones es CORRECTA?",
+                "options": {"A": "$p \\in V$", "B": "$\\{p, q\\} \\in V$", "C": "$q \\in V$", "D": "$\\{m, n\\} \\in V$"},
+                "answer": "B",
+                "explanation": "$\\{p, q\\}$ es un elemento dentro del conjunto $V$."
+            },
+            {
+                "question": "La operación que representa a los elementos que pertenecen al conjunto $A$ pero que NO pertenecen al conjunto $B$ es:",
+                "options": {"A": "$A \\cup B$", "B": "$A \\cap B$", "C": "$A - B$", "D": "$A^c$"},
                 "answer": "C",
-                "explanation": "$a \in A$ se lee 'a pertenece al conjunto A'."
+                "explanation": "La diferencia $A - B$ elimina los elementos comunes con $B$."
+            },
+            {
+                "question": "Si $A \\subset B$, entonces es SIEMPRE cierto que:",
+                "options": {"A": "$A \\cap B = B$", "B": "$A \\cup B = A$", "C": "$A \\cap B = A$", "D": "$A - B = B$"},
+                "answer": "C",
+                "explanation": "Si $A$ está contenido en $B$, su intersección es $A$ mismo."
+            },
+            {
+                "question": "En un curso de 40 alumnos, 20 practican fútbol, 15 practican básquetbol y 5 practican ambos deportes. ¿Cuántos alumnos NO practican ninguno de estos dos deportes?",
+                "options": {"A": "$0$", "B": "$5$", "C": "$10$", "D": "$30$"},
+                "answer": "C",
+                "explanation": "Total practican algún deporte: $20 + 15 - 5 = 30$. No practican: $40 - 30 = 10$."
+            },
+            {
+                "question": "El conjunto que no posee elementos y es subconjunto de cualquier otro conjunto se denomina:",
+                "options": {"A": "Conjunto Universo", "B": "Conjunto Unitario", "C": "Conjunto Vacío", "D": "Conjunto Potencia"},
+                "answer": "C",
+                "explanation": "El conjunto vacío $\\emptyset$ no tiene elementos y es subconjunto de cualquier conjunto."
+            },
+            {
+                "question": "Si $\\#A = 8$, $\\#B = 12$ y $\\#(A \\cap B) = 0$, ¿cuál es la cardinalidad de $A \\cup B$?",
+                "options": {"A": "$0$", "B": "$4$", "C": "$12$", "D": "$20$"},
+                "answer": "D",
+                "explanation": "Si no hay intersección: $\\#(A \\cup B) = 8 + 12 = 20$."
+            },
+            {
+                "question": "Si un conjunto aumenta su cardinalidad de $n=2$ a $n=3$, ¿en cuánto aumenta su cantidad de subconjuntos?",
+                "options": {"A": "En $1$", "B": "En $2$", "C": "En $4$", "D": "En $8$"},
+                "answer": "C",
+                "explanation": "De $n=2$ a $n=3$: $2^3 - 2^2 = 8 - 4 = 4$ subconjuntos más."
+            },
+            {
+                "question": "¿Qué operación define a todos los elementos que están en el Universo ($\\mathcal{U}$) pero que están fuera del conjunto $A$?",
+                "options": {"A": "$A \\cap \\mathcal{U}$", "B": "$A^c$", "C": "$A - \\mathcal{U}$", "D": "$\\emptyset$"},
+                "answer": "B",
+                "explanation": "El complemento $A^c$ es todo lo que está fuera de $A$ pero en $\\mathcal{U}$."
+            },
+            {
+                "question": "Si el conjunto $M = \\{2, 4, 6, 8\\}$, ¿cuál de los siguientes es un subconjunto de $M$?",
+                "options": {"A": "$\\{2, 4, 10\\}$", "B": "$\\{6, 8, 0\\}$", "C": "$\\{2, 8\\}$", "D": "$\\{4, 5, 6\\}$"},
+                "answer": "C",
+                "explanation": "$\\{2, 8\\}$ está completamente contenido en $M$."
             }
         ]
         render_multiple_choice_quiz(_quiz_data, key_prefix="n01_quiz")
+
+        if st.button("🚀 ENVIAR RESPUESTAS Y COMPLETAR CLASE"):
+            exito = st.session_state.registrar_progreso("N01")
+            if exito:
+                st.success("¡Progreso guardado! Revisa tu radar en el inicio.")
+                st.balloons()
