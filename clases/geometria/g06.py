@@ -28,7 +28,7 @@ def render_G06():
     * **Teorema del Ángulo Exterior:** La medida de un ángulo exterior es igual a la suma de los dos ángulos interiores no adyacentes a él.
     * **Desigualdad Triangular:** En todo triángulo, la suma de las longitudes de dos de sus lados debe ser mayor que la longitud del tercer lado ($a + b > c$).
 
-    > **Newton Tip:** "Típ: El triángulo es la única figura geométrica que no se deforma. Por eso las grúas y los puentes están llenos de triángulos. Si entiendes sus ángulos, entiendes la estabilidad del mundo."
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
