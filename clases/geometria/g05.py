@@ -29,7 +29,7 @@ def render_G05():
     * **Ángulos Alternos Externos:** Están "fuera" de las paralelas, en lados opuestos de la secante. Son **Iguales**.
     * **Ángulos Colaterales (Internos o Externos):** Están al mismo lado de la secante. Son **Suplementarios** (suman 180°).
 
-    > **Newton Tip:** "Típ: Si las rectas son paralelas, solo existen dos medidas de ángulos en todo el dibujo. O son iguales, o suman 180°. ¡No hay más ciencia!"
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
