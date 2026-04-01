@@ -205,9 +205,3 @@ def render_N02():
             }
         ]
         render_multiple_choice_quiz(_quiz_data, key_prefix="n02_quiz")
-
-        if st.button("🚀 ENVIAR RESPUESTAS Y COMPLETAR CLASE"):
-            exito = st.session_state.registrar_progreso("N02") 
-            if exito:
-                st.success("¡Progreso guardado! Revisa tu radar en el inicio.")
-                st.balloons()

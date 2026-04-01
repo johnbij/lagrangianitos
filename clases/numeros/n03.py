@@ -147,9 +147,3 @@ def render_N03():
             {"question": "Si $x \\in \\mathbb{N}$, se deduce que:", "options": {"A": "$x$ puede ser $0$", "B": "$x$ es estrictamente mayor que $0$", "C": "$x$ no tiene antecesor en $\\mathbb{N}_0$", "D": "$x$ es entero no positivo"}, "answer": "B", "explanation": "Los naturales parten desde el 1, por lo que todos son mayores que 0.[cite: 8]"},
         ]
         render_multiple_choice_quiz(quiz_questions, key_prefix="n03_quiz")
-
-    if st.button("🚀 ENVIAR RESPUESTAS Y COMPLETAR CLASE"):
-        exito = st.session_state.registrar_progreso("N03") 
-        if exito:
-            st.success("¡Progreso guardado! Revisa tu radar en el inicio.")
-            st.balloons()

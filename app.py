@@ -1,7 +1,4 @@
 import streamlit as st
-import pandas as pd
-from datetime import datetime
-from streamlit_gsheets import GSheetsConnection
 from contenidos import CONTENIDOS
 import textwrap # <--- NUEVO: Para limpiar sangrías del Markdown
 
@@ -9,8 +6,6 @@ import textwrap # <--- NUEVO: Para limpiar sangrías del Markdown
 # 1. CONFIGURACIÓN INICIAL
 # ==========================================
 st.set_page_config(page_title="Lagrangianitos - M1", page_icon="🐉", layout="wide")
-
-conn = st.connection("gsheets", type=GSheetsConnection)
 
 # Inicialización de estados
 if 'logged_in' not in st.session_state: st.session_state.logged_in = False
@@ -24,45 +19,7 @@ if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
 # ==========================================
 
 def cargar_usuario(u, p):
-    try:
-        df = conn.read(worksheet="Usuarios", ttl=0)
-        res = df[(df['User'].astype(str) == str(u)) & (df['Pass'].astype(str) == str(p))]
-        return res.iloc[0].to_dict() if not res.empty else None
-    except: return None
-
-def registrar_progreso(clase_id, buenas=0, totales=0):
-    try:
-        user_email = st.session_state.user_data['User']
-        ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        df = conn.read(worksheet="Progreso", ttl=0)
-        mask = (df['User'] == user_email) & (df['ID_Clase'] == clase_id)
-        
-        if mask.any():
-            df.loc[mask, ["Buenas", "Malas", "Timestamp"]] = [buenas, totales - buenas, ahora]
-        else:
-            nuevo = pd.DataFrame([{"User": user_email, "ID_Clase": clase_id, "Completado": True, "Buenas": buenas, "Malas": totales - buenas, "Timestamp": ahora}])
-            df = pd.concat([df, nuevo], ignore_index=True)
-        conn.update(worksheet="Progreso", data=df)
-        return True
-    except: return False
-
-st.session_state.registrar_progreso = registrar_progreso
-
-# ==========================================
-# 3. INTERFAZ
-# ==========================================
-
-def render_stats(user_email):
-    try:
-        df = conn.read(worksheet="Progreso", ttl=0)
-        u_df = df[df['User'] == user_email]
-        if u_df.empty: return st.info("🎯 ¡Sin datos aún!")
-        b, m = u_df['Buenas'].sum(), u_df['Malas'].sum()
-        t = b + m
-        c1, c2 = st.columns(2)
-        c1.metric("ÉXITO", f"{(b/t*100):.1f}%" if t>0 else "0%")
-        c2.metric("ERROR", f"{(m/t*100):.1f}%" if t>0 else "0%")
-    except: pass
+    return None
 
 # ==========================================
 # 4. LÓGICA DE NAVEGACIÓN (VISOR)
@@ -84,7 +41,6 @@ def main():
     else:
         if st.session_state.page == "Inicio":
             st.title(f"Bienvenido, {st.session_state.user_data['User']}")
-            render_stats(st.session_state.user_data['User'])
             st.divider()
             for mat in CONTENIDOS.keys():
                 if st.button(f"📘 {mat}", use_container_width=True):
