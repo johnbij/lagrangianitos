@@ -34,7 +34,7 @@ def render_G04():
     * **Complementarios:** Suman 90°.
     * **Suplementarios:** Suman 180°.
 
-    > **Hawking Tip:** *"Recuerda que el ángulo recto es la esquina perfecta, la base de casi toda la construcción geométrica."*
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
