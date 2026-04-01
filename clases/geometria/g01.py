@@ -79,6 +79,5 @@ def render_G01():
 | **6** | **B** | **Newton Tip:** "Si no te mueves hacia los lados, estás clavado en la línea vertical. La línea vertical es donde la abscisa ($x$) es siempre cero." |
 | **7** | **B** | **Hawking Tip:** "Es un clásico triángulo 3-4-5. La distancia del origen a $(x, y)$ es $\sqrt{x^2+y^2}$. $\sqrt{3^2+(-4)^2} = \sqrt{9+16} = 5$." |
 | **8** | **A** | **Curie Tip:** "El punto medio es el promedio, así que deshaz el promedio: $2 = (1+x)/2 \implies 4 = 1+x \implies x=3$. $3 = (1+y)/2 \implies 6 = 1+y \implies y=5$." |
-| **9** | **B** | **Galileo Tip:** "Si cambias el signo de X, estás reflejando al otro lado del eje vertical. Es como un espejo que cambia izquierda por derecha." |
-| **10** | **C** | **Newton Tip:** "Si la ordenada ($y$) es cero, no subiste ni bajaste. Estás sobre el eje X, específicamente 5 unidades a la izquierda del origen." |
+| **9** | **B** | 
 """)
