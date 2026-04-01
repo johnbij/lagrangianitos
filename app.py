@@ -19,6 +19,8 @@ if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
 # ==========================================
 
 def cargar_usuario(u, p):
+    # TODO: Implement authentication via a new data source.
+    # Google Sheets authentication has been removed.
     return None
 
 # ==========================================
