@@ -12,7 +12,7 @@ _CSS = """
 def render_G01():
     with st.expander("📚 Teoría", expanded=False):
         st.markdown(_CSS, unsafe_allow_html=True)
-        st.title("G01: Topografía Inicial — El Plano Cartesiano")
+        st.title("G01: El Plano Cartesiano")
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
