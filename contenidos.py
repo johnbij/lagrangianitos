@@ -50,6 +50,11 @@ from clases.algebra.f03 import render_F03
 from clases.algebra.f04 import render_F04
 from clases.algebra.f05 import render_F05
 
+from clases.geometria.p01 import render_P01
+from clases.geometria.p02 import render_P02
+from clases.geometria.p03 import render_P03
+from clases.geometria.p04 import render_P04
+from clases.geometria.p05 import render_P05
 from clases.geometria.g01 import render_G01
 from clases.geometria.g02 import render_G02
 from clases.geometria.g03 import render_G03
@@ -171,6 +176,11 @@ CONTENIDOS = {
                 "V03": {"label": "🏹 V03: Vectores III", "render": render_V03},
                 "V04": {"label": "🏹 V04: Vectores IV", "render": render_V04},
                 "V05": {"label": "🏹 V05: Vectores V", "render": render_V05},
+                "P01": {"label": "📏 P01: Perímetro de Figuras Planas", "render": render_P01},
+                "P02": {"label": "📏 P02: Área de Figuras Planas", "render": render_P02},
+                "P03": {"label": "📏 P03: El Teorema de Pitágoras", "render": render_P03},
+                "P04": {"label": "📏 P04: Cuerpos Geométricos y Volumen", "render": render_P04},
+                "P05": {"label": "📏 P05: Área de Superficies de Cuerpos Geométricos", "render": render_P05},
             },
             "Probabilidad y Estadística": {
                 "D01": {"label": "📊 D01: Necesidad de medir", "render": render_D01},
