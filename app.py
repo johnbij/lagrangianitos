@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_gsheets import GSheetsConnection
 from contenidos import CONTENIDOS
 import textwrap # <--- NUEVO: Para limpiar sangrías del Markdown
 
@@ -14,14 +15,19 @@ if 'clase_target' not in st.session_state: st.session_state.clase_target = None
 if 'materia_sel' not in st.session_state: st.session_state.materia_sel = None
 if 'eje_sel' not in st.session_state: st.session_state.eje_sel = None
 
+conn = st.connection("gsheets", type=GSheetsConnection)
+
 # ==========================================
 # 2. FUNCIONES DE DATOS
 # ==========================================
 
 def cargar_usuario(u, p):
-    # TODO: Implement authentication via a new data source.
-    # Google Sheets authentication has been removed.
-    return None
+    try:
+        df = conn.read(worksheet="Usuarios", ttl=0)
+        res = df[(df['User'].astype(str) == str(u)) & (df['Pass'].astype(str) == str(p))]
+        return res.iloc[0].to_dict() if not res.empty else None
+    except Exception:
+        return None
 
 # ==========================================
 # 4. LÓGICA DE NAVEGACIÓN (VISOR)
