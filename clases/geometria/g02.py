@@ -30,7 +30,7 @@ def render_G02():
     2. Resta las coordenadas $y$ y elévalas al cuadrado.
     3. Suma ambos resultados y saca la raíz cuadrada.
 
-    > **Statham Tip:** *"Dile que la distancia siempre es positiva. No importa si vas de A a B o de B a A, el camino mide lo mismo."*
+    >
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
