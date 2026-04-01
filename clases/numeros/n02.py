@@ -90,6 +90,99 @@ def render_N02():
     """)
 
 
+    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N02", expanded=False):
+        st.markdown(r"""
+### E01: Identificación del Sucesor y Antecesor
+
+Dado $n = 15$, determina su sucesor y su antecesor. Luego verifica si el 1 tiene antecesor en $\mathbb{N}$.
+
+**Paso 1 — Sucesor de 15:**
+$$\text{Suc}(15) = 15 + 1 = \boxed{16}$$
+
+**Paso 2 — Antecesor de 15:**
+$$\text{Ant}(15) = 15 - 1 = \boxed{14}$$
+
+**Paso 3 — ¿Tiene el 1 un antecesor en $\mathbb{N}$?**
+$$\text{Ant}(1) = 1 - 1 = 0$$
+Como $0 \notin \mathbb{N}$, el 1 **no tiene antecesor** en el conjunto de los naturales. Es el primer elemento absoluto.
+
+> **Típ:** Siempre que un problema mencione "el antecesor de $n$ es natural", implica directamente que $n \neq 1$.
+
+---
+
+### E02: Aplicación de la Ley de Tricotomía
+
+Compara cada par de números naturales e indica cuál de las tres relaciones aplica ($<$, $>$, $=$).
+
+| Par $(a,\ b)$ | Comparación | Relación |
+| :---: | :---: | :---: |
+| $(7,\ 12)$ | $7 < 12$ | $a < b$ |
+| $(9,\ 9)$ | $9 = 9$ | $a = b$ |
+| $(25,\ 17)$ | $25 > 17$ | $a > b$ |
+
+**Conclusión:** La Ley de Tricotomía garantiza que para cualquier par $(a, b) \in \mathbb{N}$, una y **solo una** de las tres situaciones se cumple. No pueden darse dos a la vez ni ninguna.
+
+---
+
+### E03: Verificación de Clausura
+
+Para el par $(8,\ 3)$, verifica si cada operación básica produce un resultado en $\mathbb{N}$.
+
+| Operación | Cálculo | Resultado | ¿Pertenece a $\mathbb{N}$? |
+| :---: | :---: | :---: | :---: |
+| Adición ($+$) | $8 + 3$ | $11$ | ✅ SÍ |
+| Multiplicación ($\times$) | $8 \times 3$ | $24$ | ✅ SÍ |
+| Sustracción ($-$) | $8 - 3$ | $5$ | ✅ SÍ (en este caso) |
+| Sustracción ($-$) | $3 - 8$ | $-5$ | ❌ NO ($-5 \notin \mathbb{N}$) |
+| División ($\div$) | $8 \div 3$ | $2{,}666...$ | ❌ NO (no es natural) |
+
+**Conclusión:** La clausura de la sustracción y la división **no siempre** se cumple en $\mathbb{N}$. Basta un contraejemplo para demostrar que la propiedad falla.
+
+---
+
+### E04: Propiedad Distributiva Aplicada
+
+**Parte A — Resolución directa vs. distributiva:**
+
+Resuelve $7 \cdot (4 + 6)$ de dos formas.
+
+*Forma directa:*
+$$7 \cdot (4 + 6) = 7 \cdot 10 = \boxed{70}$$
+
+*Usando la propiedad distributiva:*
+$$7 \cdot (4 + 6) = (7 \cdot 4) + (7 \cdot 6) = 28 + 42 = \boxed{70}$$
+
+Ambas formas producen el mismo resultado. ✅
+
+**Parte B — Distributiva inversa (factorización):**
+
+Factoriza $3 \cdot 8 + 3 \cdot 12$.
+
+$$3 \cdot 8 + 3 \cdot 12 = 3 \cdot (8 + 12) = 3 \cdot 20 = \boxed{60}$$
+
+> **Típ:** La distributiva inversa es la base de la factorización algebraica. Identificar el factor común es la clave para simplificar expresiones en álgebra y en la PAES.
+
+---
+
+### E05: Problema de Sucesor/Antecesor Compuesto
+
+Si el sucesor de $(k - 2)$ es $10$, ¿cuál es el valor de $k$?
+
+**Paso 1 — Escribir la ecuación:**
+
+Por definición, el sucesor de un número $m$ es $m + 1$. Entonces:
+$$\text{Suc}(k - 2) = (k - 2) + 1 = 10$$
+
+**Paso 2 — Simplificar:**
+$$k - 2 + 1 = 10$$
+$$k - 1 = 10$$
+
+**Paso 3 — Despejar $k$:**
+$$k = 10 + 1 = \boxed{11}$$
+
+**Verificación:** $\text{Suc}(11 - 2) = \text{Suc}(9) = 9 + 1 = 10$ ✅
+""")
+
     with st.expander("❓ Cuestionario N02", expanded=False):
         from utils import render_multiple_choice_quiz
         _quiz_data = [
