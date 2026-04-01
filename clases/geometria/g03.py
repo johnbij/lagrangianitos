@@ -27,7 +27,7 @@ def render_G03():
 
     $$x_m = \frac{x_1 + x_2}{2}, \quad y_m = \frac{y_1 + y_2}{2}$$
 
-    > **Hawking Tip:** *"Es la media aritmética pura. Suma los extremos y divide por dos. No hay fórmula más simple en todo el plano."*
+    >
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
