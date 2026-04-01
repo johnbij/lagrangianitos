@@ -16,8 +16,8 @@ def render_G21():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G21: Cuerpos 3D II - Pirámides, Conos y Esfera
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G21: Cuerpos 3D II - Pirámides, Conos y Esfera
+    
 
     ---
 
