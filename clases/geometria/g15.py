@@ -16,8 +16,8 @@ def render_G15():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G15: Teoremas de Euclides - Proporciones en el Triángulo Rectángulo
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G15: Teoremas de Euclides - Proporciones en el Triángulo Rectángulo
+   
 
     ---
 
@@ -36,7 +36,7 @@ def render_G15():
     También se cumple que el producto de los catetos es igual al producto de la hipotenusa por la altura:
     $$a \cdot b = c \cdot h_c$$
 
-    > **Newton Tip:** "Seba, dile a tu alumno: Euclides es el hermano de Pitágoras. Si con uno no puedes sacar el lado, el otro seguro te da la respuesta usando las proyecciones."
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
@@ -48,11 +48,11 @@ def render_G15():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Las proyecciones miden 4 y 9. Hallar la altura $h$. | 1. Aplicar Teorema de la Altura: $h^2 = 4 \cdot 9$.<br>2. $h^2 = 36 \implies \sqrt{36}$. | **6** |
-| **E02** | Proyección $p=2$, hipotenusa $c=8$. Hallar cateto $a$. | 1. Aplicar Teorema del Cateto: $a^2 = 2 \cdot 8$.<br>2. $a^2 = 16 \implies \sqrt{16}$. | **4** |
-| **E03** | Si $h=4$ y una proyección es 2, ¿cuánto mide la otra? | 1. $4^2 = 2 \cdot q \implies 16 = 2q$.<br>2. Despejar $q = 16 / 2$. | **8** |
-| **E04** | Catetos 3 y 4, hipotenusa 5. Hallar la altura $h$. | 1. Usar relación de área: $3 \cdot 4 = 5 \cdot h$.<br>2. $12 = 5h \implies h = 12/5$. | **2.4** |
-| **E05** | En un triángulo, $p=1$ y $q=4$. Hallar el cateto sobre $p$. | 1. Hipotenusa $c = 1 + 4 = 5$.<br>2. $a^2 = 1 \cdot 5 = 5 \implies \sqrt{5}$. | **$\sqrt{5}$** |
+| **1** | Las proyecciones miden 4 y 9. Hallar la altura $h$. | 1. Aplicar Teorema de la Altura: $h^2 = 4 \cdot 9$.<br>2. $h^2 = 36 \implies \sqrt{36}$. | **6** |
+| **2** | Proyección $p=2$, hipotenusa $c=8$. Hallar cateto $a$. | 1. Aplicar Teorema del Cateto: $a^2 = 2 \cdot 8$.<br>2. $a^2 = 16 \implies \sqrt{16}$. | **4** |
+| **3** | Si $h=4$ y una proyección es 2, ¿cuánto mide la otra? | 1. $4^2 = 2 \cdot q \implies 16 = 2q$.<br>2. Despejar $q = 16 / 2$. | **8** |
+| **4** | Catetos 3 y 4, hipotenusa 5. Hallar la altura $h$. | 1. Usar relación de área: $3 \cdot 4 = 5 \cdot h$.<br>2. $12 = 5h \implies h = 12/5$. | **2.4** |
+| **5** | En un triángulo, $p=1$ y $q=4$. Hallar el cateto sobre $p$. | 1. Hipotenusa $c = 1 + 4 = 5$.<br>2. $a^2 = 1 \cdot 5 = 5 \implies \sqrt{5}$. | **$\sqrt{5}$** |
 """)
 
     with st.expander("❓ Cuestionario G15", expanded=False):
