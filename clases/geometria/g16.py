@@ -33,7 +33,7 @@ def render_G16():
     ### 📐 3. La Regla de Oro
     Lo más importante en Tales es el **orden**. Si empiezas de arriba hacia abajo en una transversal, debes hacer lo mismo en la otra. Si comparas "segmento corto" con "segmento total", debes repetir esa lógica en todo el ejercicio.
 
-    > **Newton Tip:** "Seba, dile a tu alumno que Tales es como una fotocopiadora: mantiene la forma y las proporciones, solo cambia el tamaño. ¡Si aprenden a armar la fracción, el ejercicio está resuelto!"
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
