@@ -41,7 +41,7 @@ def render_N21():
 
     with st.expander("📝 Guía de Ejemplos Paso a Paso - Racionalización Básica"):
         st.markdown("""
-**E01. Racionalizar una raíz cuadrada simple.** Racionalizar $\\dfrac{1}{\\sqrt{2}}$.
+**1. Racionalizar una raíz cuadrada simple.** Racionalizar $\\dfrac{1}{\\sqrt{2}}$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -51,7 +51,7 @@ def render_N21():
 
 ---
 
-**E02. Racionalizar con coeficiente en el denominador.** Racionalizar $\\dfrac{3}{\\sqrt{3}}$.
+**2. Racionalizar con coeficiente en el denominador.** Racionalizar $\\dfrac{3}{\\sqrt{3}}$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -61,7 +61,7 @@ def render_N21():
 
 ---
 
-**E03. Racionalizar con número entero en el numerador.** Racionalizar $\\dfrac{2}{3\\sqrt{5}}$.
+**3. Racionalizar con número entero en el numerador.** Racionalizar $\\dfrac{2}{3\\sqrt{5}}$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -71,7 +71,7 @@ def render_N21():
 
 ---
 
-**E04. Racionalizar raíz cúbica.** Racionalizar $\\dfrac{1}{\\sqrt[3]{2}}$.
+**4. Racionalizar raíz cúbica.** Racionalizar $\\dfrac{1}{\\sqrt[3]{2}}$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -81,7 +81,7 @@ def render_N21():
 
 ---
 
-**E05. Racionalizar raíz sobre raíz.** Racionalizar $\\dfrac{\\sqrt{2}}{\\sqrt{3}}$.
+**5. Racionalizar raíz sobre raíz.** Racionalizar $\\dfrac{\\sqrt{2}}{\\sqrt{3}}$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
