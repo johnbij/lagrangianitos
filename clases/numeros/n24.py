@@ -43,7 +43,7 @@ def render_N24():
 
     with st.expander("📝 Guía de Ejemplos: Proporciones e Igualdad de k", expanded=False):
         st.markdown("""
-**E01. Hallar el término desconocido.** En la proporción $x : 4 = 15 : 6$, ¿cuál es el valor de $x$?
+**1. Hallar el término desconocido.** En la proporción $x : 4 = 15 : 6$, ¿cuál es el valor de $x$?
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -52,7 +52,7 @@ def render_N24():
 | 3 | Resolver la multiplicación y despejar | $x = 60 / 6$ |
 | 4 | Resultado final | $x = 10$ |
 
-**E02. Verificación mediante el valor k.** ¿Forman una proporción las razones $12 : 4$ y $30 : 10$?
+**2. Verificación mediante el valor k.** ¿Forman una proporción las razones $12 : 4$ y $30 : 10$?
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -61,7 +61,7 @@ def render_N24():
 | 3 | Comparar los valores de $k$ | $3 = 3$ |
 | 4 | Conclusión | Al ser el mismo valor $k$, es una proporción válida. |
 
-**E03. Uso de la constante k en igualdades.** Si $a/b = 2/3$ y $a + b = 20$, hallar el valor de $a$.
+**3. Uso de la constante k en igualdades.** Si $a/b = 2/3$ y $a + b = 20$, hallar el valor de $a$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -70,7 +70,7 @@ def render_N24():
 | 3 | Hallar el valor de $k$ | $k = 4$ |
 | 4 | Calcular el valor real de $a$ | $2 \\cdot 4 = 8$ |
 
-**E04. Proporción con decimales.** Hallar el valor de $y$ en la igualdad $y : 0,5 = 10 : 2$.
+**4. Proporción con decimales.** Hallar el valor de $y$ en la igualdad $y : 0,5 = 10 : 2$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -79,7 +79,7 @@ def render_N24():
 | 3 | Resolver la multiplicación | $2y = 5$ |
 | 4 | Resultado final | $y = 2,5$ |
 
-**E05. Incógnita en el consecuente.** Hallar $n$ en la igualdad $10 : 5 = 14 : n$.
+**5. Incógnita en el consecuente.** Hallar $n$ en la igualdad $10 : 5 = 14 : n$.
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
