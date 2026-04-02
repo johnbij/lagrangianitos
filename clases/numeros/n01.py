@@ -72,7 +72,7 @@ Son especialmente útiles para resolver problemas de conteo con múltiples grupo
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N01", expanded=False):
         st.markdown(r"""
-### E01: Identificación de Pertenencia
+### 1: Identificación de Pertenencia
 
 Dado el conjunto $V = \{m, n, \{p, q\}\}$, verifica las siguientes afirmaciones:
 
@@ -85,7 +85,7 @@ Dado el conjunto $V = \{m, n, \{p, q\}\}$, verifica las siguientes afirmaciones:
 
 ---
 
-### E02: Operaciones Básicas
+### 2: Operaciones Básicas
 
 Dados $A = \{1,2,3,4,5\}$ y $B = \{3,4,5,6,7\}$:
 
@@ -98,7 +98,7 @@ Dados $A = \{1,2,3,4,5\}$ y $B = \{3,4,5,6,7\}$:
 
 ---
 
-### E03: Cardinalidad y Conjunto Potencia
+### 3: Cardinalidad y Conjunto Potencia
 
 Sea $C = \{a, b, c\}$. Entonces $\#C = 3$ y $\#\mathcal{P}(C) = 2^3 = 8$.
 
@@ -108,7 +108,7 @@ $$\emptyset,\ \{a\},\ \{b\},\ \{c\},\ \{a,b\},\ \{a,c\},\ \{b,c\},\ \{a,b,c\}$$
 
 ---
 
-### E04: Problema de Aplicación (Regla de Oro)
+### 4: Problema de Aplicación (Regla de Oro)
 
 En un curso de **40 alumnos**, 20 practican fútbol ($F$), 15 practican básquetbol ($B$) y 5 practican ambos deportes.
 
@@ -122,7 +122,7 @@ $$\text{Ninguno} = \text{Total} - \#(F \cup B) = 40 - 30 = \boxed{10}$$
 
 ---
 
-### E05: Verificación de Subconjuntos
+### 5: Verificación de Subconjuntos
 
 Sea $M = \{2, 4, 6, 8\}$. ¿Cuál de las siguientes opciones es un subconjunto de $M$?
 
