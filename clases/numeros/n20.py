@@ -52,64 +52,64 @@ def render_N20():
 
     with st.expander("📝 Guía de Ejemplos: Dominando Radicales"):
         st.markdown("""
-**E01. De Raíz a Potencia.** Escribir $\\sqrt[5]{x^3}$ como potencia.
+**1. De Raíz a Potencia.** Escribir $\\sqrt[5]{x^3}$ como potencia.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Identificar exponente interior ($m$) e índice ($n$) | $m=3, n=5$ |
 | 2 | Aplicar el puente $a^{m/n}$ | $x^{3/5}$ |
 
-**E02. De Potencia a Raíz.** Escribir $7^{1/2}$ como raíz.
+**2. De Potencia a Raíz.** Escribir $7^{1/2}$ como raíz.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | El denominador 2 pasa a ser índice | $\\sqrt[2]{7^1}$ |
 | 2 | Simplificar notación | $\\sqrt{7}$ |
 
-**E03. Multiplicación de igual índice.** Calcular $\\sqrt[3]{2} \\cdot \\sqrt[3]{4}$
+**3. Multiplicación de igual índice.** Calcular $\\sqrt[3]{2} \\cdot \\sqrt[3]{4}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Conservar índice y multiplicar bases | $\\sqrt[3]{2 \\cdot 4}$ |
 | 2 | Resolver multiplicación | $\\sqrt[3]{8}$ |
 | 3 | Extraer raíz exacta | $2$ |
 
-**E04. División de igual índice.** Calcular $\\sqrt{50} / \\sqrt{2}$
+**4. División de igual índice.** Calcular $\\sqrt{50} / \\sqrt{2}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Conservar índice y dividir bases | $\\sqrt{50/2}$ |
 | 2 | Resolver división | $\\sqrt{25}$ |
 | 3 | Extraer raíz exacta | $5$ |
 
-**E05. Raíz de una raíz.** Simplificar $\\sqrt{\\sqrt[3]{64}}$
+**5. Raíz de una raíz.** Simplificar $\\sqrt{\\sqrt[3]{64}}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Multiplicar índices ($2 \\cdot 3$) | $\\sqrt[6]{64}$ |
 | 2 | Extraer raíz exacta ($2^6 = 64$) | $2$ |
 
-**E06. Meter factor bajo raíz.** Expresar $3\\sqrt{2}$ como una sola raíz.
+**6. Meter factor bajo raíz.** Expresar $3\\sqrt{2}$ como una sola raíz.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Elevar el factor al índice (cuadrado) | $3^2 = 9$ |
 | 2 | Multiplicar por el de adentro | $9 \\cdot 2$ |
 | 3 | Resultado final | $\\sqrt{18}$ |
 
-**E07. Suma de raíces semejantes.** Calcular $5\\sqrt{2} + 3\\sqrt{2} - \\sqrt{2}$
+**7. Suma de raíces semejantes.** Calcular $5\\sqrt{2} + 3\\sqrt{2} - \\sqrt{2}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Sumar/Restar coeficientes externos | $(5 + 3 - 1)$ |
 | 2 | Mantener la raíz semejante | $7\\sqrt{2}$ |
 
-**E08. Simplificar raíz (Descomposición).** Simplificar $\\sqrt{50}$
+**8. Simplificar raíz (Descomposición).** Simplificar $\\sqrt{50}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Buscar un cuadrado perfecto que divida al 50 | $25 \\cdot 2$ |
 | 2 | Aplicar raíz a cada uno | $\\sqrt{25} \\cdot \\sqrt{2}$ |
 | 3 | Resultado final | $5\\sqrt{2}$ |
 
-**E09. Potencia de una raíz.** Calcular $(\\sqrt[4]{3})^4$
+**9. Potencia de una raíz.** Calcular $(\\sqrt[4]{3})^4$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | El exponente anula a la raíz si son iguales | $3$ |
 
-**E10. Raíz de una fracción.** Calcular $\\sqrt{9/16}$
+**10. Raíz de una fracción.** Calcular $\\sqrt{9/16}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Aplicar raíz a numerador y denominador | $\\sqrt{9} / \\sqrt{16}$ |
