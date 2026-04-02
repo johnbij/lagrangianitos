@@ -47,11 +47,11 @@ def render_G21():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Volumen de una pirámide: base de 30 cm² y altura de 10 cm. | 1. Multiplicar base por altura: $30 \cdot 10 = 300$.<br>2. Dividir por 3: $300 / 3$. | **100 cm³** |
-| **E02** | Volumen de un cono de radio 3 y altura 4. | 1. Área base: $\pi \cdot 3^2 = 9\pi$.<br>2. Volumen: $(9\pi \cdot 4) / 3 = 36\pi / 3$. | **$12\pi$ u³** |
-| **E03** | Hallar la generatriz ($g$) de un cono si $r=3$ y $h=4$. | 1. Aplicar Pitágoras: $3^2 + 4^2 = g^2$.<br>2. $9 + 16 = 25 \implies \sqrt{25}$. | **5** |
-| **E04** | Área de una esfera de radio 2. | 1. Aplicar fórmula: $4 \cdot \pi \cdot 2^2$.<br>2. $4 \cdot \pi \cdot 4$. | **$16\pi$ u²** |
-| **E05** | Si el radio de una esfera se dobla, ¿qué pasa con el volumen? | 1. El volumen depende de $r^3$.<br>2. $2^3 = 8$. | **Aumenta 8 veces** |
+| **1** | Volumen de una pirámide: base de 30 cm² y altura de 10 cm. | 1. Multiplicar base por altura: $30 \cdot 10 = 300$.<br>2. Dividir por 3: $300 / 3$. | **100 cm³** |
+| **2** | Volumen de un cono de radio 3 y altura 4. | 1. Área base: $\pi \cdot 3^2 = 9\pi$.<br>2. Volumen: $(9\pi \cdot 4) / 3 = 36\pi / 3$. | **$12\pi$ u³** |
+| **3** | Hallar la generatriz ($g$) de un cono si $r=3$ y $h=4$. | 1. Aplicar Pitágoras: $3^2 + 4^2 = g^2$.<br>2. $9 + 16 = 25 \implies \sqrt{25}$. | **5** |
+| **4** | Área de una esfera de radio 2. | 1. Aplicar fórmula: $4 \cdot \pi \cdot 2^2$.<br>2. $4 \cdot \pi \cdot 4$. | **$16\pi$ u²** |
+| **5** | Si el radio de una esfera se dobla, ¿qué pasa con el volumen? | 1. El volumen depende de $r^3$.<br>2. $23 = 8$. | **Aumenta 8 veces** |
 """)
 
     with st.expander("❓ Cuestionario G21", expanded=False):
