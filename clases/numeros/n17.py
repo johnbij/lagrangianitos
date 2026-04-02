@@ -70,60 +70,60 @@ def render_N17():
 
     with st.expander("📝 Guía de Ejemplos: Paso a Paso de Potencias"):
         st.markdown("""
-**E01. Multiplicación de igual base.** $3^2 \\cdot 3^1 \\cdot 3^4$
+**1. Multiplicación de igual base.** $3^2 \\cdot 3^1 \\cdot 3^4$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Mantener base y sumar exponentes | $3^{(2+1+4)}$ |
 | 2 | Resultado final | $3^7$ |
 
-**E02. División de igual base.** $5^8 : 5^5$
+**2. División de igual base.** $5^8 : 5^5$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Mantener base y restar exponentes | $5^{(8-5)}$ |
 | 2 | Resultado final | $5^3 = 125$ |
 
-**E03. Multiplicación de bases distintas, igual exponente.** $2^4 \\cdot 3^4$
+**3. Multiplicación de bases distintas, igual exponente.** $2^4 \\cdot 3^4$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Multiplicar las bases | $(2 \\cdot 3)^4$ |
 | 2 | Resultado final | $6^4$ |
 
-**E04. División de bases distintas, igual exponente.** $20^3 : 5^3$
+**4. División de bases distintas, igual exponente.** $20^3 : 5^3$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Dividir las bases | $(20 : 5)^3$ |
 | 2 | Resultado final | $4^3 = 64$ |
 
-**E05. Potencia de una potencia.** $(10^2)^3$
+**5. Potencia de una potencia.** $(10^2)^3$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Mantener base y multiplicar exponentes | $10^{(2 \\cdot 3)}$ |
 | 2 | Resultado final | $10^6$ |
 
-**E06. Exponente cero.** $(-567)^0$
+**6. Exponente cero.** $(-567)^0$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Aplicar propiedad de exponente cero | $1$ |
 
-**E07. Exponente negativo (Entero).** $2^{-3}$
+**7. Exponente negativo (Entero).** $2^{-3}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Invertir la base (el \"ascensor\") | $(1/2)^3$ |
 | 2 | Elevar al cubo | $1/8$ |
 
-**E08. Exponente negativo (Fracción).** $(2/5)^{-2}$
+**8. Exponente negativo (Fracción).** $(2/5)^{-2}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | \"Girar la tortilla\" (Invertir fracción) | $(5/2)^2$ |
 | 2 | Elevar ambos términos al cuadrado | $25/4$ |
 
-**E09. Base negativa y exponente par.** $(-3)^4$
+**9. Base negativa y exponente par.** $(-3)^4$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Identificar que exponente par elimina el menos | $3^4$ |
 | 2 | Resultado final | $81$ |
 
-**E10. Prioridad de operaciones con potencias.** $2 \\cdot 3^2$
+**10. Prioridad de operaciones con potencias.** $2 \\cdot 3^2$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Resolver primero la potencia | $2 \\cdot 9$ |
