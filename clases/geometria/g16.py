@@ -16,8 +16,8 @@ def render_G16():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G16: Teorema de Tales - Proporcionalidad Entre Paralelas
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G16: Teorema de Tales - Proporcionalidad Entre Paralelas
+    
 
     ---
 
@@ -45,11 +45,11 @@ def render_G16():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | En paralelas, los segmentos en $S_1$ son 2 y 4. En $S_2$ son 3 y $x$. | 1. Armar proporción: $2 / 4 = 3 / x$.<br>2. Multiplicar cruzado: $2x = 12$. | **$x = 6$** |
-| **E02** | En un triángulo, una paralela divide un lado en 5 y 10. Si el otro lado total mide 18. | 1. Razón es $5:15$ (parte/total).<br>2. $5 / 15 = x / 18 \implies 1/3 = x / 18$. | **$x = 6$** |
-| **E03** | Configuración en "X": paralela superior 4, inferior 8. Lado superior 3. | 1. La razón es $4:8$ ($1:2$).<br>2. El lado inferior debe ser el doble: $3 \cdot 2$. | **6** |
-| **E04** | Segmentos en $S_1$ son $x$ y $x+2$. En $S_2$ son 2 y 4. | 1. $x / (x+2) = 2 / 4 \implies x / (x+2) = 1/2$.<br>2. $2x = x + 2$. | **$x = 2$** |
-| **E05** | ¿Qué condición debe cumplirse para aplicar Tales? | 1. Siempre debe haber al menos un par de rectas paralelas. | **Paralelismo** |
+| **1** | En paralelas, los segmentos en $S_1$ son 2 y 4. En $S_2$ son 3 y $x$. | 1. Armar proporción: $2 / 4 = 3 / x$.<br>2. Multiplicar cruzado: $2x = 12$. | **$x = 6$** |
+| **2** | En un triángulo, una paralela divide un lado en 5 y 10. Si el otro lado total mide 18. | 1. Razón es $5:15$ (parte/total).<br>2. $5 / 15 = x / 18 \implies 1/3 = x / 18$. | **$x = 6$** |
+| **3** | Configuración en "X": paralela superior 4, inferior 8. Lado superior 3. | 1. La razón es $4:8$ ($1:2$).<br>2. El lado inferior debe ser el doble: $3 \cdot 2$. | **6** |
+| **4** | Segmentos en $S_1$ son $x$ y $x+2$. En $S_2$ son 2 y 4. | 1. $x / (x+2) = 2 / 4 \implies x / (x+2) = 1/2$.<br>2. $2x = x + 2$. | **$x = 2$** |
+| **5** | ¿Qué condición debe cumplirse para aplicar Tales? | 1. Siempre debe haber al menos un par de rectas paralelas. | **Paralelismo** |
 """)
 
     with st.expander("❓ Cuestionario G16", expanded=False):
