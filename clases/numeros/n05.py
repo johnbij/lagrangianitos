@@ -100,7 +100,7 @@ def render_N05():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N05", expanded=False):
         st.markdown(r"""
-### E01: Transformación de Decimal Finito a Fracción
+### 1: Transformación de Decimal Finito a Fracción
 
 **Situación:** Expresar el número $0,75$ como una fracción irreducible.
 
@@ -118,7 +118,7 @@ def render_N05():
 
 ---
 
-### E02: Transformación de Decimal Periódico
+### 2: Transformación de Decimal Periódico
 
 **Situación:** Expresar $0,\bar{6}$ como una fracción de enteros.
 
@@ -136,7 +136,7 @@ def render_N05():
 
 ---
 
-### E03: Uso de la Amplificación para Comparar
+### 3: Uso de la Amplificación para Comparar
 
 **Situación:** ¿Cuál de estas fracciones es mayor: $2/3$ o $3/5$?
 
@@ -153,7 +153,7 @@ def render_N05():
 
 ---
 
-### E04: El Desafío del Semiperiódico
+### 4: El Desafío del Semiperiódico
 
 **Situación:** Transformar $0,1\bar{6}$ a fracción.
 
@@ -171,7 +171,7 @@ def render_N05():
 
 ---
 
-### E05: La Densidad en Práctica (El Promedio)
+### 5: La Densidad en Práctica (El Promedio)
 
 **Situación:** Encontrar un número racional que se encuentre exactamente entre $1/4$ y $1/2$.
 
