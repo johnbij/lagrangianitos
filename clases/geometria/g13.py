@@ -17,7 +17,7 @@ def render_G13():
 
         st.markdown(r"""
     # 🎬 Clase G13: Círculo y Circunferencia - La Perfección del Radio
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    
 
     ---
 
@@ -36,7 +36,7 @@ def render_G13():
     * **Perímetro (Longitud):** $P = 2 \cdot \pi \cdot r$  o  $P = \pi \cdot d$
     * **Área:** $A = \pi \cdot r^2$
 
-    > **Newton Tip:** "Seba, dile a tu alumno que $\pi$ (Pi) es aproximadamente 3,14, pero en la PAES muchas veces se deja expresado. ¡Que no se complique multiplicando decimales si las alternativas tienen el símbolo $\pi$!"
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
@@ -48,11 +48,11 @@ def render_G13():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Perímetro de una circunferencia de radio 5. | 1. Aplicar fórmula: $2 \cdot \pi \cdot 5$.<br>2. Multiplicar números. | **$10\pi$** |
-| **E02** | Área de un círculo con diámetro 12. | 1. Hallar el radio: $12 / 2 = 6$.<br>2. Aplicar fórmula: $\pi \cdot 6^2$. | **$36\pi$** |
-| **E03** | Si el perímetro es $16\pi$, ¿cuánto mide el radio? | 1. Igualar: $2\cdot\pi\cdot r = 16\pi$.<br>2. Despejar $r$: $16 / 2 = 8$. | **8** |
-| **E04** | Área de un círculo si su radio es 1. | 1. Aplicar fórmula: $\pi \cdot 1^2$.<br>2. $1 \cdot \pi = \pi$. | **$\pi$** |
-| **E05** | ¿Cuánto avanza una rueda de radio 10 en una vuelta? | 1. Una vuelta es igual al perímetro.<br>2. $P = 2 \cdot \pi \cdot 10$. | **$20\pi$** |
+| **1** | Perímetro de una circunferencia de radio 5. | 1. Aplicar fórmula: $2 \cdot \pi \cdot 5$.<br>2. Multiplicar números. | **$10\pi$** |
+| **2** | Área de un círculo con diámetro 12. | 1. Hallar el radio: $12 / 2 = 6$.<br>2. Aplicar fórmula: $\pi \cdot 6^2$. | **$36\pi$** |
+| **3** | Si el perímetro es $16\pi$, ¿cuánto mide el radio? | 1. Igualar: $2\cdot\pi\cdot r = 16\pi$.<br>2. Despejar $r$: $16 / 2 = 8$. | **8** |
+| **4** | Área de un círculo si su radio es 1. | 1. Aplicar fórmula: $\pi \cdot 1^2$.<br>2. $1 \cdot \pi = \pi$. | **$\pi$** |
+| **5** | ¿Cuánto avanza una rueda de radio 10 en una vuelta? | 1. Una vuelta es igual al perímetro.<br>2. $P = 2 \cdot \pi \cdot 10$. | **$20\pi$** |
 """)
 
     with st.expander("❓ Cuestionario G13", expanded=False):
