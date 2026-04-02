@@ -87,7 +87,7 @@ def render_N03():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N03", expanded=False):
         st.markdown(r"""
-### E02: La Vecindad del Uno en Diferentes Conjuntos[cite: 8]
+### 1: La Vecindad del Uno en Diferentes Conjuntos[cite: 8]
 
 | Conjunto | Número | Antecesor ($n-1$) | ¿Existe en el conjunto? |
 | :--- | :---: | :---: | :---: |
@@ -96,7 +96,7 @@ def render_N03():
 
 ---
 
-### E03: El Cero y la Paridad[cite: 8]
+### 2: El Cero y la Paridad[cite: 8]
 
 | Expresión | Valor | Clasificación |
 | :--- | :---: | :--- |
@@ -105,7 +105,7 @@ def render_N03():
 
 ---
 
-### E04: Traducción de "Enteros No Negativos"[cite: 8]
+### 3: Traducción de "Enteros No Negativos"[cite: 8]
 
 | Frase Técnica | Traducción Matemática | Valores |
 | :--- | :--- | :--- |
@@ -114,7 +114,7 @@ def render_N03():
 
 ---
 
-### E05: La Absorción y la Indefinición[cite: 8]
+### 4: La Absorción y la Indefinición[cite: 8]
 
 | Parte | Operación | Resultado |
 | :--- | :--- | :--- |
@@ -124,7 +124,7 @@ def render_N03():
 
 ---
 
-### E06: Clausura Extendida[cite: 8]
+### 5: Clausura Extendida[cite: 8]
 
 | Operación | Conjunto N | Conjunto N0 |
 | :--- | :---: | :---: |
