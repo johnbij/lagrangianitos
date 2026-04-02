@@ -16,8 +16,8 @@ def render_G11():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G11: Teorema de Pitágoras - La Llave Maestra
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # 🎬 Clase G11: Teorema de Pitágoras
+    
 
     ---
 
@@ -35,7 +35,7 @@ def render_G11():
     * **(8, 15, 17):** El nivel experto.
     * **Amplificaciones:** Cualquier múltiplo también funciona (ej: 6, 8, 10 es un 3, 4, 5 al doble).
 
-    > **Newton Tip:** "Seba, dile a tu alumno: si no hay ángulo de 90°, Pitágoras está de vacaciones. ¡No lo fuerces donde no hay un ángulo recto!"
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
@@ -47,11 +47,11 @@ def render_G11():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Catetos miden 3 y 4. Hallar hipotenusa. | 1. $3^2 + 4^2 = 9 + 16 = 25$.<br>2. $\sqrt{25} = 5$. | **5** |
-| **E02** | Hipotenusa 13, un cateto 12. Hallar el otro. | 1. $x^2 + 12^2 = 13^2$.<br>2. $x^2 + 144 = 169 \implies x^2 = 25$. | **5** |
-| **E03** | Diagonal de un rectángulo de lados 6 y 8. | 1. La diagonal forma un triángulo rectángulo.<br>2. Reconocer trío (3,4,5) al doble. | **10** |
-| **E04** | Calcular hipotenusa si catetos son 1 y 1. | 1. $1^2 + 1^2 = 2$.<br>2. Aplicar raíz cuadrada. | **$\sqrt{2}$** |
-| **E05** | ¿Es rectángulo un triángulo de lados 7, 24 y 25? | 1. $7^2 + 24^2 = 49 + 576 = 625$.<br>2. $25^2 = 625$. | **Sí, es rectángulo** |
+| **1** | Catetos miden 3 y 4. Hallar hipotenusa. | 1. $3^2 + 4^2 = 9 + 16 = 25$.<br>2. $\sqrt{25} = 5$. | **5** |
+| **2** | Hipotenusa 13, un cateto 12. Hallar el otro. | 1. $x^2 + 12^2 = 13^2$.<br>2. $x^2 + 144 = 169 \implies x^2 = 25$. | **5** |
+| **3** | Diagonal de un rectángulo de lados 6 y 8. | 1. La diagonal forma un triángulo rectángulo.<br>2. Reconocer trío (3,4,5) al doble. | **10** |
+| **4** | Calcular hipotenusa si catetos son 1 y 1. | 1. $1^2 + 1^2 = 2$.<br>2. Aplicar raíz cuadrada. | **$\sqrt{2}$** |
+| **5** | ¿Es rectángulo un triángulo de lados 7, 24 y 25? | 1. $7^2 + 24^2 = 49 + 576 = 625$.<br>2. $25^2 = 625$. | **Sí, es rectángulo** |
 """)
 
     with st.expander("❓ Cuestionario G11", expanded=False):
