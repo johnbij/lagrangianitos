@@ -16,8 +16,8 @@ def render_G20():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G20: Cuerpos 3D I - Prismas y Cilindros
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G20: Cuerpos 3D I - Prismas y Cilindros
+    
 
     ---
 
