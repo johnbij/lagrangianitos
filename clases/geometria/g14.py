@@ -16,8 +16,8 @@ def render_G14():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G14: Ángulos en la Circunferencia
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G14: Ángulos en la Circunferencia
+    
 
     ---
 
@@ -46,11 +46,11 @@ def render_G14():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Si el arco $AB$ mide 80°, ¿cuánto mide el ángulo del centro? | 1. Por definición, miden lo mismo. | **80°** |
-| **E02** | Si el arco $AB$ mide 80°, ¿cuánto mide el ángulo inscrito? | 1. El ángulo inscrito es la mitad del arco.<br>2. $80 / 2 = 40$. | **40°** |
-| **E03** | Un ángulo inscrito mide 30°. ¿Cuánto mide el ángulo del centro asociado? | 1. El del centro es el doble del inscrito.<br>2. $30 \cdot 2 = 60$. | **60°** |
-| **E04** | Hallar ángulo $x$ inscrito que subtiende un diámetro. | 1. Por teorema, todo ángulo sobre el diámetro es recto. | **90°** |
-| **E05** | Dos ángulos inscritos subtienden el mismo arco. Si uno mide 25°, ¿el otro? | 1. Ángulos que comparten el mismo arco son iguales. | **25°** |
+| **1** | Si el arco $AB$ mide 80°, ¿cuánto mide el ángulo del centro? | 1. Por definición, miden lo mismo. | **80°** |
+| **2** | Si el arco $AB$ mide 80°, ¿cuánto mide el ángulo inscrito? | 1. El ángulo inscrito es la mitad del arco.<br>2. $80 / 2 = 40$. | **40°** |
+| **3** | Un ángulo inscrito mide 30°. ¿Cuánto mide el ángulo del centro asociado? | 1. El del centro es el doble del inscrito.<br>2. $30 \cdot 2 = 60$. | **60°** |
+| **4** | Hallar ángulo $x$ inscrito que subtiende un diámetro. | 1. Por teorema, todo ángulo sobre el diámetro es recto. | **90°** |
+| **5** | Dos ángulos inscritos subtienden el mismo arco. Si uno mide 25°, ¿el otro? | 1. Ángulos que comparten el mismo arco son iguales. | **25°** |
 """)
 
     with st.expander("❓ Cuestionario G14", expanded=False):
