@@ -16,8 +16,8 @@ def render_G18():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G18: Homotecia - Ampliación y Reducción Vectorial
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G18: Homotecia - Ampliación y Reducción Vectorial
+    
 
     ---
 
@@ -38,7 +38,7 @@ def render_G18():
         * Los perímetros están en razón $|k|$.
         * Las áreas están en razón $k^2$.
 
-    > **Newton Tip:** "Seba, dile a tu alumno: la homotecia es como un proyector de cine. Si mueves la pantalla (la razón), la imagen se agranda o achica, pero la forma no se pierde porque los rayos salen del mismo punto (el centro)."
+    >  
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
@@ -50,11 +50,11 @@ def render_G18():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Aplicar homotecia con $k=3$ a un punto $P(2, 4)$ con centro $O(0,0)$. | 1. Multiplicar cada coordenada por $k$. <br>2. $(2 \cdot 3, 4 \cdot 3)$. | **$P'(6, 12)$** |
-| **E02** | Un triángulo de área 4 se somete a $k=-2$. Hallar área nueva. | 1. Razón de áreas es $k^2$. <br>2. $(-2)^2 = 4$. <br>3. $4 \cdot 4 = 16$. | **16 u²** |
-| **E03** | Si $OP = 5$ cm y $OP' = 15$ cm (en el mismo sentido), ¿cuánto es $k$? | 1. $k = OP' / OP$. <br>2. $k = 15 / 5$. | **$k = 3$** |
-| **E04** | ¿Qué sucede con la figura si $k = -1$? | 1. Se mantiene el tamaño ($|1|$) pero se invierte respecto al centro. | **Simetría Central** |
-| **E05** | Distancia $OP=10$. Si $k=0.5$, ¿dónde queda $P'$? | 1. $OP' = 10 \cdot 0.5 = 5$. | **A 5 unidades de O** |
+| **1** | Aplicar homotecia con $k=3$ a un punto $P(2, 4)$ con centro $O(0,0)$. | 1. Multiplicar cada coordenada por $k$. <br>2. $(2 \cdot 3, 4 \cdot 3)$. | **$P'(6, 12)$** |
+| **2** | Un triángulo de área 4 se somete a $k=-2$. Hallar área nueva. | 1. Razón de áreas es $k^2$. <br>2. $(-2)^2 = 4$. <br>3. $4 \cdot 4 = 16$. | **16 u²** |
+| **3** | Si $OP = 5$ cm y $OP' = 15$ cm (en el mismo sentido), ¿cuánto es $k$? | 1. $k = OP' / OP$. <br>2. $k = 15 / 5$. | **$k = 3$** |
+| **4** | ¿Qué sucede con la figura si $k = -1$? | 1. Se mantiene el tamaño ($|1|$) pero se invierte respecto al centro. | **Simetría Central** |
+| **5** | Distancia $OP=10$. Si $k=0.5$, ¿dónde queda $P'$? | 1. $OP' = 10 \cdot 0.5 = 5$. | **A 5 unidades de O** |
 """)
 
     with st.expander("❓ Cuestionario G18", expanded=False):
