@@ -16,7 +16,7 @@ def render_G13():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G13: Círculo y Circunferencia - La Perfección del Radio
+    # G13: Círculo y Circunferencia - La Perfección del Radio
     
 
     ---
