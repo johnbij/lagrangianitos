@@ -200,8 +200,4 @@ Sea $M = \{2, 4, 6, 8\}$. ¿Cuál de las siguientes opciones es un subconjunto d
         ]
         render_multiple_choice_quiz(_quiz_data, key_prefix="n01_quiz")
 
-        if st.button("🚀 ENVIAR RESPUESTAS Y COMPLETAR CLASE"):
-            exito = st.session_state.registrar_progreso("N01")
-            if exito:
-                st.success("¡Progreso guardado! Revisa tu radar en el inicio.")
-                st.balloons()
+        
