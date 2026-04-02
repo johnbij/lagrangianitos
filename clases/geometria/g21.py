@@ -1,4 +1,4 @@
-import streamlit as st
+v s timport streamlit as st
 import matplotlib.pyplot as plt
 import numpy as np
 from utils import render_multiple_choice_quiz
@@ -35,7 +35,7 @@ def render_G21():
     * **Generatriz ($g$):** Es la hipotenusa del triángulo rectángulo que gira para formar el cono.
     * **Relación Pitagórica:** $r^2 + h^2 = g^2$.
 
-    > **Newton Tip:** "Seba, dile a tu alumno: si se le olvida la fórmula de la pirámide o el cono, que piense en el prisma y lo divida por 3. ¡Es el truco que nunca falla!"
+    >
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
@@ -43,7 +43,7 @@ def render_G21():
 
     with st.expander("🛠️ Ejercitación Técnica G21 (Paso a Paso)", expanded=False):
         st.markdown(r"""
-## 🛠️ Ejercitación Técnica G21 (Paso a Paso)
+## 🛠️ EjercitacióTcnica G21 (Paso a Paso)
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
