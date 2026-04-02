@@ -16,8 +16,8 @@ def render_G17():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G17: Semejanza de Triángulos - Misma Forma, Distinto Tamaño
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G17: Semejanza de Triángulos - Misma Forma, Distinto Tamaño
+    
 
     ---
 
@@ -36,7 +36,7 @@ def render_G17():
     * **Perímetros:** Están en razón $k$.
     * **Áreas:** Estarán en razón $k^2$ (¡Ojo con esto en la PAES!).
 
-    > **Newton Tip:** "Seba, dile a tu alumno: Semejanza es como ver una foto en el celular y hacer zoom. El triángulo no cambia sus ángulos, solo se hace más grande o más chico."
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
@@ -48,11 +48,11 @@ def render_G17():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Triángulo A (lados 3, 4, 5) y B (lados 6, 8, $x$). Hallar $x$. | 1. La razón es $6/3 = 2$.<br>2. Multiplicar 5 por la razón: $5 \cdot 2$. | **$x = 10$** |
-| **E02** | Dos triángulos son semejantes en razón $1:3$. Si el área del pequeño es 5. | 1. La razón de áreas es $k^2 = (3)^2 = 9$.<br>2. Área grande: $5 \cdot 9$. | **45 u²** |
-| **E03** | ¿Son semejantes un triángulo de (40°, 60°) y otro de (60°, 80°)? | 1. Sumar en el primero: $40+60=100 \implies$ falta 80°.<br>2. Tienen los mismos tres ángulos. | **Sí (por AA)** |
-| **E04** | Los perímetros de dos figuras semejantes están en razón 2:5. | 1. La razón de sus lados es la misma que la de sus perímetros. | **2:5** |
-| **E05** | Un poste de 3 m proyecta sombra de 1,5 m. ¿Qué sombra proyecta un edificio de 12 m? | 1. Triángulos semejantes por rayos de sol.<br>2. $3 / 1,5 = 12 / x \implies 2 = 12/x$. | **6 m** |
+| **1** | Triángulo A (lados 3, 4, 5) y B (lados 6, 8, $x$). Hallar $x$. | 1. La razón es $6/3 = 2$.<br>2. Multiplicar 5 por la razón: $5 \cdot 2$. | **$x = 10$** |
+| **2** | Dos triángulos son semejantes en razón $1:3$. Si el área del pequeño es 5. | 1. La razón de áreas es $k^2 = (3)^2 = 9$.<br>2. Área grande: $5 \cdot 9$. | **45 u²** |
+| **3** | ¿Son semejantes un triángulo de (40°, 60°) y otro de (60°, 80°)? | 1. Sumar en el primero: $40+60=100 \implies$ falta 80°.<br>2. Tienen los mismos tres ángulos. | **Sí (por AA)** |
+| **4** | Los perímetros de dos figuras semejantes están en razón 2:5. | 1. La razón de sus lados es la misma que la de sus perímetros. | **2:5** |
+| **5** | Un poste de 3 m proyecta sombra de 1,5 m. ¿Qué sombra proyecta un edificio de 12 m? | 1. Triángulos semejantes por rayos de sol.<br>2. $3 / 1,5 = 12 / x \implies 2 = 12/x$. | **6 m** |
 """)
 
     with st.expander("❓ Cuestionario G17", expanded=False):
