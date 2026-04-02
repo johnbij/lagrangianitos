@@ -7,7 +7,7 @@ def render_N02():
 
         st.markdown("""
   
-    ## N02: Los Números Naturales ($\mathbb{N}$) — El Génesis del Conteo
+    ## N02: Los Números Naturales ($\mathbb{N}$) — La Génesis del Conteo
 
     ---
 
@@ -110,7 +110,7 @@ Como $0 \notin \mathbb{N}$, el 1 **no tiene antecesor** en el conjunto de los na
 
 ---
 
-### E02: Aplicación de la Ley de Tricotomía
+### 1: Aplicación de la Ley de Tricotomía
 
 Compara cada par de números naturales e indica cuál de las tres relaciones aplica ($<$, $>$, $=$).
 
@@ -124,7 +124,7 @@ Compara cada par de números naturales e indica cuál de las tres relaciones apl
 
 ---
 
-### E03: Verificación de Clausura
+### 2: Verificación de Clausura
 
 Para el par $(8,\ 3)$, verifica si cada operación básica produce un resultado en $\mathbb{N}$.
 
@@ -140,7 +140,7 @@ Para el par $(8,\ 3)$, verifica si cada operación básica produce un resultado 
 
 ---
 
-### E04: Propiedad Distributiva Aplicada
+### 3: Propiedad Distributiva Aplicada
 
 **Parte A — Resolución directa vs. distributiva:**
 
@@ -164,7 +164,7 @@ $$3 \cdot 8 + 3 \cdot 12 = 3 \cdot (8 + 12) = 3 \cdot 20 = \boxed{60}$$
 
 ---
 
-### E05: Problema de Sucesor/Antecesor Compuesto
+### 4: Problema de Sucesor/Antecesor Compuesto
 
 Si el sucesor de $(k - 2)$ es $10$, ¿cuál es el valor de $k$?
 
