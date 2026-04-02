@@ -48,7 +48,7 @@ def render_N22():
 
     with st.expander("📝 Guía de Ejemplos: Racionalización por Conjugado"):
         st.markdown("""
-**E01. Racionalización de binomio simple.** Racionalizar $\\dfrac{1}{\\sqrt{3} - 1}$.
+**1. Racionalización de binomio simple.** Racionalizar $\\dfrac{1}{\\sqrt{3} - 1}$.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Identificar el conjugado del denominador | $\\sqrt{3} + 1$ |
@@ -56,28 +56,28 @@ def render_N22():
 | 3 | Aplicar diferencia de cuadrados abajo | $\\dfrac{\\sqrt{3} + 1}{(\\sqrt{3})^2 - 1^2}$ |
 | 4 | Resolver y simplificar | $\\dfrac{\\sqrt{3} + 1}{3 - 1} = \\dfrac{\\sqrt{3} + 1}{2}$ |
 
-**E02. Binomio con dos raíces.** Racionalizar $\\dfrac{2}{\\sqrt{5} + \\sqrt{3}}$.
+**2. Binomio con dos raíces.** Racionalizar $\\dfrac{2}{\\sqrt{5} + \\sqrt{3}}$.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Multiplicar por el conjugado ($\\sqrt{5} - \\sqrt{3}$) | $\\dfrac{2(\\sqrt{5} - \\sqrt{3})}{(\\sqrt{5})^2 - (\\sqrt{3})^2}$ |
 | 2 | Resolver denominador | $\\dfrac{2(\\sqrt{5} - \\sqrt{3})}{5 - 3}$ |
 | 3 | Simplificar el 2 de arriba con el 2 de abajo | $\\sqrt{5} - \\sqrt{3}$ |
 
-**E03. Numerador compuesto.** Racionalizar $\\dfrac{\\sqrt{2}}{\\sqrt{2} + 1}$.
+**3. Numerador compuesto.** Racionalizar $\\dfrac{\\sqrt{2}}{\\sqrt{2} + 1}$.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Multiplicar por conjugado ($\\sqrt{2} - 1$) | $\\dfrac{\\sqrt{2}(\\sqrt{2} - 1)}{(\\sqrt{2})^2 - 1^2}$ |
 | 2 | Distribuir en el numerador | $\\dfrac{\\sqrt{2}\\cdot\\sqrt{2} - \\sqrt{2}}{2 - 1}$ |
 | 3 | Resultado final | $2 - \\sqrt{2}$ |
 
-**E04. Constante y raíz.** Racionalizar $\\dfrac{4}{3 - \\sqrt{5}}$.
+**4. Constante y raíz.** Racionalizar $\\dfrac{4}{3 - \\sqrt{5}}$.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Multiplicar por conjugado ($3 + \\sqrt{5}$) | $\\dfrac{4(3 + \\sqrt{5})}{3^2 - (\\sqrt{5})^2}$ |
 | 2 | Resolver denominador | $\\dfrac{4(3 + \\sqrt{5})}{9 - 5} = \\dfrac{4(3 + \\sqrt{5})}{4}$ |
 | 3 | Simplificar el 4 | $3 + \\sqrt{5}$ |
 
-**E05. Conjugado con resta y simplificación.** Racionalizar $\\dfrac{1}{\\sqrt{7} - \\sqrt{5}}$.
+**5. Conjugado con resta y simplificación.** Racionalizar $\\dfrac{1}{\\sqrt{7} - \\sqrt{5}}$.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Multiplicar por $(\\sqrt{7} + \\sqrt{5})$ | $\\dfrac{\\sqrt{7} + \\sqrt{5}}{(\\sqrt{7})^2 - (\\sqrt{5})^2}$ |
