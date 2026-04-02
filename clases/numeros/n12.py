@@ -209,23 +209,3 @@ def render_N12():
             {'question': 'La expresión del terror: $\\left( \\frac{1}{2} + \\frac{1}{2} \\right) \\cdot \\frac{3}{4} - \\frac{1}{4}$ resulta en:**\n\\', 'options': {'A': '$\\frac{1}{2}$', 'B': '1', 'C': '$\\frac{3}{4}$', 'D': '0'}, 'answer': 'A', 'explanation': 'Paréntesis: $1 \\cdot 3/4 = 3/4$. Luego $3/4 - 1/4 = 2/4 = 1/2$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n12_quiz")
-
-    with st.expander("🔑 Pauta Técnica N12: Control de Navegación", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (Análisis) |
-| :--- | :---: | :--- |
-| **1** | **B** | Mult. primero: $\frac{1}{3} \cdot \frac{3}{4} = \frac{1}{4}$. Luego $\frac{1}{2} + \frac{1}{4} = \frac{2}{4} + \frac{1}{4} = \frac{3}{4}$. |
-| **2** | **B** | Izquierda a derecha: $\frac{2}{3} \cdot \frac{3}{4} = \frac{1}{2}$. Luego $\frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4}$. |
-| **3** | **B** | **Atajo del Pillo:** $(2 \cdot 15) / (5 \cdot 4) = 30/20 = 3/2$. |
-| **4** | **A** | Paréntesis: $1/2 - 1/4 = 1/4$. Luego $1 - 1/4 = 3/4$. |
-| **5** | **C** | Menos por menos es más. Simplificando el 3: $2/4 = 1/2$. |
-| **6** | **B** | Es $\frac{1}{2} \cdot \frac{1}{2} = 1/4$. El entero 2 tiene un 1 abajo. |
-| **7** | **A** | mcm es 4: $3/4 - 2/4 + 5/4 = 6/4 = 3/2$. |
-| **8** | **C** | Numerador: $4/3$. Luego $\frac{4/3}{2/1}$ (Atajo del Pillo) $= 4/6 = 2/3$. |
-| **9** | **A** | Mult: $20/15 = 4/3$. Luego $4/3 \div 4/3 = 1$. |
-| **10** | **A** | Paréntesis: $1 \cdot 3/4 = 3/4$. Luego $3/4 - 1/4 = 2/4 = 1/2$. |
-
----
-
-> **Típ:** Si en la pregunta 2 multiplicaste primero, caíste en la trampa de la jerarquía. Multiplicación y División son "hermanos", se resuelven por orden de llegada (izquierda a derecha).
-""")

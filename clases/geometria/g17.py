@@ -69,19 +69,3 @@ def render_G17():
             {'question': 'Si el área de un triángulo aumenta 100 veces, su lado aumentó:', 'options': {'A': '100 veces', 'B': '50 veces', 'C': '10 veces', 'D': '200 veces'}, 'answer': 'C', 'explanation': 'Típ: Como el área es $k^2$, buscamos la raíz de 100, que es 10.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g17_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G17)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "La tilde de la eñe representa que las figuras son 'parecidas' pero no idénticas." |
-| **2** | **B** | **Newton Tip:** "Es el criterio más práctico. Si dos ángulos coinciden, el triángulo tiene la misma forma obligatoriamente." |
-| **3** | **C** | **Hawking Tip:** "Significa que si uno crece al doble, todos sus lados crecen al doble." |
-| **4** | **C** | **Curie Tip:** "El área es bidimensional, por eso la razón se eleva al cuadrado: $4^2 = 16$." |
-| **5** | **C** | **Statham Tip:** "Típ: No confundas con congruencia. En semejanza basta con que mantengan la proporción (ej: todos al triple)." |
-| **6** | **C** | **Newton Tip:** "Cada lado del segundo triángulo es exactamente el doble del primero." |
-| **7** | **B** | **Galileo Tip:** "¡Mucho ojo! Los lados son proporcionales, pero los ángulos NUNCA cambian, son iguales." |
-| **8** | **A** | **Hawking Tip:** "El perímetro es una medida lineal (1D), así que mantiene la misma razón que los lados." |
-| **9** | **B** | **Curie Tip:** "El ángulo debe estar 'atrapado' por los lados que estamos comparando." |
-| **10** | **C** | **Statham Tip:** "Típ: Como el área es $k^2$, buscamos la raíz de 100, que es 10." |
-""")

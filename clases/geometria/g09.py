@@ -64,19 +64,3 @@ def render_G09():
             {'question': 'Si en un triángulo una altura coincide con una bisectriz, el triángulo es al menos:', 'options': {'A': 'Escaleno', 'B': 'Isósceles', 'C': 'Obtusángulo', 'D': 'Rectángulo escaleno'}, 'answer': 'B', 'explanation': 'Típ: Esa simetría solo ocurre cuando hay lados iguales que mandan la figura.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g09_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G09)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Newton Tip:** "A-O: Altura con Ortocentro. Aprende la sigla y no se te olvida más." |
-| **2** | **B** | **Galileo Tip:** "Bisectriz = Bi (dos) - Sectriz (corte). Corta el ángulo en dos iguales." |
-| **3** | **B** | **Hawking Tip:** "Incentro viene de 'In' (dentro). Es el centro de lo que está adentro." |
-| **4** | **B** | **Curie Tip:** "Como las alturas son los mismos catetos, el único punto donde se pueden juntar es el rincón del ángulo recto." |
-| **5** | **B** | **Statham Tip:** "Típ: $35 \times 2 = 70$. No hay más vuelta que darle." |
-| **6** | **B** | **Newton Tip:** "Altura es sinónimo de perpendicularidad respecto a una base." |
-| **7** | **C** | **Galileo Tip:** "Es el único caso donde el punto de encuentro se arranca del dibujo." |
-| **8** | **A** | **Hawking Tip:** "En el equilátero (la perfección), todos los elementos secundarios coinciden en el mismo segmento." |
-| **9** | **B** | **Curie Tip:** "Esa es la gracia del incentro: 'toca' a todos los lados a la misma distancia." |
-| **10** | **B** | **Statham Tip:** "Típ: Esa simetría solo ocurre cuando hay lados iguales que mandan la figura." |
-""")

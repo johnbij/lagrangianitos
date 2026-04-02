@@ -100,16 +100,3 @@ def render_N27():
             {'question': 'Tres camiones transportan 600 toneladas. El primero hace 3 viajes, el segundo 5 viajes y el tercero 7 viajes. ¿Cuántas toneladas transportó el segundo?', 'options': {'A': '200 ton\\', 'B': '120 ton\\', 'C': '280 ton\\', 'D': '150 ton'}, 'answer': 'A', 'explanation': '$3k+5k+7k = 600 \\implies 15k = 600 \\implies k = 40$. Segundo ($5k$): $200$ toneladas.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n27_quiz")
-    with st.expander("✅ Pauta - N27", expanded=False):
-        st.markdown("""# ✅ Pauta - Cuestionario N27
-
-1. **A.** $3k + 5k = 800.000 \\implies 8k = 800.000 \\implies k = 100.000$. Menor: $3k = 300.000$.
-2. **A.** $1k+2k+5k = 240 \\implies 8k = 240 \\implies k = 30$. Mayor: $5k = 150$.
-3. **A.** La intermedia es $4k$. Si $4k = 40 \\implies k = 10$.
-4. **A.** Suma de índices: $1+4+5 = 10$. $10k = 2.000.000 \\implies k = 200.000$. Menor ($1k$): $200.000$.
-5. **A.** $2k+3k+4k = 900 \\implies 9k = 900 \\implies k = 100$. Largo: $4 \\cdot 100 = 400$.
-6. **A.** $2k+3k=150.000 \\implies 5k=150.000 \\implies k=30.000$. Partes: 60k y 90k. Diferencia: 30k.
-7. **A.** $8k = 64.000 \\implies k = 8.000$. Total ($13k$): $13 \\cdot 8.000 = 104.000$.
-8. **A.** Suma de los índices: $10 + 15 + 25 = 50$.
-9. **A.** MCM(15). Índices: $5$ y $3$. $8k = 320 \\implies k = 40$. Parte $1/3$ (índice 5): $5 \\cdot 40 = 200$.
-10. **A.** $3k+5k+7k = 600 \\implies 15k = 600 \\implies k = 40$. Segundo ($5k$): $200$ toneladas.""")

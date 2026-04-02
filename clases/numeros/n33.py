@@ -91,16 +91,3 @@ Si el efecto tiene una "dificultad", esta va multiplicando al efecto en el denom
             {'question': 'Si 2 arañas tejen 2 telas en 2 minutos, ¿cuántas telas tejerán 10 arañas en 10 minutos?', 'options': {'A': '10 telas \\', 'B': '50 telas \\', 'C': '20 telas \\', 'D': '100 telas'}, 'answer': 'B', 'explanation': '$\\frac{2 \\cdot 2}{2} = \\frac{10 \\cdot 10}{x} \\implies 2 = \\frac{100}{x} \\implies x = 50$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n33_quiz")
-    with st.expander("✅ Pauta - N33", expanded=False):
-        st.markdown("""# ✅ Pauta - Cuestionario N33
-
-1. **B.** Las causas son los agentes que ejecutan la acción, van arriba multiplicando.
-2. **B.** $\\frac{3 \\cdot 3}{3} = \\frac{1 \\cdot x}{1} \\implies 3 = x$. Sigue tardando 3 días.
-3. **C.** Si arriba multiplicas por $2 \\cdot 2 = 4$, abajo debes multiplicar por 4 para que la fracción no cambie.
-4. **B.** $\\frac{10 \\cdot 4}{200} = \\frac{5 \\cdot x}{100} \\implies \\frac{40}{200} = \\frac{5x}{100} \\implies 0,2 = 0,05x \\implies x = 4$.
-5. **A.** $\\frac{6 \\cdot 10}{2} = \\frac{3 \\cdot 15}{x} \\implies 30 = \\frac{45}{x} \\implies x = 45/30 = 1,5$.
-6. **B.** $\\frac{5 \\cdot 2}{20} = \\frac{10 \\cdot 5}{x} \\implies \\frac{10}{20} = \\frac{50}{x} \\implies 0,5 = \\frac{50}{x} \\implies x = 100$.
-7. **B.** La dificultad hace que el "efecto real" sea mayor, por lo que multiplica al denominador (obra).
-8. **B.** $\\frac{8 \\cdot 9 \\cdot 6}{1} = \\frac{4 \\cdot 8 \\cdot x}{1} \\implies 432 = 32x \\implies x = 13,5$.
-9. **B.** El efecto es el producto final o la medida de la obra realizada.
-10. **B.** $\\frac{2 \\cdot 2}{2} = \\frac{10 \\cdot 10}{x} \\implies 2 = \\frac{100}{x} \\implies x = 50$.""")

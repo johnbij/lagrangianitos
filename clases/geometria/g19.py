@@ -71,19 +71,3 @@ def render_G19():
             {'question': 'Una figura tiene simetría central si al rotarla en _____ grados queda igual:', 'options': {'A': '45°', 'B': '90°', 'C': '180°', 'D': '360°'}, 'answer': 'C', 'explanation': "Típ: Piensa en la letra 'S' o en el número '8'. Si los giras 180°, se ven exactamente igual."}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g19_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G19)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Galileo Tip:** "Isometría significa 'misma medida'. Los lados y ángulos no sufren estrés, solo se mueven." |
-| **2** | **C** | **Newton Tip:** "La traslación es una simple suma vectorial. Desplazamiento puro." |
-| **3** | **A** | **Hawking Tip:** "180° es el 'opuesto' total. Ambos signos cambian de bando." |
-| **4** | **B** | **Curie Tip:** "La simetría central y el giro de media vuelta son hermanos gemelos." |
-| **5** | **B** | **Statham Tip:** "Típ: Si el espejo es el eje $Y$, el punto cruza de izquierda a derecha, pero mantiene su altura." |
-| **6** | **C** | **Newton Tip:** "La homotecia cambia el tamaño, por eso es una transformación 'isomórfica' (misma forma) pero NO isométrica." |
-| **7** | **C** | **Galileo Tip:** "270° es como girar 90° en sentido horario. Intercambias y cambias el signo de la nueva $y$." |
-| **8** | **B** | **Hawking Tip:** "Dos reflexiones seguidas en espejos paralelos equivalen a empujar la figura (trasladarla)." |
-| **9** | **B** | **Curie Tip:** "Se llama vector nulo. Es el 'no te muevas'." |
-| **10** | **C** | **Statham Tip:** "Típ: Piensa en la letra 'S' o en el número '8'. Si los giras 180°, se ven exactamente igual." |
-""")

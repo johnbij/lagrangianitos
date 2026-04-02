@@ -222,19 +222,3 @@ def render_N06():
             {'question': 'Si multiplicas $0 \\cdot \\pi$, el resultado es:', 'options': {'A': '$\\pi$', 'B': '$0$', 'C': 'Un número irracional.', 'D': 'No se puede calcular.'}, 'answer': 'B', 'explanation': 'El cero es el elemento absorbente. $0 \\cdot \\text{Cualquier cosa} = 0$. El resultado es un Racional.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n06_quiz")
-
-    with st.expander("🔑 Pauta Técnica N06: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
-| :--- | :---: | :--- |
-| **1** | **C** | $\sqrt{121} = 11$ (Racional). $\sqrt{0,01} = 0,1$ (Racional). $0$ es Racional. $\sqrt{8}$ no es exacta, por ende es Irracional. |
-| **2** | **C** | Es la definición fundamental: decimales infinitos sin periodo. |
-| **3** | **C** | Propiedad de la "Infección": Un racional (distinto de cero) no puede quitarle el desorden infinito a un irracional al multiplicarlos. |
-| **4** | **B** | $\pi - \pi = 0$. Como el $0$ es un número entero, es Racional. |
-| **5** | **B** | Los números con nombre propio como $\pi$, $e$ y $\phi$ se clasifican como trascendentes. |
-| **6** | **B** | El cero es un número racional. Al poder escribirse como $0/n$, cumple la definición de $\mathbb{Q}$. |
-| **7** | **B** | $\sqrt{2} \cdot \sqrt{32} = \sqrt{64} = 8$. El producto de dos irracionales puede dar un racional. |
-| **8** | **C** | $\sqrt{3} + (-\sqrt{3}) = 0$. Esto demuestra que la suma de dos irracionales no siempre da otro irracional. |
-| **9** | **C** | **Ojo:** Si hay un bloque que se repite (1828), hay periodo. Si hay periodo, es Racional por definición. |
-| **10** | **B** | El cero es el elemento absorbente. $0 \cdot \text{Cualquier cosa} = 0$. El resultado es un Racional. |
-""")

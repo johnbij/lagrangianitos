@@ -143,16 +143,3 @@ $-(x - 3) = -x + 3$ — El negativo cambia el signo de TODOS los términos inter
              "answer": "B", "explanation": r"$(2s)^2 = 4s^2$. ¡El área se cuadruplica!"},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="a02_quiz")
-
-    with st.expander("🔑 Pauta Técnica A02: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $4\cdot3=12$; $a^1\cdot a^2 = a^3$. |
-| **2** | **A** | $2x\cdot x = 2x^2$; $2x\cdot 4 = 8x$. |
-| **3** | **D** | Signos distintos → negativo; $5\cdot2=10$; letras distintas juntas. |
-| **4** | **B** | $(x+2)(x+3)$: $x^2+3x+2x+6 = x^2+5x+6$. |
-| **5** | **C** | El $-$ de afuera invierte el signo de cada término. |
-| **6** | **B** | $(a+2)(a+5) = a^2+7a+10$. |
-| **7** | **B** | $(2s)^2 = 4s^2$. |
-""")

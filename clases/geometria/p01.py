@@ -208,16 +208,3 @@ B) $70$ m
 C) $73$ m
 D) $300$ m
 """)
-
-    with st.expander("🔑 Pauta Técnica P01: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $P = 4\ell = 4 \cdot 9 = 36$ cm. |
-| **2** | **B** | $P = 2(a+b) \Rightarrow 40 = 2(12 + b) \Rightarrow 20 = 12 + b \Rightarrow b = 8$ cm. |
-| **3** | **A** | $L = \pi d = \pi \cdot 10 = 10\pi$ cm. |
-| **4** | **B** | Equilátero: $P = 3\ell \Rightarrow 27 = 3\ell \Rightarrow \ell = 9$ cm. |
-| **5** | **B** | $L_{\text{arco}} = \frac{90°}{360°} \cdot 2\pi(4) = \frac{1}{4} \cdot 8\pi = 2\pi$ cm. |
-| **6** | **B** | $P = 5\ell \Rightarrow 35 = 5\ell \Rightarrow \ell = 7$ cm. |
-| **7** | **A** | $P = 2(20+15) = 70$ m, pero se descuenta la puerta: $70 - 3 = 67$ m. |
-""")

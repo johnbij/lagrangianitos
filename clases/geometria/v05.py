@@ -70,19 +70,3 @@ def render_V05():
             {'question': 'La distancia entre $(1, 0, 0)$ y $(1, 0, 5)$ es:', 'options': {'A': '1', 'B': '5', 'C': '6', 'D': '$\\sqrt{26}$'}, 'answer': 'B', 'explanation': 'Típ: Como $x$ e $y$ son iguales, la distancia es simplemente la diferencia en $z$: $5 - 0 = 5$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="v05_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V05)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "X es ancho, Y es profundidad, Z es la cota o altura." |
-| **2** | **C** | **Newton Tip:** "$\sqrt{1^2 + 1^2 + 1^2} = \sqrt{1+1+1} = \sqrt{3}$. No la confundas con 3." |
-| **3** | **A** | **Hawking Tip:** "Sumar un vector con su opuesto siempre nos lleva de vuelta al reposo, el vector nulo." |
-| **4** | **B** | **Curie Tip:** "El signo negativo invierte todo y el $1/3$ reduce los valores a la tercera parte." |
-| **5** | **C** | **Statham Tip:** "Típ: Si no tiene ancho ni largo, solo le queda 'subir' desde el plano del suelo." |
-| **6** | **C** | **Newton Tip:** "Es el trío pitagórico (5, 12, 13) pero en una posición distinta. La matemática no miente." |
-| **7** | **B** | **Galileo Tip:** "Suma componente a componente para trasladar el punto en el espacio." |
-| **8** | **C** | **Hawking Tip:** "Imagina el rincón de una caja: tienes el piso y dos paredes laterales." |
-| **9** | **C** | **Curie Tip:** "El origen es el punto de partida absoluto $(0,0,0)$." |
-| **10** | **B** | **Statham Tip:** "Típ: Como $x$ e $y$ son iguales, la distancia es simplemente la diferencia en $z$: $5 - 0 = 5$." |
-""")

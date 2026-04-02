@@ -68,19 +68,3 @@ def render_V01():
             {'question': 'Un vector cuya componente $x$ es cero es un vector:', 'options': {'A': 'Horizontal', 'B': 'Vertical', 'C': 'Nulo', 'D': 'Diagonal'}, 'answer': 'B', 'explanation': 'Típ: Si no se mueve de lado a lado, solo le queda subir o bajar. Eso es vertical.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="v01_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V01)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Galileo Tip:** "Es el 'tridente' de la física. Si falta uno, no es un vector completo." |
-| **2** | **C** | **Newton Tip:** "En el plano cartesiano, $x$ siempre manda en lo horizontal (izquierda/derecha)." |
-| **3** | **C** | **Hawking Tip:** "Derecha es $x$ positivo, abajo es $y$ negativo. Simple lógica de cuadrantes." |
-| **4** | **B** | **Curie Tip:** "Es como el GPS: te dice exactamente dónde estás respecto al punto $(0,0)$." |
-| **5** | **C** | **Statham Tip:** "Típ: Siempre es Final menos Inicial. Si lo haces al revés, la flecha apuntará al lado contrario." |
-| **6** | **B** | **Newton Tip:** "Como $x$ es 0, no hay movimiento lateral. Como $y$ es $-5$, solo baja." |
-| **7** | **C** | **Galileo Tip:** "Pueden estar en distintos lugares del plano, pero si miden lo mismo y apuntan igual, son el mismo vector." |
-| **8** | **B** | **Hawking Tip:** "La inclinación es la dirección, pero la punta de la flecha es el sentido." |
-| **9** | **A** | **Curie Tip:** "Suma el desplazamiento al punto original: $(2+1, 2+0) = (3, 2)$." |
-| **10** | **B** | **Statham Tip:** "Típ: Si no se mueve de lado a lado, solo le queda subir o bajar. Eso es vertical." |
-""")

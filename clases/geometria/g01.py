@@ -66,18 +66,3 @@ def render_G01():
             {'question': 'El punto $A(-5, 0)$ se encuentra en:', 'options': {'A': 'El III Cuadrante', 'B': 'El II Cuadrante', 'C': 'El eje X', 'D': 'El eje Y'}, 'answer': 'C', 'explanation': 'Si la ordenada ($y$) es cero, no subiste ni bajaste. Estás sobre el eje X, específicamente 5 unidades a la izquierda del origen.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g01_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G01)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Galileo Tip:** "¡No te pierdas! Si la abscisa ($x$) es negativa y la ordenada ($y$) es positiva, significa que te moviste a la izquierda y subiste. Eso define al **Segundo Cuadrante**. ¡Visualízalo!" |
-| **2** | **C** | **Newton Tip:** "Mira los puntos: $A(1, 5)$ y $B(1, -2)$. ¿Ves que el 1 no cambió? Solo te moviste verticalmente. Desde el 5 positivo hasta el 2 negativo hay 7 pasos de distancia. $|5 - (-2)| = 7$. No gastes energía en Pitágoras si la línea es recta." |
-| **3** | **A** | **Hawking Tip:** "El punto medio es simplemente el promedio. Suma las X: $-4 + 2 = -2$, y la mitad es $-1$. Suma las Y: $8 + 2 = 10$, y la mitad es $5$. El centro de ese universo es $(-1, 5)$. ¡Es lógica pura!" |
-| **4** | **B** | **Curie Tip:** "La simetría respecto al eje X es como un reflejo en el agua: lo que está arriba pasa abajo, pero la posición horizontal no cambia. El punto $(3,4)$ se convierte en $(3,-4)$." |
-| **5** | **C** | **Galileo Tip:** "¡Cuidado aquí! En el tercer cuadrante te mueves a la izquierda (X negativo) y bajas (Y negativo). La combinación $(-,-)$ es la trampa final del plano." |
-| **6** | **B** | **Newton Tip:** "Si no te mueves hacia los lados, estás clavado en la línea vertical. La línea vertical es donde la abscisa ($x$) es siempre cero." |
-| **7** | **B** | **Hawking Tip:** "Es un clásico triángulo 3-4-5. La distancia del origen a $(x, y)$ es $\sqrt{x^2+y^2}$. $\sqrt{3^2+(-4)^2} = \sqrt{9+16} = 5$." |
-| **8** | **A** | **Curie Tip:** "El punto medio es el promedio, así que deshaz el promedio: $2 = (1+x)/2 \implies 4 = 1+x \implies x=3$. $3 = (1+y)/2 \implies 6 = 1+y \implies y=5$." |
-| **9** | **B** | 
-""")

@@ -117,16 +117,3 @@ $C(x) = 500x + 2000$ → en $x=0$: costo = $2.000$.
              "answer": "C", "explanation": r"El corte con el eje $Y$ es siempre $(0, n) = (0, 5)$."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="f02_quiz")
-
-    with st.expander("🔑 Pauta Técnica F02: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | Lineal: $mx$ sin constante. |
-| **2** | **B** | Coeficiente de posición es el número solo. |
-| **3** | **C** | $m>0$ implica crecimiento. |
-| **4** | **A** | $m=(10-2)/(3-1)=4$. |
-| **5** | **C** | $n=2000$ (fijo); $m=500$ (por unidad). |
-| **6** | **C** | $f(0)=0$ por definición de lineal. |
-| **7** | **C** | Corte eje $Y$: $(0, n)=(0,5)$. |
-""")

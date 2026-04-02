@@ -119,16 +119,3 @@ En sueldos muy desiguales (mayoría gana poco, pocos ganan muchísimo), la **Med
              "answer": "C", "explanation": "La moda es el valor con mayor frecuencia, en este caso: 5."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="d03_quiz")
-
-    with st.expander("🔑 Pauta Técnica D03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | Media = punto de equilibrio; se mueve igual que los datos. |
-| **2** | **B** | Mediana es robusta a extremos. |
-| **3** | **B** | $(3+5)/2=4$. |
-| **4** | **C** | Campana de Gauss = distribución simétrica. |
-| **5** | **C** | Propiedad fundamental: $\sum(x_i-\bar{x})=0$. |
-| **6** | **A** | Para $n=8$: promedio de datos 4° y 5°. |
-| **7** | **C** | Moda = valor con mayor frecuencia. |
-""")

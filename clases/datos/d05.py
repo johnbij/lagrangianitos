@@ -125,16 +125,3 @@ Si $F_2 = 35$ y $F_3 = 55$, el dato 40 cae en la fila 3 → $P_{50}$ pertenece a
              "answer": "C", "explanation": "Bigote largo a la derecha = cola hacia la derecha = asimetría positiva."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="d05_quiz")
-
-    with st.expander("🔑 Pauta Técnica D05: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | Percentil $k$ = el $k$% está por debajo. |
-| **2** | **C** | $Q_2$ = Mediana (50%). |
-| **3** | **B** | $(25\cdot120)/100=30$. |
-| **4** | **B** | $RIC=Q_3-Q_1$: dispersión del 50% central. |
-| **5** | **C** | Línea interior = Mediana. |
-| **6** | **C** | $Q_3$ supera al 75%. |
-| **7** | **C** | Bigote largo derecho = asimetría positiva. |
-""")

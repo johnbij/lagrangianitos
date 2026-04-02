@@ -124,16 +124,3 @@ $x = 50$ minutos
              "answer": "C", "explanation": r"La pendiente $m=500$ es el costo adicional por unidad."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="f03_quiz")
-
-    with st.expander("🔑 Pauta Técnica F03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | $n=5000$ (fijo); $m=100$ (variable). |
-| **2** | **A** | $100x+5000=200x$ → $x=50$. |
-| **3** | **C** | Valor independiente de $x$ = costo fijo. |
-| **4** | **C** | Misma pendiente, distinto origen → paralelas. |
-| **5** | **D** | $800x=12000$ → $x=15$. |
-| **6** | **B** | Origen = sin cargo fijo = función lineal. |
-| **7** | **C** | $m=500$ → costo extra por kg. |
-""")

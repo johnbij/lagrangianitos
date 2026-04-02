@@ -95,16 +95,3 @@ def render_N26():
             {'question': 'Si $\\frac{x}{2} = \\frac{y}{5} = \\frac{z}{3}$ y $x+y+z = 100$, ¿cuál es el valor de $y$?', 'options': {'A': '20\\', 'B': '50\\', 'C': '30\\', 'D': '10'}, 'answer': 'B', 'explanation': '$k = 100 / (2+5+3) = 10$. Luego $y = 5 \\cdot 10 = 50$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n26_quiz")
-    with st.expander("✅ Pauta - N26", expanded=False):
-        st.markdown("""# ✅ Pauta - Cuestionario N26
-
-1. **A.** Componiendo: $\\frac{a + b}{a} = \\frac{5 + 4}{5} \\implies \\frac{18}{a} = \\frac{9}{5} \\implies a = 10$.
-2. **A.** Por definición de composición: $\\frac{7 + 3}{3} = 10 / 3$.
-3. **B.** Descomponiendo: $\\frac{a - b}{a} = \\frac{9 - 5}{9} \\implies \\frac{12}{a} = \\frac{4}{9} \\implies a = 27$.
-4. **A.** Aplicando la propiedad mixta: $\\frac{3 + 2}{3 - 2} = 5 / 1 = 5$.
-5. **A.** Suma de antecedentes (60) entre suma de consecuentes ($3+4+5=12$): $60 / 12 = 5$.
-6. **B.** Descomponiendo respecto a $y$: $\\frac{x - y}{y} = \\frac{11 - 8}{8} \\implies \\frac{9}{y} = \\frac{3}{8} \\implies y = 24$.
-7. **B.** Se trata de una variante de la descomposición al restar el consecuente.
-8. **A.** $\\frac{5 - 2}{5 + 2} = 3 / 7$.
-9. **A.** Componiendo: $\\frac{Aprob}{Total} = \\frac{7}{7 + 2} \\implies \\frac{Aprob}{36} = \\frac{7}{9} \\implies Aprob = 28$.
-10. **B.** $k = 100 / (2+5+3) = 10$. Luego $y = 5 \\cdot 10 = 50$.""")

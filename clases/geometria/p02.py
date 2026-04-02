@@ -209,16 +209,3 @@ B) $8\pi$ cm²
 C) $16\pi$ cm²
 D) $32\pi$ cm²
 """)
-
-    with st.expander("🔑 Pauta Técnica P02: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $A = 15 \cdot 8 = 120$ cm². |
-| **2** | **B** | $A = \frac{10 \cdot 7}{2} = 35$ cm². |
-| **3** | **C** | $A = \pi r^2 = \pi (6)^2 = 36\pi$ cm². |
-| **4** | **C** | $A = \frac{D \cdot d}{2} = \frac{10 \cdot 14}{2} = 70$ cm². |
-| **5** | **B** | $A = \frac{(6+10) \cdot 4}{2} = \frac{16 \cdot 4}{2} = 32$ cm². |
-| **6** | **C** | $1 \text{ ha} = 10\,000 \text{ m}^2$, así que $0{,}5 \text{ ha} = 5\,000 \text{ m}^2$. |
-| **7** | **B** | $A = \frac{45}{360} \cdot \pi (8)^2 = \frac{1}{8} \cdot 64\pi = 8\pi$ cm². |
-""")

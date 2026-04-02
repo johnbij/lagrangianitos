@@ -66,19 +66,3 @@ def render_G07():
             {'question': 'La suma de los ángulos agudos de un triángulo rectángulo es siempre:', 'options': {'A': '45°', 'B': '90°', 'C': '180°', 'D': 'Variable'}, 'answer': 'B', 'explanation': 'Típ: Se llaman ángulos complementarios. $90 + 90 = 180$. Corta.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g07_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G07)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Ojo aquí: para ser acutángulo NO basta con tener un ángulo agudo, ¡tienen que ser los tres!" |
-| **2** | **C** | **Newton Tip:** "Cualquier ángulo mayor a 90° convierte automáticamente al triángulo en obtusángulo." |
-| **3** | **C** | **Hawking Tip:** "Como ya gastaste 90° en el ángulo recto, solo te quedan 90° para repartir entre los otros dos. Por ende, ambos deben ser menores a 90°." |
-| **4** | **C** | **Curie Tip:** "El equilátero es el acutángulo por excelencia. Todos sus ángulos son de 60°." |
-| **5** | **C** | **Statham Tip:** "Típ: $90 + (\text{algo} > 90)$ ya suma más de 180. Los ángulos interiores no permiten esa mezcla." |
-| **6** | **B** | **Newton Tip:** "Es el trío pitagórico (3-4-5) amplificado al doble. $36 + 64 = 100$. Es rectángulo." |
-| **7** | **A** | **Galileo Tip:** "No te dejes engañar por el 89°. Sigue siendo menor que 90°, por lo tanto, es acutángulo." |
-| **8** | **C** | **Curie Tip:** "La hipotenusa es siempre el lado más largo y el que 'mira' al ángulo recto." |
-| **9** | **C** | **Hawking Tip:** "Suma: $20 + 30 = 50$. El tercer ángulo es $180 - 50 = 130$. Como 130 > 90, es obtusángulo." |
-| **10** | **B** | **Statham Tip:** "Típ: Se llaman ángulos complementarios. $90 + 90 = 180$. Corta." |
-""")

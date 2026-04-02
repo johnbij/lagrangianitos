@@ -67,19 +67,3 @@ def render_G14():
             {'question': 'Un cuadrilátero está inscrito en una circunferencia. Sus ángulos opuestos deben ser:', 'options': {'A': 'Iguales', 'B': 'Suplementarios (suman 180°)', 'C': 'Complementarios', 'D': 'Rectos'}, 'answer': 'B', 'explanation': 'Típ: Se llama cuadrilátero cíclico. Propiedad avanzada que salva vidas en la prueba.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g14_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G14)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Galileo Tip:** "Su nombre lo dice todo: nace en el centro, usa los radios como brazos." |
-| **2** | **C** | **Newton Tip:** "Regla de oro: El inscrito es siempre el más 'flaco', exactamente la mitad." |
-| **3** | **B** | **Hawking Tip:** "Es un clásico. Un ángulo que mira a la mitad del círculo (180°) tiene que medir 90°." |
-| **4** | **A** | **Curie Tip:** "Ángulo inscrito = Arco / 2. Entonces $70 / 2 = 35$." |
-| **5** | **B** | **Statham Tip:** "Típ: Es como un inscrito 'al borde'. Se calcula igual: mitad del arco." |
-| **6** | **C** | **Newton Tip:** "No importa dónde pongas el vértice en el borde, si miran al mismo arco, valen lo mismo." |
-| **7** | **C** | **Galileo Tip:** "Si el ángulo es 45, el arco es el doble: 90. Es un cuarto de circunferencia." |
-| **8** | **C** | **Hawking Tip:** "Al igual que un ángulo completo, la vuelta total de arcos suma 360°." |
-| **9** | **C** | **Curie Tip:** "Relación fundamental: Centro es el total, Inscrito es la mitad." |
-| **10** | **B** | **Statham Tip:** "Típ: Se llama cuadrilátero cíclico. Propiedad avanzada que salva vidas en la prueba." |
-""")

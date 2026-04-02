@@ -112,16 +112,3 @@ $\Delta = 9 - 4(-2)(-10) = 9 - 80 = -71 < 0$ → Ninguna raíz real.
              "answer": "A", "explanation": r"$x^2-4=0 \Rightarrow x^2=4 \Rightarrow x=\pm2$."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="f05_quiz")
-
-    with st.expander("🔑 Pauta Técnica F05: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | $36-36=0$. TCP, toca en un punto. |
-| **2** | **C** | $\Delta<0$ → no hay corte real. |
-| **3** | **C** | $\Delta=0$ → un solo punto de tangencia. |
-| **4** | **A** | $4-20=-16$. |
-| **5** | **B** | $a<0$ (↓) y $\Delta>0$ (dos cortes). |
-| **6** | **C** | $b^2>4ac$ → resta positiva → $\Delta>0$. |
-| **7** | **A** | $x^2=4$ → $x=\pm2$. |
-""")

@@ -200,16 +200,3 @@ B) $\frac{10}{\sqrt{2}}$ cm
 C) $5\sqrt{2}$ cm
 D) B y C son equivalentes
 """)
-
-    with st.expander("🔑 Pauta Técnica P03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | $c = \sqrt{25 + 144} = \sqrt{169} = 13$ cm. |
-| **2** | **B** | $d = \sqrt{81 + 144} = \sqrt{225} = 15$ m. |
-| **3** | **C** | $6^2 + 8^2 = 100 \neq 121 = 11^2$. No cumple $a^2 + b^2 = c^2$. |
-| **4** | **C** | $d = \sqrt{(5-2)^2 + (7-3)^2} = \sqrt{9 + 16} = 5$. |
-| **5** | **C** | $5^2 + 7^2 = 74 < 81 = 9^2$. Como $a^2+b^2 < c^2$, es obtusángulo. |
-| **6** | **C** | $a = \sqrt{100 - 36} = \sqrt{64} = 8$ cm. |
-| **7** | **D** | $\ell = \frac{10}{\sqrt{2}} = \frac{10\sqrt{2}}{2} = 5\sqrt{2}$ cm. Ambas expresiones son equivalentes. |
-""")

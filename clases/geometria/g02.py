@@ -63,19 +63,3 @@ def render_G02():
             {'question': '¿Cuál es la distancia entre el origen $(0, 0)$ y el punto $(-3, -4)$?', 'options': {'A': '1', 'B': '5', 'C': '7', 'D': '25'}, 'answer': 'B', 'explanation': '$\\sqrt{(-3-0)^2 + (-4-0)^2} = \\sqrt{(-3)^2 + (-4)^2} = \\sqrt{9+16} = 5$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g02_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G02)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Newton Tip:** "La fórmula $d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$ es literalmente Pitágoras ($a^2 + b^2 = c^2$) aplicado a los lados de un triángulo rectángulo imaginario formado por los puntos." |
-| **2** | **D** | **Galileo Tip:** "Si los puntos están en el mismo eje (en este caso el eje Y, ya que $x=0$), la distancia es simplemente la diferencia absoluta de las coordenadas que cambian: $|5 - 0| = 5$." |
-| **3** | **B** | **Hawking Tip:** "Los puntos están en el eje X ($y=0$). La distancia es $|6 - 2| = 4$." |
-| **4** | **C** | **Curie Tip:** "Aplicamos la fórmula: $\sqrt{(4-1)^2 + (6-2)^2} = \sqrt{3^2 + 4^2} = \sqrt{9+16} = \sqrt{25} = 5$." |
-| **5** | **B** | **Newton Tip:** "La distancia mide longitud, y la longitud nunca es negativa. A lo sumo, es cero si los puntos son el mismo." |
-| **6** | **C** | **Galileo Tip:** "$\sqrt{(4-1)^2 + (5-1)^2} = \sqrt{3^2 + 4^2} = 5$." |
-| **7** | **B** | **Hawking Tip:** "La distancia es $|y-1|=3$. Por lo tanto, $y-1=3$ o $y-1=-3$, lo que da $y=4$ o $y=-2$. De las opciones, 4 es correcta." |
-| **8** | **C** | **Curie Tip:** "$\sqrt{(2-(-1))^2 + (3-(-1))^2} = \sqrt{3^2 + 4^2} = 5$." |
-| **9** | **A** | **Newton Tip:** "La distancia es $|5-x|=4$. Por lo tanto, $5-x=4$ o $5-x=-4$, lo que da $x=1$ o $x=9$. De las opciones, 1 es correcta." |
-| **10** | **B** | **Galileo Tip:** "$\sqrt{(-3-0)^2 + (-4-0)^2} = \sqrt{(-3)^2 + (-4)^2} = \sqrt{9+16} = 5$." |
-""")

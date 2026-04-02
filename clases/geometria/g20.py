@@ -68,19 +68,3 @@ def render_G20():
             {'question': 'Si un cilindro y un prisma tienen la misma área de base y misma altura:', 'options': {'A': 'El cilindro tiene más volumen', 'B': 'El prisma tiene más volumen', 'C': 'Tienen el mismo volumen', 'D': 'Depende del valor de $\\pi$'}, 'answer': 'C', 'explanation': "Típ: Si el 'fondo' y la 'altura' son iguales, no importa la forma de la base, la capacidad es la misma."}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g20_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G20)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Tienes las 6 caras laterales de los lados del hexágono + las 2 bases (tapa y suelo). Total: 8." |
-| **2** | **C** | **Newton Tip:** "Es la regla de oro para prismas y cilindros. Superficie del fondo por lo alto que llegas." |
-| **3** | **A** | **Hawking Tip:** "Buscamos un número que multiplicado tres veces por sí mismo dé 64. $4 \cdot 4 \cdot 4 = 64$." |
-| **4** | **C** | **Curie Tip:** "Imagina una puerta giratoria; el camino que recorre el borde es la curva del cilindro." |
-| **5** | **C** | **Statham Tip:** "Típ: Si cortas la etiqueta de una lata y la estiras, verás un rectángulo perfecto." |
-| **6** | **C** | **Newton Tip:** "Radio al cuadrado ($3^2=9$), por altura ($10$), por $\pi$. $9 \cdot 10 \cdot \pi = 90\pi$." |
-| **7** | **B** | **Galileo Tip:** "Viene del griego 'planos paralelos'. Es la forma de los ladrillos o cajas de zapatos." |
-| **8** | **C** | **Hawking Tip:** "Simplemente multiplica las tres dimensiones: $2 \cdot 3 \cdot 4 = 24$." |
-| **9** | **C** | **Curie Tip:** "El volumen es la medida del espacio tridimensional que ocupa un cuerpo." |
-| **10** | **C** | **Statham Tip:** "Típ: Si el 'fondo' y la 'altura' son iguales, no importa la forma de la base, la capacidad es la misma." |
-""")

@@ -134,16 +134,3 @@ Para el intervalo $[20, 30[$: $m_c = (20+30)/2 = 25$
              "answer": "C", "explanation": r"$0,15 \times 100 = 15$."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="d02_quiz")
-
-    with st.expander("🔑 Pauta Técnica D02: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $25+40+35=100$. |
-| **2** | **B** | $F_2=65$; $H_2=0,65$. |
-| **3** | **B** | $(72/360)\times200=40$. |
-| **4** | **C** | Playfair: pionero de gráficos estadísticos. |
-| **5** | **C** | Marca de clase = punto medio del intervalo. |
-| **6** | **B** | Histograma: barras se tocan (continuo). |
-| **7** | **C** | $0,15\times100=15$. |
-""")

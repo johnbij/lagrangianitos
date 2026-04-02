@@ -97,16 +97,3 @@ def render_N28():
             {'question': 'Si al repartir una suma I.P. a 3 y 6, la parte mayor es 40, ¿cuál es la suma total repartida?', 'options': {'A': '60\\', 'B': '120\\', 'C': '80\\', 'D': '90'}, 'answer': 'A', 'explanation': 'Inversos $1/3, 1/6$. M.C.M. = 6. Índices: 2 y 1. Parte mayor $2k = 40 \\implies k = 20$. Total: $3k = 3 \\cdot 20 = 60$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n28_quiz")
-    with st.expander("✅ Pauta - N28", expanded=False):
-        st.markdown("""# ✅ Pauta - Cuestionario N28
-
-1. **A.** Inversos: $1/2$ y $1/9$. M.C.M. = 18. Índices: 9 y 2. $11k = 220.000 \\implies k = 20.000$. Parte menor (índice 2): \\$40.000.
-2. **B.** Los denominadores de los inversos son 1, 2 y 3. El M.C.M.(1, 2, 3) = 6.
-3. **B.** Inversos: $1/20$ y $1/25$. M.C.M. = 100. Índices: 5 y 4. La razón es $5 : 4$.
-4. **B.** Inversos: $1/3$ y $1/4$. M.C.M. = 12. Índices: 4 y 3. $7k = 70 \\implies k = 10$. Parte mayor: $4 \\cdot 10 = 40$.
-5. **B.** Inversos: $1/2, 1/3, 1/4$ (quitando los miles). M.C.M. = 12. Índices: 6, 4, 3. $13k = 39.000 \\implies k = 3.000$ (ajustando el valor total del ejemplo).
-6. **A.** $1/4 \\cdot 20 = 5$; $1/5 \\cdot 20 = 4$; $1/10 \\cdot 20 = 2$.
-7. **A.** Índices directos: 5 y 2. El que menos faltó ($5k$) recibe 50.000 $\\implies k = 10.000$. El otro ($2k$) recibe 20.000.
-8. **B.** Definición fundamental de proporcionalidad inversa.
-9. **A.** Al invertir los inversos ($1/2$ y $1/3$) volvemos a los originales 2 y 3 para el reparto directo.
-10. **A.** Inversos $1/3, 1/6$. M.C.M. = 6. Índices: 2 y 1. Parte mayor $2k = 40 \\implies k = 20$. Total: $3k = 3 \\cdot 20 = 60$.""")

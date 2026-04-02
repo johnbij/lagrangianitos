@@ -209,16 +209,3 @@ B) $\frac{1}{3}$
 C) $\frac{1}{2}$
 D) $\frac{2}{3}$
 """)
-
-    with st.expander("🔑 Pauta Técnica P04: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $V = 5^3 = 125$ cm³. |
-| **2** | **C** | $V = \pi(4)^2(10) = 160\pi$ cm³. |
-| **3** | **B** | $1\,000 \text{ cm}^3 = 1 \text{ L}$, así que $2\,000 \text{ cm}^3 = 2$ L. |
-| **4** | **B** | $V = \frac{1}{3}(10^2)(9) = \frac{900}{3} = 300$ cm³. |
-| **5** | **D** | $V = \frac{4}{3}\pi(3)^3 = \frac{108\pi}{3} = 36\pi$ cm³. Ambas son iguales. |
-| **6** | **C** | $V = \pi(2r)^2 h = 4\pi r^2 h$. El volumen se cuadruplica. |
-| **7** | **B** | $\frac{V_{\text{cono}}}{V_{\text{cilindro}}} = \frac{\frac{1}{3}\pi r^2 h}{\pi r^2 h} = \frac{1}{3}$. |
-""")

@@ -136,16 +136,3 @@ Para $f(x) = x^2 - 3x - 4$:
              "answer": "C", "explanation": r"No hay término con $x$ sola, por tanto $b=0$."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="f04_quiz")
-
-    with st.expander("🔑 Pauta Técnica F04: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | $a=2>0$ → abre hacia arriba. |
-| **2** | **C** | Corte eje $Y$: $(0, c)=(0,-8)$. |
-| **3** | **C** | $x_v=6/2=3$. |
-| **4** | **B** | $a<0$ → montaña → máximo. |
-| **5** | **C** | $x=-4/(2)=-2$. |
-| **6** | **B** | $y_v$ = valor extremo. |
-| **7** | **C** | No hay término $bx$, por tanto $b=0$. |
-""")

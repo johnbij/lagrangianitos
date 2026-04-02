@@ -120,16 +120,3 @@ $x^3 + 8 = (x+2)(x^2 - 2x + 4)$ — Igual (+), Opuesto (-), Positivo (+)
              "answer": "C", "explanation": r"TCP: $5+5=10$ y $5\cdot5=25$. Es $(x+5)^2$."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="a04_quiz")
-
-    with st.expander("🔑 Pauta Técnica A04: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $6$ divide a $12$; potencia mínima $x^2$. |
-| **2** | **B** | $x^2-7^2 = (x+7)(x-7)$. |
-| **3** | **A** | Suma de cubos SOPA: $+, -, +$. |
-| **4** | **B** | $(-2)+(-3)=-5$; $(-2)(-3)=+6$. |
-| **5** | **B** | Factor común siempre primero. |
-| **6** | **A** | $3(x^2+x-6) = 3(x+3)(x-2)$. |
-| **7** | **C** | TCP: $(x+5)^2$. |
-""")

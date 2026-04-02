@@ -211,23 +211,3 @@ def render_N10():
             {'question': '¿Cuál es el valor de $50 - 2 \\cdot (10 - 4 \\cdot 2)$?**\n\\', 'options': {'A': '96', 'B': '46', 'C': '42', 'D': '38'}, 'answer': 'B', 'explanation': 'Paréntesis interior: $10 - 8 = 2 \\rightarrow 50 - 2 \\cdot 2 \\rightarrow 50 - 4 = 46$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n10_quiz")
-
-    with st.expander("🔑 Pauta Técnica N10: Mecánica de Operatoria", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El Paso a Paso) |
-| :--- | :---: | :--- |
-| **1** | **B** | Multiplicación primero: $12 - 8 + 5 = 4 + 5 = 9$. |
-| **2** | **B** | De izquierda a derecha: $30 \div 5 = 6$, luego $6 \cdot 3 = 18$. |
-| **3** | **B** | $-10 + 5 - 8 \rightarrow -5 - 8 = -13$. |
-| **4** | **A** | Paréntesis: $(8+2)=10 \rightarrow 2 \cdot [15-10] \rightarrow 2 \cdot 5 = 10$. |
-| **5** | **C** | Amplificar por 100: $120 \div 2 = 60$. |
-| **6** | **A** | Potencia: $100 \div 100 + 0 \rightarrow 1 + 0 = 1$. |
-| **7** | **A** | Cuatro signos negativos (par) resulta en positivo: $2 \cdot 1 \cdot 3 \cdot 2 = 12$. |
-| **8** | **D** | $-15 - (-20) = -15 + 20 = 5$. |
-| **9** | **B** | Tres ceros, la coma corre 3 espacios a la derecha: $45$. |
-| **10** | **B** | Paréntesis interior: $10 - 8 = 2 \rightarrow 50 - 2 \cdot 2 \rightarrow 50 - 4 = 46$. |
-
----
-
-> **Típ:** El error más común en la PAES es el signo. Si ves un signo menos delante de un paréntesis, trátalo como una alarma de incendio: todo lo de adentro va a cambiar.
-""")

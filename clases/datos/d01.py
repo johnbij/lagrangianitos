@@ -117,16 +117,3 @@ def render_D01():
              "answer": "C", "explanation": "La estadística controla la variabilidad en los procesos industriales."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="d01_quiz")
-
-    with st.expander("🔑 Pauta Técnica D01: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | Graunt buscaba patrones en las epidemias. |
-| **2** | **C** | Subconjunto representativo = muestra. |
-| **3** | **B** | PP-EM: **E**stadístico para la **M**uestra. |
-| **4** | **C** | Temperatura = continua (decimales posibles). |
-| **5** | **B** | Inferencia = saltar de muestra a población. |
-| **6** | **C** | Con jerarquía y no numérica = ordinal. |
-| **7** | **C** | Estadística controla la variabilidad. |
-""")

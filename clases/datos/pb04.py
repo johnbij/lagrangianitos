@@ -175,15 +175,3 @@ def render_PB04():
             {"question": "Claves de $3$ dígitos del $1$ al $5$ SIN repetir. ¿Cuántas hay?", "options": {"A": "$125$", "B": "$60$", "C": "$10$", "D": "$15$"}, "answer": "B", "explanation": "$P(5,3)=5\\times4\\times3=60$."},
         ]
         render_multiple_choice_quiz(quiz_questions, key_prefix="pb04_quiz")
-    with st.expander("🔑 Pauta Técnica PB04: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | $5! = 5 \times 4 \times 3 \times 2 \times 1 = 120$. |
-| **2** | **B** | $3! = 6$. Tres letras distintas → $3$ posiciones. |
-| **3** | **B** | $\binom{10}{2} = \frac{10 \times 9}{2} = 45$. Sin importar cargo → combinación. |
-| **4** | **A** | Con repetición y orden importa: $26^4 \cdot 10^2$. Principio multiplicativo. |
-| **5** | **C** | $\binom{5}{2} = \frac{5!}{2! \cdot 3!} = \frac{5 \times 4}{2} = 10$. |
-| **6** | **C** | En permutaciones el orden importa (ABC ≠ BAC). En combinaciones no ({A,B,C} = {C,A,B}). |
-| **7** | **B** | Sin repetición, orden importa: $P(5,3) = \frac{5!}{2!} = 5 \times 4 \times 3 = 60$. |
-""")

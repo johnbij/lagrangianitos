@@ -67,19 +67,3 @@ def render_G04():
             {'question': 'Los ángulos opuestos por el vértice son:', 'options': {'A': 'Complementarios', 'B': 'Suplementarios', 'C': 'Iguales', 'D': 'Adyacentes'}, 'answer': 'C', 'explanation': 'Al cruzarse dos rectas, los ángulos opuestos son siempre congruentes (iguales).'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g04_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G04)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Newton Tip:** "El ángulo recto es la definición de perpendicularidad." |
-| **2** | **B** | **Galileo Tip:** "Complementarios se 'completan' para formar un ángulo recto (90°)." |
-| **3** | **B** | **Hawking Tip:** "Más de 90° pero menos de 180° es la definición de obtuso." |
-| **4** | **C** | **Curie Tip:** "Suplementarios suman 180°. $180 - 80 = 100$." |
-| **5** | **B** | **Newton Tip:** "Es una propiedad fundamental de la geometría euclidiana." |
-| **6** | **B** | **Galileo Tip:** "$90 - 15 = 75$." |
-| **7** | **C** | **Hawking Tip:** "También conocido como ángulo reflejo." |
-| **8** | **B** | **Curie Tip:** "$180 - 120 = 60$." |
-| **9** | **B** | **Newton Tip:** "Es el ángulo estándar de referencia." |
-| **10** | **C** | **Galileo Tip:** "Al cruzarse dos rectas, los ángulos opuestos son siempre congruentes (iguales)." |
-""")
