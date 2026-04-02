@@ -48,11 +48,11 @@ def render_G20():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Volumen de un cubo de arista 3 cm. | 1. Área base: $3 \cdot 3 = 9$.<br>2. Volumen: $9 \cdot 3$. | **27 cm³** |
-| **E02** | Volumen de un cilindro de radio 2 y altura 5. | 1. Área base: $\pi \cdot 2^2 = 4\pi$.<br>2. Volumen: $4\pi \cdot 5$. | **$20\pi$ u³** |
-| **E03** | Área total de un cubo de arista 2. | 1. Un cubo tiene 6 caras iguales.<br>2. Área una cara: $2^2 = 4$.<br>3. Total: $4 \cdot 6$. | **24 u²** |
-| **E04** | Prisma base cuadrada (lado 4) y altura 10. | 1. Área base: $4^2 = 16$.<br>2. Volumen: $16 \cdot 10$. | **160 u³** |
-| **E05** | ¿Qué pasa con el volumen del cilindro si doblo el radio? | 1. Radio al cuadrado: $2^2 = 4$.<br>2. El volumen se multiplica por 4. | **Se cuadruplica** |
+| **1** | Volumen de un cubo de arista 3 cm. | 1. Área base: $3 \cdot 3 = 9$.<br>2. Volumen: $9 \cdot 3$. | **27 cm³** |
+| **2** | Volumen de un cilindro de radio 2 y altura 5. | 1. Área base: $\pi \cdot 2^2 = 4\pi$.<br>2. Volumen: $4\pi \cdot 5$. | **$20\pi$ u³** |
+| **3** | Área total de un cubo de arista 2. | 1. Un cubo tiene 6 caras iguales.<br>2. Área una cara: $2^2 = 4$.<br>3. Total: $4 \cdot 6$. | **24 u²** |
+| **4** | Prisma base cuadrada (lado 4) y altura 10. | 1. Área base: $4^2 = 16$.<br>2. Volumen: $16 \cdot 10$. | **160 u³** |
+| **5** | ¿Qué pasa con el volumen del cilindro si doblo el radio? | 1. Radio al cuadrado: $2^2 = 4$.<br>2. El volumen se multiplica por 4. | **Se cuadruplica** |
 """)
 
     with st.expander("❓ Cuestionario G20", expanded=False):
