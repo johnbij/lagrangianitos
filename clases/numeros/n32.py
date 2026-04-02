@@ -105,16 +105,3 @@ $120 \\cdot \\text{tiempo} = 240 \\implies \\text{tiempo} = 2$ horas.""")
             {'question': 'Si 10 obreros tardan 20 días en cavar una zanja, ¿cuántos días tardarán 20 obreros?', 'options': {'A': '40 días \\', 'B': '10 días \\', 'C': '5 días \\', 'D': '15 días'}, 'answer': 'B', 'explanation': 'Al doble de obreros, la mitad de tiempo. $20/2 = 10$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n32_quiz")
-    with st.expander("✅ Pauta - N32", expanded=False):
-        st.markdown("""# ✅ Pauta Explicativa - Cuestionario N32
-
-1. **B.** Definición de inversa: cambio opuesto en la misma proporción.
-2. **A.** Usamos $x \\cdot y = k \\implies 30 \\cdot y = 120 \\implies y = 120/30 = 4$.
-3. **C.** La hipérbola es la forma geométrica que representa la función $y = k/x$.
-4. **B.** $k = 4 \\cdot 6 = 24$. Si queremos tiempo 3: $x \\cdot 3 = 24 \\implies x = 8$.
-5. **B.** El producto constante es la firma de la proporción inversa.
-6. **C.** $k = 10 \\cdot 12 = 120$. Con nuevo caudal: $15 \\cdot t = 120 \\implies t = 120/15 = 8$.
-7. **B.** Calculamos $k = 2 \\cdot 50 = 100$. Verificamos puntos: $10 \\cdot 10 = 100$. El resto no cumple.
-8. **A.** $k = 8 \\cdot 3 = 24$. Si $y = 12$, entonces $x \\cdot 12 = 24 \\implies x = 2$.
-9. **C.** Es la descripción visual de la hipérbola en el primer cuadrante.
-10. **B.** Al doble de obreros, la mitad de tiempo. $20/2 = 10$.""")

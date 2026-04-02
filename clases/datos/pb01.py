@@ -153,15 +153,3 @@ def render_PB01():
             {"question": "Con $A=\\{1,3,5\\}$ y $B=\\{5,6\\}$, $A\\cap B$ es:", "options": {"A": "$\\{1,3,5,6\\}$", "B": "$\\{5\\}$", "C": "$\\emptyset$", "D": "$\\{6\\}$"}, "answer": "B", "explanation": "$A\\cap B=\\{5\\}$."},
         ]
         render_multiple_choice_quiz(quiz_questions, key_prefix="pb01_quiz")
-    with st.expander("🔑 Pauta Técnica PB01: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | Cada moneda tiene $2$ resultados → $2 \times 2 = 4$ pares: $CC, CS, SC, SS$. $CS \neq SC$. |
-| **2** | **B** | Los primos entre $1$ y $6$ son $2, 3, 5$. El $1$ no es primo. |
-| **3** | **C** | Mutuamente excluyentes $\Leftrightarrow$ $A \cap B = \emptyset$. No pueden ocurrir a la vez. |
-| **4** | **B** | $A^c = \Omega \setminus A = \{1, 3, 5\}$. Son los elementos de $\Omega$ que no están en $A$. |
-| **5** | **C** | $|\Omega| = 2^3 = 8$. Cada moneda aporta $2$ resultados. |
-| **6** | **C** | El evento imposible es el conjunto vacío $\emptyset$. No tiene elementos. |
-| **7** | **B** | $A \cap B = \{5\}$. Es el único elemento que pertenece a ambos conjuntos. |
-""")

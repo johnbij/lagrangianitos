@@ -68,19 +68,3 @@ def render_G11():
             {'question': 'Si en un triángulo $a^2 + b^2$ es mayor que $c^2$ (siendo $c$ el lado mayor), el triángulo es:', 'options': {'A': 'Rectángulo', 'B': 'Acutángulo', 'C': 'Obtusángulo', 'D': 'Imposible'}, 'answer': 'B', 'explanation': "Típ: Si los catetos 'ganan', el ángulo se cierra y es acutángulo. Si la hipotenusa gana, se abre y es obtusángulo."}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g11_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G11)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Sin el ángulo de 90°, la relación de los cuadrados no se cumple de forma exacta." |
-| **2** | **C** | **Newton Tip:** "La hipotenusa es el lado VIP: siempre va sola al otro lado del signo igual." |
-| **3** | **A** | **Hawking Tip:** "Es el trío (3, 4, 5) multiplicado por 2. $3\times2=6, 4\times2=8, 5\times2=10$." |
-| **4** | **B** | **Curie Tip:** "Es el trío más famoso de la historia. Recuérdalo y ahorrarás minutos valiosos." |
-| **5** | **B** | **Statham Tip:** "Típ: Si conoces la hipotenusa, restas los cuadrados: $100 - 36 = 64$. Raíz de 64 es 8." |
-| **6** | **C** | **Newton Tip:** "La diagonal de cualquier cuadrado siempre es $lado \times \sqrt{2}$." |
-| **7** | **C** | **Galileo Tip:** "Se cumple perfecto: $25 + 144 = 169$. Es un triángulo rectángulo puro." |
-| **8** | **C** | **Hawking Tip:** "Aplica la fórmula: $\sqrt{5^2 + 5^2} = \sqrt{25 + 25} = \sqrt{50} = 5\sqrt{2}$." |
-| **9** | **A** | **Curie Tip:** "Es el trío (3, 4, 5) multiplicado por 3. $3\times3=9, 4\times3=12, 5\times3=15$." |
-| **10** | **B** | **Statham Tip:** "Típ: Si los catetos 'ganan', el ángulo se cierra y es acutángulo. Si la hipotenusa gana, se abre y es obtusángulo." |
-""")

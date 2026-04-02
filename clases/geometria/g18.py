@@ -71,19 +71,3 @@ def render_G18():
             {'question': 'La homotecia preserva:', 'options': {'A': 'La medida de los lados', 'B': 'El área', 'C': 'La medida de los ángulos (forma)', 'D': 'La posición original'}, 'answer': 'C', 'explanation': 'Típ: Como es una forma de semejanza, los ángulos no se tocan. La figura no se deforma, solo escala.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g18_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G18)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Siempre están en la misma línea que sale desde el centro. Es la 'guía' de la transformación." |
-| **2** | **B** | **Newton Tip:** "Cualquier número entre 0 y 1 achica la figura. Piensa en porcentajes: 0.5 es el 50%." |
-| **3** | **C** | **Hawking Tip:** "El signo negativo significa que la figura 'saltó' hacia el otro lado del centro." |
-| **4** | **B** | **Curie Tip:** "Igual que en semejanza, el área siempre depende del cuadrado de la razón." |
-| **5** | **C** | **Statham Tip:** "Típ: $k=1$ es el elemento neutro. No agranda, no achica, no mueve. Todo queda igual." |
-| **6** | **A** | **Newton Tip:** "$1 \cdot (-3) = -3$ y $-2 \cdot (-3) = 6$. Solo multiplica cada parte por $k$." |
-| **7** | **C** | **Galileo Tip:** "Triple = 3. Sentidos opuestos = Negativo. Resultado: -3." |
-| **8** | **A** | **Hawking Tip:** "El perímetro es lineal, usamos el valor absoluto de $k$. $|-2| = 2$. Es el doble." |
-| **9** | **C** | **Curie Tip:** "El signo $(-)$ la invierte y la fracción propia (como $-0.5$) la achica." |
-| **10** | **C** | **Statham Tip:** "Típ: Como es una forma de semejanza, los ángulos no se tocan. La figura no se deforma, solo escala." |
-""")

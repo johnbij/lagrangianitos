@@ -61,19 +61,3 @@ def render_G05():
             {'question': 'Si el ángulo "a" es alterno externo con "b", y $a = 125°$, entonces $b$ es:', 'options': {'A': '55°', 'B': '125°', 'C': '180°', 'D': '90°'}, 'answer': 'B', 'explanation': 'Alternos externos entre paralelas son iguales. Marca 125° y sigue con la siguiente.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g05_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G05)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Imagina que deslizas una paralela sobre la otra; los correspondientes calzan perfecto. Son iguales." |
-| **2** | **B** | **Newton Tip:** "La 'Z' de alternos internos nunca falla: los ángulos en las esquinas de la Z son iguales." |
-| **3** | **B** | **Hawking Tip:** "Colaterales viene de 'al mismo lado'. Al estar al mismo lado, se 'aplastan' formando un ángulo llano de 180°." |
-| **4** | **B** | **Curie Tip:** "Externos porque están afuera, alternos porque saltan la barda (la transversal)." |
-| **5** | **C** | **Statham Tip:** "Típ: $180 - 40 = 140$. No te compliques la vida." |
-| **6** | **C** | **Newton Tip:** "Propiedad básica: cualquier par de rectas que se crucen forman ángulos opuestos iguales." |
-| **7** | **B** | **Galileo Tip:** "La igualdad de estos ángulos es la prueba de fuego de que las rectas son paralelas." |
-| **8** | **C** | **Hawking Tip:** "Si uno es recto, la transversal es perpendicular a ambas. Todos los ángulos resultantes serán de 90°." |
-| **9** | **B** | **Curie Tip:** "Adyacentes sobre una recta siempre suman 180°. Son suplementarios por definición." |
-| **10** | **B** | **Statham Tip:** "Alternos externos entre paralelas son iguales. Marca 125° y sigue con la siguiente." |
-""")

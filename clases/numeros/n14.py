@@ -74,23 +74,3 @@ def render_N14():
             {'question': 'En el número mixto $7 \\frac{2}{5}$, ¿cuál de los siguientes elementos representa el "Resto" del algoritmo original?**\n\\', 'options': {'A': '7', 'B': '5', 'C': '2', 'D': '35'}, 'answer': 'C', 'explanation': 'Al pasar de impropia a mixto, el numerador resultante es siempre el **resto**.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n14_quiz")
-
-    with st.expander("🔑 Pauta Técnica N14: Algoritmos y Vocabulario", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El Paso a Paso) |
-| :--- | :---: | :--- |
-| **1** | **B** | $17 \div 5 = 3$ y sobran **2**. ($17 = 5 \cdot 3 + 2$). |
-| **2** | **B** | Regla sagrada: El resto $r$ siempre debe cumplir $0 \le r < d$. |
-| **3** | **B** | Los números que se multiplican para formar un producto son **factores**. |
-| **4** | **C** | $23 \div 4 = 5$ (entero) y sobran **3** (numerador). Resultado: $5 \frac{3}{4}$. |
-| **5** | **B** | Divisibilidad implica una división exacta, es decir, resto **cero**. |
-| **6** | **B** | Aplicando $D = d \cdot q + r \rightarrow D = 4 \cdot 6 + 3 = 24 + 3 = 27$. |
-| **7** | **C** | Los divisores de 12 son {1,2,3,4,6,12} y de 18 {1,2,3,6,9,18}. El mayor común es **6**. |
-| **8** | **B** | La fracción evita el error de aproximación de los decimales infinitos. |
-| **9** | **B** | Si la división es exacta, el divisor "cabe" justo, por lo tanto es un **factor**. |
-| **10** | **C** | Al pasar de impropia a mixto, el numerador resultante es siempre el **resto**. |
-
----
-
-> **Típ:** Si en un problema de planteo te preguntan "¿cuántas piezas sobran?", te están pidiendo el **Resto** ($r$) del algoritmo de la división. No sigas dividiendo con decimales, quédate con el número entero que sobró.
-""")

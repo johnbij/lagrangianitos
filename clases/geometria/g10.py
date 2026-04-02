@@ -64,19 +64,3 @@ def render_G10():
             {'question': 'Si el baricentro está a 10 cm del vértice, ¿cuánto mide el segmento que falta para llegar al lado?', 'options': {'A': '20 cm', 'B': '10 cm', 'C': '5 cm\n) 2.5 cm\n\n**10. El circuncentro de un triángulo obtusángulo se encuentra:**\nA) En el interior\nB) En el exterior\nC) En el punto medio del lado mayor', 'D': 'En un vértice'}, 'answer': 'C', 'explanation': 'Si la parte grande es 10, la parte chica tiene que ser la mitad. O sea, 5.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g10_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G10)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Newton Tip:** "Baricentro = Gravedad. Es el punto donde el peso del triángulo se equilibra." |
-| **2** | **B** | **Galileo Tip:** "Simetral = Simetría. Divide el lado justo a la mitad y en ángulo recto." |
-| **3** | **B** | **Hawking Tip:** "Circuncentro viene de 'Circunscribir'. Envuelve al triángulo tocando sus esquinas." |
-| **4** | **A** | **Curie Tip:** "Divide 12 en tres partes iguales ($12/3 = 4$). La parte pequeña (al lado) es 4." |
-| **5** | **B** | **Statham Tip:** "Típ: El camino al vértice es siempre el doble de largo que el camino al lado. $2:1$." |
-| **6** | **C** | **Newton Tip:** "Si pudieras colgar el triángulo de un hilo, lo harías desde el baricentro." |
-| **7** | **B** | **Galileo Tip:** "En la perfección del equilátero, todos los centros colapsan en un solo punto mágico." |
-| **8** | **B** | **Hawking Tip:** "Simetral y Mediatriz son dos nombres para la misma línea. Grábatelos." |
-| **9** | **C** | **Curie Tip:** "Si la parte grande es 10, la parte chica tiene que ser la mitad. O sea, 5." |
-| **10** | **B** | **Statham Tip:** "Típ: Al igual que el ortocentro, el circuncentro se 'sale' del triángulo cuando este es muy abierto (obtuso)." |
-""")

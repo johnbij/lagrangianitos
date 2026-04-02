@@ -143,15 +143,3 @@ Si $x = 5$:
         render_multiple_choice_quiz(quiz, key_prefix="a01_quiz")
 
     # ── PAUTA ───────────────────────────────────────────────────────────────
-    with st.expander("🔑 Pauta Técnica A01: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | La coma indica: primero multiplica por 3, luego suma 8. |
-| **2** | **B** | "De la diferencia" → el paréntesis envuelve la resta antes de elevar. |
-| **3** | **D** | Cuarta parte = dividir entre 4. |
-| **4** | **B** | Antecesor = uno menos. |
-| **5** | **A** | $2x + 2$: doble de $x$, aumentado en 2. |
-| **6** | **C** | Producto de $x$ por su consecutivo $(x+1)$. |
-| **7** | **A** | Semejantes: $4m+m=5m$; $-2n+5n=3n$. |
-""")

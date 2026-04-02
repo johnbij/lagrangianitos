@@ -106,16 +106,3 @@ $4 \\text{ cm} \\rightarrow 2.000.000 \\text{ cm} = 20 \\text{ km}$.""")
             {'question': 'Si en una receta para 4 personas se usan 2 huevos, ¿cuántos huevos se necesitan para 10 personas?', 'options': {'A': '4 huevos \\', 'B': '5 huevos \\', 'C': '6 huevos \\', 'D': '8 huevos'}, 'answer': 'B', 'explanation': '$k = 2/4 = 0,5$ huevos por persona. Para 10 personas: $10 \\cdot 0,5 = 5$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n31_quiz")
-    with st.expander("✅ Pauta - N31", expanded=False):
-        st.markdown("""# ✅ Pauta Explicativa - Cuestionario N31
-
-1. **C.** Es la definición técnica: el cambio en una se replica exactamente en la misma razón en la otra.
-2. **B.** Usamos la fórmula $y = k \\cdot x \\implies y = 3 \\cdot 15 = 45$.
-3. **C.** Condición esencial: si no pasa por el origen, no hay proporción directa.
-4. **B.** Calculamos $k = 2500/5 = 500$ por kg. Luego $500 \\cdot 8 = 4000$.
-5. **B.** $k = y/x$. Entonces $2/4 = 0,5$. (Ojo con el orden de la división).
-6. **C.** El cociente constante define la relación directa.
-7. **B.** $k = 10/2 = 5$ min por km. Para 5 km: $5 \\cdot 5 = 25$ minutos.
-8. **A.** $k = y/x = 2/10 = 0,2$. Si $y=8$, entonces $8/x = 0,2 \\implies x = 8/0,2 = 40$.
-9. **A.** Comprobamos $k$: $2/1 = 2$ y $4/2 = 2$. Al ser constante y pasar por el origen (implícito), es directa. En la opción B, $k$ cambia ($2/0$ es indefinido y $4/2$ es 2).
-10. **B.** $k = 2/4 = 0,5$ huevos por persona. Para 10 personas: $10 \\cdot 0,5 = 5$.""")

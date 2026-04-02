@@ -60,19 +60,3 @@ def render_G03():
             {'question': '¿Cuál es el punto medio entre el origen $(0, 0)$ y el punto $(x, y)$?', 'options': {'A': '$(x, y)$', 'B': '$(x/2, y/2)$', 'C': '$(2x, 2y)$', 'D': '$(0, 0)$'}, 'answer': 'B', 'explanation': 'Promedio con cero es simplemente dividir por dos.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g03_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G03)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Newton Tip:** "Punto medio es sinónimo de promedio: $\frac{\text{suma}}{2}$." |
-| **2** | **B** | **Galileo Tip:** "Promedio en X: $(0+0)/2 = 0$. Promedio en Y: $(0+8)/2 = 4$." |
-| **3** | **C** | **Hawking Tip:** "Promedio en X: $(2+10)/2 = 6$. Promedio en Y: $(0+0)/2 = 0$." |
-| **4** | **B** | **Curie Tip:** "Promedio en X: $(1+5)/2 = 3$. Promedio en Y: $(3+7)/2 = 5$." |
-| **5** | **C** | **Newton Tip:** "El doble del punto medio menos el extremo conocido da el extremo desconocido: $2(2)-0 = 4$." |
-| **6** | **A** | **Galileo Tip:** "Promedio en X: $(-2+4)/2 = 1$. Promedio en Y: $(-4+8)/2 = 2$." |
-| **7** | **C** | **Hawking Tip:** "Doblar el medio y restar el extremo: $2(3)-1 = 5$." |
-| **8** | **A** | **Curie Tip:** "Promedio en X: $(-3+3)/2 = 0$. Promedio en Y: $(5-5)/2 = 0$." |
-| **9** | **B** | **Newton Tip:** "Doblar el medio y restar el extremo: $2(1)-3 = -1$ (para X) y $2(2)-4 = 0$ (para Y)." |
-| **10** | **B** | **Galileo Tip:** "Promedio con cero es simplemente dividir por dos." |
-""")

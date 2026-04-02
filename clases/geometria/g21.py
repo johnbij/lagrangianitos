@@ -68,19 +68,3 @@ def render_G21():
             {'question': 'La esfera es un cuerpo que tiene:', 'options': {'A': 'Una base circular', 'B': 'Infinitos vértices', 'C': 'Cero caras planas', 'D': 'Una cara lateral rectangular'}, 'answer': 'C', 'explanation': 'Típ: La esfera es pura curva. Es el único cuerpo que no tiene ninguna superficie plana.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g21_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G21)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Galileo Tip:** "Es la relación mágica de los cuerpos que terminan en punta. Siempre es un tercio." |
-| **2** | **B** | **Newton Tip:** "$\frac{4}{3} \cdot \pi \cdot 3^3 = \frac{4}{3} \cdot \pi \cdot 27$. Dividimos 27 en 3 ($=9$) y $9 \cdot 4 = 36$." |
-| **3** | **C** | **Hawking Tip:** "Ese triángulo es el que permite usar el Teorema de Pitágoras para hallar cualquier medida faltante." |
-| **4** | **C** | **Curie Tip:** "Área base $= 6 \cdot 6 = 36$. Luego $(36 \cdot 5) / 3 = 12 \cdot 5 = 60$." |
-| **5** | **A** | **Statham Tip:** "Típ: Diámetro 10 significa Radio 5. Área $= 4 \cdot \pi \cdot 5^2 = 4 \cdot 25 \cdot \pi = 100\pi$." |
-| **6** | **C** | **Newton Tip:** "Es la definición clásica de la esfera como cuerpo de revolución." |
-| **7** | **C** | **Galileo Tip:** "Como la pirámide pierde volumen por terminar en punta, necesita compensar siendo 3 veces más alta para igualar al prisma." |
-| **8** | **C** | **Hawking Tip:** "Es la fórmula estándar. No olvides el cuadrado en el radio y el 3 en el denominador." |
-| **9** | **B** | **Curie Tip:** "Trío pitagórico (5, 12, 13). Si el radio es 5 y la hipotenusa (generatriz) es 13, la altura es 12." |
-| **10** | **C** | **Statham Tip:** "Típ: La esfera es pura curva. Es el único cuerpo que no tiene ninguna superficie plana." |
-""")

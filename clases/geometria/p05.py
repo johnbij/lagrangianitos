@@ -217,16 +217,3 @@ B) $150\pi$ cm²
 C) $250\pi$ cm²
 D) $300\pi$ cm²
 """)
-
-    with st.expander("🔑 Pauta Técnica P05: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $A_T = 6\ell^2 = 6(16) = 96$ cm². |
-| **2** | **B** | $A_L = 2\pi r h = 2\pi(3)(7) = 42\pi$ cm². |
-| **3** | **C** | $A_L = \pi r g = \pi(6)(10) = 60\pi$ cm². |
-| **4** | **C** | $A = 4\pi r^2 = 4\pi(25) = 100\pi$ cm². |
-| **5** | **C** | $A_T = 2(80 + 60 + 48) = 2(188) = 376$ cm². |
-| **6** | **C** | $A = 4\pi(2r)^2 = 16\pi r^2 = 4 \cdot 4\pi r^2$. Se cuadruplica. |
-| **7** | **B** | $A_T = 2\pi r(h+r) = 2\pi(5)(10+5) = 150\pi$ cm². |
-""")

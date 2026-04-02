@@ -69,19 +69,3 @@ def render_G12():
             {'question': 'La suma de los lados de cualquier polígono se llama:', 'options': {'A': 'Área', 'B': 'Diagonal', 'C': 'Perímetro', 'D': 'Volumen'}, 'answer': 'C', 'explanation': 'Típ: El perímetro es el camino por la orilla. Concepto fundamental.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g12_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G12)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Recuerda que el área es $L^2$. Si el lado es $2L$, el área es $(2L)^2 = 4L^2$. ¡Cuidado con esa trampa!" |
-| **2** | **A** | **Newton Tip:** "En el triángulo rectángulo, los catetos actúan como base y altura. $(3 \cdot 4) / 2 = 6$." |
-| **3** | **B** | **Hawking Tip:** "Suma todos los bordes: $10 + 5 + 10 + 5 = 30$." |
-| **4** | **B** | **Curie Tip:** "Fórmula del rombo: $(12 \cdot 16) / 2 = 96$. No olvides dividir por dos." |
-| **5** | **B** | **Statham Tip:** "Típ: Si la diagonal es $4\sqrt{2}$, el lado es 4. El área es $4^2 = 16$." |
-| **6** | **A** | **Newton Tip:** "Aplica la fórmula: $(2^2 \cdot \sqrt{3}) / 4 = 4\sqrt{3} / 4 = \sqrt{3}$." |
-| **7** | **B** | **Galileo Tip:** "Promedio de bases: $(12+8)/2 = 10$. Luego $10 \cdot 10 = 100$." |
-| **8** | **B** | **Hawking Tip:** "Lado = $20 / 4 = 5$. Área = $5^2 = 25$." |
-| **9** | **C** | **Curie Tip:** "Altura = $48 / 8 = 6$. Perímetro = $2 \cdot (8 + 6) = 2 \cdot 14 = 28$." |
-| **10** | **C** | **Statham Tip:** "Típ: El perímetro es el camino por la orilla. Concepto fundamental." |
-""")

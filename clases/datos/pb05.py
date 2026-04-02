@@ -170,15 +170,3 @@ def render_PB05():
             {"question": "Si $X$ toma $0$ y $1$ con $P(X=1)=p$, entonces $E(X)=$", "options": {"A": "$0$", "B": "$1$", "C": "$p$", "D": "$1-p$"}, "answer": "C", "explanation": "$E(X)=0\\cdot(1-p)+1\\cdot p=p$. Variable de Bernoulli."},
         ]
         render_multiple_choice_quiz(quiz_questions, key_prefix="pb05_quiz")
-    with st.expander("🔑 Pauta Técnica PB05: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $E(X) = 1(0{,}2) + 2(0{,}5) + 3(0{,}3) = 0{,}2 + 1{,}0 + 0{,}9 = 2{,}1$. |
-| **2** | **C** | Dos condiciones: cada $P(X=x_i) \geq 0$ y la suma total es exactamente $1$. |
-| **3** | **C** | $E(X) = np = 4 \cdot 0{,}5 = 2$. |
-| **4** | **B** | Al aumentar las repeticiones, el promedio converge al valor esperado. No hay "compensación" a corto plazo. |
-| **5** | **B** | Ganancia neta: $(3000 - 1000) \cdot \frac{1}{4} + (0 - 1000) \cdot \frac{3}{4} = 500 - 750 = -250$. |
-| **6** | **C** | Es la fórmula exacta de la distribución binomial con parámetros $n$ y $p$. |
-| **7** | **C** | $E(X) = 0 \cdot (1-p) + 1 \cdot p = p$. Variable de Bernoulli. |
-""")

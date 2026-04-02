@@ -136,16 +136,3 @@ $\bar{x}_{total} = \dfrac{5,0\cdot10 + 6,5\cdot20}{30} = \dfrac{50+130}{30} = 6,
              "answer": "B", "explanation": "El error clásico: no ponderar por el tamaño de cada grupo."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="d04_quiz")
-
-    with st.expander("🔑 Pauta Técnica D04: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | $80/5=16$. |
-| **2** | **B** | $52/10=5,2$. |
-| **3** | **C** | Marca de clase = punto medio del intervalo. |
-| **4** | **D** | $7\cdot13-6\cdot12=91-72=19$. |
-| **5** | **C** | $(50+130)/30=6,0$. |
-| **6** | **B** | Linealidad: media sube en $k$. |
-| **7** | **B** | Falta ponderar por el tamaño de cada grupo. |
-""")

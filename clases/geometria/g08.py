@@ -65,19 +65,3 @@ def render_G08():
             {'question': 'En un triángulo isósceles rectángulo, los ángulos agudos miden:', 'options': {'A': '30° y 60°', 'B': '45° y 45°', 'C': '20° y 70°', 'D': '10° y 80°'}, 'answer': 'B', 'explanation': 'Típ: Si es rectángulo, tienes 90°. Si es isósceles, los otros dos son iguales. $(180-90)/2 = 45$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g08_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G08)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Escaleno viene de una palabra que significa 'cojo' o 'desigual'. Ningún lado coincide." |
-| **2** | **C** | **Newton Tip:** "El perímetro es la suma de los lados. Si son 3 lados iguales a 'a', entonces $a+a+a = 3a$." |
-| **3** | **C** | **Hawking Tip:** "Si tiene dos ángulos iguales, por propiedad de correspondencia, DEBE tener dos lados iguales." |
-| **4** | **B** | **Curie Tip:** "Es el triángulo más simétrico que existe. 180 dividido en 3 partes iguales da 60." |
-| **5** | **B** | **Statham Tip:** "Típ: La 'base' no es necesariamente el lado que está abajo, sino el lado que es distinto a los otros dos." |
-| **6** | **B** | **Newton Tip:** "Dos lados de 12 lo delatan. Es isósceles." |
-| **7** | **C** | **Galileo Tip:** "El famoso triángulo 3-4-5 es escaleno (lados distintos) y rectángulo ($3^2+4^2=5^2$). Así que sí, se puede." |
-| **8** | **B** | **Curie Tip:** "Es una constante universal. Si te dicen equilátero, ya conoces sus ángulos sin que te los den." |
-| **9** | **C** | **Hawking Tip:** "8, 10 y 12 son todos diferentes. Es escaleno de tomo y lomo." |
-| **10** | **B** | **Statham Tip:** "Típ: Si es rectángulo, tienes 90°. Si es isósceles, los otros dos son iguales. $(180-90)/2 = 45$." |
-""")

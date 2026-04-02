@@ -61,19 +61,3 @@ def render_G06():
             {'question': 'La propiedad que indica que la suma de dos lados debe ser mayor al tercero es:', 'options': {'A': 'Teorema de Pitágoras', 'B': 'Desigualdad Triangular', 'C': 'Teorema de Tales', 'D': 'Propiedad de Euclides'}, 'answer': 'B', 'explanation': "Típ: Si no se cumple esto, las líneas nunca se 'alcanzan' para cerrar la figura."}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g06_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G06)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Newton Tip:** "Es la regla de oro de los triángulos en el plano. Grábatelo: siempre 180." |
-| **2** | **C** | **Galileo Tip:** "Basta con que tenga UN ángulo de 90° para que sea rectángulo." |
-| **3** | **B** | **Hawking Tip:** "Es una herramienta potente para resolver problemas de ángulos rápido sin pasar por el suplementario." |
-| **4** | **C** | **Curie Tip:** "En el trío 3, 4, 5, se cumple que $3+4 > 5$. En los demás, la suma es menor o igual al tercero." |
-| **5** | **B** | **Statham Tip:** "Típ: Si los 3 lados son iguales, los 3 ángulos también. $180 / 3 = 60$." |
-| **6** | **C** | **Newton Tip:** "Si tiene un ángulo mayor a 90°, es un triángulo obtuso (u obtusángulo)." |
-| **7** | **B** | **Galileo Tip:** "Esta regla aplica para todos los polígonos, pero en el triángulo es donde más se pregunta." |
-| **8** | **B** | **Hawking Tip:** "Simple aritmética: $180 - 100 = 80$." |
-| **9** | **C** | **Curie Tip:** "Lados iguales se oponen a ángulos iguales. Esa es la esencia del isósceles." |
-| **10** | **B** | **Statham Tip:** "Típ: Si no se cumple esto, las líneas nunca se 'alcanzan' para cerrar la figura." |
-""")

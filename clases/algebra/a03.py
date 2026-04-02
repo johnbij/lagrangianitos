@@ -126,16 +126,3 @@ $(x-2)(x+5)$: suma=$-2+5=3$, producto=$-2\cdot5=-10$ → $x^2+3x-10$
              "answer": "C", "explanation": r"$(3x)^2=9x^2$; $2\cdot3x\cdot1=6x$; $1^2=1$."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="a03_quiz")
-
-    with st.expander("🔑 Pauta Técnica A03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $2\cdot x\cdot4 = 8x$. |
-| **2** | **B** | $m^2 - 5^2 = m^2 - 25$. |
-| **3** | **B** | $2\cdot(2a)\cdot(3b) = 12ab$. |
-| **4** | **A** | Suma $7+3=10$; producto $7\cdot3=21$. |
-| **5** | **C** | $a^2 - 9^2$: diferencia de cuadrados. |
-| **6** | **B** | El signo del binomio pasa al término central. |
-| **7** | **C** | $(3x)^2=9x^2$; $2\cdot3x\cdot1=6x$. |
-""")

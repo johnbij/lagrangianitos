@@ -151,16 +151,3 @@ def render_PB03():
             {"question": "De un mazo de $52$ cartas, se sacan $2$ cartas sin reposición. $P(\\text{ambas ases}) =$", "options": {"A": "$\\frac{4}{52} \\cdot \\frac{4}{52}$", "B": "$\\frac{4}{52} \\cdot \\frac{3}{51}$", "C": "$\\frac{4}{52} \\cdot \\frac{4}{51}$", "D": "$\\frac{2}{52}$"}, "answer": "B", "explanation": "Sin reposición, tras sacar un as quedan 3 ases entre 51 cartas."},
         ]
         render_multiple_choice_quiz(quiz_questions, key_prefix="pb03_quiz")
-
-    with st.expander("🔑 Pauta Técnica PB03: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $P = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{8}$. Tres lanzamientos independientes. |
-| **2** | **A** | Con reposición: $P = \frac{5}{10} \cdot \frac{5}{10} = \frac{1}{4}$. La composición no cambia. |
-| **3** | **B** | Sin reposición: $P = \frac{5}{10} \cdot \frac{4}{9} = \frac{20}{90} = \frac{2}{9}$. |
-| **4** | **B** | $P(A \cap B) = P(A) \cdot P(B|A) = \frac{1}{3} \cdot \frac{1}{2} = \frac{1}{6}$. |
-| **5** | **B** | El resultado de un dado no afecta al otro → independientes. |
-| **6** | **B** | Se multiplican las probabilidades a lo largo de las ramas del camino. |
-| **7** | **B** | Sin reposición: $\frac{4}{52} \cdot \frac{3}{51}$. Después de sacar un as, quedan $3$ ases entre $51$ cartas. |
-""")

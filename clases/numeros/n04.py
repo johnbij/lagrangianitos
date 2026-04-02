@@ -202,23 +202,3 @@ def render_N04():
             {'question': 'El valor absoluto de un número entero es:', 'options': {'A': 'Siempre mayor que cero.', 'B': 'Siempre menor que cero.', 'C': 'Siempre no negativo.', 'D': 'Siempre igual al número original.'}, 'answer': 'C', 'explanation': '**Trampa conceptual:** Muchos dicen "siempre positivo", pero el valor absoluto de 0 es 0, y el 0 no es positivo. Por eso lo correcto es "no negativo" ($\\geq 0$).'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n04_quiz")
-
-    with st.expander("🔑 Pauta Técnica N04: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
-| :--- | :---: | :--- |
-| **1** | **C** | Aplicamos la regla de signos: $-5 - (-8) = -5 + 8$. Al tener signos distintos, restamos los valores absolutos ($8 - 5 = 3$) y conservamos el signo del mayor valor absoluto (+). |
-| **2** | **C** | Esta es la definición axiomática. Si $x$ es negativo (por ejemplo $-5$), su valor absoluto es $-x$, es decir, $-(-5) = 5$. Esto garantiza que la distancia sea siempre positiva. |
-| **3** | **C** | La distancia entre dos puntos $a$ y $b$ es $|a - b|$. Entonces: $|5 - (-7)| = |5 + 7| = |12| = 12$. Visualmente: 7 pasos al cero y 5 más hacia el positivo. |
-| **4** | **B** | Definición estructural de $\mathbb{Z}$. A diferencia de los naturales, este conjunto requiere la simetría de los negativos y el elemento neutro (cero). |
-| **5** | **C** | El opuesto o inverso aditivo es simplemente cambiar el signo. Si el resultado de ese cambio es 15, el número original debía ser $-15$. |
-| **6** | **C** | ¡Cuidado con el signo exterior! Primero resolvemos el valor absoluto: $|-10| = 10$. Luego aplicamos el menos de afuera: $-10$. Finalmente: $-10 + 4 = -6$. |
-| **7** | **B** | En la recta numérica, mientras más a la izquierda está un negativo, "menor" es. Pero al estar más lejos del cero, su **distancia** (valor absoluto) es mayor. Ejemplo: $-100 < -1$, pero $|-100| > |-1|$. |
-| **8** | **D** | La división es la operación "rebelde". Al dividir $1 : 2$, el resultado ($0,5$) no pertenece al conjunto de los enteros, por lo que no hay clausura. |
-| **9** | **A** | Si $n$ es par (ej: 4), $n+1$ es impar (5). El sucesor de 5 es 6, que se escribe como $4+2$, es decir, $n+2$. Los pares van de 2 en 2. |
-| **10** | **C** | **Trampa conceptual:** Muchos dicen "siempre positivo", pero el valor absoluto de 0 es 0, y el 0 no es positivo. Por eso lo correcto es "no negativo" ($\geq 0$). |
-
----
-
-> **Típ:** En la pregunta 6, el error más común es pensar que el menos de afuera se anula con el de adentro. El valor absoluto es como un paréntesis blindado: primero se resuelve lo de adentro y el signo de afuera espera su turno al final.
-""")

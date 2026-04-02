@@ -69,19 +69,3 @@ def render_G13():
             {'question': 'Si un círculo tiene radio 3, su perímetro y área son respectivamente:', 'options': {'A': '$6\\pi$ y $9\\pi$', 'B': '$9\\pi$ y $6\\pi$', 'C': '$3\\pi$ y $3\\pi$', 'D': '$6\\pi$ y $6\\pi$'}, 'answer': 'A', 'explanation': 'Típ: Perímetro $2 \\cdot 3 \\cdot \\pi = 6\\pi$. Área $3^2 \\cdot \\pi = 9\\pi$. ¡No las confundas!'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g13_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G13)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Es la medida base. Todo en el círculo nace del radio." |
-| **2** | **C** | **Newton Tip:** "Área = $\pi \cdot r^2$. Entonces $4^2 = 16$. Respuesta: $16\pi$." |
-| **3** | **B** | **Hawking Tip:** "Perímetro es $\pi \cdot d$. Si el diámetro es 10, es directo: $10\pi$." |
-| **4** | **C** | **Curie Tip:** "La tangente es 'tímida', solo roza a la circunferencia en un punto." |
-| **5** | **A** | **Statham Tip:** "Típ: Busca qué número al cuadrado da 25. Es el 5." |
-| **6** | **B** | **Newton Tip:** "El diámetro cruza de lado a lado pasando por el centro, por eso son 2 radios." |
-| **7** | **B** | **Galileo Tip:** "Como el perímetro es lineal ($2\pi r$), crece en la misma proporción que el radio." |
-| **8** | **B** | **Hawking Tip:** "Es la razón entre el perímetro y el diámetro de cualquier círculo del universo." |
-| **9** | **C** | **Curie Tip:** "Cualquier otra cuerda que no pase por el centro será más corta que el diámetro." |
-| **10** | **A** | **Statham Tip:** "Típ: Perímetro $2 \cdot 3 \cdot \pi = 6\pi$. Área $3^2 \cdot \pi = 9\pi$. ¡No las confundas!" |
-""")

@@ -119,16 +119,3 @@ Si $f(2) = 10$:
              "answer": "B", "explanation": r"El input $x=1$ tiene dos imágenes (2 y 3). No es función."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="f01_quiz")
-
-    with st.expander("🔑 Pauta Técnica F01: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **A** | $3(4)-5=7$. |
-| **2** | **C** | Dominio: conjunto de entradas válidas. |
-| **3** | **C** | $f(2)=10$ → 10 es la imagen de 2. |
-| **4** | **B** | $g(3)=4$; $f(4)=16$. |
-| **5** | **C** | Recorrido = imágenes reales. |
-| **6** | **C** | División por cero es indefinida. |
-| **7** | **B** | $x=1$ tiene dos imágenes → no es función. |
-""")

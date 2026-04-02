@@ -69,19 +69,3 @@ def render_G15():
             {'question': 'Si los catetos son $a$ y $b$, la altura $h$ y la hipotenusa $c$, se cumple que:', 'options': {'A': '$a+b = c+h$', 'B': '$a \\cdot b = c \\cdot h$', 'C': '$a^2+b^2 = h^2$', 'D': '$p \\cdot q = c^2$'}, 'answer': 'B', 'explanation': 'Típ: Esta fórmula viene de igualar dos formas de calcular el área del mismo triángulo.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g15_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G15)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "Euclides solo funciona cuando hay un ángulo de 90° desde donde tirar la altura." |
-| **2** | **B** | **Newton Tip:** "Es la fórmula que conecta las dos partes de la hipotenusa con la línea que las divide." |
-| **3** | **A** | **Hawking Tip:** "$3 \cdot 12 = 36$. La raíz de 36 es 6." |
-| **4** | **C** | **Curie Tip:** "$6^2 = 4 \cdot c \implies 36 = 4c$. Por lo tanto, $c = 9$." |
-| **5** | **B** | **Statham Tip:** "Típ: El cateto al cuadrado es 'su' pedacito de hipotenusa por el total." |
-| **6** | **C** | **Newton Tip:** "Las proyecciones son simplemente los dos segmentos en los que se corta la hipotenusa." |
-| **7** | **A** | **Galileo Tip:** "$a^2 = 2 \cdot 10 = 20$. Entonces $a = \sqrt{20}$ o $2\sqrt{5}$." |
-| **8** | **C** | **Hawking Tip:** "$10^2 = 5 \cdot q \implies 100 = 5q$. Despejando, $q = 20$." |
-| **9** | **B** | **Curie Tip:** "Si la tiras desde otro ángulo, las relaciones de proporcionalidad cambian." |
-| **10** | **B** | **Statham Tip:** "Típ: Esta fórmula viene de igualar dos formas de calcular el área del mismo triángulo." |
-""")

@@ -68,19 +68,3 @@ def render_V04():
             {'question': 'Si sumamos los vectores de traslación de un triángulo que volvió a su sitio original, la suma es:', 'options': {'A': 'El área del triángulo', 'B': 'El vector nulo $(0, 0)$', 'C': 'El perímetro', 'D': 'El vector $(1, 1)$'}, 'answer': 'B', 'explanation': 'Típ: Si el desplazamiento total es cero, la suma de todos los vectores intermedios debe ser cero.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="v04_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V04)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **C** | **Galileo Tip:** "La traslación es la forma geométrica de ver la suma de vectores. Punto + Desplazamiento." |
-| **2** | **A** | **Newton Tip:** "Suma componente a componente: $-1 + 4 = 3$ y $5 - 2 = 3$." |
-| **3** | **C** | **Hawking Tip:** "Las traslaciones son aditivas. Simplemente suma los vectores para obtener el efecto total." |
-| **4** | **B** | **Curie Tip:** "Para ir de 2 a 0, debes restar 2. Por eso el vector es negativo en ambas partes." |
-| **5** | **B** | **Statham Tip:** "Típ: El vector $(0,0)$ es el elemento neutro de la traslación." |
-| **6** | **C** | **Newton Tip:** "Sumar un vector y luego su opuesto da como resultado el vector nulo. No hubo movimiento neto." |
-| **7** | **B** | **Galileo Tip:** "Si aplicaras vectores distintos a cada punto, la figura se deformaría o se rompería." |
-| **8** | **A** | **Hawking Tip:** "Resta Final ($5, 2$) menos Inicial ($1, 4$). $5-1=4$ y $2-4=-2$." |
-| **9** | **C** | **Curie Tip:** "Girar 180° es enviar cada punto al lado opuesto del origen, que es lo que hace el escalar $-1$." |
-| **10** | **B** | **Statham Tip:** "Típ: Si el desplazamiento total es cero, la suma de todos los vectores intermedios debe ser cero." |
-""")

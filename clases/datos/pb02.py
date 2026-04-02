@@ -146,16 +146,3 @@ def render_PB02():
             {"question": "Se lanzan dos dados. ¿Cuántos resultados posibles hay en el espacio muestral?", "options": {"A": "$12$", "B": "$36$", "C": "$6$", "D": "$24$"}, "answer": "B", "explanation": "$6\\times 6=36$ resultados equiprobables."},
         ]
         render_multiple_choice_quiz(quiz_questions, key_prefix="pb02_quiz")
-
-    with st.expander("🔑 Pauta Técnica PB02: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **C** | $P(5) = \frac{1}{6}$. Hay $1$ caso favorable entre $6$ posibles. |
-| **2** | **B** | $P(A^c) = 1 - P(A) = 1 - 0{,}3 = 0{,}7$. Propiedad del complemento. |
-| **3** | **C** | $P(\text{azul}) = \frac{3}{5+3} = \frac{3}{8}$. Total de bolas = $8$. |
-| **4** | **C** | $\Omega = \{CC, CS, SC, SS\}$, $|\Omega|=4$. Solo $CC$ → $P = \frac{1}{4}$. |
-| **5** | **B** | Como $A \cap B = \emptyset$: $P(A \cup B) = \frac{1}{4} + \frac{1}{3} = \frac{3+4}{12} = \frac{7}{12}$. |
-| **6** | **C** | $P(\text{no as}) = 1 - P(\text{as}) = 1 - \frac{4}{40} = \frac{36}{40} = \frac{9}{10}$. |
-| **7** | **B** | $|\Omega| = 6 \times 6 = 36$. Cada dado tiene $6$ caras independientes. |
-""")

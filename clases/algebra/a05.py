@@ -129,16 +129,3 @@ Si $x^2 + 12x + c$ debe ser TCP: $c = (12/2)^2 = 36$
              "answer": "B", "explanation": r"$(x^2-10x+25)-25+20 = (x-5)^2 - 5$. Por tanto $k=-5$."},
         ]
         render_multiple_choice_quiz(quiz, key_prefix="a05_quiz")
-
-    with st.expander("🔑 Pauta Técnica A05: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **B** | Mitad de 6 = 3; $3^2=9$. TCP. |
-| **2** | **C** | $(12/2)^2=36$. |
-| **3** | **C** | Signo $-$ en el medio → $(x-7)^2$. |
-| **4** | **C** | $(8/2)^2=16$. |
-| **5** | **A** | $(x+1)^2 - 1 + 5 = (x+1)^2 + 4$. |
-| **6** | **B** | $2\cdot1\cdot4=8$. |
-| **7** | **B** | $(x-5)^2 - 25 + 20 = (x-5)^2 - 5$. |
-""")

@@ -103,16 +103,3 @@ def render_N25():
             {'question': 'Si $\\frac{12}{x} = 4$, al invertir ambas razones (considerando $4 = 4/1$) obtenemos:', 'options': {'A': '$\\frac{x}{12} = \\frac{1}{4}$\\', 'B': '$\\frac{x}{12} = 4$\\', 'C': '$12x = 4$\\', 'D': '$x = 48$'}, 'answer': 'A', 'explanation': 'Invertimos $12/x$ a $x/12$ e invertimos $4/1$ a $1/4$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n25_quiz")
-    with st.expander("✅ Pauta - N25", expanded=False):
-        st.markdown("""# ✅ Pauta - Cuestionario N25
-
-1. **A.** Invertir razones significa dar vuelta ambas fracciones: $4/x \\to x/4$ y $8/10 \\to 10/8$.
-2. **B.** Los medios son $b$ y $c$. Cambiarlos de lugar nos da $a/c = b/d$.
-3. **A.** $3/5 \\to 5/3$ y $6/10 \\to 10/6$.
-4. **A.** Los extremos son $x$ y $3$. Al cambiarlos queda $3/y = 2/x$.
-5. **B.** Por el teorema fundamental, el producto de extremos ($ad$) es igual al de medios ($bc$).
-6. **B.** Al invertir, la incógnita pasa del denominador al numerador, facilitando el despeje.
-7. **B.** Transponer miembros es simplemente cambiar de lado la igualdad completa.
-8. **A.** Es el resultado de transponer y luego alternar medios.
-9. **D.** En la opción D, el producto cruzado sería $7 \\cdot 3 = xy$, lo cual es distinto al original $7y = 3x$.
-10. **A.** Invertimos $12/x$ a $x/12$ e invertimos $4/1$ a $1/4$.""")

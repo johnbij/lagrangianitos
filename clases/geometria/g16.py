@@ -66,19 +66,3 @@ def render_G16():
             {'question': 'Si $L_1 \\parallel L_2$ y se cortan por transversales, el segmento $x$ en $2/x = 4/10$ es:', 'options': {'A': '5', 'B': '20', 'C': '8', 'D': '4'}, 'answer': 'A', 'explanation': 'Típ: Simplifica $4/10$ a $2/5$. Entonces $2/x = 2/5$, por lo tanto $x = 5$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="g16_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (G16)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **B** | **Galileo Tip:** "Sin paralelas no hay Tales. Es la condición necesaria y suficiente." |
-| **2** | **C** | **Newton Tip:** "Como 10 es el doble de 5, el resultado debe ser el doble de 4. O sea, 8." |
-| **3** | **C** | **Hawking Tip:** "Las medidas cambian, pero la división (razón) entre ellas se mantiene constante." |
-| **4** | **B** | **Curie Tip:** "Es la aplicación más común en los exámenes de ingreso a la universidad." |
-| **5** | **B** | **Statham Tip:** "Típ: $2/6 = 1/3$. Entonces $3/d = 1/3$, lo que nos da $d = 9$." |
-| **6** | **B** | **Newton Tip:** "Semejantes significa que tienen la misma forma pero distinto tamaño." |
-| **7** | **A** | **Galileo Tip:** "La inclinación de las transversales no afecta la proporción de los segmentos." |
-| **8** | **B** | **Hawking Tip:** "Simplemente divides $5/15 = 1/3$." |
-| **9** | **B** | **Curie Tip:** "Sí, en ese caso se forma un paralelogramo y los segmentos enfrentados son iguales ($1:1$)." |
-| **10** | **A** | **Statham Tip:** "Típ: Simplifica $4/10$ a $2/5$. Entonces $2/x = 2/5$, por lo tanto $x = 5$." |
-""")

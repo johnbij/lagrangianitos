@@ -69,8 +69,3 @@ def render_V03():
             {'question': 'Si las componentes de un vector son iguales $(a, a)$, su módulo es:', 'options': {'A': '$2a$', 'B': '$a^2$', 'C': '$a\\sqrt{2}$', 'D': '$2a^2$'}, 'answer': 'A', 'explanation': ''}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="v03_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V03)", expanded=False):
-        st.markdown(r"""
-
-""")

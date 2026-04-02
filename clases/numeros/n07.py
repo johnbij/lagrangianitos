@@ -166,19 +166,3 @@ def render_N07():
             {'question': 'Un número que puede ser escrito como $a/b$ (con $a, b \\in \\mathbb{Z}$ y $b \\neq 0$) pertenece a $\\mathbb{Q}$. Al unir todos estos con los que NO pueden escribirse así, formamos:', 'options': {'A': 'Los Enteros ($\\mathbb{Z}$).', 'B': 'Los Imaginarios.', 'C': 'Los Reales ($\\mathbb{R}$).', 'D': 'Los Naturales ($\\mathbb{N}$).'}, 'answer': 'C', 'explanation': 'Es el resumen de la clase: Racionales + Irracionales = El universo Real completo.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n07_quiz")
-
-    with st.expander("🔑 Pauta Técnica N07: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica (El porqué) |
-| :--- | :---: | :--- |
-| **1** | **B** | Las raíces de índice par (como la cuadrada) con cantidad subradical negativa no son reales, son imaginarias. |
-| **2** | **B** | El neutro es el elemento que "no altera" al otro en la operación. En la suma es el $0$. |
-| **3** | **C** | $-0,75 = -3/4$. Su inverso multiplicativo es "dar vuelta" la fracción manteniendo el signo: $-4/3$. |
-| **4** | **C** | Es la propiedad que permite distribuir el factor exterior a cada sumando del paréntesis. |
-| **5** | **C** | Es la definición estructural de $\mathbb{R}$: $\mathbb{Q} \cup \mathbb{I}$. |
-| **6** | **C** | $4 - 4 = 0$. La división por cero no está definida en los números reales. |
-| **7** | **A** | $a \cdot b = b \cdot a$. El intercambio de posición no afecta el resultado final. |
-| **8** | **A** | Por el axioma de clausura, la suma de dos reales (irracional + racional) siempre da un real. |
-| **9** | **C** | El inverso aditivo (u opuesto) es el mismo número con el signo contrario para que la suma sea $0$. |
-| **10** | **C** | Es el resumen de la clase: Racionales + Irracionales = El universo Real completo. |
-""")

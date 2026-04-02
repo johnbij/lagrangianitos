@@ -94,16 +94,3 @@ def render_N30():
             {'question': '"Si contrato al doble de maestros, la casa estará lista en la mitad del tiempo". Esta frase describe una:', 'options': {'A': 'Proporción Directa \\', 'B': 'Proporción Inversa \\', 'C': 'Proporción Compuesta \\', 'D': 'Relación Aditiva'}, 'answer': 'B', 'explanation': 'Al doble de esfuerzo, la mitad de tiempo. Es el ejemplo clásico de Proporción Inversa.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n30_quiz")
-    with st.expander("✅ Pauta - N30", expanded=False):
-        st.markdown("""# ✅ Pauta - Cuestionario N30
-
-1. **B.** Relación de "compañerismo": lo que le pasa a una, le pasa a la otra. Eso es Directa.
-2. **B.** A más velocidad, menos tiempo. Una sube y la otra baja. Es Inversa.
-3. **B.** Sigue la lógica del asado: más gente, menos dura la comida (Inversa).
-4. **A.** Visualmente, la directa siempre es una recta que arranca desde el origen.
-5. **C.** La firma matemática de la inversa es que $x \\cdot y$ siempre da el mismo resultado ($k$).
-6. **C.** Al haber 3 variables (Máquinas, Libros, Horas), el sistema es Compuesto.
-7. **B.** En la directa son "partners": si una baja a la cuarta parte, la otra le copia.
-8. **C.** El gráfico de la inversa ($x \\cdot y = k$) siempre es una curva llamada hipérbola.
-9. **B.** La constante de la directa se encuentra dividiendo la variable dependiente por la independiente.
-10. **B.** Al doble de esfuerzo, la mitad de tiempo. Es el ejemplo clásico de Proporción Inversa.""")

@@ -119,16 +119,3 @@ def render_N29():
             {'question': 'Al despejar $L$ de la fórmula $R = \\rho \\cdot \\frac{L}{A}$, obtenemos:', 'options': {'A': '$L = \\frac{R \\cdot A}{\\rho}$ \\', 'B': '$L = \\frac{\\rho \\cdot A}{R}$ \\', 'C': '$L = R \\cdot A \\cdot \\rho$ \\', 'D': '$L = \\frac{R}{\\rho \\cdot A}$'}, 'answer': 'A', 'explanation': 'El área $A$ sube multiplicando y la resistividad $\\rho$ baja dividiendo.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n29_quiz")
-    with st.expander("✅ Pauta - N29", expanded=False):
-        st.markdown("""# ✅ Pauta - Cuestionario N29
-
-1. **B.** Los términos $R$ y $T$ multiplican a $n$, por lo que pasan dividiendo juntos al otro lado.
-2. **C.** La intensidad ($I$) multiplica, pasa dividiendo bajo el voltaje ($V$).
-3. **A.** Primero subimos $V$ multiplicando al lado de $D$, y luego bajamos $D$ dividiendo.
-4. **B.** Primero la masa ($m$) divide a $E$, y luego el cuadrado pasa como raíz.
-5. **A.** El bloque $(m \\cdot c)$ está multiplicando, pasa dividiendo íntegro.
-6. **B.** El área está dividiendo a la fuerza, pasa multiplicando a la presión.
-7. **A.** Es un despeje directo: todo lo que acompaña a $t$ pasa dividiendo.
-8. **C.** El 2 multiplica, la $m$ divide y la potencia pasa como raíz.
-9. **A.** El término $(a \\cdot t)$ se considera un solo bloque sumando, pasa restando.
-10. **A.** El área $A$ sube multiplicando y la resistividad $\\rho$ baja dividiendo.""")

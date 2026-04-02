@@ -202,19 +202,3 @@ def render_N05():
             {'question': 'En la división de racionales, la clausura falla únicamente cuando:', 'options': {'A': 'El dividendo es negativo.', 'B': 'El resultado es un decimal infinito.', 'C': 'El divisor es cero.', 'D': 'Las fracciones tienen distinto denominador.'}, 'answer': 'C', 'explanation': 'La división por cero es una indefinición, lo que rompe la regla de clausura en $\\mathbb{Q}$.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="n05_quiz")
-
-    with st.expander("🔑 Pauta Técnica N05: Carpintería de Soluciones", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | Carpintería Técnica |
-| :--- | :---: | :--- |
-| **1** | **D** | Los racionales requieren orden (periodo) o fin. Si el decimal es infinito y caótico, es Irracional. |
-| **2** | **C** | $45$ y $60$ son divisibles por $15$. $45:15=3$ y $60:15=4$. |
-| **3** | **C** | Amplificar es multiplicar arriba y abajo por el mismo número: $2\cdot4=8$ y $7\cdot4=28$. |
-| **4** | **D** | Numerador: $46-4=42$. Denominador: $90$. Fracción $42/90$. Simplificando por 6 da $7/15$. |
-| **5** | **B** | La clausura garantiza que el resultado de la operación se mantiene dentro del mismo conjunto. |
-| **6** | **C** | Es la esencia de la densidad; la recta se vuelve "tupida" de números. |
-| **7** | **B** | $1:3 = 0,333...$ El periodo empieza inmediatamente tras la coma. |
-| **8** | **C** | $0,25$ es la representación decimal de la fracción $1/4$. Son el mismo valor. |
-| **9** | **B** | Ambos son pares, dividimos por 4: $12:4=3$ y $100:4=25$. |
-| **10** | **C** | La división por cero es una indefinición, lo que rompe la regla de clausura en $\mathbb{Q}$. |
-""")

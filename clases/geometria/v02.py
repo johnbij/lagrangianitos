@@ -71,19 +71,3 @@ def render_V02():
             {'question': 'Dos vectores son paralelos si uno es la _____ del otro por un escalar:', 'options': {'A': 'Suma', 'B': 'Resta', 'C': 'Ponderación', 'D': 'Potencia'}, 'answer': 'C', 'explanation': 'Típ: Si puedes obtener un vector multiplicando el otro por un número, es que tienen la misma inclinación.'}
         ]
         render_multiple_choice_quiz(quiz, key_prefix="v02_quiz")
-
-    with st.expander("🔑 Pauta Explicativa: Liga de los Genios (V02)", expanded=False):
-        st.markdown(r"""
-| Pregunta | Respuesta | La Voz del Maestro |
-| :--- | :---: | :--- |
-| **1** | **A** | **Galileo Tip:** "Suma componente a componente: $3-1=2$ y $5+2=7$." |
-| **2** | **B** | **Newton Tip:** "Ponderar por 0,5 es lo mismo que dividir por 2. Mitad de cada uno." |
-| **3** | **D** | **Hawking Tip:** "El opuesto es el que 'anula' al original, por eso ambos signos deben cambiar." |
-| **4** | **C** | **Curie Tip:** "Es el camino más corto entre el inicio del viaje y el final del segundo tramo." |
-| **5** | **A** | **Statham Tip:** "Típ: El $-2$ multiplica a ambos, cambiando signos y duplicando valores." |
-| **6** | **B** | **Newton Tip:** "Ojo aquí: la recta (dirección) es la misma, solo que ahora la flecha mira hacia atrás." |
-| **7** | **C** | **Galileo Tip:** "Cualquier vector restado por sí mismo nos devuelve al origen, el vector nulo." |
-| **8** | **A** | **Hawking Tip:** "Simplemente despeja: $3x = 6$, entonces $x = 2$." |
-| **9** | **A** | **Curie Tip:** "Primero el producto: $(2, 6)$. Luego la suma: $(2+0, 6-2) = (2, 4)$." |
-| **10** | **C** | **Statham Tip:** "Típ: Si puedes obtener un vector multiplicando el otro por un número, es que tienen la misma inclinación." |
-""")
