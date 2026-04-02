@@ -58,62 +58,62 @@ def render_N19():
 
     with st.expander("📝 Guía de Ejemplos: Truncamiento, Redondeo y Error"):
         st.markdown("""
-**E01. Truncamiento a la décima.** Truncar $3{,}4567$ a la décima.
+**1. Truncamiento a la décima.** Truncar $3{,}4567$ a la décima.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Ubicar la décima (primera cifra decimal) | $3{,}4[567]$ |
 | 2 | Eliminar todo lo que está a la derecha | $3{,}4$ |
 
-**E02. Truncamiento a la milésima.** Truncar $0{,}98765$ a la milésima.
+**2. Truncamiento a la milésima.** Truncar $0{,}98765$ a la milésima.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Ubicar la milésima (tercera cifra decimal) | $0{,}987[65]$ |
 | 2 | Aplicar el corte | $0{,}987$ |
 
-**E03. Redondeo a la unidad.** Redondear $12{,}54$ a la unidad.
+**3. Redondeo a la unidad.** Redondear $12{,}54$ a la unidad.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Ubicar la unidad (el 2) | $12[{,}54]$ |
 | 2 | Mirar cifra de la derecha | Es un 5 |
 | 3 | Aplicar regla (5 o más, sube 1) | $13$ |
 
-**E04. Redondeo a la centésima.** Redondear $4{,}5129$ a la centésima.
+**4. Redondeo a la centésima.** Redondear $4{,}5129$ a la centésima.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Ubicar la centésima (el 1) | $4{,}51[29]$ |
 | 2 | Mirar cifra de la derecha | Es un 2 |
 | 3 | Aplicar regla (menor que 5, se mantiene) | $4{,}51$ |
 
-**E05. Redondeo con cadena de 9.** Redondear $1{,}999$ a la centésima.
+**5. Redondeo con cadena de 9.** Redondear $1{,}999$ a la centésima.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Ubicar centésima (segundo 9) | $1{,}99[9]$ |
 | 2 | Mirar derecha (es un 9, sube 1) | $1{,}99 + 0{,}01$ |
 | 3 | Resultado final | $2{,}00$ o $2$ |
 
-**E06. Aproximación por exceso.** Aproximar $7{,}12$ a la décima por exceso.
+**6. Aproximación por exceso.** Aproximar $7{,}12$ a la décima por exceso.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Buscar el número con 1 décima inmediatamente mayor | $7{,}2$ |
 
-**E07. Aproximación por defecto.** Aproximar $8{,}99$ a la décima por defecto.
+**7. Aproximación por defecto.** Aproximar $8{,}99$ a la décima por defecto.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Buscar el número con 1 décima inmediatamente menor | $8{,}9$ |
 
-**E08. Cálculo de Error Absoluto.** Hallar error si $V_{real} = 5$ y $V_{aprox} = 4{,}8$.
+**8. Cálculo de Error Absoluto.** Hallar error si $V_{real} = 5$ y $V_{aprox} = 4{,}8$.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Aplicar fórmula $|V_{real} - V_{aprox}|$ | $|5 - 4{,}8|$ |
 | 2 | Resultado final | $0{,}2$ |
 
-**E09. Estimación en multiplicación.** Estimar $2{,}9 \\cdot 10{,}2$ redondeando a la unidad.
+**9. Estimación en multiplicación.** Estimar $2{,}9 \\cdot 10{,}2$ redondeando a la unidad.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Redondear cada factor | $3 \\cdot 10$ |
 | 2 | Operar | $30$ |
 
-**E10. Diferencia entre truncar y redondear.** Comparar $5{,}67$ a la décima.
+**10. Diferencia entre truncar y redondear.** Comparar $5{,}67$ a la décima.
 | Método | Acción | Resultado |
 | :--- | :--- | :--- |
 | Truncar | Cortar en el 6 | $5{,}6$ |
