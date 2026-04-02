@@ -61,7 +61,7 @@ def render_N23():
 
     with st.expander("📝 Guía de Ejemplos: El Poder de la Constante k", expanded=False):
         st.markdown("""
-**E01. Hallar cantidades dado el total.** La razón entre hombres y mujeres en una fiesta es $4 : 5$. Si en total hay 180 personas, ¿cuántas mujeres hay?
+**1. Hallar cantidades dado el total.** La razón entre hombres y mujeres en una fiesta es $4 : 5$. Si en total hay 180 personas, ¿cuántas mujeres hay?
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -70,7 +70,7 @@ def render_N23():
 | 3 | Hallar el valor de una parte ($k$) | $k = 20$ |
 | 4 | Calcular la cantidad solicitada (M) | $5 \\cdot 20 = 100$ mujeres |
 
-**E02. Hallar cantidades dada la diferencia.** Las edades de Juan y Diego están en razón $3 : 7$. Si Diego es 20 años mayor que Juan, ¿qué edad tiene Juan?
+**2. Hallar cantidades dada la diferencia.** Las edades de Juan y Diego están en razón $3 : 7$. Si Diego es 20 años mayor que Juan, ¿qué edad tiene Juan?
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -79,7 +79,7 @@ def render_N23():
 | 3 | Hallar $k$ | $k = 5$ |
 | 4 | Calcular edad de Juan | $3 \\cdot 5 = 15$ años |
 
-**E03. Razón con unidades distintas.** ¿Cuál es la razón entre un segmento de 12 cm y otro de 3 metros?
+**3. Razón con unidades distintas.** ¿Cuál es la razón entre un segmento de 12 cm y otro de 3 metros?
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -88,7 +88,7 @@ def render_N23():
 | 3 | Simplificar al máximo | $1 / 25$ |
 | 4 | Resultado final | La razón es $1 : 25$ |
 
-**E04. Serie de razones.** En un triángulo, sus ángulos interiores están en razón $2 : 3 : 4$. ¿Cuánto mide el ángulo mayor?
+**4. Serie de razones.** En un triángulo, sus ángulos interiores están en razón $2 : 3 : 4$. ¿Cuánto mide el ángulo mayor?
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
@@ -97,7 +97,7 @@ def render_N23():
 | 3 | Resolver $k$ | $9k = 180 \\implies k = 20$ |
 | 4 | Calcular ángulo mayor ($4k$) | $4 \\cdot 20 = 80°$ |
 
-**E05. Encontrar la razón.** En un curso de 40 alumnos, 15 son reprobados. ¿Cuál es la razón entre aprobados y el total?
+**5. Encontrar la razón.** En un curso de 40 alumnos, 15 son reprobados. ¿Cuál es la razón entre aprobados y el total?
 
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
