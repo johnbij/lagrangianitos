@@ -2,6 +2,11 @@ import streamlit as st
 from streamlit_gsheets import GSheetsConnection
 from contenidos import CONTENIDOS
 import textwrap # <--- NUEVO: Para limpiar sangrías del Markdown
+import pandas as pd
+from datetime import datetime
+import pytz
+
+_TZ = pytz.timezone("America/Santiago")
 
 # ==========================================
 # 1. CONFIGURACIÓN INICIAL
@@ -29,6 +34,52 @@ def cargar_usuario(u, p):
     except Exception:
         return None
 
+def _ahora():
+    return datetime.now(_TZ)
+
+def registrar_acceso(user):
+    """Agrega una fila a Logs_Acceso al iniciar sesión."""
+    try:
+        now = _ahora()
+        try:
+            df = conn.read(worksheet="Logs_Acceso", ttl=0)
+            if df is None or df.empty:
+                df = pd.DataFrame(columns=["User", "Fecha", "Hora", "IP_Info"])
+        except Exception:
+            df = pd.DataFrame(columns=["User", "Fecha", "Hora", "IP_Info"])
+        nueva = pd.DataFrame([{
+            "User": user,
+            "Fecha": now.strftime("%Y-%m-%d"),
+            "Hora": now.strftime("%H:%M:%S"),
+            "IP_Info": "Acceso Web",
+        }])
+        conn.update(worksheet="Logs_Acceso", data=pd.concat([df, nueva], ignore_index=True))
+    except Exception:
+        pass
+
+def registrar_clase(user, materia, eje, clase_id, clase_label):
+    """Agrega una fila a Clases cuando el usuario navega a una clase."""
+    try:
+        now = _ahora()
+        try:
+            df = conn.read(worksheet="Clases", ttl=0)
+            if df is None or df.empty:
+                df = pd.DataFrame(columns=["User", "Fecha", "Hora", "Materia", "Eje", "Clase_ID", "Clase"])
+        except Exception:
+            df = pd.DataFrame(columns=["User", "Fecha", "Hora", "Materia", "Eje", "Clase_ID", "Clase"])
+        nueva = pd.DataFrame([{
+            "User": user,
+            "Fecha": now.strftime("%Y-%m-%d"),
+            "Hora": now.strftime("%H:%M:%S"),
+            "Materia": materia,
+            "Eje": eje,
+            "Clase_ID": clase_id,
+            "Clase": clase_label,
+        }])
+        conn.update(worksheet="Clases", data=pd.concat([df, nueva], ignore_index=True))
+    except Exception:
+        pass
+
 # ==========================================
 # 4. LÓGICA DE NAVEGACIÓN (VISOR)
 # ==========================================
@@ -44,9 +95,15 @@ def main():
                 if ud: 
                     st.session_state.logged_in = True
                     st.session_state.user_data = ud
+                    st.session_state.acceso_registrado = False
                     st.rerun()
                 else: st.error("Error")
     else:
+        # Registrar acceso una sola vez por sesión al ingresar
+        if not st.session_state.get("acceso_registrado", False):
+            registrar_acceso(st.session_state.user_data['User'])
+            st.session_state.acceso_registrado = True
+
         if st.session_state.page == "Inicio":
             st.title(f"Bienvenido, {st.session_state.user_data['User']}")
             st.divider()
@@ -91,6 +148,18 @@ def main():
                     key=f"sel_{st.session_state.clase_target}_{st.session_state.eje_sel}"
                 )
                 st.session_state.clase_target = clase_actual
+
+            # Registrar visita a clase cuando cambia
+            clave_clase = f"{st.session_state.materia_sel}|{st.session_state.eje_sel}|{clase_actual}"
+            if st.session_state.get("ultima_clase_registrada") != clave_clase:
+                registrar_clase(
+                    st.session_state.user_data['User'],
+                    st.session_state.materia_sel,
+                    st.session_state.eje_sel,
+                    clase_actual,
+                    clases_dict[clase_actual]["label"],
+                )
+                st.session_state.ultima_clase_registrada = clave_clase
 
             st.divider()
 
