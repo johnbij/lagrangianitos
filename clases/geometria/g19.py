@@ -16,8 +16,8 @@ def render_G19():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G19: Transformaciones Isométricas - Movimiento sin Deformación
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G19: Transformaciones Isométricas - Movimiento sin Deformación
+   
 
     ---
 
@@ -38,7 +38,7 @@ def render_G19():
     * **180°:** $(-x, -y)$
     * **270°:** $(y, -x)$
 
-    > **Newton Tip:** "Seba, dile a tu alumno: en las isometrías, el área y el perímetro son SAGRADOS, no cambian. Si en un ejercicio te dicen que el área cambió, ¡no es isometría!"
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
@@ -50,11 +50,11 @@ def render_G19():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Trasladar el punto $A(3, -2)$ según el vector $\vec{v}(-1, 5)$. | 1. Sumar coordenadas: $(3 + (-1), -2 + 5)$. | **$A'(2, 3)$** |
-| **E02** | Rotar el punto $B(4, 1)$ en 90° respecto al origen. | 1. Aplicar regla $(-y, x)$. <br>2. El 1 pasa a ser $-1$ y el 4 queda igual. | **$B'(-1, 4)$** |
-| **E03** | Simetría axial de $C(2, 5)$ respecto al eje $X$. | 1. En eje $X$, el signo de $y$ cambia, $x$ se mantiene. | **$C'(2, -5)$** |
-| **E04** | Simetría axial de $D(2, 5)$ respecto al eje $Y$. | 1. En eje $Y$, el signo de $x$ cambia, $y$ se mantiene. | **$D'(-2, 5)$** |
-| **E05** | ¿Qué vector traslada $P(1, 1)$ a $P'(4, -2)$? | 1. Restar: Final - Inicial. <br>2. $(4-1, -2-1)$. | **$\vec{v}(3, -3)$** |
+| **1** | Trasladar el punto $A(3, -2)$ según el vector $\vec{v}(-1, 5)$. | 1. Sumar coordenadas: $(3 + (-1), -2 + 5)$. | **$A'(2, 3)$** |
+| **2** | Rotar el punto $B(4, 1)$ en 90° respecto al origen. | 1. Aplicar regla $(-y, x)$. <br>2. El 1 pasa a ser $-1$ y el 4 queda igual. | **$B'(-1, 4)$** |
+| **3** | Simetría axial de $C(2, 5)$ respecto al eje $X$. | 1. En eje $X$, el signo de $y$ cambia, $x$ se mantiene. | **$C'(2, -5)$** |
+| **4** | Simetría axial de $D(2, 5)$ respecto al eje $Y$. | 1. En eje $Y$, el signo de $x$ cambia, $y$ se mantiene. | **$D'(-2, 5)$** |
+| **5** | ¿Qué vector traslada $P(1, 1)$ a $P'(4, -2)$? | 1. Restar: Final - Inicial. <br>2. $(4-1, -2-1)$. | **$\vec{v}(3, -3)$** |
 """)
 
     with st.expander("❓ Cuestionario G19", expanded=False):
