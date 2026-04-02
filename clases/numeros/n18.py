@@ -47,64 +47,64 @@ def render_N18():
 
     with st.expander("📝 Guía de Ejemplos: Notación Científica y Base 10"):
         st.markdown("""
-**E01. Convertir número grande a notación científica.** $4.500.000$
+**1. Convertir número grande a notación científica.** $4.500.000$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Ubicar la coma al final y moverla a la izquierda | Mover 6 espacios |
 | 2 | Dejar un número entre 1 y 10 | $4{,}5$ |
 | 3 | Exponente según espacios movidos | $4{,}5 \\cdot 10^6$ |
 
-**E02. Convertir número pequeño a notación científica.** $0{,}0000078$
+**2. Convertir número pequeño a notación científica.** $0{,}0000078$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Mover la coma a la derecha | Mover 6 espacios |
 | 2 | Dejar un número entre 1 y 10 | $7{,}8$ |
 | 3 | Exponente negativo (hacia la derecha) | $7{,}8 \\cdot 10^{-6}$ |
 
-**E03. De notación científica a decimal.** $3{,}2 \\cdot 10^4$
+**3. De notación científica a decimal.** $3{,}2 \\cdot 10^4$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Mover la coma 4 espacios a la derecha | $32.000$ |
 
-**E04. De notación científica a decimal (negativo).** $9{,}1 \\cdot 10^{-3}$
+**4. De notación científica a decimal (negativo).** $9{,}1 \\cdot 10^{-3}$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Mover la coma 3 espacios a la izquierda | $0{,}0091$ |
 
-**E05. Multiplicación en notación científica.** $(2 \\cdot 10^3) \\cdot (4 \\cdot 10^5)$
+**5. Multiplicación en notación científica.** $(2 \\cdot 10^3) \\cdot (4 \\cdot 10^5)$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Multiplicar los números (k) | $2 \\cdot 4 = 8$ |
 | 2 | Sumar los exponentes de 10 | $10^{(3+5)} = 10^8$ |
 | 3 | Resultado final | $8 \\cdot 10^8$ |
 
-**E06. Ajuste de notación científica.** $45 \\cdot 10^4$ (No está en formato correcto)
+**6. Ajuste de notación científica.** $45 \\cdot 10^4$ (No está en formato correcto)
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Convertir el 45 a $4{,}5 \\cdot 10^1$ | $4{,}5 \\cdot 10^1 \\cdot 10^4$ |
 | 2 | Sumar exponentes | $4{,}5 \\cdot 10^5$ |
 
-**E07. División en notación científica.** $(9 \\cdot 10^8) : (3 \\cdot 10^2)$
+**7. División en notación científica.** $(9 \\cdot 10^8) : (3 \\cdot 10^2)$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Dividir los números | $9 : 3 = 3$ |
 | 2 | Restar exponentes | $10^{(8-2)} = 10^6$ |
 | 3 | Resultado | $3 \\cdot 10^6$ |
 
-**E08. Comparación de números.** ¿Qué es mayor, $5 \\cdot 10^{-4}$ o $2 \\cdot 10^{-3}$?
+**8. Comparación de números.** ¿Qué es mayor, $5 \\cdot 10^{-4}$ o $2 \\cdot 10^{-3}$?
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Mirar exponentes | $-3$ es mayor que $-4$ |
 | 2 | Conclusión | $2 \\cdot 10^{-3}$ es mayor |
 
-**E09. Potencia de una potencia.** $(2 \\cdot 10^4)^2$
+**9. Potencia de una potencia.** $(2 \\cdot 10^4)^2$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Elevar el número al cuadrado | $2^2 = 4$ |
 | 2 | Multiplicar exponentes del 10 | $10^{(4 \\cdot 2)} = 10^8$ |
 | 3 | Resultado | $4 \\cdot 10^8$ |
 
-**E10. Suma de potencias de 10.** $3 \\cdot 10^2 + 5 \\cdot 10^2$
+**10. Suma de potencias de 10.** $3 \\cdot 10^2 + 5 \\cdot 10^2$
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Como tienen igual exponente, sumar k | $(3+5) \\cdot 10^2$ |
