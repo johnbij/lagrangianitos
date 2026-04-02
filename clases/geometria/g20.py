@@ -36,7 +36,7 @@ def render_G20():
     * **Área Lateral:** $2 \cdot \pi \cdot r \cdot h$
     * **Volumen:** $\pi \cdot r^2 \cdot h$
 
-    > **Newton Tip:** "Seba, dile a tu alumno: el volumen es como llenar una piscina. Primero cubres el fondo (Área de la base) y luego vas subiendo capa por capa (Altura). ¡Es la misma fórmula para casi todo lo que sea 'recto'!"
+    > 
     """)
 
         st.markdown('</div>', unsafe_allow_html=True)
