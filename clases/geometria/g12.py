@@ -16,8 +16,8 @@ def render_G12():
         st.markdown('<div class="clase-body">', unsafe_allow_html=True)
 
         st.markdown(r"""
-    # 🎬 Clase G12: Áreas y Perímetros I - Triángulos y Cuadriláteros
-    **Eje:** Geometría | **Nivel:** Alcance del Objetivo
+    # G12: Áreas y Perímetros I - Triángulos y Cuadriláteros
+    
 
     ---
 
@@ -36,8 +36,7 @@ def render_G12():
     * **Rombo:** $A = \frac{D \cdot d}{2}$ (producto de diagonales dividido por 2).
     * **Trapecio:** $A = \frac{(B + b) \cdot h}{2}$ (promedio de las bases por la altura).
 
-    > **Newton Tip:** "Seba, dile a tu alumno: el área es cuántas baldosas caben dentro, el perímetro es cuánta cinta necesito para rodearlo. ¡Que no mezclen peras con manzanas!"
-    """)
+    > 
 
         st.markdown('</div>', unsafe_allow_html=True)
 
@@ -48,11 +47,11 @@ def render_G12():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Área de un triángulo de base 10 y altura 6. | 1. Aplicar formula: $(10 \cdot 6) / 2$.<br>2. $60 / 2 = 30$. | **30 u²** |
-| **E02** | Perímetro de un cuadrado de área 64. | 1. Calcular lado: $\sqrt{64} = 8$.<br>2. Multiplicar por 4: $8 \cdot 4 = 32$. | **32 u** |
-| **E03** | Área de un rombo con diagonales de 8 y 10. | 1. Multiplicar diagonales: $8 \cdot 10 = 80$.<br>2. Dividir por 2: $80 / 2 = 40$. | **40 u²** |
-| **E04** | Área de un trapecio: bases 6 y 4, altura 5. | 1. Sumar bases: $6 + 4 = 10$.<br>2. Multiplicar por altura y dividir por 2: $(10 \cdot 5) / 2$. | **25 u²** |
-| **E05** | Perímetro de un rectángulo de área 50 si un lado es 5. | 1. Hallar otro lado: $50 / 5 = 10$.<br>2. Sumar lados: $2 \cdot (5 + 10) = 30$. | **30 u** |
+| **1** | Área de un triángulo de base 10 y altura 6. | 1. Aplicar formula: $(10 \cdot 6) / 2$.<br>2. $60 / 2 = 30$. | **30 u²** |
+| **2** | Perímetro de un cuadrado de área 64. | 1. Calcular lado: $\sqrt{64} = 8$.<br>2. Multiplicar por 4: $8 \cdot 4 = 32$. | **32 u** |
+| **3** | Área de un rombo con diagonales de 8 y 10. | 1. Multiplicar diagonales: $8 \cdot 10 = 80$.<br>2. Dividir por 2: $80 / 2 = 40$. | **40 u²** |
+| **4** | Área de un trapecio: bases 6 y 4, altura 5. | 1. Sumar bases: $6 + 4 = 10$.<br>2. Multiplicar por altura y dividir por 2: $(10 \cdot 5) / 2$. | **25 u²** |
+| **5** | Perímetro de un rectángulo de área 50 si un lado es 5. | 1. Hallar otro lado: $50 / 5 = 10$.<br>2. Sumar lados: $2 \cdot (5 + 10) = 30$. | **30 u** |
 """)
 
     with st.expander("❓ Cuestionario G12", expanded=False):
