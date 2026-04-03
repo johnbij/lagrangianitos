@@ -45,11 +45,11 @@ def render_G01():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Ubicar el punto $P(-3, 4)$ | 1. Parto en el origen $(0,0)$.<br>2. Me muevo 3 unidades a la izquierda (X es -3).<br>3. Subo 4 unidades (Y es 4). | **Punto en el II Cuadrante** |
-| **E02** | ¿Cuál es la distancia entre $(0,0)$ y $(3,4)$? | 1. Dibujar el triángulo rectángulo con base 3 y altura 4.<br>2. Aplicar Pitágoras: $c^2 = 3^2 + 4^2 = 9 + 16 = 25$.<br>3. Calcular $\sqrt{25}$. | **5 unidades** |
-| **E03** | Calcular el punto medio entre $A(2, 4)$ y $B(6, 10)$ | 1. Promedio de las X: $(2+6)/2 = 4$.<br>2. Promedio de las Y: $(4+10)/2 = 7$.<br>3. Armar el par ordenado $(X_m, Y_m)$. | **$M(4, 7)$** |
-| **E04** | Reflejar el punto $(5, 2)$ respecto al eje X. | 1. El valor de X se mantiene intacto (5).<br>2. El valor de Y cambia de signo (espejo horizontal). | **$(5, -2)$** |
-| **E05** | ¿Dónde se ubica un punto cuya coordenada es $(0, -6)$? | 1. Al ser $x=0$, no hay movimiento lateral.<br>2. Al ser $y=-6$, el punto bajó por el eje vertical. | **Eje Y negativo** |
+| **1** | Ubicar el punto $P(-3, 4)$ | 1. Parto en el origen $(0,0)$.<br>2. Me muevo 3 unidades a la izquierda (X es -3).<br>3. Subo 4 unidades (Y es 4). | **Punto en el II Cuadrante** |
+| **2** | ¿Cuál es la distancia entre $(0,0)$ y $(3,4)$? | 1. Dibujar el triángulo rectángulo con base 3 y altura 4.<br>2. Aplicar Pitágoras: $c^2 = 3^2 + 4^2 = 9 + 16 = 25$.<br>3. Calcular $\sqrt{25}$. | **5 unidades** |
+| **3** | Calcular el punto medio entre $A(2, 4)$ y $B(6, 10)$ | 1. Promedio de las X: $(2+6)/2 = 4$.<br>2. Promedio de las Y: $(4+10)/2 = 7$.<br>3. Armar el par ordenado $(X_m, Y_m)$. | **$M(4, 7)$** |
+| **4** | Reflejar el punto $(5, 2)$ respecto al eje X. | 1. El valor de X se mantiene intacto (5).<br>2. El valor de Y cambia de signo (espejo horizontal). | **$(5, -2)$** |
+| **5** | ¿Dónde se ubica un punto cuya coordenada es $(0, -6)$? | 1. Al ser $x=0$, no hay movimiento lateral.<br>2. Al ser $y=-6$, el punto bajó por el eje vertical. | **Eje Y negativo** |
 """)
 
     with st.expander("❓ Cuestionario G01", expanded=False):
