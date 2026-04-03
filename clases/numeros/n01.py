@@ -8,21 +8,21 @@ def render_N01():
 
 ---
 
-### 🛡️ 1. El Portal
+### 🛡️ El Portal
 Antes de entrar al universo de los números, necesitamos el lenguaje que los une a todos. La **Teoría de Conjuntos** es la **Gramática del Universo matemático**: el marco fundamental que define qué es un objeto, cómo se agrupan y cómo se relacionan entre sí.
 
 Este es el punto de partida de todo viaje matemático serio. Sin él, el álgebra, los números y la probabilidad no tendrían cimientos.
 
 ---
 
-### 🛡️ 2. Crónica del Infinito
+### 🛡️ Crónica del Infinito
 A finales del siglo XIX, el matemático alemán **Georg Cantor** se atrevió a lo impensable: trató el infinito como si fuera un objeto matemático concreto. Su idea revolucionaria fue que una colección de objetos bien definidos podía ser tratada como un ente matemático único: el **conjunto**.
 
 Su trabajo fue rechazado por muchos contemporáneos, pero hoy es la piedra angular de toda la matemática moderna.
 
 ---
 
-### 🛡️ 3. El Marco de Referencia
+### 🛡️ El Marco de Referencia
 
 | Concepto | Símbolo | Definición |
 | :--- | :---: | :--- |
@@ -35,7 +35,7 @@ Su trabajo fue rechazado por muchos contemporáneos, pero hoy es la piedra angul
 
 ---
 
-### 🛡️ 4. Operaciones de "1000 Puntos"
+### 🛡️ Operaciones de "1000 Puntos"
 
 | Operación | Símbolo | Definición | Ejemplo ($A=\{1,2,3\}$, $B=\{3,4,5\}$) |
 | :--- | :---: | :--- | :--- |
@@ -46,7 +46,7 @@ Su trabajo fue rechazado por muchos contemporáneos, pero hoy es la piedra angul
 
 ---
 
-### 🛡️ 5. Cardinalidad y Conjunto Potencia
+### 🛡️ Cardinalidad y Conjunto Potencia
 
 * **Cardinalidad** ($\#A = n$): Es el número de elementos que tiene un conjunto.
 * **Regla de Oro** (Principio de Inclusión-Exclusión):
@@ -58,7 +58,7 @@ $$\#(A \cup B) = \#A + \#B - \#(A \cap B)$$
 
 ---
 
-### 🛡️ 6. Cartografía Visual (Diagramas de Venn-Euler)
+### 🛡️ Cartografía Visual (Diagramas de Venn-Euler)
 Los **Diagramas de Venn-Euler** son la herramienta visual definitiva para representar conjuntos y sus operaciones. Se usan rectángulos para el Universo y círculos (u óvalos) para los conjuntos. Las zonas de superposición representan la intersección, mientras que las zonas exclusivas representan las diferencias.
 
 Son especialmente útiles para resolver problemas de conteo con múltiples grupos superpuestos.
