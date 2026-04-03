@@ -37,6 +37,7 @@ def render_G12():
     * **Trapecio:** $A = \frac{(B + b) \cdot h}{2}$ (promedio de las bases por la altura).
 
     > 
+    """)
 
         st.markdown('</div>', unsafe_allow_html=True)
 
