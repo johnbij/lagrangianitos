@@ -92,7 +92,7 @@ def render_N02():
 
     with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N02", expanded=False):
         st.markdown(r"""
-### E01: Identificación del Sucesor y Antecesor
+### 1: Identificación del Sucesor y Antecesor
 
 Dado $n = 15$, determina su sucesor y su antecesor. Luego verifica si el 1 tiene antecesor en $\mathbb{N}$.
 
