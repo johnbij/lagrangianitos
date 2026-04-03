@@ -42,11 +42,11 @@ def render_G02():
 
 | ID | Desafío | Paso a Paso | Resultado |
 | :--- | :--- | :--- | :--- |
-| **E01** | Distancia entre $A(1, 2)$ y $B(4, 6)$ | 1. $(4-1)^2 + (6-2)^2 = 3^2 + 4^2$.<br>2. $\sqrt{9+16} = \sqrt{25}$. | **5 unidades** |
-| **E02** | Distancia entre $C(-1, 3)$ y $D(2, -1)$ | 1. $(2-(-1))^2 + (-1-3)^2 = 3^2 + (-4)^2$.<br>2. $\sqrt{9+16} = \sqrt{25}$. | **5 unidades** |
-| **E03** | Distancia de $P(0, 0)$ a $Q(3, 4)$ | 1. $(3-0)^2 + (4-0)^2 = 3^2 + 4^2$.<br>2. $\sqrt{9+16} = \sqrt{25}$. | **5 unidades** |
-| **E04** | Distancia entre $A(1, 1)$ y $B(1, 5)$ | 1. $(1-1)^2 + (5-1)^2 = 0^2 + 4^2$.<br>2. $\sqrt{16}$. | **4 unidades** |
-| **E05** | Distancia entre $A(2, 3)$ y $B(5, 3)$ | 1. $(5-2)^2 + (3-3)^2 = 3^2 + 0^2$.<br>2. $\sqrt{9}$. | **3 unidades** |
+| **1** | Distancia entre $A(1, 2)$ y $B(4, 6)$ | 1. $(4-1)^2 + (6-2)^2 = 3^2 + 4^2$.<br>2. $\sqrt{9+16} = \sqrt{25}$. | **5 unidades** |
+| **2** | Distancia entre $C(-1, 3)$ y $D(2, -1)$ | 1. $(2-(-1))^2 + (-1-3)^2 = 3^2 + (-4)^2$.<br>2. $\sqrt{9+16} = \sqrt{25}$. | **5 unidades** |
+| **3** | Distancia de $P(0, 0)$ a $Q(3, 4)$ | 1. $(3-0)^2 + (4-0)^2 = 3^2 + 4^2$.<br>2. $\sqrt{9+16} = \sqrt{25}$. | **5 unidades** |
+| **4** | Distancia entre $A(1, 1)$ y $B(1, 5)$ | 1. $(1-1)^2 + (5-1)^2 = 0^2 + 4^2$.<br>2. $\sqrt{16}$. | **4 unidades** |
+| **5** | Distancia entre $A(2, 3)$ y $B(5, 3)$ | 1. $(5-2)^2 + (3-3)^2 = 3^2 + 0^2$.<br>2. $\sqrt{9}$. | **3 unidades** |
 """)
 
     with st.expander("❓ Cuestionario G02", expanded=False):
