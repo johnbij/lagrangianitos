@@ -51,7 +51,7 @@ def render_N25():
     with st.expander("📝 Guía de Ejemplos", expanded=False):
         st.markdown("""## 📝 Guía de Ejemplos: Transformaciones Simétricas
 
-**E01. Invertir razones para despejar.** Hallar $x$ en la proporción $5 : x = 10 : 2$.
+**1. Invertir razones para despejar.** Hallar $x$ en la proporción $5 : x = 10 : 2$.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Escribir como fracciones | $\\frac{5}{x} = \\frac{10}{2}$ |
@@ -59,7 +59,7 @@ def render_N25():
 | 3 | Pasar el 5 multiplicando | $x = \\frac{2 \\cdot 5}{10}$ |
 | 4 | Resultado final | $x = 1$ |
 
-**E02. Alternar medios.** Dada la proporción $\\frac{a}{8} = \\frac{15}{24}$, transfórmala alternando medios.
+**2. Alternar medios.** Dada la proporción $\\frac{a}{8} = \\frac{15}{24}$, transfórmala alternando medios.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Identificar medios | Los medios son $8$ y $15$ |
@@ -67,7 +67,7 @@ def render_N25():
 | 3 | Simplificar la razón de la derecha | $\\frac{a}{15} = \\frac{1}{3}$ |
 | 4 | Despejar $a$ | $a = 15/3 = 5$ |
 
-**E03. Alternar extremos.** En la proporción $3 : 4 = 6 : 8$, cambia los extremos de lugar.
+**3. Alternar extremos.** En la proporción $3 : 4 = 6 : 8$, cambia los extremos de lugar.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Identificar extremos | $3$ y $8$ |
@@ -75,7 +75,7 @@ def render_N25():
 | 3 | Verificar igualdad | $2 = 2$ |
 | 4 | Conclusión | La proporción sigue siendo válida. |
 
-**E04. Transponer miembros.** Si $\\frac{x}{3} = 4$, ¿cómo se ve aplicando la transposición?
+**4. Transponer miembros.** Si $\\frac{x}{3} = 4$, ¿cómo se ve aplicando la transposición?
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Entender que $4$ es $\\frac{4}{1}$ | $\\frac{x}{3} = \\frac{4}{1}$ |
@@ -83,7 +83,7 @@ def render_N25():
 | 3 | Despejar $x$ | $12 = x$ |
 | 4 | Resultado | $x = 12$ |
 
-**E05. Invertir y alternar extremos.** Transforma $\\frac{a}{b} = \\frac{c}{d}$ según la Propiedad 6.
+**5. Invertir y alternar extremos.** Transforma $\\frac{a}{b} = \\frac{c}{d}$ según la Propiedad 6.
 | Paso | Acción | Resultado |
 | :--- | :--- | :--- |
 | 1 | Partir de la original | $\\frac{a}{b} = \\frac{c}{d}$ |
