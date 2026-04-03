@@ -35,8 +35,7 @@ def render_G12():
     * **Rectángulo:** $P = 2(a + b)$ | $A = \text{base} \cdot \text{altura}$.
     * **Rombo:** $A = \frac{D \cdot d}{2}$ (producto de diagonales dividido por 2).
     * **Trapecio:** $A = \frac{(B + b) \cdot h}{2}$ (promedio de las bases por la altura).
-
-    > 
+    """, unsafe_allow_html=True)
 
         st.markdown('</div>', unsafe_allow_html=True)
 
