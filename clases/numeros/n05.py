@@ -9,7 +9,7 @@ def render_N05():
         st.markdown(r"""
     ### 🛡️  El Portal: El Arte de Partir el Todo
 
-    Hasta ahora, en nuestra carpintería matemática, solo trabajábamos con "piezas completas" (vigas de 1 metro, de 2 metros). Pero la realidad es más compleja: a veces necesitas media viga o un tercio de tabla.
+    Hasta ahora, solo trabajábamos con "piezas completas" (vigas de 1 metro, de 2 metros). Pero la realidad es más compleja: a veces necesitas media viga o un tercio de tabla.
 
     El nombre **Racional** viene de "Razón" (un cociente entre dos cantidades). Los antiguos egipcios ya usaban fracciones para repartir el grano y medir tierras tras las crecidas del Nilo. Al crear $\mathbb{Q}$ (del italiano *Quoziente*), la humanidad logró por fin la **Clausura de la División**: ahora cualquier reparto tiene un número que lo representa.
 
@@ -73,7 +73,7 @@ def render_N05():
 
     ### 🛡️  Clausura: El Club casi Perfecto
 
-    | Operación | ¿Es Cerrada en $\mathbb{Q}$? | Carpintería Técnica |
+    | Operación | ¿Es Cerrada en $\mathbb{Q}$? |
     | :--- | :---: | :--- |
     | **Suma / Resta / Multi.** | ✅ SÍ | Siempre dan otro racional. |
     | **División (:)** | ⚠️ CASI | Es cerrada **siempre y cuando el divisor no sea cero**. |
@@ -98,13 +98,13 @@ def render_N05():
     """)
 
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N05", expanded=False):
+    with st.expander("🚀 Guía de Ejemplos Paso a Paso N05", expanded=False):
         st.markdown(r"""
 ### 1: Transformación de Decimal Finito a Fracción
 
 **Situación:** Expresar el número $0,75$ como una fracción irreducible.
 
-**La Carpintería:**
+**Pasos**
 1. **Numerador:** Se escribe el número sin coma ($75$).
 2. **Denominador:** Una potencia de 10 con tantos ceros como decimales tenga el número (2 decimales = $100$).
 3. **Simplificar:** Buscamos un divisor común. Dividimos ambos por $25$.
@@ -122,7 +122,7 @@ def render_N05():
 
 **Situación:** Expresar $0,\bar{6}$ como una fracción de enteros.
 
-**La Carpintería:**
+**Pasos**
 1. **Numerador:** Se toma el número completo ($6$) y se le resta la parte entera ($0$).
 2. **Denominador:** Tantos "9" como cifras tenga el periodo (1 cifra = un "9").
 3. **Simplificar:** Dividimos por 3 para llegar a la irreducible.
@@ -140,7 +140,7 @@ def render_N05():
 
 **Situación:** ¿Cuál de estas fracciones es mayor: $2/3$ o $3/5$?
 
-**La Carpintería:**
+**Pasos**
 1. **Problema:** Los denominadores son distintos, no puedo comparar "peras con manzanas".
 2. **Amplificar:** Buscamos un denominador común (MCM entre 3 y 5 es 15).
 3. **Transformar:** $2/3$ lo multiplicamos por 5: $10/15$. / $3/5$ lo multiplicamos por 3: $9/15$.
@@ -157,7 +157,7 @@ def render_N05():
 
 **Situación:** Transformar $0,1\bar{6}$ a fracción.
 
-**La Carpintería:**
+**Pasos**
 1. **Numerador:** El número sin coma ($16$) menos la parte que no tiene raya ($1$). Resultado: $15$.
 2. **Denominador:** Un "9" (por el periodo 6) y un "0" (por el anteperiodo 1). Resultado: $90$.
 3. **Simplificar:** Dividimos por 15.
@@ -175,7 +175,7 @@ def render_N05():
 
 **Situación:** Encontrar un número racional que se encuentre exactamente entre $1/4$ y $1/2$.
 
-**La Carpintería:**
+**Pasos**
 1. **Amplificar para igualar:** $1/2$ es igual a $2/4$.
 2. **Problema:** Entre $1/4$ y $2/4$ no se ve espacio. Amplificamos de nuevo ambos por 2.
 3. **Nuevos valores:** $2/8$ y $4/8$.
