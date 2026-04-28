@@ -70,7 +70,7 @@ Son especialmente útiles para resolver problemas de conteo con múltiples grupo
 > — **Georg Cantor**
 """)
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N01", expanded=False):
+    with st.expander("🚀 Guía de Ejemplos Paso a Paso N01", expanded=False):
         st.markdown(r"""
 ### 1: Identificación de Pertenencia
 
