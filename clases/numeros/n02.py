@@ -73,7 +73,7 @@ def render_N02():
 
     **Análisis de Clausura en $\mathbb{N}$:**
 
-    | Operación | ¿Es Cerrada? | Carpintería Técnica |
+    | Operación | ¿Es Cerrada? |
     | :--- | :---: | :--- |
     | **Adición (+)** | ✅ SÍ | Natural + Natural = Siempre Natural. |
     | **Multiplicación ($\cdot$)** | ✅ SÍ | Natural $\cdot$ Natural = Siempre Natural. |
@@ -90,7 +90,7 @@ def render_N02():
     """)
 
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N02", expanded=False):
+    with st.expander("🚀 Guía de Ejemplos Paso a Paso N02", expanded=False):
         st.markdown(r"""
 ### 1: Identificación del Sucesor y Antecesor
 
