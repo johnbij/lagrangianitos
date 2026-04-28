@@ -55,7 +55,7 @@ def render_N04():
         st.markdown(r"""
     ---
 
-    ### 🛡️  Valor Absoluto ($|a|$): La Carpintería de la Distancia
+    ### 🛡️  Valor Absoluto ($|a|$): Cálculo de la Distancia
 
     El valor absoluto es el "limpiador de signos". Epistemológicamente, mide la **distancia** de un número al cero. Como las distancias físicas no pueden ser negativas (no puedes correr -5 kilómetros), el resultado del valor absoluto es siempre $\geq 0$.
 
@@ -83,7 +83,7 @@ def render_N04():
 
     ¿Por qué nos mudamos de los Naturales a los Enteros? Por la **clausura de la sustracción**.
 
-    | Operación | ¿Es Cerrada en $\mathbb{Z}$? | Razón Técnica de Carpintería |
+    | Operación | ¿Es Cerrada en $\mathbb{Z}$? |
     | :--- | :---: | :--- |
     | **Adición (+)** | ✅ SÍ | Sumar deudas o fortunas siempre da un entero. |
     | **Sustracción (-)** | ✅ SÍ | **Aquí está el premio.** $3 - 10 = -7$, y el -7 vive en $\mathbb{Z}$. |
@@ -97,13 +97,13 @@ def render_N04():
     """)
 
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N04", expanded=False):
+    with st.expander("🚀 Guía de Ejemplos Paso a Paso N04", expanded=False):
         st.markdown(r"""
 ### 1: Operativa de Signos y Clausura
 
 **Situación:** Resolver la expresión $12 - (15 - 8)$ y determinar si el resultado pertenece a $\mathbb{Z}$.
 
-**La Carpintería:**
+**Pasos**
 1. **Resolver paréntesis:** $15 - 8 = 7$.
 2. **Aplicar resta externa:** $12 - 7 = 5$.
 3. **Verificar pertenencia:** El 5 es un entero positivo.
@@ -120,7 +120,7 @@ def render_N04():
 
 **Situación:** Calcular el valor de $A = |-10| + |3| - |-5|$.
 
-**La Carpintería:**
+**Pasos**
 1. **Evaluar $|-10|$:** La distancia de -10 al cero es 10.
 2. **Evaluar $|3|$:** La distancia de 3 al cero es 3.
 3. **Evaluar $|-5|$:** La distancia de -5 al cero es 5.
@@ -139,7 +139,7 @@ def render_N04():
 
 **Situación:** Si $x = -8$, ¿cuál es el valor de $-x$ y de $|x|$?
 
-**La Carpintería:**
+**Pasos**
 1. **Calcular $-x$:** Es el opuesto de $x$. Como $x$ es $-8$, entonces $-(-8) = 8$.
 2. **Calcular $|x|$:** Aplicamos la definición: "Si el número es negativo, el resultado es $-x$".
 3. **Resultado:** $|-8| = -(-8) = 8$.
@@ -157,7 +157,7 @@ def render_N04():
 
 **Situación:** Dados $a = -15$ y $b = -10$, ¿cuál es la relación de orden correcta?
 
-**La Carpintería:**
+**Pasos**
 1. **Ubicación en la recta:** El -15 está más a la izquierda que el -10.
 2. **Regla de negativos:** En los negativos, el que tiene mayor valor absoluto es el menor.
 3. **Comparar:** $|-15| = 15$ y $|-10| = 10$. Como $15 > 10$, entonces $-15 < -10$.
@@ -174,7 +174,7 @@ def render_N04():
 
 **Situación:** Resolver la expresión $-| -12 + 4 |$.
 
-**La Carpintería:**
+**Pasos**
 1. **Operar dentro:** $-12 + 4 = -8$.
 2. **Aplicar Valor Absoluto:** $|-8| = 8$.
 3. **Aplicar signo exterior:** El signo "$-$" está fuera del valor absoluto, por lo que afecta al resultado final.
