@@ -85,7 +85,7 @@ def render_N03():
     """)
 
 
-    with st.expander("🚀 Guía de Ejemplos Paso a Paso: Carpintería N03", expanded=False):
+    with st.expander("🚀 Guía de Ejemplos Paso a Paso N03", expanded=False):
         st.markdown(r"""
 ### 1: La Vecindad del Uno en Diferentes Conjuntos[cite: 8]
 
